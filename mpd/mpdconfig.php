@@ -12,7 +12,7 @@
 		include(__PHPMPRELOADED_MPD_SETTINGS__);
 	}
  
-	$host = '192.168.68.140';
+	$host = 'localhost';
 	$mpdPort = '22';
 	$mpdPassword = 'Pergamon2022!';
 ?>
