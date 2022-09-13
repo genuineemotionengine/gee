@@ -13,6 +13,6 @@
 	}
  
         $host = 'localhost';
-	$mpdPort = '6600';
+	$mpdPort = '22';
 	$mpdPassword = null;
 ?>
