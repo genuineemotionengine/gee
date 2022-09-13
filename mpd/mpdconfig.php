@@ -14,5 +14,5 @@
  
         $host = 'localhost';
 	$mpdPort = '22';
-	$mpdPassword = null;
+	$mpdPassword = 'Pergamon2022!';
 ?>
