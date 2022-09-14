@@ -1086,6 +1086,8 @@ class mpd {
 		$this->random = $status['random'];
 
 		$this->db_last_refreshed = $stats['db_update'];
+                
+                $this->current_track_id = $status['song'];
 
 		$this->volume = $status['volume'];
 		$this->uptime = $stats['uptime'];
