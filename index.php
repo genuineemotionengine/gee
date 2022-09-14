@@ -5,7 +5,7 @@ require('mpd.class.php');
 
 
 //header("Content-type: text/plain");
-$mpd = new MPD('localhost', 6600);
+$mpd = new MPD('localhost', 0);
 $mpd->connect();
 $status = $mpd->getCurrentSong();
 if (empty($status)) {
