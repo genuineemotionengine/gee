@@ -147,7 +147,7 @@ class mpd {
 	// Misc Other Vars	
 	var $mpd_class_version = "1.2";
 
-	var $debugging   = FALSE;    // Set to TRUE to turn extended debugging on.
+	var $debugging   = TRUE;    // Set to TRUE to turn extended debugging on.
 	var $errStr      = "";       // Used for maintaining information about the last error message
 
 	var $command_queue;          // The list of commands for bulk command sending
