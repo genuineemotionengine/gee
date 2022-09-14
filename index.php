@@ -7,14 +7,26 @@ $mpd = new MPD('localhost','');
 echo "ok<br>";
 //echo $mpd."<br>";
 if ($mpd == true) {
-  echo "connection successful<br>";
+  echo "initialise successful<br>";
   //pause(1);
 } else {
-  echo "connection unsuccessful<br>";
+  echo "initialise unsuccessful<br>";
   echo $mpd->get_error();
 }
 
-connect();
-pause(1);
+$connect = connect();
+
+if (connect == true) {
+  echo "connect successful<br>";
+  //pause(1);
+} else {
+  echo "connect unsuccessful<br>";
+  echo $connect->get_error();
+}
+
+w
+
+//connect();
+//pause(1);
 
 echo "screen: ".$screen;
