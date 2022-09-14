@@ -15,5 +15,5 @@ if ($mpd == true) {
 }
 
 
-$screen = pause($pause);
+pause(1);
 echo "screen: ".$screen;
