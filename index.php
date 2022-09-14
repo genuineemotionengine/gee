@@ -14,7 +14,7 @@ if ($mpd == true) {
   echo $mpd->get_error();
 }
 
-$members = $this->pause(1);
+$this->pause(1);
 
 //connect();
 //pause(1);
