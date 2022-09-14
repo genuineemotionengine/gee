@@ -14,7 +14,8 @@ if ($mpd == true) {
   echo $mpd->get_error();
 }
 
-pause(1);
+print_r($mpd->status());
+//pause(1);
 
 //connect();
 //pause(1);
