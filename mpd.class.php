@@ -1057,16 +1057,16 @@ class mpd {
 		}
 
         // Get the Playlist
-		$plStr = $this->SendCommand(MPD_CMD_PLLIST);
-   		$array = $this->_parseFileListResponse($plStr);
-   		$playlist = $array['files'];
-	   	$this->playlist_count = count($playlist);
-	   	$this->playlist = array();
-	   	if (sizeof($playlist)>0){
-			foreach ($playlist as $item ){
-				$this->playlist[$item['Pos']]=$item;
-			}
-	   	}
+//		$plStr = $this->SendCommand(MPD_CMD_PLLIST);
+//   		$array = $this->_parseFileListResponse($plStr);
+//   		$playlist = $array['files'];
+//	   	$this->playlist_count = count($playlist);
+//	   	$this->playlist = array();
+//	   	if (sizeof($playlist)>0){
+//			foreach ($playlist as $item ){
+//				$this->playlist[$item['Pos']]=$item;
+//			}
+//	   	}
 		
         // Set Misc Other Variables
 		$this->state = $status['state'];
