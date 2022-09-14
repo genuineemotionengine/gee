@@ -6,11 +6,11 @@ echo "read mpd.class.php ok<br>";
 
 //header("Content-type: text/plain");
 $mpd = new mpd('localhost', 6600);
-    if ($mpd == true) {
-      echo "initialise mpd ok<br>";
-    } else {
-      echo $mpd->get_error();
-    }
+//    if ($mpd == true) {
+//      echo "initialise mpd ok<br>";
+//    } else {
+//      echo $mpd->get_error();
+//    }
 
 
 //$mpd->Connect();
@@ -23,11 +23,11 @@ $mpd = new mpd('localhost', 6600);
 
 
 $mpd->Pause();
-    if ($mpd == true) {
-      echo "paused mpd ok<br>";
-    } else {
-      echo $mpd->get_error();
-    }
+//    if ($mpd == true) {
+//      echo "paused mpd ok<br>";
+//    } else {
+//      echo $mpd->get_error();
+//    }
 
 
 //$status = $mpd->getCurrentSong();

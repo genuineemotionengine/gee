@@ -96,7 +96,7 @@ define("MPD_TBL_ARTIST","artist");
 define("MPD_TBL_ALBUM","album");
 
 
-$mpd_debug = 0;
+$mpd_debug = 1;
 
 function addLog($text){
 	global $mpd_debug;
@@ -655,8 +655,7 @@ class mpd {
 	 * will unpause. 
 	 */
 	function Pause() {
-		//if ( $this->debugging ) 
-                    echo "mpd->Pause()\n";
+		if ( $this->debugging ) echo "mpd->Pause()\n";
 		if ( ! is_null($rpt = $this->SendCommand(MPD_CMD_PAUSE) )) $this->RefreshInfo();
 		if ( $this->debugging ) echo "mpd->Pause() / return\n";
 		return $rpt;
