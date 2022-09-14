@@ -1,9 +1,10 @@
 <?php
 
 require('mpd.class.php');
-//$mpd = new MPD('localhost', 6600);
+echo "ok";
+$mpd = new MPD('localhost', 6600);
 //if ($mpd === true) {
-  echo "connection successful";
+  //echo "connection successful";
 //} else {
   //echo $mpd->get_error();
 //}
