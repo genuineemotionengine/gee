@@ -158,7 +158,7 @@ class mpd {
 	 * 
 	 * Builds the MPD object, connects to the server, and refreshes all local object properties.
 	 */
-	function mpd($srv,$port,$pwd = NULL, $debug= FALSE ) {
+	function mpd($srv,$port,$pwd = NULL, $debug= TRUE ) {
 		$this->host = $srv;
 		$this->port = $port;
         $this->password = $pwd;
