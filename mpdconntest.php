@@ -2,11 +2,11 @@
 
 require('mpd.class.php');
 echo "ok<br>";
-$mpd = new MPD('localhost', 22,'');
+$mpd = new MPD('localhost', 22,);
 echo "ok<br>";
 if ($mpd === true) {
-  echo "connection successful";
+  echo "connection successful<br>";
 } else {
-  echo "connection unsuccessful";
+  echo "connection unsuccessful<br>";
   echo $mpd->get_error();
 }
