@@ -23,7 +23,9 @@
  define('__PROJECT__', 'phpMpReloaded');
  define('__VERSION__', '1.3');
  
- include('./config/mpd_config.php');
+ $mpd_host=  'localhost';
+ $mpd_port= 6600;
+ 
  define('__THEME_DIR__', './themes/'.__THEME__.'/' );
  
  
