@@ -14,4 +14,4 @@ if ($mpd == true) {
 
 $screen = $mpd->get_version();
 
-echo screen;
+echo $screen;
