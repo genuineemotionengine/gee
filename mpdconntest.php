@@ -6,5 +6,6 @@ $mpd = new MPD('localhost', 6600);
 if ($mpd === true) {
   echo "connection successful";
 } else {
+  echo "connection unsuccessful";
   echo $mpd->get_error();
 }
