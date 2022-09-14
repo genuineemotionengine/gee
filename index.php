@@ -13,6 +13,6 @@ if ($mpd == true) {
   echo $mpd->get_error();
 }
 
-$mpd = pause();
+pause();
 
 //echo "screen: ".$screen;
