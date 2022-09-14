@@ -5,7 +5,7 @@ echo "ok<br>";
 $mpd = new MPD('localhost', 22);
 
 echo "ok<br>";
-echo $mpd."<br>";
+//echo $mpd."<br>";
 if ($mpd == true) {
   echo "initialise successful<br>";
   //pause(1);
