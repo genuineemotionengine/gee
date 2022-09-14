@@ -12,7 +12,7 @@
 		include(__PHPMPRELOADED_MPD_SETTINGS__);
 	}
  
-        $host = 'localhost';
+        $host = '192.168.68.118';
 	$mpdPort = '6600';
 	$mpdPassword = null;
 ?>
