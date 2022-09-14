@@ -11,3 +11,5 @@ if ($mpd == true) {
   echo "connection unsuccessful<br>";
   echo $mpd->get_error();
 }
+
+echo $mpd->get_version();
