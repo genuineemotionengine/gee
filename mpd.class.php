@@ -113,7 +113,7 @@ class MPD {
 	 * @param integer $conn_timeout (Optional) Timeout of the MPD connection
 	 * @return boolean Returns the connection state
 	 */
-	function MPD($host, $port, $pwd = '', $conn_timeout = 10) {
+	function MPD($host, $port, $pwd, $conn_timeout) {
 		$this->host = $host;
 		$this->port = $port;
 		$this->pwd = $pwd;
