@@ -3,7 +3,7 @@ $pause = 1;
 require('mpd.class.php');
 echo "ok<br>";
 $mpd = new MPD('localhost','');
-pause($pause);
+
 echo "ok<br>";
 //echo $mpd."<br>";
 if ($mpd == true) {
@@ -15,5 +15,5 @@ if ($mpd == true) {
 }
 
 
-
+pause($pause);
 //echo "screen: ".$screen;
