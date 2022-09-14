@@ -24,7 +24,7 @@
  define('__VERSION__', '1.3');
  
  $mpd_host=  'localhost';
- $mpd_port= 6600;
+ $mpd_port= '';
  
  define('__THEME_DIR__', './themes/'.__THEME__.'/' );
  
