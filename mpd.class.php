@@ -256,9 +256,9 @@ class mpd {
 		} else {
 
 			// Check the command compatibility:
-			if ( ! $this->_checkCompatibility($cmdStr) ) {
-				return NULL;
-			}
+//			if ( ! $this->_checkCompatibility($cmdStr) ) {
+//				return NULL;
+//			}
 
 			if (strlen($arg1) > 0) $cmdStr .= " \"$arg1\"";
 			if (strlen($arg2) > 0) $cmdStr .= " \"$arg2\"";
@@ -881,17 +881,17 @@ class mpd {
 		}
 
         // Check maximum compatibility -- this will check for deprecations
-//		if ( $req_ver_hi ) {
-//            $req_ver = $this->_computeVersionValue($req_ver_hi);
-//
-//			if ( $mpd_ver > $req_ver ) {
-//				addErr("Command '$cmd' has been deprecated in this version of MPD.");
-//				return FALSE;
-//			}
-//		}
-//
-//		return TRUE;
-//	}
+		if ( $req_ver_hi ) {
+            $req_ver = $this->_computeVersionValue($req_ver_hi);
+
+			if ( $mpd_ver > $req_ver ) {
+				addErr("Command '$cmd' has been deprecated in this version of MPD.");
+				return FALSE;
+			}
+		}
+
+		return TRUE;
+	}
 
 	/*
 	 * checks the file entry and complete it if necesarry
