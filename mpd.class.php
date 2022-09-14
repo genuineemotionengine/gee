@@ -655,7 +655,8 @@ class mpd {
 	 * will unpause. 
 	 */
 	function Pause() {
-		if ( $this->debugging ) echo "mpd->Pause()\n";
+		//if ( $this->debugging ) 
+                    echo "mpd->Pause()\n";
 		if ( ! is_null($rpt = $this->SendCommand(MPD_CMD_PAUSE) )) $this->RefreshInfo();
 		if ( $this->debugging ) echo "mpd->Pause() / return\n";
 		return $rpt;
