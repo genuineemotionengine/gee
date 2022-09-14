@@ -8,7 +8,7 @@ echo "ok<br>";
 //echo $mpd."<br>";
 if ($mpd == true) {
   echo "connection successful<br>";
-  pause(1);
+  //pause(1);
 } else {
   echo "connection unsuccessful<br>";
   echo $mpd->get_error();
