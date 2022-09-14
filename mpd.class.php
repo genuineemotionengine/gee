@@ -288,15 +288,7 @@ class mpd {
 		return $respStr;
 	}
 
-        	function current_song() {
-		$cur_song_res = $this->cmd(CMD_CURRENTSONG);
-		if ($cur_song_res !== false) {
-			return $this->parse_playlist($cur_song_res);
-		}
-		return false;
-	}
-
-        
+       
         
 	/* QueueCommand() 
 	 *
