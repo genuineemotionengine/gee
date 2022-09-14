@@ -7,12 +7,12 @@ echo "ok<br>";
 //echo $mpd."<br>";
 if ($mpd == true) {
   echo "connection successful<br>";
-  
+  pause();
 } else {
   echo "connection unsuccessful<br>";
   echo $mpd->get_error();
 }
 
-pause();
+
 
 //echo "screen: ".$screen;
