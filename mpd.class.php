@@ -74,6 +74,7 @@ define("MPD_CMD_PLMOVETRACK", "move");
 define("MPD_CMD_PASSWORD",    "password");
 define("MPD_CMD_TABLE",       "list");
 define("MPD_CMD_PLMOVE",      "move" );
+define("CMD_CURRENTSONG", "currentsong");
 
 // Predefined MPD Response messages
 define("MPD_RESPONSE_ERR", "ACK");
@@ -287,6 +288,16 @@ class mpd {
 		return $respStr;
 	}
 
+        	function current_song() {
+		$cur_song_res = $this->cmd(CMD_CURRENTSONG);
+		if ($cur_song_res !== false) {
+			return $this->parse_playlist($cur_song_res);
+		}
+		return false;
+	}
+
+        
+        
 	/* QueueCommand() 
 	 *
 	 * Queues a generic command for later sending to the MPD server. The CommandQueue can hold 
