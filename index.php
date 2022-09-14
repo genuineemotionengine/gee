@@ -5,7 +5,7 @@ echo "ok<br>";
 $mpd = new MPD('localhost','');
 echo "ok<br>";
 //echo $mpd."<br>";
-if ($mpd === true) {
+if ($mpd == true) {
   echo "connection successful<br>";
 } else {
   echo "connection unsuccessful<br>";
