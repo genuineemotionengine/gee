@@ -14,6 +14,7 @@ if ($mpd == true) {
   echo $mpd->get_error();
 }
 
-
+connect();
+pause(1);
 
 echo "screen: ".$screen;
