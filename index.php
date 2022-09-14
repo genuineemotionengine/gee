@@ -5,12 +5,12 @@ echo "read mpd.class.php ok<br>";
 
 
 //header("Content-type: text/plain");
-$mpd = new MPD('localhost', 6600);
+$mpd = new mpd('localhost', 6600);
 echo "initialise mpd ok<br>";
-$mpd->connect();
+$mpd->Connect();
 echo "connected to mpd ok<br>";
 
-$mpd->pause($pause);
+$mpd->Pause();
 echo "paused mpd ok<br>";
 //$status = $mpd->getCurrentSong();
 //if (empty($status)) {
