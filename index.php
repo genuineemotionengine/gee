@@ -8,7 +8,7 @@ echo "ok<br>";
 $mpd = new MPD('localhost', 6600);
 echo "ok<br>";
 $mpd->connect();
-$mpd->pause();
+$mpd->pause(1);
 //$status = $mpd->getCurrentSong();
 //if (empty($status)) {
 //    $status = array();
