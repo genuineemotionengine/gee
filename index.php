@@ -14,4 +14,4 @@ if ($mpd == true) {
 
 $screen = $mpd->current_song();
 
-echo $screen;
+echo "screen: ".$screen;
