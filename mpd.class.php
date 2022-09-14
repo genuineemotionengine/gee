@@ -1141,26 +1141,26 @@ class MPD {
 		return $type_valid;
 	}
 	
-	private function parse_list($list_res, $use_str_assoc = false) {
-		$list = array();
-		if ($list_res === false) {
-			$this->err = "List is empty";
-		} else {
-			$list_line = strtok($list_res, "\n");
-			while ($list_line) {
-				list ($key, $value) = split(": ", $list_line);
-				if ($value != '') {
-					if ($use_str_assoc === true) {
-						$list[$key] = $value;
-					} else {
-						$list[] = $value;
-					}
-				}
-				$list_line = strtok("\n");
-			}
-		}
-		return $list;
-	}
+//	private function parse_list($list_res, $use_str_assoc = false) {
+//		$list = array();
+//		if ($list_res === false) {
+//			$this->err = "List is empty";
+//		} else {
+//			$list_line = strtok($list_res, "\n");
+//			while ($list_line) {
+//				list ($key, $value) = split(": ", $list_line);
+//				if ($value != '') {
+//					if ($use_str_assoc === true) {
+//						$list[$key] = $value;
+//					} else {
+//						$list[] = $value;
+//					}
+//				}
+//				$list_line = strtok("\n");
+//			}
+//		}
+//		return $list;
+//	}
 	
 	private function parse_playlist($plist_res) {
 		$playlist = array();
