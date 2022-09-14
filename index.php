@@ -24,7 +24,6 @@ if ($connect == true) {
   echo $connect->get_error();
 }
 
-w
 
 //connect();
 //pause(1);
