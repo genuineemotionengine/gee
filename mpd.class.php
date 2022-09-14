@@ -881,17 +881,17 @@ class mpd {
 		}
 
         // Check maximum compatibility -- this will check for deprecations
-		if ( $req_ver_hi ) {
-            $req_ver = $this->_computeVersionValue($req_ver_hi);
-
-			if ( $mpd_ver > $req_ver ) {
-				addErr("Command '$cmd' has been deprecated in this version of MPD.");
-				return FALSE;
-			}
-		}
-
-		return TRUE;
-	}
+//		if ( $req_ver_hi ) {
+//            $req_ver = $this->_computeVersionValue($req_ver_hi);
+//
+//			if ( $mpd_ver > $req_ver ) {
+//				addErr("Command '$cmd' has been deprecated in this version of MPD.");
+//				return FALSE;
+//			}
+//		}
+//
+//		return TRUE;
+//	}
 
 	/*
 	 * checks the file entry and complete it if necesarry
