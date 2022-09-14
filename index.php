@@ -14,7 +14,7 @@ if ($mpd == true) {
   echo $mpd->get_error();
 }
 
-$connect = connect();
+$mpd = connect();
 echo "ok<br>";
 
 if ($connect == true) {
