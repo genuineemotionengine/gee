@@ -7,12 +7,12 @@ echo "ok<br>";
 //echo $mpd."<br>";
 if ($mpd == true) {
   echo "connection successful<br>";
-  echo $mpd->current_song();
+  
 } else {
   echo "connection unsuccessful<br>";
   echo $mpd->get_error();
 }
 
-//$screen = $mpd->current_song();
+$mpd = pause();
 
 //echo "screen: ".$screen;
