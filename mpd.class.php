@@ -715,6 +715,15 @@ class mpd {
 		return $rpt;
 	}
 
+	function Playing() {
+		if ( $this->debugging ) echo "mpd->Playing()\n";
+		if ( ! is_null($rpt = $this->SendCommand(MPD_STATE_PLAYING))) $this->RefreshInfo();
+		if ( $this->debugging ) echo "mpd->Playing() / return\n";
+		return $rpt;
+	}
+        
+        
+        
 	/* Previous() 
 	 * 
 	 * Skips to the previous song in the MPD playlist. If not playing, returns an error. 
