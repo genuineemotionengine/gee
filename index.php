@@ -1,11 +1,12 @@
 <?php
 //$pause = 1;
 require('mpd.class.php');
-//echo "ok<br>";
+echo "ok<br>";
 
 
 //header("Content-type: text/plain");
 $mpd = new MPD('localhost', 6600);
+echo "ok<br>";
 //$mpd->connect();
 //$status = $mpd->getCurrentSong();
 //if (empty($status)) {
