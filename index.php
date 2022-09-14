@@ -1,7 +1,7 @@
 <?php
 //$pause = 1;
 require('mpd.class.php');
-echo "ok<br>";
+//echo "ok<br>";
 
 
 header("Content-type: text/plain");
