@@ -15,6 +15,7 @@ if ($mpd == true) {
 }
 
 $mpd->connect();
+echo "ok<br>";
 if (isset($_GET['enable'])) {
     $id = intval($_GET['enable']);
 } else {
