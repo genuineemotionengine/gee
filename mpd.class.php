@@ -1028,20 +1028,20 @@ class mpd {
 	 */
 	function RefreshInfo() {
         // Get the Server Statistics
-		$statStr = $this->SendCommand(MPD_CMD_STATISTICS);
-		if ( !$statStr ) {
-			return NULL;
-		} else {
-			$stats = array();
-
-			$statStr=trim($statStr);
-			$statLine = explode( "\n", $statStr );
-			foreach ( $statLine as $line ) {
-				list ( $element, $value ) = explode(": ",$line);
-				$stats[$element] = $value;
-			} 
-		}
-
+//		$statStr = $this->SendCommand(MPD_CMD_STATISTICS);
+//		if ( !$statStr ) {
+//			return NULL;
+//		} else {
+//			$stats = array();
+//
+//			$statStr=trim($statStr);
+//			$statLine = explode( "\n", $statStr );
+//			foreach ( $statLine as $line ) {
+//				list ( $element, $value ) = explode(": ",$line);
+//				$stats[$element] = $value;
+//			} 
+//		}
+//
         // Get the Server Status
 		$statusStr = $this->SendCommand(MPD_CMD_STATUS);
 		if ( ! $statusStr ) {
