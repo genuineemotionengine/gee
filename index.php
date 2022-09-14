@@ -2,7 +2,7 @@
 
 require('mpd.class.php');
 echo "ok<br>";
-$mpd = new MPD('localhost','6600');
+$mpd = new MPD('localhost','');
 echo "ok<br>";
 //echo $mpd."<br>";
 if ($mpd === true) {
