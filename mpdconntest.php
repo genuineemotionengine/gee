@@ -2,7 +2,7 @@
 
 require('mpd.class.php');
 echo "ok<br>";
-$mpd = new MPD('localhost', 6600);
+$mpd = new MPD('localhost', 22,'');
 echo "ok<br>";
 if ($mpd === true) {
   echo "connection successful";
