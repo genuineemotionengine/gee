@@ -12,6 +12,6 @@ if ($mpd == true) {
   echo $mpd->get_error();
 }
 
-$screen = $mpd->get_version();
+$screen = $mpd->current_song();
 
 echo $screen;
