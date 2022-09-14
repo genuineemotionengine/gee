@@ -96,7 +96,7 @@ define("MPD_TBL_ARTIST","artist");
 define("MPD_TBL_ALBUM","album");
 
 
-$mpd_debug = 1;
+$mpd_debug = 0;
 
 function addLog($text){
 	global $mpd_debug;
