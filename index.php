@@ -14,10 +14,14 @@ if ($mpd == true) {
   echo $mpd->get_error();
 }
 
-print_r($mpd->status());
-//pause(1);
-
-//connect();
-//pause(1);
-
-echo "screen: ".$screen;
+$mpd->connect();
+if (isset($_GET['enable'])) {
+    $id = intval($_GET['enable']);
+} else {
+    if (isset($_GET['disable'])) {
+        $id = intval($_GET['disable']);
+    } else {
+        echo json_encode($mpd->outputs());
+    }
+}
+$mpd->disconnect();
