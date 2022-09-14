@@ -1,103 +1,55 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<?php
+/*
+ * Created on 14.02.2010
+ * file index.php
+ * part of phpMpReloaded
+ * 
+ * by tswaehn (http://sourceforge.net/users/tswaehn/)
+ */
+ 
+ 
+ 
+ // here is some bootstrap code
+ 
+ include('./config/config.php');
+ include('./lib/header.php');
+ 	
+ 	include ('./lib/NewsReader.php');
+ 	include ('./lib/ClientHandler.php');
+ 
 
-<head>
-	<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
-	
-	<!-- iPhone Stuff -->
-	<meta content="width=device-width, user-scalable=yes" name="viewport" />
-	<meta name="keywords" content="iPhone, iPod Touch, remote, mpd, control, php" />
-	<meta name="description" content="iPhone web based remote control for MPD" />
-	<meta content="yes" name="apple-mobile-web-app-capable" /><!-- When opened from home screen app will not have safari bars -->
-	<meta name="apple-mobile-web-app-status-bar-style" content="default"/><!-- Changes the status bar color. default/black/black-translucent -->
-	<link rel="apple-touch-icon" href="apple-touch-icon.png"/>
-	<link href="startup.png" rel="apple-touch-startup-image" /><!-- Start up icon 320x460px -->
-	
-	<!-- Check for browser -->
-  <script src="javascript/browserChoice.js" type="text/javascript"></script>
-	
-	<!-- Style Sheets -->
-  <link href="css/style.css" rel="stylesheet" media="screen" type="text/css" />
+	//import_request_variables  ( 'gp', 'url_' );		
+        // ATTENTION !!! final PREFIX will be "url_TEST" instead of "urlTEST" !!!!!
+        extract($_GET, EXTR_PREFIX_ALL, 'url'); 
+        extract($_POST, EXTR_PREFIX_ALL, 'url');
+        
+ 	$clientHandler = new ClientHandler;
+ 	$news = new NewsReader;
+ 	
+	echo '<div id="client_selector">';
+	echo '<h3>::phpMpReloaded:: The Webclient for mpd</h3>';
 
-	<!-- Javascript -->
-  <script src="javascript/addRemoveClass.js" type="text/javascript"></script>
-  <script src="javascript/remoteFunctions.js" type="text/javascript"></script>
-	
-	<!-- Hostname -->
-	<meta name="hostname"	id="hostname"	content="<?php echo `hostname`;?>" />
-	
-	<title><?php echo `hostname`;?></title>
-</head>
-
-<body>
-
-	<div id="topbar"> <!-- class="black" class="transparent"-->
-		<span id="title">Remote</span>
-		<span id="rightbutton"><a href="addtrack.html">Add Track</a></span>
-	</div>
-	
-	<div id="content">
+		echo '<div id="main">';		
+		$clientHandler->execute();
+		echo '</div>';
 		
-		<span class="graytitle" id="connectedMessage"></span>
+	echo '<div id="credit">';
+		echo "phpmpreloaded version ".__VERSION__."<br>";
+                
+		// recive news from news server 
+		echo $news->readNews('http://phpmpreloaded.sourceforge.net/NewsProvider/?version='.__VERSION__);
 		
-		<div id="innerContent">
-		
-			<ul class="pageitem">
-				<li class="textbox">
-					<span class="header">
-						<div id="Status"></div>
-					</span>
-					<p>
-						<div id="Track"></div>
-						<div id="Artist"></div>
-						<div id="Album"></div>
-					</p>
-					<p id="lastUpdated"></p>
-				</li>
-			</ul>
-			
-			<ul class="pageitem">
-				<li class="checkbox"><span class="name">Random</span><input id="shuffleCheckbox" type="checkbox" /></li>
-				<li class="checkbox"><span class="name">Repeat</span><input id="repeatCheckbox" type="checkbox" /></li>
-			</ul>
-			
-			<ul class="pageitem">
-				<li class="menu" id="volumeUp">
-					<span class="name">Volume Up</span>	
-				</li>
-				<li class="menu" id="volumeDown">
-					<span class="name">Volume Down</span>
-				</li>
-			</ul>
-
-			<ul class="pageitem">
-				<li class="menu">
-					<a href="playqueue.html">
-						<span class="name">Play Queue</span>
-						<span class="comment" id="playqueueCount"></span>
-						<span class="arrow"></span>
-					</a>
-				</li>
-			</ul>	
-		</div> <!-- inner content; don't display if we can't connect to mpd -->
-	</div>
-	
-	<div id="bottombar" class="buttonWrapper">
-		<div id="buttonHolder">
-			<span id="previousButton"></span>
-			<span id="playPauseButton" class="play"></span>
-			<span id="nextButton"></span>
-		</div>
-		<div id="buttonBackgroundFiller"></div>
-	</div>
-
-
-	<div id="footer">
-		<a class="noeffect" href="http://iwebkit.net">Thanks to iWebKit for all the style sheets.</a>
-	</div>
-	
-	<script type="text/javascript">
-		init_page();
-	</script>
-</body>
-</html>
+		// support links
+		echo 'Support <a href="http://sourceforge.net/projects/phpmpreloaded/">us</a> and visit<br>'; 
+		echo '<a href="http://sourceforge.net/projects/phpmpreloaded"><img src="http://sflogo.sourceforge.net/sflogo.php?group_id=304529&amp;type=9" width="80" height="15" alt="Get ::phpMpReloaded:: The webclient for mpd at SourceForge.net. Fast, secure and Free Open Source software downloads" /></a>';	
+	echo '</div>';
+ 
+ 	echo '</div>'; 
+ 
+ 
+ include('./lib/footer.php');
+ 
+ // 
+ 
+ 
+?>
