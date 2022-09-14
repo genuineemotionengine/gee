@@ -15,6 +15,7 @@ if ($mpd == true) {
 }
 
 $connect = connect();
+echo "ok<br>";
 
 if ($connect == true) {
   echo "connect successful<br>";
