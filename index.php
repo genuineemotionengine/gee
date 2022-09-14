@@ -1,9 +1,10 @@
 <?php
-$pause = 1;
+//$pause = 1;
 require('mpd.class.php');
 echo "ok<br>";
-$mpd = new MPD('localhost', 6600);
 
+
+$mpd = new MPD('localhost', 6600);
 echo "ok<br>";
 //echo $mpd."<br>";
 if ($mpd == true) {
@@ -14,8 +15,8 @@ if ($mpd == true) {
   echo $mpd->get_error();
 }
 
-$mpd->connect();
-echo "ok<br>";
+//$mpd->connect();
+//echo "ok<br>";
 //if (isset($_GET['enable'])) {
 //    $id = intval($_GET['enable']);
 //} else {
@@ -25,4 +26,4 @@ echo "ok<br>";
 //        echo json_encode($mpd->outputs());
 //    }
 //}
-$mpd->disconnect();
+//$mpd->disconnect();
