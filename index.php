@@ -4,26 +4,15 @@ require('mpd.class.php');
 echo "ok<br>";
 
 
+header("Content-type: text/plain");
 $mpd = new MPD('localhost', 6600);
-echo "ok<br>";
-//echo $mpd."<br>";
-if ($mpd == true) {
-  echo "initialise successful<br>";
-  //pause(1);
-} else {
-  echo "initialise unsuccessful<br>";
-  echo $mpd->get_error();
+$mpd->connect();
+$status = $mpd->getCurrentSong();
+if (empty($status)) {
+    $status = array();
 }
-
-//$mpd->connect();
-//echo "ok<br>";
-//if (isset($_GET['enable'])) {
-//    $id = intval($_GET['enable']);
-//} else {
-//    if (isset($_GET['disable'])) {
-//        $id = intval($_GET['disable']);
-//    } else {
-//        echo json_encode($mpd->outputs());
-//    }
-//}
-//$mpd->disconnect();
+$status = array_merge($status, $mpd->getStatus());
+$status['repeat'] = $status['repeat'] == 1 ? true : false;
+$status['random'] = $status['random'] == 1 ? true : false;
+$mpd->disconnect();
+echo json_encode($status);
