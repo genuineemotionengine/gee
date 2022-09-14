@@ -14,17 +14,7 @@ if ($mpd == true) {
   echo $mpd->get_error();
 }
 
-connect();
-echo "ok<br>";
-
-if ($connect == true) {
-  echo "connect successful<br>";
-  //pause(1);
-} else {
-  echo "connect unsuccessful<br>";
-  echo $connect->get_error();
-}
-
+$members = $this->pause(1);
 
 //connect();
 //pause(1);
