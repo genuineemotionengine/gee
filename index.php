@@ -12,4 +12,6 @@ if ($mpd == true) {
   echo $mpd->get_error();
 }
 
-echo $mpd->get_version();
+$screen = $mpd->get_version();
+
+echo screen;
