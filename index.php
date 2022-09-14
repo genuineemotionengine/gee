@@ -5,14 +5,14 @@ require('mpd.class.php');
 
 
 //header("Content-type: text/plain");
-$mpd = new MPD('localhost', 0);
-$mpd->connect();
-$status = $mpd->getCurrentSong();
-if (empty($status)) {
-    $status = array();
-}
-$status = array_merge($status, $mpd->getStatus());
-$status['repeat'] = $status['repeat'] == 1 ? true : false;
-$status['random'] = $status['random'] == 1 ? true : false;
-$mpd->disconnect();
-echo json_encode($status);
+$mpd = new MPD('localhost', 6600);
+//$mpd->connect();
+//$status = $mpd->getCurrentSong();
+//if (empty($status)) {
+//    $status = array();
+//}
+//$status = array_merge($status, $mpd->getStatus());
+//$status['repeat'] = $status['repeat'] == 1 ? true : false;
+//$status['random'] = $status['random'] == 1 ? true : false;
+//$mpd->disconnect();
+//echo json_encode($status);
