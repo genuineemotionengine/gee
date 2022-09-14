@@ -1,5 +1,5 @@
 <?php
-$pause = '1';
+$pause = 1;
 require('mpd.class.php');
 echo "ok<br>";
 $mpd = new MPD('localhost','');
