@@ -20,9 +20,9 @@ $mpd = new mpd('localhost', 6600);
 //      echo $mpd->get_error();
 //    }
 //
+$mpd->current_song()
 
-
-$mpd->Pause();
+//$mpd->Pause();
 //    if ($mpd == true) {
 //      echo "paused mpd ok<br>";
 //    } else {
