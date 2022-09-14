@@ -1106,23 +1106,23 @@ class mpd {
 	 * NOTE: This function really should not be used. Instead, use $this->[variable]. The function
 	 *   will most likely be deprecated in future releases.
 	 */
-	function GetStatistics() {
-		if ( $this->debugging ) echo "mpd->GetStatistics()\n";
-		$stats = $this->SendCommand(MPD_CMD_STATISTICS);
-		if ( !$stats ) {
-			return NULL;
-		} else {
-			$statsArray = array();
-			$statsLine = strtok($stats,"\n");
-			while ( $statsLine ) {
-				list ( $element, $value ) = explode(": ",$statsLine);
-				$statsArray[$element] = $value;
-				$statsLine = strtok("\n");
-			} 
-		}
-		if ( $this->debugging ) echo "mpd->GetStatistics() / return: " . print_r($statsArray) ."\n";
-		return $statsArray;
-	}
+//	function GetStatistics() {
+//		if ( $this->debugging ) echo "mpd->GetStatistics()\n";
+//		$stats = $this->SendCommand(MPD_CMD_STATISTICS);
+//		if ( !$stats ) {
+//			return NULL;
+//		} else {
+//			$statsArray = array();
+//			$statsLine = strtok($stats,"\n");
+//			while ( $statsLine ) {
+//				list ( $element, $value ) = explode(": ",$statsLine);
+//				$statsArray[$element] = $value;
+//				$statsLine = strtok("\n");
+//			} 
+//		}
+//		if ( $this->debugging ) echo "mpd->GetStatistics() / return: " . print_r($statsArray) ."\n";
+//		return $statsArray;
+//	}
 
 	/* GetStatus() 
 	 * 
