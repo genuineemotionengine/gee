@@ -14,10 +14,22 @@ $mpd = new mpd('localhost', 6600);
 
 
 $mpd->Connect();
-echo "connected to mpd ok<br>";
+    if ($mpd == true) {
+      echo "connected to mpd ok<br>";
+    } else {
+      echo $mpd->get_error();
+    }
+
+
 
 $mpd->Pause();
-echo "paused mpd ok<br>";
+    if ($mpd == true) {
+      echo "paused mpd ok<br>";
+    } else {
+      echo $mpd->get_error();
+    }
+
+
 //$status = $mpd->getCurrentSong();
 //if (empty($status)) {
 //    $status = array();
