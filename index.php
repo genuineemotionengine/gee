@@ -20,7 +20,7 @@ $mpd = new mpd('localhost', 6600);
 //      echo $mpd->get_error();
 //    }
 //
-$mpd->current_song();
+$mpd->RefreshInfo()
 
 //$mpd->Pause();
 //    if ($mpd == true) {
