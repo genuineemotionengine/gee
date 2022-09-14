@@ -13,13 +13,13 @@ $mpd = new mpd('localhost', 6600);
     }
 
 
-$mpd->Connect();
-    if ($mpd == true) {
-      echo "connected to mpd ok<br>";
-    } else {
-      echo $mpd->get_error();
-    }
-
+//$mpd->Connect();
+//    if ($mpd == true) {
+//      echo "connected to mpd ok<br>";
+//    } else {
+//      echo $mpd->get_error();
+//    }
+//
 
 
 $mpd->Pause();
