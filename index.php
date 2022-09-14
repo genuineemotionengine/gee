@@ -6,7 +6,7 @@ echo "read mpd.class.php ok<br>";
 
 //header("Content-type: text/plain");
 $mpd = new mpd('localhost', 6600);
-    if ($mpd === true) {
+    if ($mpd == true) {
       echo "initialise mpd ok<br>";
     } else {
       echo $mpd->get_error();
