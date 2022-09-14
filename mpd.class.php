@@ -44,7 +44,7 @@
 
 // Create common command definitions for MPD to use
 define("MPD_CMD_STATUS",      "status");
-define("MPD_CMD_STATISTICS",  "stats");
+//define("MPD_CMD_STATISTICS",  "stats");
 define("MPD_CMD_VOLUME",      "volume");
 define("MPD_CMD_SETVOL",      "setvol");
 define("MPD_CMD_PLAY",        "play");
