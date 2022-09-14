@@ -1,5 +1,5 @@
 <?php
-//$pause = 1;
+$pause = 1;
 require('mpd.class.php');
 echo "read mpd.class.php ok<br>";
 
@@ -10,7 +10,7 @@ echo "initialise mpd ok<br>";
 $mpd->connect();
 echo "connected to mpd ok<br>";
 
-$mpd->pause(1);
+$mpd->pause($pause);
 echo "paused mpd ok<br>";
 //$status = $mpd->getCurrentSong();
 //if (empty($status)) {
