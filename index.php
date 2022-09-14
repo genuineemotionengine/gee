@@ -26,7 +26,7 @@
 	<!-- Hostname -->
 	<meta name="hostname"	id="hostname"	content="<?php echo `hostname`;?>" />
 	
-	<title>Remote</title>
+	<title><?php echo `hostname`;?></title>
 </head>
 
 <body>
