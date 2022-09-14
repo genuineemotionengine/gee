@@ -1,7 +1,13 @@
 <?php
 
-/* 
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/EmptyPHP.php to edit this template
- */
-
+require('mpd.class.php');
+echo "ok<br>";
+$mpd = new MPD('localhost',null,'',10);
+echo "ok<br>";
+//echo $mpd."<br>";
+if ($mpd === true) {
+  echo "connection successful<br>";
+} else {
+  echo "connection unsuccessful<br>";
+  echo $mpd->get_error();
+}
