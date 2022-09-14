@@ -2,8 +2,8 @@
 
 //require('./mpd/mpd.class.php');
 //$mpd = new MPD('localhost', 6600);
-if ($mpd === true) {
+//if ($mpd === true) {
   echo "connection successful";
-} else {
-  echo $mpd->get_error();
-}
+//} else {
+  //echo $mpd->get_error();
+//}
