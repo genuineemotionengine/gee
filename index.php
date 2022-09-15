@@ -32,7 +32,9 @@ $getID3->CopyTagsToComments($ThisFileInfo);
   if(isset($ThisFileInfo['comments']['picture'][0])){
      $Image='data:'.$ThisFileInfo['comments']['picture'][0]['mime'].';charset=utf-8;base64,'.base64_encode($ThisFileInfo['comments']['picture'][0]['data']);
   }
-
+ ?>
+  <img id="FileImage" width="150" src="<?php echo @$Image;?>" height="150">
+  <?php
 //header('Content-Type: image/jpeg');
 //echo $ThisFileInfo['comments']['picture']['0']['data'];
 
