@@ -39,4 +39,3 @@ $mpd = new mpd('localhost', 6600);
 //$status['random'] = $status['random'] == 1 ? true : false;
 //$mpd->disconnect();
 //echo json_encode($status);
- echo '<pre>'; print_r($err_log); echo '</pre>';

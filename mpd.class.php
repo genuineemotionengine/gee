@@ -1203,4 +1203,5 @@ class MPD {
 		}
 	}
 }
+ echo '<pre>'; print_r($err_log); echo '</pre>';
 ?>
