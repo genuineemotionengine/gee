@@ -25,7 +25,10 @@ $mpd->current_song();
 echo '<pre>'; print_r($mpd->current_song()); echo '</pre>';
 
 echo "<br><br>";
+
+$mySimpleArray = $mpd->current_song();
 //
-foreach ($mpd->current_song() as $key => $val) {
-   echo $val;
+for ($i = 0; $i < count($mySimpleArray); $i++)
+{
+   echo $mySimpleArray[$i] . "\n";
 }
