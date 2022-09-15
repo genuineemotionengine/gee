@@ -29,9 +29,14 @@ $ThisFileInfo = $getID3->analyze($flacfile);
 */
 $getID3->CopyTagsToComments($ThisFileInfo);
 
-
-//echo '<pre>'.htmlentities(print_r($ThisFileInfo, true), ENT_SUBSTITUTE).'</pre>';
-echo '<pre>'.htmlentities(print_r($ThisFileInfo['comments'], true), ENT_SUBSTITUTE).'</pre>';
+  if(isset($ThisFileInfo['comments']['picture'][0])){
+     $Image='data:'.$ThisFileInfo['comments']['picture'][0]['image_mime'].';charset=utf-8;base64,'.base64_encode($ThisFileInfo['comments']['picture'][0]['data']);
+  }
+  ?>
+<img id="FileImage" width="150" src="<?php echo @$Image;?>" height="150">
+<?php
+/echo '<pre>'.htmlentities(print_r($ThisFileInfo, true), ENT_SUBSTITUTE).'</pre>';
+//echo '<pre>'.htmlentities(print_r($ThisFileInfo['comments'], true), ENT_SUBSTITUTE).'</pre>';
 
 //// Load class.
 //require ('mp3data.php');
