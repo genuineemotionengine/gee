@@ -21,13 +21,13 @@ $getID3 = new getid3;
 
 // Analyze file and store returned data in $ThisFileInfo
 $ThisFileInfo = $getID3->analyze($flacfile);
-print_r($ThisFileInfo['comments']['picture'][0]['data']);
+
 /*
  Optional: copies data from all subarrays of [tags] into [comments] so
  metadata is all available in one location for all tag formats
  metainformation is always available under [tags] even if this is not called
 */
-//$getID3->CopyTagsToComments($ThisFileInfo);
+$getID3->CopyTagsToComments($ThisFileInfo);
 //
 //  if(isset($ThisFileInfo['comments']['picture'][0])){
 //     $Image='data:'.$ThisFileInfo['comments']['picture'][0]['mime'].';charset=utf-8;base64,'.base64_encode($ThisFileInfo['comments']['picture'][0]['data']);
@@ -37,7 +37,7 @@ print_r($ThisFileInfo['comments']['picture'][0]['data']);
 //echo $ThisFileInfo['comments']['picture']['0']['data'];
 
 //echo '<pre>'.htmlentities(print_r($ThisFileInfo, true), ENT_SUBSTITUTE).'</pre>';
-//echo '<pre>'.htmlentities(print_r($ThisFileInfo['comments'], true), ENT_SUBSTITUTE).'</pre>';
+echo '<pre>'.htmlentities(print_r($ThisFileInfo['comments'], true), ENT_SUBSTITUTE).'</pre>';
 
 //// Load class.
 //require ('mp3data.php');
