@@ -7,21 +7,26 @@ $mpd = new mpd('localhost', 6600);
 
 $mySimpleArray = $mpd->current_song();
 
-echo "result: ".$mySimpleArray[0]['basename'];
-
 $flacfile = $mySimpleArray[0]['basename'];
+
+echo "result: ".$flacfile."<br>";
+
 
 // Load class.
 require 'mp3data.php';
+echo "read mpd.class.php ok<br>";
 
 // Instantiate a new object.
 $mp3  = new Mp3Tag();
+echo "object ok<br>";
 
 // Get ID3 info.
 $data = $mp3->Get( '/mnt/usb/'.$flacfile );
+echo "get ok<br>";
 
 // Show results
 print_r( $data );
+echo "print ok<br>";
 
 foreach ( $data['tag']['picture'] as $image ) {
 
