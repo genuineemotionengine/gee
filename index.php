@@ -60,14 +60,14 @@ foreach ( $data['tag']['picture'] as $image ) {
 	echo '<img src="data:' . $image['mime'] . ';charset=utf-8;base64,' . $image['data'] . '" />';
 	
 }
-//  $getID3 = new getID3;
-//  $tags = $getID3->analyze($flacfile);
-//
-//if (isset($tags['comments']['picture']['0']['data'])) {
-//    $image = $tags['comments']['picture']['0']['data'];
-//    if(file_put_contents(FCPATH . "imageTest.jpg", $image)) {
-//        echo 'Image Added';
-//    } else {
-//        echo 'Image Not Added';
-//    }
-//}
+
+$imgData = $image['data'];
+$imgData = str_replace(' ','+',$_POST['image']);
+$imgData =  substr($imgData,strpos($imgData,",")+1);
+$imgData = base64_decode($imgData);
+// Path where the image is going to be saved
+$filePath = $_SERVER['DOCUMENT_ROOT']. '/mnt/usb/temp2.png';
+// Write $imgData into the image file
+$file = fopen($filePath, 'w');
+fwrite($file, $imgData);
+fclose($file);
