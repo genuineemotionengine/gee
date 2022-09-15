@@ -24,6 +24,8 @@ $mpd->current_song();
 
 echo '<pre>'; print_r($mpd->current_song()); echo '</pre>';
 
-//echo "<br><br>";
+echo "<br><br>";
 //
-echo $cur_song_res;
+foreach ($mpd->current_song() as $key => $val) {
+   echo $val;
+}
