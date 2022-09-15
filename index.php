@@ -28,7 +28,3 @@ echo "<br><br>";
 
 $mySimpleArray = $mpd->current_song();
 //
-for ($i = 0; $i < count($mySimpleArray); $i++)
-{
-   echo $mySimpleArray[$i] . "\n";
-}
