@@ -35,7 +35,7 @@ $getID3->CopyTagsToComments($ThisFileInfo);
   ?>
 <img id="FileImage" width="150" src="<?php echo @$Image;?>" height="150">
 <?php
-/echo '<pre>'.htmlentities(print_r($ThisFileInfo, true), ENT_SUBSTITUTE).'</pre>';
+//echo '<pre>'.htmlentities(print_r($ThisFileInfo, true), ENT_SUBSTITUTE).'</pre>';
 //echo '<pre>'.htmlentities(print_r($ThisFileInfo['comments'], true), ENT_SUBSTITUTE).'</pre>';
 
 //// Load class.
