@@ -60,8 +60,9 @@ foreach ( $data['tag']['picture'] as $image ) {
 	echo '<img src="data:' . $image['mime'] . ';charset=utf-8;base64,' . $image['data'] . '" />';
 	
 }
-
+echo "<br>";
 $imgData = $image['data'];
+echo $imgData."<br>";
 $imgData = str_replace(' ','+',$_POST['image']);
 $imgData =  substr($imgData,strpos($imgData,",")+1);
 $imgData = base64_decode($imgData);
