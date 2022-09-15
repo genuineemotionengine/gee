@@ -30,4 +30,4 @@ $mySimpleArray = $mpd->current_song();
 //
 //$myVariable=print_r($mySimpleArray[basename], TRUE);
 
-echo "result: ".$mySimpleArray['basename'];
+echo "result: ".$mySimpleArray[0]['basename'];
