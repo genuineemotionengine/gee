@@ -20,7 +20,7 @@ require_once('getid3.php');
 $getID3 = new getID3;
 
 // Analyze file and store returned data in $ThisFileInfo
-$ThisFileInfo = $getID3->analyze($filename);
+$ThisFileInfo = $getID3->analyze($flacfile);
 
 /*
  Optional: copies data from all subarrays of [tags] into [comments] so
