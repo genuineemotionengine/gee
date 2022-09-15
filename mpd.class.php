@@ -1059,7 +1059,7 @@ class MPD {
 		$this->random = $srv_status['random'];
 		$this->volume = $srv_status['volume'];
 		$this->consume = $srv_status['consume'];
-		$this->xfade = $srv_status['xfade'];
+		//$this->xfade = $srv_status['xfade'];
 		$this->bitrate = $srv_status['bitrate'];
 		$this->audio = $srv_status['audio'];
 		$this->single = $srv_status['single'];
