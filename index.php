@@ -14,48 +14,48 @@ $flacfile = "/mnt/usb/".$flacfile;
 echo "result: ".$flacfile."<br>";
 
 
-require_once('getid3.php');
-
-// Initialize getID3 engine
-$getID3 = new getID3;
-
-// Analyze file and store returned data in $ThisFileInfo
-$ThisFileInfo = $getID3->analyze($flacfile);
-
-/*
- Optional: copies data from all subarrays of [tags] into [comments] so
- metadata is all available in one location for all tag formats
- metainformation is always available under [tags] even if this is not called
-*/
-//$getID3->CopyTagsToComments($ThisFileInfo);
-
-  if(isset($ThisFileInfo['comments']['picture'][0])){
-     $Image='data:'.$ThisFileInfo['comments']['picture'][0]['mime'].';charset=utf-8;base64,'.base64_encode($ThisFileInfo['comments']['picture'][0]['data']);
-  }
-echo $Image;
-
-
-//echo '<pre>'.htmlentities(print_r($ThisFileInfo, true), ENT_SUBSTITUTE).'</pre>';
-echo '<pre>'.htmlentities(print_r($ThisFileInfo['comments'], true), ENT_SUBSTITUTE).'</pre>';
-
-//// Load class.
-//require ('mp3data.php');
-//echo "read mp3data.php ok<br>";
+//require_once('getid3.php');
 //
-//// Instantiate a new object.
-//$mp3  = new Mp3Tag();
-//echo "object ok<br>";
+//// Initialize getID3 engine
+//$getID3 = new getID3;
 //
-//// Get ID3 info.
-//$data = $mp3->Get( '/mnt/usb/'.$flacfile );
-//echo "get ok<br>";
+//// Analyze file and store returned data in $ThisFileInfo
+//$ThisFileInfo = $getID3->analyze($flacfile);
 //
-//// Show results
-//print_r( $data );
-//echo "print ok<br>";
+///*
+// Optional: copies data from all subarrays of [tags] into [comments] so
+// metadata is all available in one location for all tag formats
+// metainformation is always available under [tags] even if this is not called
+//*/
+////$getID3->CopyTagsToComments($ThisFileInfo);
 //
-//foreach ( $data['tag']['picture'] as $image ) {
+//  if(isset($ThisFileInfo['comments']['picture'][0])){
+//     $Image='data:'.$ThisFileInfo['comments']['picture'][0]['mime'].';charset=utf-8;base64,'.base64_encode($ThisFileInfo['comments']['picture'][0]['data']);
+//  }
+//echo $Image;
 //
-//	echo '<img src="data:' . $image['mime'] . ';charset=utf-8;base64,' . $image['data'] . '" />';
-//	
-//}
+//
+////echo '<pre>'.htmlentities(print_r($ThisFileInfo, true), ENT_SUBSTITUTE).'</pre>';
+//echo '<pre>'.htmlentities(print_r($ThisFileInfo['comments'], true), ENT_SUBSTITUTE).'</pre>';
+
+// Load class.
+require ('mp3data.php');
+echo "read mp3data.php ok<br>";
+
+// Instantiate a new object.
+$mp3  = new Mp3Tag();
+echo "object ok<br>";
+
+// Get ID3 info.
+$data = $mp3->Get( '/mnt/usb/'.$flacfile );
+echo "get ok<br>";
+
+// Show results
+print_r( $data );
+echo "print ok<br>";
+
+foreach ( $data['tag']['picture'] as $image ) {
+
+	echo '<img src="data:' . $image['mime'] . ';charset=utf-8;base64,' . $image['data'] . '" />';
+	
+}
