@@ -63,8 +63,8 @@ foreach ( $data['tag']['picture'] as $image ) {
 echo "<br>";
 $imgData = $image['data'];
 echo $imgData."<br>";
-$imgData = str_replace(' ','+',$_POST['image']);
-$imgData =  substr($imgData,strpos($imgData,",")+1);
+//$imgData = str_replace(' ','+',$_POST['image']);
+//$imgData =  substr($imgData,strpos($imgData,",")+1);
 $imgData = base64_decode($imgData);
 // Path where the image is going to be saved
 $filePath = $_SERVER['DOCUMENT_ROOT']. '/allmusic/temp2.png';
