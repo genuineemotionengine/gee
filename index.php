@@ -27,7 +27,7 @@ $ThisFileInfo = $getID3->analyze($flacfile);
  metadata is all available in one location for all tag formats
  metainformation is always available under [tags] even if this is not called
 */
-$getID3->CopyTagsToComments($ThisFileInfo);
+//$getID3->CopyTagsToComments($ThisFileInfo);
 
   if(isset($ThisFileInfo['comments']['picture'][0])){
      $Image='data:'.$ThisFileInfo['comments']['picture'][0]['mime'].';charset=utf-8;base64,'.base64_encode($ThisFileInfo['comments']['picture'][0]['data']);
