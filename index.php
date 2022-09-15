@@ -22,8 +22,8 @@ $mpd->current_song();
 //$currentsong = $mpd->current_song();    
 
 
-echo '<pre>'; print_r($mpd->current_song()[basename]); echo '</pre>';
+echo '<pre>'; print_r($mpd->current_song()); echo '</pre>';
 
 //echo "<br><br>";
 //
-//echo $mpd[31];
+echo $cur_song_res;
