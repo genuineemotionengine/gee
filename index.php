@@ -4,30 +4,27 @@ require('mpd.class.php');
 echo "read mpd.class.php ok<br>";
 
 $mpd = new mpd('localhost', 6600);
-    if ($mpd == true) {
-      echo "initialise mpd ok<br>";
-    } else {
-    echo "initialise mpd not ok<br>";
-      echo $mpd->get_error();
-     }
-
-$mpd->current_song();
-    if ($mpd == true) {
-      echo "current song mpd ok<br>";
-    } else {
-      echo "current song mpd not ok<br>";
-      echo $mpd->get_error();
-    }
-
-//$currentsong = $mpd->current_song();    
-
-
-echo '<pre>'; print_r($mpd->current_song()); echo '</pre>';
-
-echo "<br><br>";
 
 $mySimpleArray = $mpd->current_song();
-//
-//$myVariable=print_r($mySimpleArray[basename], TRUE);
 
 echo "result: ".$mySimpleArray[0]['basename'];
+
+$flacfile = $mySimpleArray[0]['basename'];
+
+// Load class.
+require 'mp3data.php';
+
+// Instantiate a new object.
+$mp3  = new Mp3Tag();
+
+// Get ID3 info.
+$data = $mp3->Get( '/mnt/usb/'.$flacfile );
+
+// Show results
+print_r( $data );
+
+foreach ( $data['tag']['picture'] as $image ) {
+
+	echo '<img src="data:' . $image['mime'] . ';charset=utf-8;base64,' . $image['data'] . '" />';
+	
+}
