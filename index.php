@@ -6,15 +6,15 @@ echo "read mpd.class.php ok<br>";
 $mpd = new mpd('localhost', 6600);
 
 $mySimpleArray = $mpd->current_song();
-
+print_r($mySimpleArray);
 $flacfile = $mySimpleArray[0]['basename'];
 
 echo "result: ".$flacfile."<br>";
 
 
 // Load class.
-require 'mp3data.php';
-echo "read mpd.class.php ok<br>";
+require ('mp3data.php');
+echo "read mp3data.php ok<br>";
 
 // Instantiate a new object.
 $mp3  = new Mp3Tag();
