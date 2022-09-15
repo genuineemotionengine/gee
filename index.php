@@ -74,5 +74,5 @@ fwrite($file, $imgData);
 fclose($file);
 
 echo "image: <br>";
-echo "<img src=".$filePath." />";
+echo "<img src='/allmusic/temp2.jpg' />";
 	
