@@ -1172,7 +1172,7 @@ class MPD {
 			$counter = -1;
 			$type = 'unknown';
 			while ($plist_line) {
-				list ($key, $value) = split(": ", $plist_line);
+				list ($key, $value) = explode(": ", $plist_line);
 				if ($key == 'file' || $key == 'directory' || $key == 'playlist') {
 					$type = $key;
 					$counter++;
