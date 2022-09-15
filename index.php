@@ -14,7 +14,7 @@ $flacfile = "/mnt/usb/".$flacfile;
 echo "result: ".$flacfile."<br>";
 
 
-require_once('../getid3/getid3.php');
+require_once('getid3.php');
 
 // Initialize getID3 engine
 $getID3 = new getID3;
