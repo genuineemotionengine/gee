@@ -20,7 +20,7 @@ $mpd = new mpd('localhost', 6600);
 //      echo $mpd->get_error();
 //    }
 //
-$mpd->Playing();
+
 
 //$mpd->Pause();
 //    if ($mpd == true) {
@@ -39,3 +39,4 @@ $mpd->Playing();
 //$status['random'] = $status['random'] == 1 ? true : false;
 //$mpd->disconnect();
 //echo json_encode($status);
+ echo '<pre>'; print_r($err_log); echo '</pre>';
