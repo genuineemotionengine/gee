@@ -23,12 +23,13 @@ $mpd = new mpd('localhost', 6600);
 //
 
 
-//$mpd->Pause();
-//    if ($mpd == true) {
-//      echo "paused mpd ok<br>";
-//    } else {
-//      echo $mpd->get_error();
-//    }
+$mpd->Pause(1);
+    if ($mpd == true) {
+      echo "paused mpd ok<br>";
+    } else {
+      echo "paused mpd not ok<br>";
+      echo $mpd->get_error();
+    }
 
 
 //$status = $mpd->getCurrentSong();
