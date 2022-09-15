@@ -14,6 +14,25 @@ $flacfile = "/mnt/usb/".$flacfile;
 echo "result: ".$flacfile."<br>";
 
 
+require_once('../getid3/getid3.php');
+
+// Initialize getID3 engine
+$getID3 = new getID3;
+
+// Analyze file and store returned data in $ThisFileInfo
+$ThisFileInfo = $getID3->analyze($filename);
+
+/*
+ Optional: copies data from all subarrays of [tags] into [comments] so
+ metadata is all available in one location for all tag formats
+ metainformation is always available under [tags] even if this is not called
+*/
+$getID3->CopyTagsToComments($ThisFileInfo);
+
+
+echo '<pre>'.htmlentities(print_r($ThisFileInfo, true), ENT_SUBSTITUTE).'</pre>';
+
+
 //// Load class.
 //require ('mp3data.php');
 //echo "read mp3data.php ok<br>";
