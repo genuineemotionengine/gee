@@ -39,40 +39,59 @@ require_once('getid3.php');
 //echo '<pre>'.htmlentities(print_r($ThisFileInfo['comments'], true), ENT_SUBSTITUTE).'</pre>';
 
  //Load class.
-require ('mp3data.php');
-echo "read mp3data.php ok<br>";
+//require ('mp3data.php');
+//echo "read mp3data.php ok<br>";
 
 // Instantiate a new object.
-$mp3  = new Mp3Tag();
-echo "object ok<br>";
-
-// Get ID3 info.
-$data = $mp3->Get( $flacfile );
-echo "get ok<br>";
-
-// Show results
-//print_r( $data );
-echo '<pre>'; print_r($data); echo '</pre>';
-echo "print ok<br>";
-
-foreach ( $data['tag']['picture'] as $image ) {
-
-	echo '<img src="data:' . $image['mime'] . ';charset=utf-8;base64,' . $image['data'] . '" />';
+//$mp3  = new Mp3Tag();
+//echo "object ok<br>";
+//
+//// Get ID3 info.
+//$data = $mp3->Get( $flacfile );
+//echo "get ok<br>";
+//
+//// Show results
+////print_r( $data );
+//echo '<pre>'; print_r($data); echo '</pre>';
+//echo "print ok<br>";
+//
+//foreach ( $data['tag']['picture'] as $image ) {
+//
+//	echo '<img src="data:' . $image['mime'] . ';charset=utf-8;base64,' . $image['data'] . '" />';
+//	
+//}
+//echo "<br>";
+//$imgData = $image['data'];
+//echo $imgData."<br>";
+////$imgData = str_replace(' ','+',$_POST['image']);
+////$imgData =  substr($imgData,strpos($imgData,",")+1);
+//$imgData = base64_decode($imgData);
+//// Path where the image is going to be saved
+//$filePath = $_SERVER['DOCUMENT_ROOT']. '/allmusic/temp2.jpg';
+//// Write $imgData into the image file
+//$file = fopen($filePath, 'w');
+//fwrite($file, $imgData);
+//fclose($file);
+//
+//echo "image: <br>";
+//echo "<img src='/allmusic/temp2.jpg' />";
 	
+include("flacTags.php");
+
+$ftag=new flacTags($flacfile);
+
+if($ftag->readTags()==false) {
+  echo "ERROR:";
+  echo $ftag->getError();
 }
-echo "<br>";
-$imgData = $image['data'];
-echo $imgData."<br>";
-//$imgData = str_replace(' ','+',$_POST['image']);
-//$imgData =  substr($imgData,strpos($imgData,",")+1);
-$imgData = base64_decode($imgData);
-// Path where the image is going to be saved
-$filePath = $_SERVER['DOCUMENT_ROOT']. '/allmusic/temp2.jpg';
-// Write $imgData into the image file
-$file = fopen($filePath, 'w');
-fwrite($file, $imgData);
-fclose($file);
+else {
+  echo "Vendor String: ";
+  echo $ftag->getVendorString();
 
-echo "image: <br>";
-echo "<img src='/allmusic/temp2.jpg' />";
-	
+  echo "<br><br>Title: ";
+  echo $ftag->getComment("TITLE");
+
+  echo "<br><br>All information:<br><br>";
+  $infos=$ftag->getAllComments();
+  print_r($infos);
+}
