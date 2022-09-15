@@ -1148,7 +1148,7 @@ class MPD {
 		} else {
 			$list_line = strtok($list_res, "\n");
 			while ($list_line) {
-				list ($key, $value) = split(": ", $list_line);
+				list ($key, $value) = explode(": ", $list_line);
 				if ($value != '') {
 					if ($use_str_assoc === true) {
 						$list[$key] = $value;
