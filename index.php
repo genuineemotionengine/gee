@@ -11,13 +11,13 @@ $flacfile = $mySimpleArray[0]['name'];
 
 $flacfile = "/mnt/usb/".$flacfile;
 
-//echo "result: ".$flacfile."<br>";
+echo "result: ".$flacfile."<br>";
 
 
 require_once('getid3.php');
 
 // Initialize getID3 engine
-$getID3 = new getid3;
+$getID3 = new getID3;
 
 // Analyze file and store returned data in $ThisFileInfo
 $ThisFileInfo = $getID3->analyze($flacfile);
@@ -28,16 +28,16 @@ $ThisFileInfo = $getID3->analyze($flacfile);
  metainformation is always available under [tags] even if this is not called
 */
 $getID3->CopyTagsToComments($ThisFileInfo);
-//
-//  if(isset($ThisFileInfo['comments']['picture'][0])){
-//     $Image='data:'.$ThisFileInfo['comments']['picture'][0]['mime'].';charset=utf-8;base64,'.base64_encode($ThisFileInfo['comments']['picture'][0]['data']);
-//  }
-// echo $ThisFileInfo['comments']['picture'][0]);
-//header('Content-Type: image/jpeg');
-//echo $ThisFileInfo['comments']['picture']['0']['data'];
+
+  if(isset($ThisFileInfo['comments']['picture'][0])){
+     $Image='data:'.$ThisFileInfo['comments']['picture'][0]['mime'].';charset=utf-8;base64,'.base64_encode($ThisFileInfo['comments']['picture'][0]['data']);
+  }
+  ?>
+<img id="FileImage" width="150" src="<?php echo @$Image;?>" height="150">
+<?php
 
 //echo '<pre>'.htmlentities(print_r($ThisFileInfo, true), ENT_SUBSTITUTE).'</pre>';
-echo '<pre>'.htmlentities(print_r($ThisFileInfo['comments'], true), ENT_SUBSTITUTE).'</pre>';
+//echo '<pre>'.htmlentities(print_r($ThisFileInfo['comments'], true), ENT_SUBSTITUTE).'</pre>';
 
 //// Load class.
 //require ('mp3data.php');
