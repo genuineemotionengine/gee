@@ -14,10 +14,10 @@ $flacfile = "/mnt/usb/".$flacfile;
 //echo "result: ".$flacfile."<br>";
 
 
-require_once('module.audio.flac.php');
+require_once('getid3.php');
 
 // Initialize getID3 engine
-$getID3 = new getid3_flac;
+$getID3 = new getid3;
 
 // Analyze file and store returned data in $ThisFileInfo
 $ThisFileInfo = $getID3->analyze($flacfile);
