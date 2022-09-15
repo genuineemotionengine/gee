@@ -28,3 +28,4 @@ echo "<br><br>";
 
 $mySimpleArray = $mpd->current_song();
 //
+echo $mySimpleArray[0];
