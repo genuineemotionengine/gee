@@ -28,7 +28,7 @@ echo "get ok<br>";
 print_r( $data );
 echo "print ok<br>";
 
-foreach ( $data['tag']['picture']['other'] as $image ) {
+foreach ( $data['tag']['picture'] as $image ) {
 
 	echo '<img src="data:' . $image['mime'] . ';charset=utf-8;base64,' . $image['data'] . '" />';
 	
