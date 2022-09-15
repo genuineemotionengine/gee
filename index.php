@@ -21,7 +21,7 @@ $getID3 = new getid3;
 
 // Analyze file and store returned data in $ThisFileInfo
 $ThisFileInfo = $getID3->analyze($flacfile);
-print_r($ThisFileInfo['comments']['picture'][0]);
+print_r($ThisFileInfo['comments']['picture'][0]['data']);
 /*
  Optional: copies data from all subarrays of [tags] into [comments] so
  metadata is all available in one location for all tag formats
