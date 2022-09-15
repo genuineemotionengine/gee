@@ -47,7 +47,7 @@ $mp3  = new Mp3Tag();
 echo "object ok<br>";
 
 // Get ID3 info.
-$data = $mp3->Get( '/mnt/usb/'.$flacfile );
+$data = $mp3->Get( $flacfile );
 echo "get ok<br>";
 
 // Show results
