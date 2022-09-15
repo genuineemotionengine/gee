@@ -997,7 +997,7 @@ class MPD {
 				
 				// catch the message at the end of transmission
 				if (strncmp(RES_ERR, $res, strlen(RES_ERR)) == 0) {
-					list ($tmp, $err) = split(RES_ERR . ' ', $res);
+					list ($tmp, $err) = explode(RES_ERR . ' ', $res);
 					$this->err_log[] = strtok($err, "\n");
 				}
 				
@@ -1048,7 +1048,7 @@ class MPD {
 		$this->state = $srv_status['state'];
 		if ($this->state == STATE_PLAYING || $this->state == STATE_PAUSED) {
 			$this->current_track_id = $srv_status['songid'];
-			list ($this->current_track_pos, $this->current_track_len) = split(":", $srv_status['time']);
+			list ($this->current_track_pos, $this->current_track_len) = expolde(":", $srv_status['time']);
 		} else {
 			$this->current_track_id = -1;
 			$this->current_track_pos = -1;
