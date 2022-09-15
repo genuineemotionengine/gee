@@ -21,20 +21,18 @@ $getID3 = new getid3;
 
 // Analyze file and store returned data in $ThisFileInfo
 $ThisFileInfo = $getID3->analyze($flacfile);
-
+print_r($ThisFileInfo);
 /*
  Optional: copies data from all subarrays of [tags] into [comments] so
  metadata is all available in one location for all tag formats
  metainformation is always available under [tags] even if this is not called
 */
-$getID3->CopyTagsToComments($ThisFileInfo);
-
-  if(isset($ThisFileInfo['comments']['picture'][0])){
-     $Image='data:'.$ThisFileInfo['comments']['picture'][0]['mime'].';charset=utf-8;base64,'.base64_encode($ThisFileInfo['comments']['picture'][0]['data']);
-  }
- ?>
-  <img id="FileImage" width="150" src="<?php echo @$Image;?>" height="150">
-  <?php
+//$getID3->CopyTagsToComments($ThisFileInfo);
+//
+//  if(isset($ThisFileInfo['comments']['picture'][0])){
+//     $Image='data:'.$ThisFileInfo['comments']['picture'][0]['mime'].';charset=utf-8;base64,'.base64_encode($ThisFileInfo['comments']['picture'][0]['data']);
+//  }
+// echo $ThisFileInfo['comments']['picture'][0]);
 //header('Content-Type: image/jpeg');
 //echo $ThisFileInfo['comments']['picture']['0']['data'];
 
