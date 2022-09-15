@@ -46,10 +46,10 @@ class flacTags {
     }
 
     // Check if is a FLAC file
-    if(fread($file,4)!="fLaC") {
-      $this->errorMessage="Not valid FLAC file";
-      return false;
-    }
+//    if(fread($file,4)!="fLaC") {
+//      $this->errorMessage="Not valid FLAC file";
+//      return false;
+//    }
 
     // Search for the VORBIS_COMMENT BLOCK
     $found=false;
