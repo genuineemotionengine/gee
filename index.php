@@ -29,9 +29,9 @@ $ThisFileInfo = $getID3->analyze($flacfile);
 */
 $getID3->CopyTagsToComments($ThisFileInfo);
 
-//  if(isset($ThisFileInfo['comments']['picture'][0])){
-//     $Image='data:'.$ThisFileInfo['comments']['picture'][0]['mime'].';charset=utf-8;base64,'.base64_encode($ThisFileInfo['comments']['picture'][0]['data']);
-//  }
+  if(isset($ThisFileInfo['comments']['picture'][0])){
+     $Image='data:'.$ThisFileInfo['comments']['picture'][0]['mime'].';charset=utf-8;base64,'.base64_encode($ThisFileInfo['comments']['picture'][0]['data']);
+  }
 
 //header('Content-Type: image/jpeg');
 //echo $ThisFileInfo['comments']['picture']['0']['data'];
