@@ -19,6 +19,6 @@ $mpd->current_song();
       echo $mpd->get_error();
     }
 
-$currentsong = $mpd->current_song();    
+//$currentsong = $mpd->current_song();    
 
-echo $currentsong;
+echo $mpd;
