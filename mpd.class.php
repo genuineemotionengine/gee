@@ -1048,7 +1048,7 @@ class MPD {
 		$this->state = $srv_status['state'];
 		if ($this->state == STATE_PLAYING || $this->state == STATE_PAUSED) {
 			$this->current_track_id = $srv_status['songid'];
-			list ($this->current_track_pos, $this->current_track_len) = expolde(":", $srv_status['time']);
+			list ($this->current_track_pos, $this->current_track_len) = explode(":", $srv_status['time']);
 		} else {
 			$this->current_track_id = -1;
 			$this->current_track_pos = -1;
