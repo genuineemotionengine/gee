@@ -51,7 +51,8 @@ $data = $mp3->Get( $flacfile );
 echo "get ok<br>";
 
 // Show results
-print_r( $data );
+//print_r( $data );
+echo '<pre>'; print_r($data); echo '</pre>';
 echo "print ok<br>";
 
 foreach ( $data['tag']['picture'] as $image ) {
