@@ -14,10 +14,10 @@ $flacfile = "/mnt/usb/".$flacfile;
 //echo "result: ".$flacfile."<br>";
 
 
-require_once('getid3.php');
+require_once('module.audio.flac.php');
 
 // Initialize getID3 engine
-$getID3 = new getID3;
+$getID3 = new getid3_flac;
 
 // Analyze file and store returned data in $ThisFileInfo
 $ThisFileInfo = $getID3->analyze($flacfile);
@@ -33,8 +33,8 @@ $getID3->CopyTagsToComments($ThisFileInfo);
 //     $Image='data:'.$ThisFileInfo['comments']['picture'][0]['mime'].';charset=utf-8;base64,'.base64_encode($ThisFileInfo['comments']['picture'][0]['data']);
 //  }
 
-header('Content-Type: image/jpeg');
-echo $ThisFileInfo['comments']['picture']['0']['data'];
+//header('Content-Type: image/jpeg');
+//echo $ThisFileInfo['comments']['picture']['0']['data'];
 
 //echo '<pre>'.htmlentities(print_r($ThisFileInfo, true), ENT_SUBSTITUTE).'</pre>';
 //echo '<pre>'.htmlentities(print_r($ThisFileInfo['comments'], true), ENT_SUBSTITUTE).'</pre>';
