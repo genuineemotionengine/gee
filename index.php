@@ -28,6 +28,6 @@ echo "<br><br>";
 
 $mySimpleArray = $mpd->current_song();
 //
-$myVariable=print_r($mySimpleArray[basename], TRUE);
+//$myVariable=print_r($mySimpleArray[basename], TRUE);
 
-echo $mySimpleArray[0];
+echo $mySimpleArray['basename'];
