@@ -78,10 +78,10 @@ class flacTags {
         fseek($file,$size,SEEK_CUR);
     }
 
-    if(!$found) {
-      $this->errorMessage="Vorbis comment not found";
-      return false;
-    }
+//    if(!$found) {
+//      $this->errorMessage="Vorbis comment not found";
+//      return false;
+//    }
 
     //Retrive vorbis block 
 
