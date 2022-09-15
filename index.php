@@ -71,3 +71,7 @@ $filePath = $_SERVER['DOCUMENT_ROOT']. '/allmusic/temp2.png';
 $file = fopen($filePath, 'w');
 fwrite($file, $imgData);
 fclose($file);
+
+echo "image: <br>";
+echo "<img src=".$filePath." />";
+	
