@@ -1041,8 +1041,8 @@ class MPD {
 		$this->server_status = $srv_status;
 		
 		// get playlist
-		$plist_res = $this->cmd(CMD_PLIST);
-		$this->playlist = $this->parse_playlist($plist_res);
+//		$plist_res = $this->cmd(CMD_PLIST);
+//		$this->playlist = $this->parse_playlist($plist_res);
 		
 		// other useful info
 		$this->state = $srv_status['state'];
