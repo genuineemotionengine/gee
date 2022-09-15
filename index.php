@@ -38,30 +38,30 @@ require_once('getid3.php');
 ////echo '<pre>'.htmlentities(print_r($ThisFileInfo, true), ENT_SUBSTITUTE).'</pre>';
 //echo '<pre>'.htmlentities(print_r($ThisFileInfo['comments'], true), ENT_SUBSTITUTE).'</pre>';
 
-// Load class.
-//require ('mp3data.php');
-//echo "read mp3data.php ok<br>";
-//
-//// Instantiate a new object.
-//$mp3  = new Mp3Tag();
-//echo "object ok<br>";
-//
-//// Get ID3 info.
-//$data = $mp3->Get( $flacfile );
-//echo "get ok<br>";
-//
-//// Show results
-////print_r( $data );
-//echo '<pre>'; print_r($data); echo '</pre>';
-//echo "print ok<br>";
-//
-//foreach ( $data['tag']['picture'] as $image ) {
-//
-//	echo '<img src="data:' . $image['mime'] . ';charset=utf-8;base64,' . $image['data'] . '" />';
-//	
-//}
-  $getID3 = new getID3;
-  $tags = $getID3->analyze($flacfile);
+ Load class.
+require ('mp3data.php');
+echo "read mp3data.php ok<br>";
+
+// Instantiate a new object.
+$mp3  = new Mp3Tag();
+echo "object ok<br>";
+
+// Get ID3 info.
+$tags = $mp3->Get( $flacfile );
+echo "get ok<br>";
+
+// Show results
+//print_r( $data );
+echo '<pre>'; print_r($tags); echo '</pre>';
+echo "print ok<br>";
+
+foreach ( $tags['tag']['picture'] as $image ) {
+
+	echo '<img src="data:' . $image['mime'] . ';charset=utf-8;base64,' . $image['data'] . '" />';
+	
+}
+//  $getID3 = new getID3;
+//  $tags = $getID3->analyze($flacfile);
 
 if (isset($tags['comments']['picture']['0']['data'])) {
     $image = $tags['comments']['picture']['0']['data'];
