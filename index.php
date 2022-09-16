@@ -60,7 +60,7 @@ echo "<div class='container container-full'>\n";
 
 echo "<div class='row'>\n";
 
-        echo "<img src=".$Image." />";
+        echo "<img src=".$Image." /><br>";
 
         echo $title."<br>";
 
