@@ -47,10 +47,10 @@ echo "<link href='https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstra
 //echo "<script src='https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js' integrity='sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8' crossorigin='anonymous'></script>\n";
 echo "<meta name='viewport' content='width=device-width, initial-scale=1'>\n";
 echo "<script type = 'text/javascript' src = 'https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.jsw'></script>\n";
-echo "<script type = 'text/javascript' language = 'javascript'>\n";
+//echo "<script type = 'text/javascript' language = 'javascript'>\n";
 ?>
 
-
+<script>
 $(document).ready(function(){
   setInterval(function(){
     $.getJSON("http://192.168.68.118/api.php", function(result){
@@ -65,7 +65,7 @@ $(document).ready(function(){
   
 }, 1000);
 
-
+</script>
 
 
 <?php
@@ -85,7 +85,7 @@ $(document).ready(function(){
 //    echo "}, 10000);\n";
 //
 //echo "});\n";
-echo "</script>\n";
+//echo "</script>\n";
 
 
 echo "</head>\n";
@@ -98,7 +98,7 @@ echo "<div class='text-center'>\n";
 
         echo "<br><br><br><br><br><br><br><br>";
 
-        echo "<span><img id='image' src='' /></span>";
+        echo "<img id='image' src='' />";
 
         echo "<span id='title'><h1 class='display-4'></h1></span>";
 
