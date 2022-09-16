@@ -60,6 +60,8 @@ echo "<div class='container container-full'>\n";
 
 echo "<div class='row text-center'>\n";
 
+        echo "<br><br><br><br><br><br><br><br><br>";
+
         echo "<img src=".$Image." /><br>";
 
         echo "<h1>".$title."</h1>";
