@@ -61,7 +61,7 @@ echo "<div class='container'>\n";
 
 echo "<div class='text-center'>\n";
 
-        echo "<br><br><br><br><br><br><br><br><br><br><br><br>";
+        echo "<br><br><br><br><br><br>";
 
         echo "<img src=".$Image." /><br>";
 
