@@ -53,7 +53,7 @@ echo "$(document).ready(function() {\n";
     echo "setInterval(function(){\n";
     
         echo "$.getJSON('http://192.168.68.118/api.php', function(jd) {;\n";
-        echo "$('#image').attr('src', jd.image);\n";
+        echo "$('#image').attr('src',jd.image);\n";
         echo "$('#title').text(jd.title);\n";
         echo "$('#artist').text(jd.artist);\n";
         echo "$('#album').text(jd.album);\n";
@@ -77,7 +77,7 @@ echo "<div class='text-center'>\n";
 
         echo "<br><br><br><br><br><br><br><br>";
 
-        echo "<span><img id='image' src='' /><br></span";
+        echo "<span><img id='image' src='' /><br></span>";
 
         echo "<span id='title'><h1 class='display-4'></h1></span>";
 
