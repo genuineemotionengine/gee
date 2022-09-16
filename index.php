@@ -65,11 +65,11 @@ echo "<div class='text-center'>\n";
 
         echo "<img src=".$Image." /><br>";
 
-        echo "<h1 class='display-3'>".$title."</h1>";
+        echo "<h1 class='display-4'>".$title."</h1>";
 
-        echo "<h1 class='display-5'>".$artist."</h1>"; 
+        echo "<h1 class='display-6'>".$artist."</h1>"; 
 
-        echo "<h1 class='display-5'>".$album."</h1>"; 
+        echo "<h1 class='display-6'>".$album."</h1>"; 
 
     echo "</div>\n";
 
