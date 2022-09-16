@@ -43,6 +43,7 @@ echo "<head>\n";
 echo "<meta http-equiv='Content-Type' content='text/html; charset=UTF-8'/>\n";
 echo "<title>Music Data</title>\n";
 echo "<link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css'>\n";
+echo "<link rel='stylesheet' href='gee-lite.css'>\n";
 echo "<script src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js'></script>\n";
 echo "<script src='https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>\n";
 echo "<script src='https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/locale/af.js'></script>\n";
@@ -59,7 +60,7 @@ echo "<div class='container container-full'>\n";
 
 echo "<div class='row'>\n";
 
-        echo "<img src=".$Image." />";
+        echo "<img src=".$Image."/><br>";
 
         echo $title."<br>";
 
