@@ -59,7 +59,7 @@ echo "<body>\n";
 echo "<div class='container'>\n";
 
 
-echo "<div class='row text-center'>\n";
+echo "<div class='text-center'>\n";
 
         echo "<br><br><br><br><br><br><br><br><br><br><br><br>";
 
