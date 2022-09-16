@@ -6,8 +6,14 @@
 $(document).ready(function(){
   
     $.getJSON("http://192.168.68.118/api.php", function(result){
-        $('#image').attr('src',result.image);    
-    });
+        
+        setInterval(function(){
+        
+            $('#image').attr('src',result.image); 
+        
+        }); 
+        
+    }, 1000);
   
 });
 </script>
