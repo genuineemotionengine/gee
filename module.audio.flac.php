@@ -109,11 +109,11 @@ class getid3_flac extends getid3_handler
 					}
 					break;
 
-				case 'VORBIS_COMMENT': // 0x04
-					if (!$this->parseVORBIS_COMMENT($BlockTypeText_raw['block_data'])) {
-						return false;
-					}
-					break;
+//				case 'VORBIS_COMMENT': // 0x04
+//					if (!$this->parseVORBIS_COMMENT($BlockTypeText_raw['block_data'])) {
+//						return false;
+//					}
+//					break;
 
 				case 'CUESHEET':       // 0x05
 					if (!$this->parseCUESHEET($BlockTypeText_raw['block_data'])) {
