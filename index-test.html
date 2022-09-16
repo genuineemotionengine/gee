@@ -1,20 +1,18 @@
 <!DOCTYPE html>
 <html>
 <head>
+<link href='https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css' rel='stylesheet' integrity='sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT' crossorigin='anonymous'>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script>
 $(document).ready(function(){
-  setInterval(function(){
-    $.getJSON("http://192.168.68.118/api.php", function(result){
-        
-        
-        
-            $('#image').attr('src',result.image); 
-        
+    setInterval(function(){
+        $.getJSON("http://192.168.68.118/api.php", function(result){
+            $('#image').attr('src',result.image);
+            $('#title').text(result.title);
+            $('#artist').text(result.artist);
+            $('#album').text(result.album);       
         }); 
-        
     }); 
-  
 }, 1000);
 </script>
 </head>
@@ -24,8 +22,13 @@ $(document).ready(function(){
 
     <div>
         
-    <span><img id='image' src='' /></span>    
-        
+    <img id='image' src='' />  
+    
+    <span id='title'><h1 class='display-4'></h1></span>
+
+    <span id='artist'><h1 class='display-6'></h1></span>
+
+    <span id='album'><h1 class='display-6'></h1></span>
         
     </div>
 
