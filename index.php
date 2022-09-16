@@ -58,7 +58,7 @@ echo "<body>\n";
 echo "<div class='container container-full'>\n";
 
 
-echo "<div class='row center-block'>\n";
+echo "<div class='row text-center'>\n";
 
         echo "<img src=".$Image." /><br>";
 
