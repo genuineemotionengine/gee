@@ -4,18 +4,18 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script>
 $(document).ready(function(){
-  
+  setInterval(function(){
     $.getJSON("http://192.168.68.118/api.php", function(result){
         
-        setInterval(function(){
+        
         
             $('#image').attr('src',result.image); 
         
         }); 
         
-    }, 1000);
+    }); 
   
-});
+}, 1000);
 </script>
 </head>
 <body>
