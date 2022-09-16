@@ -52,7 +52,7 @@ echo "$(document).ready(function() {\n";
 
     echo "setInterval(function(){\n";
     
-        echo "$.getJSON('http://localhost/api.php', function(jd) {;\n";
+        echo "$.getJSON('http://192.168.68.118/api.php', function(jd) {;\n";
         echo "$('#image').attr('src', jd.image);\n";
         echo "$('#title').text(jd.title);\n";
         echo "$('#artist').text(jd.artist);\n";
