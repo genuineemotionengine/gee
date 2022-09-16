@@ -79,11 +79,11 @@ echo "<div class='text-center'>\n";
 
         echo "<span><img id='image' src='' /><br></span";
 
-        echo "<span id='title' ><h1 class='display-4'></h1></span>";
+        echo "<span id='title'><h1 class='display-4'></h1></span>";
 
-        echo "<h1 id='artist' class='display-6'></h1>"; 
+        echo "<span id='artist'><h1 class='display-6'></h1></span>"; 
 
-        echo "<h1 id='album' class='display-6'></h1>"; 
+        echo "<span id='album'><h1 class='display-6'></h1></span>"; 
 
     echo "</div>\n";
 
