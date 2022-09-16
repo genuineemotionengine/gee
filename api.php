@@ -1,0 +1,36 @@
+<?php
+require('mpd.class.php');
+require_once('getid3.php');
+
+$mpd = new mpd('localhost', 6600);
+
+$mySimpleArray = $mpd->current_song();
+
+$flacfile = $mySimpleArray[0]['name'];
+
+$album = $mySimpleArray[0]['Album'];
+
+$artist = $mySimpleArray[0]['Artist'];
+
+$title = $mySimpleArray[0]['Title'];
+
+$flacfile = "/mnt/usb/".$flacfile;
+
+$getID3 = new getID3;
+
+$ThisFileInfo = $getID3->analyze($flacfile);
+
+if(isset($ThisFileInfo['comments']['picture'][0])){
+    $image='data:'.$ThisFileInfo['comments']['picture'][0]['image_mime'].';charset=utf-8;base64,'.base64_encode($ThisFileInfo['comments']['picture'][0]['data']);
+}
+
+$rows = array(
+
+'image' => $image,
+'title' => $title,
+'artist' => $artist,
+'album' => $album
+
+);
+
+echo json_encode($rows);
