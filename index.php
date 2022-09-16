@@ -21,7 +21,7 @@ $(document).ready(function(){
 }, 1000);
 </script>
 </head>
-<body>
+<body class="p-3 mb-2 bg-black text-white">
     <div class="container text-center">
         <br><br>
             <img id='image' src='' /><br>  
