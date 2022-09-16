@@ -23,7 +23,7 @@ $(document).ready(function(){
 </head>
 <body>
     <div class="position-relative">
-        <div class="position-absolute top-50 start-50 translate-middle">
+        <div class="position-absolute top-100 start-50 translate-middle">
             <img id='image' src='' /><br>  
             <h1 id='title' class='display-4'></h1>
             <h1 id='artist' class='display-6'></h1>
