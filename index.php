@@ -22,8 +22,8 @@ $(document).ready(function(){
 </script>
 </head>
 <body>
-    <div class="border d-flex align-items-center justify-content-center">
-
+    <div class="container text-center">
+        <br><br><br><br><br><br><br><br>
             <img id='image' src='' /><br>  
             <h1 id='title' class='display-4'></h1>
             <h1 id='artist' class='display-6'></h1>
