@@ -23,7 +23,7 @@ $(document).ready(function(){
 </head>
 <body>
     <div class="container text-center">
-        <br><br><br>
+        <br><br>
             <img id='image' src='' /><br>  
             <h1 id='title' class='display-4'></h1>
             <h1 id='artist' class='display-6'></h1>
