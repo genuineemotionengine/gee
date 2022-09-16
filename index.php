@@ -58,15 +58,15 @@ echo "<body>\n";
 echo "<div class='container container-full'>\n";
 
 
-echo "<div class='row'>\n";
+echo "<div class='row center-block'>\n";
 
         echo "<img src=".$Image." /><br>";
 
-        echo $title."<br>";
+        echo "<h1>".$title."</h1>";
 
-        echo $artist."<br>"; 
+        echo "<h2>".$artist."</h2>"; 
 
-        echo $album."<br>"; 
+        echo "<h2>".$album."</h2>"; 
 
     echo "</div>\n";
 
