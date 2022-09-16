@@ -39,4 +39,4 @@ echo $artist."<br>";
 echo $album."<br>";
 
 
-//echo json_encode($rows);
+echo json_encode($rows);
