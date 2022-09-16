@@ -6,7 +6,7 @@ require('mpd.class.php');
 $mpd = new mpd('localhost', 6600);
 
 $mySimpleArray = $mpd->current_song();
-echo '<pre>'.htmlentities(print_r($mySimpleArray, true), ENT_SUBSTITUTE).'</pre>';
+//echo '<pre>'.htmlentities(print_r($mySimpleArray, true), ENT_SUBSTITUTE).'</pre>';
 
 $flacfile = $mySimpleArray[0]['name'];
 
