@@ -61,7 +61,7 @@ echo "$(document).ready(function() {\n";
     echo "});\n";  
     
     
-    echo "}, 1000);\n";
+    echo "}, 10000);\n";
 
 echo "});\n";
 echo "</script>\n";
