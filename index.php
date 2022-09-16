@@ -34,12 +34,40 @@ $ThisFileInfo = $getID3->analyze($flacfile);
      $Image='data:'.$ThisFileInfo['comments']['picture'][0]['image_mime'].';charset=utf-8;base64,'.base64_encode($ThisFileInfo['comments']['picture'][0]['data']);
   }
 
-
-echo $title."<br>";
- 
-echo $artist."<br>"; 
-
-echo $album."<br>"; 
   
-echo "<img src=".$Image." />";
+  
+echo "<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Strict//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd'>\n";
+echo "<html xmlns='http://www.w3.org/1999/xhtml'>\n";
+echo "<head>\n";
+   
+echo "<meta http-equiv='Content-Type' content='text/html; charset=UTF-8'/>\n";
+echo "<title>Music Data</title>\n";
+echo "<link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css'>\n";
+echo "<script src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js'></script>\n";
+echo "<script src='https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>\n";
+echo "<script src='https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/locale/af.js'></script>\n";
+echo "<meta name='viewport' content='width=device-width, initial-scale=1'>\n";
+?>
+
+<?php
+
+echo "</head>\n";
+
+echo "<body>\n";
+echo "<div class='container container-full'>\n";
+
+
+echo "<div class='row'>\n";
+
+        echo "<img src=".$Image." />";
+
+        echo $title."<br>";
+
+        echo $artist."<br>"; 
+
+        echo $album."<br>"; 
+
+    echo "</div>\n";
+
+echo "</div></body></html>\n"; 
 
