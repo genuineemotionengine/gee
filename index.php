@@ -48,22 +48,43 @@ echo "<link href='https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstra
 echo "<meta name='viewport' content='width=device-width, initial-scale=1'>\n";
 echo "<script type = 'text/javascript' src = 'https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.jsw'></script>\n";
 echo "<script type = 'text/javascript' language = 'javascript'>\n";
-echo "$(document).ready(function() {\n";
+?>
 
-    echo "setInterval(function(){\n";
-    
-        echo "$.getJSON('http://192.168.68.118/api.php', function(jd) {;\n";
-        echo "$('#image').attr('src',jd.image);\n";
-        echo "$('#title').text(jd.title);\n";
-        echo "$('#artist').text(jd.artist);\n";
-        echo "$('#album').text(jd.album);\n";
-    
-    echo "});\n";  
-    
-    
-    echo "}, 10000);\n";
 
-echo "});\n";
+$(document).ready(function(){
+  setInterval(function(){
+    $.getJSON("http://192.168.68.118/api.php", function(result){
+        
+        
+        
+            $('#image').attr('src',result.image); 
+        
+        }); 
+        
+    }); 
+  
+}, 1000);
+
+
+
+
+<?php
+//echo "$(document).ready(function() {\n";
+//
+//    echo "setInterval(function(){\n";
+//    
+//        echo "$.getJSON('http://192.168.68.118/api.php', function(jd) {;\n";
+//        echo "$('#image').attr('src',jd.image);\n";
+//        echo "$('#title').text(jd.title);\n";
+//        echo "$('#artist').text(jd.artist);\n";
+//        echo "$('#album').text(jd.album);\n";
+//    
+//    echo "});\n";  
+//    
+//    
+//    echo "}, 10000);\n";
+//
+//echo "});\n";
 echo "</script>\n";
 
 
