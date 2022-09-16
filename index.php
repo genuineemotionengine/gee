@@ -55,8 +55,8 @@ echo "<meta name='viewport' content='width=device-width, initial-scale=1'>\n";
 
 echo "</head>\n";
 
-echo "<body>\n";
-echo "<div class='container p-3 mb-2 bg-dark text-white'>\n";
+echo "<body class' p-3 mb-2 bg-dark text-white'>\n";
+echo "<div class='container'>\n";
 
 
 echo "<div class='text-center'>\n";
