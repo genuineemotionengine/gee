@@ -22,13 +22,13 @@ $(document).ready(function(){
 </script>
 </head>
 <body>
-    <div class="position-relative">
-        <div class="position-absolute top-100 start-50 translate-middle">
+    <div class="container center-block">
+
             <img id='image' src='' /><br>  
             <h1 id='title' class='display-4'></h1>
             <h1 id='artist' class='display-6'></h1>
             <h1 id='album'class='display-6'></h1>
-        </div>        
+       
     </div>
 </body>
 </html>
