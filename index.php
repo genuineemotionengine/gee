@@ -15,27 +15,27 @@ echo "result: ".$flacfile."<br>";
 
 
 require_once('getid3.php');
-//
-//// Initialize getID3 engine
-//$getID3 = new getID3;
-//
-//// Analyze file and store returned data in $ThisFileInfo
-//$ThisFileInfo = $getID3->analyze($flacfile);
-//
-///*
-// Optional: copies data from all subarrays of [tags] into [comments] so
-// metadata is all available in one location for all tag formats
-// metainformation is always available under [tags] even if this is not called
-//*/
-////$getID3->CopyTagsToComments($ThisFileInfo);
-//
-//  if(isset($ThisFileInfo['comments']['picture'][0])){
-//     $Image='data:'.$ThisFileInfo['comments']['picture'][0]['mime'].';charset=utf-8;base64,'.base64_encode($ThisFileInfo['comments']['picture'][0]['data']);
-//  }
-//echo $Image;
-//
-//
-////echo '<pre>'.htmlentities(print_r($ThisFileInfo, true), ENT_SUBSTITUTE).'</pre>';
+
+// Initialize getID3 engine
+$getID3 = new getID3;
+
+// Analyze file and store returned data in $ThisFileInfo
+$ThisFileInfo = $getID3->analyze($flacfile);
+
+/*
+ Optional: copies data from all subarrays of [tags] into [comments] so
+ metadata is all available in one location for all tag formats
+ metainformation is always available under [tags] even if this is not called
+*/
+//$getID3->CopyTagsToComments($ThisFileInfo);
+
+  if(isset($ThisFileInfo['comments']['picture'][0])){
+     $Image='data:'.$ThisFileInfo['comments']['picture'][0]['mime'].';charset=utf-8;base64,'.base64_encode($ThisFileInfo['comments']['picture'][0]['data']);
+  }
+echo $Image;
+
+
+echo '<pre>'.htmlentities(print_r($ThisFileInfo, true), ENT_SUBSTITUTE).'</pre>';
 //echo '<pre>'.htmlentities(print_r($ThisFileInfo['comments'], true), ENT_SUBSTITUTE).'</pre>';
 
  //Load class.
@@ -76,22 +76,22 @@ require_once('getid3.php');
 //echo "image: <br>";
 //echo "<img src='/allmusic/temp2.jpg' />";
 	
-include("flacTags.php");
-
-$ftag=new flacTags($flacfile);
-
-if($ftag->readTags()==false) {
-  echo "ERROR:";
-  echo $ftag->getError();
-}
-else {
-  echo "Vendor String: ";
-  echo $ftag->getVendorString();
-
-  echo "<br><br>Title: ";
-  echo $ftag->getComment("TITLE");
-
-  echo "<br><br>All information:<br><br>";
-  $infos=$ftag->getAllComments();
-  print_r($infos);
-}
+//include("flacTags.php");
+//
+//$ftag=new flacTags($flacfile);
+//
+//if($ftag->readTags()==false) {
+//  echo "ERROR:";
+//  echo $ftag->getError();
+//}
+//else {
+//  echo "Vendor String: ";
+//  echo $ftag->getVendorString();
+//
+//  echo "<br><br>Title: ";
+//  echo $ftag->getComment("TITLE");
+//
+//  echo "<br><br>All information:<br><br>";
+//  $infos=$ftag->getAllComments();
+//  print_r($infos);
+//}
