@@ -67,9 +67,9 @@ echo "<div class='text-center'>\n";
 
         echo "<h1 class='display-3'>".$title."</h1>";
 
-        echo "<h1 class='display-4'>".$artist."</h1>"; 
+        echo "<h1 class='display-5'>".$artist."</h1>"; 
 
-        echo "<h1 class='display-4'>".$album."</h1>"; 
+        echo "<h1 class='display-5'>".$album."</h1>"; 
 
     echo "</div>\n";
 
