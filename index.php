@@ -76,9 +76,9 @@ echo "<div class='text-center'>\n";
 
         echo "<br><br><br><br><br><br><br><br>";
 
-        echo "<img id='image' src='' /><br>";
+        echo "<span><img id='image' src='' /><br></span";
 
-        echo "<h1 id='title' class='display-4'></h1>";
+        echo "<span id='title' ><h1 class='display-4'></h1></span>";
 
         echo "<h1 id='artist' class='display-6'></h1>"; 
 
