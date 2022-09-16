@@ -33,10 +33,10 @@ $rows = array(
 
 );
 
-echo $image."<br>";
-echo $title."<br>";
-echo $artist."<br>";
-echo $album."<br>";
+//echo $image."<br>";
+//echo $title."<br>";
+//echo $artist."<br>";
+//echo $album."<br>";
 
 
 echo json_encode($rows);
