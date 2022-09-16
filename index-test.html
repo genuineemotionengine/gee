@@ -6,9 +6,7 @@
 $(document).ready(function(){
   
     $.getJSON("http://192.168.68.118/api.php", function(result){
-      $.each(result, function(i, field){
-        $("div").append(field + " ");
-      });
+        $('#image').attr('src',result.image);    
     });
   
 });
@@ -16,9 +14,14 @@ $(document).ready(function(){
 </head>
 <body>
 
-<button>Get JSON data</button>
 
-<div></div>
+
+    <div>
+        
+    <span><img id='image' src='' /></span>    
+        
+        
+    </div>
 
 </body>
 </html>
