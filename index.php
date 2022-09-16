@@ -22,7 +22,7 @@ $(document).ready(function(){
 </script>
 </head>
 <body>
-    <div class="container center-block">
+    <div class="container text-center">
 
             <img id='image' src='' /><br>  
             <h1 id='title' class='display-4'></h1>
