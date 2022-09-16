@@ -15,9 +15,9 @@ $album = $mySimpleArray[0]['Album'];
 $artist = $mySimpleArray[0]['Artist'];
 
 $title = $mySimpleArray[0]['Title'];
-//$flacfile = "/mnt/usb/".$flacfile;
+$flacfile = "/mnt/usb/".$flacfile;
 
-echo "result: ".$flacfile."<br>";
+//echo "result: ".$flacfile."<br>";
 
 
 require_once('getid3.php');
