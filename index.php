@@ -32,10 +32,10 @@ $ThisFileInfo = $getID3->analyze($flacfile);
   if(isset($ThisFileInfo['comments']['picture'][0])){
      $Image='data:'.$ThisFileInfo['comments']['picture'][0]['image_mime'].';charset=utf-8;base64,'.base64_encode($ThisFileInfo['comments']['picture'][0]['data']);
   }
-echo $Image;
+//echo $Image;
+echo "<img src=".$Image." />";
 
-
-echo '<pre>'.htmlentities(print_r($ThisFileInfo, true), ENT_SUBSTITUTE).'</pre>';
+//echo '<pre>'.htmlentities(print_r($ThisFileInfo, true), ENT_SUBSTITUTE).'</pre>';
 //echo '<pre>'.htmlentities(print_r($ThisFileInfo['comments'], true), ENT_SUBSTITUTE).'</pre>';
 
  //Load class.
