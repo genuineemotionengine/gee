@@ -10,7 +10,7 @@
    }
 }
 
-@media (min-width:1400px) {
+@media (min-width:992px) {
    .custom-class-audio{
       display:none;
    }
