@@ -4,8 +4,8 @@
    }
 }
 
-@media (max-width:767.98px) {
+@media (min-width:960px) {
    .custom-class-mac{
-      display:none;
+      display:block;
    }
 }
