@@ -5,8 +5,9 @@
    
 <meta http-equiv='Content-Type' content='text/html; charset=UTF-8'/>
 <title>GEE-Lite</title>
-<link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css'>
-<script src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js'></script>
+
+<link href='https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css' rel='stylesheet' integrity='sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT' crossorigin='anonymous'>
+<link href="gee-lite.css" rel="stylesheet" />
 <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script>
 $(document).ready(function(){
@@ -31,14 +32,10 @@ $(document).ready(function(){
             <h1 id='artist' class='display-6'></h1>
             <h1 id='album'class='display-6'></h1>
        -->
-   
-   <div class="visible-xs-block">
+        <div class="custom-class-mobile">
        <h1 class='display-4'>mobile</h1>
     </div>
-    
-       
-       
-      
+ 
     </div>
     
     <div class="container text-center">
@@ -47,10 +44,11 @@ $(document).ready(function(){
             <h1 id='title' class='display-4'></h1>
             <h1 id='artist' class='display-6'></h1>
             <h1 id='album'class='display-6'></h1>-->
-       <div class="visible-sm-block visible-md-block">
+
+   <div class="custom-class-mac">
        <h1 class='display-4'>mac</h1>
     </div>
-    
+       
     </div>
     
 </body>
