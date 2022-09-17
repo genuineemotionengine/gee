@@ -26,10 +26,10 @@ $(document).ready(function(){
 }, 100000);
 </script>
 </head>
-<body class="p-3 mb-2 bg-black text-white">
+<body class="p-3 mb-2 bg-black text-white border border-0">
     
     
-    <div class="container-fluid text-center bg-white border border-0">
+    <div class="container-fluid text-center bg-white">
          <div class="d-block d-sm-none">   
              
             <img id='image' class='img-fluid' src='' /><br>    
