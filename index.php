@@ -16,8 +16,11 @@ $(document).ready(function(){
             $('#image').attr('src',result.image);
             $('#imagelg').attr('src',result.image);
             $('#title').text(result.title);
+            $('#titlelg').text(result.title);
             $('#artist').text(result.artist);
+            $('#artistlg').text(result.artist);
             $('#album').text(result.album);       
+            $('#albumlg').text(result.album);       
         }); 
     }); 
 }, 100000);
@@ -44,9 +47,9 @@ $(document).ready(function(){
       <div class="d-none d-xl-block">  
         
             <img id='imagelg' src='' /><br>  
-            <h1 id='title' class='display-4'></h1>
-            <h1 id='artist' class='display-6'></h1>
-            <h1 id='album'class='display-6'></h1>
+            <h1 id='titlelg' class='display-4'></h1>
+            <h1 id='artistlg' class='display-6'></h1>
+            <h1 id='albumlg'class='display-6'></h1>
 
    
        <h1 class='display-4'>mac & audio</h1>
