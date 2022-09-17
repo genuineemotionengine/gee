@@ -38,7 +38,9 @@ $(document).ready(function(){
             <h1 id='artist' class='display-6'></h1>
             <h1 id='album'class='display-6'></h1>
        
-<i class="bi bi-play-fill" style="font-size: 10rem; color: white;"></i>
+<i class="bi bi-rewind-fill" style="font-size: 8rem; color: white;"></i>
+<i class="bi bi-play-fill" style="font-size: 8rem; color: white;"></i>
+<i class="bi bi-fast-forward-fill" style="font-size: 8rem; color: white;"></i>
        
     </div>
  
