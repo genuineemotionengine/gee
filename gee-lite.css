@@ -12,7 +12,7 @@
 
 @media (min-width:992px) {
    .custom-class-mac{
-      display:block;
+      display:none;
    }
 }
 
