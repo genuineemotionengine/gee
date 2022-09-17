@@ -12,12 +12,12 @@
 <script>
 $(document).ready(function(){
     setInterval(function(){
-        $.getJSON("http://192.168.68.118/api.php", function(result){
-            $('#image').attr('src',result.image);
-            $('#title').text(result.title);
-            $('#artist').text(result.artist);
-            $('#album').text(result.album);       
-        }); 
+//        $.getJSON("http://192.168.68.118/api.php", function(result){
+//            $('#image').attr('src',result.image);
+//            $('#title').text(result.title);
+//            $('#artist').text(result.artist);
+//            $('#album').text(result.album);       
+//        }); 
         $.getJSON("http://192.168.68.118/api.php", function(result-lg){
             $('#image-lg').attr('src',result-lg.image);
             $('#title-lg').text(result-lg.title);
