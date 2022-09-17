@@ -14,12 +14,13 @@ $(document).ready(function(){
     setInterval(function(){
         $.getJSON("http://192.168.68.118/api.php", function(result){
             $('#image').attr('src',result.image);
+            $('#imagelg').attr('src',result.image);
             $('#title').text(result.title);
             $('#artist').text(result.artist);
             $('#album').text(result.album);       
         }); 
-    }, 100000); 
-});
+    }); 
+}, 100000);
 </script>
 </head>
 <body class="p-3 mb-2 bg-black text-white">
@@ -42,7 +43,7 @@ $(document).ready(function(){
     <div class="container text-center">
       <div class="d-none d-xl-block">  
         
-            <img id='image' src='' /><br>  
+            <img id='imagelg' src='' /><br>  
             <h1 id='title' class='display-4'></h1>
             <h1 id='artist' class='display-6'></h1>
             <h1 id='album'class='display-6'></h1>
