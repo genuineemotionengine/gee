@@ -33,9 +33,9 @@ $(document).ready(function(){
          <div class="d-block d-sm-none">   
              
             <img id='image' class='img-fluid' src='' /><br>    
-            <h1 id='title' class='display-4'></h1>
-            <h1 id='artist' class='display-6'></h1>
-            <h1 id='album'class='display-6'></h1>
+            <h1 id='title' class='display-6'></h1>
+            <h1 id='artist' class='display-8'></h1>
+            <h1 id='album'class='display-8'></h1>
        
 
        
