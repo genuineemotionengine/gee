@@ -18,7 +18,7 @@ $(document).ready(function(){
             $('#album').text(result.album);       
         }); 
     }); 
-}, 10000);
+}, 100000);
 </script>
 </head>
 <body class="p-3 mb-2 bg-black text-white">
@@ -26,7 +26,7 @@ $(document).ready(function(){
     
     <div class="container-sm text-center">
         
-              
+            <img id='image' src='' /><br>    
             <h1 id='title' class='display-4'></h1>
             <h1 id='artist' class='display-6'></h1>
             <h1 id='album'class='display-6'></h1>
