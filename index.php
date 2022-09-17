@@ -8,7 +8,7 @@
 
 <link href='https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css' rel='stylesheet' integrity='sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT' crossorigin='anonymous'>
 <meta name="viewport" content="width=device-width, initial-scale=">
-<!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script>
 $(document).ready(function(){
     setInterval(function(){
@@ -20,45 +20,33 @@ $(document).ready(function(){
         }); 
     }); 
 }, 100000);
-</script>-->
+</script>
 </head>
 <body class="p-3 mb-2 bg-black text-white">
     
     
     <div class="container text-center">
-        
-<!--            <img id='image' src='' /><br>    
+         <div class="d-block d-sm-none">       
+            <img id='image' src='' /><br>    
             <h1 id='title' class='display-4'></h1>
             <h1 id='artist' class='display-6'></h1>
             <h1 id='album'class='display-6'></h1>
-       -->
-        <div class="d-block d-sm-none">
+       
+
        <h1 class='display-4'>mobile</h1>
     </div>
  
     </div>
-    
+
     <div class="container text-center">
-<!--        
+      <div class="d-none d-xl-block">  
+        
             <img id='image' src='' /><br>  
             <h1 id='title' class='display-4'></h1>
             <h1 id='artist' class='display-6'></h1>
-            <h1 id='album'class='display-6'></h1>-->
+            <h1 id='album'class='display-6'></h1>
 
-   <div class="d-none d-md-block d-lg-none">
-       <h1 class='display-4'>tablet</h1>
-    </div>
-       
-    </div>
-
-    <div class="container text-center">
-<!--        
-            <img id='image' src='' /><br>  
-            <h1 id='title' class='display-4'></h1>
-            <h1 id='artist' class='display-6'></h1>
-            <h1 id='album'class='display-6'></h1>-->
-
-   <div class="d-none d-xl-block">
+   
        <h1 class='display-4'>mac & audio</h1>
     </div>
        
