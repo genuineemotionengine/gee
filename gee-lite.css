@@ -1,6 +1,6 @@
-@media (max-width:576px) {
+@media (min-width:576px) {
    .custom-class-mobile{
-      display:none;
+      display:block;
    }
 }
 
