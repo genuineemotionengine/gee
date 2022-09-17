@@ -29,7 +29,7 @@ $(document).ready(function(){
 <body class="p-3 mb-2 bg-black text-white pt-0 ps-0 pe-0">
     
     
-    <div class="container-fluid text-center bg-white ps-0 pe-0">
+    <div class="container-fluid text-center ps-0 pe-0">
          <div class="d-block d-sm-none">   
              
             <img id='image' class='img-fluid' src='' /><br>    
