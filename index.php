@@ -50,6 +50,19 @@ $(document).ready(function(){
     </div>
        
     </div>
+
+    <div class="container text-center">
+<!--        
+            <img id='image' src='' /><br>  
+            <h1 id='title' class='display-4'></h1>
+            <h1 id='artist' class='display-6'></h1>
+            <h1 id='album'class='display-6'></h1>-->
+
+   <div class="custom-class-audio">
+       <h1 class='display-4'>audio</h1>
+    </div>
+       
+    </div>
     
 </body>
 </html>
