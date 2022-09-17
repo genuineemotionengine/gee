@@ -28,10 +28,10 @@ $(document).ready(function(){
     <div class="container text-center">
          <div class="d-block d-sm-none">   
              
-<!--            <img id='image' src='' /><br>    
+            <img id='image' src='' /><br>    
             <h1 id='title' class='display-4'></h1>
             <h1 id='artist' class='display-6'></h1>
-            <h1 id='album'class='display-6'></h1>-->
+            <h1 id='album'class='display-6'></h1>
        
 
        <h1 class='display-4'>mobile</h1>
