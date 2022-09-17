@@ -45,7 +45,7 @@ $(document).ready(function(){
             <h1 id='artist' class='display-6'></h1>
             <h1 id='album'class='display-6'></h1>-->
 
-   <div class="d-none d-lg-block d-xl-none">
+   <div class="d-none d-xl-block">
        <h1 class='display-4'>mac</h1>
     </div>
        
