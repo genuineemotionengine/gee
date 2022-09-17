@@ -32,7 +32,7 @@ $(document).ready(function(){
             <h1 id='artist' class='display-6'></h1>
             <h1 id='album'class='display-6'></h1>
        -->
-        <div class="d-none d-md-block d-lg-none">
+        <div class="d-none d-sm-block d-md-none">
        <h1 class='display-4'>mobile</h1>
     </div>
  
@@ -45,7 +45,7 @@ $(document).ready(function(){
             <h1 id='artist' class='display-6'></h1>
             <h1 id='album'class='display-6'></h1>-->
 
-   <div class="d-none d-lg-block d-xl-none">
+   <div class="d-none d-md-block d-lg-none">
        <h1 class='display-4'>tablet</h1>
     </div>
        
