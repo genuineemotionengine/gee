@@ -7,6 +7,7 @@
 <title>GEE-Lite</title>
 
 <link href='https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css' rel='stylesheet' integrity='sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT' crossorigin='anonymous'>
+<link href="gee-lite.css" rel="stylesheet" />
 <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script>
 $(document).ready(function(){
@@ -40,7 +41,11 @@ $(document).ready(function(){
             <h1 id='title' class='display-4'></h1>
             <h1 id='artist' class='display-6'></h1>
             <h1 id='album'class='display-6'></h1>-->
+
+   <div class="custom-class">
        <h1 class='display-4'>mac</h1>
+    </div>
+       
     </div>
     
 </body>
