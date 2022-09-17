@@ -7,7 +7,7 @@
 <title>GEE-Lite</title>
 
 <link href='https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css' rel='stylesheet' integrity='sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT' crossorigin='anonymous'>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script>
 $(document).ready(function(){
     setInterval(function(){
@@ -19,27 +19,28 @@ $(document).ready(function(){
         }); 
     }); 
 }, 100000);
-</script>
+</script>-->
 </head>
 <body class="p-3 mb-2 bg-black text-white">
     
     
     <div class="container-fluid container-sm text-center mt-0">
         
-            <img id='image' src='' /><br>    
+<!--            <img id='image' src='' /><br>    
             <h1 id='title' class='display-4'></h1>
             <h1 id='artist' class='display-6'></h1>
             <h1 id='album'class='display-6'></h1>
-       
+       -->
+       <h1 class='display-4'>mobile</h1>
     </div>
     
     <div class="container-xxl text-center">
-        
+<!--        
             <img id='image' src='' /><br>  
             <h1 id='title' class='display-4'></h1>
             <h1 id='artist' class='display-6'></h1>
-            <h1 id='album'class='display-6'></h1>
-       
+            <h1 id='album'class='display-6'></h1>-->
+       <h1 class='display-4'>mac</h1>
     </div>
     
 </body>
