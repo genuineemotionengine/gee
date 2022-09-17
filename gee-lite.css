@@ -3,3 +3,12 @@
       display:none;
    }
 }
+.custom-class {
+   display:none;
+}
+
+@media (min-width:576px) {
+   .custom-class-mac{
+      display:block;
+   }
+}
