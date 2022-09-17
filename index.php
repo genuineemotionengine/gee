@@ -29,7 +29,7 @@ $(document).ready(function(){
 <body class="p-3 mb-2 bg-black text-white">
     
     
-    <div class="container text-center">
+    <div class="container-fluid text-center">
          <div class="d-block d-sm-none">   
              
             <img id='image' src='' /><br>    
