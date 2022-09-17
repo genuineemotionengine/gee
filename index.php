@@ -22,7 +22,18 @@ $(document).ready(function(){
 </script>
 </head>
 <body class="p-3 mb-2 bg-black text-white">
-    <div class="container text-center">
+    
+    
+    <div class="container-sm text-center">
+        
+              
+            <h1 id='title' class='display-4'></h1>
+            <h1 id='artist' class='display-6'></h1>
+            <h1 id='album'class='display-6'></h1>
+       
+    </div>
+    
+    <div class="container-xl text-center">
         
             <img id='image' src='' /><br>  
             <h1 id='title' class='display-4'></h1>
@@ -30,5 +41,7 @@ $(document).ready(function(){
             <h1 id='album'class='display-6'></h1>
        
     </div>
+
+    
 </body>
 </html>
