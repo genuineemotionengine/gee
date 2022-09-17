@@ -38,7 +38,7 @@ $(document).ready(function(){
             <h1 id='album'class='display-6'></h1>
        
 
-       <h1 class='display-4'>mobile</h1>
+       
     </div>
  
     </div>
@@ -52,7 +52,7 @@ $(document).ready(function(){
             <h1 id='albumlg'class='display-6'></h1>
 
    
-       <h1 class='display-4'>mac & audio</h1>
+       
     </div>
        
    
