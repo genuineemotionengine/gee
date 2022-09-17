@@ -29,7 +29,7 @@ $(document).ready(function(){
             <img id='image' src='' /><br>    
             <h1 id='title' class='display-4'></h1>
             <h1 id='artist' class='display-6'></h1>
-            
+            <h1 id='album'class='display-6'></h1>
        
     </div>
     
