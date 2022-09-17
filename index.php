@@ -25,7 +25,7 @@ $(document).ready(function(){
 <body class="p-3 mb-2 bg-black text-white">
     
     
-    <div class="container-fluid container-sm text-center mt-0">
+    <div class="container text-center">
         
 <!--            <img id='image' src='' /><br>    
             <h1 id='title' class='display-4'></h1>
@@ -35,15 +35,15 @@ $(document).ready(function(){
        <h1 class='display-4'>mobile</h1>
     </div>
     
-    <div class="container-xxl text-center">
+    <div class="container text-center">
 <!--        
             <img id='image' src='' /><br>  
             <h1 id='title' class='display-4'></h1>
             <h1 id='artist' class='display-6'></h1>
             <h1 id='album'class='display-6'></h1>-->
 
-   <div class="custom-class">
-       <h1 class='display-4'>mac</h1>
+   <div class="custom-class-mobile">
+       <h1 class='display-4'>mobile</h1>
     </div>
        
     </div>
