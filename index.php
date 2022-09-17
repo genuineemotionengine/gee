@@ -18,7 +18,7 @@ $(document).ready(function(){
             $('#album').text(result.album);       
         }); 
     }); 
-}, 1000);
+}, 10000);
 </script>
 </head>
 <body class="p-3 mb-2 bg-black text-white">
