@@ -26,7 +26,7 @@ $(document).ready(function(){
 }, 100000);
 </script>
 </head>
-<body class="p-3 mb-2 bg-black text-white border border-0">
+<body class="p-3 mb-2 bg-black text-white pt-0">
     
     
     <div class="container-fluid text-center bg-white">
