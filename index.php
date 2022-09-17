@@ -18,6 +18,13 @@ $(document).ready(function(){
             $('#artist').text(result.artist);
             $('#album').text(result.album);       
         }); 
+        $.getJSON("http://192.168.68.118/api.php", function(result-lg){
+            $('#image-lg').attr('src',result-lg.image);
+            $('#title-lg').text(result-lg.title);
+            $('#artist-lg').text(result-lg.artist);
+            $('#album-lg').text(result-lg.album);       
+        }); 
+        
     }); 
 }, 100000);
 </script>
@@ -42,10 +49,10 @@ $(document).ready(function(){
     <div class="container text-center">
       <div class="d-none d-xl-block">  
         
-            <img id='image' src='' /><br>  
-            <h1 id='title' class='display-4'></h1>
-            <h1 id='artist' class='display-6'></h1>
-            <h1 id='album'class='display-6'></h1>
+            <img id='image-lg' src='' /><br>  
+            <h1 id='title-lg' class='display-4'></h1>
+            <h1 id='artist-lg' class='display-6'></h1>
+            <h1 id='album-lg'class='display-6'></h1>
 
    
        <h1 class='display-4'>mac & audio</h1>
