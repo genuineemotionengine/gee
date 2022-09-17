@@ -33,7 +33,7 @@ $(document).ready(function(){
        
     </div>
     
-    <div class="container-lg text-center">
+    <div class="container-xxl text-center">
         
             <img id='image' src='' /><br>  
             <h1 id='title' class='display-4'></h1>
