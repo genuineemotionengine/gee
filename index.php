@@ -18,8 +18,8 @@ $(document).ready(function(){
             $('#artist').text(result.artist);
             $('#album').text(result.album);       
         }); 
-    }); 
-}, 100000);
+    }, 100000); 
+});
 </script>
 </head>
 <body class="p-3 mb-2 bg-black text-white">
