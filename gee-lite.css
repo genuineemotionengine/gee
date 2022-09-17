@@ -1,6 +1,12 @@
+
+
+
+
+
+
 @media (min-width:576px) {
    .custom-class-mobile{
-      display:block;
+      display:none;
    }
 }
 
