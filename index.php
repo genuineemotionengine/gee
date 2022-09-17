@@ -26,7 +26,8 @@ $(document).ready(function(){
     
     
     <div class="container text-center">
-         <div class="d-block d-sm-none">       
+         <div class="d-block d-sm-none">   
+             
             <img id='image' src='' /><br>    
             <h1 id='title' class='display-4'></h1>
             <h1 id='artist' class='display-6'></h1>
@@ -50,7 +51,7 @@ $(document).ready(function(){
        <h1 class='display-4'>mac & audio</h1>
     </div>
        
-    </div>
+   
     
 </body>
 </html>
