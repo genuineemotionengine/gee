@@ -1,13 +1,10 @@
-@media (min-width:767.98px) {
+@media (max-width:576px) {
    .custom-class-mobile{
       display:none;
    }
 }
-.custom-class-mac{
-   display:none;
-}
 
-@media (min-width:576px) {
+@media (max-width:767.98px) {
    .custom-class-mac{
       display:none;
    }
