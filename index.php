@@ -32,7 +32,7 @@ $(document).ready(function(){
             <h1 id='artist' class='display-6'></h1>
             <h1 id='album'class='display-6'></h1>
        -->
-        <div class="custom-class-mobile custom-class-mobile-hide">
+        <div class="custom-class-mobile">
        <h1 class='display-4'>mobile</h1>
     </div>
  
