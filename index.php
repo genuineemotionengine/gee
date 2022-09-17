@@ -24,7 +24,7 @@ $(document).ready(function(){
 <body class="p-3 mb-2 bg-black text-white">
     
     
-    <div class="container-sm text-center mt-0">
+    <div class="container-fluid container-sm text-center mt-0">
         
             <img id='image' src='' /><br>    
             <h1 id='title' class='display-4'></h1>
