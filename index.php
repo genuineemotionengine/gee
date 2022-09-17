@@ -33,7 +33,7 @@ $(document).ready(function(){
        
     </div>
     
-    <div class="container-xl text-center">
+    <div class="container-lg text-center">
         
             <img id='image' src='' /><br>  
             <h1 id='title' class='display-4'></h1>
@@ -41,7 +41,6 @@ $(document).ready(function(){
             <h1 id='album'class='display-6'></h1>
        
     </div>
-
     
 </body>
 </html>
