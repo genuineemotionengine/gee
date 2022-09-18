@@ -87,7 +87,7 @@ $mpd->load_playlist($playlist);
 
 $mpd->playlist_shuffle();
 
-$mpd->play(1);
+$mpd->play(0);
  
     
 header("Location: http://192.168.68.118");
