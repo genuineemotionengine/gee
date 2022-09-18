@@ -97,7 +97,7 @@ echo "<a href='http://192.168.68.118/api.php?service=4'><i class='bi bi-arrow-ri
             
        
 <?php
-echo "<a href='http://192.168.68.118/api.php?service=5'><i class='bi bi-arrow-repeat' style='font-size: 3rem; color: white;'></i></a>";
+echo "<a href='http://192.168.68.118/api.php?service=5'><i class='bi bi-arrow-clockwise' style='font-size: 3rem; color: white;'></i></a>";
 ?>
        
     </div>
