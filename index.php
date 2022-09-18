@@ -67,7 +67,7 @@ if ($play == 1){
 }
 
 if ($play == 2){
-    echo "<a href='http://192.168.68.118/api.php?service=2&pause=2'><i class='bi bi-caret-right' style='font-size: 6rem; color: white;'></i></a>&nbsp;&nbsp;";
+    echo "<a href='http://192.168.68.118/api.php?service=2&pause=0'><i class='bi bi-caret-right' style='font-size: 6rem; color: white;'></i></a>&nbsp;&nbsp;";
     
 }
 if ($playpause === play){
@@ -76,7 +76,7 @@ if ($playpause === play){
 }
 
 if ($playpause === pause){
-    echo "<a href='http://192.168.68.118/api.php?service=2&pause=2'><i class='bi bi-caret-right' style='font-size: 6rem; color: white;'></i></a>&nbsp;&nbsp;";
+    echo "<a href='http://192.168.68.118/api.php?service=2&pause=0'><i class='bi bi-caret-right' style='font-size: 6rem; color: white;'></i></a>&nbsp;&nbsp;";
     
 }
 

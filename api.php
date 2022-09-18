@@ -59,9 +59,7 @@ break;
 
 case "3": //***************** Pause **********************
     
-$mpd->pause($pause);
-    
-header("Location: http://192.168.68.118");
+
     
 break;
 
