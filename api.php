@@ -59,10 +59,23 @@ break;
 
 case "3": //***************** Pause **********************
     
-
+$mpd->prev();
+    
+ 
+    
+header("Location: http://192.168.68.118");
     
 break;
 
+case "4": //***************** Pause **********************
+    
+$mpd->next();
+    
+ 
+    
+header("Location: http://192.168.68.118");
+    
+break;
 
 default: //***************** Nothing **********************
     
