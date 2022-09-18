@@ -57,7 +57,7 @@ header("Location: http://192.168.68.118");
     
 break;
 
-case "3": //***************** Pause **********************
+case "3": //***************** Previous **********************
     
 $mpd->prev();
     
@@ -67,9 +67,19 @@ header("Location: http://192.168.68.118");
     
 break;
 
-case "4": //***************** Pause **********************
+case "4": //***************** Next **********************
     
 $mpd->next();
+    
+ 
+    
+header("Location: http://192.168.68.118");
+    
+break;
+
+case "5": //***************** Restart Playlist **********************
+    
+$mpd->playlist_clear();
     
  
     
