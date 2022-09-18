@@ -43,7 +43,7 @@ $(document).ready(function(){
             $('#duration').text(result.duration);
         }); 
     }, 1000);
-    var sec = 0;
+    var sec = 10;
     function pad ( val ) { return val > 9 ? val : "0" + val; }
     setInterval( function(){
         $("#seconds").html(pad(++sec%60));
