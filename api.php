@@ -19,6 +19,10 @@ $elapsed = round($elapsed,2);
 
 $elapsed = number_format($elapsed, 2);
 
+if ($elapsed < 10){
+    $elapsed = "0".$elapsed;
+}
+
 $duration = $statusarray['duration'];
 
 $duration = $duration/60;
@@ -26,6 +30,11 @@ $duration = $duration/60;
 $duration = round($duration,2);
 
 $duration = number_format($duration, 2);
+
+if ($duration < 10){
+    $duration = "0".$duration;
+}
+
 
 $mySimpleArray = $mpd->current_song();
     
