@@ -14,7 +14,7 @@ echo $playpause;
     
 ?>
 
-<!--<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Strict//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd'>
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Strict//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd'>
 <html xmlns='http://www.w3.org/1999/xhtml'>
 <head>
    
@@ -71,7 +71,7 @@ if ($play == 2){
     echo "<a href='http://192.168.68.118/api.php?service=2&pause=2'><i class='bi bi-caret-right' style='font-size: 6rem; color: white;'></i></a>&nbsp;&nbsp;";
     
 }
-if ($playpause === 'pause'){
+if ($playpause === 'stop'){
     echo "<a href='http://192.168.68.118/api.php?service=2&pause=1'><i class='bi bi-pause' style='font-size: 6rem; color: white;'></i></a>&nbsp;&nbsp;";
     
 }
@@ -107,4 +107,4 @@ if ($playpause === 'play'){
    
     
 </body>
-</html>-->
+</html>
