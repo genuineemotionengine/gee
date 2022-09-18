@@ -80,7 +80,10 @@ break;
 case "5": //***************** Restart Playlist **********************
     
 $mpd->playlist_clear();
+
+$playlist = "allmuisc";   
     
+$mpd->load_playlist($playlist);
  
     
 header("Location: http://192.168.68.118");
