@@ -9,7 +9,7 @@ $status = $mpd->server_status();
 echo '<pre>'.print_r($status['state']).'</pre>';    
     
 
-$playpause = $status[0]['State'];
+$playpause = $status['State'];
 echo $playpause;
     
 ?>
