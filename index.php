@@ -42,8 +42,9 @@ $(document).ready(function(){
             $('#elapsed').text(result.elapsed);
             $('#duration').text(result.duration);
         }); 
-    }); 
-}, 100000);
+    }, 100000);
+    
+});
 </script>
 </head>
 <body class="p-3 mb-2 bg-black text-white pt-0 ps-0 pe-0">
