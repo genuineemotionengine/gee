@@ -11,6 +11,8 @@ case "1": //***************** Track Data **********************
   
 
 $mySimpleArray = $mpd->current_song();
+    
+    print_r($mySimpleArray);
       
 $flacfile = $mySimpleArray[0]['name'];
 
