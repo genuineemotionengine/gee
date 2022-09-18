@@ -9,6 +9,11 @@ switch ($service){
 
 case "1": //***************** Track Data **********************
   
+$statusarray = $mpd->server_status();
+    
+$elapsed = $statusarray['elapsed'];
+
+$duration = $statusarray['duration'];
 
 $mySimpleArray = $mpd->current_song();
     
@@ -38,8 +43,10 @@ $rows = array(
 'image' => $image,
 'title' => $title,
 'artist' => $artist,
-'album' => $album
-
+'album' => $album,
+'elapsed' => $elapsed,
+'duration' => $duration
+        
 );
 
 echo json_encode($rows);
