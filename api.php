@@ -24,6 +24,7 @@ $flacfile = "/mnt/usb/".$flacfile;
 $getID3 = new getID3;
 
 $ThisFileInfo = $getID3->analyze($flacfile);
+echo '<pre>'.htmlentities(print_r($ThisFileInfo['comments'], true), ENT_SUBSTITUTE).'</pre>';
 
 if(isset($ThisFileInfo['comments']['picture'][0])){
     $image='data:'.$ThisFileInfo['comments']['picture'][0]['image_mime'].';charset=utf-8;base64,'.base64_encode($ThisFileInfo['comments']['picture'][0]['data']);
@@ -40,6 +41,14 @@ $rows = array(
 
 echo json_encode($rows);
 
+break;
+
+case "2": //***************** Pause **********************
+    
+$mpd->pause($pause);
+    
+header("Location: http://192.168.68.118");
+    
 break;
 
 case "2": //***************** Pause **********************
