@@ -45,15 +45,17 @@ echo json_encode($rows);
 break;
 
 case "2": //***************** Pause **********************
-    
+
+$playstatus = $pause;    
+
 $mpd->pause($pause);
     
-if ($pause == 0) {   
+if ($playstatus == 0) {   
     
 header("Location: http://192.168.68.118/?play=1");
 }
 
-if ($pause == 1) {   
+if ($playstatus == 1) {   
     
 header("Location: http://192.168.68.118/?play=2");
 }
