@@ -50,7 +50,7 @@ $(document).ready(function(){
     <div class="container-fluid text-center ps-0 pe-0">
          <div class="d-block d-sm-none">   
              
-            <img id='image' class='img-fluid' src='' /><br> 
+            <img id='image' class='img-fluid' src='black.jpg' /><br> 
                 <br>
             <h1 id='title' class='display-6'></h1>
             <h1 id='artist' class='display-6'></h1>
