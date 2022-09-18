@@ -44,7 +44,7 @@ break;
 
 case "2": //***************** Pause **********************
     
-$mpd = pause($pause);
+$mpd->pause($pause);
     
 header("Location: http://192.168.68.118");
     
