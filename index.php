@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
 <meta name = "viewport" content = "width=device-width, initial-scale = 1, shrink-to-fit = no">
 <meta name = "theme-color" content = "#000000">
+<meta name="apple-mobile-web-app-capable" content="yes">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script>
 $(document).ready(function(){
