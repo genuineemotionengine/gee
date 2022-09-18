@@ -51,13 +51,10 @@ $(document).ready(function(){
          <div class="d-block d-sm-none">   
              
             <img id='image' class='img-fluid' src='black.jpg' /><br> 
-                <br>
-            <h1 id='title' class='display-6'></h1>
-            <h1 id='artist' class='display-6'></h1>
-            <h1 id='album'class='display-6'></h1>
-            
-       
-<i class="bi bi-arrow-left-short" style="font-size: 6rem; color: white;"></i>&nbsp;&nbsp;
+                
+                    
+                    
+   <i class="bi bi-arrow-left-short" style="font-size: 6rem; color: white;"></i>&nbsp;&nbsp;
 <?php
 
 
@@ -85,7 +82,16 @@ if ($playpause === pause){
 
 
 
-<i class="bi bi-arrow-right-short" style="font-size: 6rem; color: white;"></i>
+<i class="bi bi-arrow-right-short" style="font-size: 6rem; color: white;"></i>                 
+                    
+                    
+                    
+            <h1 id='title' class='display-6'></h1>
+            <h1 id='artist' class='display-6'></h1>
+            <h1 id='album'class='display-6'></h1>
+            
+       
+
        
     </div>
  
