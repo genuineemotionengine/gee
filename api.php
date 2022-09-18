@@ -11,7 +11,7 @@ case "1": //***************** Track Data **********************
 
 $mySimpleArray = $mpd->current_song();
     
-echo '<pre>'.print_r($mySimpleArray).'</pre>';    
+echo '<pre>'.htmlentities(print_r($mySimpleArray), ENT_SUBSTITUTE).'</pre>';    
     
 
 $flacfile = $mySimpleArray[0]['name'];
@@ -54,7 +54,7 @@ header("Location: http://192.168.68.118");
     
 break;
 
-case "2": //***************** Pause **********************
+case "3": //***************** Pause **********************
     
 $mpd->pause($pause);
     
