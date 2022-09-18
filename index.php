@@ -84,7 +84,7 @@ echo "<a href='http://192.168.68.118/api.php?service=4'><i class='bi bi-arrow-ri
 
 ?>
 
-
+ <div class="container text-center">
 
 <table>
   <tr>
@@ -94,7 +94,7 @@ echo "<a href='http://192.168.68.118/api.php?service=4'><i class='bi bi-arrow-ri
   </tr>
 
 </table>
-              
+ </div>          
                     
                     
                     
