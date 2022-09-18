@@ -39,6 +39,7 @@ $(document).ready(function(){
             <h1 id='title' class='display-6'></h1>
             <h1 id='artist' class='display-6'></h1>
             <h1 id='album'class='display-6'></h1>
+            <br><br>
        
 <i class="bi bi-arrow-left-short" style="font-size: 6rem; color: white;"></i>&nbsp;&nbsp;
 <i class="bi bi-caret-right" style="font-size: 6rem; color: white;"></i>&nbsp;&nbsp;
