@@ -24,7 +24,7 @@ $flacfile = "/mnt/usb/".$flacfile;
 $getID3 = new getID3;
 
 $ThisFileInfo = $getID3->analyze($flacfile);
-echo '<pre>'.htmlentities(print_r($ThisFileInfo['comments'], true), ENT_SUBSTITUTE).'</pre>';
+echo '<pre>'.htmlentities(print_r($ThisFileInfo['comments']['picture'][0], true), ENT_SUBSTITUTE).'</pre>';
 
 if(isset($ThisFileInfo['comments']['picture'][0])){
     $image='data:'.$ThisFileInfo['comments']['picture'][0]['image_mime'].';charset=utf-8;base64,'.base64_encode($ThisFileInfo['comments']['picture'][0]['data']);
