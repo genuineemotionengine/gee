@@ -6,7 +6,7 @@ $mpd = new mpd('localhost', 6600);
     
 $status = $mpd->server_status();
 
-echo '<pre>'.print_r($status['state']).'</pre>';    
+//echo '<pre>'.print_r($status['state']).'</pre>';    
     
 
 $playpause = $status['state'];
@@ -71,12 +71,12 @@ if ($play == 2){
     echo "<a href='http://192.168.68.118/api.php?service=2&pause=2'><i class='bi bi-caret-right' style='font-size: 6rem; color: white;'></i></a>&nbsp;&nbsp;";
     
 }
-if ($playpause === 'stop'){
+if ($playpause = 'pause'){
     echo "<a href='http://192.168.68.118/api.php?service=2&pause=1'><i class='bi bi-pause' style='font-size: 6rem; color: white;'></i></a>&nbsp;&nbsp;";
     
 }
 
-if ($playpause === 'play'){
+if ($playpause = 'play'){
     echo "<a href='http://192.168.68.118/api.php?service=2&pause=2'><i class='bi bi-caret-right' style='font-size: 6rem; color: white;'></i></a>&nbsp;&nbsp;";
     
 }
