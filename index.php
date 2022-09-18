@@ -43,7 +43,7 @@ $(document).ready(function(){
             $('#duration').text(result.duration);
         }); 
     }); 
-}, 1000);
+}, 100000);
 </script>
 </head>
 <body class="p-3 mb-2 bg-black text-white pt-0 ps-0 pe-0">
