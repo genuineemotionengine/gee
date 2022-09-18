@@ -1,8 +1,13 @@
 <?php
+parse_str($_SERVER['QUERY_STRING']);
 require('mpd.class.php');
 require_once('getid3.php');
 
 $mpd = new mpd('localhost', 6600);
+
+switch ($service){
+
+case "1": //***************** Track Data **********************
 
 $mySimpleArray = $mpd->current_song();
 
@@ -33,10 +38,20 @@ $rows = array(
 
 );
 
-//echo $image."<br>";
-//echo $title."<br>";
-//echo $artist."<br>";
-//echo $album."<br>";
-
-
 echo json_encode($rows);
+
+break;
+
+case "2": //***************** Pause **********************
+    
+    
+    
+break;
+
+
+default: //***************** Nothing **********************
+    
+    echo "...nothing";
+    
+}
+

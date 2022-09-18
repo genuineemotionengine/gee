@@ -15,7 +15,7 @@
 <script>
 $(document).ready(function(){
     setInterval(function(){
-        $.getJSON("http://192.168.68.118/api.php", function(result){
+        $.getJSON("http://192.168.68.118/api.php?service=1", function(result){
             $('#image').attr('src',result.image);
             $('#imagelg').attr('src',result.image);
             $('#title').text(result.title);
