@@ -17,11 +17,15 @@ $elapsed = $elapsed/60;
 
 $elapsed = round($elapsed,2);
 
+$elapsed = number_format($elapsed, 2);
+
 $duration = $statusarray['duration'];
 
 $duration = $duration/60;
 
 $duration = round($duration,2);
+
+$duration = number_format($duration, 2);
 
 $mySimpleArray = $mpd->current_song();
     
