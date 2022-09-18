@@ -11,7 +11,7 @@ case "1": //***************** Track Data **********************
     
 $status = $mpd->server_status(); 
     
-echo '<pre>'.print_r($status).'</pre>';    
+echo '<pre>'.print_r($status['state']).'</pre>';    
     
 
 $mySimpleArray = $mpd->current_song();
