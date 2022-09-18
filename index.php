@@ -86,7 +86,14 @@ echo "<a href='http://192.168.68.118/api.php?service=4'><i class='bi bi-arrow-ri
 
 
 
+<table>
+  <tr>
+    <td>02.53</td>
+    <td>05.11</td>
+ 
+  </tr>
 
+</table>
               
                     
                     
