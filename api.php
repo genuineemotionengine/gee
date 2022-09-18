@@ -10,6 +10,9 @@ switch ($service){
 case "1": //***************** Track Data **********************
 
 $mySimpleArray = $mpd->current_song();
+    
+echo '<pre>'.print_r($mySimpleArray).'</pre>';    
+    
 
 $flacfile = $mySimpleArray[0]['name'];
 
