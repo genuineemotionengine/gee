@@ -4,7 +4,10 @@ require('mpd.class.php');
 
 $mpd = new mpd('localhost', 6600);
     
-$status = $mpd->server_status(); 
+$status = $mpd->server_status();
+
+echo '<pre>'.print_r($status['state']).'</pre>';    
+    
 
 $playpause = $status[0]['State'];
 echo $playpause;
