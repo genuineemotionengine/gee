@@ -13,7 +13,11 @@ $statusarray = $mpd->server_status();
     
 $elapsed = $statusarray['elapsed'];
 
+$elapsed = $elapsed/60;
+
 $duration = $statusarray['duration'];
+
+$duration = $duration/60;
 
 $mySimpleArray = $mpd->current_song();
     
