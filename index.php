@@ -7,6 +7,7 @@ $mpd = new mpd('localhost', 6600);
 $status = $mpd->server_status(); 
 
 $playpause = $status[0]['state'];
+echo $playpause;
     
 ?>
 
