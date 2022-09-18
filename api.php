@@ -48,12 +48,12 @@ case "2": //***************** Pause **********************
     
 $mpd->pause($pause);
     
-if ($pause === 0) {   
+if ($pause == 0) {   
     
 header("Location: http://192.168.68.118/?play=1");
 }
 
-if ($pause === 1) {   
+if ($pause == 1) {   
     
 header("Location: http://192.168.68.118/?play=2");
 }
