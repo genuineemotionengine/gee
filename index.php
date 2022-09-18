@@ -42,7 +42,7 @@ $(document).ready(function(){
             $('#elapsed').text(result.elapsed);
             $('#duration').text(result.duration);
         }); 
-    }, 10000);
+    }, 1000);
     
 });
 </script>
