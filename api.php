@@ -9,6 +9,11 @@ switch ($service){
 
 case "1": //***************** Track Data **********************
     
+$status = $mpd->server_status(); 
+    
+echo '<pre>'.print_r($status['state']).'</pre>';    
+    
+
 $mySimpleArray = $mpd->current_song();
       
 $flacfile = $mySimpleArray[0]['name'];
@@ -47,7 +52,16 @@ case "2": //***************** Pause **********************
     
 $mpd->pause($pause);
     
-header("Location: http://192.168.68.118");
+if ($pause === 0) {   
+    
+header("Location: http://192.168.68.118/?play=1");
+}
+
+if ($pause === 1) {   
+    
+header("Location: http://192.168.68.118/?play=2");
+}
+
     
 break;
 
