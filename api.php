@@ -9,16 +9,8 @@ switch ($service){
 
 case "1": //***************** Track Data **********************
     
-$status = $mpd->server_status(); 
-    
-echo '<pre>'.print_r($status['state']).'</pre>';    
-    
-
 $mySimpleArray = $mpd->current_song();
-    
-//echo '<pre>'.htmlentities(print_r($mySimpleArray), ENT_SUBSTITUTE).'</pre>';    
-    
-
+      
 $flacfile = $mySimpleArray[0]['name'];
 
 $album = $mySimpleArray[0]['Album'];
