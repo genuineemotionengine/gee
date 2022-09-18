@@ -46,19 +46,13 @@ break;
 
 case "2": //***************** Pause **********************
 
-$playstatus = $pause;    
+   
 
 $mpd->pause($pause);
     
-if ($playstatus == 0) {   
+ 
     
-header("Location: http://192.168.68.118/?play=1");
-}
-
-if ($playstatus == 1) {   
-    
-header("Location: http://192.168.68.118/?play=2");
-}
+header("Location: http://192.168.68.118");
 
     
 break;
