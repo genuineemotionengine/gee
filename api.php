@@ -84,6 +84,8 @@ $mpd->playlist_clear();
 $playlist = "allmusic";   
     
 $mpd->load_playlist($playlist);
+
+$mpd->playlist_shuffle();
  
     
 header("Location: http://192.168.68.118");
