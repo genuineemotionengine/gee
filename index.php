@@ -43,7 +43,7 @@ $(document).ready(function(){
             
        
 <i class="bi bi-arrow-left-short" style="font-size: 6rem; color: white;"></i>&nbsp;&nbsp;
-<i class="bi bi-caret-right" style="font-size: 5rem; color: white;"></i>&nbsp;&nbsp;
+<i class="bi bi-caret-right" style="font-size: 6rem; color: white;"></i>&nbsp;&nbsp;
 <i class="bi bi-arrow-right-short" style="font-size: 6rem; color: white;"></i>
        
     </div>
