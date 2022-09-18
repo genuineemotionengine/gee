@@ -38,7 +38,9 @@ $(document).ready(function(){
             $('#artist').text(result.artist);
             $('#artistlg').text(result.artist);
             $('#album').text(result.album);       
-            $('#albumlg').text(result.album);       
+            $('#albumlg').text(result.album);
+            $('#elapsed').text(result.elapsed);
+            $('#duration').text(result.duration);
         }); 
     }); 
 }, 100000);
@@ -84,13 +86,13 @@ echo "<a href='http://192.168.68.118/api.php?service=4'><i class='bi bi-arrow-ri
 
 ?>
 
-<!--<div class="container text-center">
+<div class="container text-center">
   <div class="row row-cols-2">
-    <div class="col">02.53</div>
-    <div class="col">05.11</div>
+    <div id="elapsed" class="col"></div>
+    <div id="duration" class="col"></div>
   </div>
-</div>-->
-               
+</div>
+<br>
 
                      
                     
