@@ -43,7 +43,7 @@ $(document).ready(function(){
             $('#duration').text(result.duration);
         }); 
     }, 1000);
-    var sec = 0;
+    var sec = 10;
     function pad ( val ) { return val > 9 ? val : "0" + val; }
     setInterval( function(){
         $("#seconds").html(pad(++sec%60));
@@ -95,7 +95,9 @@ echo "<a href='http://192.168.68.118/api.php?service=4'><i class='bi bi-arrow-ri
 
 <div class="container text-center">
   <div class="row row-cols-2">
-    <div class="col"><span id="minutes"></span>:<span id="seconds"></span></div>
+<?php
+if 
+    <div id="elapsed" class="col"></div>
     <div id="duration" class="col"></div>
   </div>
 </div>
