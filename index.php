@@ -43,7 +43,23 @@ $(document).ready(function(){
             
        
 <i class="bi bi-arrow-left-short" style="font-size: 6rem; color: white;"></i>&nbsp;&nbsp;
-<a href="http://192.168.68.118/api.php?service=2&pause=1"><i class="bi bi-pause" style="font-size: 6rem; color: white;"></i></a>&nbsp;&nbsp;
+<?php
+
+if ($play == 1){
+    echo "<a href='http://192.168.68.118/api.php?service=2&pause=1'><i class='bi bi-pause' style='font-size: 6rem; color: white;'></i></a>&nbsp;&nbsp;";
+    
+}
+
+if ($play == 2){
+    echo "<a href='http://192.168.68.118/api.php?service=2&pause=2'><i class='bi bi-caret-right' style='font-size: 6rem; color: white;'></i></a>&nbsp;&nbsp;";
+    
+}
+
+
+
+
+
+
 <i class="bi bi-arrow-right-short" style="font-size: 6rem; color: white;"></i>
        
     </div>
