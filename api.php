@@ -81,7 +81,7 @@ case "5": //***************** Restart Playlist **********************
     
 $mpd->playlist_clear();
 
-$playlist = "allmuisc";   
+$playlist = "allmusic";   
     
 $mpd->load_playlist($playlist);
  
