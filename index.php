@@ -60,10 +60,6 @@ $(document).ready(function(){
     setInterval( function(){
         $("#seconds").html(pad(++sec%60));
         $("#minutes").html(pad(parseInt(sec/60,10)));
-          if(text(result.elapsed) = 0) {
-    function();
-    return;
-  }
     }, 1000);
     
 });
