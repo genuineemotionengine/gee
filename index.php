@@ -70,7 +70,7 @@ function function2()
 {
     var timemilli = d.getTime()
         
-    durationtime = timemilli + durationmilli);
+    durationtime = timemilli + durationmilli;
     function3();
     
 }
