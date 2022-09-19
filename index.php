@@ -63,7 +63,7 @@ $(document).ready(function(){
     function pad ( val ) { return val > 9 ? val : "0" + val; }
         $("#seconds").html(pad(++sec%60));
         $("#minutes").html(pad(parseInt(sec/60,10)));
-    });    
+    
 });
 </script>
 </head>
