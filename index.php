@@ -12,7 +12,7 @@ $elapsed = $status['elapsed'];
 
 //$elapsed = $elapsed/60;
 
-$elapsed = ceil($elapsed);
+$elapsedround = ceil($elapsed);
 
 //$elapsed = number_format($elapsed);
 
@@ -31,6 +31,7 @@ $playpause = $status['state'];
 <head>
    
 <meta http-equiv='Content-Type' content='text/html; charset=UTF-8'/>
+<meta http-equiv='refresh' content='<?php echo $elapsed; ?>'>
 <title>GEE-Lite</title>
 
 <link href='https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css' rel='stylesheet' integrity='sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT' crossorigin='anonymous'>
@@ -59,7 +60,7 @@ $(document).ready(function(){
             
         }); 
 //    }, 1000);
-    var sec = <?php echo $elapsed; ?>;
+    var sec = <?php echo $elapsedround; ?>;
     function pad ( val ) { return val > 9 ? val : "0" + val; }
     setInterval( function(){
         $("#seconds").html(pad(++sec%60));
