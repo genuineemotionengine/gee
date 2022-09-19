@@ -7,7 +7,19 @@ $mpd = new mpd('localhost', 6600);
 $status = $mpd->server_status();
 
 //echo '<pre>'.print_r($status['state']).'</pre>';    
-    
+
+$elapsed = $statusarray['elapsed'];
+
+$elapsed = $elapsed/60;
+
+$elapsed = round($elapsed,2);
+
+$elapsed = number_format($elapsed, 2);
+
+if ($elapsed < 10){
+    $elapsed = "0".$elapsed;
+}
+
 
 $playpause = $status['state'];
 //echo $playpause;
@@ -43,7 +55,7 @@ $(document).ready(function(){
             $('#duration').text(result.duration);
         }); 
     }, 1000);
-    var sec = 10;
+    var sec = <?php echo $elapsed; ?>;
     function pad ( val ) { return val > 9 ? val : "0" + val; }
     setInterval( function(){
         $("#seconds").html(pad(++sec%60));
