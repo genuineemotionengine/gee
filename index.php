@@ -41,8 +41,7 @@ $playpause = $status['state'];
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script>
 $(document).ready(function(){
-    var durationmilli;
-    var durationtime;
+
 //    setInterval(function(){
         $.getJSON("http://192.168.68.118/api.php?service=1", function(result){
             $('#image').attr('src',result.image);
@@ -55,42 +54,11 @@ $(document).ready(function(){
             $('#albumlg').text(result.album);
             $('#elapsed').text(result.elapsed);
             $('#duration').text(result.duration);
-            durationmilli = result.durationmilli;
-            function2();
+
 
             
         }); 
 //    }, 1000);
-
-
-
-
-
-function function2()
-{
-    var timemilli = d.getTime()
-        
-    durationtime = timemilli + durationmilli;
-    function3();
-    
-}
-
-function function3()
-{
-    setInterval(function(){
-    
-    if (durationtime = d.getTime()){
-        location.reload();
-    }
-        
-   }, 1);
-    
-}
-
-
- 
-
-
     
 });
 </script>
