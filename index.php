@@ -54,7 +54,13 @@ $(document).ready(function(){
             $('#elapsed').text(result.elapsed);
             $('#duration').text(result.duration);
             var durationmilli = result.durationmilli;
+           
+        }); 
+//    }, 1000);
+
+
 var timemilli = d.getTime();
+
 
 var durationtime = timemilli + durationmilli;
 
@@ -62,13 +68,8 @@ setInterval(function(){
 if (d.getTime() >= durationtime){
     alert("Boom!");
 }
-}, 1000);
-            
-        }); 
-//    }, 1000);
-
-
-
+}, 1);
+ 
 
 //    var sec = <?php echo $elapsed; ?>;
 //    function pad ( val ) { return val > 9 ? val : "0" + val; }
