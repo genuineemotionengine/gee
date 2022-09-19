@@ -10,15 +10,15 @@ $status = $mpd->server_status();
 
 $elapsed = $status['elapsed'];
 
-$elapsed = $elapsed/60;
-
-$elapsed = round($elapsed,2);
-
-$elapsed = number_format($elapsed, 2);
-
-if ($elapsed < 10){
-    $elapsed = "0".$elapsed;
-}
+//$elapsed = $elapsed/60;
+//
+//$elapsed = round($elapsed,2);
+//
+//$elapsed = number_format($elapsed, 2);
+//
+//if ($elapsed < 10){
+//    $elapsed = "0".$elapsed;
+//}
 
 
 $playpause = $status['state'];
