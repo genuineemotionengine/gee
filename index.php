@@ -8,19 +8,19 @@ $status = $mpd->server_status();
 
 //echo '<pre>'.print_r($status['state']).'</pre>';    
 
-//$elapsed = $status['elapsed'];
+$elapsed = $status['elapsed'];
 
-//$elapsed = $elapsed/60;
-//
-//$elapsed = round($elapsed,2);
-//
-//$elapsed = number_format($elapsed, 2);
-//
+$elapsed = $elapsed/60;
+
+$elapsed = round($elapsed,2);
+
+$elapsed = number_format($elapsed);
+
 //if ($elapsed < 10){
 //    $elapsed = "0".$elapsed;
 //}
 
-$elapsed = 0;
+//$elapsed = 0;
 $playpause = $status['state'];
 //echo $playpause;
     
