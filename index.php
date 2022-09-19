@@ -6,19 +6,23 @@ $mpd = new mpd('localhost', 6600);
     
 $status = $mpd->server_status();
 
-//echo '<pre>'.print_r($status['state']).'</pre>';    
+//echo '<pre>'.print_r($status['state']).'</pre>';
+
+$duration = $status['duration'];
 
 $elapsed = $status['elapsed'];
 
-//$elapsed = $elapsed/60;
+
+
+$elapsed = $elapsed/60;
 
 $elapsed = ceil($elapsed);
 
 //$elapsed = number_format($elapsed);
 
-//if ($elapsed < 10){
-//    $elapsed = "0".$elapsed;
-//}
+if ($elapsed < 10){
+    $elapsed = "0".$elapsed;
+}
 
 //$elapsed = 0;
 $playpause = $status['state'];
