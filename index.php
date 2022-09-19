@@ -10,7 +10,7 @@ $status = $mpd->server_status();
 
 $elapsed = $status['elapsed'];
 
-$elapsed = $elapsed/60;
+//$elapsed = $elapsed/60;
 
 $elapsed = ceil($elapsed);
 
