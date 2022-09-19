@@ -16,9 +16,9 @@ $elapsed = $status['elapsed'];
 
 $elapsed = $elapsed/60;
 
-$elapsed = round($elapsed);
+//$elapsed = round($elapsed);
 
-$elapsed = number_format($elapsed ,2);
+$elapsed = number_format($elapsed);
 
 $refresh = $duration - $elapsed;
 
