@@ -53,13 +53,7 @@ $(document).ready(function(){
             $('#albumlg').text(result.album);
             $('#elapsed').text(result.elapsed);
             $('#duration').text(result.duration);
-            
-            
-        }); 
-//    }, 1000);
-
-
-var durationmilli = result.durationmilli;
+            var durationmilli = result.durationmilli;
 var timemilli = d.getTime();
 
 var durationtime = timemilli + durationmilli;
@@ -69,6 +63,12 @@ if (d.getTime() >= durationtime){
     alert("Boom!");
 }
 }, 1000);
+            
+        }); 
+//    }, 1000);
+
+
+
 
 //    var sec = <?php echo $elapsed; ?>;
 //    function pad ( val ) { return val > 9 ? val : "0" + val; }
