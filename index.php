@@ -70,12 +70,12 @@ if (d.getTime() >= durationtime){
 }
 }, 1000);
 
-    var sec = <?php echo $elapsed; ?>;
-    function pad ( val ) { return val > 9 ? val : "0" + val; }
-    setInterval( function(){
-        $("#seconds").html(pad(++sec%60));
-        $("#minutes").html(pad(parseInt(sec/60,10)));
-    }, 1000);
+//    var sec = <?php echo $elapsed; ?>;
+//    function pad ( val ) { return val > 9 ? val : "0" + val; }
+//    setInterval( function(){
+//        $("#seconds").html(pad(++sec%60));
+//        $("#minutes").html(pad(parseInt(sec/60,10)));
+//    }, 1000);
     
 });
 </script>
