@@ -55,13 +55,22 @@ $(document).ready(function(){
             $('#elapsed').text(result.elapsed);
             $('#duration').text(result.duration);
             durationmilli = result.durationmilli;
-
+            function2();
 
             
         }); 
 //    }, 1000);
 
-alert(durationmilli);
+
+
+
+
+function function2()
+{
+  alert(durationmilli);
+}
+
+
 
  
 
