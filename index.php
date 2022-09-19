@@ -54,7 +54,7 @@ $(document).ready(function(){
             $('#elapsed').text(result.elapsed);
             $('#duration').text(result.duration);
             var durationmilli = result.durationmilli;
-           alert(durationmilli);
+//            alert(durationmilli);
         }); 
 //    }, 1000);
 
