@@ -58,7 +58,7 @@ $(document).ready(function(){
         }); 
 //    }, 1000);
 
-
+alert(durationmilli);
 var timemilli = d.getTime();
 alert(timemilli);
 
