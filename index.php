@@ -16,13 +16,17 @@ $elapsed = $status['elapsed'];
 
 $elapsed = $elapsed/60;
 
-$elapsed = ceil($elapsed);
+$elapsed = round($elapsed);
 
-//$elapsed = number_format($elapsed);
+$elapsed = number_format($elapsed ,2);
+
+$refresh = $duration - $elapsed;
 
 if ($elapsed < 10){
     $elapsed = "0".$elapsed;
 }
+
+
 
 //$elapsed = 0;
 $playpause = $status['state'];
@@ -35,7 +39,7 @@ $playpause = $status['state'];
 <head>
    
 <meta http-equiv='Content-Type' content='text/html; charset=UTF-8'/>
-<meta http-equiv='refresh' content='<?php echo $duration; ?>'>
+<meta http-equiv='refresh' content='<?php echo $refresh; ?>'>
 <title>GEE-Lite</title>
 
 <link href='https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css' rel='stylesheet' integrity='sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT' crossorigin='anonymous'>
