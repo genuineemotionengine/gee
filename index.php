@@ -12,7 +12,7 @@ $elapsed = $status['elapsed'];
 
 //$elapsed = $elapsed/60;
 
-$elapsedround = ceil($elapsed);
+$elapsed = ceil($elapsed);
 
 //$elapsed = number_format($elapsed);
 
@@ -60,7 +60,7 @@ $(document).ready(function(){
             
         }); 
 //    }, 1000);
-    var sec = <?php echo $elapsedround; ?>;
+    var sec = <?php echo $elapsed; ?>;
     function pad ( val ) { return val > 9 ? val : "0" + val; }
     setInterval( function(){
         $("#seconds").html(pad(++sec%60));
