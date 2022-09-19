@@ -54,15 +54,17 @@ $(document).ready(function(){
             $('#elapsed').text(result.elapsed);
             $('#duration').text(result.duration);
             var durationmilli = result.durationmilli;
-           
+           alert(durationmilli);
         }); 
 //    }, 1000);
 
 
 var timemilli = d.getTime();
-
+alert(timemilli);
 
 var durationtime = timemilli + durationmilli;
+
+alert(durationtime);
 
 setInterval(function(){
 if (d.getTime() >= durationtime){
