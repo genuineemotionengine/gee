@@ -53,8 +53,8 @@ $(document).ready(function(){
             $('#albumlg').text(result.album);
             $('#elapsed').text(result.elapsed);
             $('#duration').text(result.duration);
-            var duration = result.duration;
-            alert(duration);
+            var durationmilli = result.durationmilli;
+            alert(durationmilli);
         }); 
 //    }, 1000);
 

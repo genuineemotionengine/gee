@@ -25,6 +25,8 @@ if ($elapsed < 10){
 
 $duration = $statusarray['duration'];
 
+$durationmilli = $duration*1000;
+
 $duration = $duration/60;
 
 $duration = round($duration,2);
@@ -66,8 +68,8 @@ $rows = array(
 'artist' => $artist,
 'album' => $album,
 'elapsed' => $elapsed,
-'duration' => $duration
-        
+'duration' => $duration,
+'durationmilli' => $durationmilli       
 );
 
 echo json_encode($rows);
