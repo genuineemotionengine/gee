@@ -107,7 +107,20 @@ echo "<a href='http://192.168.68.118/api.php?service=4'><i class='bi bi-arrow-ri
 
 <div class="container text-center">
   <div class="row row-cols-2">
-    <div class="col"><span id="minutes"></span>:<span id="seconds"></span></div>
+      
+      <?php
+      if ($playpause === pause){
+     
+          
+      
+    echo "<div id='elasped' class='col'></div>";
+    
+      }else{
+          
+          echo "<div class='col'><span id='minutes'></span>:<span id='seconds'></span></div>";
+      }
+    ?>
+        
     <div id="duration" class="col"></div>
   </div>
 </div>
