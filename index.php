@@ -12,9 +12,9 @@ $elapsed = $status['elapsed'];
 
 $elapsed = $elapsed/60;
 
-$elapsed = round($elapsed,2);
+$elapsed = ceil($elapsed);
 
-$elapsed = number_format($elapsed);
+//$elapsed = number_format($elapsed);
 
 //if ($elapsed < 10){
 //    $elapsed = "0".$elapsed;
