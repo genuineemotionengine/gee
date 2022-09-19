@@ -8,7 +8,7 @@ $status = $mpd->server_status();
 
 //echo '<pre>'.print_r($status['state']).'</pre>';    
 
-$elapsed = $statusarray['elapsed'];
+$elapsed = $status['elapsed'];
 
 $elapsed = $elapsed/60;
 
