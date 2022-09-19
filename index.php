@@ -113,7 +113,7 @@ echo "<a href='http://192.168.68.118/api.php?service=4'><i class='bi bi-arrow-ri
      
           
       
-    echo "<div id='elasped' class='col'></div>";
+    echo "<div id='elapsed' class='col'></div>";
     
       }else{
           
