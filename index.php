@@ -8,7 +8,7 @@ $status = $mpd->server_status();
 
 //echo '<pre>'.print_r($status['state']).'</pre>';    
 
-$elapsed = $status['elapsed'];
+//$elapsed = $status['elapsed'];
 
 //$elapsed = $elapsed/60;
 //
@@ -20,7 +20,7 @@ $elapsed = $status['elapsed'];
 //    $elapsed = "0".$elapsed;
 //}
 
-
+$elapsed = 0;
 $playpause = $status['state'];
 //echo $playpause;
     
