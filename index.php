@@ -37,7 +37,7 @@ $refresh = $duration - $elapsed;
 
 $elapsedpause = $elapsedpause/60;
 
-$elapsedpause = round($elapsedpause,2);
+//$elapsedpause = round($elapsedpause,2);
 
 $elapsedpause = number_format($elapsedpause, 2);
 
