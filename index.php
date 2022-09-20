@@ -19,6 +19,8 @@ $duration = round($duration,2);
 
 $duration = number_format($duration, 2);
 
+$duration = str_replace('.', ':', $duration);
+
 $elapsed = $status['elapsed'];
 
 
