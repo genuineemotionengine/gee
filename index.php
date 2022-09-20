@@ -27,6 +27,7 @@ $duration = str_replace('.', ':', $duration);
 
 $elapsed = $status['elapsed'];
 
+$elapsedpause = $elapsed;
 
 $elapsed = round($elapsed);
 
@@ -34,8 +35,14 @@ $elapsed = number_format($elapsed);
 
 $refresh = $duration - $elapsed;
 
-if ($elapsed < 10){
-    $elapsed = "0".$elapsed;
+$elapsedpause = $elapsedpause/60;
+
+$elapsedpause = round($elapsedpause,2);
+
+$elapsedpause = number_format($elapsedpause, 2);
+
+if ($elapsedpause < 10){
+    $elapsedpause = "0".$elapsedpause;
 }
 
 $playpause = $status['state'];
@@ -109,7 +116,7 @@ echo "<a href='http://192.168.68.118/api.php?service=4'><i class='bi bi-arrow-ri
 echo "<div class='container text-center'>\n";
 echo "<div class='row row-cols-2'>\n";
 if ($playpause === pause){
-    echo "<div class='col'>".$elapsed."</div>";
+    echo "<div class='col'>".$elapsedpause."</div>";
 }else{
     echo "<div class='col'><span id='minutes'></span>:<span id='seconds'></span></div>";
 }
