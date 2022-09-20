@@ -160,7 +160,7 @@ echo "<a href='http://192.168.68.118/api.php?service=5'><i class='bi bi-arrow-re
 
     <div class="container text-center">
       <div class="d-none d-xl-block">  
-        
+          <br><br><br><br><br><br><br><br><br><br>
             <img id='imagelg' src='' /><br>  
             <h1 id='titlelg' class='display-4'></h1>
             <h1 id='artistlg' class='display-6'></h1>
