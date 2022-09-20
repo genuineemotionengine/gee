@@ -48,8 +48,8 @@ $playpause = $status['state'];
 
 <link href='https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css' rel='stylesheet' integrity='sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT' crossorigin='anonymous'>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
-<meta name = "viewport" content = "width=device-width, initial-scale = 1, shrink-to-fit = no">
-<meta name = "theme-color" content = "#000000">
+<meta name = "viewport" content = "width=device-width, initial-scale = 1">
+
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script>
@@ -81,7 +81,7 @@ $(document).ready(function(){
 });
 </script>
 </head>
-<body class="p-3 mb-2 bg-black text-white pt-0 ps-10 pe-0">
+<body class="p-3 mb-2 bg-black text-white pt-0 ps-0 pe-0">
     
     
     <div class="container-fluid text-center ps-0 pe-0">
