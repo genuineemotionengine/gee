@@ -35,7 +35,7 @@ echo $duration."<br>";
 
 $duration = str_replace('.', ':', $duration);
 
-echo $duration."<br>";∑
+echo $duration."<br>";
 
 
 
