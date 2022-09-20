@@ -11,9 +11,13 @@ $status = $mpd->server_status();
 
 $duration = $status['duration'];
 
-$duration = round($duration);
+$durationmilli = $duration*1000;
 
-$duration = number_format($duration);
+$duration = $duration/60;
+
+$duration = round($duration,2);
+
+$duration = number_format($duration, 2);
 
 $elapsed = $status['elapsed'];
 
@@ -113,6 +117,7 @@ echo "<h1 class='display-6'>".$album."</h1>\n";
 echo "<a href='http://192.168.68.118/api.php?service=5'><i class='bi bi-arrow-repeat' style='font-size: 3rem; color: white;'></i></a>";
 echo "</div>\n";
 echo "</div>\n";
+
 echo "<div class='container text-center'>\n";
 echo "<div class='d-none d-xl-block'>\n";  
 echo "<br><br><br><br><br><br><br><br><br><br>\n";
@@ -121,6 +126,7 @@ echo "<h1 class='display-4'>".$title."</h1>\n";
 echo "<h1 class='display-6'>".$artist."</h1>\n";
 echo "<h1 class='display-6'>".$album."</h1>\n";
 echo "</div>\n";
+
 echo "</body>\n";
 echo "</html>\n";
 ?>
