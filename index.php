@@ -10,6 +10,10 @@ $status = $mpd->server_status();
 
 $duration = $status['duration'];
 
+$duration = round($duration);
+
+$duration = number_format($duration);
+
 $elapsed = $status['elapsed'];
 
 
