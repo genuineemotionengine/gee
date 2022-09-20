@@ -11,11 +11,13 @@ $status = $mpd->server_status();
 
 $duration = $status['duration'];
 
+$elapsed = $status['elapsed'];
+
+$refresh = $duration - $elapsed;
+
 $durationmilli = $duration*1000;
 
 $duration = $duration/60;
-
-$duration = round($duration,2);
 
 $duration = number_format($duration, 2);
 
@@ -25,7 +27,7 @@ if (duration < 10){
 
 $duration = str_replace('.', ':', $duration);
 
-$elapsed = $status['elapsed'];
+
 
 $elapsedpause = $elapsed;
 
@@ -33,11 +35,10 @@ $elapsed = round($elapsed);
 
 $elapsed = number_format($elapsed);
 
-$refresh = $duration - $elapsed;
+
 
 $elapsedpause = $elapsedpause/60;
 
-//$elapsedpause = round($elapsedpause,2);
 
 $elapsedpause = number_format($elapsedpause, 2);
 
@@ -76,7 +77,7 @@ echo "<html xmlns='http://www.w3.org/1999/xhtml'>\n";
 echo "<head>\n";
 echo "<meta http-equiv='Content-Type' content='text/html; charset=UTF-8'/>\n";
 echo "<meta name = 'viewport' content = 'width=device-width, initial-scale = 1'>\n";
-//echo "<meta http-equiv='refresh' content='".$refresh."'>\n";
+echo "<meta http-equiv='refresh' content='".$refresh."'>\n";
 echo "<title>GEE-Lite</title>\n";
 echo "<link href='https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css' rel='stylesheet' integrity='sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT' crossorigin='anonymous'>\n";
 echo "<link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css'>\n";
