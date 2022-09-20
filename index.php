@@ -2,7 +2,7 @@
 parse_str($_SERVER['QUERY_STRING']);
 require('mpd.class.php');
 
-$mpd = new mpd('localhost', 6600);
+$mpd = new mpd('localhost');
     
 $status = $mpd->server_status();
 
