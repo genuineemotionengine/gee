@@ -20,7 +20,7 @@ $duration = round($duration,2);
 $duration = number_format($duration, 2);
 
 if (duration < 10){
-    $duration = "0".duration;
+    $duration = "0".$duration;
 }
 
 $duration = str_replace('.', ':', $duration);
