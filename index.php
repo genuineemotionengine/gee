@@ -11,6 +11,8 @@ $status = $mpd->server_status();
 
 $duration = $status['duration'];
 
+echo $duration."<br>";
+
 $elapsed = $status['elapsed'];
 
 $refresh = $duration - $elapsed;
@@ -19,13 +21,21 @@ $durationmilli = $duration*1000;
 
 $duration = $duration/60;
 
+echo $duration."<br>";
+
 $duration = number_format($duration, 2);
+
+echo $duration."<br>";
 
 if (duration < 10){
     $duration = "0".$duration;
 }
 
+echo $duration."<br>";
+
 $duration = str_replace('.', ':', $duration);
+
+echo $duration."<br>";∑
 
 
 
