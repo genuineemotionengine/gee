@@ -19,7 +19,7 @@ echo $durations[0]."<br>";
 
 $elapsed = $status['elapsed'];
 
-$refresh = $duration - $elapsed;
+
 
 $duration = $durations[0]/60;
 
@@ -47,7 +47,9 @@ $elapsed = round($elapsed);
 
 $elapsed = number_format($elapsed);
 
+$refresh = $duration - $elapsed;
 
+echo $refresh."<br>";
 
 $elapsedpause = $elapsedpause/60;
 
