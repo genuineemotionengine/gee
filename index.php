@@ -15,19 +15,13 @@ echo $duration."<br>";
 
 $durations = explode(".",$duration);
 
-echo $durations[1]."<br>";
-
-$durationsmil = $durations[1]/1000;
-
-echo $durationsmil."<br>";
+echo $durations[0]."<br>";
 
 $elapsed = $status['elapsed'];
 
 $refresh = $duration - $elapsed;
 
-$durationmilli = $duration*1000;
-
-$duration = $duration/60;
+$duration = $durations[0]/60;
 
 echo $duration."<br>";
 
