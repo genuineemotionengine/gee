@@ -36,8 +36,9 @@ $refresh = $durations[0] - $elapsed;
 
 echo $refresh."<br>";
 
+$elapsedpause = $elapseds[0]-1;
 
-$elapsedpause = gmdate("i:s", $elapseds[0]);
+$elapsedpause = gmdate("i:s", $elapsedpause);
 
 
 
