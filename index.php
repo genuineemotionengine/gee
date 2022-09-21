@@ -22,8 +22,7 @@ $duration = gmdate("i:s", $durations[0]);
 //$duration = $durations[0]/60;
 
 
-
-
+echo $duration."<br>";
 
 //$duration = str_replace('.', ':', $duration);
 
