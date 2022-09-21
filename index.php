@@ -19,29 +19,22 @@ echo $durations[0]."<br>";
 
 $duration = gmdate("i:s", $durations[0]);
 
-//$duration = $durations[0]/60;
-
-
-echo $duration."<br>";
-
-//$duration = str_replace('.', ':', $duration);
-
-
-
-
-
+echo $duration."<br><br>";
 
 $elapsed = $status['elapsed'];
 
+echo $elapsed."<br>";
+
+$elapseds = explode(".",$elapsed);
+
+$elapsed = $elapseds[0];
+
+echo $elapsed."<br><br>";
 
 
+$refresh = $duration[0] - $elapsed;
 
-
-
-
-
-
-
+echo $refresh."<br>";
 
 
 
