@@ -45,6 +45,7 @@ if ($realpause == 1){
     $elapsed - 3;
 }
 
+echo $elapsed."<br><br>";
 
 $playpause = $status['state'];
 
