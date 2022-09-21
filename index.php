@@ -21,17 +21,9 @@ $duration = gmdate("i:s", $durations[0]);
 
 //$duration = $durations[0]/60;
 
-echo $duration."<br>";
 
-$duration = number_format($duration, 2);
 
-echo $duration."<br>";
 
-if (duration < 10){
-    $duration = "0".$duration;
-}
-
-echo $duration."<br>";
 
 //$duration = str_replace('.', ':', $duration);
 
