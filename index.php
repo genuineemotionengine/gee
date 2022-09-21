@@ -119,7 +119,7 @@ echo "<div class='row row-cols-2'>\n";
 if ($playpause === pause){
     echo "<div class='col'>".$elapsedpause."</div>";
 }else{
-    echo "<div class='col'><span id='minutes'></span>:<span id='seconds'></span></div>";
+    echo "<div class='col'><span id='minutes'>00</span>:<span id='seconds'>00</span></div>";
 }
 echo "<div class='col'>".$duration."</div>\n";
 echo "</div>\n";
