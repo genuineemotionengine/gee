@@ -32,7 +32,7 @@ $elapsed = $elapseds[0];
 echo $elapsed."<br><br>";
 
 
-$refresh = $duration[0] - $elapsed;
+$refresh = $durations[0] - $elapsed;
 
 echo $refresh."<br>";
 
