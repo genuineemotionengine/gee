@@ -124,7 +124,7 @@ echo "</div>\n";
 echo "<br>\n";
 echo "<h1 class='display-6'>".$title."</h1>\n";
 echo "<h1 class='display-6'>".$artist."</h1>\n";
-if ($artist == $album){
+if ($artist === $album){
 echo "<h1 class='display-6'></h1>\n";
 } else {
 echo "<h1 class='display-6'>".$album."</h1>\n";
@@ -139,7 +139,7 @@ echo "<br><br><br><br><br><br><br><br><br><br>\n";
 echo "<img src='".$image."' /><br>\n";
 echo "<h1 class='display-4'>".$title."</h1>\n";
 echo "<h1 class='display-6'>".$artist."</h1>\n";
-if ($artist == $album){
+if ($artist === $album){
 echo "<h1 class='display-6'></h1>\n";
 } else {
 echo "<h1 class='display-6'>".$album."</h1>\n";
