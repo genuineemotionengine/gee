@@ -13,6 +13,10 @@ $duration = $status['duration'];
 
 echo $duration."<br>";
 
+$durations = explode(".",$duration);
+
+echo $durations[1]."<br>";
+
 $elapsed = $status['elapsed'];
 
 $refresh = $duration - $elapsed;
