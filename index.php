@@ -41,9 +41,9 @@ $elapsedpause = $elapseds[0]-1;
 $elapsedpause = gmdate("i:s", $elapsedpause);
 
 
-//if ($realpause === 1){
-//    $elapsed - 3;
-//}
+if ($realpause === 0){
+    $elapsed - 3;
+}
 
 echo $elapsed."<br><br>";
 
