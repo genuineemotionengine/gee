@@ -84,7 +84,7 @@ $mpd->pause($pause);
     
  
     
-header("Location: http://192.168.68.118?realpause=".$pause."");
+header("Location: http://192.168.68.118");
 
     
 break;

@@ -41,11 +41,7 @@ $elapsedpause = $elapseds[0]-1;
 $elapsedpause = gmdate("i:s", $elapsedpause);
 
 
-if ($realpause == 0){
-    $elapsed - 3;
-}
 
-echo $elapsed."<br><br>";
 
 $playpause = $status['state'];
 
