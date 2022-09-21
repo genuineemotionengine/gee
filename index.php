@@ -17,6 +17,10 @@ $durations = explode(".",$duration);
 
 echo $durations[1]."<br>";
 
+$durationsmil = $durations[1]/1000;
+
+echo $durationsmil."<br>";
+
 $elapsed = $status['elapsed'];
 
 $refresh = $duration - $elapsed;
