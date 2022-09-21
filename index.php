@@ -17,10 +17,6 @@ $durations = explode(".",$duration);
 
 echo $durations[0]."<br>";
 
-$elapsed = $status['elapsed'];
-
-
-
 $duration = $durations[0]/60;
 
 echo $duration."<br>";
@@ -41,24 +37,28 @@ echo $duration."<br>";
 
 
 
-$elapsedpause = $elapsed;
-
-$elapsed = round($elapsed);
-
-$elapsed = number_format($elapsed);
-
-$refresh = $duration - $elapsed;
-
-echo $refresh."<br>";
-
-$elapsedpause = $elapsedpause/60;
 
 
-$elapsedpause = number_format($elapsedpause, 2);
+$elapsed = $status['elapsed'];
 
-if ($elapsedpause < 10){
-    $elapsedpause = "0".$elapsedpause;
-}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 $playpause = $status['state'];
 
