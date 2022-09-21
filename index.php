@@ -11,30 +11,30 @@ $status = $mpd->server_status();
 
 $duration = $status['duration'];
 
-echo $duration."<br>";
+//echo $duration."<br>";
 
 $durations = explode(".",$duration);
 
-echo $durations[0]."<br>";
+//echo $durations[0]."<br>";
 
 $duration = gmdate("i:s", $durations[0]);
 
-echo $duration."<br><br>";
+//echo $duration."<br><br>";
 
 $elapsed = $status['elapsed'];
 
-echo $elapsed."<br>";
+//echo $elapsed."<br>";
 
 $elapseds = explode(".",$elapsed);
 
 $elapsed = $elapseds[0];
 
-echo $elapsed."<br><br>";
+//echo $elapsed."<br><br>";
 
 
 $refresh = $durations[0] - $elapsed;
 
-echo $refresh."<br>";
+//echo $refresh."<br>";
 
 $elapsedpause = $elapseds[0]-1;
 
