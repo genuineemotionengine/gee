@@ -43,8 +43,6 @@ echo $refresh."<br>";
 
 
 
-
-
 $playpause = $status['state'];
 
 $mySimpleArray = $mpd->current_song();
