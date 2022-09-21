@@ -17,7 +17,9 @@ $durations = explode(".",$duration);
 
 echo $durations[0]."<br>";
 
-$duration = $durations[0]/60;
+$duration = gmdate("i:s", $durations[0]);
+
+//$duration = $durations[0]/60;
 
 echo $duration."<br>";
 
@@ -31,9 +33,8 @@ if (duration < 10){
 
 echo $duration."<br>";
 
-$duration = str_replace('.', ':', $duration);
+//$duration = str_replace('.', ':', $duration);
 
-echo $duration."<br>";
 
 
 
