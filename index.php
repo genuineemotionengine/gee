@@ -7,66 +7,26 @@ $mpd = new mpd('localhost', 6600);
     
 $status = $mpd->server_status();
 
-//echo '<pre>'.print_r($status['state']).'</pre>';
-
 $duration = $status['duration'];
-
-//echo $duration."<br>";
 
 $durations = explode(".",$duration);
 
-//echo $durations[0]."<br>";
-
 $duration = gmdate("i:s", $durations[0]);
 
-//echo $duration."<br><br>";
-
 $elapsed = $status['elapsed'];
-
-//echo $elapsed."<br>";
 
 $elapseds = explode(".",$elapsed);
 
 $elapsed = $elapseds[0];
 
-//echo $elapsed."<br><br>";
-
-
 $refresh = $durations[0] - $elapsed;
-
-//echo $refresh."<br>";
 
 $elapsedpause = $elapseds[0]-1;
 
 $elapsedpause = gmdate("i:s", $elapsedpause);
 
-
-
-
 $playpause = $status['state'];
 
-$mySimpleArray = $mpd->current_song();
-    
-    //print_r($mySimpleArray);
-      
-$flacfile = $mySimpleArray[0]['name'];
-
-$album = $mySimpleArray[0]['Album'];
-
-$artist = $mySimpleArray[0]['Artist'];
-
-$title = $mySimpleArray[0]['Title'];
-
-$flacfile = "/mnt/usb/".$flacfile;
-
-$getID3 = new getID3;
-
-$ThisFileInfo = $getID3->analyze($flacfile);
-//echo '<pre>'.htmlentities(print_r($ThisFileInfo['comments']['picture'][0], true), ENT_SUBSTITUTE).'</pre>';
-
-if(isset($ThisFileInfo['comments']['picture'][0])){
-    $image='data:'.$ThisFileInfo['comments']['picture'][0]['image_mime'].';charset=utf-8;base64,'.base64_encode($ThisFileInfo['comments']['picture'][0]['data']);
-}
 
 
 echo "<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Strict//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd'>\n";
@@ -81,19 +41,34 @@ echo "<link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/bootstrap-icons@
 echo "<script src='https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js'></script>\n";
 echo "<script>\n";
 echo "$(document).ready(function(){\n";
+
+echo "setInterval(function(){\n";
+echo "$.getJSON('http://192.168.68.118/api.php?service=1', function(result){\n";
+echo "$('#image').attr('src',result.image);\n";
+echo "$('#imagelg').attr('src',result.image);\n";
+echo "$('#title').text(result.title);\n";
+echo "$('#titlelg').text(result.title);\n";
+echo "$('#artist').text(result.artist);\n";
+echo "$('#artistlg').text(result.artist);\n";
+echo "$('#album').text(result.album);\n";      
+echo "$('#albumlg').text(result.album);\n";
+echo "});\n"; 
+echo "}, 1000);\n";
+
 echo "var sec = ".$elapsed.";\n";
 echo "function pad ( val ) { return val > 9 ? val : '0' + val; }\n";
 echo "setInterval( function(){\n";
 echo "$('#seconds').html(pad(++sec%60));\n";
 echo "$('#minutes').html(pad(parseInt(sec/60,10)));\n";
 echo "}, 1000);\n";  
+
 echo "});\n";
 echo "</script>\n";
 echo "</head>\n";
 echo "<body class='p-3 mb-2 bg-black text-white pt-0 ps-0 pe-0 me-0'>\n";
 echo "<div class='container-fluid text-center ps-0 pe-0'>\n";
 echo "<div class='d-block d-sm-none'>\n";
-echo "<img class='img-fluid' src='".$image."' /><br>\n";
+echo "<img id='image' class='img-fluid' src='black.jpg' /><br>\n";
 echo "<a href='http://192.168.68.118/api.php?service=3'><i class='bi bi-arrow-left-short' style='font-size: 6rem; color: white;'></i></a>&nbsp;&nbsp;";
 if ($play == 1){
     echo "<a href='http://192.168.68.118/api.php?service=2&pause=1'><i class='bi bi-pause' style='font-size: 6rem; color: white;'></i></a>&nbsp;&nbsp;";
@@ -122,13 +97,9 @@ echo "<div class='col'>".$duration."</div>\n";
 echo "</div>\n";
 echo "</div>\n";
 echo "<br>\n";
-echo "<h1 class='display-6'>".$title."</h1>\n";
-echo "<h1 class='display-6'>".$artist."</h1>\n";
-if ($artist == $album){
-echo "<h1 class='display-6'></h1>\n";
-} else {
-echo "<h1 class='display-6'>".$album."</h1>\n";
-}
+echo "<h1 id='title' class='display-6'></h1>\n";
+echo "<h1 id='artist' class='display-6'></h1>\n";
+echo "<h1 id='album' class='display-6'></h1>\n";
 echo "<a href='http://192.168.68.118/api.php?service=5'><i class='bi bi-arrow-repeat' style='font-size: 3rem; color: white;'></i></a>";
 echo "</div>\n";
 echo "</div>\n";
@@ -136,14 +107,10 @@ echo "</div>\n";
 echo "<div class='container text-center'>\n";
 echo "<div class='d-none d-xl-block'>\n";  
 echo "<br><br><br><br><br><br><br><br><br><br>\n";
-echo "<img src='".$image."' /><br>\n";
-echo "<h1 class='display-4'>".$title."</h1>\n";
-echo "<h1 class='display-6'>".$artist."</h1>\n";
-if ($artist == $album){
-echo "<h1 class='display-6'></h1>\n";
-} else {
-echo "<h1 class='display-6'>".$album."</h1>\n";
-}
+echo "<img id='imagelg' src='".$image."' /><br>\n";
+echo "<h1 id='titlelg' class='display-4'></h1>\n";
+echo "<h1 id='artistlg' class='display-6'></h1>\n";
+echo "<h1 id='albumlg' class='display-6'></h1>\n";
 echo "</div>\n";
 
 echo "</body>\n";
