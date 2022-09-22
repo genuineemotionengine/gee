@@ -6,14 +6,14 @@
 <script>
 $(document).ready(function(){
     setInterval(function(){
-        $.getJSON("http://192.168.68.118/api.php", function(result){
+        $.getJSON("http://192.168.68.118/api.php?service=1", function(result){
             $('#image').attr('src',result.image);
             $('#title').text(result.title);
             $('#artist').text(result.artist);
             $('#album').text(result.album);       
         }); 
-    }); 
-}, 1000);
+    }, 1000); 
+});
 </script>
 </head>
 <body>
@@ -22,13 +22,13 @@ $(document).ready(function(){
 
     <div>
         
-        <img id='image' src='' /><br>  
+    <img id='image' src='' /><br>  
     
     <h1 id='title' class='display-4'></h1>
 
-    <span id='artist'><h1 class='display-6'></h1></span>
+    <h1 id='artist' class='display-6'></h1>
 
-    <span id='album'><h1 class='display-6'></h1></span>
+    <h1 id='album' class='display-6'></h1>
         
     </div>
 
