@@ -13,29 +13,18 @@ $statusarray = $mpd->server_status();
     
 $elapsed = $statusarray['elapsed'];
 
-$elapsed = $elapsed/60;
 
-$elapsed = round($elapsed,2);
+$elapseds = explode(".",$elapsed);
 
-$elapsed = number_format($elapsed, 2);
-
-if ($elapsed < 10){
-    $elapsed = "0".$elapsed;
-}
+$elapsed = $elapseds[0];
 
 $duration = $statusarray['duration'];
 
-$durationmilli = $duration*1000;
+$durations = explode(".",$duration);
 
-$duration = $duration/60;
 
-$duration = round($duration,2);
 
-$duration = number_format($duration, 2);
-
-if ($duration < 10){
-    $duration = "0".$duration;
-}
+$refresh = $durations[0] - $elapsed;
 
 
 $mySimpleArray = $mpd->current_song();
@@ -68,8 +57,8 @@ $rows = array(
 'artist' => $artist,
 'album' => $album,
 'elapsed' => $elapsed,
-'duration' => $duration,
-'durationmilli' => $durationmilli       
+'refresh' => $resfresh,
+     
 );
 
 echo json_encode($rows);

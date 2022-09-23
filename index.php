@@ -21,6 +21,8 @@ $elapsed = $elapseds[0];
 
 $refresh = $durations[0] - $elapsed;
 
+//$refresh = $refresh*1000;
+
 $elapsedpause = $elapseds[0]-1;
 
 $elapsedpause = gmdate("i:s", $elapsedpause);
@@ -34,7 +36,7 @@ echo "<html xmlns='http://www.w3.org/1999/xhtml'>\n";
 echo "<head>\n";
 echo "<meta http-equiv='Content-Type' content='text/html; charset=UTF-8'/>\n";
 echo "<meta name = 'viewport' content = 'width=device-width, initial-scale = 1'>\n";
-echo "<meta http-equiv='refresh' content='".$refresh."'>\n";
+//echo "<meta http-equiv='refresh' content='".$refresh."'>\n";
 echo "<title>GEE-Lite</title>\n";
 echo "<link href='https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css' rel='stylesheet' integrity='sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT' crossorigin='anonymous'>\n";
 echo "<link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css'>\n";
@@ -42,7 +44,7 @@ echo "<script src='https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min
 echo "<script>\n";
 echo "$(document).ready(function(){\n";
 
-//echo "setInterval(function(){\n";
+echo "setInterval(function(){\n";
 echo "$.getJSON('http://192.168.68.118/api.php?service=1', function(result){\n";
 echo "$('#image').attr('src',result.image);\n";
 echo "$('#imagelg').attr('src',result.image);\n";
@@ -52,8 +54,9 @@ echo "$('#artist').text(result.artist);\n";
 echo "$('#artistlg').text(result.artist);\n";
 echo "$('#album').text(result.album);\n";      
 echo "$('#albumlg').text(result.album);\n";
+echo "$('#albumlg').text(result.album);\n";
 echo "});\n"; 
-//echo "}, 1000);\n";
+echo "}, text(result.refresh));\n";
 
 echo "var sec = ".$elapsed.";\n";
 echo "function pad ( val ) { return val > 9 ? val : '0' + val; }\n";
