@@ -42,7 +42,7 @@ echo "<script src='https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min
 echo "<script>\n";
 echo "$(document).ready(function(){\n";
 
-echo "setInterval(function(){\n";
+//echo "setInterval(function(){\n";
 echo "$.getJSON('http://192.168.68.118/api.php?service=1', function(result){\n";
 echo "$('#image').attr('src',result.image);\n";
 echo "$('#imagelg').attr('src',result.image);\n";
@@ -53,7 +53,7 @@ echo "$('#artistlg').text(result.artist);\n";
 echo "$('#album').text(result.album);\n";      
 echo "$('#albumlg').text(result.album);\n";
 echo "});\n"; 
-echo "}, 1000);\n";
+//echo "}, 1000);\n";
 
 echo "var sec = ".$elapsed.";\n";
 echo "function pad ( val ) { return val > 9 ? val : '0' + val; }\n";
