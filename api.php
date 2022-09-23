@@ -57,7 +57,7 @@ $rows = array(
 'artist' => $artist,
 'album' => $album,
 'elapsed' => $elapsed,
-'refresh' => $resfresh,
+'refresh' => $refresh,
      
 );
 
