@@ -55,8 +55,9 @@ echo "$('#artistlg').text(result.artist);\n";
 echo "$('#album').text(result.album);\n";      
 echo "$('#albumlg').text(result.album);\n";
 echo "$('#albumlg').text(result.album);\n";
+echo "var refresh = text(result.refresh);\n";
 echo "});\n"; 
-echo "}, text(result.refresh));\n";
+echo "}, refresh));\n";
 
 echo "var sec = ".$elapsed.";\n";
 echo "function pad ( val ) { return val > 9 ? val : '0' + val; }\n";
