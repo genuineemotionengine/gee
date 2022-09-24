@@ -77,7 +77,10 @@ echo "}, 1000);\n";
 echo "});\n";
 echo "</script>\n";
 echo "</head>\n";
-echo "<body class='p-3 mb-2 bg-black text-white pt-0 ps-0 pe-0 me-0'>\n";
+echo "<body class='p-3 mb-2 bg-black text-white pt-0 ps-0 pe-0 me-0'>\n\n";
+
+//*******iPhone portrait**********
+
 echo "<div class='container-fluid text-center ps-0 pe-0'>\n";
 echo "<div class='d-block d-sm-none'>\n";
 echo "<img id='image' class='img-fluid' src='".$image."' />\n";
@@ -115,7 +118,10 @@ echo "<h1 id='artist' class='display-6'>".$artist."</h1>\n";
 echo "<h1 id='album' class='display-6'>".$album."</h1>\n";
 echo "<a href='http://192.168.68.118/api.php?service=5'><i class='bi bi-arrow-repeat' style='font-size: 3rem; color: white;'></i></a>\n";
 echo "</div>\n";
-echo "</div>\n";
+echo "</div>\n\n";
+//**********************
+
+//***********dekstop************
 
 echo "<div class='container text-center'>\n";
 echo "<div class='d-none d-xl-block'>\n";  
@@ -126,6 +132,9 @@ echo "<h1 id='titlelg' class='display-4'>".$title."</h1>\n";
 echo "<h1 id='artistlg' class='display-6'>".$artist."</h1>\n";
 echo "<h1 id='albumlg' class='display-6'>".$album."</h1>\n";
 echo "</div>\n";
+echo "</div>\n\n";
+
+//*************************
 
 echo "</body>\n";
 echo "</html>\n";
