@@ -125,7 +125,7 @@ echo "</div>\n\n";
 
 
 echo "<div class='container-fluid text-center ps-0 pe-0'>\n";
-echo "<div class='.d-none .d-sm-block .d-md-none'>\n";
+echo "<div class='d-none d-sm-block d-md-none'>\n";
 
 
 echo "<div class='row row-cols-2'>\n";
