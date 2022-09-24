@@ -81,23 +81,23 @@ echo "<body class='p-3 mb-2 bg-black text-white pt-0 ps-0 pe-0 me-0'>\n";
 echo "<div class='container-fluid text-center ps-0 pe-0'>\n";
 echo "<div class='d-block d-sm-none'>\n";
 echo "<img id='image' class='img-fluid' src='".$image."'><br>\n";
-echo "<a href='http://192.168.68.118/api.php?service=3'><i class='bi bi-arrow-left-short' style='font-size: 6rem; color: white;'></i></a>&nbsp;&nbsp;";
+echo "<a href='http://192.168.68.118/api.php?service=3'><i class='bi bi-arrow-left-short' style='font-size: 6rem; color: white;'></i></a>&nbsp;&nbsp;\n";
 if ($play == 1){
-    echo "<a href='http://192.168.68.118/api.php?service=2&pause=1'><i class='bi bi-pause' style='font-size: 6rem; color: white;'></i></a>&nbsp;&nbsp;";
+    echo "<a href='http://192.168.68.118/api.php?service=2&pause=1'><i class='bi bi-pause' style='font-size: 6rem; color: white;'></i></a>&nbsp;&nbsp;\n";
     
 }
 if ($play == 2){
-    echo "<a href='http://192.168.68.118/api.php?service=2&pause=0'><i class='bi bi-caret-right' style='font-size: 6rem; color: white;'></i></a>&nbsp;&nbsp;";
+    echo "<a href='http://192.168.68.118/api.php?service=2&pause=0'><i class='bi bi-caret-right' style='font-size: 6rem; color: white;'></i></a>&nbsp;&nbsp;\n";
     
 }
 if ($playpause === play){
-    echo "<a href='http://192.168.68.118/api.php?service=2&pause=1'><i class='bi bi-pause' style='font-size: 6rem; color: white;'></i></a>&nbsp;&nbsp;";
+    echo "<a href='http://192.168.68.118/api.php?service=2&pause=1'><i class='bi bi-pause' style='font-size: 6rem; color: white;'></i></a>&nbsp;&nbsp;\n";
     
 }
 if ($playpause === pause){
-    echo "<a href='http://192.168.68.118/api.php?service=2&pause=0'><i class='bi bi-caret-right' style='font-size: 6rem; color: white;'></i></a>&nbsp;&nbsp;";
+    echo "<a href='http://192.168.68.118/api.php?service=2&pause=0'><i class='bi bi-caret-right' style='font-size: 6rem; color: white;'></i></a>&nbsp;&nbsp;\n";
 }
-echo "<a href='http://192.168.68.118/api.php?service=4'><i class='bi bi-arrow-right-short' style='font-size: 6rem; color: white;'></i></a><br>";
+echo "<a href='http://192.168.68.118/api.php?service=4'><i class='bi bi-arrow-right-short' style='font-size: 6rem; color: white;'></i></a><br>\n";
 echo "<div class='container text-center'>\n";
 echo "<div class='row row-cols-2'>\n";
 if ($playpause === pause){
