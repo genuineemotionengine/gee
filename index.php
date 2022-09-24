@@ -193,6 +193,8 @@ echo "<a href='http://192.168.68.118/api.php?service=5'><i class='bi bi-arrow-re
 
 /////////////////
 echo "</div>\n";
+echo "</div>\n";
+echo "</div>\n";
 echo "</div>\n\n";
 
 
