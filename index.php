@@ -129,7 +129,9 @@ echo "<div class='d-none d-sm-block d-md-none'>\n";
 
 
 echo "<div class='row row-cols-2'>\n";
-echo "<div class='col'><img id='image' class='img-fluid' src='".$image."' /></div>\n";
+echo "<div class='col'>\n";
+echo "<img id='image' class='img-fluid' src='".$image."' />\n";
+echo "</div>\n";
 echo "<div class='col'>\n";
 ///////////////////
 
