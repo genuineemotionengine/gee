@@ -165,7 +165,7 @@ echo "</div>\n";
 echo "</div>\n";
 
 
-echo "<br>\n";
+
 echo "<h1 id='title' class='display-6'>".$title."</h1>\n";
 echo "<h1 id='artist' class='display-6'>".$artist."</h1>\n";
 echo "<h1 id='album' class='display-6'>".$album."</h1>\n";
