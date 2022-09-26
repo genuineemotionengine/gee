@@ -83,12 +83,14 @@ echo "var currentpos = (current/duration)*100;\n";
 echo "var currentprogress = currentpos.toFixed(0);\n";
 //echo "alert(currentprogress);\n";
 
+echo "$('#dynamic').css('width', currentprogress + '%';\n";
+
 echo "function pad ( val ) { return val > 9 ? val : '0' + val; }\n";
 echo "setInterval( function(){\n";
 echo "$('#seconds').html(pad(++sec%60));\n";
 echo "$('#minutes').html(pad(parseInt(sec/60,10)));\n";
 
-echo "$('#dynamic').css('width', currentprogress + '%';\n";
+
 
 echo "}, 1000);\n";  
 
