@@ -111,7 +111,7 @@ if ($playpause === pause){
 }else{
     echo "<div class='col text-start'><span id='minutes'>00</span>:<span id='seconds'>00</span></div>\n";
 }
-echo "<div class='col'>\n";
+echo "<div class='col-6'>\n";
 echo "<div class='progress border'>\n";
 echo "<div class='progress-bar bg-white' style='width:60%'></div>\n";
 echo "</div>\n";
