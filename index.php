@@ -104,7 +104,7 @@ if ($playpause === pause){
     echo "<a href='http://192.168.68.118/api.php?service=2&pause=0'><i class='bi bi-caret-right' style='font-size: 6rem; color: white;'></i></a>&nbsp;&nbsp;\n";
 }
 echo "<a href='http://192.168.68.118/api.php?service=4'><i class='bi bi-arrow-right-short' style='font-size: 6rem; color: white;'></i></a><br>\n";
-echo "<div class='container'>\n";
+echo "<div class='container pt-0 mt-0'>\n";
 echo "<div class='row row-cols-3'>\n";
 if ($playpause === pause){
     echo "<div class='col-2 text-center'>".$elapsedpause."</div>\n";
@@ -112,7 +112,7 @@ if ($playpause === pause){
     echo "<div class='col-2 text-center'><span id='minutes'>00</span>:<span id='seconds'>00</span></div>\n";
 }
 echo "<div class='col-8'>\n";
-echo "<div class='progress bg-black pt-5' style='height: 5px;'>\n";
+echo "<div class='progress bg-black' style='height: 5px;'>\n";
 echo "<div class='progress-bar bg-white' style='width:60%;height: 5px;'></div>\n";
 echo "</div>\n";
 echo "</div>\n";
