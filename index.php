@@ -74,11 +74,11 @@ echo "$(document).ready(function(){\n";
 echo "var duration = ".$progduration.";\n";
 echo "var current = ".$elapsed.";\n";
 echo "setInterval( function(){\n";
-echo "current = current + 0.01;\n";
+echo "current = current + 0.001;\n";
 echo "var currentpos = (current/duration)*100;\n";
-echo "var currentprogress = currentpos.toFixed(2);\n";
+echo "var currentprogress = currentpos.toFixed(0);\n";
 echo "$('#dynamic').css('width', currentprogress + '%');\n";
-echo "}, 10);\n"; 
+echo "}, 1);\n"; 
 
 
 echo "var sec = ".$elapsed.";\n";
