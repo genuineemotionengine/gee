@@ -70,7 +70,7 @@ echo "<script>\n";
 echo "$(document).ready(function(){\n";
 
 echo "var sec = ".$elapsed.";\n";
-echo "var duration = ".$duration.";\n";
+echo "var duration = ".$durations.";\n";
 echo "var current = ".$elapsed.";\n";
 echo "function pad ( val ) { return val > 9 ? val : '0' + val; }\n";
 echo "setInterval( function(){\n";
