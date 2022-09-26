@@ -11,6 +11,8 @@ $duration = $status['duration'];
 
 $durations = explode(".",$duration);
 
+$progduration = $durations[0];
+
 $duration = gmdate("i:s", $durations[0]);
 
 $elapsed = $status['elapsed'];
@@ -70,14 +72,22 @@ echo "<script>\n";
 echo "$(document).ready(function(){\n";
 
 echo "var sec = ".$elapsed.";\n";
-echo "var duration = ".$durations.";\n";
+echo "var duration = ".$progduration.";\n";
 echo "var current = ".$elapsed.";\n";
+
+echo "const duration = parseFloat(duration);\n";
+echo "const current = parseFloat(current);\n";
+
+echo "const currentpos = (current/duration)*100;\n";
+
+echo "const currentprogress = currentpos.toFixed(2);\n";
+
 echo "function pad ( val ) { return val > 9 ? val : '0' + val; }\n";
 echo "setInterval( function(){\n";
 echo "$('#seconds').html(pad(++sec%60));\n";
 echo "$('#minutes').html(pad(parseInt(sec/60,10)));\n";
 
-echo "$('#dynamic').css('width', ((current/duration)*100)) + '%';\n";
+echo "$('#dynamic').css('width', currentprogress + '%';\n";
 
 echo "}, 1000);\n";  
 
