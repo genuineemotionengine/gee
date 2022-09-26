@@ -76,15 +76,19 @@ echo "var duration = ".$progduration.";\n";
 
 echo "var current = ".$elapsed.";\n";
 
+echo "setInterval( function(){\n";
+echo "curent = current + 1;\n";
 echo "var currentpos = (current/duration)*100;\n";
 
 echo "var currentprogress = currentpos.toFixed(0);\n";
 
-echo "alert(currentprogress);\n";
+//echo "alert(currentprogress);\n";
 
 //echo "function(){\n";
-//echo "$('#dynamic').css('width', currentprogress + '%');\n";
+echo "$('#dynamic').style('width', currentprogress + '%');\n";
 //echo "};\n";
+echo "}, 1000);\n"; 
+
 
 echo "var sec = ".$elapsed.";\n";
 echo "function pad ( val ) { return val > 9 ? val : '0' + val; }\n";
