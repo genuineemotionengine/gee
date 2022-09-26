@@ -118,9 +118,10 @@ echo "<div class='progress-bar bg-white' style='width:60%;height: 5px;'></div>\n
 echo "</div>\n";
 echo "</div>\n";
 echo "</div>\n";
-echo "<div class='col-2 text-center' style='background:red;'>".$duration."</div>\n";
+echo "<div class='col-2 text-center'>".$duration."</div>\n";
 echo "</div>\n";
 echo "</div>\n";
+echo "<br/>\n";
 echo "<h1 id='title' class='display-6'>".$title."</h1>\n";
 echo "<h1 id='artist' class='display-6'>".$artist."</h1>\n";
 echo "<h1 id='album' class='display-6'>".$album."</h1>\n";
