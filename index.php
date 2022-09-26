@@ -75,12 +75,12 @@ echo "var sec = ".$elapsed.";\n";
 echo "var duration = ".$progduration.";\n";
 echo "var current = ".$elapsed.";\n";
 
-echo "const duration = parseFloat(duration);\n";
-echo "const current = parseFloat(current);\n";
+//echo "const duration = parseFloat(duration);\n";
+//echo "const current = parseFloat(current);\n";
 
-echo "const currentpos = (current/duration)*100;\n";
+echo "var currentpos = (current/duration)*100;\n";
 
-echo "const currentprogress = currentpos.toFixed(2);\n";
+echo "var currentprogress = currentpos.toFixed(2);\n";
 
 echo "function pad ( val ) { return val > 9 ? val : '0' + val; }\n";
 echo "setInterval( function(){\n";
