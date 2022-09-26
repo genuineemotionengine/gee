@@ -73,17 +73,18 @@ echo "$(document).ready(function(){\n";
 
 
 echo "var duration = ".$progduration.";\n";
+
 echo "var current = ".$elapsed.";\n";
 
-//echo "const duration = parseFloat(duration);\n";
-//echo "const current = parseFloat(current);\n";
-
 echo "var currentpos = (current/duration)*100;\n";
-//echo "alert(currentpos);\n";
+
 echo "var currentprogress = currentpos.toFixed(0);\n";
+
 echo "alert(currentprogress);\n";
 
-//echo "$('#dynamic').css('width', currentprogress + '%';\n";
+echo "function(){\n";
+echo "$('#dynamic').css('width', currentprogress + '%');\n";
+echo "});\n";
 
 echo "var sec = ".$elapsed.";\n";
 echo "function pad ( val ) { return val > 9 ? val : '0' + val; }\n";
