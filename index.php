@@ -116,7 +116,7 @@ echo "<div class='progress bg-black' style='height: 5px;'>\n";
 echo "<div class='progress-bar bg-white' style='width:60%;height: 5px;'></div>\n";
 echo "</div>\n";
 echo "</div>\n";
-echo "<div class='col-2 text-center bg-red'>".$duration."</div>\n";
+echo "<div class='col-2 text-center' style='background:red;'>".$duration."</div>\n";
 echo "</div>\n";
 echo "</div>\n";
 echo "<h1 id='title' class='display-6'>".$title."</h1>\n";
