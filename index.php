@@ -104,14 +104,19 @@ if ($playpause === pause){
     echo "<a href='http://192.168.68.118/api.php?service=2&pause=0'><i class='bi bi-caret-right' style='font-size: 6rem; color: white;'></i></a>&nbsp;&nbsp;\n";
 }
 echo "<a href='http://192.168.68.118/api.php?service=4'><i class='bi bi-arrow-right-short' style='font-size: 6rem; color: white;'></i></a><br>\n";
-echo "<div class='container text-center'>\n";
-echo "<div class='row row-cols-2'>\n";
+echo "<div class='container'>\n";
+echo "<div class='row row-cols-3'>\n";
 if ($playpause === pause){
-    echo "<div class='col'>".$elapsedpause."</div>\n";
+    echo "<div class='col text-start'>".$elapsedpause."</div>\n";
 }else{
-    echo "<div class='col'><span id='minutes'>00</span>:<span id='seconds'>00</span></div>\n";
+    echo "<div class='col text-start'><span id='minutes'>00</span>:<span id='seconds'>00</span></div>\n";
 }
-echo "<div class='col'>".$duration."</div>\n";
+echo "<div class='col'>\n";
+echo "<div class='progress border'>\n";
+echo "<div class='progress-bar bg-white' style='width:60%'></div>\n";
+echo "</div>\n";
+echo "</div>\n";
+echo "<div class='col text-start'>".$duration."</div>\n";
 echo "</div>\n";
 echo "</div>\n";
 echo "<br>\n";
