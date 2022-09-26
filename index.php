@@ -77,7 +77,7 @@ echo "var duration = ".$progduration.";\n";
 echo "var current = ".$elapsed.";\n";
 
 echo "setInterval( function(){\n";
-echo "curent = current + 1;\n";
+echo "current = current + 1;\n";
 echo "var currentpos = (current/duration)*100;\n";
 
 echo "var currentprogress = currentpos.toFixed(0);\n";
@@ -85,7 +85,7 @@ echo "var currentprogress = currentpos.toFixed(0);\n";
 //echo "alert(currentprogress);\n";
 
 //echo "function(){\n";
-echo "$('#dynamic').style('width', currentprogress + '%');\n";
+echo "$('#dynamic').css('width', currentprogress + '%');\n";
 //echo "};\n";
 echo "}, 1000);\n"; 
 
@@ -135,7 +135,7 @@ if ($playpause === pause){
 echo "<div class='col-8'>\n";
 echo "<div class='mt-2'>\n";
 echo "<div class='progress bg-black' style='height: 5px;'>\n";
-echo "<div id='dynamic' class='progress-bar bg-white' style='width: 0%;'></div>\n";
+echo "<div id='dynamic' class='progress-bar bg-white' style='width: 10%;'></div>\n";
 echo "</div>\n";
 echo "</div>\n";
 echo "</div>\n";
