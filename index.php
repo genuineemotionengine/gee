@@ -70,10 +70,13 @@ echo "<script>\n";
 echo "$(document).ready(function(){\n";
 
 echo "var sec = ".$elapsed.";\n";
+echo "var duration = ".$duration.";\n";
+echo "var current = ".$elpased.";\n";
 echo "function pad ( val ) { return val > 9 ? val : '0' + val; }\n";
 echo "setInterval( function(){\n";
 echo "$('#seconds').html(pad(++sec%60));\n";
 echo "$('#minutes').html(pad(parseInt(sec/60,10)));\n";
+echo "$('#dynamic').css('width', (parseInt((current/duration)*100)))) + '%';\n";
 echo "}, 1000);\n";  
 
 echo "});\n";
@@ -114,7 +117,7 @@ if ($playpause === pause){
 echo "<div class='col-8'>\n";
 echo "<div class='mt-2'>\n";
 echo "<div class='progress bg-black' style='height: 5px;'>\n";
-echo "<div class='progress-bar bg-white' style='width:100%;height: 5px;'></div>\n";
+echo "<div id='dynamic' class='progress-bar bg-white' style='width:0%;height: 5px;'></div>\n";
 echo "</div>\n";
 echo "</div>\n";
 echo "</div>\n";
