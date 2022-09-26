@@ -76,7 +76,7 @@ echo "function pad ( val ) { return val > 9 ? val : '0' + val; }\n";
 echo "setInterval( function(){\n";
 echo "$('#seconds').html(pad(++sec%60));\n";
 echo "$('#minutes').html(pad(parseInt(sec/60,10)));\n";
-echo "$('#dynamic').css('width', (parseInt((current/duration)*100)))) + '%';\n";
+echo "$('#dynamic').css('width', ((current/duration)*100))) + '%';\n";
 echo "}, 1000);\n";  
 
 echo "});\n";
