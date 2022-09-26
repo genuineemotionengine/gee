@@ -82,9 +82,9 @@ echo "var currentprogress = currentpos.toFixed(0);\n";
 
 echo "alert(currentprogress);\n";
 
-echo "function(){\n";
-echo "$('#dynamic').css('width', currentprogress + '%');\n";
-echo "});\n";
+//echo "function(){\n";
+//echo "$('#dynamic').css('width', currentprogress + '%');\n";
+//echo "});\n";
 
 echo "var sec = ".$elapsed.";\n";
 echo "function pad ( val ) { return val > 9 ? val : '0' + val; }\n";
