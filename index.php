@@ -113,7 +113,7 @@ if ($playpause === pause){
 }
 echo "<div class='col-8'>\n";
 echo "<div class='progress style='height: 3px;'>\n";
-echo "<div class='progress-bar bg-white' style='width:60%'></div>\n";
+echo "<div class='progress-bar bg-white' style='width:60%;height: 3px;'></div>\n";
 echo "</div>\n";
 echo "</div>\n";
 echo "<div class='col-2 text-center'>".$duration."</div>\n";
