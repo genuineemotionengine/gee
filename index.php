@@ -80,7 +80,7 @@ echo "var current = ".$elapsed.";\n";
 
 echo "var currentpos = (current/duration)*100;\n";
 echo "alert (currentpos);\n";
-echo "var currentprogress = currentpos.toFixed(2);\n";
+echo "var currentprogress = currentpos.toFixed(0);\n";
 
 echo "function pad ( val ) { return val > 9 ? val : '0' + val; }\n";
 echo "setInterval( function(){\n";
