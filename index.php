@@ -107,16 +107,16 @@ echo "<a href='http://192.168.68.118/api.php?service=4'><i class='bi bi-arrow-ri
 echo "<div class='container'>\n";
 echo "<div class='row row-cols-3'>\n";
 if ($playpause === pause){
-    echo "<div class='col-1.5 text-start'>".$elapsedpause."</div>\n";
+    echo "<div class='col-2 text-center'>".$elapsedpause."</div>\n";
 }else{
-    echo "<div class='col-1.5 text-start'><span id='minutes'>00</span>:<span id='seconds'>00</span></div>\n";
+    echo "<div class='col-2 text-center'><span id='minutes'>00</span>:<span id='seconds'>00</span></div>\n";
 }
-echo "<div class='col-6'>\n";
+echo "<div class='col-7'>\n";
 echo "<div class='progress border'>\n";
 echo "<div class='progress-bar bg-white' style='width:60%'></div>\n";
 echo "</div>\n";
 echo "</div>\n";
-echo "<div class='col-2 text-end'>".$duration."</div>\n";
+echo "<div class='col-2 text-center'>".$duration."</div>\n";
 echo "</div>\n";
 echo "</div>\n";
 echo "<h1 id='title' class='display-6'>".$title."</h1>\n";
