@@ -76,7 +76,7 @@ echo "var current = ".$elapsed.";\n";
 echo "setInterval( function(){\n";
 echo "current = current + 0.01;\n";
 echo "var currentpos = (current/duration)*100;\n";
-echo "var currentprogress = currentpos.toFixed(2);\n";
+echo "var currentprogress = currentpos.toFixed(0);\n";
 echo "$('#dynamic').css('width', currentprogress + '%');\n";
 echo "}, 10);\n"; 
 
