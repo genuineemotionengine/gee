@@ -228,7 +228,7 @@ echo "</div>\n\n";
 
 echo "<div class='container text-center'>\n";
 echo "<div class='d-none d-xl-block'>\n";  
-echo "<br><br><br><br><br><br><br><br><br><br>\n";
+echo "<br><br><br><br><br><br><br>\n";
 echo "<img id='imagelg' src='".$image."' />\n";
 echo "<br>\n";
 echo "<h1 id='titlelg' class='display-4'>".$title."</h1>\n";
