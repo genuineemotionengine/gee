@@ -147,7 +147,7 @@ echo "</div>\n\n";
 
 
 echo "<div class='container-fluid text-center ps-0 pe-0'>\n";
-echo "<div class='d-block d-sm-none'>\n";
+echo "<div class='d-none d-md-block d-lg-none'>\n";
 echo "<img id='image' class='img-fluid' src='".$image."' />\n";
 echo "<br/>\n";
 echo "<a href='http://192.168.68.118/api.php?service=3'><i class='bi bi-arrow-left-short' style='font-size: 6rem; color: white;'></i></a>&nbsp;&nbsp;\n";
