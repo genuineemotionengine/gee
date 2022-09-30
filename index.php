@@ -142,11 +142,11 @@ echo "</div>\n";
 echo "</div>\n\n";
 //**********************
 
-//*******iPhone landscape**********
+//*******iPad lanscape**********
 
 
 echo "<div class='container-fluid text-center ps-0 pe-0'>\n";
-echo "<div class='d-none d-sm-block d-md-none'>\n";
+echo "<div class='d-none d-md-block d-lg-none'>\n";
 
 
 echo "<div class='row row-cols-2'>\n";
