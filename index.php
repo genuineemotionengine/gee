@@ -142,7 +142,7 @@ echo "</div>\n";
 echo "</div>\n\n";
 //**********************
 
-//*******iPad lanscape**********
+//*******iPad portait**********
 
 
 echo "<div class='container-fluid text-center ps-0 pe-0'>\n";
@@ -194,6 +194,61 @@ echo "</div>\n";
 echo "</div>\n\n";
 
 //**********************
+
+//*******iPad lanscape**********
+
+
+echo "<div class='container-fluid text-center ps-0 pe-0'>\n";
+echo "<div class='d-none d-lg-block d-xl-none'>\n";
+
+
+echo "<div class='row row-cols-2'>\n";
+echo "<div class='col'>\n";
+echo "<img id='image' class='img-fluid' src='".$image."' />\n";
+echo "</div>\n";
+echo "<div class='col'>\n";
+
+echo "<a href='http://192.168.68.118/api.php?service=3'><i class='bi bi-arrow-left-short' style='font-size: 6rem; color: white;'></i></a>&nbsp;&nbsp;\n";
+if ($play == 1){
+    echo "<a href='http://192.168.68.118/api.php?service=2&pause=1'><i class='bi bi-pause' style='font-size: 6rem; color: white;'></i></a>&nbsp;&nbsp;\n";
+    
+}
+if ($play == 2){
+    echo "<a href='http://192.168.68.118/api.php?service=2&pause=0'><i class='bi bi-caret-right' style='font-size: 6rem; color: white;'></i></a>&nbsp;&nbsp;\n";
+    
+}
+if ($playpause === play){
+    echo "<a href='http://192.168.68.118/api.php?service=2&pause=1'><i class='bi bi-pause' style='font-size: 6rem; color: white;'></i></a>&nbsp;&nbsp;\n";
+    
+}
+if ($playpause === pause){
+    echo "<a href='http://192.168.68.118/api.php?service=2&pause=0'><i class='bi bi-caret-right' style='font-size: 6rem; color: white;'></i></a>&nbsp;&nbsp;\n";
+}
+echo "<a href='http://192.168.68.118/api.php?service=4'><i class='bi bi-arrow-right-short' style='font-size: 6rem; color: white;'></i></a><br>\n";
+echo "<div class='container text-center'>\n";
+echo "<div class='row row-cols-2'>\n";
+if ($playpause === pause){
+    echo "<div class='col'>".$elapsedpause."</div>\n";
+}else{
+    echo "<div class='col'><span id='minutes'>00</span>:<span id='seconds'>00</span></div>\n";
+}
+echo "<div class='col'>".$duration."</div>\n";
+echo "</div>\n";
+echo "</div>\n";
+
+echo "<h1 id='title' class='display-6'>".$title."</h1>\n";
+echo "<h1 id='artist' class='display-6'>".$artist."</h1>\n";
+echo "<h1 id='album' class='display-6'>".$album."</h1>\n";
+echo "<a href='http://192.168.68.118/api.php?service=5'><i class='bi bi-arrow-repeat' style='font-size: 3rem; color: white;'></i></a>\n";
+
+echo "</div>\n";
+echo "</div>\n";
+echo "</div>\n";
+echo "</div>\n\n";
+
+//**********************
+
+
 
 //***********dekstop************
 
