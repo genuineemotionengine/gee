@@ -121,11 +121,11 @@ case "6": //***************** get ip address **********************
     
 $ipaddr = $_SERVER['SERVER_ADDR'];
     
-echo $ipaddr."br";
+echo $ipaddr."<br>";
 
 $hosty = gethostname();
 
-echo $hosty."br";
+echo $hosty."<br>";
 
     
 break;
