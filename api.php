@@ -115,6 +115,14 @@ header("Location: http://192.168.68.118");
     
 break;
 
+case "6": //***************** get ip address **********************
+    
+$ipaddr = $_SERVER['SERVER_ADDR'];
+    
+echo $ipaddr;
+    
+break;
+
 default: //***************** Nothing **********************
     
     echo "...nothing";
