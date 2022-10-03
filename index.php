@@ -1,6 +1,7 @@
 <?php
 parse_str($_SERVER['QUERY_STRING']);
 $ipaddr = $_SERVER['SERVER_ADDR'];
+$hosty = gethostname();
 require('mpd.class.php');
 require_once('getid3.php');
 
@@ -65,7 +66,7 @@ echo "<meta name = 'viewport' content = 'width=device-width, initial-scale = 1'/
 if ($refresh){
 echo "<meta http-equiv='refresh' content='".$refresh."'/>\n";
 }
-echo "<title>GEE-Lite</title>\n";
+echo "<title>".$hosty."</title>\n";
 echo "<link href='https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css' rel='stylesheet' integrity='sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT' crossorigin='anonymous'/>\n";
 echo "<link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css'/>\n";
 echo "<script src='https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js'></script>\n";
