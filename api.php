@@ -1,6 +1,7 @@
 <?php
 parse_str($_SERVER['QUERY_STRING']);
 $ipaddr = $_SERVER['SERVER_ADDR'];
+
 require('mpd.class.php');
 require_once('getid3.php');
 
@@ -120,7 +121,12 @@ case "6": //***************** get ip address **********************
     
 $ipaddr = $_SERVER['SERVER_ADDR'];
     
-echo $ipaddr;
+echo $ipaddr."br";
+
+$hosty = gethostname();
+
+echo $hosty."br";
+
     
 break;
 
