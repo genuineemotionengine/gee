@@ -1,5 +1,6 @@
 <?php
 parse_str($_SERVER['QUERY_STRING']);
+$ipaddr = $_SERVER['SERVER_ADDR'];
 require('mpd.class.php');
 require_once('getid3.php');
 
@@ -73,7 +74,7 @@ $mpd->pause($pause);
     
  
     
-header("Location: http://192.168.68.118");
+header("Location: http://". $ipaddr ."");
 
     
 break;
@@ -84,7 +85,7 @@ $mpd->prev();
     
  
     
-header("Location: http://192.168.68.118");
+header("Location: http://". $ipaddr ."");
     
 break;
 
@@ -94,7 +95,7 @@ $mpd->next();
     
  
     
-header("Location: http://192.168.68.118");
+header("Location: http://". $ipaddr ."");
     
 break;
 
@@ -111,7 +112,7 @@ $mpd->playlist_shuffle();
 $mpd->play(0);
  
     
-header("Location: http://192.168.68.118");
+header("Location: http://". $ipaddr ."");
     
 break;
 
