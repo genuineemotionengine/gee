@@ -279,17 +279,17 @@ echo "<h1 id='album' class='display-6'>".$album."</h1>\n";
 echo "<div class='row row-cols-3'>\n";
 
 echo "<div>\n";
-echo "<a href='http://". $ipaddr ."/api.php?service=5'><i class='bi bi-arrow-repeat' style='font-size: 3rem; color: white;'></i></a>\n";
+echo "<a href='http://". $ipaddr ."/api.php?service=5&playl=1'><i class='bi bi-arrow-repeat' style='font-size: 3rem; color: white;'></i></a>\n";
 echo "<h5>All Music</h5>\n";
 echo "</div>\n";
 
 echo "<div>\n";
-echo "<a href='http://". $ipaddr ."/api.php?service=5'><i class='bi bi-arrow-repeat' style='font-size: 3rem; color: white;'></i></a>\n";
+echo "<a href='http://". $ipaddr ."/api.php?service=5&playl=2'><i class='bi bi-arrow-repeat' style='font-size: 3rem; color: white;'></i></a>\n";
 echo "<h5>Classical</h5>\n";
 echo "</div>\n";
 
 echo "<div>\n";
-echo "<a href='http://". $ipaddr ."/api.php?service=5'><i class='bi bi-arrow-repeat' style='font-size: 3rem; color: white;'></i></a>\n";
+echo "<a href='http://". $ipaddr ."/api.php?service=5&playl=3'><i class='bi bi-arrow-repeat' style='font-size: 3rem; color: white;'></i></a>\n";
 echo "<h5>Relaxation</h5>\n";
 echo "</div>\n";
 

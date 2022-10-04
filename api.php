@@ -103,8 +103,26 @@ break;
 case "5": //***************** Restart Playlist **********************
     
 $mpd->playlist_clear();
+    
+if ($playl == 1){    
 
-$playlist = "allmusic";   
+$playlist = "allmusic";
+
+}
+
+if ($playl == 2){    
+
+$playlist = "classical";
+
+}
+
+
+if ($playl == 3){    
+
+$playlist = "relaxation";
+
+}
+
     
 $mpd->load_playlist($playlist);
 
