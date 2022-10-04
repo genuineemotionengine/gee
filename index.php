@@ -197,10 +197,10 @@ echo "<br/>\n";
 
 echo "<a href='http://". $ipaddr ."/api.php?service=5'><i class='bi bi-arrow-repeat' style='font-size: 3rem; color: white;'></i></a>\n";
 echo "<h5>All Music</h5>\n";
-
+echo "<br/>\n";
 echo "<a href='http://". $ipaddr ."/api.php?service=5'><i class='bi bi-arrow-repeat' style='font-size: 3rem; color: white;'></i></a>\n";
 echo "<h5>Classical</h5>\n";
-
+echo "<br/>\n";
 echo "<a href='http://". $ipaddr ."/api.php?service=5'><i class='bi bi-arrow-repeat' style='font-size: 3rem; color: white;'></i></a>\n";
 echo "<h5>Relaxation</h5>\n";
 
