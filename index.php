@@ -193,10 +193,16 @@ echo "<br/>\n";
 echo "<h1 id='title' class='display-6'>".$title."</h1>\n";
 echo "<h1 id='artist' class='display-6'>".$artist."</h1>\n";
 echo "<h1 id='album' class='display-6'>".$album."</h1>\n";
+echo "<br/>\n";
 
 echo "<a href='http://". $ipaddr ."/api.php?service=5'><i class='bi bi-arrow-repeat' style='font-size: 3rem; color: white;'></i></a>\n";
-echo "<h4>All Music</h4>\n";
+echo "<h5>All Music</h5>\n";
 
+echo "<a href='http://". $ipaddr ."/api.php?service=5'><i class='bi bi-arrow-repeat' style='font-size: 3rem; color: white;'></i></a>\n";
+echo "<h5>Classical</h5>\n";
+
+echo "<a href='http://". $ipaddr ."/api.php?service=5'><i class='bi bi-arrow-repeat' style='font-size: 3rem; color: white;'></i></a>\n";
+echo "<h5>Relaxation</h5>\n";
 
 echo "</div>\n";
 echo "</div>\n\n";
