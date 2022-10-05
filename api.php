@@ -54,12 +54,12 @@ if(isset($ThisFileInfo['comments']['picture'][0])){
 
 $rows = array(
 
-'image' => $image,
-'title' => $title,
-'artist' => $artist,
-'album' => $album,
-'elapsed' => $elapsed,
-'refresh' => $refresh
+'image' => $image
+//'title' => $title,
+//'artist' => $artist,
+//'album' => $album,
+//'elapsed' => $elapsed,
+//'refresh' => $refresh
      
 );
 

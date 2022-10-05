@@ -82,6 +82,21 @@ echo "var currentprogress = currentpos.toFixed(0);\n";
 echo "$('#dynamic').css('width', currentprogress + '%');\n";
 echo "$('#dynamicipad').css('width', currentprogress + '%');\n";
 echo "$('#dynamicipadl').css('width', currentprogress + '%');\n";
+echo "if (current = duration){;\n";
+echo "$.getJSON('http://". $ipaddr ."/api.php?service=1', function(result){\n";
+echo "$('#image').attr('src',result.image);\n";
+//echo "$('#imagelg').attr('src',result.image);\n";
+//echo "$('#title').text(result.title);\n";
+//echo "$('#titlelg').text(result.title);\n";
+//echo "$('#artist').text(result.artist);\n";
+//echo "$('#artistlg').text(result.artist);\n";
+//echo "$('#album').text(result.album);\n";       
+//echo "$('#albumlg').text(result.album);\n";
+//echo "$('#elapsed').text(result.elapsed);\n";
+//echo "$('#duration').text(result.duration);\n";
+echo "});\n";
+echo "}\n";
+
 echo "}, 100);\n"; 
 
 
@@ -94,7 +109,11 @@ echo "$('#secondsipad').html(pad(++sec%60));\n";
 echo "$('#minutesipad').html(pad(parseInt(sec/60,10)));\n";
 echo "$('#secondsipadl').html(pad(++sec%60));\n";
 echo "$('#minutesipadl').html(pad(parseInt(sec/60,10)));\n";
-echo "}, 1000);\n";  
+echo "}, 1000);\n"; 
+
+
+
+
 
 echo "});\n";
 echo "</script>\n";
