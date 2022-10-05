@@ -82,20 +82,21 @@ echo "var currentprogress = currentpos.toFixed(0);\n";
 echo "$('#dynamic').css('width', currentprogress + '%');\n";
 echo "$('#dynamicipad').css('width', currentprogress + '%');\n";
 echo "$('#dynamicipadl').css('width', currentprogress + '%');\n";
-echo "if (current = duration){\n";
-echo "$.getJSON('http://". $ipaddr ."/api.php?service=1', function(result){\n";
-echo "$('#image').attr('src',result.image);\n";
-//echo "$('#imagelg').attr('src',result.image);\n";
-//echo "$('#title').text(result.title);\n";
-//echo "$('#titlelg').text(result.title);\n";
-//echo "$('#artist').text(result.artist);\n";
-//echo "$('#artistlg').text(result.artist);\n";
-//echo "$('#album').text(result.album);\n";       
-//echo "$('#albumlg').text(result.album);\n";
-//echo "$('#elapsed').text(result.elapsed);\n";
-//echo "$('#duration').text(result.duration);\n";
-echo "});\n";
-echo "}\n";
+
+//echo "if (current = duration){\n";
+//echo "$.getJSON('http://". $ipaddr ."/api.php?service=1', function(result){\n";
+//echo "$('#image').attr('src',result.image);\n";
+////echo "$('#imagelg').attr('src',result.image);\n";
+////echo "$('#title').text(result.title);\n";
+////echo "$('#titlelg').text(result.title);\n";
+////echo "$('#artist').text(result.artist);\n";
+////echo "$('#artistlg').text(result.artist);\n";
+////echo "$('#album').text(result.album);\n";       
+////echo "$('#albumlg').text(result.album);\n";
+////echo "$('#elapsed').text(result.elapsed);\n";
+////echo "$('#duration').text(result.duration);\n";
+//echo "});\n";
+//echo "}\n";
 
 echo "}, 100);\n"; 
 
