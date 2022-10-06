@@ -76,7 +76,7 @@ echo "$(document).ready(function(){\n";
 echo "var duration = ".$progduration.";\n";
 echo "var current = ".$elapsed.";\n";
 echo "setInterval( function(){\n";
-echo "current = current + 0.1;\n";
+echo "current = current + 1;\n";
 echo "var currentpos = (current/duration)*100;\n";
 echo "var currentprogress = currentpos.toFixed(0);\n";
 echo "$('#dynamic').css('width', currentprogress + '%');\n";
@@ -98,7 +98,7 @@ echo "$('#image').attr('src',result.image);\n";
 echo "});\n";
 echo "}\n";
 
-echo "}, 100);\n"; 
+echo "}, 1000);\n"; 
 
 
 echo "var sec = ".$elapsed.";\n";
