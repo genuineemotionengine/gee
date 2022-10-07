@@ -97,7 +97,7 @@ echo "$('#elapsed').text(result.elapsed);\n";
 //echo "$('#duration').text(result.duration);\n";
 echo "});\n";
 echo "current = result.elapsed;\n";
-echo "current = sec.toFixed(0);\n";
+echo "current = current.toFixed(0);\n";
 echo "}\n";
 echo "$('#time').text(current);\n";
 echo "}, 1000);\n"; 
