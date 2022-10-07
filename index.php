@@ -93,9 +93,11 @@ echo "$('#artist').text(result.artist);\n";
 //echo "$('#artistlg').text(result.artist);\n";
 echo "$('#album').text(result.album);\n";       
 //echo "$('#albumlg').text(result.album);\n";
-//echo "$('#elapsed').text(result.elapsed);\n";
+echo "$('#elapsed').text(result.elapsed);\n";
 //echo "$('#duration').text(result.duration);\n";
 echo "});\n";
+echo "sec = result.elapsed;\n";
+echo "sec = sec.toFixed(0);\n";
 echo "}\n";
 
 echo "}, 1000);\n"; 
