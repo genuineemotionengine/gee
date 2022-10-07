@@ -73,8 +73,32 @@ echo "<script src='https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min
 echo "<script>\n";
 echo "$(document).ready(function(){\n";
 
-echo "var duration = ".$progduration.";\n";
-echo "var current = ".$elapsed.";\n";
+
+echo "$.getJSON('http://". $ipaddr ."/api.php?service=1', function(result){\n";
+echo "$('#image').attr('src',result.image);\n";
+//echo "$('#imagelg').attr('src',result.image);\n";
+echo "$('#title').text(result.title);\n";
+//echo "$('#titlelg').text(result.title);\n";
+echo "$('#artist').text(result.artist);\n";
+//echo "$('#artistlg').text(result.artist);\n";
+echo "$('#album').text(result.album);\n";       
+//echo "$('#albumlg').text(result.album);\n";
+echo "$('#elapsed').text(result.elapsed);\n";
+echo "$('#seconds').html(result.duration%60);\n";
+echo "$('#minutes').html(parseInt(result.duration/60,10));\n";
+
+echo "var duration = result.duration;\n";
+echo "var current = result.elapsed;\n";
+echo "});\n";
+
+
+
+
+
+
+
+//echo "var duration = ".$progduration.";\n";
+//echo "var current = ".$elapsed.";\n";
 echo "setInterval( function(){\n";
 echo "current = current + 1;\n";
 echo "var currentpos = (current/duration)*100;\n";
@@ -97,14 +121,14 @@ echo "$('#artist').text(result.artist);\n";
 echo "$('#album').text(result.album);\n";       
 //echo "$('#albumlg').text(result.album);\n";
 echo "$('#elapsed').text(result.elapsed);\n";
-echo "$('#seconds').html(result.duration%60);\n";
-echo "$('#minutes').html(parseInt(result.duration/60,10));\n";
-
-//echo "$('#duration').text(result.duration);\n";
-echo "});\n";
+//echo "$('#seconds').html(result.duration%60);\n";
+//echo "$('#minutes').html(parseInt(result.duration/60,10));\n";
 echo "current = result.elapsed;\n";
-echo "current = current.toFixed(0);\n";
-echo "$('#time').text(current);\n";
+echo "duration = result.duration;\n";
+echo "});\n";
+//echo "current = result.elapsed;\n";
+//echo "current = current.toFixed(0);\n";
+//echo "$('#time').text(current);\n";
 echo "}\n";
 
 echo "}, 1000);\n"; 
