@@ -92,11 +92,11 @@ echo "$('#secondscur').html(pad(result.elapsed%60));\n";
 echo "$('#minutescur').html(pad(parseInt(result.elapsed/60,10)));\n";
 
 
-echo "duration = result.duration;\n";
-//echo "duration = duration.toFixed(0);\n";
-echo "current = result.elapsed;\n";
+echo "duration = parseInt(result.duration);\n";
+echo "duration = duration.toFixed(0);\n";
+echo "current = parseInt(result.elapsed);\n";
 
-//echo "current = current.toFixed(0);\n";
+echo "current = current.toFixed(0);\n";
 //echo "$('#current').text(current);\n"; 
 echo "});\n";
 
