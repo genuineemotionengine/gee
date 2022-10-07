@@ -75,6 +75,7 @@ echo "$(document).ready(function(){\n";
 
 echo "var duration;\n";
 echo "var current;\n";
+echo "function pad ( val ) { return val > 9 ? val : '0' + val; }\n";
 echo "$.getJSON('http://". $ipaddr ."/api.php?service=1', function(result){\n";
 echo "$('#image').attr('src',result.image);\n";
 //echo "$('#imagelg').attr('src',result.image);\n";
@@ -85,10 +86,10 @@ echo "$('#artist').text(result.artist);\n";
 echo "$('#album').text(result.album);\n";       
 //echo "$('#albumlg').text(result.album);\n";
 //echo "$('#elapsed').text(result.elapsed);\n";
-echo "$('#secondsdur').html(result.duration%60);\n";
-echo "$('#minutesdur').html(parseInt(result.duration/60,10));\n";
-echo "$('#secondscur').html(result.elapsed%60);\n";
-echo "$('#minutescur').html(parseInt(result.elapsed/60,10));\n";
+echo "$('#secondsdur').html(pad(result.duration%60));\n";
+echo "$('#minutesdur').html(pad(parseInt(result.duration/60,10)));\n";
+echo "$('#secondscur').html(pad(result.elapsed%60));\n";
+echo "$('#minutescur').html(pad(parseInt(result.elapsed/60,10)));\n";
 
 
 echo "duration = parseInt(result.duration);\n";
@@ -112,8 +113,8 @@ echo "var currentprogress = currentpos.toFixed(0);\n";
 echo "$('#dynamic').css('width', currentprogress + '%');\n";
 echo "$('#dynamicipad').css('width', currentprogress + '%');\n";
 echo "$('#dynamicipadl').css('width', currentprogress + '%');\n";
-echo "$('#secondscur').html(current%60);\n";
-echo "$('#minutescur').html(parseInt(current/60,10));\n";
+echo "$('#secondscur').html(pad(current%60));\n";
+echo "$('#minutescur').html(pad(parseInt(current/60,10)));\n";
 
 
 echo "if (current === duration){\n";
@@ -128,13 +129,13 @@ echo "$('#album').text(result.album);\n";
 //echo "$('#albumlg').text(result.album);\n";
 echo "$('#elapsed').text(result.elapsed);\n";
 
-echo "$('#secondsdur').html(result.duration%60);\n";
-echo "$('#minutesdur').html(parseInt(result.duration/60,10));\n";
+echo "$('#secondsdur').html(pad(result.duration%60));\n";
+echo "$('#minutesdur').html(pad(parseInt(result.duration/60,10)));\n";
 echo "duration = parseInt(result.duration);\n";
 //echo "duration = duration.toFixed(0);\n";
 echo "current = parseInt(result.elapsed);\n";
 //echo "current = current.toFixed(0);\n";
-echo "$('#current').text(current);\n"; 
+//echo "$('#current').text(current);\n"; 
 
 echo "});\n";
 
@@ -169,7 +170,7 @@ echo "<body class='p-3 mb-2 bg-black text-white pt-0 ps-0 pe-0 me-0'>\n\n";
 echo "<div class='container-fluid text-center ps-0 pe-0'>\n";
 echo "<div class='d-block d-sm-none'>\n";
 echo "<img id='image' class='img-fluid' src='".$image."' />\n";
-echo "<div id='current'></div>\n";
+//echo "<div id='current'></div>\n";
 echo "<br/>\n";
 echo "<a href='http://". $ipaddr ."/api.php?service=3'><i class='bi bi-arrow-left-short' style='font-size: 6rem; color: white;'></i></a>&nbsp;&nbsp;\n";
 if ($play == 1){
