@@ -87,7 +87,8 @@ echo "$('#album').text(result.album);\n";
 echo "$('#elapsed').text(result.elapsed);\n";
 echo "$('#secondsdur').html(result.duration%60);\n";
 echo "$('#minutesdur').html(parseInt(result.duration/60,10));\n";
-
+echo "$('#secondscur').html(result.elapsed%60);\n";
+echo "$('#minutescur').html(parseInt(result.elapsed/60,10));\n";
 
 echo "duration = parseInt(result.duration);\n";
 //echo "duration = duration.toFixed(0);\n";
@@ -190,7 +191,7 @@ echo "<div class='row row-cols-3'>\n";
 if ($playpause === pause){
     echo "<div class='col-2 text-center'>".$elapsedpause."</div>\n";
 }else{
-    echo "<div class='col-2 text-center'><span id='minutes'>00</span>:<span id='seconds'>00</span></div>\n";
+    echo "<div class='col-2 text-center'><span id='minutescur'>00</span>:<span id='secondscur'>00</span></div>\n";
     //echo "<div class='col-2 text-center'><span id='time'>00</span></div>\n";
 }
 echo "<div class='col-8'>\n";
