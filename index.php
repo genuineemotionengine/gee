@@ -111,26 +111,26 @@ echo "$('#seconds').html(duration%60);\n";
 echo "$('#minutes').html(parseInt(duration/60,10));\n";
 
 
-echo "if (current === duration){\n";
-echo "$.getJSON('http://". $ipaddr ."/api.php?service=1', function(result){\n";
-echo "$('#image').attr('src',result.image);\n";
-//echo "$('#imagelg').attr('src',result.image);\n";
-echo "$('#title').text(result.title);\n";
-//echo "$('#titlelg').text(result.title);\n";
-echo "$('#artist').text(result.artist);\n";
-//echo "$('#artistlg').text(result.artist);\n";
-echo "$('#album').text(result.album);\n";       
-//echo "$('#albumlg').text(result.album);\n";
-//echo "$('#elapsed').text(result.elapsed);\n";
-//echo "$('#seconds').html(result.duration%60);\n";
-//echo "$('#minutes').html(parseInt(result.duration/60,10));\n";
+//echo "if (current === duration){\n";
+//echo "$.getJSON('http://". $ipaddr ."/api.php?service=1', function(result){\n";
+//echo "$('#image').attr('src',result.image);\n";
+////echo "$('#imagelg').attr('src',result.image);\n";
+//echo "$('#title').text(result.title);\n";
+////echo "$('#titlelg').text(result.title);\n";
+//echo "$('#artist').text(result.artist);\n";
+////echo "$('#artistlg').text(result.artist);\n";
+//echo "$('#album').text(result.album);\n";       
+////echo "$('#albumlg').text(result.album);\n";
+////echo "$('#elapsed').text(result.elapsed);\n";
+////echo "$('#seconds').html(result.duration%60);\n";
+////echo "$('#minutes').html(parseInt(result.duration/60,10));\n";
+////echo "current = result.elapsed;\n";
+////echo "duration = result.duration;\n";
+//echo "});\n";
 //echo "current = result.elapsed;\n";
-//echo "duration = result.duration;\n";
-echo "});\n";
-echo "current = result.elapsed;\n";
-echo "current = current.toFixed(0);\n";
-//echo "$('#time').text(current);\n";
-echo "}\n";
+//echo "current = current.toFixed(0);\n";
+////echo "$('#time').text(current);\n";
+//echo "}\n";
 
 echo "}, 1000);\n"; 
 
