@@ -122,12 +122,13 @@ echo "$('#artist').text(result.artist);\n";
 echo "$('#album').text(result.album);\n";       
 //echo "$('#albumlg').text(result.album);\n";
 echo "$('#elapsed').text(result.elapsed);\n";
-echo "$('#seconds').html(result.duration%60);\n";
-echo "$('#minutes').html(parseInt(result.duration/60,10));\n";
 
 
 echo "duration = parseInt(result.duration);\n";
 echo "current = parseInt(result.elapsed);\n";
+echo "$('#seconds').html(duration%60);\n";
+echo "$('#minutes').html(duration/60,10);\n";
+
 echo "});\n";
 
 echo "}\n";
