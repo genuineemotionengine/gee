@@ -84,15 +84,16 @@ echo "$('#artist').text(result.artist);\n";
 //echo "$('#artistlg').text(result.artist);\n";
 echo "$('#album').text(result.album);\n";       
 //echo "$('#albumlg').text(result.album);\n";
-echo "$('#elapsed').text(result.elapsed);\n";
+//echo "$('#elapsed').text(result.elapsed);\n";
 echo "$('#secondsdur').html(result.duration%60);\n";
 echo "$('#minutesdur').html(parseInt(result.duration/60,10));\n";
+echo "$('#secondscur').html(result.elapsed%60);\n";
+echo "$('#minutescur').html(parseInt(result.elapsed/60,10));\n";
+
 
 echo "duration = parseInt(result.duration);\n";
 //echo "duration = duration.toFixed(0);\n";
 echo "current = parseInt(result.elapsed);\n";
-//echo "$('#secondscur').html(result.current%60);\n";
-//echo "$('#minutescur').html(parseInt(result.current/60,10));\n";
 
 //echo "current = current.toFixed(0);\n";
 echo "$('#current').text(current);\n"; 
