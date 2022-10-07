@@ -94,7 +94,7 @@ echo "$('#artist').text(result.artist);\n";
 echo "$('#album').text(result.album);\n";       
 //echo "$('#albumlg').text(result.album);\n";
 echo "$('#elapsed').text(result.elapsed);\n";
-//echo "$('#duration').text(result.duration);\n";
+echo "$('#duration').text(result.duration);\n";
 echo "});\n";
 echo "current = result.elapsed;\n";
 echo "current = current.toFixed(0);\n";
@@ -162,7 +162,7 @@ echo "<div id='dynamic' class='progress-bar bg-white' style='width: 0%; height: 
 echo "</div>\n";
 echo "</div>\n";
 echo "</div>\n";
-echo "<div class='col-2 text-center'>".$duration."</div>\n";
+echo "<div id='duration' class='col-2 text-center'>".$duration."</div>\n";
 echo "</div>\n";
 echo "</div>\n";
 echo "<br/>\n";

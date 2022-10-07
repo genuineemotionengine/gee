@@ -56,8 +56,8 @@ $rows = ['image' => $image,
 'title' => $title,
 'artist' => $artist,
 'album' => $album,
-'elapsed' => $elapsed
-//'refresh' => $refresh
+'elapsed' => $elapsed,
+'duration' => $durations[0]
      
         ];
 
