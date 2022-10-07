@@ -55,8 +55,8 @@ if(isset($ThisFileInfo['comments']['picture'][0])){
 $rows = ['image' => $image,
 'title' => $title,
 'artist' => $artist,
-'album' => $album
-//'elapsed' => $elapsed,
+'album' => $album,
+'elapsed' => $elapsed
 //'refresh' => $refresh
      
         ];
