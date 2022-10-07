@@ -90,8 +90,9 @@ echo "$('#minutesdur').html(parseInt(result.duration/60,10));\n";
 
 
 echo "duration = parseInt(result.duration);\n";
+echo "var duration = duration.toFixed(0);\n";
 echo "current = parseInt(result.elapsed);\n";
-
+echo "var current = current.toFixed(0);\n";
 echo "});\n";
 
 
