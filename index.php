@@ -159,13 +159,14 @@ echo "});\n";
 echo "</script>\n";
 echo "</head>\n";
 echo "<body class='p-3 mb-2 bg-black text-white pt-0 ps-0 pe-0 me-0'>\n\n";
-echo "<div id='current'></div>\n";
+
 
 //*******iPhone portrait**********
 
 echo "<div class='container-fluid text-center ps-0 pe-0'>\n";
 echo "<div class='d-block d-sm-none'>\n";
 echo "<img id='image' class='img-fluid' src='".$image."' />\n";
+echo "<div id='current'></div>\n";
 echo "<br/>\n";
 echo "<a href='http://". $ipaddr ."/api.php?service=3'><i class='bi bi-arrow-left-short' style='font-size: 6rem; color: white;'></i></a>&nbsp;&nbsp;\n";
 if ($play == 1){
