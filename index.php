@@ -87,15 +87,15 @@ echo "$('#elapsed').text(result.elapsed);\n";
 echo "$('#seconds').html(result.duration%60);\n";
 echo "$('#minutes').html(parseInt(result.duration/60,10));\n";
 
-echo "var duration = result.duration;\n";
-echo "var current = result.elapsed;\n";
+
 echo "});\n";
 
 
 
 
 
-
+echo "var duration = result.duration;\n";
+echo "var current = result.elapsed;\n";
 
 //echo "var duration = ".$progduration.";\n";
 //echo "var current = ".$elapsed.";\n";
