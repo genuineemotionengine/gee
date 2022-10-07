@@ -107,8 +107,8 @@ echo "var currentprogress = currentpos.toFixed(0);\n";
 echo "$('#dynamic').css('width', currentprogress + '%');\n";
 echo "$('#dynamicipad').css('width', currentprogress + '%');\n";
 echo "$('#dynamicipadl').css('width', currentprogress + '%');\n";
-echo "$('#seconds').html(duration%60);\n";
-echo "$('#minutes').html(parseInt(duration/60,10));\n";
+//echo "$('#seconds').html(duration%60);\n";
+//echo "$('#minutes').html(parseInt(duration/60,10));\n";
 
 
 echo "if (current === duration){\n";
