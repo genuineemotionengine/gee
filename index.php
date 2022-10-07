@@ -91,8 +91,8 @@ echo "$('#minutesdur').html(parseInt(result.duration/60,10));\n";
 echo "duration = parseInt(result.duration);\n";
 //echo "duration = duration.toFixed(0);\n";
 echo "current = parseInt(result.elapsed);\n";
-echo "$('#secondscur').html(result.current%60);\n";
-echo "$('#minutescur').html(parseInt(result.current/60,10));\n";
+//echo "$('#secondscur').html(result.current%60);\n";
+//echo "$('#minutescur').html(parseInt(result.current/60,10));\n";
 
 //echo "current = current.toFixed(0);\n";
 echo "$('#current').text(current);\n"; 
