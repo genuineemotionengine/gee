@@ -100,7 +100,7 @@ echo "$('#elapsed').text(result.elapsed);\n";
 echo "$('#seconds').html(result.duration%60);\n";
 echo "$('#minutes').html(parseInt(result.duration/60,10));\n";
 
-echo "$('#duration').text(result.duration);\n";
+//echo "$('#duration').text(result.duration);\n";
 echo "});\n";
 echo "current = result.elapsed;\n";
 echo "current = current.toFixed(0);\n";
