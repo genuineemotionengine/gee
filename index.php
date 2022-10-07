@@ -85,8 +85,8 @@ echo "$('#artist').text(result.artist);\n";
 echo "$('#album').text(result.album);\n";       
 //echo "$('#albumlg').text(result.album);\n";
 echo "$('#elapsed').text(result.elapsed);\n";
-echo "$('#seconds').html(result.duration%60);\n";
-echo "$('#minutes').html(parseInt(result.duration/60,10));\n";
+echo "$('#secondsdur').html(result.duration%60);\n";
+echo "$('#minutesdur').html(parseInt(result.duration/60,10));\n";
 
 
 echo "duration = parseInt(result.duration);\n";
@@ -123,8 +123,8 @@ echo "$('#album').text(result.album);\n";
 //echo "$('#albumlg').text(result.album);\n";
 echo "$('#elapsed').text(result.elapsed);\n";
 
-echo "$('#seconds').html(result.duration%60);\n";
-echo "$('#minutes').html(parseInt(result.duration/60,10));\n";
+echo "$('#secondsdur').html(result.duration%60);\n";
+echo "$('#minutesdur').html(parseInt(result.duration/60,10));\n";
 echo "duration = parseInt(result.duration);\n";
 echo "current = parseInt(result.elapsed);\n";
 
@@ -194,7 +194,8 @@ echo "<div id='dynamic' class='progress-bar bg-white' style='width: 0%; height: 
 echo "</div>\n";
 echo "</div>\n";
 echo "</div>\n";
-echo "<div id='duration' class='col-2 text-center'>".$duration."</div>\n";
+//echo "<div id='duration' class='col-2 text-center'>".$duration."</div>\n";
+echo "<div class='col-2 text-center'><span id='minutesdur'>00</span>:<span id='secondsdur'>00</span></div>\n";
 echo "</div>\n";
 echo "</div>\n";
 echo "<br/>\n";
