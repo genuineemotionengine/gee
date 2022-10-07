@@ -92,12 +92,12 @@ echo "$('#secondscur').html(pad(result.elapsed%60));\n";
 echo "$('#minutescur').html(pad(parseInt(result.elapsed/60,10)));\n";
 
 
-echo "duration = parseInt(result.duration);\n";
+echo "duration = result.duration;\n";
 //echo "duration = duration.toFixed(0);\n";
-echo "current = parseInt(result.elapsed);\n";
+echo "current = result.elapsed;\n";
 
 //echo "current = current.toFixed(0);\n";
-echo "$('#current').text(current);\n"; 
+//echo "$('#current').text(current);\n"; 
 echo "});\n";
 
 
@@ -117,7 +117,7 @@ echo "$('#secondscur').html(pad(current%60));\n";
 echo "$('#minutescur').html(pad(parseInt(current/60,10)));\n";
 
 
-echo "if (currentprogress === 100){\n";
+echo "if (current === duration){\n";
 echo "$.getJSON('http://". $ipaddr ."/api.php?service=1', function(result){\n";
 echo "$('#image').attr('src',result.image);\n";
 //echo "$('#imagelg').attr('src',result.image);\n";
