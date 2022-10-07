@@ -99,20 +99,20 @@ echo "});\n";
 echo "sec = result.elapsed;\n";
 echo "sec = sec.toFixed(0);\n";
 echo "}\n";
-
+echo "$('#time').text(current);\n";
 echo "}, 1000);\n"; 
 
 
-echo "var sec = ".$elapsed.";\n";
-echo "function pad ( val ) { return val > 9 ? val : '0' + val; }\n";
-echo "setInterval( function(){\n";
-echo "$('#seconds').html(pad(++sec%60));\n";
-echo "$('#minutes').html(pad(parseInt(sec/60,10)));\n";
-//echo "$('#secondsipad').html(pad(++sec%60));\n";
-//echo "$('#minutesipad').html(pad(parseInt(sec/60,10)));\n";
-//echo "$('#secondsipadl').html(pad(++sec%60));\n";
-//echo "$('#minutesipadl').html(pad(parseInt(sec/60,10)));\n";
-echo "}, 1000);\n"; 
+//echo "var sec = ".$elapsed.";\n";
+//echo "function pad ( val ) { return val > 9 ? val : '0' + val; }\n";
+//echo "setInterval( function(){\n";
+//echo "$('#seconds').html(pad(++sec%60));\n";
+//echo "$('#minutes').html(pad(parseInt(sec/60,10)));\n";
+////echo "$('#secondsipad').html(pad(++sec%60));\n";
+////echo "$('#minutesipad').html(pad(parseInt(sec/60,10)));\n";
+////echo "$('#secondsipadl').html(pad(++sec%60));\n";
+////echo "$('#minutesipadl').html(pad(parseInt(sec/60,10)));\n";
+//echo "}, 1000);\n"; 
 
 
 
@@ -151,7 +151,8 @@ echo "<div class='row row-cols-3'>\n";
 if ($playpause === pause){
     echo "<div class='col-2 text-center'>".$elapsedpause."</div>\n";
 }else{
-    echo "<div class='col-2 text-center'><span id='minutes'>00</span>:<span id='seconds'>00</span></div>\n";
+    //echo "<div class='col-2 text-center'><span id='minutes'>00</span>:<span id='seconds'>00</span></div>\n";
+    echo "<div class='col-2 text-center'><span id='time'>00</span></div>\n";
 }
 echo "<div class='col-8'>\n";
 echo "<div class='mt-2'>\n";
