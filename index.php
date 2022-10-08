@@ -79,9 +79,10 @@ echo "xhttp.send();\n";
 echo "getmeta();\n";
 echo "}\n";
 
-echo "function pad ( val ) { return val > 9 ? val : '0' + val; }\n";
+
 
 echo "function getmeta(){\n";
+echo "function pad ( val ) { return val > 9 ? val : '0' + val; }\n";
 echo "$.getJSON('http://". $ipaddr ."/api.php?service=1', function(result){\n";
 echo "$('#image').attr('src',result.image);\n";
 //echo "$('#imagelg').attr('src',result.image);\n";
