@@ -95,14 +95,14 @@ echo "duration = parseInt(result.duration);\n";
 echo "current = parseInt(result.elapsed);\n";
 echo "});\n";
 echo "}\n";
+?>
+function next() {
+  const xhttp = new XMLHttpRequest();
 
-echo "function next() {\n";
-echo "const xhttp = new XMLHttpRequest();\n";
-echo "xhttp.open('GET', 'http://192.168.68.118/api.php?service=4');\n";
-echo "xhttp.send();\n";
-//echo "getmeta()\n";
-echo "}\n";
-
+  xhttp.open("GET", "http://192.168.68.118/api.php?service=4");
+  xhttp.send();
+}
+<?php
 echo "getmeta()\n";
 
 echo "setInterval( function(){\n";
