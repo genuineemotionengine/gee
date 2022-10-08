@@ -76,19 +76,8 @@ echo "function nexttrack() {\n";
 echo "const xhttp = new XMLHttpRequest();\n";
 echo "xhttp.open('GET', 'http://192.168.68.118/api.php?service=4');\n";
 echo "xhttp.send();\n";
-//echo "getmeta();\n";
+echo "getmeta();\n";
 echo "}\n";
-
-echo "</script>\n";
-
-echo "<script>\n";
-echo "$(document).ready(function(){\n";
-
-echo "var duration;\n";
-echo "var current;\n";
-
-
-echo "function pad ( val ) { return val > 9 ? val : '0' + val; }\n";
 
 echo "function getmeta(){\n";
 echo "$.getJSON('http://". $ipaddr ."/api.php?service=1', function(result){\n";
@@ -108,6 +97,19 @@ echo "duration = parseInt(result.duration);\n";
 echo "current = parseInt(result.elapsed);\n";
 echo "});\n";
 echo "}\n";
+
+echo "</script>\n";
+
+echo "<script>\n";
+echo "$(document).ready(function(){\n";
+
+echo "var duration;\n";
+echo "var current;\n";
+
+
+echo "function pad ( val ) { return val > 9 ? val : '0' + val; }\n";
+
+
 
 
 echo "getmeta();\n";
