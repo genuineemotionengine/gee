@@ -109,24 +109,7 @@ echo "$('#secondscur').html(pad(current%60));\n";
 echo "$('#minutescur').html(pad(parseInt(current/60,10)));\n";
 
 echo "if (current >= duration){\n";
-
-echo "$.getJSON('http://". $ipaddr ."/api.php?service=1', function(result){\n";
-echo "$('#image').attr('src',result.image);\n";
-//echo "$('#imagelg').attr('src',result.image);\n";
-echo "$('#title').text(result.title);\n";
-//echo "$('#titlelg').text(result.title);\n";
-echo "$('#artist').text(result.artist);\n";
-//echo "$('#artistlg').text(result.artist);\n";
-echo "$('#album').text(result.album);\n";       
-//echo "$('#albumlg').text(result.album);\n";
-echo "$('#secondsdur').html(pad(result.duration%60));\n";
-echo "$('#minutesdur').html(pad(parseInt(result.duration/60,10)));\n";
-echo "$('#secondscur').html(pad(current%60));\n";
-echo "$('#minutescur').html(pad(parseInt(current/60,10)));\n";
-
-echo "duration = parseInt(result.duration);\n";
-echo "current = parseInt(result.elapsed);\n";
-echo "});\n";
+echo "getmeta()\n";
 echo "}\n";
 
 echo "}, 1000);\n"; 
