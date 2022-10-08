@@ -76,12 +76,32 @@ echo "function nexttrack() {\n";
 echo "const xhttp = new XMLHttpRequest();\n";
 echo "xhttp.open('GET', 'http://192.168.68.118/api.php?service=4');\n";
 echo "xhttp.send();\n";
-echo "getmeta();\n";
+echo "getmetas();\n";
 echo "}\n";
 
 
 
 
+echo "function pads ( val ) { return val > 9 ? val : '0' + val; }\n";
+echo "function getmetas(){\n";
+
+echo "$.getJSON('http://". $ipaddr ."/api.php?service=1', function(result){\n";
+echo "$('#image').attr('src',result.image);\n";
+//echo "$('#imagelg').attr('src',result.image);\n";
+echo "$('#title').text(result.title);\n";
+//echo "$('#titlelg').text(result.title);\n";
+echo "$('#artist').text(result.artist);\n";
+//echo "$('#artistlg').text(result.artist);\n";
+echo "$('#album').text(result.album);\n";       
+//echo "$('#albumlg').text(result.album);\n";
+echo "$('#secondsdur').html(pads(result.duration%60));\n";
+echo "$('#minutesdur').html(pads(parseInt(result.duration/60,10)));\n";
+echo "$('#secondscur').html(pads(result.elapsed%60));\n";
+echo "$('#minutescur').html(pads(parseInt(result.elapsed/60,10)));\n";
+echo "duration = parseInt(result.duration);\n";
+echo "current = parseInt(result.elapsed);\n";
+echo "});\n";
+echo "}\n";
 
 echo "</script>\n";
 
