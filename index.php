@@ -96,6 +96,13 @@ echo "current = parseInt(result.elapsed);\n";
 echo "});\n";
 echo "}\n";
 
+echo "function next() {\n";
+echo "const xhttp = new XMLHttpRequest();\n";
+echo "xhttp.open('GET', 'http://192.168.68.118/api.php?service=4');\n";
+echo "xhttp.send();\n";
+echo "getmeta()\n";
+echo "}\n";
+
 echo "getmeta()\n";
 
 echo "setInterval( function(){\n";
@@ -114,12 +121,7 @@ echo "}\n";
 
 echo "}, 1000);\n";
 
-echo "function next() {\n";
-echo "const xhttp = new XMLHttpRequest();\n";
-echo "xhttp.open('GET', 'http://192.168.68.118/api.php?service=4');\n";
-echo "xhttp.send();\n";
-echo "getmeta()\n";
-echo "}\n";
+
 
 echo "});\n";
 echo "</script>\n";
