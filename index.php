@@ -76,6 +76,8 @@ echo "$(document).ready(function(){\n";
 echo "var duration;\n";
 echo "var current;\n";
 echo "function pad ( val ) { return val > 9 ? val : '0' + val; }\n";
+
+echo "function getmeta(){\n";
 echo "$.getJSON('http://". $ipaddr ."/api.php?service=1', function(result){\n";
 echo "$('#image').attr('src',result.image);\n";
 //echo "$('#imagelg').attr('src',result.image);\n";
@@ -92,6 +94,9 @@ echo "$('#minutescur').html(pad(parseInt(result.elapsed/60,10)));\n";
 echo "duration = parseInt(result.duration);\n";
 echo "current = parseInt(result.elapsed);\n";
 echo "});\n";
+echo "}\n";
+
+echo "getmeta()\n";
 
 echo "setInterval( function(){\n";
 echo "current = current + 1;\n";
@@ -104,6 +109,7 @@ echo "$('#secondscur').html(pad(current%60));\n";
 echo "$('#minutescur').html(pad(parseInt(current/60,10)));\n";
 
 echo "if (current >= duration){\n";
+
 echo "$.getJSON('http://". $ipaddr ."/api.php?service=1', function(result){\n";
 echo "$('#image').attr('src',result.image);\n";
 //echo "$('#imagelg').attr('src',result.image);\n";
