@@ -1,32 +1,19 @@
 <!DOCTYPE html>
-<!--
-Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
-Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this template
--->
 <html>
-    <head>
-        <title>Test</title>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        
-        <script>
-        $(document).ready(function(){
-        var duration = 336;
-        var current = 307;
-        var currentpos = (current/duration)*100;
-        var currentprogress = currentpos.toFixed(0);
-        alert(currentprogress);
-        function(){
-        $('#dynamic').text(currentprogress);
-        };
+<body>
 
-        });
-        </script>
-        
-        
-        
-    </head>
-    <body>
-        <div id="dynamic"></div>
-    </body>
+<h2>The XMLHttpRequest Object</h2>
+<button type="button" onclick="loadDoc()">Request data</button>
+<p id="demo"></p>
+
+<script>
+function loadDoc() {
+  const xhttp = new XMLHttpRequest();
+
+  xhttp.open("GET", "http://192.168.68.118/api.php?service=4");
+  xhttp.send();
+}
+</script>
+
+</body>
 </html>

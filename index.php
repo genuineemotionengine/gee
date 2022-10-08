@@ -85,27 +85,14 @@ echo "$('#artist').text(result.artist);\n";
 //echo "$('#artistlg').text(result.artist);\n";
 echo "$('#album').text(result.album);\n";       
 //echo "$('#albumlg').text(result.album);\n";
-//echo "$('#elapsed').text(result.elapsed);\n";
 echo "$('#secondsdur').html(pad(result.duration%60));\n";
 echo "$('#minutesdur').html(pad(parseInt(result.duration/60,10)));\n";
 echo "$('#secondscur').html(pad(result.elapsed%60));\n";
 echo "$('#minutescur').html(pad(parseInt(result.elapsed/60,10)));\n";
-
-
 echo "duration = parseInt(result.duration);\n";
-//echo "duration = duration.toFixed(0);\n";
 echo "current = parseInt(result.elapsed);\n";
-
-//echo "current = current.toFixed(0);\n";
-//echo "$('#current').text(current);\n"; 
 echo "});\n";
 
-
-
-
-
-//echo "var duration = ".$progduration.";\n";
-//echo "var current = ".$elapsed.";\n";
 echo "setInterval( function(){\n";
 echo "current = current + 1;\n";
 echo "var currentpos = (current/duration)*100;\n";
@@ -115,7 +102,6 @@ echo "$('#dynamicipad').css('width', currentprogress + '%');\n";
 echo "$('#dynamicipadl').css('width', currentprogress + '%');\n";
 echo "$('#secondscur').html(pad(current%60));\n";
 echo "$('#minutescur').html(pad(parseInt(current/60,10)));\n";
-
 
 echo "if (current >= duration){\n";
 echo "$.getJSON('http://". $ipaddr ."/api.php?service=1', function(result){\n";
@@ -127,37 +113,14 @@ echo "$('#artist').text(result.artist);\n";
 //echo "$('#artistlg').text(result.artist);\n";
 echo "$('#album').text(result.album);\n";       
 //echo "$('#albumlg').text(result.album);\n";
-echo "$('#elapsed').text(result.elapsed);\n";
-
 echo "$('#secondsdur').html(pad(result.duration%60));\n";
 echo "$('#minutesdur').html(pad(parseInt(result.duration/60,10)));\n";
 echo "duration = parseInt(result.duration);\n";
-//echo "duration = duration.toFixed(0);\n";
 echo "current = parseInt(result.elapsed);\n";
-//echo "current = current.toFixed(0);\n";
-//echo "$('#current').text(current);\n"; 
-
 echo "});\n";
-
 echo "}\n";
 
 echo "}, 1000);\n"; 
-
-
-//echo "var sec = ".$elapsed.";\n";
-//echo "function pad ( val ) { return val > 9 ? val : '0' + val; }\n";
-//echo "setInterval( function(){\n";
-//echo "$('#seconds').html(pad(++sec%60));\n";
-//echo "$('#minutes').html(pad(parseInt(sec/60,10)));\n";
-////echo "$('#secondsipad').html(pad(++sec%60));\n";
-////echo "$('#minutesipad').html(pad(parseInt(sec/60,10)));\n";
-////echo "$('#secondsipadl').html(pad(++sec%60));\n";
-////echo "$('#minutesipadl').html(pad(parseInt(sec/60,10)));\n";
-//echo "}, 1000);\n"; 
-
-
-
-
 
 echo "});\n";
 echo "</script>\n";
