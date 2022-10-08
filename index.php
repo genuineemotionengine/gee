@@ -112,7 +112,14 @@ echo "if (current >= duration){\n";
 echo "getmeta()\n";
 echo "}\n";
 
-echo "}, 1000);\n"; 
+echo "}, 1000);\n";
+
+echo "function next() {\n";
+echo "const xhttp = new XMLHttpRequest();\n";
+echo "xhttp.open('GET', 'http://192.168.68.118/api.php?service=4');\n";
+echo "xhttp.send();\n";
+echo "getmeta()\n";
+echo "}\n";
 
 echo "});\n";
 echo "</script>\n";
@@ -143,7 +150,9 @@ if ($playpause === play){
 if ($playpause === pause){
     echo "<a href='http://". $ipaddr ."/api.php?service=2&pause=0'><i class='bi bi-caret-right' style='font-size: 6rem; color: white;'></i></a>&nbsp;&nbsp;\n";
 }
-echo "<a href='http://". $ipaddr ."/api.php?service=4'><i class='bi bi-arrow-right-short' style='font-size: 6rem; color: white;'></i></a><br>\n";
+//echo "<a href='http://". $ipaddr ."/api.php?service=4'><i class='bi bi-arrow-right-short' style='font-size: 6rem; color: white;'></i></a><br>\n";
+echo "<a onclick='next()'><i class='bi bi-arrow-right-short' style='font-size: 6rem; color: white;'></i></a><br>\n";
+
 echo "<div class='container pt-0 mt-0'>\n";
 echo "<div class='row row-cols-3'>\n";
 if ($playpause === pause){
