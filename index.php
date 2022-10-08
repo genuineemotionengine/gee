@@ -100,7 +100,7 @@ echo "function next() {\n";
 echo "const xhttp = new XMLHttpRequest();\n";
 echo "xhttp.open('GET', 'http://192.168.68.118/api.php?service=4');\n";
 echo "xhttp.send();\n";
-echo "getmeta()\n";
+//echo "getmeta()\n";
 echo "}\n";
 
 echo "getmeta()\n";
