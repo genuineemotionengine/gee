@@ -70,17 +70,22 @@ echo "<title>".$hosty."</title>\n";
 echo "<link href='https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css' rel='stylesheet' integrity='sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT' crossorigin='anonymous'/>\n";
 echo "<link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css'/>\n";
 echo "<script src='https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js'></script>\n";
-echo "<script>\n";
-echo "$(document).ready(function(){\n";
 
-echo "var duration;\n";
-echo "var current;\n";
+echo "<script>\n";
 echo "function nexttrack() {\n";
 echo "const xhttp = new XMLHttpRequest();\n";
 echo "xhttp.open('GET', 'http://192.168.68.118/api.php?service=4');\n";
 echo "xhttp.send();\n";
 //echo "getmeta();\n";
 echo "}\n";
+
+echo "</script>\n";
+
+echo "<script>\n";
+echo "$(document).ready(function(){\n";
+
+echo "var duration;\n";
+echo "var current;\n";
 
 
 echo "function pad ( val ) { return val > 9 ? val : '0' + val; }\n";
