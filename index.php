@@ -95,15 +95,15 @@ echo "duration = parseInt(result.duration);\n";
 echo "current = parseInt(result.elapsed);\n";
 echo "});\n";
 echo "}\n";
-?>
-function next() {
-  const xhttp = new XMLHttpRequest();
 
-  xhttp.open("GET", "http://192.168.68.118/api.php?service=4");
-  xhttp.send();
-}
-<?php
-echo "getmeta()\n";
+echo "function next() {\n";
+echo "const xhttp = new XMLHttpRequest();\n";
+echo "xhttp.open('GET', 'http://192.168.68.118/api.php?service=4');\n";
+echo "xhttp.send();\n";
+echo "getmeta();\n";
+echo "}\n";
+
+echo "getmeta();\n";
 
 echo "setInterval( function(){\n";
 echo "current = current + 1;\n";
@@ -116,7 +116,7 @@ echo "$('#secondscur').html(pad(current%60));\n";
 echo "$('#minutescur').html(pad(parseInt(current/60,10)));\n";
 
 echo "if (current >= duration){\n";
-echo "getmeta()\n";
+echo "getmeta();\n";
 echo "}\n";
 
 echo "}, 1000);\n";
