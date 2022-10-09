@@ -84,7 +84,7 @@ $mpd->prev();
     
  
     
-header("Location: http://". $ipaddr ."");
+//header("Location: http://". $ipaddr ."");
     
 break;
 
@@ -94,7 +94,7 @@ $mpd->next();
     
  
     
-header("Location: http://". $ipaddr ."");
+//header("Location: http://". $ipaddr ."");
     
 break;
 
