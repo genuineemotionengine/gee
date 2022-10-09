@@ -76,9 +76,9 @@ echo "<script>\n";
 echo "var duration;\n";
 echo "var current;\n";
 
-echo "function nexttrack(val) {\n";
+echo "function trackchange(val) {\n";
 echo "const xhttp = new XMLHttpRequest();\n";
-echo "xhttp.open('GET', 'http://192.168.68.118/api.php?service=' +'val');\n";
+echo "xhttp.open('GET', 'http://192.168.68.118/api.php?service=' + val);\n";
 echo "xhttp.send();\n";
 echo "getmeta();\n";
 echo "}\n";
