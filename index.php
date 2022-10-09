@@ -75,7 +75,7 @@ echo "<script>\n";
 
 echo "var duration;\n";
 echo "var current;\n";
-echo "var playpause;\n";
+echo "var playpause = '".$playpause."';\n";
 
 echo "function nexttrack() {\n";
 echo "const xhttp = new XMLHttpRequest();\n";
@@ -140,7 +140,7 @@ echo "}\n";
 
 echo "getmeta();\n";
 
-echo "if (playpause === '".$playpause."'){\n";
+echo "if (playpause === 'play'){\n";
 echo "setInterval( function(){\n";
 echo "current = current + 1;\n";
 echo "var currentpos = (current/duration)*100;\n";
