@@ -107,12 +107,16 @@ echo "function getmeta(){\n";
 echo "$.getJSON('http://". $ipaddr ."/api.php?service=1', function(result){\n";
 echo "$('#image').attr('src',result.image);\n";
 echo "$('#imageipp').attr('src',result.image);\n";
+echo "$('#imageipl').attr('src',result.image);\n";
 echo "$('#title').text(result.title);\n";
 echo "$('#titleipp').text(result.title);\n";
+echo "$('#titleipl').text(result.title);\n";
 echo "$('#artist').text(result.artist);\n";
 echo "$('#artistipp').text(result.artist);\n";
+echo "$('#artistipl').text(result.artist);\n";
 echo "$('#album').text(result.album);\n";       
 echo "$('#albumipp').text(result.album);\n";
+echo "$('#albumipl').text(result.album);\n";
 echo "$('#secondsdur').html(pad(result.duration%60));\n";
 echo "$('#minutesdur').html(pad(parseInt(result.duration/60,10)));\n";
 echo "$('#secondsduripp').html(pad(result.duration%60));\n";
@@ -298,7 +302,7 @@ echo "<div class='d-none d-lg-block d-xl-none'>\n";
 
 echo "<div class='row row-cols-2'>\n";
 echo "<div class='col'>\n";
-echo "<img id='image' class='img-fluid' src='".$image."' />\n";
+echo "<img id='imageipl' class='img-fluid' src='".$image."' />\n";
 echo "</div>\n";
 echo "<div class='col'>\n";
 
@@ -338,9 +342,9 @@ echo "<div class='col-2 text-center'>".$duration."</div>\n";
 echo "</div>\n";
 echo "</div>\n";
 
-echo "<h1 id='title' class='display-6'>".$title."</h1>\n";
-echo "<h1 id='artist' class='display-6'>".$artist."</h1>\n";
-echo "<h1 id='album' class='display-6'>".$album."</h1>\n";
+echo "<h1 id='titleipl' class='display-6'>".$title."</h1>\n";
+echo "<h1 id='artistipl' class='display-6'>".$artist."</h1>\n";
+echo "<h1 id='albumipl' class='display-6'>".$album."</h1>\n";
 
 echo "<div class='row row-cols-3'>\n";
 
