@@ -141,7 +141,7 @@ echo "<img id='image' class='img-fluid' src='".$image."' />\n";
 //echo "<div id='current'></div>\n";
 echo "<br/>\n";
 //echo "<a href='http://". $ipaddr ."/api.php?service=3'><i class='bi bi-arrow-left-short' style='font-size: 6rem; color: white;'></i></a>&nbsp;&nbsp;\n";
-echo "<a onclick='trackchange()'><i class='bi bi-arrow-left-short' style='font-size: 6rem; color: white;'></i></a><br>\n";
+echo "<a onclick='trackchange()'><i class='bi bi-arrow-left-short' style='font-size: 6rem; color: white;'></i></a>&nbsp;&nbsp;\n";
 
 if ($play == 1){
     echo "<a href='http://". $ipaddr ."/api.php?service=2&pause=1'><i class='bi bi-pause' style='font-size: 6rem; color: white;'></i></a>&nbsp;&nbsp;\n";
