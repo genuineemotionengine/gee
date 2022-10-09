@@ -81,7 +81,7 @@ echo "const xhttp = new XMLHttpRequest();\n";
 echo "xhttp.open('GET', 'http://192.168.68.118/api.php?service=4');\n";
 echo "xhttp.send();\n";
 echo "getmeta();\n";
-echo "current = 0;\n";
+//echo "current = 0;\n";
 echo "}\n";
 
 echo "function pad ( val ) { return val > 9 ? val : '0' + val; }\n";
