@@ -78,22 +78,24 @@ echo "var current;\n";
 
 echo "function nexttrack() {\n";
 echo "const xhttp = new XMLHttpRequest();\n";
-echo "xhttp.open('GET', 'http://192.168.68.118/api.php?service=4');\n";
+echo "xhttp.open('GET', 'http://". $ipaddr ."/api.php?service=4');\n";
 echo "xhttp.send();\n";
 echo "getmeta();\n";
 echo "}\n";
 
 echo "function prevtrack() {\n";
 echo "const xhttp = new XMLHttpRequest();\n";
-echo "xhttp.open('GET', 'http://192.168.68.118/api.php?service=3');\n";
+echo "xhttp.open('GET', 'http://". $ipaddr ."/api.php?service=3');\n";
 echo "xhttp.send();\n";
 echo "getmeta();\n";
 echo "}\n";
 
 echo "function playrefresh() {\n";
 echo "const xhttp = new XMLHttpRequest();\n";
-echo "xhttp.open('GET', 'http://192.168.68.118/api.php?service=5&playl=1');\n";
+echo "xhttp.open('GET', 'http://". $ipaddr ."/api.php?service=5&playl=1');\n";
 echo "xhttp.send();\n";
+echo "duration = 0;\n";
+echo "current= 0;\n";
 echo "getmeta();\n";
 echo "}\n";
 
