@@ -240,7 +240,7 @@ echo "<div class='row row-cols-3'>\n";
 if ($playpause === pause){
     echo "<div class='col-2 text-center'>".$elapsedpause."</div>\n";
 }else{
-    echo "<div class='col-2 text-center'><span id='minutesipp'>00</span>:<span id='secondsipp'>00</span></div>\n";
+    echo "<div class='col-2 text-center'><span id='minutescuripp'>00</span>:<span id='secondscuripp'>00</span></div>\n";
 }
 echo "<div class='col-8'>\n";
 echo "<div class='mt-2'>\n";
