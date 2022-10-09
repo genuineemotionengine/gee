@@ -90,6 +90,15 @@ echo "xhttp.send();\n";
 echo "getmeta();\n";
 echo "}\n";
 
+echo "function playrefresh() {\n";
+echo "const xhttp = new XMLHttpRequest();\n";
+echo "xhttp.open('GET', 'http://192.168.68.118/api.php?service=5');\n";
+echo "xhttp.send();\n";
+echo "getmeta();\n";
+echo "}\n";
+
+
+
 echo "function pad ( val ) { return val > 9 ? val : '0' + val; }\n";
 
 echo "function getmeta(){\n";
@@ -191,7 +200,8 @@ echo "<br/>\n";
 echo "<h1 id='title' class='display-6'>".$title."</h1>\n";
 echo "<h1 id='artist' class='display-6'>".$artist."</h1>\n";
 echo "<h1 id='album' class='display-6'>".$album."</h1>\n";
-echo "<a href='http://". $ipaddr ."/api.php?service=5'><i class='bi bi-arrow-repeat' style='font-size: 3rem; color: white;'></i></a>\n";
+//echo "<a href='http://". $ipaddr ."/api.php?service=5'><i class='bi bi-arrow-repeat' style='font-size: 3rem; color: white;'></i></a>\n";
+echo "<a onclick='playrefresh()'><i class='bi bi-arrow-repeat' style='font-size: 6rem; color: white;'></i></a>\n";
 echo "</div>\n";
 echo "</div>\n\n";
 //**********************
