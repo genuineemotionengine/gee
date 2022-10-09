@@ -76,10 +76,9 @@ echo "<script>\n";
 echo "var duration;\n";
 echo "var current;\n";
 
-echo "function trackchange(val) {\n";
+echo "function nexttrack() {\n";
 echo "const xhttp = new XMLHttpRequest();\n";
-echo "var apicall ='http://192.168.68.118/api.php?service='+'val';\n";
-echo "xhttp.open('GET', 'apicall');\n";
+echo "xhttp.open('GET', 'http://192.168.68.118/api.php?service=4');\n";
 echo "xhttp.send();\n";
 echo "getmeta();\n";
 echo "}\n";
@@ -160,7 +159,7 @@ if ($playpause === pause){
     echo "<a href='http://". $ipaddr ."/api.php?service=2&pause=0'><i class='bi bi-caret-right' style='font-size: 6rem; color: white;'></i></a>&nbsp;&nbsp;\n";
 }
 //echo "<a href='http://". $ipaddr ."/api.php?service=4'><i class='bi bi-arrow-right-short' style='font-size: 6rem; color: white;'></i></a><br>\n";
-echo "<a onclick='trackchange('4')'><i class='bi bi-arrow-right-short' style='font-size: 6rem; color: white;'></i></a><br>\n";
+echo "<a onclick='nexttrack()'><i class='bi bi-arrow-right-short' style='font-size: 6rem; color: white;'></i></a><br>\n";
 
 echo "<div class='container pt-0 mt-0'>\n";
 echo "<div class='row row-cols-3'>\n";
