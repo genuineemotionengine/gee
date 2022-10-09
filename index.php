@@ -73,13 +73,13 @@ echo "<script src='https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min
 
 echo "<script>\n";
 
-echo "$(window).on('load', function(){\n";
+//echo "$(window).on('load', function(){\n";
 echo "function nexttrack() {\n";
 echo "const xhttp = new XMLHttpRequest();\n";
 echo "xhttp.open('GET', 'http://192.168.68.118/api.php?service=4');\n";
 echo "xhttp.send();\n";
 echo "getmeta();\n";
-echo "}\n";
+//echo "}\n";
 
 echo "function pad ( val ) { return val > 9 ? val : '0' + val; }\n";
 
