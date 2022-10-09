@@ -72,7 +72,7 @@ echo "<link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/bootstrap-icons@
 echo "<script src='https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js'></script>\n";
 
 echo "<script>\n";
-echo "$(window).on('load', function(){\n";
+
 
 echo "function nexttrack() {\n";
 echo "const xhttp = new XMLHttpRequest();\n";
@@ -102,7 +102,7 @@ echo "current = parseInt(result.elapsed);\n";
 echo "});\n";
 echo "}\n";
 
-
+echo "$(window).on('load', function(){\n";
 
 echo "var duration;\n";
 echo "var current;\n";
