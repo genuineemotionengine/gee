@@ -140,7 +140,7 @@ echo "}\n";
 
 echo "getmeta();\n";
 
-echo "if (playpause === '".playpause."'){\n";
+echo "if (playpause === '".$playpause."'){\n";
 echo "setInterval( function(){\n";
 echo "current = current + 1;\n";
 echo "var currentpos = (current/duration)*100;\n";
