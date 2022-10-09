@@ -10,8 +10,30 @@
 <script src='https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js'></script>
 <script>
 $(document).ready(function(){
-var duration = 290;
-var current = 241;
+var duration;
+var current;
+function pad ( val ) { return val > 9 ? val : '0' + val; }
+function getmeta(){
+$.getJSON('http://192.168.68.118/api.php?service=1', function(result){
+$('#image').attr('src',result.image);
+$('#title').text(result.title);
+$('#artist').text(result.artist);
+$('#album').text(result.album);
+$('#secondsdur').html(pad(result.duration%60));
+$('#minutesdur').html(pad(parseInt(result.duration/60,10)));
+$('#secondscur').html(pad(result.elapsed%60));
+$('#minutescur').html(pad(parseInt(result.elapsed/60,10)));
+duration = parseInt(result.duration);
+current = parseInt(result.elapsed);
+});
+}
+function next() {
+const xhttp = new XMLHttpRequest();
+xhttp.open('GET', 'http://192.168.68.118/api.php?service=4');
+xhttp.send();
+getmeta()
+}
+getmeta()
 setInterval( function(){
 current = current + 1;
 var currentpos = (current/duration)*100;
@@ -19,21 +41,11 @@ var currentprogress = currentpos.toFixed(0);
 $('#dynamic').css('width', currentprogress + '%');
 $('#dynamicipad').css('width', currentprogress + '%');
 $('#dynamicipadl').css('width', currentprogress + '%');
-if (current === duration){
-$.getJSON('http://192.168.68.118/api.php?service=1', function(result){
-$('#image').attr('src',result.image);
-});
+$('#secondscur').html(pad(current%60));
+$('#minutescur').html(pad(parseInt(current/60,10)));
+if (current >= duration){
+getmeta()
 }
-}, 1000);
-var sec = 241;
-function pad ( val ) { return val > 9 ? val : '0' + val; }
-setInterval( function(){
-$('#seconds').html(pad(++sec%60));
-$('#minutes').html(pad(parseInt(sec/60,10)));
-$('#secondsipad').html(pad(++sec%60));
-$('#minutesipad').html(pad(parseInt(sec/60,10)));
-$('#secondsipadl').html(pad(++sec%60));
-$('#minutesipadl').html(pad(parseInt(sec/60,10)));
 }, 1000);
 });
 </script>
