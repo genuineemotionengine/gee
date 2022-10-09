@@ -217,7 +217,7 @@ echo "<div class='container-fluid text-center ps-0 pe-0'>\n";
 echo "<div class='d-none d-md-block d-lg-none'>\n";
 echo "<img id='image' class='img-fluid' src='".$image."' />\n";
 echo "<br/>\n";
-echo "<a href='http://". $ipaddr ."/api.php?service=3'><i class='bi bi-arrow-left-short' style='font-size: 6rem; color: white;'></i></a>&nbsp;&nbsp;\n";
+//echo "<a href='http://". $ipaddr ."/api.php?service=3'><i class='bi bi-arrow-left-short' style='font-size: 6rem; color: white;'></i></a>&nbsp;&nbsp;\n";
 echo "<a onclick='prevtrack()'><i class='bi bi-arrow-left-short' style='font-size: 6rem; color: white;'></i></a>&nbsp;&nbsp;\n";
 
 if ($play == 1){
