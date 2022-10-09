@@ -337,7 +337,7 @@ echo "<div class='row row-cols-3'>\n";
 if ($playpause === pause){
     echo "<div class='col-2 text-center'>".$elapsedpause."</div>\n";
 }else{
-    echo "<div class='col-2 text-center'><span id='minutesipadl'>00</span>:<span id='secondsipadl'>00</span></div>\n";
+    echo "<div class='col-2 text-center'><span id='minutescuripl'>00</span>:<span id='secondscuripl'>00</span></div>\n";
 }
 echo "<div class='col-8'>\n";
 echo "<div class='mt-2'>\n";
@@ -346,7 +346,8 @@ echo "<div id='dynamicipadl' class='progress-bar bg-white' style='width: 0%; hei
 echo "</div>\n";
 echo "</div>\n";
 echo "</div>\n";
-echo "<div class='col-2 text-center'>".$duration."</div>\n";
+//echo "<div class='col-2 text-center'>".$duration."</div>\n";
+echo "<div class='col-2 text-center'><span id='minutesduripl'>00</span>:<span id='secondsduripl'>00</span></div>\n";
 echo "</div>\n";
 echo "</div>\n";
 
