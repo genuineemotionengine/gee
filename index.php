@@ -72,6 +72,8 @@ echo "<link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/bootstrap-icons@
 echo "<script src='https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js'></script>\n";
 
 echo "<script>\n";
+echo "$(window).on('load', function(){\n";
+
 echo "function nexttrack() {\n";
 echo "const xhttp = new XMLHttpRequest();\n";
 echo "xhttp.open('GET', 'http://192.168.68.118/api.php?service=4');\n";
@@ -100,10 +102,7 @@ echo "current = parseInt(result.elapsed);\n";
 echo "});\n";
 echo "}\n";
 
-//echo "</script>\n";
-//
-//echo "<script>\n";
-//echo "$(document).ready(function(){\n";
+
 
 echo "var duration;\n";
 echo "var current;\n";
@@ -128,7 +127,7 @@ echo "}, 1000);\n";
 
 
 
-//echo "});\n";
+echo "});\n";
 echo "</script>\n";
 echo "</head>\n";
 echo "<body class='p-3 mb-2 bg-black text-white pt-0 ps-0 pe-0 me-0'>\n\n";
