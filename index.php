@@ -106,13 +106,13 @@ echo "function pad ( val ) { return val > 9 ? val : '0' + val; }\n";
 echo "function getmeta(){\n";
 echo "$.getJSON('http://". $ipaddr ."/api.php?service=1', function(result){\n";
 echo "$('#image').attr('src',result.image);\n";
-//echo "$('#imagelg').attr('src',result.image);\n";
+echo "$('#imageipp').attr('src',result.image);\n";
 echo "$('#title').text(result.title);\n";
-//echo "$('#titlelg').text(result.title);\n";
+echo "$('#titleipp').text(result.title);\n";
 echo "$('#artist').text(result.artist);\n";
-//echo "$('#artistlg').text(result.artist);\n";
+echo "$('#artistipp').text(result.artist);\n";
 echo "$('#album').text(result.album);\n";       
-//echo "$('#albumlg').text(result.album);\n";
+echo "$('#albumipp').text(result.album);\n";
 echo "$('#secondsdur').html(pad(result.duration%60));\n";
 echo "$('#minutesdur').html(pad(parseInt(result.duration/60,10)));\n";
 echo "$('#secondscur').html(pad(result.elapsed%60));\n";
@@ -215,7 +215,7 @@ echo "</div>\n\n";
 
 echo "<div class='container-fluid text-center ps-0 pe-0'>\n";
 echo "<div class='d-none d-md-block d-lg-none'>\n";
-echo "<img id='image' class='img-fluid' src='".$image."' />\n";
+echo "<img id='imageipp' class='img-fluid' src='".$image."' />\n";
 echo "<br/>\n";
 //echo "<a href='http://". $ipaddr ."/api.php?service=3'><i class='bi bi-arrow-left-short' style='font-size: 6rem; color: white;'></i></a>&nbsp;&nbsp;\n";
 echo "<a onclick='prevtrack()'><i class='bi bi-arrow-left-short' style='font-size: 6rem; color: white;'></i></a>&nbsp;&nbsp;\n";
@@ -252,14 +252,15 @@ echo "<div id='dynamicipad' class='progress-bar bg-white' style='width: 0%; heig
 echo "</div>\n";
 echo "</div>\n";
 echo "</div>\n";
-echo "<div class='col-2 text-center'>".$duration."</div>\n";
+//echo "<div class='col-2 text-center'>".$duration."</div>\n";
+echo "<div class='col-2 text-center'><span id='minutesduripp'>00</span>:<span id='secondsduripp'>00</span></div>\n";
 echo "</div>\n";
 echo "</div>\n";
 
 echo "<br/>\n";
-echo "<h1 id='title' class='display-6'>".$title."</h1>\n";
-echo "<h1 id='artist' class='display-6'>".$artist."</h1>\n";
-echo "<h1 id='album' class='display-6'>".$album."</h1>\n";
+echo "<h1 id='titleipp' class='display-6'>".$title."</h1>\n";
+echo "<h1 id='artistipp' class='display-6'>".$artist."</h1>\n";
+echo "<h1 id='albumipp' class='display-6'>".$album."</h1>\n";
 echo "<br/>\n";
 /////////
 echo "<div class='row row-cols-3'>\n";
