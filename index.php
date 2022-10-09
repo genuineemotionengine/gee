@@ -79,7 +79,7 @@ echo "const xhttp = new XMLHttpRequest();\n";
 echo "xhttp.open('GET', 'http://192.168.68.118/api.php?service=4');\n";
 echo "xhttp.send();\n";
 echo "getmeta();\n";
-//echo "}\n";
+echo "}\n";
 
 echo "function pad ( val ) { return val > 9 ? val : '0' + val; }\n";
 
@@ -101,7 +101,7 @@ echo "duration = parseInt(result.duration);\n";
 echo "current = parseInt(result.elapsed);\n";
 echo "});\n";
 echo "}\n";
-echo "});\n";
+//echo "});\n";
 //echo "$(window).on('load', function(){\n";
 
 echo "var duration;\n";
