@@ -83,6 +83,13 @@ echo "xhttp.send();\n";
 echo "getmeta();\n";
 echo "}\n";
 
+echo "function prevtrack() {\n";
+echo "const xhttp = new XMLHttpRequest();\n";
+echo "xhttp.open('GET', 'http://192.168.68.118/api.php?service=3');\n";
+echo "xhttp.send();\n";
+echo "getmeta();\n";
+echo "}\n";
+
 echo "function pad ( val ) { return val > 9 ? val : '0' + val; }\n";
 
 echo "function getmeta(){\n";
@@ -141,7 +148,7 @@ echo "<img id='image' class='img-fluid' src='".$image."' />\n";
 //echo "<div id='current'></div>\n";
 echo "<br/>\n";
 //echo "<a href='http://". $ipaddr ."/api.php?service=3'><i class='bi bi-arrow-left-short' style='font-size: 6rem; color: white;'></i></a>&nbsp;&nbsp;\n";
-echo "<a onclick='trackchange()'><i class='bi bi-arrow-left-short' style='font-size: 6rem; color: white;'></i></a>&nbsp;&nbsp;\n";
+echo "<a onclick='prevtrack()'><i class='bi bi-arrow-left-short' style='font-size: 6rem; color: white;'></i></a>&nbsp;&nbsp;\n";
 
 if ($play == 1){
     echo "<a href='http://". $ipaddr ."/api.php?service=2&pause=1'><i class='bi bi-pause' style='font-size: 6rem; color: white;'></i></a>&nbsp;&nbsp;\n";
