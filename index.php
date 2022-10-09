@@ -136,6 +136,8 @@ echo "$('#dynamicipad').css('width', currentprogress + '%');\n";
 echo "$('#dynamicipadl').css('width', currentprogress + '%');\n";
 echo "$('#secondscur').html(pad(current%60));\n";
 echo "$('#minutescur').html(pad(parseInt(current/60,10)));\n";
+echo "$('#secondscuripp').html(pad(current%60));\n";
+echo "$('#minutescuripp').html(pad(parseInt(current/60,10)));\n";
 
 echo "if (current >= duration){\n";
 echo "getmeta();\n";
@@ -238,7 +240,7 @@ echo "<div class='row row-cols-3'>\n";
 if ($playpause === pause){
     echo "<div class='col-2 text-center'>".$elapsedpause."</div>\n";
 }else{
-    echo "<div class='col-2 text-center'><span id='minutesipad'>00</span>:<span id='secondsipad'>00</span></div>\n";
+    echo "<div class='col-2 text-center'><span id='minutesipp'>00</span>:<span id='secondsipp'>00</span></div>\n";
 }
 echo "<div class='col-8'>\n";
 echo "<div class='mt-2'>\n";
