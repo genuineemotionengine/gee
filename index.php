@@ -115,6 +115,8 @@ echo "$('#album').text(result.album);\n";
 echo "$('#albumipp').text(result.album);\n";
 echo "$('#secondsdur').html(pad(result.duration%60));\n";
 echo "$('#minutesdur').html(pad(parseInt(result.duration/60,10)));\n";
+echo "$('#secondsduripp').html(pad(result.duration%60));\n";
+echo "$('#minutesduripp').html(pad(parseInt(result.duration/60,10)));\n";
 echo "$('#secondscur').html(pad(result.elapsed%60));\n";
 echo "$('#minutescur').html(pad(parseInt(result.elapsed/60,10)));\n";
 echo "duration = parseInt(result.duration);\n";
