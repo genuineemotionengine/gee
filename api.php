@@ -7,9 +7,11 @@ require_once('getid3.php');
 
 $mpd = new mpd('localhost', 6600);
 
-switch ($service){
+//switch ($service){
 
-case "1": //***************** Track Data **********************
+//***************** Track Data **********************
+
+if ($service == 1){
   
 $statusarray = $mpd->server_status();
     
@@ -62,10 +64,11 @@ $rows = ['image' => $image,
         ];
 
 echo json_encode($rows);
+}
 
-break;
+//***************** Pause **********************
 
-case "2": //***************** Pause **********************
+if ($service == 2){
 
    
 
@@ -76,29 +79,25 @@ $mpd->pause($pause);
 header("Location: http://". $ipaddr ."");
 
     
-break;
+}
 
-case "3": //***************** Previous **********************
+//***************** Previous **********************
+if ($service == 3){ 
     
 $mpd->prev();
     
- 
-    
-//header("Location: http://". $ipaddr ."");
-    
-break;
+}
 
-case "4": //***************** Next **********************
+//***************** Next **********************
+if ($service == 4){ 
     
 $mpd->next();
     
- 
-    
-//header("Location: http://". $ipaddr ."");
-    
-break;
+}
 
-case "5": //***************** Restart Playlist **********************
+//***************** Restart Playlist **********************
+
+if ($service == 5){ 
     
 $mpd->playlist_clear();
     
@@ -128,12 +127,11 @@ $mpd->playlist_shuffle();
 
 $mpd->play(0);
  
-    
-//header("Location: http://". $ipaddr ."");
-    
-break;
+}
 
-case "6": //***************** get ip address **********************
+//***************** get ip address **********************
+
+if ($service == 6){  
     
 $ipaddr = $_SERVER['SERVER_ADDR'];
     
@@ -144,11 +142,7 @@ $hosty = gethostname();
 echo $hosty."<br>";
 
     
-break;
 
-default: //***************** Nothing **********************
-    
-    echo "...nothing";
     
 }
 
