@@ -78,7 +78,8 @@ echo "var current;\n";
 
 echo "function trackchange(val) {\n";
 echo "const xhttp = new XMLHttpRequest();\n";
-echo "xhttp.open('GET', 'http://192.168.68.118/api.php?service=' . 'val');\n";
+echo "var apicall ='http://192.168.68.118/api.php?service='+'val';\n";
+echo "xhttp.open('GET', 'apicall');\n";
 echo "xhttp.send();\n";
 echo "getmeta();\n";
 echo "}\n";
