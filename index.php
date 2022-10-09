@@ -94,8 +94,8 @@ echo "function playrefresh() {\n";
 echo "const xhttp = new XMLHttpRequest();\n";
 echo "xhttp.open('GET', 'http://". $ipaddr ."/api.php?service=5&playl=1');\n";
 echo "xhttp.send();\n";
-echo "duration = 0;\n";
-echo "current= 0;\n";
+//echo "duration = 0;\n";
+//echo "current= 0;\n";
 echo "getmeta();\n";
 echo "}\n";
 
