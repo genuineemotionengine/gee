@@ -76,12 +76,11 @@ echo "<script>\n";
 echo "var duration;\n";
 echo "var current;\n";
 
-echo "function nexttrack() {\n";
+echo "function nexttrack(val) {\n";
 echo "const xhttp = new XMLHttpRequest();\n";
-echo "xhttp.open('GET', 'http://192.168.68.118/api.php?service=4');\n";
+echo "xhttp.open('GET', 'http://192.168.68.118/api.php?service=' +'val');\n";
 echo "xhttp.send();\n";
 echo "getmeta();\n";
-//echo "current = 0;\n";
 echo "}\n";
 
 echo "function pad ( val ) { return val > 9 ? val : '0' + val; }\n";
@@ -142,6 +141,8 @@ echo "<img id='image' class='img-fluid' src='".$image."' />\n";
 //echo "<div id='current'></div>\n";
 echo "<br/>\n";
 echo "<a href='http://". $ipaddr ."/api.php?service=3'><i class='bi bi-arrow-left-short' style='font-size: 6rem; color: white;'></i></a>&nbsp;&nbsp;\n";
+echo "<a onclick='trackchange()'><i class='bi bi-arrow-left-short' style='font-size: 6rem; color: white;'></i></a><br>\n";
+
 if ($play == 1){
     echo "<a href='http://". $ipaddr ."/api.php?service=2&pause=1'><i class='bi bi-pause' style='font-size: 6rem; color: white;'></i></a>&nbsp;&nbsp;\n";
     
@@ -158,7 +159,7 @@ if ($playpause === pause){
     echo "<a href='http://". $ipaddr ."/api.php?service=2&pause=0'><i class='bi bi-caret-right' style='font-size: 6rem; color: white;'></i></a>&nbsp;&nbsp;\n";
 }
 //echo "<a href='http://". $ipaddr ."/api.php?service=4'><i class='bi bi-arrow-right-short' style='font-size: 6rem; color: white;'></i></a><br>\n";
-echo "<a onclick='nexttrack()'><i class='bi bi-arrow-right-short' style='font-size: 6rem; color: white;'></i></a><br>\n";
+echo "<a onclick='trackchange('4')'><i class='bi bi-arrow-right-short' style='font-size: 6rem; color: white;'></i></a><br>\n";
 
 echo "<div class='container pt-0 mt-0'>\n";
 echo "<div class='row row-cols-3'>\n";
