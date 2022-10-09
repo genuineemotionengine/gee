@@ -75,7 +75,7 @@ echo "<script>\n";
 
 echo "var duration;\n";
 echo "var current;\n";
-echo "var playpause = '".$playpause."';\n";
+
 
 echo "function nexttrack() {\n";
 echo "const xhttp = new XMLHttpRequest();\n";
@@ -140,7 +140,7 @@ echo "}\n";
 
 echo "getmeta();\n";
 
-echo "if (playpause === 'play'){\n";
+
 echo "setInterval( function(){\n";
 echo "current = current + 1;\n";
 echo "var currentpos = (current/duration)*100;\n";
@@ -154,7 +154,7 @@ echo "$('#secondscuripp').html(pad(current%60));\n";
 echo "$('#minutescuripp').html(pad(parseInt(current/60,10)));\n";
 echo "$('#secondscuripl').html(pad(current%60));\n";
 echo "$('#minutescuripl').html(pad(parseInt(current/60,10)));\n";
-echo "}\n";
+
 
 echo "if (current >= duration){\n";
 echo "getmeta();\n";
