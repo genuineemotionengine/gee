@@ -6,3 +6,5 @@ $mpd = new mpd('localhost', 6600);
 $mySimpleArray = $mpd->current_song();
     
     print_r($mySimpleArray);
+    
+    echo '<pre>'.htmlentities(print_r($mySimpleArray), ENT_SUBSTITUTE).'</pre>';
