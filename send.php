@@ -3,7 +3,7 @@ require('mpd.class.php');
 
 $mpd = new mpd('localhost', 6600);
 
-$mySimpleArray = $mpd->current_song();
+$statusarray = $mpd->server_status();
     
-    print_r($mySimpleArray);
+    print_r($statusarray);
     
