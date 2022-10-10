@@ -17,6 +17,7 @@ $statusarray = $mpd->server_status();
     
 $elapsed = $statusarray['elapsed'];
 
+$state = $statusarray['state'];
 
 $elapseds = explode(".",$elapsed);
 
@@ -59,7 +60,8 @@ $rows = ['image' => $image,
 'artist' => $artist,
 'album' => $album,
 'elapsed' => $elapsed,
-'duration' => $durations[0]
+'duration' => $durations[0],
+'state' => $state
      
         ];
 
