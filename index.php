@@ -93,6 +93,14 @@ echo "xhttp.send();\n";
 echo "getmeta();\n";
 echo "}\n";
 
+echo "function state() {\n";
+echo "const xhttp = new XMLHttpRequest();\n";
+echo "xhttp.open('GET', 'http://". $ipaddr ."/api.php?service=2');\n";
+echo "xhttp.send();\n";
+echo "getmeta();\n";
+echo "}\n";
+
+
 //echo "function playrefresh() {\n";
 //echo "const xhttp = new XMLHttpRequest();\n";
 //echo "xhttp.open('GET', 'http://". $ipaddr ."/api.php?service=5&playl=1');\n";
@@ -199,7 +207,7 @@ echo "<br/>\n";
 //echo "<a href='http://". $ipaddr ."/api.php?service=3'><i class='bi bi-arrow-left-short' style='font-size: 6rem; color: white;'></i></a>&nbsp;&nbsp;\n";
 echo "<a onclick='prevtrack()'><i class='bi bi-arrow-left-short' style='font-size: 6rem; color: white;'></i></a>&nbsp;&nbsp;\n";
 
-echo "<a id='playpause'></a>&nbsp;&nbsp;\n";
+echo "<a id='playpause' onclick='state()'></a>&nbsp;&nbsp;\n";
 
 //if ($play == 1){
 //    echo "<a href='http://". $ipaddr ."/api.php?service=2&pause=1'><i class='bi bi-pause' style='font-size: 6rem; color: white;'></i></a>&nbsp;&nbsp;\n";

@@ -62,8 +62,7 @@ $rows = ['image' => $image,
 'elapsed' => $elapsed,
 'duration' => $durations[0],
 'state' => $state
-     
-        ];
+     ];
 
 echo json_encode($rows);
 }
@@ -78,7 +77,7 @@ $mpd->pause($pause);
     
  
     
-header("Location: http://". $ipaddr ."");
+//header("Location: http://". $ipaddr ."");
 
     
 }
