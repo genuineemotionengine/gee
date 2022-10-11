@@ -147,7 +147,7 @@ echo "$('#minutescuripl').html(pad(parseInt(current/60,10)));\n";
 echo "duration = parseInt(result.duration);\n";
 echo "current = parseInt(result.elapsed);\n";
 //echo "state = text(result.state);\n";
-echo "$('#playpause').text(result.state);\n";
+//echo "$('#playpause').text(result.state);\n";
 
 //echo "if (state = play){\n";
 //echo "$('#playpause').html('<i class='bi bi-pause' style='font-size: 6rem; color: white;'></i>');\n";
@@ -207,7 +207,7 @@ echo "<br/>\n";
 //echo "<a href='http://". $ipaddr ."/api.php?service=3'><i class='bi bi-arrow-left-short' style='font-size: 6rem; color: white;'></i></a>&nbsp;&nbsp;\n";
 echo "<a onclick='prevtrack()'><i class='bi bi-arrow-left-short' style='font-size: 6rem; color: white;'></i></a>&nbsp;&nbsp;\n";
 
-echo "<a id='playpause' onclick='states()'><i class='bi bi-pause' style='font-size: 6rem; color: white;'></i></a>&nbsp;&nbsp;\n";
+echo "<a onclick='states()'><i class='bi bi-pause' style='font-size: 6rem; color: white;'></i></a>&nbsp;&nbsp;\n";
 
 //if ($play == 1){
 //    echo "<a href='http://". $ipaddr ."/api.php?service=2&pause=1'><i class='bi bi-pause' style='font-size: 6rem; color: white;'></i></a>&nbsp;&nbsp;\n";
