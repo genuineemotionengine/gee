@@ -234,12 +234,12 @@ echo "<a onclick='nexttrack()'><i class='bi bi-arrow-right-short' style='font-si
 
 echo "<div class='container pt-0 mt-0'>\n";
 echo "<div class='row row-cols-3'>\n";
-if ($playpause === pause){
-    echo "<div class='col-2 text-center'>".$elapsedpause."</div>\n";
-}else{
+//if ($playpause === pause){
+//    echo "<div class='col-2 text-center'>".$elapsedpause."</div>\n";
+//}else{
     echo "<div class='col-2 text-center'><span id='minutescur'>00</span>:<span id='secondscur'>00</span></div>\n";
     //echo "<div class='col-2 text-center'><span id='time'>00</span></div>\n";
-}
+//}
 echo "<div class='col-8'>\n";
 echo "<div class='mt-2'>\n";
 echo "<div class='progress bg-black' style='height: 5px;'>\n";
