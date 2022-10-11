@@ -152,11 +152,11 @@ echo "state = result.state;\n";
 //echo "$('#playpause').text(result.state);\n";
 
 echo "if (state === play){\n";
-echo "$('#playpause').addClass('bi bi-pause');\n";
+echo "$('#playp').addClass('bi bi-pause');\n";
 echo "}\n";
 
 echo "if (state === pause){\n";
-echo "$('#playpause').addClass('bi bi-caret-right');\n";
+echo "$('#playp').addClass('bi bi-caret-right');\n";
 echo "}\n";
 
 
@@ -212,7 +212,7 @@ echo "<br/>\n";
 //echo "<a href='http://". $ipaddr ."/api.php?service=3'><i class='bi bi-arrow-left-short' style='font-size: 6rem; color: white;'></i></a>&nbsp;&nbsp;\n";
 echo "<a onclick='prevtrack()'><i class='bi bi-arrow-left-short' style='font-size: 6rem; color: white;'></i></a>&nbsp;&nbsp;\n";
 
-echo "<a onclick='playpause()'><i id='playpause' class='' style='font-size: 6rem; color: white;'></i></a>&nbsp;&nbsp;\n";
+echo "<a onclick='playpause()'><i id='playp' class='' style='font-size: 6rem; color: white;'></i></a>&nbsp;&nbsp;\n";
 
 //if ($play == 1){
 //    echo "<a href='http://". $ipaddr ."/api.php?service=2&pause=1'><i class='bi bi-pause' style='font-size: 6rem; color: white;'></i></a>&nbsp;&nbsp;\n";
