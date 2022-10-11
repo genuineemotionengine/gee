@@ -140,11 +140,11 @@ echo "duration = parseInt(result.duration);\n";
 echo "current = parseInt(result.elapsed);\n";
 echo "state = text(result.state);\n";
 
-echo "if (state === play){\n";
+echo "if (state = play){\n";
 echo "$('#playpause').html('<i class='bi bi-pause' style='font-size: 6rem; color: white;'></i>');\n";
 echo "}\n";
 
-echo "if (state === pause){\n";
+echo "if (state = pause){\n";
 echo "$('#playpause').html('<i class='bi bi-caret-right' style='font-size: 6rem; color: white;'></i>');\n";
 echo "}\n";
 
