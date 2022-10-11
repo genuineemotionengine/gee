@@ -152,11 +152,11 @@ echo "state = result.state;\n";
 //echo "$('#playpause').text(result.state);\n";
 
 echo "if (state === play){\n";
-echo "$('#playpause').class('bi bi-pause');\n";
+echo "$('#playpause').addClass('bi bi-pause');\n";
 echo "}\n";
 
 echo "if (state === pause){\n";
-echo "$('#playpause').class('bi bi-caret-right');\n";
+echo "$('#playpause').addClass('bi bi-caret-right');\n";
 echo "}\n";
 
 
