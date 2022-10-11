@@ -85,7 +85,7 @@ echo "function nexttrack() {\n";
 echo "const xhttp = new XMLHttpRequest();\n";
 echo "xhttp.open('GET', 'http://". $ipaddr ."/api.php?service=4');\n";
 echo "xhttp.send();\n";
-echo "$('#dynamic').removeClass('bg-white').addClass('bg-black');\n";
+//echo "$('#dynamic').removeClass('bg-white').addClass('bg-black');\n";
 echo "getmeta();\n";
 
 echo "}\n";
@@ -178,7 +178,7 @@ echo "current = current + 1;\n";
 echo "}\n";
 echo "currentpos = (current/duration)*100;\n";
 echo "currentprogress = currentpos.toFixed(0);\n";
-echo "$('#dynamic').removeClass('bg-black').addClass('bg-white');\n";
+//echo "$('#dynamic').removeClass('bg-black').addClass('bg-white');\n";
 echo "$('#dynamic').css('width', currentprogress + '%');\n";
 echo "$('#dynamicipad').css('width', currentprogress + '%');\n";
 echo "$('#dynamicipadl').css('width', currentprogress + '%');\n";
