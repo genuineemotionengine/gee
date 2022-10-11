@@ -85,8 +85,9 @@ echo "function nexttrack() {\n";
 echo "const xhttp = new XMLHttpRequest();\n";
 echo "xhttp.open('GET', 'http://". $ipaddr ."/api.php?service=4');\n";
 echo "xhttp.send();\n";
-echo "getmeta();\n";
 echo "$('#dynamic').removeClass('bg-white').addClass('bg-black');\n";
+echo "getmeta();\n";
+
 echo "}\n";
 
 echo "function prevtrack() {\n";
