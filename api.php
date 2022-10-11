@@ -71,11 +71,11 @@ echo json_encode($rows);
 
 if ($service == 2){
     
-if ($state === play){
+if ($state == 'play'){
     $pause = 1;
 }
 
-if ($state === pause){
+if ($state == 'pause'){
     $pause = 0;
 }
 
