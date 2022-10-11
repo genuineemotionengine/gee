@@ -78,6 +78,8 @@ echo "var current;\n";
 //echo "var state;\n";
 echo "var play = 'play';\n";
 echo "var pause = 'pause';\n";
+echo "var currentpos;\n";
+echo "var currentprogress;\n";
 
 echo "function nexttrack() {\n";
 echo "const xhttp = new XMLHttpRequest();\n";
@@ -172,8 +174,9 @@ echo "setInterval( function(){\n";
 echo "if (state === play){\n";
 echo "current = current + 1;\n";
 echo "}\n";
-echo "var currentpos = (current/duration)*100;\n";
-echo "var currentprogress = currentpos.toFixed(0);\n";
+echo "currentpos = (current/duration)*100;\n";
+echo "currentprogress = currentpos.toFixed(0);\n";
+
 echo "$('#dynamic').css('width', currentprogress + '%');\n";
 echo "$('#dynamicipad').css('width', currentprogress + '%');\n";
 echo "$('#dynamicipadl').css('width', currentprogress + '%');\n";
