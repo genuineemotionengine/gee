@@ -75,8 +75,6 @@ $state = $statusarray['state'];
 
 if ($service == 2){
     
-    echo $state;
-    
 if ($state === 'play'){
     $pause = 1;
 }
