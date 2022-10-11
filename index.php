@@ -180,7 +180,7 @@ echo "currentpos = (current/duration)*100;\n";
 echo "currentprogress = currentpos.toFixed(0);\n";
 
 echo "$('#dynamic').css('width', currentprogress + '%');\n";
-echo "$('#dynamic').removeClass('bg-black').addClass('bg-white');\n";
+//echo "$('#dynamic').removeClass('bg-black').addClass('bg-white');\n";
 echo "$('#dynamicipad').css('width', currentprogress + '%');\n";
 echo "$('#dynamicipadl').css('width', currentprogress + '%');\n";
 echo "$('#secondscur').html(pad(current%60));\n";
