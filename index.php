@@ -76,8 +76,8 @@ echo "<script>\n";
 echo "var duration;\n";
 echo "var current;\n";
 //echo "var state;\n";
-//echo "var play = 'play';\n";
-//echo "var pause = 'pause';\n";
+echo "var play = 'play';\n";
+echo "var pause = 'pause';\n";
 
 echo "function nexttrack() {\n";
 echo "const xhttp = new XMLHttpRequest();\n";
@@ -169,7 +169,7 @@ echo "getmeta();\n";
 
 
 echo "setInterval( function(){\n";
-echo "if (state === 'play'){\n";
+echo "if (state === play){\n";
 echo "current = current + 1;\n";
 echo "var currentpos = (current/duration)*100;\n";
 echo "var currentprogress = currentpos.toFixed(0);\n";
