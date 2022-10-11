@@ -245,7 +245,7 @@ echo "<div class='row row-cols-3'>\n";
 echo "<div class='col-8'>\n";
 echo "<div class='mt-2'>\n";
 echo "<div class='progress bg-black' style='height: 5px;'>\n";
-echo "<div id='dynamic' class='progress-bar bg-white' style='width: 0%; height: 5px;'></div>\n";
+echo "<div id='dynamic' class='progress-bar ' style='width: 0%; height: 5px;'></div>\n";
 echo "</div>\n";
 echo "</div>\n";
 echo "</div>\n";
