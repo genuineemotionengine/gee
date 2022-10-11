@@ -171,6 +171,7 @@ echo "getmeta();\n";
 echo "setInterval( function(){\n";
 echo "if (state === play){\n";
 echo "current = current + 1;\n";
+echo "}\n";
 echo "var currentpos = (current/duration)*100;\n";
 echo "var currentprogress = currentpos.toFixed(0);\n";
 echo "$('#dynamic').css('width', currentprogress + '%');\n";
@@ -182,7 +183,7 @@ echo "$('#secondscuripp').html(pad(current%60));\n";
 echo "$('#minutescuripp').html(pad(parseInt(current/60,10)));\n";
 echo "$('#secondscuripl').html(pad(current%60));\n";
 echo "$('#minutescuripl').html(pad(parseInt(current/60,10)));\n";
-echo "}\n";
+
 
 echo "if (current >= duration){\n";
 echo "getmeta();\n";
