@@ -75,7 +75,9 @@ echo "<script>\n";
 
 echo "var duration;\n";
 echo "var current;\n";
-
+echo "var state;\n";
+echo "var play = 'play';\n";
+echo "var pause = 'pause';\n";
 
 echo "function nexttrack() {\n";
 echo "const xhttp = new XMLHttpRequest();\n";
@@ -136,6 +138,18 @@ echo "$('#secondscuripl').html(pad(current%60));\n";
 echo "$('#minutescuripl').html(pad(parseInt(current/60,10)));\n";
 echo "duration = parseInt(result.duration);\n";
 echo "current = parseInt(result.elapsed);\n";
+echo "state = text(result.state);\n";
+
+echo "if (state === play){\n";
+echo "$('#playpause').html('<i class='bi bi-pause' style='font-size: 6rem; color: white;'></i>');\n";
+echo "}\n";
+
+echo "if (state === pause){\n";
+echo "$('#playpause').html('<i class='bi bi-caret-right' style='font-size: 6rem; color: white;'></i>');\n";
+echo "}\n";
+
+
+
 echo "});\n";
 echo "}\n";
 
@@ -184,21 +198,23 @@ echo "<br/>\n";
 //echo "<a href='http://". $ipaddr ."/api.php?service=3'><i class='bi bi-arrow-left-short' style='font-size: 6rem; color: white;'></i></a>&nbsp;&nbsp;\n";
 echo "<a onclick='prevtrack()'><i class='bi bi-arrow-left-short' style='font-size: 6rem; color: white;'></i></a>&nbsp;&nbsp;\n";
 
-if ($play == 1){
-    echo "<a href='http://". $ipaddr ."/api.php?service=2&pause=1'><i class='bi bi-pause' style='font-size: 6rem; color: white;'></i></a>&nbsp;&nbsp;\n";
-    
-}
-if ($play == 2){
-    echo "<a href='http://". $ipaddr ."/api.php?service=2&pause=0'><i class='bi bi-caret-right' style='font-size: 6rem; color: white;'></i></a>&nbsp;&nbsp;\n";
-    
-}
-if ($playpause === play){
-    echo "<a href='http://". $ipaddr ."/api.php?service=2&pause=1'><i class='bi bi-pause' style='font-size: 6rem; color: white;'></i></a>&nbsp;&nbsp;\n";
-    
-}
-if ($playpause === pause){
-    echo "<a href='http://". $ipaddr ."/api.php?service=2&pause=0'><i class='bi bi-caret-right' style='font-size: 6rem; color: white;'></i></a>&nbsp;&nbsp;\n";
-}
+echo "<a id='playpause'></a>&nbsp;&nbsp;\n";
+
+//if ($play == 1){
+//    echo "<a href='http://". $ipaddr ."/api.php?service=2&pause=1'><i class='bi bi-pause' style='font-size: 6rem; color: white;'></i></a>&nbsp;&nbsp;\n";
+//    
+//}
+//if ($play == 2){
+//    echo "<a href='http://". $ipaddr ."/api.php?service=2&pause=0'><i class='bi bi-caret-right' style='font-size: 6rem; color: white;'></i></a>&nbsp;&nbsp;\n";
+//    
+//}
+//if ($playpause === play){
+//    echo "<a href='http://". $ipaddr ."/api.php?service=2&pause=1'><i class='bi bi-pause' style='font-size: 6rem; color: white;'></i></a>&nbsp;&nbsp;\n";
+//    
+//}
+//if ($playpause === pause){
+//    echo "<a href='http://". $ipaddr ."/api.php?service=2&pause=0'><i class='bi bi-caret-right' style='font-size: 6rem; color: white;'></i></a>&nbsp;&nbsp;\n";
+//}
 //echo "<a href='http://". $ipaddr ."/api.php?service=4'><i class='bi bi-arrow-right-short' style='font-size: 6rem; color: white;'></i></a><br>\n";
 echo "<a onclick='nexttrack()'><i class='bi bi-arrow-right-short' style='font-size: 6rem; color: white;'></i></a><br>\n";
 
