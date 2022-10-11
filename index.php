@@ -75,9 +75,9 @@ echo "<script>\n";
 
 echo "var duration;\n";
 echo "var current;\n";
-echo "var state;\n";
-echo "var play = 'play';\n";
-echo "var pause = 'pause';\n";
+//echo "var state;\n";
+//echo "var play = 'play';\n";
+//echo "var pause = 'pause';\n";
 
 echo "function nexttrack() {\n";
 echo "const xhttp = new XMLHttpRequest();\n";
@@ -138,15 +138,16 @@ echo "$('#secondscuripl').html(pad(current%60));\n";
 echo "$('#minutescuripl').html(pad(parseInt(current/60,10)));\n";
 echo "duration = parseInt(result.duration);\n";
 echo "current = parseInt(result.elapsed);\n";
-echo "state = text(result.state);\n";
+//echo "state = text(result.state);\n";
+echo "$('#playpause').text(result.state);\n";
 
-echo "if (state = play){\n";
-echo "$('#playpause').html('<i class='bi bi-pause' style='font-size: 6rem; color: white;'></i>');\n";
-echo "}\n";
-
-echo "if (state = pause){\n";
-echo "$('#playpause').html('<i class='bi bi-caret-right' style='font-size: 6rem; color: white;'></i>');\n";
-echo "}\n";
+//echo "if (state = play){\n";
+//echo "$('#playpause').html('<i class='bi bi-pause' style='font-size: 6rem; color: white;'></i>');\n";
+//echo "}\n";
+//
+//echo "if (state = pause){\n";
+//echo "$('#playpause').html('<i class='bi bi-caret-right' style='font-size: 6rem; color: white;'></i>');\n";
+//echo "}\n";
 
 
 
