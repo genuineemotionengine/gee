@@ -103,6 +103,7 @@ echo "const xhttp = new XMLHttpRequest();\n";
 echo "xhttp.open('GET', 'http://". $ipaddr ."/api.php?service=5&playl=1');\n";
 echo "xhttp.send();\n";
 echo "getmeta();\n";
+echo "location.reload();\n";
 echo "}\n";
 
 echo "function pad ( val ) { return val > 9 ? val : '0' + val; }\n";
