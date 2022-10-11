@@ -70,12 +70,20 @@ echo json_encode($rows);
 //***************** Pause **********************
 
 if ($service == 2){
+    
+if ($state === play){
+    $pause = 1;
+}
+
+if ($state === pause){
+    $pause = 0;
+}
 
    
 
 $mpd->pause($pause);
     
- 
+
     
 //header("Location: http://". $ipaddr ."");
 
