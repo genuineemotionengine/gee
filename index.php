@@ -151,13 +151,13 @@ echo "current = parseInt(result.elapsed);\n";
 echo "state = result.state;\n";
 //echo "$('#playpause').text(result.state);\n";
 
-//echo "if (state = play){\n";
-//echo "$('#playpause').html('<i class='bi bi-pause' style='font-size: 6rem; color: white;'></i>');\n";
-//echo "}\n";
-//
-//echo "if (state = pause){\n";
-//echo "$('#playpause').html('<i class='bi bi-caret-right' style='font-size: 6rem; color: white;'></i>');\n";
-//echo "}\n";
+echo "if (state === play){\n";
+echo "$('#playpause').class('bi bi-pause');\n";
+echo "}\n";
+
+echo "if (state === pause){\n";
+echo "$('#playpause').class('bi bi-caret-right');\n";
+echo "}\n";
 
 
 
