@@ -86,6 +86,7 @@ echo "const xhttp = new XMLHttpRequest();\n";
 echo "xhttp.open('GET', 'http://". $ipaddr ."/api.php?service=4');\n";
 echo "xhttp.send();\n";
 echo "getmeta();\n";
+echo "$('#dynamic').removeClass('bg-white').addClass('bg-black');\n";
 echo "}\n";
 
 echo "function prevtrack() {\n";
@@ -178,6 +179,7 @@ echo "currentpos = (current/duration)*100;\n";
 echo "currentprogress = currentpos.toFixed(0);\n";
 
 echo "$('#dynamic').css('width', currentprogress + '%');\n";
+echo "$('#dynamic').removeClass('bg-black').addClass('bg-white');\n";
 echo "$('#dynamicipad').css('width', currentprogress + '%');\n";
 echo "$('#dynamicipadl').css('width', currentprogress + '%');\n";
 echo "$('#secondscur').html(pad(current%60));\n";
