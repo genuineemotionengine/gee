@@ -186,7 +186,7 @@ echo "}\n";
 
 echo "if (current >= duration){\n";
 echo "getmeta();\n";
-
+echo "}\n";
 
 echo "}, 1000);\n";
 
