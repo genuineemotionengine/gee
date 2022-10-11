@@ -146,7 +146,7 @@ echo "$('#secondscuripl').html(pad(current%60));\n";
 echo "$('#minutescuripl').html(pad(parseInt(current/60,10)));\n";
 echo "duration = parseInt(result.duration);\n";
 echo "current = parseInt(result.elapsed);\n";
-echo "state = text(result.state);\n";
+echo "state = result.state;\n";
 //echo "$('#playpause').text(result.state);\n";
 
 //echo "if (state = play){\n";
