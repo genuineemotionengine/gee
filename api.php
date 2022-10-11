@@ -69,6 +69,10 @@ echo json_encode($rows);
 
 //***************** Pause **********************
 
+$statusarray = $mpd->server_status();
+
+$state = $statusarray['state'];
+
 if ($service == 2){
     
     echo $state;
