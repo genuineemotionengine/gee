@@ -140,7 +140,7 @@ $mpd->playlist_shuffle();
 
 $mpd->play(0);
 
-header("Location: http://". $ipaddr ."");
+//header("Location: http://". $ipaddr ."");
  
 }
 

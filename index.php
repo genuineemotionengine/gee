@@ -63,19 +63,14 @@ echo "<html xmlns='http://www.w3.org/1999/xhtml'>\n";
 echo "<head>\n";
 echo "<meta http-equiv='Content-Type' content='text/html; charset=UTF-8'/>\n";
 echo "<meta name = 'viewport' content = 'width=device-width, initial-scale = 1'/>\n";
-//if ($refresh){
-//echo "<meta http-equiv='refresh' content='".$refresh."'/>\n";
-//}
 echo "<title>".$hosty."</title>\n";
 echo "<link href='https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css' rel='stylesheet' integrity='sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT' crossorigin='anonymous'/>\n";
 echo "<link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css'/>\n";
+
 echo "<script src='https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js'></script>\n";
-
 echo "<script>\n";
-
 echo "var duration;\n";
 echo "var current;\n";
-//echo "var state;\n";
 echo "var play = 'play';\n";
 echo "var pause = 'pause';\n";
 echo "var currentpos;\n";
@@ -85,7 +80,6 @@ echo "function nexttrack() {\n";
 echo "const xhttp = new XMLHttpRequest();\n";
 echo "xhttp.open('GET', 'http://". $ipaddr ."/api.php?service=4');\n";
 echo "xhttp.send();\n";
-echo "$('#dynamic').css('width', 0 + '%');\n";
 echo "getmeta();\n";
 
 echo "}\n";
@@ -104,17 +98,12 @@ echo "xhttp.send();\n";
 echo "getmeta();\n";
 echo "}\n";
 
-
-//echo "function playrefresh() {\n";
-//echo "const xhttp = new XMLHttpRequest();\n";
-//echo "xhttp.open('GET', 'http://". $ipaddr ."/api.php?service=5&playl=1');\n";
-//echo "xhttp.send();\n";
-////echo "duration = 0;\n";
-////echo "current= 0;\n";
-//echo "getmeta();\n";
-//echo "}\n";
-
-
+echo "function playrefresh() {\n";
+echo "const xhttp = new XMLHttpRequest();\n";
+echo "xhttp.open('GET', 'http://". $ipaddr ."/api.php?service=5&playl=1');\n";
+echo "xhttp.send();\n";
+echo "getmeta();\n";
+echo "}\n";
 
 echo "function pad ( val ) { return val > 9 ? val : '0' + val; }\n";
 
@@ -151,7 +140,6 @@ echo "$('#minutescuripl').html(pad(parseInt(current/60,10)));\n";
 echo "duration = parseInt(result.duration);\n";
 echo "current = parseInt(result.elapsed);\n";
 echo "state = result.state;\n";
-//echo "$('#playpause').text(result.state);\n";
 
 echo "if (state === play){\n";
 echo "$('#playp').removeClass('bi-caret-right').addClass('bi-pause');\n";
@@ -161,16 +149,10 @@ echo "if (state === pause){\n";
 echo "$('#playp').removeClass('bi-pause').addClass('bi-caret-right');\n";
 echo "}\n";
 
-
-
 echo "});\n";
 echo "}\n";
 
-
-
-
 echo "getmeta();\n";
-
 
 echo "setInterval( function(){\n";
 echo "if (state === play){\n";
@@ -178,7 +160,6 @@ echo "current = current + 1;\n";
 echo "}\n";
 echo "currentpos = (current/duration)*100;\n";
 echo "currentprogress = currentpos.toFixed(0);\n";
-//echo "$('#dynamic').removeClass('bg-black').addClass('bg-white');\n";
 echo "$('#dynamic').css('width', currentprogress + '%');\n";
 echo "$('#dynamicipad').css('width', currentprogress + '%');\n";
 echo "$('#dynamicipadl').css('width', currentprogress + '%');\n";
@@ -195,11 +176,8 @@ echo "getmeta();\n";
 echo "}\n";
 
 echo "}, 1000);\n";
-
-
-
-
 echo "</script>\n";
+
 echo "</head>\n";
 echo "<body class='p-3 mb-2 bg-black text-white pt-0 ps-0 pe-0 me-0'>\n\n";
 
@@ -209,39 +187,13 @@ echo "<body class='p-3 mb-2 bg-black text-white pt-0 ps-0 pe-0 me-0'>\n\n";
 echo "<div class='container-fluid text-center ps-0 pe-0'>\n";
 echo "<div class='d-block d-sm-none'>\n";
 echo "<img id='image' class='img-fluid' src='".$image."' />\n";
-//echo "<div id='current'></div>\n";
 echo "<br/>\n";
-//echo "<a href='http://". $ipaddr ."/api.php?service=3'><i class='bi bi-arrow-left-short' style='font-size: 6rem; color: white;'></i></a>&nbsp;&nbsp;\n";
 echo "<a onclick='prevtrack()'><i class='bi bi-arrow-left-short' style='font-size: 6rem; color: white;'></i></a>&nbsp;&nbsp;\n";
-
 echo "<a onclick='playpause()'><i id='playp' class='bi ' style='font-size: 6rem; color: white;'></i></a>&nbsp;&nbsp;\n";
-
-//if ($play == 1){
-//    echo "<a href='http://". $ipaddr ."/api.php?service=2&pause=1'><i class='bi bi-pause' style='font-size: 6rem; color: white;'></i></a>&nbsp;&nbsp;\n";
-//    
-//}
-//if ($play == 2){
-//    echo "<a href='http://". $ipaddr ."/api.php?service=2&pause=0'><i class='bi bi-caret-right' style='font-size: 6rem; color: white;'></i></a>&nbsp;&nbsp;\n";
-//    
-//}
-//if ($playpause === play){
-//    echo "<a href='http://". $ipaddr ."/api.php?service=2&pause=1'><i class='bi bi-pause' style='font-size: 6rem; color: white;'></i></a>&nbsp;&nbsp;\n";
-//    
-//}
-//if ($playpause === pause){
-//    echo "<a href='http://". $ipaddr ."/api.php?service=2&pause=0'><i class='bi bi-caret-right' style='font-size: 6rem; color: white;'></i></a>&nbsp;&nbsp;\n";
-//}
-//echo "<a href='http://". $ipaddr ."/api.php?service=4'><i class='bi bi-arrow-right-short' style='font-size: 6rem; color: white;'></i></a><br>\n";
 echo "<a onclick='nexttrack()'><i class='bi bi-arrow-right-short' style='font-size: 6rem; color: white;'></i></a><br>\n";
-
 echo "<div class='container pt-0 mt-0'>\n";
 echo "<div class='row row-cols-3'>\n";
-//if ($playpause === pause){
-//    echo "<div class='col-2 text-center'>".$elapsedpause."</div>\n";
-//}else{
-    echo "<div class='col-2 text-center'><span id='minutescur'>00</span>:<span id='secondscur'>00</span></div>\n";
-    //echo "<div class='col-2 text-center'><span id='time'>00</span></div>\n";
-//}
+echo "<div class='col-2 text-center'><span id='minutescur'>00</span>:<span id='secondscur'>00</span></div>\n";
 echo "<div class='col-8'>\n";
 echo "<div class='mt-2'>\n";
 echo "<div class='progress bg-black' style='height: 5px;'>\n";
@@ -249,7 +201,6 @@ echo "<div id='dynamic' class='progress-bar bg-white' style='width: 0%; height: 
 echo "</div>\n";
 echo "</div>\n";
 echo "</div>\n";
-//echo "<div id='duration' class='col-2 text-center'>".$duration."</div>\n";
 echo "<div class='col-2 text-center'><span id='minutesdur'>00</span>:<span id='secondsdur'>00</span></div>\n";
 echo "</div>\n";
 echo "</div>\n";
@@ -257,8 +208,8 @@ echo "<br/>\n";
 echo "<h1 id='title' class='display-6'>".$title."</h1>\n";
 echo "<h1 id='artist' class='display-6'>".$artist."</h1>\n";
 echo "<h1 id='album' class='display-6'>".$album."</h1>\n";
-echo "<a href='http://". $ipaddr ."/api.php?service=5&playl=1'><i class='bi bi-arrow-repeat' style='font-size: 3rem; color: white;'></i></a>\n";
-//echo "<a onclick='playrefresh()'><i class='bi bi-arrow-repeat' style='font-size: 3rem; color: white;'></i></a>\n";
+//echo "<a href='http://". $ipaddr ."/api.php?service=5&playl=1'><i class='bi bi-arrow-repeat' style='font-size: 3rem; color: white;'></i></a>\n";
+echo "<a onclick='playrefresh()'><i class='bi bi-arrow-repeat' style='font-size: 3rem; color: white;'></i></a>\n";
 echo "</div>\n";
 echo "</div>\n\n";
 //**********************
