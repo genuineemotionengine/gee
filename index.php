@@ -168,7 +168,7 @@ echo "$('#minutescuripl').html(pad(parseInt(current/60,10)));\n";
 
 
 echo "if (current >= duration){\n";
-//echo "$('#dynamic').removeClass('bg-white').addClass('bg-black');\n";
+echo "$('#dynamic').removeClass('bg-white').addClass('bg-black');\n";
 echo "getmeta();\n";
 //echo "$('#dynamic').removeClass('bg-black').addClass('bg-white');\n";
 echo "}\n";
