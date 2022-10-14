@@ -70,6 +70,13 @@ echo "<link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/bootstrap-icons@
 
 echo "<script src='https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js'></script>\n";
 echo "<script>\n";
+
+echo "window.addEventListener('load',function() {\n";
+echo "setTimeout(function(){\n";
+echo "window.scrollTo(0, 1);\n";
+echo "}, 0);\n";
+echo "});\n";
+
 echo "var duration;\n";
 echo "var current;\n";
 echo "var play = 'play';\n";
