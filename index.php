@@ -148,7 +148,7 @@ echo "});\n";
 echo "}\n";
 
 echo "getmeta();\n";
-echo "$('#dynamic').removeClass('bg-black').addClass('bg-white');\n";
+//echo "$('#dynamic').removeClass('bg-black').addClass('bg-white');\n";
 
 echo "setInterval( function(){\n";
 echo "if (state === play){\n";
