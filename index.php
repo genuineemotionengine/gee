@@ -157,10 +157,11 @@ echo "current = current + 1;\n";
 echo "}\n";
 echo "currentpos = (current/duration)*100;\n";
 echo "currentprogress = currentpos.toFixed(0);\n";
+echo "$('#dynamic').removeClass('bg-black').addClass('bg-white');\n";
 echo "$('#dynamic').css('width', currentprogress + '%');\n";
 echo "$('#dynamicipad').css('width', currentprogress + '%');\n";
 echo "$('#dynamicipadl').css('width', currentprogress + '%');\n";
-echo "$('#dynamic').removeClass('bg-black').addClass('bg-white');\n";
+
 echo "$('#secondscur').html(pad(current%60));\n";
 echo "$('#minutescur').html(pad(parseInt(current/60,10)));\n";
 echo "$('#secondscuripp').html(pad(current%60));\n";
