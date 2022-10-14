@@ -151,6 +151,7 @@ echo "getmeta();\n";
 //echo "$('#dynamic').removeClass('bg-black').addClass('bg-white');\n";
 
 echo "setInterval( function(){\n";
+echo "$('#dynamic').removeClass('bg-black').addClass('bg-white');\n";
 echo "if (state === play){\n";
 echo "current = current + 1;\n";
 echo "}\n";
