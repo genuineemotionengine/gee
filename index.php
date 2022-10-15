@@ -136,6 +136,7 @@ echo "$('#minutescuripp').html(pad(parseInt(current/60,10)));\n";
 echo "$('#secondscuripl').html(pad(current%60));\n";
 echo "$('#minutescuripl').html(pad(parseInt(current/60,10)));\n";
 
+
 echo "if (state === play){\n";
 echo "$('#playp').removeClass('bi-caret-right').addClass('bi-pause');\n";
 echo "}\n";
@@ -157,7 +158,7 @@ echo "current = current + 1;\n";
 echo "}\n";
 echo "currentpos = (current/duration)*100;\n";
 echo "currentprogress = currentpos.toFixed(0);\n";
-echo "$('#dynamic').removeClass('bg-black').addClass('bg-white');\n";
+
 echo "$('#dynamic').css('width', currentprogress + '%');\n";
 echo "$('#dynamicipad').css('width', currentprogress + '%');\n";
 echo "$('#dynamicipadl').css('width', currentprogress + '%');\n";
@@ -198,7 +199,7 @@ echo "<div class='col-2 text-center'><span id='minutescur'>00</span>:<span id='s
 echo "<div class='col-8'>\n";
 echo "<div class='mt-2'>\n";
 echo "<div class='progress bg-black' style='height: 5px;'>\n";
-echo "<div id='dynamic' class='progress-bar bg-white' style='width: 0%; height: 5px;'></div>\n";
+echo "<div id='dynamic' class='progress-bar bg-black' style='width: 0%; height: 5px;'></div>\n";
 echo "</div>\n";
 echo "</div>\n";
 echo "</div>\n";
