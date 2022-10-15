@@ -155,11 +155,11 @@ echo "setInterval( function(){\n";
 
 echo "if (state === play){\n";
 echo "current = current + 1;\n";
-echo "$('#dynamic').removeClass('bg-black').addClass('bg-white');\n";
+
 echo "}\n";
 echo "currentpos = (current/duration)*100;\n";
 echo "currentprogress = currentpos.toFixed(0);\n";
-
+echo "$('#dynamic').removeClass('bg-black').addClass('bg-white');\n";
 echo "$('#dynamic').css('width', currentprogress + '%');\n";
 echo "$('#dynamicipad').css('width', currentprogress + '%');\n";
 echo "$('#dynamicipadl').css('width', currentprogress + '%');\n";
@@ -173,7 +173,7 @@ echo "$('#minutescuripl').html(pad(parseInt(current/60,10)));\n";
 
 
 echo "if (current >= duration){\n";
-echo "$('#dynamic').removeClass('bg-white').addClass('bg-black');\n";
+//echo "$('#dynamic').removeClass('bg-white').addClass('bg-black');\n";
 echo "getmeta();\n";
 //echo "$('#dynamic').removeClass('bg-black').addClass('bg-white');\n";
 echo "}\n";
