@@ -159,7 +159,7 @@ echo "current = current + 1;\n";
 echo "}\n";
 echo "currentpos = (current/duration)*100;\n";
 echo "currentprogress = currentpos.toFixed(0);\n";
-echo "$('#dynamic').removeClass('bg-black').addClass('bg-white');\n";
+//echo "$('#dynamic').removeClass('bg-black').addClass('bg-white');\n";
 echo "$('#dynamic').css('width', currentprogress + '%');\n";
 echo "$('#dynamicipad').css('width', currentprogress + '%');\n";
 echo "$('#dynamicipadl').css('width', currentprogress + '%');\n";
