@@ -155,6 +155,7 @@ echo "setInterval( function(){\n";
 
 echo "if (state === play){\n";
 echo "current = current + 1;\n";
+echo "$('#dynamic').removeClass('bg-black').addClass('bg-white');\n";
 echo "}\n";
 echo "currentpos = (current/duration)*100;\n";
 echo "currentprogress = currentpos.toFixed(0);\n";
