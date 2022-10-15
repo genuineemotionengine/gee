@@ -200,7 +200,7 @@ echo "<div class='col-2 text-center'><span id='minutescur'>00</span>:<span id='s
 echo "<div class='col-8'>\n";
 echo "<div class='mt-2'>\n";
 echo "<div class='progress bg-black' style='height: 5px;'>\n";
-echo "<div id='dynamic' class='progress-bar bg-black' style='width: 0%; height: 5px;'></div>\n";
+echo "<div id='dynamic' class='progress-bar bg-white' style='width: 0%; height: 5px;'></div>\n";
 echo "</div>\n";
 echo "</div>\n";
 echo "</div>\n";
