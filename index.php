@@ -139,10 +139,14 @@ echo "$('#minutescuripl').html(pad(parseInt(current/60,10)));\n";
 
 echo "if (state === play){\n";
 echo "$('#playp').removeClass('bi-caret-right').addClass('bi-pause');\n";
+echo "$('#playpipp').removeClass('bi-caret-right').addClass('bi-pause');\n";
+echo "$('#playpipl').removeClass('bi-caret-right').addClass('bi-pause');\n";
 echo "}\n";
 
 echo "if (state === pause){\n";
 echo "$('#playp').removeClass('bi-pause').addClass('bi-caret-right');\n";
+echo "$('#playpipp').removeClass('bi-pause').addClass('bi-caret-right');\n";
+echo "$('#playpipl').removeClass('bi-pause').addClass('bi-caret-right');\n";
 echo "}\n";
 
 echo "});\n";
@@ -224,7 +228,7 @@ echo "<div class='d-none d-md-block d-lg-none'>\n";
 echo "<img id='imageipp' class='img-fluid' src='".$image."' />\n";
 echo "<br/>\n";
 echo "<a onclick='prevtrack()'><i class='bi bi-arrow-left-short' style='font-size: 6rem; color: white;'></i></a>&nbsp;&nbsp;\n";
-echo "<a onclick='playpause()'><i id='playp' class='bi ' style='font-size: 6rem; color: white;'></i></a>&nbsp;&nbsp;\n";
+echo "<a onclick='playpause()'><i id='playpipp' class='bi ' style='font-size: 6rem; color: white;'></i></a>&nbsp;&nbsp;\n";
 echo "<a onclick='nexttrack()'><i class='bi bi-arrow-right-short' style='font-size: 6rem; color: white;'></i></a><br>\n";
 echo "<div class='container pt-0 mt-0'>\n";
 echo "<div class='row row-cols-3'>\n";
@@ -282,7 +286,7 @@ echo "<img id='imageipl' class='img-fluid' src='".$image."' />\n";
 echo "</div>\n";
 echo "<div class='col'>\n";
 echo "<a onclick='prevtrack()'><i class='bi bi-arrow-left-short' style='font-size: 6rem; color: white;'></i></a>&nbsp;&nbsp;\n";
-echo "<a onclick='playpause()'><i id='playp' class='bi ' style='font-size: 6rem; color: white;'></i></a>&nbsp;&nbsp;\n";
+echo "<a onclick='playpause()'><i id='playpipl' class='bi ' style='font-size: 6rem; color: white;'></i></a>&nbsp;&nbsp;\n";
 echo "<a onclick='nexttrack()'><i class='bi bi-arrow-right-short' style='font-size: 6rem; color: white;'></i></a><br>\n";
 
 echo "<div class='container pt-0 mt-0'>\n";
