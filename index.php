@@ -223,34 +223,12 @@ echo "<div class='container-fluid text-center ps-0 pe-0'>\n";
 echo "<div class='d-none d-md-block d-lg-none'>\n";
 echo "<img id='imageipp' class='img-fluid' src='".$image."' />\n";
 echo "<br/>\n";
-//echo "<a href='http://". $ipaddr ."/api.php?service=3'><i class='bi bi-arrow-left-short' style='font-size: 6rem; color: white;'></i></a>&nbsp;&nbsp;\n";
 echo "<a onclick='prevtrack()'><i class='bi bi-arrow-left-short' style='font-size: 6rem; color: white;'></i></a>&nbsp;&nbsp;\n";
-
-if ($play == 1){
-    echo "<a href='http://". $ipaddr ."/api.php?service=2&pause=1'><i class='bi bi-pause' style='font-size: 6rem; color: white;'></i></a>&nbsp;&nbsp;\n";
-    
-}
-if ($play == 2){
-    echo "<a href='http://". $ipaddr ."/api.php?service=2&pause=0'><i class='bi bi-caret-right' style='font-size: 6rem; color: white;'></i></a>&nbsp;&nbsp;\n";
-    
-}
-if ($playpause === play){
-    echo "<a href='http://". $ipaddr ."/api.php?service=2&pause=1'><i class='bi bi-pause' style='font-size: 6rem; color: white;'></i></a>&nbsp;&nbsp;\n";
-    
-}
-if ($playpause === pause){
-    echo "<a href='http://". $ipaddr ."/api.php?service=2&pause=0'><i class='bi bi-caret-right' style='font-size: 6rem; color: white;'></i></a>&nbsp;&nbsp;\n";
-}
-//echo "<a href='http://". $ipaddr ."/api.php?service=4'><i class='bi bi-arrow-right-short' style='font-size: 6rem; color: white;'></i></a><br>\n";
+echo "<a onclick='playpause()'><i id='playp' class='bi ' style='font-size: 6rem; color: white;'></i></a>&nbsp;&nbsp;\n";
 echo "<a onclick='nexttrack()'><i class='bi bi-arrow-right-short' style='font-size: 6rem; color: white;'></i></a><br>\n";
-
 echo "<div class='container pt-0 mt-0'>\n";
 echo "<div class='row row-cols-3'>\n";
-if ($playpause === pause){
-    echo "<div class='col-2 text-center'>".$elapsedpause."</div>\n";
-}else{
-    echo "<div class='col-2 text-center'><span id='minutescuripp'>00</span>:<span id='secondscuripp'>00</span></div>\n";
-}
+echo "<div class='col-2 text-center'><span id='minutescuripp'>00</span>:<span id='secondscuripp'>00</span></div>\n";
 echo "<div class='col-8'>\n";
 echo "<div class='mt-2'>\n";
 echo "<div class='progress bg-black' style='height: 5px;'>\n";
@@ -258,11 +236,9 @@ echo "<div id='dynamicipad' class='progress-bar bg-white' style='width: 0%; heig
 echo "</div>\n";
 echo "</div>\n";
 echo "</div>\n";
-//echo "<div class='col-2 text-center'>".$duration."</div>\n";
 echo "<div class='col-2 text-center'><span id='minutesduripp'>00</span>:<span id='secondsduripp'>00</span></div>\n";
 echo "</div>\n";
 echo "</div>\n";
-
 echo "<br/>\n";
 echo "<h1 id='titleipp' class='display-6'>".$title."</h1>\n";
 echo "<h1 id='artistipp' class='display-6'>".$artist."</h1>\n";
@@ -305,35 +281,13 @@ echo "<div class='col'>\n";
 echo "<img id='imageipl' class='img-fluid' src='".$image."' />\n";
 echo "</div>\n";
 echo "<div class='col'>\n";
-
-//echo "<a href='http://". $ipaddr ."/api.php?service=3'><i class='bi bi-arrow-left-short' style='font-size: 6rem; color: white;'></i></a>&nbsp;&nbsp;\n";
 echo "<a onclick='prevtrack()'><i class='bi bi-arrow-left-short' style='font-size: 6rem; color: white;'></i></a>&nbsp;&nbsp;\n";
-
-if ($play == 1){
-    echo "<a href='http://". $ipaddr ."/api.php?service=2&pause=1'><i class='bi bi-pause' style='font-size: 6rem; color: white;'></i></a>&nbsp;&nbsp;\n";
-    
-}
-if ($play == 2){
-    echo "<a href='http://". $ipaddr ."/api.php?service=2&pause=0'><i class='bi bi-caret-right' style='font-size: 6rem; color: white;'></i></a>&nbsp;&nbsp;\n";
-    
-}
-if ($playpause === play){
-    echo "<a href='http://". $ipaddr ."/api.php?service=2&pause=1'><i class='bi bi-pause' style='font-size: 6rem; color: white;'></i></a>&nbsp;&nbsp;\n";
-    
-}
-if ($playpause === pause){
-    echo "<a href='http://". $ipaddr ."/api.php?service=2&pause=0'><i class='bi bi-caret-right' style='font-size: 6rem; color: white;'></i></a>&nbsp;&nbsp;\n";
-}
-//echo "<a href='http://". $ipaddr ."/api.php?service=4'><i class='bi bi-arrow-right-short' style='font-size: 6rem; color: white;'></i></a><br>\n";
+echo "<a onclick='playpause()'><i id='playp' class='bi ' style='font-size: 6rem; color: white;'></i></a>&nbsp;&nbsp;\n";
 echo "<a onclick='nexttrack()'><i class='bi bi-arrow-right-short' style='font-size: 6rem; color: white;'></i></a><br>\n";
 
 echo "<div class='container pt-0 mt-0'>\n";
 echo "<div class='row row-cols-3'>\n";
-if ($playpause === pause){
-    echo "<div class='col-2 text-center'>".$elapsedpause."</div>\n";
-}else{
-    echo "<div class='col-2 text-center'><span id='minutescuripl'>00</span>:<span id='secondscuripl'>00</span></div>\n";
-}
+echo "<div class='col-2 text-center'><span id='minutescuripl'>00</span>:<span id='secondscuripl'>00</span></div>\n";
 echo "<div class='col-8'>\n";
 echo "<div class='mt-2'>\n";
 echo "<div class='progress bg-black' style='height: 5px;'>\n";
@@ -341,7 +295,6 @@ echo "<div id='dynamicipadl' class='progress-bar bg-white' style='width: 0%; hei
 echo "</div>\n";
 echo "</div>\n";
 echo "</div>\n";
-//echo "<div class='col-2 text-center'>".$duration."</div>\n";
 echo "<div class='col-2 text-center'><span id='minutesduripl'>00</span>:<span id='secondsduripl'>00</span></div>\n";
 echo "</div>\n";
 echo "</div>\n";
