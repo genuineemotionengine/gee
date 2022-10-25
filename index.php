@@ -216,28 +216,9 @@ echo "<h1 id='title' class='display-6'>".$title."</h1>\n";
 echo "<h1 id='artist' class='display-6'>".$artist."</h1>\n";
 echo "<h1 id='album' class='display-6'>".$album."</h1>\n";
 echo "<a href='http://". $ipaddr ."/api.php?service=5&playl=1'><i class='bi bi-arrow-repeat' style='font-size: 3rem; color: white;'></i></a>&nbsp;&nbsp;&nbsp;&nbsp;\n";
-echo "<a data-toggle='modal' href='#myModal'><i class='bi bi-three-dots' style='font-size: 3rem; color: white;'></i></a>\n";
+//echo "<a data-toggle='modal' href='#myModal'><i class='bi bi-three-dots' style='font-size: 3rem; color: white;'></i></a>\n";
+echo "<button type='button' class='btn btn-primary' data-bs-toggle='modal' data-bs-target='#staticBackdrop'><i class='bi bi-three-dots' style='font-size: 3rem; color: white;'></i></button>\n";
 echo "</div>\n";
-
-echo "<div class='modal fade' id='myModal' role='dialog'>\n";
-echo "<div class='modal-dialog'>\n";
-echo "<div class='modal-content'>\n";
-echo "<div class='modal-header'>\n";
-echo "<button type='button' class='close' data-dismiss='modal'>&times;</button>\n";
-echo "<h4 class='modal-title'>Modal Header</h4>\n";
-echo "</div>\n";
-echo "<div class='modal-body'>\n";
-echo "<p>Some text in the modal.</p>\n";
-echo "</div>\n";
-echo "<div class='modal-footer'>\n";
-echo "<button type='button' class='btn btn-default' data-dismiss='modal'>Close</button>\n";
-echo "</div>\n";
-echo "</div>\n";
-echo "</div>\n";
-echo "</div>\n";
-
-
-
 echo "</div>\n\n";
 //**********************
 
@@ -376,8 +357,21 @@ echo "</div>\n\n";
 
 //*********** Modal ***************
 
-
-
+echo "<div class='modal fade' id='staticBackdrop' data-bs-backdrop='static' data-bs-keyboard='false' tabindex='-1' aria-labelledby='staticBackdropLabel' aria-hidden='true'>\n";
+echo "<div class='modal-dialog'>\n";
+echo "<div class='modal-content'>\n";
+echo "<div class='modal-header'>\n";
+echo "<h1 class='modal-title fs-5' id='staticBackdropLabel'>Modal title</h1>\n";
+echo "<button type='button' class='btn-close' data-bs-dismiss='modal' aria-label='Close'></button>\n";
+echo "</div>\n";
+echo "<div class='modal-body'>All Music</div>\n";
+echo "<div class='modal-footer'>\n";
+echo "<button type='button' class='btn btn-secondary' data-bs-dismiss='modal'>Close</button>\n";
+echo "<button type='button' class='btn btn-primary'>Understood</button>\n";
+echo "</div>\n";
+echo "</div>\n";
+echo "</div>\n";
+echo "</div>\n";
 
 
 
