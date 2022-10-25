@@ -364,7 +364,7 @@ echo "<h1 class='modal-title fs-5' id='staticBackdropLabel'>Album</h1>\n";
 echo "<button type='button' class='btn btn-sm' data-bs-dismiss='modal' aria-label='Close'><i class='bi bi-x' style='font-size: 3rem; color: white;'></i></button>\n";
 echo "</div>\n";
 echo "<div class='modal-body'>\n";
-echo "<img id='imagem' class='img-fluid' src='".$image."' />\n";
+echo "<img id='imagem' class='img-fluid w-25 h-25' src='".$image."' />\n";
 echo "</div>\n";
 echo "<div class='modal-footer'>\n";
 echo "<button type='button' class='btn btn-secondary' data-bs-dismiss='modal'>Close</button>\n";
