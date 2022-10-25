@@ -358,7 +358,7 @@ echo "</div>\n\n";
 //*********** Modal ***************
 
 echo "<div class='modal fade' id='staticBackdrop' data-bs-backdrop='static' data-bs-keyboard='false' tabindex='-1' aria-labelledby='staticBackdropLabel' aria-hidden='true'>\n";
-echo "<div class='modal-dialog'>\n";
+echo "<div class='modal-dialog modal-dialog-scrollable bg-black'>\n";
 echo "<div class='modal-content'>\n";
 echo "<div class='modal-header'>\n";
 echo "<h1 class='modal-title fs-5' id='staticBackdropLabel'>Modal title</h1>\n";
