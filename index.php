@@ -364,7 +364,7 @@ echo "<div class='modal-header'>\n";
 echo "<h1 class='modal-title fs-5' id='staticBackdropLabel'>Modal title</h1>\n";
 echo "<button type='button' class='btn-close' data-bs-dismiss='modal' aria-label='Close'></button>\n";
 echo "</div>\n";
-echo "<div class='modal-body'><h1>All Music</h1></div>\n";
+echo "<div class='modal-body'><p>Some text in the modal.</p></div>\n";
 echo "<div class='modal-footer'>\n";
 echo "<button type='button' class='btn btn-secondary' data-bs-dismiss='modal'>Close</button>\n";
 echo "<button type='button' class='btn btn-primary'>Understood</button>\n";
