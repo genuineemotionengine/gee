@@ -361,7 +361,7 @@ echo "<div class='modal-dialog modal-dialog-scrollable'>\n";
 echo "<div class='modal-content bg-black'>\n";
 echo "<div class='modal-header'>\n";
 echo "<img id='imagem' class='img-fluid w-25 h-25' src='".$image."' />\n";
-echo "<h1 class='modal-title fs-5' id='staticBackdropLabel'>Album</h1>\n";
+echo "<h1 id='staticBackdropLabel'>Album</h1>\n";
 echo "<button type='button' class='btn btn-sm' data-bs-dismiss='modal' aria-label='Close'><i class='bi bi-x' style='font-size: 3rem; color: white;'></i></button>\n";
 echo "</div>\n";
 echo "<div class='modal-body'>\n";
