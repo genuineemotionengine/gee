@@ -216,7 +216,7 @@ echo "<h1 id='title' class='display-6'>".$title."</h1>\n";
 echo "<h1 id='artist' class='display-6'>".$artist."</h1>\n";
 echo "<h1 id='album' class='display-6'>".$album."</h1>\n";
 echo "<a href='http://". $ipaddr ."/api.php?service=5&playl=1'><i class='bi bi-arrow-repeat' style='font-size: 3rem; color: white;'></i></a>&nbsp;&nbsp;&nbsp;&nbsp;\n";
-echo "<a onclick='nexttrack()'><i class='bi bi-three-dots' style='font-size: 3rem; color: white;'></i></a>\n";
+echo "<a data-toggle='modal' href='#myModal'><i class='bi bi-three-dots' style='font-size: 3rem; color: white;'></i></a>\n";
 echo "</div>\n";
 echo "</div>\n\n";
 //**********************
@@ -353,6 +353,35 @@ echo "</div>\n";
 echo "</div>\n\n";
 
 //*************************
+
+//*********** Modal ***************
+
+echo "<div class='container'>\n";
+echo "<div class='modal fade' id='myModal' role='dialog'>\n";
+echo "<div class='modal-dialog'>\n";
+echo "<div class='modal-content'>\n";
+echo "<div class='modal-header'>\n";
+echo "<button type='button' class='close' data-dismiss='modal'>&times;</button>\n";
+echo "<h4 class='modal-title'>Modal Header</h4>\n";
+echo "</div>\n";
+echo "<div class='modal-body'>\n";
+echo "<p>Some text in the modal.</p>\n";
+echo "</div>\n";
+echo "<div class='modal-footer'>\n";
+echo "<button type='button' class='btn btn-default' data-dismiss='modal'>Close</button>\n";
+echo "</div>\n";
+echo "</div>\n";
+echo "</div>\n";
+echo "</div>\n";
+echo "</div>\n";
+
+
+
+
+
+
+
+/*************************
 
 echo "</body>\n";
 echo "</html>\n";
