@@ -361,8 +361,8 @@ echo "<div class='modal fade' id='staticBackdrop' data-bs-backdrop='static' data
 echo "<div class='modal-dialog modal-dialog-scrollable'>\n";
 echo "<div class='modal-content bg-black'>\n";
 echo "<div class='modal-header'>\n";
-//echo "<h1 class='modal-title fs-5' id='staticBackdropLabel'>Modal title</h1>\n";
-echo "<button type='button' class='btn-sm' data-bs-dismiss='modal' aria-label='Close'><i class='bi bi-x' style='font-size: 3rem; color: white;'></i></button>\n";
+echo "<h1 class='modal-title fs-5' id='staticBackdropLabel'>Modal title</h1>\n";
+echo "<button type='button' class='btn btn-sm' data-bs-dismiss='modal' aria-label='Close'><i class='bi bi-x' style='font-size: 3rem; color: white;'></i></button>\n";
 echo "</div>\n";
 echo "<div class='modal-body'><p>Some text in the modal.</p></div>\n";
 echo "<div class='modal-footer'>\n";
