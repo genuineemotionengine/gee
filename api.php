@@ -46,7 +46,7 @@ $title = $mySimpleArray[0]['Title'];
 
 $albumartist = $mySimpleArray[0]['AlbumArtist'];
 
-if (stripos("$albumartist;, Various Artists - ") === 0){
+if (stripos("$albumartist, Various Artists - ") === 0){
     $artist = "Various Artists";
 }
 
