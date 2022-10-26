@@ -34,7 +34,7 @@ $refresh = $durations[0] - $elapsed;
 
 $mySimpleArray = $mpd->current_song();
     
-    print_r($mySimpleArray);
+    //print_r($mySimpleArray);
       
 $flacfile = $mySimpleArray[0]['name'];
 
