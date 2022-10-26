@@ -371,7 +371,7 @@ echo "<div class='col-3'><img id='imagem' class='img-fluid' src='".$image."' /><
 
 echo "<div class='col-7'>\n";
 echo "<div id='albumm'></div>\n";
-echo "<div id='artistm></div>\n";
+echo "<div id='artistm'></div>\n";
 echo "</div>\n";
 
 echo "<div class='col-1'><button type='button' class='btn btn-sm' data-bs-dismiss='modal' aria-label='Close'><i class='bi bi-x' style='font-size: 3rem; color: white;'></i></button></div>\n";
