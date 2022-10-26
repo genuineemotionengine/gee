@@ -47,7 +47,7 @@ $title = $mySimpleArray[0]['Title'];
 $albumartist = $mySimpleArray[0]['AlbumArtist'];
 
 if (stripos("$albumartist, Various Artists - ") == 0){
-    $artist = "Various Artists";
+    $albumartist = "Various Artists";
 }
 
 $flacfile = "/mnt/usb/".$flacfile;
@@ -67,6 +67,7 @@ $rows = ['image' => $image,
 'album' => $album,
 'elapsed' => $elapsed,
 'duration' => $durations[0],
+'albumartist' => $albumartist,   
 'state' => $state
      ];
 
