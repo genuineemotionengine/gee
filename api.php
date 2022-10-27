@@ -168,3 +168,19 @@ echo $hosty."<br>";
     
 }
 
+
+//***************** get albums **********************
+
+if ($service == 7){  
+    
+
+
+$mpd = list_albums();
+
+
+
+    
+
+    
+}
+
