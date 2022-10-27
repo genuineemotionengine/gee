@@ -196,9 +196,9 @@ $playlist = "allmusic";
 
 $playlistarray = $mpd->playlistinfo($playlist);
 
-echo array_search("Album",$playlistarray);
+//echo array_search("Album",$playlistarray);
 
-//echo '<pre>'.htmlentities(print_r($playlistarray, true), ENT_SUBSTITUTE).'</pre>';  
+echo '<pre>'.htmlentities(print_r($playlistarray, true), ENT_SUBSTITUTE).'</pre>';  
 
     
 }
