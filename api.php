@@ -183,7 +183,7 @@ $albumarray = $mpd->list_albums();
 
 
 
-print_r($albumarray);    
+echo '<pre>'.htmlentities(print_r($albumarray, true), ENT_SUBSTITUTE).'</pre>';  
 
     
 }
