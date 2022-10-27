@@ -196,9 +196,9 @@ $playlist = "allmusic";
 
 $playlistarray = $mpd->playlistinfo($playlist);
 
+echo array_search("See This Through And Leave",$playlistarray);
 
-
-echo '<pre>'.htmlentities(print_r($playlistarray, true), ENT_SUBSTITUTE).'</pre>';  
+//echo '<pre>'.htmlentities(print_r($playlistarray, true), ENT_SUBSTITUTE).'</pre>';  
 
     
 }
