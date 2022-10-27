@@ -188,3 +188,17 @@ echo '<pre>'.htmlentities(print_r($albumarray, true), ENT_SUBSTITUTE).'</pre>';
     
 }
 
+//***************** get playlist **********************
+
+if ($service == 8){  
+    
+$playlist = "allmusic";
+
+$playlistarray = playlistinfo($playlist);
+
+
+
+echo '<pre>'.htmlentities(print_r($playlistarray, true), ENT_SUBSTITUTE).'</pre>';  
+
+    
+}
