@@ -34,7 +34,8 @@ $refresh = $durations[0] - $elapsed;
 
 $mySimpleArray = $mpd->current_song();
     
-    print_r($mySimpleArray);
+    //print_r($mySimpleArray);
+    echo '<pre>'.htmlentities(print_r($mySimpleArray, true), ENT_SUBSTITUTE).'</pre>';
       
 $flacfile = $mySimpleArray[0]['name'];
 
