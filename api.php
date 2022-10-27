@@ -175,11 +175,11 @@ if ($service == 7){
     
 
 
-$mpd->list_albums();
+$albumarray = $mpd->list_albums();
 
 
 
-    
+print_r($albumarray);    
 
     
 }
