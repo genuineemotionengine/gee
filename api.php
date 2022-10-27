@@ -175,7 +175,7 @@ if ($service == 7){
     
 
 
-$mpd = list_albums();
+$mpd->list_albums();
 
 
 
