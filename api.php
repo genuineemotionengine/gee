@@ -194,7 +194,7 @@ if ($service == 8){
     
 $playlist = "allmusic";
 
-$playlistarray = playlistinfo($playlist);
+$playlistarray = $mpd->playlistinfo($playlist);
 
 
 
