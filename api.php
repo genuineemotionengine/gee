@@ -173,9 +173,11 @@ echo $hosty."<br>";
 
 if ($service == 7){  
     
+$playlist = "allmusic";
 
 
-$albumarray = $mpd->list_albums();
+$albumarray = $mpd->playlistinfo($playlist) ;
+    
 
 
 
