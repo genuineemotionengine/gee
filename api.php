@@ -194,7 +194,7 @@ if ($service == 8){
     
 $what = "Changing Faces";
 
-$type = "Title";
+$type = "Album";
 
 $playlistarray = $mpd->search($type, $what);
 
