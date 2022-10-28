@@ -21,7 +21,7 @@ xmlhttp.onload = function() {
   const myObj = JSON.parse(this.responseText);
   let text = "<table border='1'>"
   for (let x in myObj) {
-    text += "<tr><td>" + myObj[x].Track + myObj[x].Title + "</td></tr>";
+    text += "<tr><td>" + myObj[x].Track + " - " + myObj[x].Title + "</td></tr>";
   }
   text += "</table>"    
   document.getElementById("demo").innerHTML = text;
