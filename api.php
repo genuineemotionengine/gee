@@ -188,7 +188,7 @@ echo '<pre>'.htmlentities(print_r($albumarray, true), ENT_SUBSTITUTE).'</pre>';
     
 }
 
-//***************** get playlist **********************
+//***************** get album list **********************
 
 if ($service == 8){  
     
@@ -206,5 +206,22 @@ $playlistarray = $mpd->search($type, $what);
 
 echo json_encode($playlistarray);
 
+
+}
+//***************** set vol **********************
+
+if ($service == 9){  
+    
+
+
+$mpd->setvol($vol);
+
+
+
+
+
     
 }
+
+    
+
