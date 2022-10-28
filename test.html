@@ -7,31 +7,29 @@
 <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css'/>
 <script src='https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js'></script>
 
-        
-  <script>
-function next() {
-  const xhttp = new XMLHttpRequest();
-
-  xhttp.open("GET", "http://192.168.68.118/api.php?service=4");
-  xhttp.send();
-}
-</script>      
-        
-        
-        
-        
-        
-        
-        
-        
     </head>
 <body>
 
-<h2>The XMLHttpRequest Object</h2>
+<h2>Make a table based on JSON data.</h2>
 
+<p id="demo"></p>
 
-<a onclick='next()'><i class='bi bi-arrow-right-short' style='font-size: 6rem; color: black;'></i></a>
-
+<script>
+const dbParam = JSON.stringify({table:"customers",limit:20});
+const xmlhttp = new XMLHttpRequest();
+xmlhttp.onload = function() {
+  const myObj = JSON.parse(this.responseText);
+  let text = "<table border='1'>"
+  for (let x in myObj) {
+    text += "<tr><td>" + myObj[x].Title + "</td></tr>";
+  }
+  text += "</table>"    
+  document.getElementById("demo").innerHTML = text;
+}
+xmlhttp.open("POST", "http://192.168.68.118/api.php?service=8");
+xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+xmlhttp.send("x=" + dbParam);
+</script>
 
 </body>
 </html>
