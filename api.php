@@ -192,9 +192,11 @@ echo '<pre>'.htmlentities(print_r($albumarray, true), ENT_SUBSTITUTE).'</pre>';
 
 if ($service == 8){  
     
-$playlist = "allmusic";
+$what = "Changing Faces";
 
-$playlistarray = $mpd->playlistinfo($playlist);
+$type = "Title";
+
+$playlistarray = $mpd->search($type, $what);
 
 //echo array_search("Album",$playlistarray);
 
