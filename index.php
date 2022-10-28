@@ -219,8 +219,9 @@ echo "<h1 id='title' class='display-6'>".$title."</h1>\n";
 echo "<h1 id='artist' class='display-6'>".$artist."</h1>\n";
 echo "<h1 id='album' class='display-6'>".$album."</h1>\n";
 echo "<a href='http://". $ipaddr ."/api.php?service=5&playl=1'><i class='bi bi-arrow-repeat' style='font-size: 3rem; color: white;'></i></a>&nbsp;&nbsp;&nbsp;&nbsp;\n";
-echo "<button type='button' class='btn btn-black' data-bs-toggle='modal' data-bs-target='#staticBackdrop'><i class='bi bi-three-dots' style='font-size: 3rem; color: white;'></i></button>\n";
+echo "<button type='button' class='btn btn-black' data-bs-toggle='modal' data-bs-target='#staticBackdrop'><i class='bi bi-three-dots' style='font-size: 3rem; color: white;'></i></button><br>\n";
 echo "<a href='http://". $ipaddr ."/api.php?service=9&vol=70'><i class='bi bi-volume-down' style='font-size: 3rem; color: white;'></i></a>&nbsp;&nbsp;&nbsp;&nbsp;\n";
+echo "<a href='http://". $ipaddr ."/api.php?service=9&vol=100'><i class='bi bi-volume-up' style='font-size: 3rem; color: white;'></i></a>&nbsp;&nbsp;&nbsp;&nbsp;\n";
 echo "</div>\n";
 echo "</div>\n\n";
 //**********************
