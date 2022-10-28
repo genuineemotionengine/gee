@@ -15,7 +15,7 @@ if ($service == 1){
   
 $statusarray = $mpd->server_status();
 
-echo '<pre>'.htmlentities(print_r($statusarray, true), ENT_SUBSTITUTE).'</pre>';
+//echo '<pre>'.htmlentities(print_r($statusarray, true), ENT_SUBSTITUTE).'</pre>';
     
 $elapsed = $statusarray['elapsed'];
 
@@ -37,7 +37,7 @@ $refresh = $durations[0] - $elapsed;
 $mySimpleArray = $mpd->current_song();
     
     //print_r($mySimpleArray);
-    echo '<pre>'.htmlentities(print_r($mySimpleArray, true), ENT_SUBSTITUTE).'</pre>';
+    //echo '<pre>'.htmlentities(print_r($mySimpleArray, true), ENT_SUBSTITUTE).'</pre>';
       
 $flacfile = $mySimpleArray[0]['name'];
 
