@@ -12,18 +12,18 @@
 
 <h2>Make a table based on JSON data.</h2>
 
-<p id="demo"></p>
+<div id="demo"></div>
 
 <script>
 const dbParam = JSON.stringify({table:"customers",limit:20});
 const xmlhttp = new XMLHttpRequest();
 xmlhttp.onload = function() {
   const myObj = JSON.parse(this.responseText);
-  let text = "<table border='1'>"
+  let text = "<div>"
   for (let x in myObj) {
-    text += "<tr><td>" + myObj[x].Track + ". " + myObj[x].Title + "</td></tr>";
+    text += "<p>" + myObj[x].Track + ". " + myObj[x].Title + "</p>";
   }
-  text += "</table>"    
+  text += "</div>"    
   document.getElementById("demo").innerHTML = text;
 }
 xmlhttp.open("POST", "http://192.168.68.118/api.php?service=8");
