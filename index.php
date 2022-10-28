@@ -383,6 +383,9 @@ echo "</div>\n";
 
 echo "</div>\n";
 echo "<div class='modal-body'>\n";
+
+echo "<div id='demo'></div>\n";
+
 echo "</div>\n";
 echo "<div class='modal-footer'>\n";
 //echo "<button type='button' class='btn btn-secondary' data-bs-dismiss='modal'>Close</button>\n";
@@ -398,7 +401,28 @@ echo "</div>\n";
 
 
 //*************************
+?>
 
+<script>
+const dbParam = JSON.stringify({table:"customers",limit:20});
+const xmlhttp = new XMLHttpRequest();
+xmlhttp.onload = function() {
+  const myObj = JSON.parse(this.responseText);
+  let text = "<div>"
+  for (let x in myObj) {
+    text += "<p>" + myObj[x].Track + ". " + myObj[x].Title + "</p>";
+  }
+  text += "</div>"    
+  document.getElementById("demo").innerHTML = text;
+}
+xmlhttp.open("POST", "http://192.168.68.118/api.php?service=8");
+xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+xmlhttp.send("x=" + dbParam);
+</script>
+
+
+
+<?php
 echo "</body>\n";
 echo "</html>\n";
 ?>
