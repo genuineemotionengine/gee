@@ -100,6 +100,22 @@ echo "xhttp.send();\n";
 echo "getmeta();\n";
 echo "}\n";
 
+echo "function wholealbum() {\n";
+echo "const xmlhttp = new XMLHttpRequest();\n";
+echo "xmlhttp.open('POST', 'http://192.168.68.118/api.php?service=8');\n";
+echo "xmlhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');\n";
+echo "xmlhttp.send('x=');\n";
+echo "const myObj = JSON.parse(this.responseText);\n";
+echo "let text = '<div>'\n";
+echo "for (let x in myObj) {\n";
+echo "text += '<p>' + myObj[x].Track + '. ' + myObj[x].Title + '</p>';\n";
+echo "}\n";
+echo "text += '</div>' \n";  
+echo "document.getElementById('demo').innerHTML = text;\n";
+echo "}\n";
+
+
+
 echo "function pad ( val ) { return val > 9 ? val : '0' + val; }\n";
 
 echo "function getmeta(){\n";
@@ -219,7 +235,7 @@ echo "<h1 id='title' class='display-6'>".$title."</h1>\n";
 echo "<h1 id='artist' class='display-6'>".$artist."</h1>\n";
 echo "<h1 id='album' class='display-6'>".$album."</h1>\n";
 echo "<a href='http://". $ipaddr ."/api.php?service=5&playl=1'><i class='bi bi-arrow-repeat' style='font-size: 3rem; color: white;'></i></a>&nbsp;&nbsp;&nbsp;&nbsp;\n";
-echo "<button type='button' class='btn btn-black' data-bs-toggle='modal' data-bs-target='#staticBackdrop'><i class='bi bi-three-dots' style='font-size: 3rem; color: white;'></i></button><br>\n";
+echo "<button type='button' onclick='wholealbum()' class='btn btn-black' data-bs-toggle='modal' data-bs-target='#staticBackdrop'><i class='bi bi-three-dots' style='font-size: 3rem; color: white;'></i></button><br>\n";
 echo "<a href='http://". $ipaddr ."/api.php?service=9&vol=70'><i class='bi bi-volume-down' style='font-size: 3rem; color: white;'></i></a>&nbsp;&nbsp;&nbsp;&nbsp;\n";
 echo "<a href='http://". $ipaddr ."/api.php?service=9&vol=100'><i class='bi bi-volume-up' style='font-size: 3rem; color: white;'></i></a>&nbsp;&nbsp;&nbsp;&nbsp;\n";
 echo "</div>\n";
@@ -403,28 +419,9 @@ echo "</div>\n";
 
 
 //*************************
-?>
-
-<script>
-//const dbParam = JSON.stringify({table:"customers",limit:20});
-const xmlhttp = new XMLHttpRequest();
-xmlhttp.onload = function() {
-  const myObj = JSON.parse(this.responseText);
-  let text = "<div>"
-  for (let x in myObj) {
-    text += "<p>" + myObj[x].Track + ". " + myObj[x].Title + "</p>";
-  }
-  text += "</div>"    
-  document.getElementById("demo").innerHTML = text;
-}
-xmlhttp.open("POST", "http://192.168.68.118/api.php?service=8");
-xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-xmlhttp.send("x=");
-</script>
 
 
 
-<?php
 echo "</body>\n";
 echo "</html>\n";
 ?>
