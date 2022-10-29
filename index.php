@@ -216,7 +216,7 @@ echo "<div class='d-block d-sm-none'>\n";
 echo "<img id='image' class='img-fluid' src='".$image."' />\n";
 echo "<button class='btn btn-sm' onclick='prevtrack()'><i class='bi bi-arrow-left-short' style='font-size: 6rem; color: white;'></i></button>\n";
 echo "<button class='btn btn-sm' onclick='playpause()'><i id='playp' class='bi ' style='font-size: 6rem; color: white;'></i></button>\n";
-echo "<button class='btn btn-sm' onclick='wholealbum()'><i class='bi bi-arrow-right-short' style='font-size: 6rem; color: white;'></i></button>\n";
+echo "<button class='btn btn-sm' onclick='nexttrack()'><i class='bi bi-arrow-right-short' style='font-size: 6rem; color: white;'></i></button>\n";
 echo "<div class='container pt-0 mt-0'>\n";
 echo "<div class='row row-cols-3'>\n";
 echo "<div class='col-2 text-center'><span id='minutescur'>00</span>:<span id='secondscur'>00</span></div>\n";
