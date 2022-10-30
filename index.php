@@ -435,9 +435,10 @@ echo "</div>\n";
 
 ?>
 <script>
-//const dbParam = JSON.stringify({table:"album",limit:150});
+const dbParam = JSON.stringify({table:"album",limit:150});
 const xmlhttp = new XMLHttpRequest();
-xmlhttp.onload = function() {
+//xmlhttp.onload = function() {
+function wholealbum(){
   const myObj = JSON.parse(this.responseText);
   let text = "<div>"
   for (let x in myObj) {
