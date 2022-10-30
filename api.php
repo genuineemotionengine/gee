@@ -192,7 +192,7 @@ $albumarray = $mpd->list_albums();
 
 if ($service == 8){  
 
-$mySimpleArray = $mpd->current_song();
+$mySimpleArray = $mpd->server_status();
 
 echo '<pre>'.htmlentities(print_r($mySimpleArray, true), ENT_SUBSTITUTE).'</pre>'; 
 
