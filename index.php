@@ -435,6 +435,7 @@ echo "</div>\n";
 
 ?>
 <script>
+function wholealbum(){
 const dbParam = JSON.stringify({table:"album",limit:150});
 const xmlhttp = new XMLHttpRequest();
 xmlhttp.onload = function() {
@@ -450,6 +451,7 @@ xmlhttp.onload = function() {
 xmlhttp.open("POST", "http://192.168.68.118/api.php?service=8");
 xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 xmlhttp.send("x=" + dbParam);
+}
 </script>
 <?php
 
