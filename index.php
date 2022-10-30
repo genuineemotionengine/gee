@@ -435,7 +435,7 @@ echo "</div>\n";
 
 ?>
 <script>
-//const dbParam = JSON.stringify({table:"customers",limit:20});
+const dbParam = JSON.stringify({table:"album",limit:150});
 const xmlhttp = new XMLHttpRequest();
 xmlhttp.onload = function() {
   const myObj = JSON.parse(this.responseText);
