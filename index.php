@@ -176,6 +176,7 @@ echo "$('#playp').removeClass('bi-pause').addClass('bi-caret-right');\n";
 echo "$('#playpipp').removeClass('bi-pause').addClass('bi-caret-right');\n";
 echo "$('#playpipl').removeClass('bi-pause').addClass('bi-caret-right');\n";
 echo "}\n";
+echo "wholealbum();\n";
 
 echo "});\n";
 
