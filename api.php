@@ -194,7 +194,7 @@ if ($service == 8){
 
 $mySimpleArray = $mpd->current_song();
 
-echo '<pre>'.htmlentities(print_r($albumarray, true), ENT_SUBSTITUTE).'</pre>'; 
+echo '<pre>'.htmlentities(print_r($mySimpleArray, true), ENT_SUBSTITUTE).'</pre>'; 
 
 echo "<br><br><br>";
 
