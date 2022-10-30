@@ -104,7 +104,7 @@ echo "function wholealbum() {\n";
 echo "const xmlhttp = new XMLHttpRequest();\n";
 echo "xmlhttp.open('POST', 'http://". $ipaddr ."/api.php?service=8');\n";
 echo "xmlhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');\n";
-echo "xmlhttp.send('x=');\n";
+echo "xmlhttp.send();\n";
 echo "const myObj = JSON.parse(this.responseText);\n";
 echo "let text = '<div>'\n";
 echo "for (let x in myObj) {\n";
