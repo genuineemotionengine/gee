@@ -191,8 +191,12 @@ echo '<pre>'.htmlentities(print_r($albumarray, true), ENT_SUBSTITUTE).'</pre>';
 //***************** get album list **********************
 
 if ($service == 8){  
-    
-$what = "Changing Faces";
+
+$mySimpleArray = $mpd->current_song();
+
+$what = $mySimpleArray[0]['Album'];
+
+//$what = "Changing Faces";
 
 $type = "Album";
 
