@@ -100,29 +100,22 @@ echo "xhttp.send();\n";
 echo "getmeta();\n";
 echo "}\n";
 
-?>
-
-function wholealbum(){
-const dbParam = JSON.stringify({table:"album",limit:150});
-const xmlhttp = new XMLHttpRequest();
-xmlhttp.onload = function() {
-//function wholealbum(){
-  const myObj = JSON.parse(this.responseText);
-  let text = "<div>"
-  for (let x in myObj) {
-    text += "<p>" + myObj[x].Track + ". " + myObj[x].Title + "</p>";
-  }
-  text += "</div>"    
-  document.getElementById("demo").innerHTML = text;
-}
-xmlhttp.open("POST", "http://192.168.68.118/api.php?service=8");
-xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-xmlhttp.send("x=" + dbParam);
-}
-
-<?php
-
-
+echo "function wholealbum(){\n";
+echo "const dbParam = JSON.stringify({table:'album',limit:150});\n";
+echo "const xmlhttp = new XMLHttpRequest();\n";
+echo "xmlhttp.onload = function() {\n";
+echo "const myObj = JSON.parse(this.responseText);\n";
+echo "let text = '<div>'\n";
+echo "for (let x in myObj) {\n";
+echo "text += '<p>' + myObj[x].Track + '. ' + myObj[x].Title + '</p>';\n";
+echo "}\n";
+echo "text += '</div>'\n";    
+echo "document.getElementById('demo').innerHTML = text;\n";
+echo "}\n";
+echo "xmlhttp.open('POST', 'http://192.168.68.118/api.php?service=8');\n";
+echo "xmlhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');\n";
+echo "xmlhttp.send('x=' + dbParam);\n";
+echo "}\n";
 
 echo "function pad ( val ) { return val > 9 ? val : '0' + val; }\n";
 
@@ -180,17 +173,6 @@ echo "wholealbum();\n";
 
 echo "});\n";
 
-//echo "const xmlhttp = new XMLHttpRequest();\n";
-//echo "xmlhttp.open('POST', 'http://". $ipaddr ."/api.php?service=8');\n";
-////echo "xmlhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');\n";
-//echo "xmlhttp.send();\n";
-//echo "const myObj = JSON.parse(this.responseText);\n";
-//echo "let text = '<div>';\n";
-//echo "for (let x in myObj) {\n";
-//echo "text += '<p>' + myObj[x].Track + '. ' + myObj[x].Title + '</p>';\n";
-//echo "}\n";
-//echo "text += '</div>';\n";  
-//echo "document.getElementById('demo').innerHTML = text;\n";
 
 echo "}\n";
 
