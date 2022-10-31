@@ -107,10 +107,10 @@ echo "xmlhttp.onload = function() {\n";
 echo "const myObj = JSON.parse(this.responseText);\n";
 echo "let html = '<div>'\n";
 echo "for (let x in myObj) {\n";
-echo "html += '<div class=\x22border-bottom align-baseline\x22><i class=\x22bi bi-arrow-right-short\x22 style=\x22font-size: 2rem; color: white;\x22></i>' + myObj[x].Track + '. ' + myObj[x].Title + '</div>';\n";
+echo "html += '<div class=\x22border-bottom align-baseline\x22><i class=\x22bi bi-caret-right\x22 style=\x22font-size: 2rem; color: white;\x22></i><i class=\x22bi bi-arrow-right-short\x22 style=\x22font-size: 2rem; color: white;\x22></i>' + myObj[x].Track + '. ' + myObj[x].Title + '</div>';\n";
 echo "}\n";
 echo "html += '</div>'\n";    
-echo "document.getElementById('fullablum').innerHTML = html;\n";
+echo "document.getElementById('fullalbum').innerHTML = html;\n";
 echo "}\n";
 echo "xmlhttp.open('POST', 'http://192.168.68.118/api.php?service=8');\n";
 echo "xmlhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');\n";
@@ -385,42 +385,21 @@ echo "<div class='modal fade' id='staticBackdrop' data-bs-backdrop='static' data
 echo "<div class='modal-dialog modal-dialog-scrollable'>\n";
 echo "<div class='modal-content bg-black'>\n";
 echo "<div class='modal-header'>\n";
-
-
-
 echo "<div class='row row-cols-3'>\n";
-
 echo "<div class='col-3'><img id='imagem' class='img-fluid' src='".$image."' /></div>\n";
-
 echo "<div class='col-7'>\n";
 echo "<h3 id='albumm'></h3>\n";
 echo "<h4 id='albumartist'></h4>\n";
 echo "</div>\n";
-
 echo "<div class='col-1'><button type='button' class='btn btn-sm' data-bs-dismiss='modal' aria-label='Close'><i class='bi bi-x' style='font-size: 3rem; color: white;'></i></button></div>\n";
-
 echo "</div>\n";
-
-
-
 echo "</div>\n";
 echo "<div class='modal-body'>\n";
-
-echo "<div id='fullablum'></div>\n";
-
-echo "</div>\n";
-//echo "<div class='modal-footer'>\n";
-//echo "<button type='button' class='btn btn-secondary' data-bs-dismiss='modal'>Close</button>\n";
-//echo "<button type='button' class='btn btn-primary'>Understood</button>\n";
-//echo "</div>\n";
+echo "<div id='fullalbum'></div>\n";
 echo "</div>\n";
 echo "</div>\n";
 echo "</div>\n";
-
-
-
-
-
+echo "</div>\n";
 
 //*************************
 
