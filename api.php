@@ -194,9 +194,9 @@ if ($service == 8){
 
 $mySimpleArray = $mpd->current_song();
 
-echo '<pre>'.htmlentities(print_r($mySimpleArray, true), ENT_SUBSTITUTE).'</pre>'; 
-
-echo "<br><br><br>";
+//echo '<pre>'.htmlentities(print_r($mySimpleArray, true), ENT_SUBSTITUTE).'</pre>'; 
+//
+//echo "<br><br><br>";
 
 $what = $mySimpleArray[0]['Album'];
 
@@ -204,7 +204,7 @@ $type = "Album";
 
 $playlistarray = $mpd->search($type, $what);
 
-echo '<pre>'.htmlentities(print_r($playlistarray, true), ENT_SUBSTITUTE).'</pre>'; 
+//echo '<pre>'.htmlentities(print_r($playlistarray, true), ENT_SUBSTITUTE).'</pre>'; 
 
 echo json_encode($playlistarray);
 
