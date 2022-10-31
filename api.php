@@ -212,7 +212,7 @@ $playlistarray = $mpd->search($type, $what);
 
 
 
-//echo json_encode($playlistarray);
+echo json_encode($playlistarray);
 
 
 }
