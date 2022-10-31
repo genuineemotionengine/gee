@@ -198,7 +198,7 @@ echo '<pre>'.htmlentities(print_r($mySimpleArray, true), ENT_SUBSTITUTE).'</pre>
 
 echo "<br><br><br>";
 
-$what = $mySimpleArray[0]['album'];
+$what = $mySimpleArray[0]['Album'];
 
 //$what = "Changing Faces";
 
