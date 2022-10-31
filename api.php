@@ -198,11 +198,11 @@ echo '<pre>'.htmlentities(print_r($mySimpleArray, true), ENT_SUBSTITUTE).'</pre>
 
 echo "<br><br><br>";
 
-$what = $mySimpleArray[0]['name'];
+$what = $mySimpleArray[0]['album'];
 
 //$what = "Changing Faces";
 
-$type = "name";
+$type = "Album";
 
 $playlistarray = $mpd->search($type, $what);
 
