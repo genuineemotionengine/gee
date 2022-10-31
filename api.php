@@ -190,13 +190,17 @@ $albumarray = $mpd->list_albums();
 
 //***************** get album list **********************
 
-if ($service == 8){  
+if ($service == 8){
+    
+$statusarray = $mpd->server_status();
+
+echo '<pre>'.htmlentities(print_r($statusarray, true), ENT_SUBSTITUTE).'</pre>';
 
 $mySimpleArray = $mpd->current_song();
 
 //echo '<pre>'.htmlentities(print_r($mySimpleArray, true), ENT_SUBSTITUTE).'</pre>'; 
 //
-//echo "<br><br><br>";
+echo "<br><br><br>";
 
 $what = $mySimpleArray[0]['Album'];
 
