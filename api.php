@@ -208,7 +208,6 @@ echo '<pre>'.htmlentities(print_r($playlistarray, true), ENT_SUBSTITUTE).'</pre>
 
 echo json_encode($playlistarray);
 
-
 }
 //***************** set vol **********************
 
