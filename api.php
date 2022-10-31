@@ -204,7 +204,9 @@ $type = "Album";
 
 $playlistarray = $mpd->search($type, $what);
 
-//echo '<pre>'.htmlentities(print_r($playlistarray, true), ENT_SUBSTITUTE).'</pre>'; 
+echo '<pre>'.htmlentities(print_r($playlistarray, true), ENT_SUBSTITUTE).'</pre>';
+
+echo "<br><br><br>";
 
 echo json_encode($playlistarray);
 
