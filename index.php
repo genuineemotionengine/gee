@@ -105,7 +105,7 @@ echo "const dbParam = JSON.stringify({table:'album',limit:150});\n";
 echo "const xmlhttp = new XMLHttpRequest();\n";
 echo "xmlhttp.onload = function() {\n";
 echo "const myObj = JSON.parse(this.responseText);\n";
-echo "let text = '<div class='border-bottom'>'\n";
+echo "let text = '<div>'\n";
 echo "for (let x in myObj) {\n";
 echo "text += '<p>' + myObj[x].Track + '. ' + myObj[x].Title + '</p>';\n";
 echo "}\n";
