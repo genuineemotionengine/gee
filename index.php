@@ -110,7 +110,7 @@ echo "for (let x in myObj) {\n";
 echo "text += '<p>' + myObj[x].Track + '. ' + myObj[x].Title + '</p>';\n";
 echo "}\n";
 echo "text += '</div>'\n";    
-echo "document.getElementById('demo').innerHTML = text;\n";
+echo "document.getElementById('fullablum').innerHTML = text;\n";
 echo "}\n";
 echo "xmlhttp.open('POST', 'http://192.168.68.118/api.php?service=8');\n";
 echo "xmlhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');\n";
@@ -406,13 +406,13 @@ echo "</div>\n";
 echo "</div>\n";
 echo "<div class='modal-body'>\n";
 
-echo "<div id='demo'></div>\n";
+echo "<div id='fullablum'></div>\n";
 
 echo "</div>\n";
-echo "<div class='modal-footer'>\n";
+//echo "<div class='modal-footer'>\n";
 //echo "<button type='button' class='btn btn-secondary' data-bs-dismiss='modal'>Close</button>\n";
 //echo "<button type='button' class='btn btn-primary'>Understood</button>\n";
-echo "</div>\n";
+//echo "</div>\n";
 echo "</div>\n";
 echo "</div>\n";
 echo "</div>\n";
