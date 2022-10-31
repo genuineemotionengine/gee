@@ -107,7 +107,7 @@ echo "xmlhttp.onload = function() {\n";
 echo "const myObj = JSON.parse(this.responseText);\n";
 echo "let html = '<div>'\n";
 echo "for (let x in myObj) {\n";
-echo "html += '<div class=\x22border-bottom align-baseline\x22><i class=\x22bi bi-chevron-right\x22 style=\x22font-size: 2rem; color: white;\x22></i><i class=\x22bi bi-chevron-double-right\x22 style=\x22font-size: 2rem; color: white;\x22></i><h4>' + myObj[x].Track + '. ' + myObj[x].Title + '</h4></div>';\n";
+echo "html += '<div class=\x22border-bottom align-baseline\x22><i class=\x22bi bi-chevron-right\x22 style=\x22font-size: 3rem; color: white;\x22></i><i class=\x22bi bi-chevron-double-right\x22 style=\x22font-size: 3rem; color: white;\x22></i><h4>' + myObj[x].Track + '. ' + myObj[x].Title + '</h4></div>';\n";
 echo "}\n";
 echo "html += '</div>'\n";    
 echo "document.getElementById('fullalbum').innerHTML = html;\n";
