@@ -107,7 +107,7 @@ echo "xmlhttp.onload = function() {\n";
 echo "const myObj = JSON.parse(this.responseText);\n";
 echo "let text = '<div>'\n";
 echo "for (let x in myObj) {\n";
-echo "text += '<p>' + myObj[x].Track + '. ' + myObj[x].Title + '</p>';\n";
+echo "text += '<div  class='border-bottom'>' + myObj[x].Track + '. ' + myObj[x].Title + '</div>';\n";
 echo "}\n";
 echo "text += '</div>'\n";    
 echo "document.getElementById('fullablum').innerHTML = text;\n";
