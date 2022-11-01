@@ -216,6 +216,8 @@ $playlistarray = $mpd->search($type, $what);
 
 echo "Album Search Results";
 
+echo "No of Elements: ".count($playlistarray);
+
 echo '<pre>'.htmlentities(print_r($playlistarray, true), ENT_SUBSTITUTE).'</pre>';
 
 echo "<br><br><br>";
@@ -223,6 +225,8 @@ echo "<br><br><br>";
 echo "Album Search Results With Element Removed";
 
 unset($playlistarray[6]);
+
+echo "No of Elements: ".count($playlistarray);
 
 echo '<pre>'.htmlentities(print_r($playlistarray, true), ENT_SUBSTITUTE).'</pre>';
 
