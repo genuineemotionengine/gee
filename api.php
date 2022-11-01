@@ -214,7 +214,7 @@ $type = "Album";
 
 $playlistarray = $mpd->search($type, $what);
 
-echo "Album Serch Results";
+echo "Album Search Results";
 
 echo '<pre>'.htmlentities(print_r($playlistarray, true), ENT_SUBSTITUTE).'</pre>';
 
