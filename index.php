@@ -165,15 +165,15 @@ echo "$('#minutescuripl').html(pad(parseInt(current/60,10)));\n";
 
 
 echo "if (state === play){\n";
-echo "$('#playp').removeClass('bi-caret-right').addClass('bi-pause');\n";
-echo "$('#playpipp').removeClass('bi-caret-right').addClass('bi-pause');\n";
-echo "$('#playpipl').removeClass('bi-caret-right').addClass('bi-pause');\n";
+echo "$('#playp').removeClass('bi-chevron-right').addClass('bi-pause');\n";
+echo "$('#playpipp').removeClass('bi-chevron-right').addClass('bi-pause');\n";
+echo "$('#playpipl').removeClass('bi-chevron-right').addClass('bi-pause');\n";
 echo "}\n";
 
 echo "if (state === pause){\n";
-echo "$('#playp').removeClass('bi-pause').addClass('bi-caret-right');\n";
-echo "$('#playpipp').removeClass('bi-pause').addClass('bi-caret-right');\n";
-echo "$('#playpipl').removeClass('bi-pause').addClass('bi-caret-right');\n";
+echo "$('#playp').removeClass('bi-pause').addClass('bi-chevron-right');\n";
+echo "$('#playpipp').removeClass('bi-pause').addClass('bi-chevron-right');\n";
+echo "$('#playpipl').removeClass('bi-pause').addClass('bi-chevron-right');\n";
 echo "}\n";
 echo "wholealbum();\n";
 
