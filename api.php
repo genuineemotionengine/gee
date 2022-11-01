@@ -194,9 +194,15 @@ if ($service == 8){
     
 $statusarray = $mpd->server_status();
 
+echo "Server Status";
+
 echo '<pre>'.htmlentities(print_r($statusarray, true), ENT_SUBSTITUTE).'</pre>';
 
+echo "<br><br><br>";
+
 $mySimpleArray = $mpd->current_song();
+
+echo "Current Song";
 
 echo '<pre>'.htmlentities(print_r($mySimpleArray, true), ENT_SUBSTITUTE).'</pre>'; 
 
@@ -207,6 +213,8 @@ $what = $mySimpleArray[0]['Album'];
 $type = "Album";
 
 $playlistarray = $mpd->search($type, $what);
+
+echo "Album Serch Results";
 
 echo '<pre>'.htmlentities(print_r($playlistarray, true), ENT_SUBSTITUTE).'</pre>';
 
