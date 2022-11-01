@@ -194,19 +194,19 @@ if ($service == 8){
     
 $statusarray = $mpd->server_status();
 
-echo "Server Status";
+//echo "Server Status";
 
-echo '<pre>'.htmlentities(print_r($statusarray, true), ENT_SUBSTITUTE).'</pre>';
+//echo '<pre>'.htmlentities(print_r($statusarray, true), ENT_SUBSTITUTE).'</pre>';
 
-echo "<br><br><br>";
+//echo "<br><br><br>";
 
 $mySimpleArray = $mpd->current_song();
 
-echo "Current Song";
+//echo "Current Song";
 
-echo '<pre>'.htmlentities(print_r($mySimpleArray, true), ENT_SUBSTITUTE).'</pre>'; 
+//echo '<pre>'.htmlentities(print_r($mySimpleArray, true), ENT_SUBSTITUTE).'</pre>'; 
 
-echo "<br><br><br>";
+//echo "<br><br><br>";
 
 $what = $mySimpleArray[0]['Album'];
 
@@ -214,17 +214,17 @@ $type = "Album";
 
 $playlistarray = $mpd->search($type, $what);
 
-echo "Album Search Results<br>";
+//echo "Album Search Results<br>";
 
 $elements = count($playlistarray);
 
-echo "No of Elements: ".$elements;
+//echo "No of Elements: ".$elements;
 
-echo '<pre>'.htmlentities(print_r($playlistarray, true), ENT_SUBSTITUTE).'</pre>';
+//echo '<pre>'.htmlentities(print_r($playlistarray, true), ENT_SUBSTITUTE).'</pre>';
 
-echo "<br><br><br>";
+//echo "<br><br><br>";
 
-echo "Album Search Results With Element Removed<br>";
+//echo "Album Search Results With Element Removed<br>";
 
 
 
@@ -236,11 +236,11 @@ for ($x = 0; $x <= $elements; $x++) {
 
 
 
-echo "No of Elements: ".count($playlistarray);
+//echo "No of Elements: ".count($playlistarray);
 
-echo '<pre>'.htmlentities(print_r($playlistarray, true), ENT_SUBSTITUTE).'</pre>';
+//echo '<pre>'.htmlentities(print_r($playlistarray, true), ENT_SUBSTITUTE).'</pre>';
 
-echo "<br><br><br>";
+//echo "<br><br><br>";
 
 
 echo json_encode($playlistarray);
