@@ -225,7 +225,7 @@ echo "<div class='container-fluid text-center ps-0 pe-0'>\n";
 echo "<div class='d-block d-sm-none'>\n";
 echo "<img id='image' class='img-fluid' src='".$image."' />\n";
 echo "<button class='btn btn-sm' onclick='prevtrack()'><i class='bi bi-arrow-left-short' style='font-size: 6rem; color: white;'></i></button>\n";
-echo "<button class='btn btn-sm' onclick='playpause()'><i id='playp' class='bi ' style='font-size: 6rem; color: white;'></i></button>\n";
+echo "<button class='btn btn-sm' onclick='playpause()'><i id='playp' class='bi ' style='font-size: 4rem; color: white;'></i></button>\n";
 echo "<button class='btn btn-sm' onclick='nexttrack()'><i class='bi bi-arrow-right-short' style='font-size: 6rem; color: white;'></i></button>\n";
 echo "<div class='container pt-0 mt-0'>\n";
 echo "<div class='row row-cols-3'>\n";
