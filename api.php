@@ -220,6 +220,15 @@ echo '<pre>'.htmlentities(print_r($playlistarray, true), ENT_SUBSTITUTE).'</pre>
 
 echo "<br><br><br>";
 
+echo "Album Search Results With Element Removed";
+
+unset($playlistarray[6]);
+
+echo '<pre>'.htmlentities(print_r($playlistarray, true), ENT_SUBSTITUTE).'</pre>';
+
+echo "<br><br><br>";
+
+
 echo json_encode($playlistarray);
 
 }
