@@ -228,11 +228,11 @@ $elements = count($playlistarray);
 
 
 
-//for ($x = 0; $x <= $elements; $x++) {
-//  if ($what != $playlistarray[$x][Album]){
-//      unset($playlistarray[$x]);
-//  }
-//}
+for ($x = 0; $x <= $elements; $x++) {
+  if ($what != $playlistarray[$x][Album]){
+      unset($playlistarray[$x]);
+  }
+}
 
 
 
