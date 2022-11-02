@@ -119,7 +119,7 @@ echo "}\n";
 echo "html += '</div>'\n";    
 echo "document.getElementById('fullalbum').innerHTML = html;\n";
 echo "}\n";
-echo "xmlhttp.open('POST', 'http://192.168.68.118/api.php?service=8');\n";
+echo "xmlhttp.open('POST', 'http://". $ipaddr ."/api.php?service=8');\n";
 echo "xmlhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');\n";
 echo "xmlhttp.send('x=' + dbParam);\n";
 echo "}\n";
