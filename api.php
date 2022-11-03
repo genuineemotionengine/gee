@@ -259,5 +259,22 @@ header("Location: http://". $ipaddr ."");
     
 }
 
+//***************** serach **********************
+
+if ($service == 10){  
     
+
+
+$what = $mySimpleArray[0]['Album'];
+
+$type = "Album";
+
+$playlistarray = $mpd->search($type, $what);
+
+
+echo '<pre>'.htmlentities(print_r($playlistarray, true), ENT_SUBSTITUTE).'</pre>';
+    
+}
+    
+
 
