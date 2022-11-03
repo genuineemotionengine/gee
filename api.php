@@ -265,9 +265,9 @@ if ($service == 10){
     
 
 
-$what = "Largo";
+$what = "Tyranny Of Beauty";
 
-$type = "basename";
+$type = "Album";
 
 $playlistarray = $mpd->search($type, $what);
 
