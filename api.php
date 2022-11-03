@@ -238,9 +238,9 @@ for ($x = 0; $x <= $elements; $x++) {
 
 //echo "No of Elements: ".count($playlistarray);
 
-//echo '<pre>'.htmlentities(print_r($playlistarray, true), ENT_SUBSTITUTE).'</pre>';
+echo '<pre>'.htmlentities(print_r($playlistarray, true), ENT_SUBSTITUTE).'</pre>';
 
-//echo "<br><br><br>";
+echo "<br><br><br>";
 
 
 echo json_encode($playlistarray);
