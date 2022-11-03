@@ -265,7 +265,7 @@ if ($service == 10){
     
 
 
-$what = "09 Tangerine Dream - Largo.flac";
+$what = "Largo";
 
 $type = "basename";
 
