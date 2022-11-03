@@ -267,7 +267,7 @@ if ($service == 10){
 
 $what = "09 Tangerine Dream - Largo.flac";
 
-$type = "Basename";
+$type = "basename";
 
 $playlistarray = $mpd->search($type, $what);
 
