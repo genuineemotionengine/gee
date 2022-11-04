@@ -255,7 +255,7 @@ $uri = $playlistarray[$t]['name'];
 
 echo $uri;
 
-//$mpd->playlist_add($uri);
+$mpd->playlist_add($uri);
     
     
 }else{
