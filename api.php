@@ -312,15 +312,15 @@ echo "<br><br><br>";
 
 
 
-for ($x = 0; $x <= $elements; $x++) {
-  if ($album != $playlistarray[$x][Album]){
-      unset($playlistarray[$x]);
-  }
-}
-
-
-
-echo '<pre>'.htmlentities(print_r($playlistarray, true), ENT_SUBSTITUTE).'</pre>';
+//for ($x = 0; $x <= $elements; $x++) {
+//  if ($album != $playlistarray[$x][Album]){
+//      unset($playlistarray[$x]);
+//  }
+//}
+//
+//
+//
+//echo '<pre>'.htmlentities(print_r($playlistarray, true), ENT_SUBSTITUTE).'</pre>';
     
 }
     
