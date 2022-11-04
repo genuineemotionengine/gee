@@ -248,6 +248,10 @@ if ($playnow == 1){
   }
 }
 echo '<pre>'.htmlentities(print_r($playlistarray, true), ENT_SUBSTITUTE).'</pre>';
+
+$uri = $playlistarray[0]['name'];
+
+$mpd->playlist_add($uri);
     
     
 }else{
