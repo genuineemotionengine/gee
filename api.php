@@ -295,9 +295,9 @@ if ($service == 10){
     
 
 
-$what = $songid;
+$what = $title;
 
-$type = "Id";
+$type = "Title";
 
 $playlistarray = $mpd->search($type, $what);
 
@@ -307,7 +307,7 @@ echo "Album Search Results<br>";
 echo "No of Elements: ".$elements;
 echo '<pre>'.htmlentities(print_r($playlistarray, true), ENT_SUBSTITUTE).'</pre>';
 echo "<br><br><br>";
-print_r($playlistarray);
+
 
 
 
