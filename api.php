@@ -245,15 +245,17 @@ if ($playnow == 1){
   for ($x = 0; $x <= $elements; $x++) {
   if ($track != $playlistarray[$x][Track]){
       unset($playlistarray[$x]);
+  }else{
+      $t = $x;
   }
 }
 echo '<pre>'.htmlentities(print_r($playlistarray, true), ENT_SUBSTITUTE).'</pre>';
 
-$uri = $playlistarray['name'];
+$uri = $playlistarray[$t]['name'];
 
 echo $uri;
 
-$mpd->playlist_add($uri);
+//$mpd->playlist_add($uri);
     
     
 }else{
