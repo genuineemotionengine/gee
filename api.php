@@ -179,11 +179,11 @@ if ($service == 7){
     
 
 
-$albumarray = $mpd->list_albums();
+$albumarray = $mpd->playlist();
 
 
 
-//echo '<pre>'.htmlentities(print_r($albumarray, true), ENT_SUBSTITUTE).'</pre>';  
+echo '<pre>'.htmlentities(print_r($albumarray, true), ENT_SUBSTITUTE).'</pre>';  
 
     
 }
