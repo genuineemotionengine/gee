@@ -263,13 +263,32 @@ header("Location: http://". $ipaddr ."");
 
 if ($service == 10){  
     
+    
 
 
-$what = "09 Tangerine Dream - Largo.flac";
+$what = $title;
 
-$type = "basename";
+$type = "Title";
 
 $playlistarray = $mpd->search($type, $what);
+
+$elements = count($playlistarray);
+
+//echo "Album Search Results<br>";
+//echo "No of Elements: ".$elements;
+echo '<pre>'.htmlentities(print_r($playlistarray, true), ENT_SUBSTITUTE).'</pre>';
+echo "<br><br><br>";
+
+
+
+
+
+for ($x = 0; $x <= $elements; $x++) {
+  if ($album != $playlistarray[$x][Album]){
+      unset($playlistarray[$x]);
+  }
+}
+
 
 
 echo '<pre>'.htmlentities(print_r($playlistarray, true), ENT_SUBSTITUTE).'</pre>';
