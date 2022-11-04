@@ -274,8 +274,8 @@ $playlistarray = $mpd->search($type, $what);
 
 $elements = count($playlistarray);
 
-//echo "Album Search Results<br>";
-//echo "No of Elements: ".$elements;
+echo "Album Search Results<br>";
+echo "No of Elements: ".$elements;
 echo '<pre>'.htmlentities(print_r($playlistarray, true), ENT_SUBSTITUTE).'</pre>';
 echo "<br><br><br>";
 
