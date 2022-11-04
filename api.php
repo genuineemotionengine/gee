@@ -251,6 +251,8 @@ echo '<pre>'.htmlentities(print_r($playlistarray, true), ENT_SUBSTITUTE).'</pre>
 
 $uri = $playlistarray[0]['name'];
 
+echo $uri;
+
 $mpd->playlist_add($uri);
     
     
