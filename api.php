@@ -193,10 +193,12 @@ $albumarray = $mpd->list_albums();
 if ($service == 8){
     
 $statusarray = $mpd->server_status();
-
-//echo "Server Status";
-//echo '<pre>'.htmlentities(print_r($statusarray, true), ENT_SUBSTITUTE).'</pre>';
-//echo "<br><br><br>";
+if ($verbose){
+echo "Server Status";
+echo '<pre>'.htmlentities(print_r($statusarray, true), ENT_SUBSTITUTE).'</pre>';
+echo "<br><br><br>";
+    
+}
 
 $statsarray = $mpd->server_stats();
 
