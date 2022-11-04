@@ -297,6 +297,8 @@ if ($service == 10){
 
 $what = $title;
 
+echo $title."br>";
+
 $type = "Title";
 
 $playlistarray = $mpd->search($type, $what);
