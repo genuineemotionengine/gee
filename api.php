@@ -295,9 +295,9 @@ if ($service == 10){
     
 
 
-$what = $title;
+$what = $songid;
 
-$type = "Title";
+$type = "Id";
 
 $playlistarray = $mpd->search($type, $what);
 
