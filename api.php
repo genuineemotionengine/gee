@@ -240,8 +240,21 @@ for ($x = 0; $x <= $elements; $x++) {
 //echo '<pre>'.htmlentities(print_r($playlistarray, true), ENT_SUBSTITUTE).'</pre>';
 //echo "<br><br><br>";
 
+if ($playnow == 1){
+    $elements = count($playlistarray);
+  for ($x = 0; $x <= $elements; $x++) {
+  if ($track != $playlistarray[$x][Track]){
+      unset($playlistarray[$x]);
+  }
+}
+echo '<pre>'.htmlentities(print_r($playlistarray, true), ENT_SUBSTITUTE).'</pre>';
+    
+    
+}else{
+
 
 echo json_encode($playlistarray);
+}
 
 }
 //***************** set vol **********************
