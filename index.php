@@ -261,7 +261,7 @@ echo "<h1 id='album' class='display-6'>".$album."</h1>\n";
 echo "<a href='http://". $ipaddr ."/'><i class='bi bi-arrow-clockwise' style='font-size: 3rem; color: white;'></i></a>\n";
 echo "<button type='button' onclick='wholealbum()' class='btn btn-black' data-bs-toggle='modal' data-bs-target='#staticBackdrop'><i class='bi bi-three-dots' style='font-size: 3rem; color: white;'></i></button>\n";
 echo "<a href='http://". $ipaddr ."/api.php?service=5&playl=1'><i class='bi bi-arrow-repeat' style='font-size: 3rem; color: white;'></i></a>\n";
-echo "<h4 id='next' class='display-6'>Next: ".$title." - ".$artist."</h4><br/><br/><br/>\n";
+echo "<h4 id='next' class='display-2'>Next: ".$title." - ".$artist."</h4><br/><br/><br/>\n";
 
 
 
