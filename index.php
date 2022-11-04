@@ -254,7 +254,7 @@ echo "</div>\n";
 echo "<div class='col-2 text-center'><span id='minutesdur'>00</span>:<span id='secondsdur'>00</span></div>\n";
 echo "</div>\n";
 echo "</div>\n";
-echo "<br/>\n";
+//echo "<br/>\n";
 echo "<h1 id='title' class='display-6'>".$title."</h1>\n";
 echo "<h1 id='artist' class='display-6'>".$artist."</h1>\n";
 echo "<h1 id='album' class='display-6'>".$album."</h1>\n";
