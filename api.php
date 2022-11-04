@@ -297,7 +297,7 @@ if ($service == 10){
 
 $what = $title;
 
-echo $title."br>";
+echo $title."<br>";
 
 $type = "Title";
 
