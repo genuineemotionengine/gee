@@ -193,24 +193,27 @@ $albumarray = $mpd->list_albums();
 if ($service == 8){
     
 $statusarray = $mpd->server_status();
+
 if ($verbose){
 echo "Server Status";
 echo '<pre>'.htmlentities(print_r($statusarray, true), ENT_SUBSTITUTE).'</pre>';
-echo "<br><br><br>";
-    
+echo "<br><br><br>";    
 }
 
 $statsarray = $mpd->server_stats();
 
-//echo "Server Stats";
-//echo '<pre>'.htmlentities(print_r($statsarray, true), ENT_SUBSTITUTE).'</pre>';
-//echo "<br><br><br>";
-
+if ($verbose){
+echo "Server Stats";
+echo '<pre>'.htmlentities(print_r($statsarray, true), ENT_SUBSTITUTE).'</pre>';
+echo "<br><br><br>";
+}
 $mySimpleArray = $mpd->current_song();
 
-//echo "Current Song";
-//echo '<pre>'.htmlentities(print_r($mySimpleArray, true), ENT_SUBSTITUTE).'</pre>'; 
-//echo "<br><br><br>";
+if ($verbose){
+echo "Current Song";
+echo '<pre>'.htmlentities(print_r($mySimpleArray, true), ENT_SUBSTITUTE).'</pre>'; 
+echo "<br><br><br>";    
+}
 
 $what = $mySimpleArray[0]['Album'];
 
@@ -222,10 +225,12 @@ $playlistarray = $mpd->search($type, $what);
 
 $elements = count($playlistarray);
 
-//echo "Album Search Results<br>";
-//echo "No of Elements: ".$elements;
-//echo '<pre>'.htmlentities(print_r($playlistarray, true), ENT_SUBSTITUTE).'</pre>';
-//echo "<br><br><br>";
+if ($verbose){
+echo "Album Search Results<br>";
+echo "No of Elements: ".$elements;
+echo '<pre>'.htmlentities(print_r($playlistarray, true), ENT_SUBSTITUTE).'</pre>';
+echo "<br><br><br>";
+}
 
 
 
@@ -236,11 +241,12 @@ for ($x = 0; $x <= $elements; $x++) {
       unset($playlistarray[$x]);
   }
 }
-
-//echo "Album Search Results With Element Removed<br>";
-//echo "No of Elements: ".count($playlistarray);
-//echo '<pre>'.htmlentities(print_r($playlistarray, true), ENT_SUBSTITUTE).'</pre>';
-//echo "<br><br><br>";
+if ($verbose){
+echo "Album Search Results With Element Removed<br>";
+echo "No of Elements: ".count($playlistarray);
+echo '<pre>'.htmlentities(print_r($playlistarray, true), ENT_SUBSTITUTE).'</pre>';
+echo "<br><br><br>";
+}
 
 if ($playnow == 1){
     $elements = count($playlistarray);
