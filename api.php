@@ -180,7 +180,7 @@ if ($service == 7){
 echo "all music<br><br>";
 
 
-$albumarray = $mpd->playlist();
+$albumarray = $mpd->list_albums();
 
 
 
@@ -192,11 +192,7 @@ echo '<pre>'.htmlentities(print_r($albumarray, true), ENT_SUBSTITUTE).'</pre>';
 //***************** get album list **********************
 
 if ($service == 8){
-    $albumarray = $mpd->playlist();
 
-
-
-echo '<pre>'.htmlentities(print_r($albumarray, true), ENT_SUBSTITUTE).'</pre>';  
 
     
 $statusarray = $mpd->server_status(); 
