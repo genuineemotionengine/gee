@@ -192,6 +192,12 @@ echo '<pre>'.htmlentities(print_r($albumarray, true), ENT_SUBSTITUTE).'</pre>';
 //***************** get album list **********************
 
 if ($service == 8){
+    $albumarray = $mpd->playlist();
+
+
+
+echo '<pre>'.htmlentities(print_r($albumarray, true), ENT_SUBSTITUTE).'</pre>';  
+
     
 $statusarray = $mpd->server_status(); 
 
