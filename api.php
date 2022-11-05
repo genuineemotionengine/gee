@@ -176,7 +176,8 @@ echo $hosty."<br>";
 //***************** get albums **********************
 
 if ($service == 7){  
-    
+
+echo "all music<br><br>";
 
 
 $albumarray = $mpd->playlist();
@@ -192,7 +193,7 @@ echo '<pre>'.htmlentities(print_r($albumarray, true), ENT_SUBSTITUTE).'</pre>';
 
 if ($service == 8){
     
-$statusarray = $mpd->server_status();
+$statusarray = $mpd->server_status(); 
 
 if ($verbose){
 echo "Server Status";
@@ -205,7 +206,7 @@ $statsarray = $mpd->server_stats();
 if ($verbose){
 echo "Server Stats";
 echo '<pre>'.htmlentities(print_r($statsarray, true), ENT_SUBSTITUTE).'</pre>';
-echo "<br><br><br>";
+echo "<br><br><br>";     
 }
 $mySimpleArray = $mpd->current_song();
 
@@ -327,4 +328,6 @@ echo '<pre>'.htmlentities(print_r($playlistarray, true), ENT_SUBSTITUTE).'</pre>
 }
     
 
+
+//****************** Up Next ***************
 
