@@ -180,7 +180,7 @@ if ($service == 7){
 echo "all music<br><br>";
 
 
-$albumarray = $mpd->list_albums();
+$albumarray = $mpd->dir_list();
 
 
 
