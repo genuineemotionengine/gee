@@ -353,7 +353,7 @@ $type = "Title";
 
 $what = "I Got Rhythm";
     
-$findarray = $mpd->find($type, $what);      
+$findarray = $mpd->findadd($type, $what);      
 
 echo '<pre>'.htmlentities(print_r($findarray, true), ENT_SUBSTITUTE).'</pre>';
 
