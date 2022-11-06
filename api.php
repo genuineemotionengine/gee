@@ -349,13 +349,13 @@ echo '<pre>'.htmlentities(print_r($playlistarray, true), ENT_SUBSTITUTE).'</pre>
 if ($service == 11){
   
     
-$type = "Title";
-
-$what = "I Got Rhythm";
+//$type = "Album";
+//
+//$what = "x";
     
-$mpd->findadd($type, $what);      
+$tagarray = $mpd->findadd();      
 
-//echo '<pre>'.htmlentities(print_r($findarray, true), ENT_SUBSTITUTE).'</pre>';
+echo '<pre>'.htmlentities(print_r($tagarray, true), ENT_SUBSTITUTE).'</pre>';
 
 
 }
