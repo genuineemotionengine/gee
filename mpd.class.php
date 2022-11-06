@@ -335,10 +335,10 @@ class MPD {
 		return false;
 	}
 
-        function tags() {
-		if ($this->cmd(CMD_TAGS) !== false) {
-			$this->update();
-			return true;
+	function tags() {
+		$tag_list = $this->cmd(CMD_TAGS);
+		if ($tag_list !== false) {
+			return $this->parse_list($tag_list);
 		}
 		return false;
 	}
