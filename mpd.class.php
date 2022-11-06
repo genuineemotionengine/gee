@@ -69,7 +69,7 @@ define("CMD_CLOSE", "close");
 define("CMD_KILL", "kill");
 define("CMD_FIND", "find");
 define("CMD_FINDADD", "findadd");
-
+define("CMD_TAGS", "tagtypes");
 
 class MPD {
 	
@@ -329,6 +329,14 @@ class MPD {
 	 */
 	function prev() {
 		if ($this->cmd(CMD_PREV) !== false) {
+			$this->update();
+			return true;
+		}
+		return false;
+	}
+
+        function tags() {
+		if ($this->cmd(CMD_TAGS) !== false) {
 			$this->update();
 			return true;
 		}
