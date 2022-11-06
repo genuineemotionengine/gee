@@ -67,6 +67,7 @@ define("CMD_PLAYLISTREMOVE", "rm");
 define("CMD_PLAYLISTSAVE", "save");
 define("CMD_CLOSE", "close");
 define("CMD_KILL", "kill");
+define("CMD_FIND", "find");
 
 
 class MPD {
@@ -661,6 +662,19 @@ class MPD {
 		}
 		
 		$search_res = $this->cmd(CMD_DB_SEARCH, array($type, $what));
+		if ($search_res !== false) {
+			return $this->parse_playlist($search_res);
+		}
+		return false;
+	}
+        
+	function find($type, $what) {
+		if ($this->validate_type($type) === false || $what == '') {
+			$this->err_log[] = "Invalid TYPE or WHAT empty";
+			return false;
+		}
+		
+		$search_res = $this->cmd(CMD_FIND, array($type, $what));
 		if ($search_res !== false) {
 			return $this->parse_playlist($search_res);
 		}

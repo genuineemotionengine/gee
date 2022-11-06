@@ -279,7 +279,7 @@ $uri = $playlistarray[$t]['name'];
 
 echo $uri;
 
-$mpd->playlist_add($uri);
+//$mpd->playlist_add($uri);
     
     
 }else{
@@ -345,4 +345,18 @@ echo '<pre>'.htmlentities(print_r($playlistarray, true), ENT_SUBSTITUTE).'</pre>
 
 
 //****************** Up Next ***************
+
+if ($service == 11){
+  
+    
+$type = "Title";
+
+$what = "I Got Rhythm";
+    
+$findarray = $mpd->find($type, $what);      
+
+echo '<pre>'.htmlentities(print_r($findarray, true), ENT_SUBSTITUTE).'</pre>';
+
+
+}
 
