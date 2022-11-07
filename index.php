@@ -114,28 +114,28 @@ echo "getmeta();\n";
 echo "}\n";
 
 
-echo "function wholealbum(){\n";
-echo "const dbParam = JSON.stringify({table:'album',limit:150});\n";
-echo "const xmlhttp = new XMLHttpRequest();\n";
-echo "xmlhttp.onload = function() {\n";
-echo "const myObj = JSON.parse(this.responseText);\n";
-echo "let html = '<div>'\n";
-echo "for (let x in myObj) {\n";
-
-echo "html += '<div class=\x22border-bottom align-top\x22><br/>";
-echo "<h4>' + myObj[x].Track + ' - ' + myObj[x].Title + ' - ' + myObj[x].Artist + '</h4>";
-echo "<span onclick=\x22playnow('+ myObj[x].Title +','+ myObj[x].Album +')\x22><i class=\x22bi bi-chevron-right\x22 style=\x22font-size: 3rem; color: white;\x22></i></span>";
-echo "<i class=\x22bi bi-chevron-double-right\x22 style=\x22font-size: 3rem; color: white;\x22></i>";
-echo "</div>';\n";
-
-echo "}\n";
-echo "html += '</div>'\n";    
-echo "document.getElementById('fullalbum').innerHTML = html;\n";
-echo "}\n";
-echo "xmlhttp.open('POST', 'http://". $ipaddr ."/api.php?service=8');\n";
-echo "xmlhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');\n";
-echo "xmlhttp.send('x=' + dbParam);\n";
-echo "}\n";
+//echo "function wholealbum(){\n";
+//echo "const dbParam = JSON.stringify({table:'album',limit:150});\n";
+//echo "const xmlhttp = new XMLHttpRequest();\n";
+//echo "xmlhttp.onload = function() {\n";
+//echo "const myObj = JSON.parse(this.responseText);\n";
+//echo "let html = '<div>'\n";
+//echo "for (let x in myObj) {\n";
+//
+//echo "html += '<div class=\x22border-bottom align-top\x22><br/>";
+//echo "<h4>' + myObj[x].Track + ' - ' + myObj[x].Title + ' - ' + myObj[x].Artist + '</h4>";
+//echo "<span onclick=\x22playnow('+ myObj[x].Title +','+ myObj[x].Album +')\x22><i class=\x22bi bi-chevron-right\x22 style=\x22font-size: 3rem; color: white;\x22></i></span>";
+//echo "<i class=\x22bi bi-chevron-double-right\x22 style=\x22font-size: 3rem; color: white;\x22></i>";
+//echo "</div>';\n";
+//
+//echo "}\n";
+//echo "html += '</div>'\n";    
+//echo "document.getElementById('fullalbum').innerHTML = html;\n";
+//echo "}\n";
+//echo "xmlhttp.open('POST', 'http://". $ipaddr ."/api.php?service=8');\n";
+//echo "xmlhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');\n";
+//echo "xmlhttp.send('x=' + dbParam);\n";
+//echo "}\n";
 
 echo "function pad ( val ) { return val > 9 ? val : '0' + val; }\n";
 
@@ -191,7 +191,7 @@ echo "$('#playp').removeClass('bi-pause').addClass('bi-chevron-right');\n";
 echo "$('#playpipp').removeClass('bi-pause').addClass('bi-chevron-right');\n";
 echo "$('#playpipl').removeClass('bi-pause').addClass('bi-chevron-right');\n";
 echo "}\n";
-echo "wholealbum();\n";
+//echo "wholealbum();\n";
 
 echo "});\n";
 
