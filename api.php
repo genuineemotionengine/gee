@@ -5,7 +5,7 @@ $ipaddr = $_SERVER['SERVER_ADDR'];
 require('mpd.class.php');
 require_once('getid3.php');
 
-$mpd = new mpd('localhost', 6600);
+$mpd = new mpd('127.0.0.1', 6600);
 
 //switch ($service){
 
