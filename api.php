@@ -353,7 +353,7 @@ if ($service == 11){
 //
 //$what = "x";
     
-$tagarray = $mpd->tags();      
+$tagarray = $mpd->tagsall();      
 
 echo '<pre>'.htmlentities(print_r($tagarray, true), ENT_SUBSTITUTE).'</pre>';
 

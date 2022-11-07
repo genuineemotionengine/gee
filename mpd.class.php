@@ -70,6 +70,7 @@ define("CMD_KILL", "kill");
 define("CMD_FIND", "find");
 define("CMD_FINDADD", "findadd");
 define("CMD_TAGS", "tagtypes");
+define("CMD_TAGS_All", "tagtypes all");
 
 class MPD {
 	
@@ -337,6 +338,14 @@ class MPD {
 
 	function tags() {
 		$tag_list = $this->cmd(CMD_TAGS);
+		if ($tag_list !== false) {
+			return $this->parse_list($tag_list);
+		}
+		return false;
+	}
+	
+	function tagsall() {
+		$tag_list = $this->cmd(CMD_TAGS_ALL);
 		if ($tag_list !== false) {
 			return $this->parse_list($tag_list);
 		}
