@@ -20,6 +20,8 @@ while(!feof($myfile)) {
     
   $myalbum = fgets($myfile);
   
+  $myalbum = chop($myalbum);
+  
   $sql="INSERT INTO allmusic (album) VALUES ($myalbum)";
   
   echo $sql."<br>";
