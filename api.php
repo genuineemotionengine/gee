@@ -65,15 +65,15 @@ if(isset($ThisFileInfo['comments']['picture'][0])){
     $image='data:'.$ThisFileInfo['comments']['picture'][0]['image_mime'].';charset=utf-8;base64,'.base64_encode($ThisFileInfo['comments']['picture'][0]['data']);
 }
 
-$mpd->next();
-
-$nextsong = $mpd->current_song();
-
-$nexttitle = $nextsong[0]['Title'];
-
-$nextartist = $nextsong[0]['Artist'];
-
-$mpd->prev();
+//$mpd->next();
+//
+//$nextsong = $mpd->current_song();
+//
+//$nexttitle = $nextsong[0]['Title'];
+//
+//$nextartist = $nextsong[0]['Artist'];
+//
+//$mpd->prev();
 
 
 $rows = ['image' => $image,
@@ -83,8 +83,8 @@ $rows = ['image' => $image,
 'elapsed' => $elapsed,
 'duration' => $durations[0],
 'albumartist' => $albumartist,
-'nexttitle' => $nexttitle,
-'nextartist' => $nextartist,    
+//'nexttitle' => $nexttitle,
+//'nextartist' => $nextartist,    
 'state' => $state
      ];
 
