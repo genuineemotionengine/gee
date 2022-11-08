@@ -14,31 +14,43 @@ include "dbconn.php";
 
 
 
-$myfile = fopen("/mnt/usb/000Playlists/allmusic.m3u", "r") or die("Unable to open file!");
-// Output one line until end-of-file
-while(!feof($myfile)) {
-    
-  $myalbum = fgets($myfile);
-  
-  $myalbum = chop($myalbum);
-  
-  $myalbum =  str_replace("'","&#39;",$myalbum);
-  
+//$myfile = fopen("/mnt/usb/000Playlists/allmusic.m3u", "r") or die("Unable to open file!");
+//// Output one line until end-of-file
+//while(!feof($myfile)) {
+//    
+//  $myalbum = fgets($myfile);
+//  
+//  $myalbum = chop($myalbum);
+//  
+//  $myalbum =  str_replace("'","&#39;",$myalbum);
+//  
+//
+//  
+//  $sql="INSERT INTO allmusic (album) VALUES ('$myalbum')";
+//  
+//  echo $sql."<br>\n";
+//  
+//
+//  
+//  $conn->query($sql);
+//  
+//  echo mysqli_error($conn)."<br><br>";
+//  
+//}
+//fclose($myfile);
 
-  
-  $sql="INSERT INTO allmusic (album) VALUES ('$myalbum')";
-  
-  echo $sql."<br>\n";
-  
+$sql = "SELECT * FROM allmuisc";
+$result = $conn->query($sql);
+if ($result->num_rows > 0) {
+    while($row = $result->fetch_assoc()) {
 
-  
-  $conn->query($sql);
-  
-  echo mysqli_error($conn)."<br><br>";
-  
-}
-fclose($myfile);
+        $album = $row['album'];
+        
+        echo $album."<br>\n";
 
+
+        }
+     } 
 
 
 //$conn->query($sql);
