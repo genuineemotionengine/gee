@@ -45,9 +45,12 @@ $result = $conn->query($sql);
 if ($result->num_rows > 0) {
     while($row = $result->fetch_assoc()) {
 
-        $album = $row['album'];
+        $myalbum = $row['album'];
         
-        echo $album."<br>\n";
+        $myalbum =  str_replace("&#39;","'",$myalbum);
+        
+        echo $myalbum."<br>\n";
+        
 
 
         }
