@@ -26,7 +26,7 @@ while(!feof($myfile)) {
   
   $sql="INSERT INTO allmusic (album) VALUES ('$myalbum')";
   
-  echo $sql."<br>";
+  echo $sql."<br>\n";
   
   //$conn->query($sql);
   
