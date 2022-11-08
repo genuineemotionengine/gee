@@ -22,13 +22,15 @@ while(!feof($myfile)) {
   
   $myalbum = chop($myalbum);
   
+  $myalbum =  str_replace("'","&#39;",$myalbum);
+  
   $sql="INSERT INTO allmusic (album) VALUES ('$myalbum')";
   
   echo $sql."<br>";
   
-  $conn->query($sql);
+  //$conn->query($sql);
   
-  echo mysqli_error($conn)."<br><br>";
+  //echo mysqli_error($conn)."<br><br>";
   
 }
 fclose($myfile);
