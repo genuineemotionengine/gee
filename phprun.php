@@ -17,12 +17,18 @@ include "dbconn.php";
 $myfile = fopen("/mnt/usb/000Playlists/allmusic.m3u", "r") or die("Unable to open file!");
 // Output one line until end-of-file
 while(!feof($myfile)) {
-  echo fgets($myfile) . "<br>";
+    
+  $myalbum = fgets($myfile);
+  
+  $sql="INSERT INTO allmusic (album) VALUES ($myalbum)";
+  
+  echo $sql."<br>";
+  
 }
 fclose($myfile);
 
 
 
-$conn->query($sql);
-echo mysqli_error($conn)."<br /><br />";
-echo "done";
+//$conn->query($sql);
+//echo mysqli_error($conn)."<br /><br />";
+//echo "done";
