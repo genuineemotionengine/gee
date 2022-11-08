@@ -41,6 +41,7 @@ include "dbconn.php";
 
 $sql = "SELECT * FROM allmuisc";
 $result = $conn->query($sql);
+echo mysqli_error($conn)."<br><br>";
 if ($result->num_rows > 0) {
     while($row = $result->fetch_assoc()) {
 
