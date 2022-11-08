@@ -22,7 +22,7 @@ while(!feof($myfile)) {
   
   $myalbum = chop($myalbum);
   
-  $sql="INSERT INTO allmusic (album) VALUES ($myalbum)";
+  $sql="INSERT INTO allmusic (album) VALUES ('$myalbum')";
   
   echo $sql."<br>";
   
