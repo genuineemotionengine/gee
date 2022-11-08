@@ -26,6 +26,8 @@ while(!feof($myfile)) {
   
   echo $sql."<br>";
   
+  $conn->query($sql);
+  
 }
 fclose($myfile);
 
