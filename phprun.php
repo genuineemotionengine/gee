@@ -24,6 +24,14 @@ while(!feof($myfile)) {
   
   $myalbum =  str_replace("'","&#39;",$myalbum);
   
+  $myalbum =  str_replace("'","&#39;",$myalbum);
+  
+  $sql="INSERT INTO allmusic (album) VALUES ('$myalbum')";
+  
+  echo $sql."<br>\n";
+  
+  $myalbum =  str_replace("&#39;","'",$myalbum);
+  
   $sql="INSERT INTO allmusic (album) VALUES ('$myalbum')";
   
   echo $sql."<br>\n";
