@@ -28,6 +28,8 @@ while(!feof($myfile)) {
   
   $conn->query($sql);
   
+  echo mysqli_error($conn)."<br><br>";
+  
 }
 fclose($myfile);
 
