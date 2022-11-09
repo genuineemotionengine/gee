@@ -94,14 +94,18 @@ $finalarray[$x] = $myalbumarray[$random];
 
 $finalarray = array_unique($finalarray);
 
+
+$myfile = fopen("/mnt/usb/000Playlists/app.m3u", "w") or die("Unable to open file!");
+
 for ($x = 1; $x <= 100; $x++) {
     
     if ($finalarray[$x] != ""){
 
   echo $finalarray[$x]."<br>";
+  fwrite($myfile, $finalarray[$x]);
     }
 }  
-
+fclose($myfile);
 
 //$count++;
 //if ($count <= 10){       
