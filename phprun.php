@@ -39,7 +39,7 @@ include "dbconn.php";
 //}
 //fclose($myfile);
 
-$myfile = fopen("/mnt/usb/000Playlists/app.m3u", "r") or die("Unable to open file!");
+$myfile = fopen("/mnt/usb/000Playlists/app.m3u", "w") or die("Unable to open file!");
 
 
 
