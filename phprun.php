@@ -92,7 +92,7 @@ echo $x." - ".$myalbumarray[$random]."<br>";
 
 
     
-}
+
 
 //$count++;
 //if ($count <= 10){       
