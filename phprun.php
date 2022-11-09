@@ -45,12 +45,12 @@ fclose($myfile);
 }
 
 if ($mode == 2){
-    
+$count = 0;    
 $myfile = fopen("/mnt/usb/000Playlists/app.m3u", "w") or die("Unable to open file!");
 $sql = "SELECT * FROM allmusic";
 $result = $conn->query($sql);
 //echo mysqli_error($conn)."<br><br>";
-if ($result->num_rows > 10) {
+if ($result->num_rows > 0) {
     while($row = $result->fetch_assoc()) {
 
         $myalbum = $row['album'];
@@ -59,6 +59,12 @@ if ($result->num_rows > 10) {
         
         $myalbum = $myalbum."\n";
         
+        echo $myalbum."<br>\n";
+                
+        echo $count."<br>\n";
+        
+        $count++;
+                
         fwrite($myfile, $myalbum);
 
        }
