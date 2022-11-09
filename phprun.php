@@ -120,4 +120,4 @@ echo $myalbumarray[$random]."<br>";
 
 //$conn->query($sql);
 //echo mysqli_error($conn)."<br /><br />";
-echo "done";
+//echo "done";
