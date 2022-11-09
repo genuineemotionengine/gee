@@ -14,18 +14,21 @@ include "dbconn.php";
 
 
 
-//$myfile = fopen("/mnt/usb/000Playlists/allmusic.m3u", "r") or die("Unable to open file!");
-//// Output one line until end-of-file
-//while(!feof($myfile)) {
-//    
-//  $myalbum = fgets($myfile);
-//  
-//  $myalbum = chop($myalbum);
-//  
-//  $myalbum =  str_replace("'","&#39;",$myalbum);
-//  
-//
-//  
+$myfile = fopen("/mnt/usb/000Playlists/app.m3u", "r") or die("Unable to open file!");
+// Output one line until end-of-file
+while(!feof($myfile)) {
+    
+  $myalbum = fgets($myfile);
+  
+  //$myalbum = chop($myalbum);
+  
+  //$myalbum =  str_replace("'","&#39;",$myalbum);
+  
+  //echo $myalbum."<br>\n";
+  
+  echo $myalbum."<br>\n";
+
+  
 //  $sql="INSERT INTO allmusic (album) VALUES ('$myalbum')";
 //  
 //  echo $sql."<br>\n";
@@ -35,35 +38,35 @@ include "dbconn.php";
 //  $conn->query($sql);
 //  
 //  echo mysqli_error($conn)."<br><br>";
-//  
-//}
-//fclose($myfile);
-
-$myfile = fopen("/mnt/usb/000Playlists/app.m3u", "w") or die("Unable to open file!");
-
-
-
-$sql = "SELECT * FROM allmusic";
-$result = $conn->query($sql);
-//echo mysqli_error($conn)."<br><br>";
-if ($result->num_rows > 0) {
-    while($row = $result->fetch_assoc()) {
-
-        $myalbum = $row['album'];
-        
-        $myalbum = str_replace("&#39;","'",$myalbum);
-        
-        $myalbum = $myalbum."\n";
-        
-        //echo $myalbum."<br>\n";
-        
-        fwrite($myfile, $myalbum);
-
-
-        }
-     } 
-
+  
+}
 fclose($myfile);
+
+//$myfile = fopen("/mnt/usb/000Playlists/app.m3u", "w") or die("Unable to open file!");
+//
+//
+//
+//$sql = "SELECT * FROM allmusic";
+//$result = $conn->query($sql);
+////echo mysqli_error($conn)."<br><br>";
+//if ($result->num_rows > 0) {
+//    while($row = $result->fetch_assoc()) {
+//
+//        $myalbum = $row['album'];
+//        
+//        $myalbum = str_replace("&#39;","'",$myalbum);
+//        
+//        $myalbum = $myalbum."\n";
+//        
+//        
+//        
+//        fwrite($myfile, $myalbum);
+//
+//
+//        }
+//     } 
+//
+//fclose($myfile);
 
 //$conn->query($sql);
 //echo mysqli_error($conn)."<br /><br />";
