@@ -80,21 +80,14 @@ for ($x = 1; $x <= 100; $x++) {
     
 $random = mt_rand(0, $elements);
 
-$randcheck[$x] = $random;
 
-$elementschk = count($randcheck);
 
-for ($y = 0; $y <= $elementschk; $y++) {
-    
-    if ($randcheck[$y] = $random){
-        $random = mt_rand(0, $elements);
-    }
-    
-}
+//array_unique($a);
 
-echo $myalbumarray[$random]."<br>";
+
+$finalarray[$x] = $myalbumarray[$random];
       
-      
+echo $finalarray[$x]."<br>";
       
   }
 }
