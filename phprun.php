@@ -45,8 +45,9 @@ fclose($myfile);
 }
 
 if ($mode == 2){
+
 $count = 0;    
-$myfile = fopen("/mnt/usb/000Playlists/app.m3u", "w") or die("Unable to open file!");
+
 $sql = "SELECT * FROM allmusic";
 $result = $conn->query($sql);
 if ($result->num_rows > 0) {
@@ -61,34 +62,21 @@ if ($result->num_rows > 0) {
         $myalbumarray[$count] = $myalbum;
         
         $count++;
-        
 
        }
      } 
 
-fclose($myfile);
-
 $elements = count($myalbumarray);
 
 for ($x = 1; $x <= 100; $x++) {
-    
-    
+        
 $random = mt_rand(0, $elements);
-
-
-
-//array_unique($a);
-
 
 $finalarray[$x] = $myalbumarray[$random];
       
-//echo $finalarray[$x]."<br>";
-      
-  }
-
+}
 
 $finalarray = array_unique($finalarray);
-
 
 $myfile = fopen("/mnt/usb/000Playlists/app.m3u", "w") or die("Unable to open file!");
 
@@ -102,18 +90,4 @@ for ($x = 1; $x <= 100; $x++) {
 }  
 fclose($myfile);
 }
-//$count++;
-//if ($count <= 10){       
-//fwrite($myfile, $myalbum);
-//}
 
-
-
-
-
-
-
-
-//$conn->query($sql);
-//echo mysqli_error($conn)."<br /><br />";
-//echo "done";
