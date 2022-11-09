@@ -59,21 +59,50 @@ if ($result->num_rows > 0) {
         
         $myalbum = $myalbum."\n";
         
-        echo $myalbum."<br>\n";
+        //echo $myalbum."<br>\n";
                 
-        echo $count."<br>\n";
+        //echo $count."<br>\n";
         
-        $count++;
-        if ($count <= 10){       
-        fwrite($myfile, $myalbum);
-        }
+        $myalbumarray[$count] = $myalbum;
+        
 
        }
      } 
 
 fclose($myfile);
+
+$elements = count($myalbumarray);
+
+for ($x = 1; $x <= 100; $x++) {
+    
+    
+$random = mt_rand(0, $elements);
+
+echo $x." - ".$myalbumarray[$random]."<br>";
+      
+      
+      
+  }
+}
+
+
+
+
+
     
 }
+
+//$count++;
+//if ($count <= 10){       
+//fwrite($myfile, $myalbum);
+//}
+
+
+
+
+
+
+
 
 //$conn->query($sql);
 //echo mysqli_error($conn)."<br /><br />";
