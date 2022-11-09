@@ -1,5 +1,7 @@
 <?php
 
+parse_str($_SERVER['QUERY_STRING']);
+
 include "dbconn.php";
 
 //$sql = "CREATE TABLE allmusic (
@@ -13,21 +15,6 @@ include "dbconn.php";
 //$sql="ALTER TABLE users AUTO_INCREMENT=100001";
 
 
-
-$myfile = fopen("/mnt/usb/000Playlists/app.m3u", "r") or die("Unable to open file!");
-
-while(!feof($myfile)) {
-    
-$myalbum = fgets($myfile);
-    
-//$myalbum = chop($myalbum);
-//$myalbum =  str_replace("'","&#39;",$myalbum);
-  
-  //echo $myalbum."<br>\n";
-  
-echo $myalbum."<br>\n";
-
-  
 //  $sql="INSERT INTO allmusic (album) VALUES ('$myalbum')";
 //  
 //  echo $sql."<br>\n";
@@ -37,35 +24,49 @@ echo $myalbum."<br>\n";
 //  $conn->query($sql);
 //  
 //  echo mysqli_error($conn)."<br><br>";
+
+
+if ($mode == 1){
+
+$myfile = fopen("/mnt/usb/000Playlists/app.m3u", "r") or die("Unable to open file!");
+
+while(!feof($myfile)) {
+    
+$myalbum = fgets($myfile);
+    
+//$myalbum = chop($myalbum);
+//$myalbum =  str_replace("'","&#39;",$myalbum);
+//echo $myalbum."<br>\n";
   
+echo $myalbum."<br>\n";
 }
 fclose($myfile);
 
-//$myfile = fopen("/mnt/usb/000Playlists/app.m3u", "w") or die("Unable to open file!");
+}
 
+if ($mode == 2){
+    
+$myfile = fopen("/mnt/usb/000Playlists/app.m3u", "w") or die("Unable to open file!");
+$sql = "SELECT * FROM allmusic";
+$result = $conn->query($sql);
+//echo mysqli_error($conn)."<br><br>";
+if ($result->num_rows > 10) {
+    while($row = $result->fetch_assoc()) {
 
+        $myalbum = $row['album'];
+        
+        $myalbum = str_replace("&#39;","'",$myalbum);
+        
+        $myalbum = $myalbum."\n";
+        
+        fwrite($myfile, $myalbum);
 
-//$sql = "SELECT * FROM allmusic";
-//$result = $conn->query($sql);
-////echo mysqli_error($conn)."<br><br>";
-//if ($result->num_rows < 10) {
-//    while($row = $result->fetch_assoc()) {
-//
-//        $myalbum = $row['album'];
-//        
-//        $myalbum = str_replace("&#39;","'",$myalbum);
-//        
-//        $myalbum = $myalbum."\n";
-//        
-//        
-//        
-//        fwrite($myfile, $myalbum);
-//
-//
-//        }
-//     } 
-//
-//fclose($myfile);
+       }
+     } 
+
+fclose($myfile);
+    
+}
 
 //$conn->query($sql);
 //echo mysqli_error($conn)."<br /><br />";
