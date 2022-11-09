@@ -50,7 +50,7 @@ $myfile = fopen("/mnt/usb/000Playlists/app.m3u", "w") or die("Unable to open fil
 $sql = "SELECT * FROM allmusic";
 $result = $conn->query($sql);
 //echo mysqli_error($conn)."<br><br>";
-if ($result->num_rows > 10) {
+if ($result->num_rows > 0) {
     while($row = $result->fetch_assoc()) {
 
         $myalbum = $row['album'];
