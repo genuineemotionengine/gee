@@ -95,8 +95,11 @@ $finalarray[$x] = $myalbumarray[$random];
 $finalarray = array_unique($finalarray);
 
 for ($x = 1; $x <= 100; $x++) {
+    
+    if ($finalarray[$x] != ""){
 
   echo $finalarray[$x]."<br>";
+    }
 }  
 
 
