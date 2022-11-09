@@ -84,7 +84,7 @@ $randcheck[$x] = $random;
 
 $elementschk = count($randcheck);
 
-for ($y = 1; $y <= $elementschk; $y++) {
+for ($y = 0; $y <= $elementschk; $y++) {
     
     if ($randcheck[$y] = $random){
         $random = mt_rand(0, $elements);
