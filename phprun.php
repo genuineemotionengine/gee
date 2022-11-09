@@ -92,7 +92,7 @@ for ($y = 0; $y <= $elementschk; $y++) {
     
 }
 
-echo $x." - ".$myalbumarray[$random]."<br>";
+echo $myalbumarray[$random]."<br>";
       
       
       
