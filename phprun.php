@@ -87,16 +87,17 @@ $random = mt_rand(0, $elements);
 
 $finalarray[$x] = $myalbumarray[$random];
       
-echo $finalarray[$x]."<br>";
+//echo $finalarray[$x]."<br>";
       
   }
 }
 
+$finalarray = array_unique($finalarray);
 
+for ($x = 1; $x <= 100; $x++) {
 
-
-
-    
+  echo $finalarray[$x]."<br>";
+}  
 
 
 //$count++;
