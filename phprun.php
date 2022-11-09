@@ -65,6 +65,8 @@ if ($result->num_rows > 0) {
         
         $myalbumarray[$count] = $myalbum;
         
+        $count++;
+        
 
        }
      } 
