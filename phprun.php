@@ -64,8 +64,9 @@ if ($result->num_rows > 0) {
         echo $count."<br>\n";
         
         $count++;
-                
+        if ($count < 10){       
         fwrite($myfile, $myalbum);
+        }
 
        }
      } 
