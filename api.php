@@ -140,7 +140,7 @@ $mpd->playlist_clear();
     
 if ($playl == 1){    
 
-$playlist = "allmusic";
+$playlist = "app";
 
 }
 
@@ -160,7 +160,7 @@ $playlist = "relaxation";
     
 $mpd->load_playlist($playlist);
 
-$mpd->playlist_shuffle();
+//$mpd->playlist_shuffle();
 
 $mpd->play(0);
 
