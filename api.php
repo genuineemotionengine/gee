@@ -279,7 +279,9 @@ $uri = $playlistarray[$t]['name'];
 
 $uri = "mnt/usb/".$uri;
 
-$pos = $statusarray['nextsong'];
+$pos = $statusarray['song'];
+
+$pos = "+".$pos;
 
 
 echo "uri: ".$uri."<br>";
