@@ -366,7 +366,7 @@ $pos = $statusarray['song'];
 
 $pos = "+".$pos;
 
-$range = "0:10";
+$range = "0:";
 
 echo "pos: ".$pos."<br>";
 
