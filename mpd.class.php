@@ -823,13 +823,13 @@ class MPD {
 	 * @param string $playlist Playlist to load
 	 * @return boolean Returns false on failure and true on success
 	 */
-	function load_playlist($playlist, $pos) {
+	function load_playlist($playlist) {
 		if ($playlist == '') {
 			$this->err_log[] = "Playlist name must not be empty";
 			return false;
 		}
 		
-		$pl_res = $this->cmd(CMD_PLAYLISTLOAD, array($playlist, $pos));
+		$pl_res = $this->cmd(CMD_PLAYLISTLOAD, array($playlist));
 		if ($pl_res !== false) {
 			return true;
 		}
