@@ -264,30 +264,30 @@ echo '<pre>'.htmlentities(print_r($playlistarray, true), ENT_SUBSTITUTE).'</pre>
 echo "<br><br><br>";
 }
 
-//if ($playnow == 1){
-//    $elements = count($playlistarray);
-//  for ($x = 0; $x <= $elements; $x++) {
-//  if ($track != $playlistarray[$x][Track]){
-//      unset($playlistarray[$x]);
-//  }else{
-//      $t = $x;
-//  }
-//}
-//echo '<pre>'.htmlentities(print_r($playlistarray, true), ENT_SUBSTITUTE).'</pre>';
-//
-//$uri = $playlistarray[$t]['name'];
-//
-//echo $uri;
-//
-////$mpd->playlist_add($uri);
-//    
-//    
-//}else{
+if ($playnow == 1){
+    $elements = count($playlistarray);
+  for ($x = 0; $x <= $elements; $x++) {
+  if ($name != $playlistarray[$x][name]){
+      unset($playlistarray[$x]);
+  }else{
+      $t = $x;
+  }
+}
+echo '<pre>'.htmlentities(print_r($playlistarray, true), ENT_SUBSTITUTE).'</pre>';
+
+$uri = $playlistarray[$t]['name'];
+
+echo "uri: ".$uri;
+
+$mpd->playlist_add($uri);
+    
+    
+}else{
 
 
 echo json_encode($playlistarray);
 
-
+}
 }
 //***************** set vol **********************
 
