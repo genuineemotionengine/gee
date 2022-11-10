@@ -357,10 +357,14 @@ echo '<pre>'.htmlentities(print_r($playlistarray, true), ENT_SUBSTITUTE).'</pre>
 //****************** Up Next ***************
 
 if ($service == 11){
+    
+$statusarray = $mpd->server_status();    
   
 $playlist = "relaxation";
 
-$loadarray = $mpd->load_playlist($playlist);
+$pos = $statusarray['nextsong'];
+
+$loadarray = $mpd->load_playlist($playlist, $pos);
 
 echo '<pre>'.htmlentities(print_r($loadarray, true), ENT_SUBSTITUTE).'</pre>';
 
