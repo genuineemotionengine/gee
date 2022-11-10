@@ -824,7 +824,7 @@ class MPD {
 	 * @return boolean Returns false on failure and true on success
 	 */
 	function load_playlist($playlist, $pos) {
-		if ($playlist == '') {
+		if ($playlist == '' || $pos == '') {
 			$this->err_log[] = "Playlist name must not be empty";
 			return false;
 		}
