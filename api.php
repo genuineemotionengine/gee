@@ -280,9 +280,9 @@ $uri = $playlistarray[$t]['name'];
 $pos = $statusarray['nextsong'];
 
 
-echo "uri: ".$uri."<br";
+echo "uri: ".$uri."<br>";
 
-echo "pos: ".$pos."<br";
+echo "pos: ".$pos."<br>";
 
 $results = $mpd->playlist_add_id($uri, $pos);
     
