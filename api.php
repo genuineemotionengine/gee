@@ -277,6 +277,8 @@ echo '<pre>'.htmlentities(print_r($playlistarray, true), ENT_SUBSTITUTE).'</pre>
 
 $uri = $playlistarray[$t]['name'];
 
+$uri = "mnt/usb/".$uri;
+
 $pos = $statusarray['nextsong'];
 
 
