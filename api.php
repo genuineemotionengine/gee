@@ -366,11 +366,11 @@ $pos = $statusarray['song'];
 
 $pos = "+".$pos;
 
-$range = "0:";
+//$range = "0:";
 
 echo "pos: ".$pos."<br>";
 
-$loadarray = $mpd->load_next($playlist, $range, $pos);
+$loadarray = $mpd->load_next($playlist, $pos);
 
 echo '<pre>'.htmlentities(print_r($loadarray, true), ENT_SUBSTITUTE).'</pre>';
 
