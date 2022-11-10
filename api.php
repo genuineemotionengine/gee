@@ -277,9 +277,14 @@ echo '<pre>'.htmlentities(print_r($playlistarray, true), ENT_SUBSTITUTE).'</pre>
 
 $uri = $playlistarray[$t]['name'];
 
-echo "uri: ".$uri;
+$pos = $statusarray['nextsong'];
 
-$results = $mpd->playlist_add($uri);
+
+echo "uri: ".$uri."<br";
+
+echo "pos: ".$pos."<br";
+
+$results = $mpd->playlist_add_id($uri, $pos);
     
 echo '<pre>'.htmlentities(print_r($results, true), ENT_SUBSTITUTE).'</pre>';
 
