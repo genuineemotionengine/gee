@@ -358,14 +358,11 @@ echo '<pre>'.htmlentities(print_r($playlistarray, true), ENT_SUBSTITUTE).'</pre>
 
 if ($service == 11){
   
-    
-//$type = "Album";
-//
-//$what = "x";
-    
-$tagarray = $mpd->tags();      
+$playlist = "relaxation";
 
-echo '<pre>'.htmlentities(print_r($tagarray, true), ENT_SUBSTITUTE).'</pre>';
+load_playlist($playlist)
+
+//echo '<pre>'.htmlentities(print_r($tagarray, true), ENT_SUBSTITUTE).'</pre>';
 
 
 }
