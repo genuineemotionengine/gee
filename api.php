@@ -360,7 +360,7 @@ if ($service == 11){
   
 $playlist = "relaxation";
 
-load_playlist($playlist);
+$mpd->load_playlist($playlist);
 
 //echo '<pre>'.htmlentities(print_r($tagarray, true), ENT_SUBSTITUTE).'</pre>';
 
