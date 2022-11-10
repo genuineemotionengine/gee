@@ -68,7 +68,7 @@ if ($result->num_rows > 0) {
 
 $elements = count($myalbumarray);
 
-for ($x = 1; $x <= 100; $x++) {
+for ($x = 1; $x <= 10; $x++) {
         
 $random = mt_rand(0, $elements);
 
@@ -80,7 +80,7 @@ $finalarray = array_unique($finalarray);
 
 $myfile = fopen("/mnt/usb/000Playlists/app.m3u", "w") or die("Unable to open file!");
 
-for ($x = 1; $x <= 100; $x++) {
+for ($x = 1; $x <= 10; $x++) {
     
     if ($finalarray[$x] != ""){
 
