@@ -279,9 +279,10 @@ $uri = $playlistarray[$t]['name'];
 
 echo "uri: ".$uri;
 
-$mpd->playlist_add($uri);
+$results = $mpd->playlist_add($uri);
     
-    
+echo '<pre>'.htmlentities(print_r($results, true), ENT_SUBSTITUTE).'</pre>';
+
 }else{
 
 
