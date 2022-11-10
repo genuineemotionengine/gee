@@ -823,13 +823,26 @@ class MPD {
 	 * @param string $playlist Playlist to load
 	 * @return boolean Returns false on failure and true on success
 	 */
-	function load_playlist($playlist, $posi) {
-		if ($playlist == '' || $posi == '') {
+	function load_playlist($playlist) {
+		if ($playlist == '') {
 			$this->err_log[] = "Playlist name must not be empty";
 			return false;
 		}
 		
-		$pl_res = $this->cmd(CMD_PLAYLISTLOAD, array($playlist, $posi));
+		$pl_res = $this->cmd(CMD_PLAYLISTLOAD, array($playlist));
+		if ($pl_res !== false) {
+			return true;
+		}
+		return false;		
+	}
+	
+	function load_next($playlist, $pos) {
+		if ($playlist == '' || $pos == '') {
+			$this->err_log[] = "Playlist name must not be empty";
+			return false;
+		}
+		
+		$pl_res = $this->cmd(CMD_PLAYLISTLOAD, array($playlist, $pos));
 		if ($pl_res !== false) {
 			return true;
 		}
