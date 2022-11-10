@@ -364,7 +364,11 @@ $playlist = "relaxation";
 
 $pos = $statusarray['nextsong'];
 
-$loadarray = $mpd->load_next($playlist, $pos);
+$range = "0:";
+
+echo "pos: ".$pos."<br>";
+
+$loadarray = $mpd->load_next($playlist, $range, $pos);
 
 echo '<pre>'.htmlentities(print_r($loadarray, true), ENT_SUBSTITUTE).'</pre>';
 

@@ -836,13 +836,13 @@ class MPD {
 		return false;		
 	}
 	
-	function load_next($playlist, $pos) {
+	function load_next($playlist, $range, $pos) {
 		if ($playlist == '' || $pos == '') {
 			$this->err_log[] = "Playlist name must not be empty";
 			return false;
 		}
 		
-		$pl_res = $this->cmd(CMD_PLAYLISTLOAD, array($playlist, $pos));
+		$pl_res = $this->cmd(CMD_PLAYLISTLOAD, array($playlist, $range, $pos));
 		if ($pl_res !== false) {
 			return true;
 		}
