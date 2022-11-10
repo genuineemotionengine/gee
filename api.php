@@ -362,7 +362,9 @@ $statusarray = $mpd->server_status();
   
 $playlist = "relaxation";
 
-$pos = $statusarray['nextsong'];
+$pos = $statusarray['song'];
+
+$pos = "+".$pos;
 
 $range = "0:";
 
