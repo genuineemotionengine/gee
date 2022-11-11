@@ -164,6 +164,8 @@ $mpd->load_playlist($playlist);
 
 $mpd->play(0);
 
+$mpd->repeat(1);
+
 header("Location: http://". $ipaddr ."");
  
 }
