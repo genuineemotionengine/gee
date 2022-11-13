@@ -242,7 +242,6 @@ echo "<body class='p-3 mb-2 bg-black text-white pt-0 ps-0 pe-0 me-0'>\n\n";
 echo "<div class='container-fluid text-center ps-0 pe-0'>\n";
 echo "<div class='d-block d-sm-none'>\n";
 echo "<img id='image' class='img-fluid' src='".$image."' />\n";
-echo "<span class='fs-6'>".$hosty."</span>";
 echo "<button class='btn btn-sm' onclick='prevtrack()'><i class='bi bi-arrow-left-short' style='font-size: 6rem; color: white;'></i></button>\n";
 echo "<button class='btn btn-sm' onclick='playpause()'><i id='playp' class='bi bi-pause' style='font-size: 5rem; color: white;'></i></button>\n";
 echo "<button class='btn btn-sm' onclick='nexttrack()'><i class='bi bi-arrow-right-short' style='font-size: 6rem; color: white;'></i></button>\n";
@@ -267,7 +266,7 @@ echo "<a href='http://". $ipaddr ."/'><i class='bi bi-arrow-clockwise' style='fo
 echo "<button type='button' onclick='wholealbum()' class='btn btn-black' data-bs-toggle='modal' data-bs-target='#staticBackdrop'><i class='bi bi-three-dots' style='font-size: 3rem; color: white;'></i></button>\n";
 echo "<a href='http://". $ipaddr ."/api.php?service=5&playl=1'><i class='bi bi-arrow-repeat' style='font-size: 3rem; color: white;'></i></a><br/><br/><br/>\n";
 //echo "Next: <span id='nexttitle' class='fs-6'></span> - <span id='nextartist' class='fs-6'></span><br/><br/><br/>\n";
-
+echo "<span class='fs-6'>".$hosty."</span>";
 
 
 echo "<a href='http://". $ipaddr ."/api.php?service=9&vol=70'><i class='bi bi-volume-down' style='font-size: 3rem; color: white;'></i></a>&nbsp;&nbsp;&nbsp;&nbsp;\n";
