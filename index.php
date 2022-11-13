@@ -83,7 +83,6 @@ echo "function nexttrack() {\n";
 echo "const xhttp = new XMLHttpRequest();\n";
 echo "xhttp.open('GET', 'http://". $ipaddr ."/api.php?service=4');\n";
 echo "xhttp.send();\n";
-//echo "getmeta();\n";
 echo "location.reload();";
 
 echo "}\n";
@@ -92,14 +91,14 @@ echo "function prevtrack() {\n";
 echo "const xhttp = new XMLHttpRequest();\n";
 echo "xhttp.open('GET', 'http://". $ipaddr ."/api.php?service=3');\n";
 echo "xhttp.send();\n";
-echo "getmeta();\n";
+echo "location.reload();";
 echo "}\n";
 
 echo "function playpause() {\n";
 echo "const xhttp = new XMLHttpRequest();\n";
 echo "xhttp.open('GET', 'http://". $ipaddr ."/api.php?service=2');\n";
 echo "xhttp.send();\n";
-echo "getmeta();\n";
+echo "location.reload();";
 echo "}\n";
 
 echo "function playnow(title,album) {\n";
