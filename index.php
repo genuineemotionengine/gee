@@ -139,58 +139,90 @@ echo "}\n";
 
 echo "function pad ( val ) { return val > 9 ? val : '0' + val; }\n";
 
+//echo "function getmeta(){\n";
+//echo "$.getJSON('http://". $ipaddr ."/api.php?service=1', function(result){\n";
+//echo "duration = parseInt(result.duration);\n";
+//echo "current = parseInt(result.elapsed);\n";
+//echo "state = result.state;\n";
+//echo "$('#image').attr('src',result.image);\n";
+//echo "$('#imageipp').attr('src',result.image);\n";
+//echo "$('#imageipl').attr('src',result.image);\n";
+//echo "$('#imagexlg').attr('src',result.image);\n";
+//echo "$('#imagem').attr('src',result.image);\n";
+//echo "$('#title').text(result.title);\n";
+//echo "$('#titleipp').text(result.title);\n";
+//echo "$('#titleipl').text(result.title);\n";
+//echo "$('#titlexlg').text(result.title);\n";
+//echo "$('#artist').text(result.artist);\n";
+//echo "$('#artistipp').text(result.artist);\n";
+//echo "$('#artistipl').text(result.artist);\n";
+//echo "$('#artistxlg').text(result.artist);\n";
+//echo "$('#artistm').text(result.artist);\n";
+//echo "$('#album').text(result.album);\n";       
+//echo "$('#albumipp').text(result.album);\n";
+//echo "$('#albumipl').text(result.album);\n";
+//echo "$('#albumxlg').text(result.album);\n";
+//echo "$('#albumm').text(result.album);\n";
+//echo "$('#albumartist').text(result.albumartist);\n";
+//echo "$('#nexttitle').text(result.nexttitle);\n";
+//echo "$('#nextartist').text(result.nextartist);\n";
+//echo "$('#secondsdur').html(pad(result.duration%60));\n";
+//echo "$('#minutesdur').html(pad(parseInt(result.duration/60,10)));\n";
+//echo "$('#secondsduripp').html(pad(result.duration%60));\n";
+//echo "$('#minutesduripp').html(pad(parseInt(result.duration/60,10)));\n";
+//echo "$('#secondsduripl').html(pad(result.duration%60));\n";
+//echo "$('#minutesduripl').html(pad(parseInt(result.duration/60,10)));\n";
+//echo "$('#secondscur').html(pad(current%60));\n";
+//echo "$('#minutescur').html(pad(parseInt(current/60,10)));\n";
+//echo "$('#secondscuripp').html(pad(current%60));\n";
+//echo "$('#minutescuripp').html(pad(parseInt(current/60,10)));\n";
+//echo "$('#secondscuripl').html(pad(current%60));\n";
+//echo "$('#minutescuripl').html(pad(parseInt(current/60,10)));\n";
+//
+//
+//echo "if (state === play){\n";
+//echo "$('#playp').removeClass('bi-chevron-right').addClass('bi-pause');\n";
+//echo "$('#playpipp').removeClass('bi-chevron-right').addClass('bi-pause');\n";
+//echo "$('#playpipl').removeClass('bi-chevron-right').addClass('bi-pause');\n";
+//echo "}\n";
+//
+//echo "if (state === pause){\n";
+//echo "$('#playp').removeClass('bi-pause').addClass('bi-chevron-right');\n";
+//echo "$('#playpipp').removeClass('bi-pause').addClass('bi-chevron-right');\n";
+//echo "$('#playpipl').removeClass('bi-pause').addClass('bi-chevron-right');\n";
+//echo "}\n";
+//echo "wholealbum();\n";
+//
+//echo "});\n";
+//
+//
+//echo "}\n";
+
 echo "function getmeta(){\n";
 echo "$.getJSON('http://". $ipaddr ."/api.php?service=1', function(result){\n";
 echo "duration = parseInt(result.duration);\n";
 echo "current = parseInt(result.elapsed);\n";
 echo "state = result.state;\n";
 echo "$('#image').attr('src',result.image);\n";
-echo "$('#imageipp').attr('src',result.image);\n";
-echo "$('#imageipl').attr('src',result.image);\n";
-echo "$('#imagexlg').attr('src',result.image);\n";
 echo "$('#imagem').attr('src',result.image);\n";
-echo "$('#title').text(result.title);\n";
-echo "$('#titleipp').text(result.title);\n";
-echo "$('#titleipl').text(result.title);\n";
-echo "$('#titlexlg').text(result.title);\n";
 echo "$('#artist').text(result.artist);\n";
-echo "$('#artistipp').text(result.artist);\n";
-echo "$('#artistipl').text(result.artist);\n";
-echo "$('#artistxlg').text(result.artist);\n";
 echo "$('#artistm').text(result.artist);\n";
-echo "$('#album').text(result.album);\n";       
-echo "$('#albumipp').text(result.album);\n";
-echo "$('#albumipl').text(result.album);\n";
-echo "$('#albumxlg').text(result.album);\n";
+echo "$('#album').text(result.album);\n";
 echo "$('#albumm').text(result.album);\n";
-echo "$('#albumartist').text(result.albumartist);\n";
-echo "$('#nexttitle').text(result.nexttitle);\n";
-echo "$('#nextartist').text(result.nextartist);\n";
 echo "$('#secondsdur').html(pad(result.duration%60));\n";
 echo "$('#minutesdur').html(pad(parseInt(result.duration/60,10)));\n";
-echo "$('#secondsduripp').html(pad(result.duration%60));\n";
-echo "$('#minutesduripp').html(pad(parseInt(result.duration/60,10)));\n";
-echo "$('#secondsduripl').html(pad(result.duration%60));\n";
-echo "$('#minutesduripl').html(pad(parseInt(result.duration/60,10)));\n";
 echo "$('#secondscur').html(pad(current%60));\n";
 echo "$('#minutescur').html(pad(parseInt(current/60,10)));\n";
-echo "$('#secondscuripp').html(pad(current%60));\n";
-echo "$('#minutescuripp').html(pad(parseInt(current/60,10)));\n";
-echo "$('#secondscuripl').html(pad(current%60));\n";
-echo "$('#minutescuripl').html(pad(parseInt(current/60,10)));\n";
-
 
 echo "if (state === play){\n";
 echo "$('#playp').removeClass('bi-chevron-right').addClass('bi-pause');\n";
-echo "$('#playpipp').removeClass('bi-chevron-right').addClass('bi-pause');\n";
-echo "$('#playpipl').removeClass('bi-chevron-right').addClass('bi-pause');\n";
 echo "}\n";
 
 echo "if (state === pause){\n";
 echo "$('#playp').removeClass('bi-pause').addClass('bi-chevron-right');\n";
-echo "$('#playpipp').removeClass('bi-pause').addClass('bi-chevron-right');\n";
-echo "$('#playpipl').removeClass('bi-pause').addClass('bi-chevron-right');\n";
+
 echo "}\n";
+
 echo "wholealbum();\n";
 
 echo "});\n";
