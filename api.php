@@ -167,7 +167,7 @@ $mpd->repeat(1);
 $mpd->play(0);
 
 
-header("Location: http://". $ipaddr ."");
+//header("Location: http://". $ipaddr ."");
  
 }
 
