@@ -407,5 +407,7 @@ $insertarray = $mpd->playlist_add_id($uri, $pos);
 
 echo '<pre>'.htmlentities(print_r($insertarray, true), ENT_SUBSTITUTE).'</pre>';
 
+$mpd->next();
+
 }
 
