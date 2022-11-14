@@ -401,7 +401,7 @@ if ($service == 13){
     
 $uri = "Oasis - Living Fast/02 Oasis - She's Electric.flac";
 
-$pos = "9";
+$pos = "4";
 
 $insertarray = $mpd->playlist_add_id($uri, $pos);
 
