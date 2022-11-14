@@ -381,12 +381,10 @@ echo '<pre>'.htmlentities(print_r($loadarray, true), ENT_SUBSTITUTE).'</pre>';
 }
 
 
-//****************** Insert Track ***************
+//****************** Insert Next Track ***************
 
 if ($service == 12){
     
-
-
 $uri = "Oasis - Living Fast/02 Oasis - She's Electric.flac";
 
 $pos = "9";
@@ -396,3 +394,18 @@ $insertarray = $mpd->playlist_add_id($uri, $pos);
 echo '<pre>'.htmlentities(print_r($insertarray, true), ENT_SUBSTITUTE).'</pre>';
 
 }
+
+//****************** Insert Next Track ***************
+
+if ($service == 13){
+    
+$uri = "Oasis - Living Fast/02 Oasis - She's Electric.flac";
+
+$pos = "9";
+
+$insertarray = $mpd->playlist_add_id($uri, $pos);
+
+echo '<pre>'.htmlentities(print_r($insertarray, true), ENT_SUBSTITUTE).'</pre>';
+
+}
+
