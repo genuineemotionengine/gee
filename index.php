@@ -103,7 +103,7 @@ echo "}\n";
 
 echo "function playnow(name) {\n";
 echo "const xhttp = new XMLHttpRequest();\n";
-echo "var PageToSendTo = 'http://". $ipaddr ."/api.php?service=8&playnow=1&name=';\n";
+echo "var PageToSendTo = 'http://". $ipaddr ."/api.php?service=8&playnow=1&playnext=1&name=';\n";
 //echo "var MyVariable = 'variableData';\n";
 //echo "var VariableTitle = 'name=';\n";
 //echo "var VariableAlbum = '&album=';\n";
