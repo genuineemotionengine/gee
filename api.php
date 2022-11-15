@@ -136,7 +136,11 @@ $mpd->next();
 
 //***************** Restart Playlist **********************
 
-if ($service == 5){ 
+if ($service == 5){
+    
+echo "<head>\n";
+echo "<meta name='apple-mobile-web-app-capable' content='yes'>\n";
+echo "</head>\n";
     
 $mpd->playlist_clear();
     
