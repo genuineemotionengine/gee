@@ -113,9 +113,8 @@ echo "for (let x in myObj) {\n";
 
 echo "html += '<div class=\x22border-bottom align-top\x22><br/>";
 echo "<h4>' + myObj[x].Track + ' - ' + myObj[x].Title + ' - ' + myObj[x].Artist + '</h4>";
-//echo "<button class=\x22btn btn-sm\x22 onclick=\x22playnow('+ myObj[x].name +')\x22><i class=\x22bi bi-chevron-right\x22 style=\x22font-size: 3rem; color: white;\x22></i></button>";
-echo "<a href=\x22http://". $ipaddr ."/api.php?service=8&playnext=1&name='+ myObj[x].name +'\x22><i class=\x22bi bi-chevron-right\x22 style=\x22font-size: 3rem; color: white;\x22></i></a>";
-echo "<i class=\x22bi bi-chevron-double-right\x22 style=\x22font-size: 3rem; color: white;\x22></i>";
+echo "<a href=\x22http://". $ipaddr ."/api.php?service=8&playnow=1&playnext=1&name='+ myObj[x].name +'\x22><i class=\x22bi bi-chevron-right\x22 style=\x22font-size: 3rem; color: white;\x22></i></a>";
+echo "<a href=\x22http://". $ipaddr ."/api.php?service=8&playnext=1&name='+ myObj[x].name +'\x22><i class=\x22bi bi-chevron-double-right\x22 style=\x22font-size: 3rem; color: white;\x22></i></a>";
 echo "</div>';\n";
 
 echo "}\n";
