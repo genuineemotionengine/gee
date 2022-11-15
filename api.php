@@ -300,7 +300,7 @@ if ($playnow == 1){
     
 }
 
-header("Location: http://". $ipaddr ."");
+//header("Location: http://". $ipaddr ."");
 
 echo '<pre>'.htmlentities(print_r($results, true), ENT_SUBSTITUTE).'</pre>';
 
