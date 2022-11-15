@@ -266,9 +266,6 @@ echo '<pre>'.htmlentities(print_r($albumarray, true), ENT_SUBSTITUTE).'</pre>';
 
 if ($service == 8){
 
-echo "<head>\n";
-echo "<meta name='apple-mobile-web-app-capable' content='yes'>\n";
-echo "</head>\n";
  
     
 $statusarray = $mpd->server_status(); 
