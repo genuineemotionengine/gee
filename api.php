@@ -267,7 +267,7 @@ echo '<pre>'.htmlentities(print_r($playlistarray, true), ENT_SUBSTITUTE).'</pre>
 echo "<br><br><br>";
 }
 
-if ($playnow == 1){
+if ($playnext == 1){
     $elements = count($playlistarray);
   for ($x = 0; $x <= $elements; $x++) {
   if ($name != $playlistarray[$x][name]){
@@ -295,11 +295,13 @@ echo "pos: ".$pos."<br>";
 
 $results = $mpd->playlist_add_id($uri, $pos);
 
-if ($playnext == 1){
+if ($playnow == 1){
     $mpd->next();
     
 }
-    
+
+header("Location: http://". $ipaddr ."");
+
 echo '<pre>'.htmlentities(print_r($results, true), ENT_SUBSTITUTE).'</pre>';
 
 }else{
