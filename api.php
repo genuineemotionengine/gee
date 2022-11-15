@@ -2,6 +2,8 @@
 parse_str($_SERVER['QUERY_STRING']);
 $ipaddr = $_SERVER['SERVER_ADDR'];
 
+include "dbconn.php";
+
 require('mpd.class.php');
 require_once('getid3.php');
 
@@ -157,7 +159,61 @@ $playlist = "relaxation";
 
 }
 
+////////////
+
+
+$count = 0;    
+
+$sql = "SELECT * FROM allmusic";
+$result = $conn->query($sql);
+if ($result->num_rows > 0) {
+    while($row = $result->fetch_assoc()) {
+
+        $myalbum = $row['album'];
+        
+        $myalbum = str_replace("&#39;","'",$myalbum);
+        
+        $myalbum = $myalbum."\n";
+        
+        $myalbumarray[$count] = $myalbum;
+        
+        $count++;
+
+       }
+     } 
+
+$elements = count($myalbumarray);
+
+for ($x = 1; $x <= 10; $x++) {
+        
+$random = mt_rand(0, $elements);
+
+$finalarray[$x] = $myalbumarray[$random];
+      
+}
+
+$finalarray = array_unique($finalarray);
+
+$myfile = fopen("/mnt/usb/000Playlists/app.m3u", "w") or die("Unable to open file!");
+
+for ($x = 1; $x <= 10; $x++) {
     
+    if ($finalarray[$x] != ""){
+
+  echo $finalarray[$x]."<br>";
+  fwrite($myfile, $finalarray[$x]);
+    }
+}  
+fclose($myfile);
+
+
+
+
+
+
+
+////////////////
+
 $mpd->load_playlist($playlist);
 
 //$mpd->playlist_shuffle();
