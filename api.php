@@ -284,6 +284,8 @@ $uri = $playlistarray[$t]['name'];
 
 $pos = $statusarray['song'];
 
+$pos++;
+
 //$pos = "+".$pos;
 
 
