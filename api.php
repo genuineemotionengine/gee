@@ -280,11 +280,11 @@ echo '<pre>'.htmlentities(print_r($playlistarray, true), ENT_SUBSTITUTE).'</pre>
 
 $uri = $playlistarray[$t]['name'];
 
-$uri = "mnt/usb/".$uri;
+//$uri = "mnt/usb/".$uri;
 
 $pos = $statusarray['song'];
 
-$pos = "+".$pos;
+//$pos = "+".$pos;
 
 
 echo "uri: ".$uri."<br>";
