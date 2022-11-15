@@ -276,8 +276,9 @@ if ($playnext == 1){
       $t = $x;
   }
 }
+if ($verbose){
 echo '<pre>'.htmlentities(print_r($playlistarray, true), ENT_SUBSTITUTE).'</pre>';
-
+}
 $uri = $playlistarray[$t]['name'];
 
 //$uri = "mnt/usb/".$uri;
@@ -288,11 +289,11 @@ $pos++;
 
 //$pos = "+".$pos;
 
-
+if ($verbose){
 echo "uri: ".$uri."<br>";
 
 echo "pos: ".$pos."<br>";
-
+}
 $results = $mpd->playlist_add_id($uri, $pos);
 
 if ($playnow == 1){
@@ -300,7 +301,7 @@ if ($playnow == 1){
     
 }
 
-//header("Location: http://". $ipaddr ."");
+header("Location: http://". $ipaddr ."");
 
 echo '<pre>'.htmlentities(print_r($results, true), ENT_SUBSTITUTE).'</pre>';
 
