@@ -101,17 +101,6 @@ echo "xhttp.send();\n";
 echo "location.reload();";
 echo "}\n";
 
-echo "function playnow(name) {\n";
-echo "const xhttp = new XMLHttpRequest();\n";
-echo "var PageToSendTo = 'http://". $ipaddr ."/api.php?service=8&playnow=1&playnext=1&name=';\n";
-//echo "var MyVariable = 'variableData';\n";
-//echo "var VariableTitle = 'name=';\n";
-//echo "var VariableAlbum = '&album=';\n";
-echo "var UrlToSend = PageToSendTo + name;\n";
-echo "xmlhttp.open('GET', UrlToSend, false);\n";
-echo "xhttp.send();\n";
-echo "getmeta();\n";
-echo "}\n";
 
 
 echo "function wholealbum(){\n";
@@ -125,7 +114,7 @@ echo "for (let x in myObj) {\n";
 echo "html += '<div class=\x22border-bottom align-top\x22><br/>";
 echo "<h4>' + myObj[x].Track + ' - ' + myObj[x].Title + ' - ' + myObj[x].Artist + '</h4>";
 //echo "<button class=\x22btn btn-sm\x22 onclick=\x22playnow('+ myObj[x].name +')\x22><i class=\x22bi bi-chevron-right\x22 style=\x22font-size: 3rem; color: white;\x22></i></button>";
-echo "<a href=\x22http://". $ipaddr ."/api.php?service=8&playnow=1&playnext=1&name='+ myObj[x].name +'\x22><i class=\x22bi bi-chevron-right\x22 style=\x22font-size: 3rem; color: white;\x22></i></a>";
+echo "<a href=\x22http://". $ipaddr ."/api.php?service=8&playnext=1&name='+ myObj[x].name +'\x22><i class=\x22bi bi-chevron-right\x22 style=\x22font-size: 3rem; color: white;\x22></i></a>";
 echo "<i class=\x22bi bi-chevron-double-right\x22 style=\x22font-size: 3rem; color: white;\x22></i>";
 echo "</div>';\n";
 
