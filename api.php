@@ -294,6 +294,11 @@ echo "uri: ".$uri."<br>";
 echo "pos: ".$pos."<br>";
 
 $results = $mpd->playlist_add_id($uri, $pos);
+
+if ($playnext == 1){
+    $mpd->next();
+    
+}
     
 echo '<pre>'.htmlentities(print_r($results, true), ENT_SUBSTITUTE).'</pre>';
 
