@@ -64,9 +64,9 @@ echo "<head>\n";
 echo "<meta http-equiv='Content-Type' content='text/html; charset=UTF-8'/>\n";
 echo "<meta name = 'viewport' content = 'width=device-width, initial-scale = 1'/>\n";
 echo "<title>".$hosty."</title>\n";
-echo "<link href='bootstrap.min.css' rel='stylesheet' integrity='sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT' crossorigin='anonymous'/>\n";
+echo "<link href='bootstrap.min.css' rel='stylesheet'/>\n";
 echo "<link rel='stylesheet' href='bootstrap-icons.css'/>\n";
-echo "<script src='bootstrap.bundle.min.js' integrity='sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3' crossorigin='anonymous'></script>\n";
+echo "<script src='bootstrap.bundle.min.js'></script>\n";
 echo "<script src='jquery.min.js'></script>\n";
 
 echo "<script>\n";
