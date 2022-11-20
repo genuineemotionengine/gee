@@ -186,7 +186,7 @@ echo "}, 1000);\n";
 echo "</script>\n";
 
 echo "</head>\n";
-echo "<body class='p-3 mb-2 bg-black text-white pt-0 ps-0 pe-0 me-0'>\n\n";
+echo "<body style='background: black;' class='p-3 mb-2 bg-black text-white pt-0 ps-0 pe-0 me-0'>\n\n";
 
 
 //*******iPhone portrait**********
