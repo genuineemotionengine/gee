@@ -204,8 +204,8 @@ for ($x = 0; $x < $elements; $x++) {
     
     
 
-  echo $myalbumarray[$x]."<br>";
-  echo $x."<br>";
+//  echo $myalbumarray[$x]."<br>";
+//  echo $x."<br>";
   fwrite($myfile, $myalbumarray[$x]);
     
 }  
@@ -228,7 +228,7 @@ $mpd->repeat(1);
 $mpd->play(0);
 
 
-//header("Location: http://". $ipaddr ."");
+header("Location: http://". $ipaddr ."");
  
 }
 
