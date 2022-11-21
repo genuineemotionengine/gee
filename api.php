@@ -160,9 +160,6 @@ $playlist = "relaxation";
 
 }
 
-////////////
-
-
 $count = 0;    
 
 $sql = "SELECT * FROM allmusic";
@@ -188,40 +185,16 @@ $elements = count($myalbumarray);
 
 shuffle($myalbumarray);
 
-//for ($x = 1; $x <= 10; $x++) {
-//        
-//$random = mt_rand(0, $elements);
-//
-//$finalarray[$x] = $myalbumarray[$random];
-//      
-//}
-
-//$finalarray = array_unique($finalarray);
-
 $myfile = fopen("/mnt/usb/000Playlists/app.m3u", "w") or die("Unable to open file!");
 
 for ($x = 0; $x < $elements; $x++) {
-    
-    
 
-//  echo $myalbumarray[$x]."<br>";
-//  echo $x."<br>";
   fwrite($myfile, $myalbumarray[$x]);
     
 }  
 fclose($myfile);
 
-
-
-
-
-
-
-////////////////
-
 $mpd->load_playlist($playlist);
-
-//$mpd->playlist_shuffle();
 
 $mpd->repeat(1);
 
