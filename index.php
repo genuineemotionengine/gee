@@ -104,6 +104,7 @@ echo "}\n";
 
 
 echo "function wholealbum(){\n";
+echo "getmeta();\n";
 echo "const dbParam = JSON.stringify({table:'album',limit:150});\n";
 echo "const xmlhttp = new XMLHttpRequest();\n";
 echo "xmlhttp.onload = function() {\n";
