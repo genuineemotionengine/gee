@@ -186,6 +186,8 @@ if ($result->num_rows > 0) {
 
 $elements = count($myalbumarray);
 
+shuffle($myalbumarray);
+
 //for ($x = 1; $x <= 10; $x++) {
 //        
 //$random = mt_rand(0, $elements);
