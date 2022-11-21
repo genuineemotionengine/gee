@@ -182,28 +182,30 @@ if ($result->num_rows > 0) {
 
        }
      } 
+     
 
 $elements = count($myalbumarray);
 
-for ($x = 1; $x <= 10; $x++) {
-        
-$random = mt_rand(0, $elements);
+//for ($x = 1; $x <= 10; $x++) {
+//        
+//$random = mt_rand(0, $elements);
+//
+//$finalarray[$x] = $myalbumarray[$random];
+//      
+//}
 
-$finalarray[$x] = $myalbumarray[$random];
-      
-}
-
-$finalarray = array_unique($finalarray);
+//$finalarray = array_unique($finalarray);
 
 $myfile = fopen("/mnt/usb/000Playlists/app.m3u", "w") or die("Unable to open file!");
 
-for ($x = 1; $x <= 10; $x++) {
+for ($x = 0; $x <= $elements; $x++) {
     
-    if ($finalarray[$x] != ""){
+    
 
-  echo $finalarray[$x]."<br>";
-  fwrite($myfile, $finalarray[$x]);
-    }
+  echo $myalbumarray[$x]."<br>";
+  echo $x."<br>";
+  fwrite($myfile, $myalbumarray[$x]);
+    
 }  
 fclose($myfile);
 
@@ -224,7 +226,7 @@ $mpd->repeat(1);
 $mpd->play(0);
 
 
-header("Location: http://". $ipaddr ."");
+//header("Location: http://". $ipaddr ."");
  
 }
 
@@ -478,3 +480,11 @@ $mpd->next();
 
 }
 
+//****************** Build Database ***************
+
+if ($service == 14){
+    
+    
+    
+    
+}
