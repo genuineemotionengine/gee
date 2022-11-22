@@ -466,7 +466,7 @@ $a = scandir($dir);
 
 
 
-print_r($a);
+echo '<pre>'.htmlentities(print_r($a, true), ENT_SUBSTITUTE).'</pre>';
    
     
 
