@@ -466,7 +466,7 @@ $dirarray = scandir($dir);
 
 
 
-echo '<pre>'.htmlentities(print_r($dirarray[4], true), ENT_SUBSTITUTE).'</pre>';
+echo '<pre>'.htmlentities(print_r($dirarray[23], true), ENT_SUBSTITUTE).'</pre>';
    
     
 $subdir = "/mnt/usb/".$dirarray[4]."/";
