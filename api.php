@@ -459,6 +459,17 @@ $mpd->next();
 
 if ($service == 14){
     
+$dir = "/mnt/usb/";
+
+// Sort in ascending order - this is default
+$a = scandir($dir);
+
+
+
+print_r($a);
+   
+    
+
     
     
     
