@@ -462,15 +462,17 @@ if ($service == 14){
 $dir = "/mnt/usb/";
 
 // Sort in ascending order - this is default
-$a = scandir($dir);
+$dirarray = scandir($dir);
 
 
 
-echo '<pre>'.htmlentities(print_r($a[4], true), ENT_SUBSTITUTE).'</pre>';
+echo '<pre>'.htmlentities(print_r($dirarray[4], true), ENT_SUBSTITUTE).'</pre>';
    
     
+$subdir = "/mnt/usb/".$dirarray[4]."/";
+    
+$subdirarray = scandir($subdir);  
 
-    
-    
+echo '<pre>'.htmlentities(print_r($subdirarray, true), ENT_SUBSTITUTE).'</pre>';
     
 }
