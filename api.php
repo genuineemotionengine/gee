@@ -346,9 +346,24 @@ echo json_encode($playlistarray);
 
 }
 }
-//***************** set vol **********************
+//***************** set vol + **********************
 
 if ($service == 9){  
+    
+
+
+$mpd->setvol($vol);
+
+header("Location: http://". $ipaddr ."");
+
+
+
+    
+}
+
+//***************** set vol - **********************
+
+if ($service == 15){  
     
 
 
