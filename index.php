@@ -282,7 +282,7 @@ echo "<div class='d-none d-md-block d-lg-none'>\n";
 echo "<img id='imageipp' class='img-fluid' src='".$image."' />\n";
 echo "<br/>\n";
 echo "<a onclick='prevtrack()'><i class='bi bi-arrow-left-short' style='font-size: 6rem; color: white;'></i></a>&nbsp;&nbsp;\n";
-echo "<a onclick='playpause()'><i id='playpipp' class='bi ' style='font-size: 6rem; color: white;'></i></a>&nbsp;&nbsp;\n";
+echo "<a onclick='playpause()'><i id='playpipp' class='bi bi-pause' style='font-size: 6rem; color: white;'></i></a>&nbsp;&nbsp;\n";
 echo "<a onclick='nexttrack()'><i class='bi bi-arrow-right-short' style='font-size: 6rem; color: white;'></i></a><br>\n";
 echo "<div class='container pt-0 mt-0'>\n";
 echo "<div class='row row-cols-3'>\n";
@@ -342,7 +342,7 @@ echo "<img id='imageipl' class='img-fluid' src='".$image."' />\n";
 echo "</div>\n";
 echo "<div class='col'>\n";
 echo "<a onclick='prevtrack()'><i class='bi bi-arrow-left-short' style='font-size: 6rem; color: white;'></i></a>&nbsp;&nbsp;\n";
-echo "<a onclick='playpause()'><i id='playpipl' class='bi ' style='font-size: 6rem; color: white;'></i></a>&nbsp;&nbsp;\n";
+echo "<a onclick='playpause()'><i id='playpipl' class='bi bi-pause' style='font-size: 6rem; color: white;'></i></a>&nbsp;&nbsp;\n";
 echo "<a onclick='nexttrack()'><i class='bi bi-arrow-right-short' style='font-size: 6rem; color: white;'></i></a><br>\n";
 
 echo "<div class='container pt-0 mt-0'>\n";
