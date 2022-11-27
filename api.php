@@ -144,22 +144,6 @@ $mpd->playlist_clear();
 if ($playl == 1){    
 
 $playlist = "app";
-
-}
-
-if ($playl == 2){    
-
-$playlist = "classical";
-
-}
-
-
-if ($playl == 3){    
-
-$playlist = "relaxation";
-
-}
-
 $count = 0;    
 
 $sql = "SELECT * FROM allmusic";
@@ -199,6 +183,41 @@ $mpd->load_playlist($playlist);
 $mpd->repeat(1);
 
 $mpd->play(0);
+
+
+}
+
+if ($playl == 2){    
+
+$playlist = "classical";
+
+$mpd->load_playlist($playlist);
+
+$mpd->playlist_shuffle();
+
+$mpd->repeat(1);
+
+$mpd->play(0);
+
+
+}
+
+
+if ($playl == 3){    
+
+$playlist = "relaxation";
+
+$mpd->load_playlist($playlist);
+
+$mpd->playlist_shuffle();
+
+$mpd->repeat(1);
+
+$mpd->play(0);
+
+
+}
+
 
 
 header("Location: http://". $ipaddr ."");
