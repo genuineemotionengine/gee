@@ -115,14 +115,15 @@ $mpd->pause($pause);
     
 
     
-//header("Location: http://". $ipaddr ."");
+header("Location: http://". $ipaddr ."");
 
     
 }
 
 //***************** Previous **********************
-if ($service == 3){ 
+if ($service == 3){
     
+header("Location: http://". $ipaddr ."");    
 $mpd->prev();
     
 }
@@ -131,7 +132,7 @@ $mpd->prev();
 if ($service == 4){ 
     
 $mpd->next();
-    
+header("Location: http://". $ipaddr ."");    
 }
 
 //***************** Restart Playlist **********************
