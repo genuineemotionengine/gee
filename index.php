@@ -65,11 +65,18 @@ echo "<meta name='apple-mobile-web-app-capable' content='yes'>\n";
 echo "<meta http-equiv='Content-Type' content='text/html; charset=UTF-8'/>\n";
 echo "<meta name = 'viewport' content = 'width=device-width, initial-scale = 1'/>\n";
 echo "<title>".$hosty."</title>\n";
+if ($hosty = 'Veronica'){
+echo "<link href='css/bootstrap.min.css' rel='stylesheet'/>\n";
+echo "<link rel='stylesheet' href='css/bootstrap-icons.css'/>\n";
+echo "<script src='js/bootstrap.bundle.min.js'></script>\n";
+echo "<script src='js/jquery-3.6.1.min.js'></script>\n";
+
+}else{
 echo "<link href='https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css' rel='stylesheet' integrity='sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT' crossorigin='anonymous'/>\n";
 echo "<link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css'/>\n";
 echo "<script src='https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js' integrity='sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3' crossorigin='anonymous'></script>\n";
 echo "<script src='https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js'></script>\n";
-
+}
 echo "<script>\n";
 
 echo "var duration;\n";
