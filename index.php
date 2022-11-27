@@ -301,6 +301,8 @@ echo "<br/>\n";
 echo "<h1 id='titleipp' class='display-6'>".$title."</h1>\n";
 echo "<h1 id='artistipp' class='display-6'>".$artist."</h1>\n";
 echo "<h1 id='albumipp' class='display-6'>".$album."</h1>\n";
+echo "<button type='button' onclick='wholealbum()' class='btn btn-black' data-bs-toggle='modal' data-bs-target='#staticBackdrop'><i class='bi bi-three-dots' style='font-size: 3rem; color: white;'></i></button>\n";
+
 echo "<br/>\n";
 /////////
 echo "<div class='row row-cols-3'>\n";
@@ -360,6 +362,8 @@ echo "</div>\n";
 echo "<h1 id='titleipl' class='display-6'>".$title."</h1>\n";
 echo "<h1 id='artistipl' class='display-6'>".$artist."</h1>\n";
 echo "<h1 id='albumipl' class='display-6'>".$album."</h1>\n";
+echo "<button type='button' onclick='wholealbum()' class='btn btn-black' data-bs-toggle='modal' data-bs-target='#staticBackdrop'><i class='bi bi-three-dots' style='font-size: 3rem; color: white;'></i></button>\n";
+
 
 echo "<div class='row row-cols-3'>\n";
 
