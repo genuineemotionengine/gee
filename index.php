@@ -65,7 +65,7 @@ echo "<meta name='apple-mobile-web-app-capable' content='yes'>\n";
 echo "<meta http-equiv='Content-Type' content='text/html; charset=UTF-8'/>\n";
 echo "<meta name = 'viewport' content = 'width=device-width, initial-scale = 1'/>\n";
 echo "<title>".$hosty."</title>\n";
-if ($hosty = 'Veronica'){
+if ($hosty == 'Veronica'){
 echo "<link href='css/bootstrap.min.css' rel='stylesheet'/>\n";
 echo "<link rel='stylesheet' href='css/bootstrap-icons.css'/>\n";
 echo "<script src='js/bootstrap.bundle.min.js'></script>\n";
