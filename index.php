@@ -106,7 +106,7 @@ echo "function getmeta(){\n";
 echo "$.getJSON('http://". $ipaddr ."/api.php?service=1', function(result){\n";
 echo "duration = parseInt(result.duration);\n";
 echo "current = parseInt(result.elapsed);\n";
-echo "state = result.state;\n";
+echo "state = text(result.state);\n";
 echo "$('#image').attr('src',result.image);\n";
 echo "$('#imageipp').attr('src',result.image);\n";
 echo "$('#imageipl').attr('src',result.image);\n";
