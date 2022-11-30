@@ -165,7 +165,7 @@ $mpd->prev();
 if ($service == 4){ 
     
 $mpd->next();
-header("Location: http://". $ipaddr ."");    
+//header("Location: http://". $ipaddr ."");    
 }
 
 //***************** Restart Playlist **********************
