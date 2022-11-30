@@ -77,18 +77,41 @@ if(isset($ThisFileInfo['comments']['picture'][0])){
 //
 //$mpd->prev();
 
+//
+//$rows = ['image' => $image,
+//'title' => $title,
+//'artist' => $artist,
+//'album' => $album,
+//'elapsed' => $elapsed,
+//'duration' => $durations[0],
+//'albumartist' => $albumartist,
+////'nexttitle' => $nexttitle,
+////'nextartist' => $nextartist,    
+//'state' => $state
+//     ];
 
-$rows = ['image' => $image,
-'title' => $title,
-'artist' => $artist,
-'album' => $album,
-'elapsed' => $elapsed,
-'duration' => $durations[0],
-'albumartist' => $albumartist,
-//'nexttitle' => $nexttitle,
-//'nextartist' => $nextartist,    
-'state' => $state
-     ];
+
+$rows = array(
+      
+    // Ankit will act as key
+    "currentalbum" => array(
+          
+        'title' => $title,
+        'artist' => $artist,
+        'album' => $album,
+        'elapsed' => $elapsed,
+        'duration' => $durations[0],
+        'albumartist' => $albumartist,
+        'state' => $state
+    ),
+
+);
+ 
+
+
+
+
+
 
 echo json_encode($rows);
 }
