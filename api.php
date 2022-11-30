@@ -103,8 +103,9 @@ if(isset($ThisFileInfo['comments']['picture'][0])){
 $rows = array(
       
     // Ankit will act as key
-    "currentalbum" => array(
-          
+    "products" => array(
+         
+        'image' => $image,
         'title' => $title,
         'artist' => $artist,
         'album' => $album,
