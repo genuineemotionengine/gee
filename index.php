@@ -85,6 +85,7 @@ echo "var play = 'play';\n";
 echo "var pause = 'pause';\n";
 echo "var currentpos;\n";
 echo "var currentprogress;\n";
+echo "var state;\n";
 
 echo "function nexttrack() {\n";
 echo "const xhttp = new XMLHttpRequest();\n";
