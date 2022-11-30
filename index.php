@@ -61,14 +61,22 @@ if(isset($ThisFileInfo['comments']['picture'][0])){
 echo "<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Strict//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd'>\n";
 echo "<html xmlns='http://www.w3.org/1999/xhtml'>\n";
 echo "<head>\n";
+echo "<meta name='apple-mobile-web-app-capable' content='yes'>\n";
 echo "<meta http-equiv='Content-Type' content='text/html; charset=UTF-8'/>\n";
 echo "<meta name = 'viewport' content = 'width=device-width, initial-scale = 1'/>\n";
 echo "<title>".$hosty."</title>\n";
+if ($hosty == 'Veronica'){
 echo "<link href='css/bootstrap.min.css' rel='stylesheet'/>\n";
 echo "<link rel='stylesheet' href='css/bootstrap-icons.css'/>\n";
 echo "<script src='js/bootstrap.bundle.min.js'></script>\n";
 echo "<script src='js/jquery-3.6.1.min.js'></script>\n";
 
+}else{
+echo "<link href='https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css' rel='stylesheet' integrity='sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT' crossorigin='anonymous'/>\n";
+echo "<link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css'/>\n";
+echo "<script src='https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js' integrity='sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3' crossorigin='anonymous'></script>\n";
+echo "<script src='https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js'></script>\n";
+}
 echo "<script>\n";
 
 echo "var duration;\n";
@@ -82,7 +90,7 @@ echo "function nexttrack() {\n";
 echo "const xhttp = new XMLHttpRequest();\n";
 echo "xhttp.open('GET', 'http://". $ipaddr ."/api.php?service=4');\n";
 echo "xhttp.send();\n";
-echo "getmeta();\n";
+echo "location.reload();";
 
 echo "}\n";
 
@@ -90,14 +98,40 @@ echo "function prevtrack() {\n";
 echo "const xhttp = new XMLHttpRequest();\n";
 echo "xhttp.open('GET', 'http://". $ipaddr ."/api.php?service=3');\n";
 echo "xhttp.send();\n";
-echo "getmeta();\n";
+echo "location.reload();";
 echo "}\n";
 
 echo "function playpause() {\n";
 echo "const xhttp = new XMLHttpRequest();\n";
 echo "xhttp.open('GET', 'http://". $ipaddr ."/api.php?service=2');\n";
 echo "xhttp.send();\n";
+echo "location.reload();";
+echo "}\n";
+
+
+
+echo "function wholealbum(){\n";
 echo "getmeta();\n";
+echo "const dbParam = JSON.stringify({table:'album',limit:150});\n";
+echo "const xmlhttp = new XMLHttpRequest();\n";
+echo "xmlhttp.onload = function() {\n";
+echo "const myObj = JSON.parse(this.responseText);\n";
+echo "let html = '<div>'\n";
+echo "for (let x in myObj) {\n";
+
+echo "html += '<div class=\x22border-bottom align-top\x22><br/>";
+echo "<h4>' + myObj[x].Track + ' - ' + myObj[x].Title + ' - ' + myObj[x].Artist + '</h4>";
+echo "<a href=\x22http://". $ipaddr ."/api.php?service=8&playnow=1&playnext=1&name='+ myObj[x].name +'\x22><i class=\x22bi bi-chevron-right\x22 style=\x22font-size: 3rem; color: white;\x22></i></a>";
+echo "<a href=\x22http://". $ipaddr ."/api.php?service=8&playnext=1&name='+ myObj[x].name +'\x22><i class=\x22bi bi-chevron-double-right\x22 style=\x22font-size: 3rem; color: white;\x22></i></a>";
+echo "</div>';\n";
+
+echo "}\n";
+echo "html += '</div>'\n";    
+echo "document.getElementById('fullalbum').innerHTML = html;\n";
+echo "}\n";
+echo "xmlhttp.open('POST', 'http://". $ipaddr ."/api.php?service=8');\n";
+echo "xmlhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');\n";
+echo "xmlhttp.send('x=' + dbParam);\n";
 echo "}\n";
 
 echo "function pad ( val ) { return val > 9 ? val : '0' + val; }\n";
@@ -111,6 +145,7 @@ echo "$('#image').attr('src',result.image);\n";
 echo "$('#imageipp').attr('src',result.image);\n";
 echo "$('#imageipl').attr('src',result.image);\n";
 echo "$('#imagexlg').attr('src',result.image);\n";
+echo "$('#imagem').attr('src',result.image);\n";
 echo "$('#title').text(result.title);\n";
 echo "$('#titleipp').text(result.title);\n";
 echo "$('#titleipl').text(result.title);\n";
@@ -119,10 +154,15 @@ echo "$('#artist').text(result.artist);\n";
 echo "$('#artistipp').text(result.artist);\n";
 echo "$('#artistipl').text(result.artist);\n";
 echo "$('#artistxlg').text(result.artist);\n";
+echo "$('#artistm').text(result.artist);\n";
 echo "$('#album').text(result.album);\n";       
 echo "$('#albumipp').text(result.album);\n";
 echo "$('#albumipl').text(result.album);\n";
 echo "$('#albumxlg').text(result.album);\n";
+echo "$('#albumm').text(result.album);\n";
+echo "$('#albumartist').text(result.albumartist);\n";
+echo "$('#nexttitle').text(result.nexttitle);\n";
+echo "$('#nextartist').text(result.nextartist);\n";
 echo "$('#secondsdur').html(pad(result.duration%60));\n";
 echo "$('#minutesdur').html(pad(parseInt(result.duration/60,10)));\n";
 echo "$('#secondsduripp').html(pad(result.duration%60));\n";
@@ -138,19 +178,24 @@ echo "$('#minutescuripl').html(pad(parseInt(current/60,10)));\n";
 
 
 echo "if (state === play){\n";
-echo "$('#playp').removeClass('bi-caret-right').addClass('bi-pause');\n";
-echo "$('#playpipp').removeClass('bi-caret-right').addClass('bi-pause');\n";
-echo "$('#playpipl').removeClass('bi-caret-right').addClass('bi-pause');\n";
+echo "$('#playp').removeClass('bi-chevron-right').addClass('bi-pause');\n";
+echo "$('#playpipp').removeClass('bi-chevron-right').addClass('bi-pause');\n";
+echo "$('#playpipl').removeClass('bi-chevron-right').addClass('bi-pause');\n";
 echo "}\n";
 
 echo "if (state === pause){\n";
-echo "$('#playp').removeClass('bi-pause').addClass('bi-caret-right');\n";
-echo "$('#playpipp').removeClass('bi-pause').addClass('bi-caret-right');\n";
-echo "$('#playpipl').removeClass('bi-pause').addClass('bi-caret-right');\n";
+echo "$('#playp').removeClass('bi-pause').addClass('bi-chevron-right');\n";
+echo "$('#playpipp').removeClass('bi-pause').addClass('bi-chevron-right');\n";
+echo "$('#playpipl').removeClass('bi-pause').addClass('bi-chevron-right');\n";
 echo "}\n";
+echo "wholealbum();\n";
 
 echo "});\n";
+
+
 echo "}\n";
+
+
 
 echo "getmeta();\n";
 //echo "$('#dynamic').removeClass('bg-black').addClass('bg-white');\n";
@@ -178,7 +223,9 @@ echo "$('#minutescuripl').html(pad(parseInt(current/60,10)));\n";
 
 echo "if (current >= duration){\n";
 //echo "$('#dynamic').removeClass('bg-white').addClass('bg-black');\n";
-echo "getmeta();\n";
+//echo "getmeta();\n";
+echo "location.reload();";
+echo "wholealbum();\n";
 //echo "$('#dynamic').removeClass('bg-black').addClass('bg-white');\n";
 echo "}\n";
 
@@ -194,16 +241,15 @@ echo "<body style='background: black;' class='p-3 mb-2 bg-black text-white pt-0 
 echo "<div class='container-fluid text-center ps-0 pe-0'>\n";
 echo "<div class='d-block d-sm-none'>\n";
 echo "<img id='image' class='img-fluid' src='".$image."' />\n";
-echo "<br/>\n";
-echo "<a onclick='prevtrack()'><i class='bi bi-arrow-left-short' style='font-size: 6rem; color: white;'></i></a>&nbsp;&nbsp;\n";
-echo "<a onclick='playpause()'><i id='playp' class='bi ' style='font-size: 6rem; color: white;'></i></a>&nbsp;&nbsp;\n";
-echo "<a onclick='nexttrack()'><i class='bi bi-arrow-right-short' style='font-size: 6rem; color: white;'></i></a><br>\n";
+echo "<a href='http://". $ipaddr ."/api.php?service=3'><i class='bi bi-arrow-left-short' style='font-size: 6rem; color: white;'></i></a\n";
+echo "<a href='http://". $ipaddr ."/api.php?service=2'><i id='playp' class='bi bi-pause' style='font-size: 5rem; color: white;'></i></a\n";
+echo "<a href='http://". $ipaddr ."/api.php?service=4'><i class='bi bi-arrow-right-short' style='font-size: 6rem; color: white;'></i></a>\n";
 echo "<div class='container pt-0 mt-0'>\n";
 echo "<div class='row row-cols-3'>\n";
 echo "<div class='col-2 text-center'><span id='minutescur'>00</span>:<span id='secondscur'>00</span></div>\n";
 echo "<div class='col-8'>\n";
 echo "<div class='mt-2'>\n";
-echo "<div class='progress bg-black' style='height: 5px;'>\n";
+echo "<div class='progress bg-dark' style='height: 5px;'>\n";
 echo "<div id='dynamic' class='progress-bar bg-white' style='width: 0%; height: 5px;'></div>\n";
 echo "</div>\n";
 echo "</div>\n";
@@ -215,7 +261,15 @@ echo "<br/>\n";
 echo "<h1 id='title' class='display-6'>".$title."</h1>\n";
 echo "<h1 id='artist' class='display-6'>".$artist."</h1>\n";
 echo "<h1 id='album' class='display-6'>".$album."</h1>\n";
-echo "<a href='http://". $ipaddr ."/api.php?service=5&playl=1'><i class='bi bi-arrow-repeat' style='font-size: 3rem; color: white;'></i></a>\n";
+echo "<a href='http://". $ipaddr ."/'><i class='bi bi-arrow-clockwise' style='font-size: 3rem; color: white;'></i></a>\n";
+echo "<button type='button' onclick='wholealbum()' class='btn btn-black' data-bs-toggle='modal' data-bs-target='#staticBackdrop'><i class='bi bi-three-dots' style='font-size: 3rem; color: white;'></i></button>\n";
+echo "<a href='http://". $ipaddr ."/api.php?service=5&playl=1'><i class='bi bi-arrow-repeat' style='font-size: 3rem; color: white;'></i></a><br/><br/><br/>\n";
+//echo "Next: <span id='nexttitle' class='fs-6'></span> - <span id='nextartist' class='fs-6'></span><br/><br/><br/>\n";
+//echo "<span class='fs-6'>".$hosty."</span><br/><br/>";
+
+
+echo "<a href='http://". $ipaddr ."/api.php?service=9&vol=70'><i class='bi bi-volume-down' style='font-size: 3rem; color: white;'></i></a>&nbsp;&nbsp;&nbsp;&nbsp;\n";
+echo "<a href='http://". $ipaddr ."/api.php?service=9&vol=100'><i class='bi bi-volume-up' style='font-size: 3rem; color: white;'></i></a>&nbsp;&nbsp;&nbsp;&nbsp;\n";
 echo "</div>\n";
 echo "</div>\n\n";
 //**********************
@@ -227,15 +281,15 @@ echo "<div class='container-fluid text-center ps-0 pe-0'>\n";
 echo "<div class='d-none d-md-block d-lg-none'>\n";
 echo "<img id='imageipp' class='img-fluid' src='".$image."' />\n";
 echo "<br/>\n";
-echo "<a onclick='prevtrack()'><i class='bi bi-arrow-left-short' style='font-size: 6rem; color: white;'></i></a>&nbsp;&nbsp;\n";
-echo "<a onclick='playpause()'><i id='playpipp' class='bi ' style='font-size: 6rem; color: white;'></i></a>&nbsp;&nbsp;\n";
-echo "<a onclick='nexttrack()'><i class='bi bi-arrow-right-short' style='font-size: 6rem; color: white;'></i></a><br>\n";
+echo "<a href='http://". $ipaddr ."/api.php?service=3'><i class='bi bi-arrow-left-short' style='font-size: 6rem; color: white;'></i></a\n";
+echo "<a href='http://". $ipaddr ."/api.php?service=2'><i id='playp' class='bi bi-pause' style='font-size: 5rem; color: white;'></i></a\n";
+echo "<a href='http://". $ipaddr ."/api.php?service=4'><i class='bi bi-arrow-right-short' style='font-size: 6rem; color: white;'></i></a>\n";
 echo "<div class='container pt-0 mt-0'>\n";
 echo "<div class='row row-cols-3'>\n";
 echo "<div class='col-2 text-center'><span id='minutescuripp'>00</span>:<span id='secondscuripp'>00</span></div>\n";
 echo "<div class='col-8'>\n";
 echo "<div class='mt-2'>\n";
-echo "<div class='progress bg-dark' style='height: 5px;'>\n";
+echo "<div class='progress bg-black' style='height: 5px;'>\n";
 echo "<div id='dynamicipad' class='progress-bar bg-white' style='width: 0%; height: 5px;'></div>\n";
 echo "</div>\n";
 echo "</div>\n";
@@ -247,6 +301,8 @@ echo "<br/>\n";
 echo "<h1 id='titleipp' class='display-6'>".$title."</h1>\n";
 echo "<h1 id='artistipp' class='display-6'>".$artist."</h1>\n";
 echo "<h1 id='albumipp' class='display-6'>".$album."</h1>\n";
+echo "<button type='button' onclick='wholealbum()' class='btn btn-black' data-bs-toggle='modal' data-bs-target='#staticBackdrop'><i class='bi bi-three-dots' style='font-size: 3rem; color: white;'></i></button>\n";
+
 echo "<br/>\n";
 /////////
 echo "<div class='row row-cols-3'>\n";
@@ -286,7 +342,7 @@ echo "<img id='imageipl' class='img-fluid' src='".$image."' />\n";
 echo "</div>\n";
 echo "<div class='col'>\n";
 echo "<a onclick='prevtrack()'><i class='bi bi-arrow-left-short' style='font-size: 6rem; color: white;'></i></a>&nbsp;&nbsp;\n";
-echo "<a onclick='playpause()'><i id='playpipl' class='bi ' style='font-size: 6rem; color: white;'></i></a>&nbsp;&nbsp;\n";
+echo "<a onclick='playpause()'><i id='playpipl' class='bi bi-pause' style='font-size: 6rem; color: white;'></i></a>&nbsp;&nbsp;\n";
 echo "<a onclick='nexttrack()'><i class='bi bi-arrow-right-short' style='font-size: 6rem; color: white;'></i></a><br>\n";
 
 echo "<div class='container pt-0 mt-0'>\n";
@@ -294,7 +350,7 @@ echo "<div class='row row-cols-3'>\n";
 echo "<div class='col-2 text-center'><span id='minutescuripl'>00</span>:<span id='secondscuripl'>00</span></div>\n";
 echo "<div class='col-8'>\n";
 echo "<div class='mt-2'>\n";
-echo "<div class='progress bg-dark' style='height: 5px;'>\n";
+echo "<div class='progress bg-black' style='height: 5px;'>\n";
 echo "<div id='dynamicipadl' class='progress-bar bg-white' style='width: 0%; height: 5px;'></div>\n";
 echo "</div>\n";
 echo "</div>\n";
@@ -306,6 +362,8 @@ echo "</div>\n";
 echo "<h1 id='titleipl' class='display-6'>".$title."</h1>\n";
 echo "<h1 id='artistipl' class='display-6'>".$artist."</h1>\n";
 echo "<h1 id='albumipl' class='display-6'>".$album."</h1>\n";
+echo "<button type='button' onclick='wholealbum()' class='btn btn-black' data-bs-toggle='modal' data-bs-target='#staticBackdrop'><i class='bi bi-three-dots' style='font-size: 3rem; color: white;'></i></button>\n";
+
 
 echo "<div class='row row-cols-3'>\n";
 
@@ -353,7 +411,33 @@ echo "</div>\n\n";
 
 //*************************
 
+//*********** Modal ***************
+
+echo "<div class='modal fade' id='staticBackdrop' data-bs-backdrop='static' data-bs-keyboard='false' tabindex='-1' aria-labelledby='staticBackdropLabel' aria-hidden='true'>\n";
+echo "<div class='modal-dialog modal-dialog-scrollable'>\n";
+echo "<div class='modal-content bg-black'>\n";
+echo "<div class='modal-header'>\n";
+echo "<div class='row row-cols-3'>\n";
+echo "<div class='col-3'><img id='imagem' class='img-fluid' src='".$image."' /></div>\n";
+echo "<div class='col-7'>\n";
+echo "<h3 id='albumm'></h3>\n";
+echo "<h4 id='albumartist'></h4>\n";
+echo "</div>\n";
+echo "<div class='col-1'><button type='button' class='btn btn-sm' data-bs-dismiss='modal' aria-label='Close'><i class='bi bi-x' style='font-size: 3rem; color: white;'></i></button></div>\n";
+echo "</div>\n";
+echo "</div>\n";
+echo "<div class='modal-body'>\n";
+echo "<div id='fullalbum'></div>\n";
+echo "</div>\n";
+echo "</div>\n";
+echo "</div>\n";
+echo "</div>\n";
+
+//*************************
+
+
 echo "</body>\n";
 echo "</html>\n";
 ?>
        
+
