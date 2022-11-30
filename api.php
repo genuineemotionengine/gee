@@ -104,7 +104,7 @@ $rows = array(
       
     // Ankit will act as key
     "products" => array(
-         'id' => 1,
+         ['id' => 1,
         'image' => $image,
         'title' => $title,
         'artist' => $artist,
@@ -112,7 +112,7 @@ $rows = array(
         'elapsed' => $elapsed,
         'duration' => $durations[0],
         'albumartist' => $albumartist,
-        'state' => $state
+        'state' => $state]
     ),
 
 );
