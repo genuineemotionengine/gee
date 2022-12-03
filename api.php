@@ -86,24 +86,24 @@ if(isset($ThisFileInfo['comments']['picture'][0])){
 //
 //$mpd->prev();
 
-//
-//$rows = ['image' => $image,
-//'title' => $title,
-//'artist' => $artist,
-//'album' => $album,
-//'elapsed' => $elapsed,
-//'duration' => $durations[0],
-//'albumartist' => $albumartist,
-////'nexttitle' => $nexttitle,
-////'nextartist' => $nextartist,    
-//'state' => $state
-//     ];
-
+if ($ipaddr == "192.168.68.126"){
+$rows = ['image' => $image,
+'title' => $title,
+'artist' => $artist,
+'album' => $album,
+'elapsed' => $elapsed,
+'duration' => $durations[0],
+'albumartist' => $albumartist,
+//'nexttitle' => $nexttitle,
+//'nextartist' => $nextartist,    
+'state' => $state
+     ];
+} else {
 
 $rows = array(
       
-    // Ankit will act as key
-    "products" => array(
+
+    "currentalbum" => array(
          ['id' => 1,
         'image' => $image,
         'title' => $title,
@@ -117,7 +117,7 @@ $rows = array(
 
 );
  
-
+}
 
 
 
