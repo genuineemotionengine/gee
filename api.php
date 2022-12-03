@@ -86,21 +86,21 @@ if(isset($ThisFileInfo['comments']['picture'][0])){
 //
 //$mpd->prev();
 
-if ($ipaddr == "192.168.68.126"){
-$rows = ['image' => $image,
-'title' => $title,
-'artist' => $artist,
-'album' => $album,
-'elapsed' => $elapsed,
-'duration' => $durations[0],
-'albumartist' => $albumartist,
-//'nexttitle' => $nexttitle,
-//'nextartist' => $nextartist,    
-'state' => $state
-     ];
-} else {
-
-$rows = array(
+//if ($ipaddr == "192.168.68.126"){
+//$rows = ['image' => $image,
+//'title' => $title,
+//'artist' => $artist,
+//'album' => $album,
+//'elapsed' => $elapsed,
+//'duration' => $durations[0],
+//'albumartist' => $albumartist,
+////'nexttitle' => $nexttitle,
+////'nextartist' => $nextartist,    
+//'state' => $state
+//     ];
+//} else {
+//
+//$rows = array(
       
 
     "currentalbum" => array(
@@ -117,7 +117,7 @@ $rows = array(
 
 );
  
-}
+//}
 
 
 
