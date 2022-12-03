@@ -100,7 +100,7 @@ if(isset($ThisFileInfo['comments']['picture'][0])){
 //     ];
 //} else {
 //
-//$rows = array(
+$rows = array(
       
 
     "currentalbum" => array(
