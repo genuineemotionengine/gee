@@ -156,7 +156,7 @@ header("Location: http://". $ipaddr ."");
 //***************** Previous **********************
 if ($service == 3){
     
-header("Location: http://". $ipaddr ."");    
+//header("Location: http://". $ipaddr ."");    
 $mpd->prev();
     
 }
@@ -164,9 +164,9 @@ $mpd->prev();
 //***************** Next **********************
 if ($service == 4){ 
     
-$next = $mpd->next();
+$mpd->next();
 //header("Location: http://". $ipaddr ."");
-echo json_encode($next);
+
 }
 
 //***************** Restart Playlist **********************
