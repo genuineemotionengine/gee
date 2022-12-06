@@ -2,10 +2,10 @@
 
 $http_origin = $_SERVER['HTTP_ORIGIN'];
 
-if ($http_origin == "http://192.168.68.108:3000")
-{  
-    header("Access-Control-Allow-Origin: $http_origin");
-}
+//if ($http_origin == "http://192.168.68.108:3000")
+//{  
+//    header("Access-Control-Allow-Origin: $http_origin");
+//}
 
 
 parse_str($_SERVER['QUERY_STRING']);
@@ -16,9 +16,6 @@ require_once('dbconn.php');
 require_once('mpd.class.php');
 
 require_once('getid3.php');   
-
-
-
 
 $mpd = new mpd('localhost', 6600);
 
