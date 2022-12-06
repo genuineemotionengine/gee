@@ -14,7 +14,8 @@ $ipaddr = $_SERVER['SERVER_ADDR'];
 
 
 require('mpd.class.php');
-
+include "dbconn.php";
+require_once('getid3.php');   
 
 
 
@@ -27,8 +28,7 @@ $mpd = new mpd('localhost', 6600);
 
 if ($service == 1){
     
-include "dbconn.php";
-require_once('getid3.php');    
+ 
   
 $statusarray = $mpd->server_status();
 
