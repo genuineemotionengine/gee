@@ -11,9 +11,9 @@ if ($http_origin == "http://192.168.68.108:3000")
 parse_str($_SERVER['QUERY_STRING']);
 $ipaddr = $_SERVER['SERVER_ADDR'];
 
-include "dbconn.php";
+require_once('dbconn.php');
 
-require('mpd.class.php');
+require_once('mpd.class.php');
 
 require_once('getid3.php');   
 
