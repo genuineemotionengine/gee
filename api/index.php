@@ -2,7 +2,7 @@
 
 $http_origin = $_SERVER['HTTP_ORIGIN'];
 
-if ($http_origin == "http://192.168.68.108:3000")
+if ($http_origin == "http://192.168.68.108:3000" || $http_origin == "http://192.168.68.13")
 {  
     header("Access-Control-Allow-Origin: $http_origin");
 }
