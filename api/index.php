@@ -557,7 +557,7 @@ echo '<pre>'.htmlentities(print_r($statusarray, true), ENT_SUBSTITUTE).'</pre>';
     
 $elapsed = $statusarray['elapsed'];
 
-echo json_encode($elapsed);
+//echo json_encode($elapsed);
 
 
 }
