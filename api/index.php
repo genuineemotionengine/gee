@@ -553,7 +553,7 @@ if ($service == 16){
     
 $statusarray = $mpd->server_status();
 
-echo '<pre>'.htmlentities(print_r($statusarray, true), ENT_SUBSTITUTE).'</pre>';
+//echo '<pre>'.htmlentities(print_r($statusarray, true), ENT_SUBSTITUTE).'</pre>';
     
 $elapsed = $statusarray['elapsed'];
 
@@ -561,7 +561,7 @@ $elapseds = explode(".",$elapsed);
 
 $elapsed = $elapseds[0];
 
-echo $elapsed."<br><br><br>";
+//echo $elapsed."<br><br><br>";
 
 $rows = [
     
