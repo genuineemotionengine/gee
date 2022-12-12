@@ -555,9 +555,13 @@ $statusarray = $mpd->server_status();
 
 echo '<pre>'.htmlentities(print_r($statusarray, true), ENT_SUBSTITUTE).'</pre>';
     
-//$elapsed = $statusarray['elapsed'];
+$state = $statusarray['state'];
 
-//echo json_encode($elapsed);
+$elapseds = explode(".",$elapsed);
+
+$elapsed = $elapseds[0];
+
+echo $elapsed;
 
 
 }
