@@ -550,6 +550,7 @@ echo '<pre>'.htmlentities(print_r($subdirarray, true), ENT_SUBSTITUTE).'</pre>';
 }
 
 if ($service == 15){
+    
 $statusarray = $mpd->server_status();
 
 //echo '<pre>'.htmlentities(print_r($statusarray, true), ENT_SUBSTITUTE).'</pre>';
