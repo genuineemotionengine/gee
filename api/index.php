@@ -561,8 +561,14 @@ $elapseds = explode(".",$elapsed);
 
 $elapsed = $elapseds[0];
 
-echo $elapsed;
+echo $elapsed."<br><br><br>";
 
-echo json_encode($elapsed);
+$rows = [
+    
+'elapsed' => $elapsed
+        
+];
+
+echo json_encode($rows);
 
 }
