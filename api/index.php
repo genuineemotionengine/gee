@@ -549,7 +549,7 @@ echo '<pre>'.htmlentities(print_r($subdirarray, true), ENT_SUBSTITUTE).'</pre>';
     
 }
 
-if ($service == 15){
+if ($service == 16){
     
 $statusarray = $mpd->server_status();
 
@@ -557,7 +557,7 @@ echo '<pre>'.htmlentities(print_r($statusarray, true), ENT_SUBSTITUTE).'</pre>';
     
 $elapsed = $statusarray['elapsed'];
 
-//echo json_encode($elapsed);
+echo json_encode($elapsed);
 
 
 }
