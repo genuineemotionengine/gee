@@ -563,5 +563,6 @@ $elapsed = $elapseds[0];
 
 echo $elapsed;
 
+echo json_encode($elapsed);
 
 }
