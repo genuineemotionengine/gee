@@ -24,6 +24,14 @@ echo "<script src='https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min
 //}
 echo "<script>\n";
 
+echo "var duration;\n";
+echo "var current;\n";
+echo "var play = 'play';\n";
+echo "var pause = 'pause';\n";
+echo "var currentpos;\n";
+echo "var currentprogress;\n";
+echo "var state;\n";
+
 echo "function pad ( val ) { return val > 9 ? val : '0' + val; }\n";
 
 echo "function getmeta(){\n";
