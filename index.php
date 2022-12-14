@@ -1,7 +1,7 @@
 <?php
 parse_str($_SERVER['QUERY_STRING']);
 $ipaddr = $_SERVER['SERVER_ADDR'];
-$hosty = gethostname();
+//$hosty = gethostname();
 
 echo "<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Strict//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd'>\n";
 echo "<html xmlns='http://www.w3.org/1999/xhtml'>\n";
@@ -10,18 +10,18 @@ echo "<meta name='apple-mobile-web-app-capable' content='yes'>\n";
 echo "<meta http-equiv='Content-Type' content='text/html; charset=UTF-8'/>\n";
 echo "<meta name = 'viewport' content = 'width=device-width, initial-scale = 1'/>\n";
 echo "<title>".$hosty."</title>\n";
-if ($hosty == 'Veronica'){
-echo "<link href='css/bootstrap.min.css' rel='stylesheet'/>\n";
-echo "<link rel='stylesheet' href='css/bootstrap-icons.css'/>\n";
-echo "<script src='js/bootstrap.bundle.min.js'></script>\n";
-echo "<script src='js/jquery-3.6.1.min.js'></script>\n";
-
-}else{
+//if ($hosty == 'Veronica'){
+//echo "<link href='css/bootstrap.min.css' rel='stylesheet'/>\n";
+//echo "<link rel='stylesheet' href='css/bootstrap-icons.css'/>\n";
+//echo "<script src='js/bootstrap.bundle.min.js'></script>\n";
+//echo "<script src='js/jquery-3.6.1.min.js'></script>\n";
+//
+//}else{
 echo "<link href='https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css' rel='stylesheet' integrity='sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT' crossorigin='anonymous'/>\n";
 echo "<link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css'/>\n";
 echo "<script src='https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js' integrity='sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3' crossorigin='anonymous'></script>\n";
 echo "<script src='https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js'></script>\n";
-}
+//}
 echo "<script>\n";
 
 echo "var duration;\n";
@@ -88,39 +88,24 @@ echo "duration = parseInt(result.duration);\n";
 echo "current = parseInt(result.elapsed);\n";
 echo "state = result.state;\n";
 echo "$('#image').attr('src',result.image);\n";
-echo "$('#imageipp').attr('src',result.image);\n";
-echo "$('#imageipl').attr('src',result.image);\n";
-echo "$('#imagexlg').attr('src',result.image);\n";
+
 echo "$('#imagem').attr('src',result.image);\n";
 echo "$('#title').text(result.title);\n";
-echo "$('#titleipp').text(result.title);\n";
-echo "$('#titleipl').text(result.title);\n";
-echo "$('#titlexlg').text(result.title);\n";
+
 echo "$('#artist').text(result.artist);\n";
-echo "$('#artistipp').text(result.artist);\n";
-echo "$('#artistipl').text(result.artist);\n";
-echo "$('#artistxlg').text(result.artist);\n";
+
 echo "$('#artistm').text(result.artist);\n";
 echo "$('#album').text(result.album);\n";       
-echo "$('#albumipp').text(result.album);\n";
-echo "$('#albumipl').text(result.album);\n";
-echo "$('#albumxlg').text(result.album);\n";
+
 echo "$('#albumm').text(result.album);\n";
 echo "$('#albumartist').text(result.albumartist);\n";
-echo "$('#nexttitle').text(result.nexttitle);\n";
-echo "$('#nextartist').text(result.nextartist);\n";
+
 echo "$('#secondsdur').html(pad(result.duration%60));\n";
 echo "$('#minutesdur').html(pad(parseInt(result.duration/60,10)));\n";
-echo "$('#secondsduripp').html(pad(result.duration%60));\n";
-echo "$('#minutesduripp').html(pad(parseInt(result.duration/60,10)));\n";
-echo "$('#secondsduripl').html(pad(result.duration%60));\n";
-echo "$('#minutesduripl').html(pad(parseInt(result.duration/60,10)));\n";
+
 echo "$('#secondscur').html(pad(current%60));\n";
 echo "$('#minutescur').html(pad(parseInt(current/60,10)));\n";
-echo "$('#secondscuripp').html(pad(current%60));\n";
-echo "$('#minutescuripp').html(pad(parseInt(current/60,10)));\n";
-echo "$('#secondscuripl').html(pad(current%60));\n";
-echo "$('#minutescuripl').html(pad(parseInt(current/60,10)));\n";
+
 
 
 echo "if (state === play){\n";
@@ -220,166 +205,7 @@ echo "</div>\n";
 echo "</div>\n\n";
 //**********************
 
-//*******iPad portait**********
 
-
-echo "<div class='container-fluid text-center ps-0 pe-0'>\n";
-echo "<div class='d-none d-md-block d-lg-none'>\n";
-echo "<img id='imageipp' class='img-fluid' src='black.jpg' />\n";
-echo "<br/>\n";
-echo "<a href='http://". $ipaddr ."/api/?service=3'><i class='bi bi-arrow-left-short' style='font-size: 6rem; color: white;'></i></a\n";
-echo "<a href='http://". $ipaddr ."/api/?service=2'><i id='playp' class='bi bi-pause' style='font-size: 5rem; color: white;'></i></a\n";
-echo "<a href='http://". $ipaddr ."/api/?service=4'><i class='bi bi-arrow-right-short' style='font-size: 6rem; color: white;'></i></a>\n";
-echo "<div class='container pt-0 mt-0'>\n";
-echo "<div class='row row-cols-3'>\n";
-echo "<div class='col-2 text-center'><span id='minutescuripp'>00</span>:<span id='secondscuripp'>00</span></div>\n";
-echo "<div class='col-8'>\n";
-echo "<div class='mt-2'>\n";
-echo "<div class='progress bg-black' style='height: 5px;'>\n";
-echo "<div id='dynamicipad' class='progress-bar bg-white' style='width: 0%; height: 5px;'></div>\n";
-echo "</div>\n";
-echo "</div>\n";
-echo "</div>\n";
-echo "<div class='col-2 text-center'><span id='minutesduripp'>00</span>:<span id='secondsduripp'>00</span></div>\n";
-echo "</div>\n";
-echo "</div>\n";
-echo "<br/>\n";
-echo "<h1 id='titleipp' class='display-6'></h1>\n";
-echo "<h1 id='artistipp' class='display-6'></h1>\n";
-echo "<h1 id='albumipp' class='display-6'></h1>\n";
-echo "<button type='button' onclick='wholealbum()' class='btn btn-black' data-bs-toggle='modal' data-bs-target='#staticBackdrop'><i class='bi bi-three-dots' style='font-size: 3rem; color: white;'></i></button>\n";
-
-echo "<br/>\n";
-/////////
-echo "<div class='row row-cols-3'>\n";
-
-echo "<div>\n";
-echo "<a href='http://". $ipaddr ."/api/?service=5&playl=1'><i class='bi bi-arrow-repeat' style='font-size: 3rem; color: white;'></i></a>\n";
-echo "<h5>All Music</h5>\n";
-echo "</div>\n";
-
-echo "<div>\n";
-echo "<a href='http://". $ipaddr ."/api/?service=5&playl=2'><i class='bi bi-arrow-repeat' style='font-size: 3rem; color: white;'></i></a>\n";
-echo "<h5>Classical</h5>\n";
-echo "</div>\n";
-
-echo "<div>\n";
-echo "<a href='http://". $ipaddr ."/api/?service=5&playl=3'><i class='bi bi-arrow-repeat' style='font-size: 3rem; color: white;'></i></a>\n";
-echo "<h5>Relaxation</h5>\n";
-echo "</div>\n";
-
-echo "</div>\n";
-/////////////
-echo "</div>\n";
-echo "</div>\n\n";
-
-//**********************
-
-//*******iPad landscape**********
-
-
-echo "<div class='container-fluid text-center ps-0 pe-0'>\n";
-echo "<div class='d-none d-lg-block d-xl-none'>\n";
-
-
-echo "<div class='row row-cols-2'>\n";
-echo "<div class='col'>\n";
-echo "<img id='imageipl' class='img-fluid' src='black.jpg' />\n";
-echo "</div>\n";
-echo "<div class='col'>\n";
-echo "<a onclick='prevtrack()'><i class='bi bi-arrow-left-short' style='font-size: 6rem; color: white;'></i></a>&nbsp;&nbsp;\n";
-echo "<a onclick='playpause()'><i id='playpipl' class='bi bi-pause' style='font-size: 6rem; color: white;'></i></a>&nbsp;&nbsp;\n";
-echo "<a onclick='nexttrack()'><i class='bi bi-arrow-right-short' style='font-size: 6rem; color: white;'></i></a><br>\n";
-
-echo "<div class='container pt-0 mt-0'>\n";
-echo "<div class='row row-cols-3'>\n";
-echo "<div class='col-2 text-center'><span id='minutescuripl'>00</span>:<span id='secondscuripl'>00</span></div>\n";
-echo "<div class='col-8'>\n";
-echo "<div class='mt-2'>\n";
-echo "<div class='progress bg-black' style='height: 5px;'>\n";
-echo "<div id='dynamicipadl' class='progress-bar bg-white' style='width: 0%; height: 5px;'></div>\n";
-echo "</div>\n";
-echo "</div>\n";
-echo "</div>\n";
-echo "<div class='col-2 text-center'><span id='minutesduripl'>00</span>:<span id='secondsduripl'>00</span></div>\n";
-echo "</div>\n";
-echo "</div>\n";
-
-echo "<h1 id='titleipl' class='display-6'></h1>\n";
-echo "<h1 id='artistipl' class='display-6'></h1>\n";
-echo "<h1 id='albumipl' class='display-6'></h1>\n";
-echo "<button type='button' onclick='wholealbum()' class='btn btn-black' data-bs-toggle='modal' data-bs-target='#staticBackdrop'><i class='bi bi-three-dots' style='font-size: 3rem; color: white;'></i></button>\n";
-
-
-echo "<div class='row row-cols-3'>\n";
-
-echo "<div>\n";
-echo "<a href='http://". $ipaddr ."/api/?service=5&playl=1'><i class='bi bi-arrow-repeat' style='font-size: 3rem; color: white;'></i></a>\n";
-echo "<h5>All Music</h5>\n";
-echo "</div>\n";
-
-echo "<div>\n";
-echo "<a href='http://". $ipaddr ."/api/?service=5&playl=2'><i class='bi bi-arrow-repeat' style='font-size: 3rem; color: white;'></i></a>\n";
-echo "<h5>Classical</h5>\n";
-echo "</div>\n";
-
-echo "<div>\n";
-echo "<a href='http://". $ipaddr ."/api/?service=5&playl=3'><i class='bi bi-arrow-repeat' style='font-size: 3rem; color: white;'></i></a>\n";
-echo "<h5>Relaxation</h5>\n";
-echo "</div>\n";
-
-echo "</div>\n";
-
-
-
-
-echo "</div>\n";
-echo "</div>\n";
-echo "</div>\n";
-echo "</div>\n\n";
-
-//**********************
-
-
-
-//***********dekstop************
-
-echo "<div class='container text-center'>\n";
-echo "<div class='d-none d-xl-block'>\n";  
-echo "<br><br><br><br><br><br><br>\n";
-echo "<img id='imagexlg' src='black.jpg' />\n";
-echo "<br>\n";
-echo "<h1 id='titlexlg' class='display-4'></h1>\n";
-echo "<h1 id='artistxlg' class='display-6'></h1>\n";
-echo "<h1 id='albumxlg' class='display-6'></h1>\n";
-echo "</div>\n";
-echo "</div>\n\n";
-
-//*************************
-
-//*********** Modal ***************
-
-echo "<div class='modal fade' id='staticBackdrop' data-bs-backdrop='static' data-bs-keyboard='false' tabindex='-1' aria-labelledby='staticBackdropLabel' aria-hidden='true'>\n";
-echo "<div class='modal-dialog modal-dialog-scrollable'>\n";
-echo "<div class='modal-content bg-black'>\n";
-echo "<div class='modal-header'>\n";
-echo "<div class='row row-cols-3'>\n";
-echo "<div class='col-3'><img id='imagem' class='img-fluid' src='black.jpg' /></div>\n";
-echo "<div class='col-7'>\n";
-echo "<h3 id='albumm'></h3>\n";
-echo "<h4 id='albumartist'></h4>\n";
-echo "</div>\n";
-echo "<div class='col-1'><button type='button' class='btn btn-sm' data-bs-dismiss='modal' aria-label='Close'><i class='bi bi-x' style='font-size: 3rem; color: white;'></i></button></div>\n";
-echo "</div>\n";
-echo "</div>\n";
-echo "<div class='modal-body'>\n";
-echo "<div id='fullalbum'></div>\n";
-echo "</div>\n";
-echo "</div>\n";
-echo "</div>\n";
-echo "</div>\n";
-
-//*************************
 
 
 echo "</body>\n";
