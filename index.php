@@ -33,6 +33,8 @@ echo "$('#image').attr('src',result.image);\n";
 echo "$('#title').text(result.title);\n";
 echo "$('#artist').text(result.artist);\n";
 echo "$('#album').text(result.album);\n";    
+echo "});\n";
+echo "}\n";
 
 echo "getmeta();\n";
 
