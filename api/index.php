@@ -60,19 +60,19 @@ if ($service == 2){
 
 if ($service == 3){
     
-    $statusarray = $mpd->server_status();
-
-    $state = $statusarray['state'];
-       
-    $mpd->prev();
-    
-    if ($state === 'play'){
-        $pause = 1;
-    }
-
-    if ($state === 'pause'){
-        $pause = 0;
-    }
+//    $statusarray = $mpd->server_status();
+//
+//    $state = $statusarray['state'];
+//       
+//    $mpd->prev();
+//    
+//    if ($state === 'play'){
+//        $pause = 1;
+//    }
+//
+//    if ($state === 'pause'){
+//        $pause = 0;
+//    }
 
     $mpd->pause($pause);
 
