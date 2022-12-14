@@ -48,6 +48,15 @@ echo "$('#secondsdur').html(pad(result.duration%60));\n";
 echo "$('#minutesdur').html(pad(parseInt(result.duration/60,10)));\n";
 echo "$('#secondscur').html(pad(current%60));\n";
 echo "$('#minutescur').html(pad(parseInt(current/60,10)));\n";
+
+echo "if (state === play){\n";
+echo "$('#playpause').removeClass('bi-chevron-right').addClass('bi-pause');\n";
+echo "}\n";
+
+echo "if (state === pause){\n";
+echo "$('#playpause').removeClass('bi-pause').addClass('bi-chevron-right');\n";
+echo "}\n";
+
 echo "});\n";
 echo "}\n";
 
@@ -82,7 +91,7 @@ echo "<div class='container-fluid text-center ps-0 pe-0'>\n";
 echo "<div class='d-block d-sm-none'>\n";
 echo "<img id='image' class='img-fluid' src='black.jpg' />\n";
 echo "<button type='button' class='bg-black' onclick='getmeta(3)'><i class='bi bi-arrow-left-short' style='font-size: 6rem; color: white;'></i></a>\n";
-echo "<button type='button' class='bg-black' onclick='getmeta(2)'><i id='playp' class='bi bi-pause' style='font-size: 5rem; color: white;'></i></a>\n";
+echo "<button type='button' class='bg-black' onclick='getmeta(2)'><i id='playpause' class='bi bi-pause' style='font-size: 5rem; color: white;'></i></a>\n";
 echo "<button type='button' class='bg-black' onclick='getmeta(4)'><i class='bi bi-arrow-right-short' style='font-size: 6rem; color: white;'></i></button>\n";
 echo "<div class='container pt-0 mt-0'>\n";
 echo "<div class='row row-cols-3'>\n";

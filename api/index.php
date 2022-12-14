@@ -36,32 +36,28 @@ if ($service == 4){
 
 //***************** Pause **********************
 
-$statusarray = $mpd->server_status();
-
-$state = $statusarray['state'];
-
 if ($service == 2){
-    
-if ($state === 'play'){
-    $pause = 1;
-}
 
-if ($state === 'pause'){
-    $pause = 0;
-}
+    $statusarray = $mpd->server_status();
 
-   
+    $state = $statusarray['state'];
 
-$mpd->pause($pause);
-    
+    if ($state === 'play'){
+        $pause = 1;
+    }
 
-    
-header("Location: http://". $ipaddr ."");
+    if ($state === 'pause'){
+        $pause = 0;
+    }
 
+    $mpd->pause($pause);
+
+    include ('getmeta.php');
     
 }
 
 //***************** Previous **********************
+
 if ($service == 3){
        
     $mpd->prev();
