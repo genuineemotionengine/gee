@@ -78,8 +78,8 @@ echo "}\n";
 echo "}, 1000);\n";
 
 echo "function nexttrack() {\n";
-echo "fetch('http://192.168.68.134/api/?service=4')\n";
-echo "getmeta();";
+echo "fetch('http://192.168.68.134/api/?service=1&nexttrack=1')\n";
+//echo "getmeta();";
 echo "}\n";
 
 echo "</script>\n";
