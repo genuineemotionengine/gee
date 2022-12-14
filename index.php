@@ -26,15 +26,19 @@ echo "<script src='https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min
 <script>
 
 
-    fetch(`http://192.168.68.134/api/?service=1`)
-      .then((response) => response.json())
-      .then((data) => {
-            console.log(data);
-      })
-      .catch((err) => {
-            console.log(err.message);
-      });
-  
+fetch(`http://192.168.68.134/api/?service=1`)
+  .then((response) => response.json())
+  .then((data) => {
+        console.log(data);
+  })
+  .catch((err) => {
+        console.log(err.message);
+  });
+
+
+const obj = (data);
+document.getElementById("image").innerHTML =
+obj.currentalbum.image;
 
 
 
