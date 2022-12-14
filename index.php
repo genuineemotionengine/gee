@@ -22,147 +22,25 @@ echo "<link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/bootstrap-icons@
 echo "<script src='https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js' integrity='sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3' crossorigin='anonymous'></script>\n";
 echo "<script src='https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js'></script>\n";
 //}
+?>
 echo "<script>\n";
 
-echo "var duration;\n";
-echo "var current;\n";
-echo "var play = 'play';\n";
-echo "var pause = 'pause';\n";
-echo "var currentpos;\n";
-echo "var currentprogress;\n";
-echo "var state;\n";
 
-echo "function nexttrack() {\n";
-echo "const xhttp = new XMLHttpRequest();\n";
-echo "xhttp.open('GET', 'http://". $ipaddr ."/api/?service=4');\n";
-echo "xhttp.send();\n";
-echo "location.reload();";
-
-echo "}\n";
-
-echo "function prevtrack() {\n";
-echo "const xhttp = new XMLHttpRequest();\n";
-echo "xhttp.open('GET', 'http://". $ipaddr ."/api/?service=3');\n";
-echo "xhttp.send();\n";
-echo "location.reload();";
-echo "}\n";
-
-echo "function playpause() {\n";
-echo "const xhttp = new XMLHttpRequest();\n";
-echo "xhttp.open('GET', 'http://". $ipaddr ."/api/?service=2');\n";
-echo "xhttp.send();\n";
-echo "location.reload();";
-echo "}\n";
+    fetch(`http://192.168.68.134/api/?service=1`)
+      .then((response) => response.json())
+      .then((data) => {
+            console.log(data);
+      })
+      .catch((err) => {
+            console.log(err.message);
+      });
+  };
 
 
 
-echo "function wholealbum(){\n";
-echo "getmeta();\n";
-echo "const dbParam = JSON.stringify({table:'album',limit:150});\n";
-echo "const xmlhttp = new XMLHttpRequest();\n";
-echo "xmlhttp.onload = function() {\n";
-echo "const myObj = JSON.parse(this.responseText);\n";
-echo "let html = '<div>'\n";
-echo "for (let x in myObj) {\n";
 
-echo "html += '<div class=\x22border-bottom align-top\x22><br/>";
-echo "<h4>' + myObj[x].Track + ' - ' + myObj[x].Title + ' - ' + myObj[x].Artist + '</h4>";
-echo "<a href=\x22http://". $ipaddr ."/api/?service=8&playnow=1&playnext=1&name='+ myObj[x].name +'\x22><i class=\x22bi bi-chevron-right\x22 style=\x22font-size: 3rem; color: white;\x22></i></a>";
-echo "<a href=\x22http://". $ipaddr ."/api/?service=8&playnext=1&name='+ myObj[x].name +'\x22><i class=\x22bi bi-chevron-double-right\x22 style=\x22font-size: 3rem; color: white;\x22></i></a>";
-echo "</div>';\n";
-
-echo "}\n";
-echo "html += '</div>'\n";    
-echo "document.getElementById('fullalbum').innerHTML = html;\n";
-echo "}\n";
-echo "xmlhttp.open('POST', 'http://". $ipaddr ."/api/?service=8');\n";
-echo "xmlhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');\n";
-echo "xmlhttp.send('x=' + dbParam);\n";
-echo "}\n";
-
-echo "function pad ( val ) { return val > 9 ? val : '0' + val; }\n";
-
-echo "function getmeta(){\n";
-echo "$.getJSON('http://". $ipaddr ."/api/?service=1', function(result){\n";
-echo "duration = parseInt(result.duration);\n";
-echo "current = parseInt(result.elapsed);\n";
-echo "state = result.state;\n";
-echo "$('#image').attr('src',result.image);\n";
-
-echo "$('#imagem').attr('src',result.image);\n";
-echo "$('#title').text(result.title);\n";
-
-echo "$('#artist').text(result.artist);\n";
-
-echo "$('#artistm').text(result.artist);\n";
-echo "$('#album').text(result.album);\n";       
-
-echo "$('#albumm').text(result.album);\n";
-echo "$('#albumartist').text(result.albumartist);\n";
-
-echo "$('#secondsdur').html(pad(result.duration%60));\n";
-echo "$('#minutesdur').html(pad(parseInt(result.duration/60,10)));\n";
-
-echo "$('#secondscur').html(pad(current%60));\n";
-echo "$('#minutescur').html(pad(parseInt(current/60,10)));\n";
-
-
-
-echo "if (state === play){\n";
-echo "$('#playp').removeClass('bi-chevron-right').addClass('bi-pause');\n";
-echo "$('#playpipp').removeClass('bi-chevron-right').addClass('bi-pause');\n";
-echo "$('#playpipl').removeClass('bi-chevron-right').addClass('bi-pause');\n";
-echo "}\n";
-
-echo "if (state === pause){\n";
-echo "$('#playp').removeClass('bi-pause').addClass('bi-chevron-right');\n";
-echo "$('#playpipp').removeClass('bi-pause').addClass('bi-chevron-right');\n";
-echo "$('#playpipl').removeClass('bi-pause').addClass('bi-chevron-right');\n";
-echo "}\n";
-echo "wholealbum();\n";
-
-echo "});\n";
-
-
-echo "}\n";
-
-
-
-echo "getmeta();\n";
-//echo "$('#dynamic').removeClass('bg-black').addClass('bg-white');\n";
-
-echo "setInterval( function(){\n";
-
-echo "if (state === play){\n";
-echo "current = current + 1;\n";
-
-echo "}\n";
-echo "currentpos = (current/duration)*100;\n";
-echo "currentprogress = currentpos.toFixed(0);\n";
-//echo "$('#dynamic').removeClass('bg-black').addClass('bg-white');\n";
-echo "$('#dynamic').css('width', currentprogress + '%');\n";
-echo "$('#dynamicipad').css('width', currentprogress + '%');\n";
-echo "$('#dynamicipadl').css('width', currentprogress + '%');\n";
-
-echo "$('#secondscur').html(pad(current%60));\n";
-echo "$('#minutescur').html(pad(parseInt(current/60,10)));\n";
-echo "$('#secondscuripp').html(pad(current%60));\n";
-echo "$('#minutescuripp').html(pad(parseInt(current/60,10)));\n";
-echo "$('#secondscuripl').html(pad(current%60));\n";
-echo "$('#minutescuripl').html(pad(parseInt(current/60,10)));\n";
-
-
-echo "if (current >= duration){\n";
-//echo "$('#dynamic').removeClass('bg-white').addClass('bg-black');\n";
-//echo "getmeta();\n";
-echo "location.reload();";
-echo "wholealbum();\n";
-//echo "$('#dynamic').removeClass('bg-black').addClass('bg-white');\n";
-echo "}\n";
-
-echo "}, 1000);\n";
 echo "</script>\n";
-
+<?php
 echo "</head>\n";
 echo "<body style='background: black;' class='p-3 mb-2 bg-black text-white pt-0 ps-0 pe-0 me-0'>\n\n";
 
