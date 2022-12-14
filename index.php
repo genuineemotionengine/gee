@@ -92,7 +92,7 @@ echo "<div class='d-block d-sm-none'>\n";
 echo "<img id='image' class='img-fluid' src='black.jpg' />\n";
 echo "<a href='http://". $ipaddr ."/api/?service=3'><i class='bi bi-arrow-left-short' style='font-size: 6rem; color: white;'></i></a>\n";
 echo "<a href='http://". $ipaddr ."/api/?service=2'><i id='playp' class='bi bi-pause' style='font-size: 5rem; color: white;'></i></a>\n";
-echo "<a type='button' onclick='getmeta(1)' class='bi bi-arrow-right-short' style='font-size: 6rem; color: white;'></i></a>\n";
+echo "<button type='button' onclick='getmeta(1)'><i class='bi bi-arrow-right-short' style='font-size: 6rem; color: white;'></i></a>\n";
 echo "<div class='container pt-0 mt-0'>\n";
 echo "<div class='row row-cols-3'>\n";
 echo "<div class='col-2 text-center'><span id='minutescur'>00</span>:<span id='secondscur'>00</span></div>\n";
