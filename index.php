@@ -24,6 +24,8 @@ echo "<script src='https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min
 //}
 echo "<script>\n";
 
+echo "function pad ( val ) { return val > 9 ? val : '0' + val; }\n";
+
 echo "function getmeta(){\n";
 echo "$.getJSON('http://". $ipaddr ."/api/?service=1', function(result){\n";
 echo "duration = parseInt(result.duration);\n";
@@ -32,7 +34,9 @@ echo "duration = parseInt(result.duration);\n";
 echo "$('#image').attr('src',result.image);\n";
 echo "$('#title').text(result.title);\n";
 echo "$('#artist').text(result.artist);\n";
-echo "$('#album').text(result.album);\n";    
+echo "$('#album').text(result.album);\n";
+echo "$('#secondsdur').html(pad(result.duration%60));\n";
+echo "$('#minutesdur').html(pad(parseInt(result.duration/60,10)));\n";
 echo "});\n";
 echo "}\n";
 
