@@ -25,7 +25,7 @@ $mpd = new mpd('localhost', 6600);
 
 if ($service == 1){
     
-if ($nexttrack == 1){
+if ($control == 1){
     $mpd->next();
 }
   

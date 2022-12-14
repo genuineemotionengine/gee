@@ -34,8 +34,8 @@ echo "var state;\n";
 
 echo "function pad ( val ) { return val > 9 ? val : '0' + val; }\n";
 
-echo "function getmeta(){\n";
-echo "$.getJSON('http://". $ipaddr ."/api/?service=1', function(result){\n";
+echo "function getmeta(controldata){\n";
+echo "$.getJSON('http://". $ipaddr ."/api/?service=1&control=' + controldata, function(result){\n";
 echo "duration = parseInt(result.duration);\n";
 echo "current = parseInt(result.elapsed);\n";
 echo "state = result.state;\n";
@@ -77,22 +77,7 @@ echo "}\n";
 
 echo "}, 1000);\n";
 
-echo "function nexttrack() {\n";
-//echo "fetch('http://192.168.68.134/api/?service=1&nexttrack=1')\n";
-echo "$.getJSON('http://". $ipaddr ."/api/?service=1&nexttrack=1', function(result){\n";
-echo "duration = parseInt(result.duration);\n";
-echo "current = parseInt(result.elapsed);\n";
-echo "state = result.state;\n";
-echo "$('#image').attr('src',result.image);\n";
-echo "$('#title').text(result.title);\n";
-echo "$('#artist').text(result.artist);\n";
-echo "$('#album').text(result.album);\n";
-echo "$('#secondsdur').html(pad(result.duration%60));\n";
-echo "$('#minutesdur').html(pad(parseInt(result.duration/60,10)));\n";
-echo "$('#secondscur').html(pad(current%60));\n";
-echo "$('#minutescur').html(pad(parseInt(current/60,10)));\n";
-echo "});\n";
-echo "}\n";
+
 
 echo "</script>\n";
 
@@ -107,7 +92,7 @@ echo "<div class='d-block d-sm-none'>\n";
 echo "<img id='image' class='img-fluid' src='black.jpg' />\n";
 echo "<a href='http://". $ipaddr ."/api/?service=3'><i class='bi bi-arrow-left-short' style='font-size: 6rem; color: white;'></i></a>\n";
 echo "<a href='http://". $ipaddr ."/api/?service=2'><i id='playp' class='bi bi-pause' style='font-size: 5rem; color: white;'></i></a>\n";
-echo "<a type='button' onclick='nexttrack()' class='bi bi-arrow-right-short' style='font-size: 6rem; color: white;'></i></a>\n";
+echo "<a type='button' onclick='getmeta(1)' class='bi bi-arrow-right-short' style='font-size: 6rem; color: white;'></i></a>\n";
 echo "<div class='container pt-0 mt-0'>\n";
 echo "<div class='row row-cols-3'>\n";
 echo "<div class='col-2 text-center'><span id='minutescur'>00</span>:<span id='secondscur'>00</span></div>\n";
