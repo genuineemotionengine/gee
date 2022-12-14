@@ -22,29 +22,22 @@ echo "<link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/bootstrap-icons@
 echo "<script src='https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js' integrity='sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3' crossorigin='anonymous'></script>\n";
 echo "<script src='https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js'></script>\n";
 //}
-?>
-<script>
+echo "<script>\n";
 
+echo "function getmeta(){\n";
+echo "$.getJSON('http://". $ipaddr ."/api/?service=1', function(result){\n";
+echo "duration = parseInt(result.duration);\n";
+echo "current = parseInt(result.elapsed);\n";
+echo "state = result.state;\n";
+echo "$('#image').attr('src',result.image);\n";
+echo "$('#title').text(result.title);\n";
+echo "$('#artist').text(result.artist);\n";
+echo "$('#album').text(result.album);\n";    
 
-fetch(`http://192.168.68.134/api/?service=1`)
-  .then((response) => response.json())
-  .then((data) => {
-        console.log(data);
-  })
-  .catch((err) => {
-        console.log(err.message);
-  });
+echo "getmeta();\n";
 
+echo "</script>\n";
 
-const obj = (data);
-document.getElementById("image").innerHTML =
-obj.currentalbum.image;
-
-
-
-
-</script>
-<?php
 echo "</head>\n";
 echo "<body style='background: black;' class='p-3 mb-2 bg-black text-white pt-0 ps-0 pe-0 me-0'>\n\n";
 
