@@ -70,8 +70,8 @@ echo "$('#minutescur').html(pad(parseInt(current/60,10)));\n";
 
 
 echo "if (current >= duration){\n";
-//echo "getmeta();\n";
-echo "location.reload();";
+echo "getmeta(1);\n";
+//echo "location.reload();";
 //echo "wholealbum();\n";
 
 echo "}\n";

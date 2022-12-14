@@ -12,17 +12,27 @@ require_once('getid3.php');
 
 $mpd = new mpd('localhost', 6600);
 
+//***************** Just Get Meta **********************
+
+if ($service == 1){ 
+    
+    include ('getmeta.php');
+
+}
+
 
     
 //***************** Next **********************
 
 if ($service == 4){ 
     
-$mpd->next();
+    $mpd->next();
+    
+    include ('getmeta.php');
 
 }
 
-include ('getmeta.php');
+
 
 //***************** Pause **********************
 
