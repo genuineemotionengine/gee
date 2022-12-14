@@ -35,8 +35,8 @@ echo "var state;\n";
 
 echo "function pad ( val ) { return val > 9 ? val : '0' + val; }\n";
 
-echo "function getmeta(controldata){\n";
-echo "$.getJSON('http://". $ipaddr ."/api/?service=1&control=' + controldata, function(result){\n";
+echo "function getmeta(control){\n";
+echo "$.getJSON('http://". $ipaddr ."/api/?service=' + control, function(result){\n";
 echo "duration = parseInt(result.duration);\n";
 echo "current = parseInt(result.elapsed);\n";
 echo "state = result.state;\n";
