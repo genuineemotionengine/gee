@@ -51,7 +51,7 @@ echo "$('#minutescur').html(pad(parseInt(current/60,10)));\n";
 echo "});\n";
 echo "}\n";
 
-echo "getmeta();\n";
+echo "getmeta(1);\n";
 
 echo "setInterval( function(){\n";
 
