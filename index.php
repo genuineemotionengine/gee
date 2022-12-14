@@ -34,7 +34,7 @@ echo "<script src='https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min
       .catch((err) => {
             console.log(err.message);
       });
-  };
+  
 
 
 
