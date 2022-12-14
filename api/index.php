@@ -118,7 +118,7 @@ $rows = ['image' => $image,
 //        'state' => $state]
 //    ),
 
-);
+//);
  
 //}
 
