@@ -26,10 +26,10 @@ echo "<script>\n";
 
 echo "function getmeta(){\n";
 echo "$.getJSON('http://". $ipaddr ."/api/?service=1', function(result){\n";
-echo "duration = parseInt(result.duration);\n";
-echo "current = parseInt(result.elapsed);\n";
-echo "state = result.state;\n";
-echo "$('#image').attr('src',result.currentalbum.image);\n";
+//echo "duration = parseInt(result.duration);\n";
+//echo "current = parseInt(result.elapsed);\n";
+//echo "state = result.state;\n";
+echo "$('#image').attr('src',result.image);\n";
 echo "$('#title').text(result.title);\n";
 echo "$('#artist').text(result.artist);\n";
 echo "$('#album').text(result.album);\n";    
