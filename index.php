@@ -78,8 +78,20 @@ echo "}\n";
 echo "}, 1000);\n";
 
 echo "function nexttrack() {\n";
-echo "fetch('http://192.168.68.134/api/?service=1&nexttrack=1')\n";
-//echo "getmeta();";
+//echo "fetch('http://192.168.68.134/api/?service=1&nexttrack=1')\n";
+echo "$.getJSON('http://". $ipaddr ."/api/?service=1&nexttrack=1', function(result){\n";
+echo "duration = parseInt(result.duration);\n";
+echo "current = parseInt(result.elapsed);\n";
+echo "state = result.state;\n";
+echo "$('#image').attr('src',result.image);\n";
+echo "$('#title').text(result.title);\n";
+echo "$('#artist').text(result.artist);\n";
+echo "$('#album').text(result.album);\n";
+echo "$('#secondsdur').html(pad(result.duration%60));\n";
+echo "$('#minutesdur').html(pad(parseInt(result.duration/60,10)));\n";
+echo "$('#secondscur').html(pad(current%60));\n";
+echo "$('#minutescur').html(pad(parseInt(current/60,10)));\n";
+echo "});\n";
 echo "}\n";
 
 echo "</script>\n";
