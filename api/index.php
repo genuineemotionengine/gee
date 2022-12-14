@@ -59,8 +59,22 @@ if ($service == 2){
 //***************** Previous **********************
 
 if ($service == 3){
+    
+    $statusarray = $mpd->server_status();
+
+    $state = $statusarray['state'];
        
     $mpd->prev();
+    
+    if ($state === 'play'){
+        $pause = 0;
+    }
+
+    if ($state === 'pause'){
+        $pause = 1;
+    }
+
+    $mpd->pause($pause);
 
     include ('getmeta.php');
 
