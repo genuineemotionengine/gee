@@ -32,11 +32,6 @@ echo "var currentpos;\n";
 echo "var currentprogress;\n";
 echo "var state;\n";
 
-echo "function nexttrack() {\n";
-echo "getmeta();";
-echo "}\n";
-
-
 echo "function pad ( val ) { return val > 9 ? val : '0' + val; }\n";
 
 echo "function getmeta(){\n";
