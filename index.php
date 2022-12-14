@@ -23,7 +23,7 @@ echo "<script src='https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstra
 echo "<script src='https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js'></script>\n";
 //}
 ?>
-echo "<script>\n";
+<script>
 
 
     fetch(`http://192.168.68.134/api/?service=1`)
@@ -39,7 +39,7 @@ echo "<script>\n";
 
 
 
-echo "</script>\n";
+</script>
 <?php
 echo "</head>\n";
 echo "<body style='background: black;' class='p-3 mb-2 bg-black text-white pt-0 ps-0 pe-0 me-0'>\n\n";
