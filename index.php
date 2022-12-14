@@ -57,29 +57,19 @@ echo "setInterval( function(){\n";
 
 echo "if (state === play){\n";
 echo "current = current + 1;\n";
-
 echo "}\n";
+
 echo "currentpos = (current/duration)*100;\n";
 echo "currentprogress = currentpos.toFixed(0);\n";
 echo "$('#dynamic').css('width', currentprogress + '%');\n";
-
-
 echo "$('#secondscur').html(pad(current%60));\n";
 echo "$('#minutescur').html(pad(parseInt(current/60,10)));\n";
 
-
-
 echo "if (current >= duration){\n";
 echo "getmeta(1);\n";
-//echo "location.reload();";
-//echo "wholealbum();\n";
-
 echo "}\n";
 
 echo "}, 1000);\n";
-
-
-
 echo "</script>\n";
 
 echo "</head>\n";
@@ -91,8 +81,8 @@ echo "<body style='background: black;' class='p-3 mb-2 bg-black text-white pt-0 
 echo "<div class='container-fluid text-center ps-0 pe-0'>\n";
 echo "<div class='d-block d-sm-none'>\n";
 echo "<img id='image' class='img-fluid' src='black.jpg' />\n";
-echo "<a href='http://". $ipaddr ."/api/?service=3'><i class='bi bi-arrow-left-short' style='font-size: 6rem; color: white;'></i></a>\n";
-echo "<a href='http://". $ipaddr ."/api/?service=2'><i id='playp' class='bi bi-pause' style='font-size: 5rem; color: white;'></i></a>\n";
+echo "<button type='button' class='bg-black' onclick='getmeta(3)'><i class='bi bi-arrow-left-short' style='font-size: 6rem; color: white;'></i></a>\n";
+echo "<button type='button' class='bg-black' onclick='getmeta(2)'><i id='playp' class='bi bi-pause' style='font-size: 5rem; color: white;'></i></a>\n";
 echo "<button type='button' class='bg-black' onclick='getmeta(4)'><i class='bi bi-arrow-right-short' style='font-size: 6rem; color: white;'></i></button>\n";
 echo "<div class='container pt-0 mt-0'>\n";
 echo "<div class='row row-cols-3'>\n";

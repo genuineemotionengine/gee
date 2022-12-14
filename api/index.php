@@ -63,10 +63,11 @@ header("Location: http://". $ipaddr ."");
 
 //***************** Previous **********************
 if ($service == 3){
-    
-//header("Location: http://". $ipaddr ."");    
-$mpd->prev();
-    
+       
+    $mpd->prev();
+
+    include ('getmeta.php');
+
 }
 
 
