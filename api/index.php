@@ -1,14 +1,7 @@
 <?php
 
-//$http_origin = $_SERVER['HTTP_ORIGIN'];
-//
-//if ($http_origin == "http://192.168.68.108:3000" || $http_origin == "http://192.168.68.13")
-//{  
-//    header("Access-Control-Allow-Origin: $http_origin");
-//}
-
-
 parse_str($_SERVER['QUERY_STRING']);
+
 $ipaddr = $_SERVER['SERVER_ADDR'];
 
 require_once('dbconn.php');
@@ -19,87 +12,17 @@ require_once('getid3.php');
 
 $mpd = new mpd('localhost', 6600);
 
-//switch ($service){
 
-//***************** Track Data **********************
-
-if ($service == 1){
     
-if ($control == 1){
-    $mpd->next();
-}
-  
-$statusarray = $mpd->server_status();
+//***************** Next **********************
 
-//echo '<pre>'.htmlentities(print_r($statusarray, true), ENT_SUBSTITUTE).'</pre>';
+if ($service == 4){ 
     
-$elapsed = $statusarray['elapsed'];
+$mpd->next();
 
-$state = $statusarray['state'];
-
-$elapseds = explode(".",$elapsed);
-
-$elapsed = $elapseds[0];
-
-$duration = $statusarray['duration'];
-
-$durations = explode(".",$duration);
-
-
-
-$refresh = $durations[0] - $elapsed;
-
-
-$mySimpleArray = $mpd->current_song();
-    
-    //print_r($mySimpleArray);
-    //echo '<pre>'.htmlentities(print_r($mySimpleArray, true), ENT_SUBSTITUTE).'</pre>';
-      
-$flacfile = $mySimpleArray[0]['name'];
-
-$album = $mySimpleArray[0]['Album'];
-
-$artist = $mySimpleArray[0]['Artist'];
-
-$title = $mySimpleArray[0]['Title'];
-
-$albumartist = $mySimpleArray[0]['AlbumArtist'];
-
-if (stripos("$albumartist, Various Artists - ", "Various Artists - ") === 0){
-    $albumartist = "Various Artists";
 }
 
-$flacfile = "/mnt/usb/".$flacfile;
-
-$getID3 = new getID3;
-
-$ThisFileInfo = $getID3->analyze($flacfile);
-//echo '<pre>'.htmlentities(print_r($ThisFileInfo['comments']['picture'][0], true), ENT_SUBSTITUTE).'</pre>';
-//echo '<pre>'.htmlentities(print_r($ThisFileInfo, true), ENT_SUBSTITUTE).'</pre>';
-
-if(isset($ThisFileInfo['comments']['picture'][0])){
-    $image='data:'.$ThisFileInfo['comments']['picture'][0]['image_mime'].';charset=utf-8;base64,'.base64_encode($ThisFileInfo['comments']['picture'][0]['data']);
-}
-
-$rows = ['image' => $image,
-'title' => $title,
-'artist' => $artist,
-'album' => $album,
-'elapsed' => $elapsed,
-'duration' => $durations[0],
-'albumartist' => $albumartist,
-//'nexttitle' => $nexttitle,
-//'nextartist' => $nextartist,    
-'state' => $state
-     ];
-
-
-
-
-
-
-echo json_encode($rows);
-}
+include ('getmeta.php');
 
 //***************** Pause **********************
 
@@ -136,13 +59,6 @@ $mpd->prev();
     
 }
 
-//***************** Next **********************
-if ($service == 4){ 
-    
-$mpd->next();
-//header("Location: http://". $ipaddr ."");
-
-}
 
 //***************** Restart Playlist **********************
 
