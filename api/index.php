@@ -67,11 +67,11 @@ if ($service == 3){
     $mpd->prev();
     
     if ($state === 'play'){
-        $pause = 0;
+        $pause = 1;
     }
 
     if ($state === 'pause'){
-        $pause = 1;
+        $pause = 0;
     }
 
     $mpd->pause($pause);
