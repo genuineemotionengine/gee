@@ -89,7 +89,7 @@ echo "var state;\n";
 
 echo "function nexttrack() {\n";
 echo "const xhttp = new XMLHttpRequest();\n";
-echo "xhttp.open('GET', 'http://". $ipaddr ."/api.php?service=4');\n";
+echo "xhttp.open('GET', 'http://". $ipaddr ."/api/?service=4');\n";
 echo "xhttp.send();\n";
 echo "location.reload();";
 
@@ -97,14 +97,14 @@ echo "}\n";
 
 echo "function prevtrack() {\n";
 echo "const xhttp = new XMLHttpRequest();\n";
-echo "xhttp.open('GET', 'http://". $ipaddr ."/api.php?service=3');\n";
+echo "xhttp.open('GET', 'http://". $ipaddr ."/api/?service=3');\n";
 echo "xhttp.send();\n";
 echo "location.reload();";
 echo "}\n";
 
 echo "function playpause() {\n";
 echo "const xhttp = new XMLHttpRequest();\n";
-echo "xhttp.open('GET', 'http://". $ipaddr ."/api.php?service=2');\n";
+echo "xhttp.open('GET', 'http://". $ipaddr ."/api/?service=2');\n";
 echo "xhttp.send();\n";
 echo "location.reload();";
 echo "}\n";
@@ -122,15 +122,15 @@ echo "for (let x in myObj) {\n";
 
 echo "html += '<div class=\x22border-bottom align-top\x22><br/>";
 echo "<h4>' + myObj[x].Track + ' - ' + myObj[x].Title + ' - ' + myObj[x].Artist + '</h4>";
-echo "<a href=\x22http://". $ipaddr ."/api.php?service=8&playnow=1&playnext=1&name='+ myObj[x].name +'\x22><i class=\x22bi bi-chevron-right\x22 style=\x22font-size: 3rem; color: white;\x22></i></a>";
-echo "<a href=\x22http://". $ipaddr ."/api.php?service=8&playnext=1&name='+ myObj[x].name +'\x22><i class=\x22bi bi-chevron-double-right\x22 style=\x22font-size: 3rem; color: white;\x22></i></a>";
+echo "<a href=\x22http://". $ipaddr ."/api/?service=8&playnow=1&playnext=1&name='+ myObj[x].name +'\x22><i class=\x22bi bi-chevron-right\x22 style=\x22font-size: 3rem; color: white;\x22></i></a>";
+echo "<a href=\x22http://". $ipaddr ."/api/?service=8&playnext=1&name='+ myObj[x].name +'\x22><i class=\x22bi bi-chevron-double-right\x22 style=\x22font-size: 3rem; color: white;\x22></i></a>";
 echo "</div>';\n";
 
 echo "}\n";
 echo "html += '</div>'\n";    
 echo "document.getElementById('fullalbum').innerHTML = html;\n";
 echo "}\n";
-echo "xmlhttp.open('POST', 'http://". $ipaddr ."/api.php?service=8');\n";
+echo "xmlhttp.open('POST', 'http://". $ipaddr ."/api/?service=8');\n";
 echo "xmlhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');\n";
 echo "xmlhttp.send('x=' + dbParam);\n";
 echo "}\n";
@@ -138,7 +138,7 @@ echo "}\n";
 echo "function pad ( val ) { return val > 9 ? val : '0' + val; }\n";
 
 echo "function getmeta(){\n";
-echo "$.getJSON('http://". $ipaddr ."/api.php?service=1', function(result){\n";
+echo "$.getJSON('http://". $ipaddr ."/api/?service=1', function(result){\n";
 echo "duration = parseInt(result.duration);\n";
 echo "current = parseInt(result.elapsed);\n";
 echo "state = result.state;\n";
@@ -242,9 +242,9 @@ echo "<body style='background: black;' class='p-3 mb-2 bg-black text-white pt-0 
 echo "<div class='container-fluid text-center ps-0 pe-0'>\n";
 echo "<div class='d-block d-sm-none'>\n";
 echo "<img id='image' class='img-fluid' src='".$image."' />\n";
-echo "<a href='http://". $ipaddr ."/api.php?service=3'><i class='bi bi-arrow-left-short' style='font-size: 6rem; color: white;'></i></a\n";
-echo "<a href='http://". $ipaddr ."/api.php?service=2'><i id='playp' class='bi bi-pause' style='font-size: 5rem; color: white;'></i></a\n";
-echo "<a href='http://". $ipaddr ."/api.php?service=4'><i class='bi bi-arrow-right-short' style='font-size: 6rem; color: white;'></i></a>\n";
+echo "<a href='http://". $ipaddr ."/api/?service=3'><i class='bi bi-arrow-left-short' style='font-size: 6rem; color: white;'></i></a\n";
+echo "<a href='http://". $ipaddr ."/api/?service=2'><i id='playp' class='bi bi-pause' style='font-size: 5rem; color: white;'></i></a\n";
+echo "<a href='http://". $ipaddr ."/api/?service=4'><i class='bi bi-arrow-right-short' style='font-size: 6rem; color: white;'></i></a>\n";
 echo "<div class='container pt-0 mt-0'>\n";
 echo "<div class='row row-cols-3'>\n";
 echo "<div class='col-2 text-center'><span id='minutescur'>00</span>:<span id='secondscur'>00</span></div>\n";
@@ -264,13 +264,13 @@ echo "<h1 id='artist' class='display-6'>".$artist."</h1>\n";
 echo "<h1 id='album' class='display-6'>".$album."</h1>\n";
 echo "<a href='http://". $ipaddr ."/'><i class='bi bi-arrow-clockwise' style='font-size: 3rem; color: white;'></i></a>\n";
 echo "<button type='button' onclick='wholealbum()' class='btn btn-black' data-bs-toggle='modal' data-bs-target='#staticBackdrop'><i class='bi bi-three-dots' style='font-size: 3rem; color: white;'></i></button>\n";
-echo "<a href='http://". $ipaddr ."/api.php?service=5&playl=1'><i class='bi bi-arrow-repeat' style='font-size: 3rem; color: white;'></i></a><br/><br/><br/>\n";
+echo "<a href='http://". $ipaddr ."/api/?service=5&playl=1'><i class='bi bi-arrow-repeat' style='font-size: 3rem; color: white;'></i></a><br/><br/><br/>\n";
 //echo "Next: <span id='nexttitle' class='fs-6'></span> - <span id='nextartist' class='fs-6'></span><br/><br/><br/>\n";
 //echo "<span class='fs-6'>".$hosty."</span><br/><br/>";
 
 
-echo "<a href='http://". $ipaddr ."/api.php?service=9&vol=70'><i class='bi bi-volume-down' style='font-size: 3rem; color: white;'></i></a>&nbsp;&nbsp;&nbsp;&nbsp;\n";
-echo "<a href='http://". $ipaddr ."/api.php?service=9&vol=100'><i class='bi bi-volume-up' style='font-size: 3rem; color: white;'></i></a>&nbsp;&nbsp;&nbsp;&nbsp;\n";
+echo "<a href='http://". $ipaddr ."/api/?service=9&vol=70'><i class='bi bi-volume-down' style='font-size: 3rem; color: white;'></i></a>&nbsp;&nbsp;&nbsp;&nbsp;\n";
+echo "<a href='http://". $ipaddr ."/api/?service=9&vol=100'><i class='bi bi-volume-up' style='font-size: 3rem; color: white;'></i></a>&nbsp;&nbsp;&nbsp;&nbsp;\n";
 echo "</div>\n";
 echo "</div>\n\n";
 //**********************
@@ -282,9 +282,9 @@ echo "<div class='container-fluid text-center ps-0 pe-0'>\n";
 echo "<div class='d-none d-md-block d-lg-none'>\n";
 echo "<img id='imageipp' class='img-fluid' src='".$image."' />\n";
 echo "<br/>\n";
-echo "<a href='http://". $ipaddr ."/api.php?service=3'><i class='bi bi-arrow-left-short' style='font-size: 6rem; color: white;'></i></a\n";
-echo "<a href='http://". $ipaddr ."/api.php?service=2'><i id='playp' class='bi bi-pause' style='font-size: 5rem; color: white;'></i></a\n";
-echo "<a href='http://". $ipaddr ."/api.php?service=4'><i class='bi bi-arrow-right-short' style='font-size: 6rem; color: white;'></i></a>\n";
+echo "<a href='http://". $ipaddr ."/api/?service=3'><i class='bi bi-arrow-left-short' style='font-size: 6rem; color: white;'></i></a\n";
+echo "<a href='http://". $ipaddr ."/api/?service=2'><i id='playp' class='bi bi-pause' style='font-size: 5rem; color: white;'></i></a\n";
+echo "<a href='http://". $ipaddr ."/api/?service=4'><i class='bi bi-arrow-right-short' style='font-size: 6rem; color: white;'></i></a>\n";
 echo "<div class='container pt-0 mt-0'>\n";
 echo "<div class='row row-cols-3'>\n";
 echo "<div class='col-2 text-center'><span id='minutescuripp'>00</span>:<span id='secondscuripp'>00</span></div>\n";
@@ -309,17 +309,17 @@ echo "<br/>\n";
 echo "<div class='row row-cols-3'>\n";
 
 echo "<div>\n";
-echo "<a href='http://". $ipaddr ."/api.php?service=5&playl=1'><i class='bi bi-arrow-repeat' style='font-size: 3rem; color: white;'></i></a>\n";
+echo "<a href='http://". $ipaddr ."/api/?service=5&playl=1'><i class='bi bi-arrow-repeat' style='font-size: 3rem; color: white;'></i></a>\n";
 echo "<h5>All Music</h5>\n";
 echo "</div>\n";
 
 echo "<div>\n";
-echo "<a href='http://". $ipaddr ."/api.php?service=5&playl=2'><i class='bi bi-arrow-repeat' style='font-size: 3rem; color: white;'></i></a>\n";
+echo "<a href='http://". $ipaddr ."/api/?service=5&playl=2'><i class='bi bi-arrow-repeat' style='font-size: 3rem; color: white;'></i></a>\n";
 echo "<h5>Classical</h5>\n";
 echo "</div>\n";
 
 echo "<div>\n";
-echo "<a href='http://". $ipaddr ."/api.php?service=5&playl=3'><i class='bi bi-arrow-repeat' style='font-size: 3rem; color: white;'></i></a>\n";
+echo "<a href='http://". $ipaddr ."/api/?service=5&playl=3'><i class='bi bi-arrow-repeat' style='font-size: 3rem; color: white;'></i></a>\n";
 echo "<h5>Relaxation</h5>\n";
 echo "</div>\n";
 
@@ -369,17 +369,17 @@ echo "<button type='button' onclick='wholealbum()' class='btn btn-black' data-bs
 echo "<div class='row row-cols-3'>\n";
 
 echo "<div>\n";
-echo "<a href='http://". $ipaddr ."/api.php?service=5&playl=1'><i class='bi bi-arrow-repeat' style='font-size: 3rem; color: white;'></i></a>\n";
+echo "<a href='http://". $ipaddr ."/api/?service=5&playl=1'><i class='bi bi-arrow-repeat' style='font-size: 3rem; color: white;'></i></a>\n";
 echo "<h5>All Music</h5>\n";
 echo "</div>\n";
 
 echo "<div>\n";
-echo "<a href='http://". $ipaddr ."/api.php?service=5&playl=2'><i class='bi bi-arrow-repeat' style='font-size: 3rem; color: white;'></i></a>\n";
+echo "<a href='http://". $ipaddr ."/api/?service=5&playl=2'><i class='bi bi-arrow-repeat' style='font-size: 3rem; color: white;'></i></a>\n";
 echo "<h5>Classical</h5>\n";
 echo "</div>\n";
 
 echo "<div>\n";
-echo "<a href='http://". $ipaddr ."/api.php?service=5&playl=3'><i class='bi bi-arrow-repeat' style='font-size: 3rem; color: white;'></i></a>\n";
+echo "<a href='http://". $ipaddr ."/api/?service=5&playl=3'><i class='bi bi-arrow-repeat' style='font-size: 3rem; color: white;'></i></a>\n";
 echo "<h5>Relaxation</h5>\n";
 echo "</div>\n";
 
