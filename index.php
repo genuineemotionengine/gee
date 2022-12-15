@@ -33,6 +33,32 @@ echo "var currentpos;\n";
 echo "var currentprogress;\n";
 echo "var state;\n";
 
+echo "function wholealbum(){\n";
+echo "getmeta(1);\n";
+echo "const dbParam = JSON.stringify({table:'album',limit:150});\n";
+echo "const xmlhttp = new XMLHttpRequest();\n";
+echo "xmlhttp.onload = function() {\n";
+echo "const myObj = JSON.parse(this.responseText);\n";
+echo "let html = '<div>'\n";
+echo "for (let x in myObj) {\n";
+
+echo "html += '<div class=\x22border-bottom align-top\x22><br/>";
+echo "<h4>' + myObj[x].Track + ' - ' + myObj[x].Title + ' - ' + myObj[x].Artist + '</h4>";
+echo "<a href=\x22http://". $ipaddr ."/api/?service=8&playnow=1&playnext=1&name='+ myObj[x].name +'\x22><i class=\x22bi bi-chevron-right\x22 style=\x22font-size: 3rem; color: white;\x22></i></a>";
+echo "<a href=\x22http://". $ipaddr ."/api/?service=8&playnext=1&name='+ myObj[x].name +'\x22><i class=\x22bi bi-chevron-double-right\x22 style=\x22font-size: 3rem; color: white;\x22></i></a>";
+echo "</div>';\n";
+
+echo "}\n";
+echo "html += '</div>'\n";    
+echo "document.getElementById('fullalbum').innerHTML = html;\n";
+echo "}\n";
+echo "xmlhttp.open('POST', 'http://". $ipaddr ."/api/?service=8');\n";
+echo "xmlhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');\n";
+echo "xmlhttp.send('x=' + dbParam);\n";
+echo "}\n";
+
+
+
 echo "function pad ( val ) { return val > 9 ? val : '0' + val; }\n";
 
 echo "function getmeta(control){\n";
@@ -44,6 +70,11 @@ echo "$('#image').attr('src',result.image);\n";
 echo "$('#title').text(result.title);\n";
 echo "$('#artist').text(result.artist);\n";
 echo "$('#album').text(result.album);\n";
+echo "$('#imagem').attr('src',result.image);\n";
+echo "$('#titlem').text(result.title);\n";
+echo "$('#artistm').text(result.artist);\n";
+echo "$('#albumm').text(result.album);\n";
+echo "$('#albumartist').text(result.albumartist);\n";
 echo "$('#secondsdur').html(pad(result.duration%60));\n";
 echo "$('#minutesdur').html(pad(parseInt(result.duration/60,10)));\n";
 echo "$('#secondscur').html(pad(current%60));\n";
@@ -123,7 +154,29 @@ echo "</div>\n";
 echo "</div>\n\n";
 //**********************
 
+//*********** Modal ***************
 
+echo "<div class='modal fade' id='staticBackdrop' data-bs-backdrop='static' data-bs-keyboard='false' tabindex='-1' aria-labelledby='staticBackdropLabel' aria-hidden='true'>\n";
+echo "<div class='modal-dialog modal-dialog-scrollable'>\n";
+echo "<div class='modal-content bg-black'>\n";
+echo "<div class='modal-header'>\n";
+echo "<div class='row row-cols-3'>\n";
+echo "<div class='col-3'><img id='imagem' class='img-fluid' src='' /></div>\n";
+echo "<div class='col-7'>\n";
+echo "<h3 id='albumm'></h3>\n";
+echo "<h4 id='albumartist'></h4>\n";
+echo "</div>\n";
+echo "<div class='col-1'><button type='button' class='btn btn-sm' data-bs-dismiss='modal' aria-label='Close'><i class='bi bi-x' style='font-size: 3rem; color: white;'></i></button></div>\n";
+echo "</div>\n";
+echo "</div>\n";
+echo "<div class='modal-body'>\n";
+echo "<div id='fullalbum'></div>\n";
+echo "</div>\n";
+echo "</div>\n";
+echo "</div>\n";
+echo "</div>\n";
+
+//*************************
 
 
 echo "</body>\n";

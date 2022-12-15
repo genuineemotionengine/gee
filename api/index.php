@@ -206,13 +206,13 @@ echo '<pre>'.htmlentities(print_r($statusarray, true), ENT_SUBSTITUTE).'</pre>';
 echo "<br><br><br>";    
 }
 
-$statsarray = $mpd->server_stats();
-
-if ($verbose){
-echo "Server Stats";
-echo '<pre>'.htmlentities(print_r($statsarray, true), ENT_SUBSTITUTE).'</pre>';
-echo "<br><br><br>";     
-}
+//$statsarray = $mpd->server_stats();
+//
+//if ($verbose){
+//echo "Server Stats";
+//echo '<pre>'.htmlentities(print_r($statsarray, true), ENT_SUBSTITUTE).'</pre>';
+//echo "<br><br><br>";     
+//}
 $mySimpleArray = $mpd->current_song();
 
 if ($verbose){
@@ -290,7 +290,10 @@ if ($playnow == 1){
 
 header("Location: http://". $ipaddr ."");
 
+if ($verbose){
+
 echo '<pre>'.htmlentities(print_r($results, true), ENT_SUBSTITUTE).'</pre>';
+}
 
 }else{
 
