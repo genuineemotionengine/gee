@@ -179,9 +179,7 @@ $mpd->play(0);
 
 }
 
-
-
-header("Location: http://". $ipaddr ."");
+include ('getmeta.php');
  
 }
 
