@@ -110,7 +110,7 @@ echo "<br/>\n";
 echo "<h1 id='title' class='display-6'></h1>\n";
 echo "<h1 id='artist' class='display-6'></h1>\n";
 echo "<h1 id='album' class='display-6'></h1>\n";
-echo "<a href='http://". $ipaddr ."/'><i class='bi bi-arrow-clockwise' style='font-size: 3rem; color: white;'></i></a>\n";
+echo "<button type='button' class='bg-black' onclick='getmeta(1)'><i class='bi bi-arrow-clockwise' style='font-size: 3rem; color: white;'></i></button>\n";
 echo "<button type='button' onclick='wholealbum()' class='btn btn-black' data-bs-toggle='modal' data-bs-target='#staticBackdrop'><i class='bi bi-three-dots' style='font-size: 3rem; color: white;'></i></button>\n";
 echo "<button type='button' class='bg-black' onclick='getmeta(5)'><i class='bi bi-arrow-repeat' style='font-size: 3rem; color: white;'></i></button><br/><br/><br/>\n";
 //echo "Next: <span id='nexttitle' class='fs-6'></span> - <span id='nextartist' class='fs-6'></span><br/><br/><br/>\n";
