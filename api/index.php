@@ -102,7 +102,7 @@ if ($service == 5){
    
 $mpd->playlist_clear();
     
-if ($playl == 1){    
+   
 
 $playlist = "app";
 $count = 0;    
@@ -145,10 +145,15 @@ $mpd->repeat(1);
 
 $mpd->play(0);
 
-
+include ('getmeta.php');
+ 
 }
 
-if ($playl == 2){    
+//***************** load classical playlist **********************
+
+if ($service == 6){  
+    
+    
 
 $playlist = "classical";
 
@@ -161,11 +166,18 @@ $mpd->repeat(1);
 $mpd->play(0);
 
 
+
+    
+
+    
 }
 
 
-if ($playl == 3){    
+//***************** load relaxation playlist **********************
 
+if ($service == 7){  
+
+   
 $playlist = "relaxation";
 
 $mpd->load_playlist($playlist);
@@ -179,43 +191,6 @@ $mpd->play(0);
 
 }
 
-include ('getmeta.php');
- 
-}
-
-//***************** get ip address **********************
-
-if ($service == 6){  
-    
-$ipaddr = $_SERVER['SERVER_ADDR'];
-    
-echo $ipaddr."<br>";
-
-$hosty = gethostname();
-
-echo $hosty."<br>";
-
-    
-
-    
-}
-
-
-//***************** get albums **********************
-
-if ($service == 7){  
-
-$playlist = "allmusic";
-
-
-$albumarray = $mpd->playlistinfo($playlist);
-
-
-
-echo '<pre>'.htmlentities(print_r($albumarray, true), ENT_SUBSTITUTE).'</pre>';  
-
-    
-}
 
 //***************** get album list **********************
 
