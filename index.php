@@ -6,7 +6,7 @@ $hosty = gethostname();
 echo "<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Strict//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd'>\n";
 echo "<html xmlns='http://www.w3.org/1999/xhtml'>\n";
 echo "<head>\n";
-echo "<meta name='apple-mobile-web-app-capable' content='yes'>\n";
+echo "<meta name='apple-mobile-web-app-capable' content='yes'/>\n";
 echo "<meta http-equiv='Content-Type' content='text/html; charset=UTF-8'/>\n";
 echo "<meta name = 'viewport' content = 'width=device-width, initial-scale = 1'/>\n";
 echo "<title>".$hosty."</title>\n";
@@ -90,8 +90,8 @@ echo "<body style='background: black;' class='p-3 mb-2 bg-black text-white pt-0 
 echo "<div class='container-fluid text-center ps-0 pe-0'>\n";
 echo "<div class='d-block d-sm-none'>\n";
 echo "<img id='image' class='img-fluid' src='black.jpg' />\n";
-echo "<button type='button' class='bg-black' onclick='getmeta(3)'><i class='bi bi-arrow-left-short' style='font-size: 6rem; color: white;'></i></a>\n";
-echo "<button type='button' class='bg-black' onclick='getmeta(2)'><i id='playpause' class='bi bi-pause' style='font-size: 5rem; color: white;'></i></a>\n";
+echo "<button type='button' class='bg-black' onclick='getmeta(3)'><i class='bi bi-arrow-left-short' style='font-size: 6rem; color: white;'></i></button>\n";
+echo "<button type='button' class='bg-black' onclick='getmeta(2)'><i id='playpause' class='bi bi-pause' style='font-size: 5rem; color: white;'></i></button>\n";
 echo "<button type='button' class='bg-black' onclick='getmeta(4)'><i class='bi bi-arrow-right-short' style='font-size: 6rem; color: white;'></i></button>\n";
 echo "<div class='container pt-0 mt-0'>\n";
 echo "<div class='row row-cols-3'>\n";
@@ -112,7 +112,7 @@ echo "<h1 id='artist' class='display-6'></h1>\n";
 echo "<h1 id='album' class='display-6'></h1>\n";
 echo "<a href='http://". $ipaddr ."/'><i class='bi bi-arrow-clockwise' style='font-size: 3rem; color: white;'></i></a>\n";
 echo "<button type='button' onclick='wholealbum()' class='btn btn-black' data-bs-toggle='modal' data-bs-target='#staticBackdrop'><i class='bi bi-three-dots' style='font-size: 3rem; color: white;'></i></button>\n";
-echo "<button type='button' class='bg-black' onclick='getmeta(5&playl=1)'><i class='bi bi-arrow-repeat' style='font-size: 3rem; color: white;'></i></button><br/><br/><br/>\n";
+echo "<button type='button' class='bg-black' onclick='getmeta(5)'><i class='bi bi-arrow-repeat' style='font-size: 3rem; color: white;'></i></button><br/><br/><br/>\n";
 //echo "Next: <span id='nexttitle' class='fs-6'></span> - <span id='nextartist' class='fs-6'></span><br/><br/><br/>\n";
 //echo "<span class='fs-6'>".$hosty."</span><br/><br/>";
 
