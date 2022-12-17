@@ -196,66 +196,20 @@ $mpd->play(0);
 
 if ($service == 8){
 
- 
+include ('getalbum.php'); 
     
-$statusarray = $mpd->server_status(); 
+echo json_encode($playlistarray);
 
-if ($verbose){
-echo "Server Status";
-echo '<pre>'.htmlentities(print_r($statusarray, true), ENT_SUBSTITUTE).'</pre>';
-echo "<br><br><br>";    
 }
 
-//$statsarray = $mpd->server_stats();
-//
-//if ($verbose){
-//echo "Server Stats";
-//echo '<pre>'.htmlentities(print_r($statsarray, true), ENT_SUBSTITUTE).'</pre>';
-//echo "<br><br><br>";     
-//}
-$mySimpleArray = $mpd->current_song();
+//****************** Play Next ***************
 
-if ($verbose){
-echo "Current Song";
-echo '<pre>'.htmlentities(print_r($mySimpleArray, true), ENT_SUBSTITUTE).'</pre>'; 
-echo "<br><br><br>";    
-}
-
-$what = $mySimpleArray[0]['Album'];
-
-$type = "Album";
-
-$playlistarray = $mpd->search($type, $what);
-
-
-
+if (service == 12){
+    
+include ('getalbum.php');    
+    
 $elements = count($playlistarray);
 
-if ($verbose){
-echo "Album Search Results<br>";
-echo "No of Elements: ".$elements;
-echo '<pre>'.htmlentities(print_r($playlistarray, true), ENT_SUBSTITUTE).'</pre>';
-echo "<br><br><br>";
-}
-
-
-
-
-
-for ($x = 0; $x <= $elements; $x++) {
-  if ($what != $playlistarray[$x][Album]){
-      unset($playlistarray[$x]);
-  }
-}
-if ($verbose){
-echo "Album Search Results With Element Removed<br>";
-echo "No of Elements: ".count($playlistarray);
-echo '<pre>'.htmlentities(print_r($playlistarray, true), ENT_SUBSTITUTE).'</pre>';
-echo "<br><br><br>";
-}
-
-if ($playnext == 1){
-    $elements = count($playlistarray);
   for ($x = 0; $x <= $elements; $x++) {
   if ($name != $playlistarray[$x][name]){
       unset($playlistarray[$x]);
@@ -263,45 +217,91 @@ if ($playnext == 1){
       $t = $x;
   }
 }
+
 if ($verbose){
 echo '<pre>'.htmlentities(print_r($playlistarray, true), ENT_SUBSTITUTE).'</pre>';
 }
-$uri = $playlistarray[$t]['name'];
 
-//$uri = "mnt/usb/".$uri;
+
+$uri = $playlistarray[$t]['name'];
 
 $pos = $statusarray['song'];
 
 $pos++;
-
-//$pos = "+".$pos;
 
 if ($verbose){
 echo "uri: ".$uri."<br>";
 
 echo "pos: ".$pos."<br>";
 }
+
 $results = $mpd->playlist_add_id($uri, $pos);
-
-if ($playnow == 1){
-    $mpd->next();
-    
-}
-
-header("Location: http://". $ipaddr ."");
 
 if ($verbose){
 
 echo '<pre>'.htmlentities(print_r($results, true), ENT_SUBSTITUTE).'</pre>';
+
+
 }
 
-}else{
-
-
-echo json_encode($playlistarray);
+include ('getmeta.php');
 
 }
+
+//****************** Play Now ***************
+
+if (service == 13){
+    
+include ('getalbum.php');    
+    
+$elements = count($playlistarray);
+
+  for ($x = 0; $x <= $elements; $x++) {
+  if ($name != $playlistarray[$x][name]){
+      unset($playlistarray[$x]);
+  }else{
+      $t = $x;
+  }
 }
+
+if ($verbose){
+echo '<pre>'.htmlentities(print_r($playlistarray, true), ENT_SUBSTITUTE).'</pre>';
+}
+
+
+$uri = $playlistarray[$t]['name'];
+
+$pos = $statusarray['song'];
+
+$pos++;
+
+if ($verbose){
+echo "uri: ".$uri."<br>";
+
+echo "pos: ".$pos."<br>";
+}
+
+$results = $mpd->playlist_add_id($uri, $pos);
+
+
+$mpd->next();  
+
+
+
+if ($verbose){
+
+echo '<pre>'.htmlentities(print_r($results, true), ENT_SUBSTITUTE).'</pre>';
+
+
+}
+
+include ('getmeta.php');
+
+}
+
+
+
+
 //***************** set vol + **********************
 
 if ($service == 9){  
@@ -396,35 +396,8 @@ echo '<pre>'.htmlentities(print_r($loadarray, true), ENT_SUBSTITUTE).'</pre>';
 }
 
 
-//****************** Insert Next Track ***************
 
-if ($service == 12){
-    
-$uri = "Oasis - Living Fast/02 Oasis - She's Electric.flac";
 
-$pos = "9";
-
-$insertarray = $mpd->playlist_add_id($uri, $pos);
-
-echo '<pre>'.htmlentities(print_r($insertarray, true), ENT_SUBSTITUTE).'</pre>';
-
-}
-
-//****************** Insert Next Track ***************
-
-if ($service == 13){
-    
-$uri = "Oasis - Living Fast/02 Oasis - She's Electric.flac";
-
-$pos = "4";
-
-$insertarray = $mpd->playlist_add_id($uri, $pos);
-
-echo '<pre>'.htmlentities(print_r($insertarray, true), ENT_SUBSTITUTE).'</pre>';
-
-$mpd->next();
-
-}
 
 //****************** Build Database ***************
 
