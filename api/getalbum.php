@@ -35,10 +35,35 @@ for ($x = 0; $x <= $elements; $x++) {
   if ($what != $playlistarray[$x][Album]){
       unset($playlistarray[$x]);
   }
+  
+ 
+  
 }
 if ($verbose){
 echo "Album Search Results With Element Removed<br>";
-echo "No of Elements: ".count($playlistarray);
+$elements = count($playlistarray);
+echo "No of Elements: ".$elements;
+echo '<pre>'.htmlentities(print_r($playlistarray, true), ENT_SUBSTITUTE).'</pre>';
+echo "<br><br><br>";
+}
+
+
+for ($x = 0; $x <= $elements; $x++) {
+$sql = "SELECT id FROM allmusic WHERE album = $elements";
+$result = $conn->query($sql);
+if ($result->num_rows > 0) {
+    while($row = $result->fetch_assoc()) {
+
+        $playlistarray[$x]["albumid"] = $row[id];
+
+       }
+     } 
+
+}
+
+if ($verbose){
+echo "Album Search Results With albumid added<br>";
+echo "No of Elements: ".$elements;
 echo '<pre>'.htmlentities(print_r($playlistarray, true), ENT_SUBSTITUTE).'</pre>';
 echo "<br><br><br>";
 }
