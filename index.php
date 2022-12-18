@@ -67,7 +67,7 @@ echo "}\n";
 
 echo "function insertnext(name){\n";
 
-echo "fetch('http://192.168.68.134/api/?service=12&name='+ name +')\n";
+echo "fetch('http://192.168.68.134/api/?service=12&name='+ name)\n";
 
 echo "}\n";
 
