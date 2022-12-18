@@ -64,7 +64,7 @@ if ($result->num_rows > 0) {
      } 
 
 }
-echo "<br><br>";
+//echo "<br><br>";
 if ($verbose){
 echo "Album Search Results With albumid added<br>";
 echo "No of Elements: ".$elements;
