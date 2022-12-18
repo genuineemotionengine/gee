@@ -49,7 +49,7 @@ echo "<br><br><br>";
 
 
 for ($x = 0; $x <= $elements; $x++) {
-$sql = "SELECT id FROM allmusic WHERE album = $playlistarray[$x][Album]";
+$sql = "SELECT id FROM allmusic WHERE name = $playlistarray[$x][name]";
 $result = $conn->query($sql);
 if ($result->num_rows > 0) {
     while($row = $result->fetch_assoc()) {
