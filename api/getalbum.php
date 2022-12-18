@@ -57,7 +57,7 @@ if ($result->num_rows > 0) {
 
         //echo $row['id']."<br>";
         
-        $playlistarray[$x]["albumid"] = $row['id'];
+        $playlistarray[$x]["trackid"] = $row['id'];
         
 
        }
