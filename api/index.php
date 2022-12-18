@@ -208,15 +208,14 @@ if (service == 12){
     
 include ('getalbum.php');
 
-$elements--;
-for ($x = 0; $x <= $elements; $x++) {
+
 $sql = "SELECT album FROM allmusic WHERE id = '".$trackid."'";
-//echo "sql: ".$sql."<br>";
+echo "sql: ".$sql."<br>";
 $result = $conn->query($sql);
 if ($result->num_rows > 0) {
     while($row = $result->fetch_assoc()) {
 
-        //echo $row['id']."<br>";
+        echo $row['album']."<br>";
         
         $name = $row['album'];
         
@@ -224,7 +223,8 @@ if ($result->num_rows > 0) {
        }
      } 
 
-}
+
+     
 
     
 $elements = count($playlistarray);
