@@ -47,7 +47,7 @@ echo '<pre>'.htmlentities(print_r($playlistarray, true), ENT_SUBSTITUTE).'</pre>
 echo "<br><br><br>";
 }
 
-
+$elements--;
 for ($x = 0; $x <= $elements; $x++) {
 $sql = "SELECT id FROM allmusic WHERE name = ".$playlistarray[$x][name];
 echo "sql: ".$sql."<br>";
