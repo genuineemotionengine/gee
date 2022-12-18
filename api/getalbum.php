@@ -50,12 +50,12 @@ echo "<br><br><br>";
 $elements--;
 for ($x = 0; $x <= $elements; $x++) {
 $sql = "SELECT id FROM allmusic WHERE album = '".$playlistarray[$x][name]."'";
-echo "sql: ".$sql."<br>";
+//echo "sql: ".$sql."<br>";
 $result = $conn->query($sql);
 if ($result->num_rows > 0) {
     while($row = $result->fetch_assoc()) {
 
-        echo $row['id']."<br>";
+        //echo $row['id']."<br>";
         
         $playlistarray[$x]["albumid"] = $row['id'];
         
