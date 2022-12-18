@@ -209,61 +209,61 @@ if (service == 12){
 include ('getalbum.php');
 
 
-$sql = "SELECT album FROM allmusic WHERE id = '".$trackid."'";
-echo "sql: ".$sql."<br>";
-$result = $conn->query($sql);
-if ($result->num_rows > 0) {
-    while($row = $result->fetch_assoc()) {
-
-        echo $row['album']."<br>";
-        
-        $name = $row['album'];
-        
-
-       }
-     } 
-
-
-     
-
-    
-$elements = count($playlistarray);
-
-  for ($x = 0; $x <= $elements; $x++) {
-  if ($name != $playlistarray[$x][name]){
-      unset($playlistarray[$x]);
-  }else{
-      $t = $x;
-  }
-}
-
-if ($verbose){
-echo '<pre>'.htmlentities(print_r($playlistarray, true), ENT_SUBSTITUTE).'</pre>';
-}
-
-
-$uri = $playlistarray[$t]['name'];
-
-$pos = $statusarray['song'];
-
-$pos++;
-
-if ($verbose){
-echo "uri: ".$uri."<br>";
-
-echo "pos: ".$pos."<br>";
-}
-
-$results = $mpd->playlist_add_id($uri, $pos);
-
-if ($verbose){
-
-echo '<pre>'.htmlentities(print_r($results, true), ENT_SUBSTITUTE).'</pre>';
-
-
-}
-
-include ('getmeta.php');
+//$sql = "SELECT album FROM allmusic WHERE id = '".$trackid."'";
+//echo "sql: ".$sql."<br>";
+//$result = $conn->query($sql);
+//if ($result->num_rows > 0) {
+//    while($row = $result->fetch_assoc()) {
+//
+//        echo $row['album']."<br>";
+//        
+//        $name = $row['album'];
+//        
+//
+//       }
+//     } 
+//
+//
+//     
+//
+//    
+//$elements = count($playlistarray);
+//
+//  for ($x = 0; $x <= $elements; $x++) {
+//  if ($name != $playlistarray[$x][name]){
+//      unset($playlistarray[$x]);
+//  }else{
+//      $t = $x;
+//  }
+//}
+//
+//if ($verbose){
+//echo '<pre>'.htmlentities(print_r($playlistarray, true), ENT_SUBSTITUTE).'</pre>';
+//}
+//
+//
+//$uri = $playlistarray[$t]['name'];
+//
+//$pos = $statusarray['song'];
+//
+//$pos++;
+//
+//if ($verbose){
+//echo "uri: ".$uri."<br>";
+//
+//echo "pos: ".$pos."<br>";
+//}
+//
+//$results = $mpd->playlist_add_id($uri, $pos);
+//
+//if ($verbose){
+//
+//echo '<pre>'.htmlentities(print_r($results, true), ENT_SUBSTITUTE).'</pre>';
+//
+//
+//}
+//
+//include ('getmeta.php');
 
 }
 
