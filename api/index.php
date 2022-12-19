@@ -218,31 +218,8 @@ echo '<pre>'.htmlentities(print_r($results, true), ENT_SUBSTITUTE).'</pre>';
 
 }
 
-//include ('getmeta.php');
-
 }
 
-//****************** Play Now ***************
-
-if ($service == 13){
-    
-include ('getalbum.php');    
-    
-include ('findtrack.php');
-
-$results = $mpd->playlist_add_id($uri, $pos);
-
-$mpd->next();  
-
-if ($verbose){
-
-echo '<pre>'.htmlentities(print_r($results, true), ENT_SUBSTITUTE).'</pre>';
-
-}
-
-//include ('getmeta.php');
-
-}
 
 //***************** set vol + **********************
 
