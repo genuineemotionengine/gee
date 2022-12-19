@@ -206,7 +206,7 @@ echo json_encode($playlistarray);
 
 if ($service == 12){
 
-echo "service 12";    
+//echo "service 12";    
 
     
 include ('getalbum.php');

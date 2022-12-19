@@ -65,9 +65,9 @@ echo "xmlhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencode
 echo "xmlhttp.send('x=' + dbParam);\n";
 echo "}\n";
 
-echo "function insertnext(trackid){\n";
+echo "function insertnext(track){\n";
 
-echo "fetch('http://". $ipaddr ."/api/?service=12&trackid='+ trackid)\n";
+echo "fetch('http://". $ipaddr ."/api/?service=12&trackid='+ track)\n";
 
 echo "}\n";
 
