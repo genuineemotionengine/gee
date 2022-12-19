@@ -66,9 +66,12 @@ echo "xmlhttp.send('x=' + dbParam);\n";
 echo "}\n";
 
 echo "function insertnext(track){\n";
-
 echo "fetch('http://". $ipaddr ."/api/?service=12&trackid='+ track)\n";
+echo "}\n";
 
+echo "function playnow(track){\n";
+echo "fetch('http://". $ipaddr ."/api/?service=12&trackid='+ track)\n";
+echo "getmeta(1);\n";
 echo "}\n";
 
 
