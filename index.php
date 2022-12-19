@@ -145,6 +145,7 @@ echo "<button type='button' class='bg-black' onclick='getmeta(5)'><i class='bi b
 //echo "<span class='fs-6'>".$hosty."</span><br/><br/>";
 echo "</div>\n";
 echo "</div>\n\n";
+
 //**********************
 
 //*********** dekstop  id 3 ************
@@ -161,8 +162,6 @@ echo "</div>\n";
 echo "</div>\n\n";
 
 //*************************
-
-
 
 //*********** Modal  id 2 ***************
 
