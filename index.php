@@ -52,7 +52,7 @@ echo "for (let x in myObj) {\n";
 
 echo "html += '<div class=\x22border-bottom align-top\x22><br/>";
 echo "<h4>' + myObj[x].Track + ' - ' + myObj[x].Title + ' - ' + myObj[x].Artist + '</h4>";
-echo "<a href=\x22http://". $ipaddr ."/api/?service=12&name='+ myObj[x].name +'\x22><i class=\x22bi bi-chevron-right\x22 style=\x22font-size: 3rem; color: white;\x22></i></a>";
+echo "<button type=\x22button\x22 class=\x22bg-black\x22 onclick=\x22playnow('+myObj[x].trackid+')\x22><i class=\x22bi bi-chevron-right\x22 style=\x22font-size: 3rem; color: white;\x22></i></buuton>";
 echo "<button type=\x22button\x22 class=\x22bg-black\x22 onclick=\x22insertnext('+myObj[x].trackid+')\x22><i class=\x22bi bi-chevron-double-right\x22 style=\x22font-size: 3rem; color: white;\x22></i></button>";
 echo "</div>';\n";
 
@@ -70,7 +70,7 @@ echo "fetch('http://". $ipaddr ."/api/?service=12&trackid='+ track)\n";
 echo "}\n";
 
 echo "function playnow(track){\n";
-echo "fetch('http://". $ipaddr ."/api/?service=12&trackid='+ track)\n";
+echo "fetch('http://". $ipaddr ."/api/?service=13&trackid='+ track)\n";
 echo "getmeta(1);\n";
 echo "}\n";
 
