@@ -88,7 +88,7 @@ echo "setInterval( function(){\n";
 
 echo "if (state === play){\n";
 echo "current = current + 1;\n";
-echo "$('#dynamic5').removeClass('bg-dark').addClass('bg-white');\n";
+//echo "$('#dynamic5').removeClass('bg-dark').addClass('bg-white');\n";
 echo "}\n";
 
 echo "currentpos = (current/duration)*100;\n";
