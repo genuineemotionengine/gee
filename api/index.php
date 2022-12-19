@@ -224,7 +224,7 @@ echo '<pre>'.htmlentities(print_r($results, true), ENT_SUBSTITUTE).'</pre>';
 
 //****************** Play Now ***************
 
-if (service == 13){
+if ($service == 13){
     
 include ('getalbum.php');    
     
