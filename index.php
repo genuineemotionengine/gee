@@ -9,28 +9,22 @@ echo "<head>\n";
 echo "<meta name='apple-mobile-web-app-capable' content='yes'/>\n";
 echo "<meta http-equiv='Content-Type' content='text/html; charset=UTF-8'/>\n";
 echo "<meta name = 'viewport' content = 'width=device-width, initial-scale = 1'/>\n";
-
-        echo "<link rel='icon' href='/favicon.ico'/>\n";
-
-        echo "<meta name='theme-color' content='#000000'/>\n";
-        echo "<link rel='apple-touch-icon' href='/logo192.png'/>\n";
-
-
-
+echo "<link rel='icon' href='/favicon.ico'/>\n";
+echo "<meta name='theme-color' content='#000000'/>\n";
+echo "<link rel='apple-touch-icon' href='/logo192.png'/>\n";
 echo "<title>".$hosty."</title>\n";
-//if ($hosty == 'Veronica'){
-//echo "<link href='css/bootstrap.min.css' rel='stylesheet'/>\n";
-//echo "<link rel='stylesheet' href='css/bootstrap-icons.css'/>\n";
-//echo "<script src='js/bootstrap.bundle.min.js'></script>\n";
-//echo "<script src='js/jquery-3.6.1.min.js'></script>\n";
-//
-//}else{
+if ($hosty == 'Veronica'){
+echo "<link href='css/bootstrap.min.css' rel='stylesheet'/>\n";
+echo "<link rel='stylesheet' href='css/bootstrap-icons.css'/>\n";
+echo "<script src='js/bootstrap.bundle.min.js'></script>\n";
+echo "<script src='js/jquery-3.6.1.min.js'></script>\n";
+}else{
 echo "<link href='https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css' rel='stylesheet' integrity='sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT' crossorigin='anonymous'/>\n";
 echo "<link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css'/>\n";
 echo "<script src='https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js' integrity='sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3' crossorigin='anonymous'></script>\n";
 echo "<script src='https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js'></script>\n";
 echo "<link rel='stylesheet' href='gee.css'/>\n";
-//}
+}
 echo "<script>\n";
 
 echo "var duration;\n";
@@ -98,9 +92,7 @@ echo "}\n";
 
 echo "currentpos = (current/duration)*100;\n";
 echo "currentprogress = currentpos.toFixed(0);\n";
-echo "$('#dynamic').css('width', currentprogress + '%');\n";
-echo "$('#secondscur').html(pad(current%60));\n";
-echo "$('#minutescur').html(pad(parseInt(current/60,10)));\n";
+include ('progressids.php');
 
 echo "if (current >= duration){\n";
 echo "getmeta(1);\n";
@@ -127,7 +119,7 @@ echo "<div class='col-2 text-center'><span id='minutescur1'>00</span>:<span id='
 echo "<div class='col-8'>\n";
 echo "<div class='mt-2'>\n";
 echo "<div class='progress bg-dark' style='height: 5px;'>\n";
-echo "<div id='dynamic' class='progress-bar bg-white' style='width: 0%; height: 5px;'></div>\n";
+echo "<div id='dynamic1' class='progress-bar bg-white' style='width: 0%; height: 5px;'></div>\n";
 echo "</div>\n";
 echo "</div>\n";
 echo "</div>\n";
@@ -142,11 +134,76 @@ echo "<button type='button' class='bg-black' onclick='getmeta(1)'><i class='bi b
 echo "<button type='button' onclick='wholealbum()' class='btn btn-black' data-bs-toggle='modal' data-bs-target='#staticBackdrop'><i class='bi bi-three-dots' style='font-size: 3rem; color: white;'></i></button>\n";
 echo "<button type='button' class='bg-black' onclick='getmeta(5)'><i class='bi bi-arrow-repeat' style='font-size: 3rem; color: white;'></i></button><br/><br/><br/>\n";
 //echo "Next: <span id='nexttitle' class='fs-6'></span> - <span id='nextartist' class='fs-6'></span><br/><br/><br/>\n";
-//echo "<span class='fs-6'>".$hosty."</span><br/><br/>";
 echo "</div>\n";
 echo "</div>\n\n";
 
 //**********************
+
+
+//******* iPad portait - id 4 **********
+
+
+echo "<div class='container-fluid text-center ps-0 pe-0'>\n";
+echo "<div class='d-none d-md-block d-lg-none'>\n";
+echo "<img id='image4' class='img-fluid' src='black.jpg' />\n";
+echo "<br/>\n";
+echo "<button type='button' class='bg-black' onclick='getmeta(3)'><i class='bi bi-arrow-left-short' style='font-size: 6rem; color: white;'></i></button>\n";
+echo "<button type='button' class='bg-black' onclick='getmeta(2)'><i id='playpause' class='bi bi-pause' style='font-size: 5rem; color: white;'></i></button>\n";
+echo "<button type='button' class='bg-black' onclick='getmeta(4)'><i class='bi bi-arrow-right-short' style='font-size: 6rem; color: white;'></i></button>\n";
+echo "<div class='container pt-0 mt-0'>\n";
+echo "<div class='row row-cols-3'>\n";
+echo "<div class='col-2 text-center'><span id='minutescur4'>00</span>:<span id='secondscur4'>00</span></div>\n";
+echo "<div class='col-8'>\n";
+echo "<div class='mt-2'>\n";
+echo "<div class='progress bg-black' style='height: 5px;'>\n";
+echo "<div id='dynamic4' class='progress-bar bg-white' style='width: 0%; height: 5px;'></div>\n";
+echo "</div>\n";
+echo "</div>\n";
+echo "</div>\n";
+echo "<div class='col-2 text-center'><span id='minutesdur4'>00</span>:<span id='secondsdur4'>00</span></div>\n";
+echo "</div>\n";
+echo "</div>\n";
+echo "<br/>\n";
+echo "<h1 id='title4' class='display-6'></h1>\n";
+echo "<h1 id='artist4' class='display-6'></h1>\n";
+echo "<h1 id='album4' class='display-6'></h1>\n";
+echo "<button type='button' onclick='wholealbum()' class='btn btn-black' data-bs-toggle='modal' data-bs-target='#staticBackdrop'><i class='bi bi-three-dots' style='font-size: 3rem; color: white;'></i></button>\n";
+
+echo "<br/>\n";
+
+echo "<div class='row row-cols-3'>\n";
+
+echo "<div>\n";
+echo "<button type='button' class='bg-black' onclick='getmeta(5)'><i class='bi bi-arrow-repeat' style='font-size: 3rem; color: white;'></i></button><br/><br/><br/>\n";
+echo "<h5>All Music</h5>\n";
+echo "</div>\n";
+
+echo "<div>\n";
+echo "<button type='button' class='bg-black' onclick='getmeta(5)'><i class='bi bi-arrow-repeat' style='font-size: 3rem; color: white;'></i></button><br/><br/><br/>\n";
+echo "<h5>Classical</h5>\n";
+echo "</div>\n";
+
+echo "<div>\n";
+echo "<button type='button' class='bg-black' onclick='getmeta(5)'><i class='bi bi-arrow-repeat' style='font-size: 3rem; color: white;'></i></button><br/><br/><br/>\n";
+echo "<h5>Relaxation</h5>\n";
+echo "</div>\n";
+
+echo "</div>\n";
+
+echo "</div>\n";
+echo "</div>\n\n";
+
+//**********************
+
+
+
+
+
+
+
+
+
+
 
 //*********** dekstop  id 3 ************
 

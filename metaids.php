@@ -1,6 +1,6 @@
 <?php
 
-for ($x = 1; $x <= 3; $x++) {
+for ($x = 1; $x <= 4; $x++) {
 
 echo "$('#image".$x."').attr('src',result.image);\n";
 echo "$('#title".$x."').text(result.title);\n";
