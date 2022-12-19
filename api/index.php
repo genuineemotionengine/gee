@@ -153,7 +153,7 @@ include ('getmeta.php');
 
 if ($service == 6){  
     
-    
+$mpd->playlist_clear();    
 
 $playlist = "classical";
 
@@ -177,7 +177,8 @@ include ('getmeta.php');
 
 if ($service == 7){  
 
-   
+$mpd->playlist_clear();
+    
 $playlist = "relaxation";
 
 $mpd->load_playlist($playlist);
