@@ -188,7 +188,7 @@ echo "</div>\n\n";
 
 //**********************
 
-//******* iPad landscape - id 5**********
+//******* iPad landscape - id 5 **********
 
 
 echo "<div class='container-fluid text-center ps-0 pe-0'>\n";
@@ -206,7 +206,7 @@ echo "<div class='row row-cols-3'>\n";
 echo "<div class='col-2 text-center'><span id='minutescur5'>00</span>:<span id='secondscur5'>00</span></div>\n";
 echo "<div class='col-8'>\n";
 echo "<div class='mt-2'>\n";
-echo "<div class='progress bg-black' style='height: 5px;'>\n";
+echo "<div class='progress bg-dark' style='height: 5px;'>\n";
 echo "<div id='dynamic5' class='progress-bar bg-white' style='width: 0%; height: 5px;'></div>\n";
 echo "</div>\n";
 echo "</div>\n";
