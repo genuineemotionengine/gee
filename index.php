@@ -72,7 +72,6 @@ echo "}\n";
 
 echo "function playnow(track){\n";
 echo "fetch('http://". $ipaddr ."/api/?service=13&trackid='+ track)\n";
-echo "getmeta(1);\n";
 echo "location.reload();";
 echo "}\n";
 

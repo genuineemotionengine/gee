@@ -232,7 +232,7 @@ include ('findtrack.php');
 
 $results = $mpd->playlist_add_id($uri, $pos);
 
-//$mpd->next();  
+$mpd->next();  
 
 if ($verbose){
 
