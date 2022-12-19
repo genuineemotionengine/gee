@@ -179,12 +179,12 @@ echo "<h5>All Music</h5>\n";
 echo "</div>\n";
 
 echo "<div>\n";
-echo "<button type='button' class='bg-black' onclick='getmeta(5)'><i class='bi bi-arrow-repeat' style='font-size: 3rem; color: white;'></i></button><br/><br/><br/>\n";
+echo "<button type='button' class='bg-black' onclick='getmeta(6)'><i class='bi bi-arrow-repeat' style='font-size: 3rem; color: white;'></i></button><br/><br/><br/>\n";
 echo "<h5>Classical</h5>\n";
 echo "</div>\n";
 
 echo "<div>\n";
-echo "<button type='button' class='bg-black' onclick='getmeta(5)'><i class='bi bi-arrow-repeat' style='font-size: 3rem; color: white;'></i></button><br/><br/><br/>\n";
+echo "<button type='button' class='bg-black' onclick='getmeta(7)'><i class='bi bi-arrow-repeat' style='font-size: 3rem; color: white;'></i></button><br/><br/><br/>\n";
 echo "<h5>Relaxation</h5>\n";
 echo "</div>\n";
 

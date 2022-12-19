@@ -165,7 +165,7 @@ $mpd->repeat(1);
 
 $mpd->play(0);
 
-
+include ('getmeta.php');
 
     
 
@@ -188,6 +188,7 @@ $mpd->repeat(1);
 
 $mpd->play(0);
 
+include ('getmeta.php');
 
 }
 
