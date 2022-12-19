@@ -168,41 +168,78 @@ echo "<h1 id='title4' class='display-6'></h1>\n";
 echo "<h1 id='artist4' class='display-6'></h1>\n";
 echo "<h1 id='album4' class='display-6'></h1>\n";
 echo "<button type='button' onclick='wholealbum()' class='btn btn-black' data-bs-toggle='modal' data-bs-target='#staticBackdrop'><i class='bi bi-three-dots' style='font-size: 3rem; color: white;'></i></button>\n";
-
 echo "<br/>\n";
-
 echo "<div class='row row-cols-3'>\n";
-
 echo "<div>\n";
 echo "<button type='button' class='bg-black' onclick='getmeta(5)'><i class='bi bi-arrow-repeat' style='font-size: 3rem; color: white;'></i></button><br/><br/><br/>\n";
 echo "<h5>All Music</h5>\n";
 echo "</div>\n";
-
 echo "<div>\n";
 echo "<button type='button' class='bg-black' onclick='getmeta(6)'><i class='bi bi-arrow-repeat' style='font-size: 3rem; color: white;'></i></button><br/><br/><br/>\n";
 echo "<h5>Classical</h5>\n";
 echo "</div>\n";
-
 echo "<div>\n";
 echo "<button type='button' class='bg-black' onclick='getmeta(7)'><i class='bi bi-arrow-repeat' style='font-size: 3rem; color: white;'></i></button><br/><br/><br/>\n";
 echo "<h5>Relaxation</h5>\n";
 echo "</div>\n";
-
 echo "</div>\n";
-
 echo "</div>\n";
 echo "</div>\n\n";
 
 //**********************
 
+//******* iPad landscape - id 5**********
 
 
+echo "<div class='container-fluid text-center ps-0 pe-0'>\n";
+echo "<div class='d-none d-lg-block d-xl-none'>\n";
 
 
+echo "<div class='row row-cols-2'>\n";
+echo "<div class='col'>\n";
+echo "<img id='imageipl' class='img-fluid' src='black.jpg' />\n";
+echo "</div>\n";
+echo "<div class='col'>\n";
+echo "<button type='button' class='bg-black' onclick='getmeta(3)'><i class='bi bi-arrow-left-short' style='font-size: 6rem; color: white;'></i></button>\n";
+echo "<button type='button' class='bg-black' onclick='getmeta(2)'><i id='playpause' class='bi bi-pause' style='font-size: 5rem; color: white;'></i></button>\n";
+echo "<button type='button' class='bg-black' onclick='getmeta(4)'><i class='bi bi-arrow-right-short' style='font-size: 6rem; color: white;'></i></button>\n";
+echo "<div class='container pt-0 mt-0'>\n";
+echo "<div class='row row-cols-3'>\n";
+echo "<div class='col-2 text-center'><span id='minutescur5'>00</span>:<span id='secondscur5'>00</span></div>\n";
+echo "<div class='col-8'>\n";
+echo "<div class='mt-2'>\n";
+echo "<div class='progress bg-black' style='height: 5px;'>\n";
+echo "<div id='dynamic5' class='progress-bar bg-white' style='width: 0%; height: 5px;'></div>\n";
+echo "</div>\n";
+echo "</div>\n";
+echo "</div>\n";
+echo "<div class='col-2 text-center'><span id='minutesdur5'>00</span>:<span id='secondsdur5'>00</span></div>\n";
+echo "</div>\n";
+echo "</div>\n";
+echo "<h1 id='title5' class='display-6'></h1>\n";
+echo "<h1 id='artist5' class='display-6'></h1>\n";
+echo "<h1 id='album5' class='display-6'></h1>\n";
+echo "<button type='button' onclick='wholealbum()' class='btn btn-black' data-bs-toggle='modal' data-bs-target='#staticBackdrop'><i class='bi bi-three-dots' style='font-size: 3rem; color: white;'></i></button>\n";
+echo "<div class='row row-cols-3'>\n";
+echo "<div>\n";
+echo "<button type='button' class='bg-black' onclick='getmeta(5)'><i class='bi bi-arrow-repeat' style='font-size: 3rem; color: white;'></i></button><br/><br/><br/>\n";
+echo "<h5>All Music</h5>\n";
+echo "</div>\n";
+echo "<div>\n";
+echo "<button type='button' class='bg-black' onclick='getmeta(6)'><i class='bi bi-arrow-repeat' style='font-size: 3rem; color: white;'></i></button><br/><br/><br/>\n";
+echo "<h5>Classical</h5>\n";
+echo "</div>\n";
+echo "<div>\n";
+echo "<button type='button' class='bg-black' onclick='getmeta(7)'><i class='bi bi-arrow-repeat' style='font-size: 3rem; color: white;'></i></button><br/><br/><br/>\n";
+echo "<h5>Relaxation</h5>\n";
+echo "</div>\n";
+echo "</div>\n";
+echo "</div>\n";
+echo "</div>\n";
+echo "</div>\n";
+echo "</div>\n\n";
 
-
-
-
+//**********************
 
 
 //*********** dekstop  id 3 ************
