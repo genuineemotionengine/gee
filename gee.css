@@ -3,4 +3,8 @@ button {
     outline: none;
 }
 
-
+.progress .progress-bar {
+  -webkit-transition: none;
+       -o-transition: none;
+          transition: none;
+}
