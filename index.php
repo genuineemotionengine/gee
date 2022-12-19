@@ -88,7 +88,6 @@ echo "setInterval( function(){\n";
 
 echo "if (state === play){\n";
 echo "current = current + 1;\n";
-//echo "$('#dynamic5').removeClass('bg-dark').addClass('bg-white');\n";
 echo "}\n";
 
 echo "currentpos = (current/duration)*100;\n";
@@ -97,6 +96,7 @@ echo "currentprogress = currentpos.toFixed(0);\n";
 include ('progressids.php');
 
 echo "if (current >= duration){\n";
+echo "currentprogress = 0;\n";
 echo "getmeta(1);\n";
 echo "}\n";
 
