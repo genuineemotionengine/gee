@@ -197,7 +197,7 @@ echo "<div class='d-none d-lg-block d-xl-none'>\n";
 
 echo "<div class='row row-cols-2'>\n";
 echo "<div class='col'>\n";
-echo "<img id='imageipl' class='img-fluid' src='black.jpg' />\n";
+echo "<img id='image5' class='img-fluid' src='black.jpg' />\n";
 echo "</div>\n";
 echo "<div class='col'>\n";
 echo "<button type='button' class='bg-black' onclick='getmeta(3)'><i class='bi bi-arrow-left-short' style='font-size: 6rem; color: white;'></i></button>\n";
