@@ -204,7 +204,7 @@ echo json_encode($playlistarray);
 
 //****************** Play Next ***************
 
-if (service == 12){
+if ($service == 12){
 
 echo "service 12";    
 
