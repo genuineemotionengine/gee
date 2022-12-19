@@ -1,12 +1,12 @@
 <?php
 
 $sql = "SELECT album FROM allmusic WHERE id = '".$trackid."'";
-echo "sql: ".$sql."<br>";
+//echo "sql: ".$sql."<br>";
 $result = $conn->query($sql);
 if ($result->num_rows > 0) {
     while($row = $result->fetch_assoc()) {
 
-        echo $row['album']."<br>";
+        //echo $row['album']."<br>";
         
         $name = $row['album'];
         
