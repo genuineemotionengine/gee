@@ -113,7 +113,7 @@ echo "</head>\n";
 echo "<body style='background: black;' class='p-3 mb-2 bg-black text-white pt-0 ps-0 pe-0 me-0'>\n\n";
 
 
-//*******iPhone portrait**********
+//******* iPhone portrait  id 1 **********
 
 echo "<div class='container-fluid text-center ps-0 pe-0'>\n";
 echo "<div class='d-block d-sm-none'>\n";
@@ -143,15 +143,28 @@ echo "<button type='button' onclick='wholealbum()' class='btn btn-black' data-bs
 echo "<button type='button' class='bg-black' onclick='getmeta(5)'><i class='bi bi-arrow-repeat' style='font-size: 3rem; color: white;'></i></button><br/><br/><br/>\n";
 //echo "Next: <span id='nexttitle' class='fs-6'></span> - <span id='nextartist' class='fs-6'></span><br/><br/><br/>\n";
 //echo "<span class='fs-6'>".$hosty."</span><br/><br/>";
-
-
-echo "<a href='http://". $ipaddr ."/api/?service=9&vol=70'><i class='bi bi-volume-down' style='font-size: 3rem; color: white;'></i></a>&nbsp;&nbsp;&nbsp;&nbsp;\n";
-echo "<a href='http://". $ipaddr ."/api/?service=9&vol=100'><i class='bi bi-volume-up' style='font-size: 3rem; color: white;'></i></a>&nbsp;&nbsp;&nbsp;&nbsp;\n";
 echo "</div>\n";
 echo "</div>\n\n";
 //**********************
 
-//*********** Modal ***************
+//*********** dekstop  id 3 ************
+
+echo "<div class='container text-center'>\n";
+echo "<div class='d-none d-xl-block'>\n";  
+echo "<br><br><br><br><br><br><br>\n";
+echo "<img id='image3' src='black.jpg' />\n";
+echo "<br>\n";
+echo "<h1 id='title3' class='display-4'></h1>\n";
+echo "<h1 id='artist3' class='display-6'></h1>\n";
+echo "<h1 id='album3' class='display-6'></h1>\n";
+echo "</div>\n";
+echo "</div>\n\n";
+
+//*************************
+
+
+
+//*********** Modal  id 2 ***************
 
 echo "<div class='modal fade' id='staticBackdrop' data-bs-backdrop='static' data-bs-keyboard='false' tabindex='-1' aria-labelledby='staticBackdropLabel' aria-hidden='true'>\n";
 echo "<div class='modal-dialog modal-dialog-scrollable'>\n";
