@@ -218,7 +218,7 @@ echo '<pre>'.htmlentities(print_r($results, true), ENT_SUBSTITUTE).'</pre>';
 
 }
 
-include ('getmeta.php');
+//include ('getmeta.php');
 
 }
 
@@ -240,7 +240,7 @@ echo '<pre>'.htmlentities(print_r($results, true), ENT_SUBSTITUTE).'</pre>';
 
 }
 
-include ('getmeta.php');
+//include ('getmeta.php');
 
 }
 
