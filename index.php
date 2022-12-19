@@ -92,11 +92,9 @@ echo "}\n";
 
 echo "currentpos = (current/duration)*100;\n";
 echo "currentprogress = currentpos.toFixed(0);\n";
-
 include ('progressids.php');
 
 echo "if (current >= duration){\n";
-echo "currentprogress = 0;\n";
 echo "getmeta(1);\n";
 echo "}\n";
 
@@ -209,7 +207,7 @@ echo "<div class='col-2 text-center'><span id='minutescur5'>00</span>:<span id='
 echo "<div class='col-8'>\n";
 echo "<div class='mt-2'>\n";
 echo "<div class='progress bg-dark' style='height: 5px;'>\n";
-echo "<div id='dynamic5' class='progress-bar bg-dark' style='width: 0%; height: 5px;'></div>\n";
+echo "<div id='dynamic5' class='progress-bar bg-white' style='width: 0%; height: 5px;'></div>\n";
 echo "</div>\n";
 echo "</div>\n";
 echo "</div>\n";
