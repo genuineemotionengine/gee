@@ -40,10 +40,7 @@ echo "var state;\n";
 //******* Whole Album ***************
 echo "function wholealbum(){\n";
 echo "getmeta(1);\n";
-echo "const dbParam = JSON.stringify({table:'album',limit:150});\n";
-echo "const xmlhttp = new XMLHttpRequest();\n";
-echo "xmlhttp.onload = function() {\n";
-echo "const myObj = JSON.parse(this.responseText);\n";
+echo "$.getJSON('http://". $ipaddr ."/api/?service=8', function(myObj){\n";
 echo "let html = '<div>'\n";
 echo "for (let x in myObj) {\n";
 echo "html += '<div class=\x22border-bottom align-top\x22><br/>";
@@ -54,10 +51,30 @@ echo "}\n";
 echo "html += '</div>'\n";    
 echo "document.getElementById('fullalbum').innerHTML = html;\n";
 echo "}\n";
-echo "xmlhttp.open('POST', 'http://". $ipaddr ."/api/?service=8');\n";
-echo "xmlhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');\n";
-echo "xmlhttp.send('x=' + dbParam);\n";
 echo "}\n";
+//***********************************
+
+//******* Whole Album ***************
+//echo "function wholealbum(){\n";
+//echo "getmeta(1);\n";
+//echo "const dbParam = JSON.stringify({table:'album',limit:150});\n";
+//echo "const xmlhttp = new XMLHttpRequest();\n";
+//echo "xmlhttp.onload = function() {\n";
+//echo "const myObj = JSON.parse(this.responseText);\n";
+//echo "let html = '<div>'\n";
+//echo "for (let x in myObj) {\n";
+//echo "html += '<div class=\x22border-bottom align-top\x22><br/>";
+//echo "<h4>' + myObj[x].Track + ' - ' + myObj[x].Title + ' - ' + myObj[x].Artist + '</h4>";
+//echo "<button type=\x22button\x22 class=\x22bg-black\x22 onclick=\x22insertnext('+myObj[x].trackid+')\x22><i class=\x22bi bi-chevron-double-right\x22 style=\x22font-size: 3rem; color: white;\x22></i></button>";
+//echo "</div>';\n";
+//echo "}\n";
+//echo "html += '</div>'\n";    
+//echo "document.getElementById('fullalbum').innerHTML = html;\n";
+//echo "}\n";
+//echo "xmlhttp.open('POST', 'http://". $ipaddr ."/api/?service=8');\n";
+//echo "xmlhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');\n";
+//echo "xmlhttp.send('x=' + dbParam);\n";
+//echo "}\n";
 //***********************************
 
 //******* Insert Next Track *********
