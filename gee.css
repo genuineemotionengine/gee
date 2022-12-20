@@ -1,6 +1,7 @@
 button {
     border: none;
     outline: none;
+    background: black;
 }
 
 .progress .progress-bar {
