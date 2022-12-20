@@ -27,6 +27,7 @@ echo "<script src='https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min
 echo "<link rel='stylesheet' href='gee.css'/>\n";
 echo "<script>\n";
 
+//******* Varibale Decaration *******
 echo "var duration;\n";
 echo "var current;\n";
 echo "var play = 'play';\n";
@@ -34,7 +35,9 @@ echo "var pause = 'pause';\n";
 echo "var currentpos;\n";
 echo "var currentprogress;\n";
 echo "var state;\n";
+//***********************************
 
+//******* Whole Album ***************
 echo "function wholealbum(){\n";
 echo "getmeta(1);\n";
 echo "const dbParam = JSON.stringify({table:'album',limit:150});\n";
@@ -43,12 +46,10 @@ echo "xmlhttp.onload = function() {\n";
 echo "const myObj = JSON.parse(this.responseText);\n";
 echo "let html = '<div>'\n";
 echo "for (let x in myObj) {\n";
-
 echo "html += '<div class=\x22border-bottom align-top\x22><br/>";
 echo "<h4>' + myObj[x].Track + ' - ' + myObj[x].Title + ' - ' + myObj[x].Artist + '</h4>";
 echo "<button type=\x22button\x22 class=\x22bg-black\x22 onclick=\x22insertnext('+myObj[x].trackid+')\x22><i class=\x22bi bi-chevron-double-right\x22 style=\x22font-size: 3rem; color: white;\x22></i></button>";
 echo "</div>';\n";
-
 echo "}\n";
 echo "html += '</div>'\n";    
 echo "document.getElementById('fullalbum').innerHTML = html;\n";
@@ -57,18 +58,24 @@ echo "xmlhttp.open('POST', 'http://". $ipaddr ."/api/?service=8');\n";
 echo "xmlhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');\n";
 echo "xmlhttp.send('x=' + dbParam);\n";
 echo "}\n";
+//***********************************
 
+//******* Insert Next Track *********
 echo "function insertnext(track){\n";
 echo "fetch('http://". $ipaddr ."/api/?service=12&trackid='+ track)\n";
 echo "}\n";
+//***********************************
 
+//******* Pad ***********************
 echo "function pad ( val ) { return val > 9 ? val : '0' + val; }\n";
+//***********************************
 
+//******* Get Meta ******************
 echo "function getmeta(control){\n";
 
-echo "if (control === 4 || control === 3){\n";
-include ('zeroprogids.php');
-echo "}\n";
+//echo "if (control === 4 || control === 3){\n";
+//include ('zeroprogids.php');
+//echo "}\n";
 
 echo "$.getJSON('http://". $ipaddr ."/api/?service=' + control, function(result){\n";
 echo "duration = parseInt(result.duration);\n";
@@ -86,9 +93,11 @@ echo "}\n";
 
 echo "});\n";
 echo "}\n";
+//***********************************
 
 echo "getmeta(1);\n";
 
+//**** Progress Bar Calulations *****
 echo "setInterval( function(){\n";
 
 echo "if (state === play){\n";
@@ -104,6 +113,8 @@ echo "getmeta(1);\n";
 echo "}\n";
 
 echo "}, 1000);\n";
+//***********************************
+
 echo "</script>\n";
 
 echo "</head>\n";
