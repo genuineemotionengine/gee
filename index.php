@@ -66,7 +66,7 @@ echo "function pad ( val ) { return val > 9 ? val : '0' + val; }\n";
 
 echo "function getmeta(control){\n";
 
-echo "if (control === 4){\n";
+echo "if (control == 4){\n";
 echo "$('#dynamic1').css('width', 0 + '%');\n";
 echo "}\n";
 
