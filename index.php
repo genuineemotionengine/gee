@@ -50,7 +50,7 @@ echo "</div>';\n";
 echo "}\n";
 echo "html += '</div>'\n";    
 echo "document.getElementById('fullalbum').innerHTML = html;\n";
-echo "}\n";
+echo "})\n";
 echo "}\n";
 //***********************************
 
