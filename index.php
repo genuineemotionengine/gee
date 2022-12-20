@@ -73,9 +73,9 @@ echo "function pad ( val ) { return val > 9 ? val : '0' + val; }\n";
 //******* Get Meta ******************
 echo "function getmeta(control){\n";
 
-//echo "if (control === 4 || control === 3){\n";
-//include ('zeroprogids.php');
-//echo "}\n";
+echo "if (control === 4 || control === 3){\n";
+include ('zeroprogids.php');
+echo "}\n";
 
 echo "$.getJSON('http://". $ipaddr ."/api/?service=' + control, function(result){\n";
 echo "duration = parseInt(result.duration);\n";
@@ -84,11 +84,11 @@ echo "state = result.state;\n";
 include ('metaids.php');
 
 echo "if (state === play){\n";
-echo "$('#playpause').removeClass('bi-chevron-right').addClass('bi-pause');\n";
+include ('playids.php');
 echo "}\n";
 
 echo "if (state === pause){\n";
-echo "$('#playpause').removeClass('bi-pause').addClass('bi-chevron-right');\n";
+include ('pauseids.php');
 echo "}\n";
 
 echo "});\n";
