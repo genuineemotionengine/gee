@@ -65,6 +65,11 @@ echo "}\n";
 echo "function pad ( val ) { return val > 9 ? val : '0' + val; }\n";
 
 echo "function getmeta(control){\n";
+
+echo "if (control === 4){\n";
+echo "currentprogress = 0;\n";
+echo "}\n";
+
 echo "$.getJSON('http://". $ipaddr ."/api/?service=' + control, function(result){\n";
 echo "duration = parseInt(result.duration);\n";
 echo "current = parseInt(result.elapsed);\n";
