@@ -56,7 +56,7 @@ echo "}\n";
 
 //******* Insert Next Track *********
 echo "function insertnext(track){\n";
-echo "fetch('http://". $ipaddr ."/api/?service=12&trackid='+ track)\n";
+echo "fetch('http://". $ipaddr ."/api/?service=12&trackid='+ track);\n";
 echo "}\n";
 //***********************************
 
