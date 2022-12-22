@@ -253,7 +253,7 @@ echo "</div>\n\n";
 //*********** dekstop  id 3 ************
 
 echo "<div class='container text-center'>\n";
-echo "<div class='d-none d-xl-block mt-20'>\n";  
+echo "<div class='d-none d-xl-block'>\n";  
 //echo "<br>\n";
 echo "<img id='image3' src='black.jpg' />\n";
 echo "<br>\n";
