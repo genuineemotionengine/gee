@@ -254,7 +254,7 @@ echo "</div>\n\n";
 
 echo "<div class='container text-center pt-10'>\n";
 echo "<div class='d-none d-xl-block'>\n";  
-echo "<br>\n";
+//echo "<br>\n";
 echo "<img id='image3' src='black.jpg' />\n";
 echo "<br>\n";
 echo "<h1 id='title3' class='display-4'></h1>\n";
