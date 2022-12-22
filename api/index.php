@@ -231,7 +231,7 @@ if ($service == 9){
 
 $mpd->setvol($vol);
 
-header("Location: http://". $ipaddr ."");
+//header("Location: http://". $ipaddr ."");
 
 
 
