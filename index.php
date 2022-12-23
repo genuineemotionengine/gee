@@ -60,15 +60,15 @@ echo "fetch('http://". $ipaddr ."/api/?service=12&trackid='+ track);\n";
 echo "}\n";
 //***********************************
 
-//******* *********
-echo "function insertnext(track){\n";
-echo "fetch('http://". $ipaddr ."/api/?service=12&trackid='+ track);\n";
+//******* Volume Down *********
+echo "function volumedown(){\n";
+echo "fetch('http://". $ipaddr ."/api/?service=15&mod=-5');\n";
 echo "}\n";
 //***********************************
 
-//******* Insert Next Track *********
-echo "function insertnext(track){\n";
-echo "fetch('http://". $ipaddr ."/api/?service=12&trackid='+ track);\n";
+//******* Volume Up *********
+echo "function volumeup(){\n";
+echo "fetch('http://". $ipaddr ."/api/?service=15&mod=+5');\n";
 echo "}\n";
 //***********************************
 
