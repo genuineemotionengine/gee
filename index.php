@@ -283,7 +283,7 @@ echo "</div>\n\n";
 
 echo "<div class='modal fade' id='staticBackdrop' data-bs-backdrop='static' data-bs-keyboard='false' tabindex='-1' aria-labelledby='staticBackdropLabel' aria-hidden='true'>\n";
 echo "<div class='modal-dialog modal-dialog-scrollable'>\n";
-echo "<div class='modal-content bg-black'>\n";
+echo "<div class='modal-content bg-black'style='background: black;'>\n";
 echo "<div class='modal-header'>\n";
 echo "<div class='row row-cols-3'>\n";
 echo "<div class='col-3'><img id='image2' class='img-fluid' src='' /></div>\n";
