@@ -241,6 +241,8 @@ echo "</div>\n";
 echo "<h1 id='title5' class='display-6'></h1>\n";
 echo "<h1 id='artist5' class='display-6'></h1>\n";
 echo "<h1 id='album5' class='display-6'></h1>\n";
+echo "<button type='button' class='bg-black' onclick='volumedown()'><i class='bi bi-volume-down' style='font-size: 3rem; color: white;'></i></button>\n";
+echo "<button type='button' class='bg-black' onclick='volumeup()'><i class='bi bi-volume-up' style='font-size: 3rem; color: white;'></i></button>\n";
 echo "<button type='button' onclick='wholealbum()' class='btn btn-black' data-bs-toggle='modal' data-bs-target='#staticBackdrop'><i class='bi bi-three-dots' style='font-size: 3rem; color: white;'></i></button>\n";
 echo "<div class='row row-cols-3'>\n";
 echo "<div>\n";
