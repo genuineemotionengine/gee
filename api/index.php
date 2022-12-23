@@ -244,9 +244,9 @@ if ($service == 15){
     
 
 
-$mpd->setvol($vol);
+$mpd->adjust_vol($mod);
 
-header("Location: http://". $ipaddr ."");
+//header("Location: http://". $ipaddr ."");
 
 
 
