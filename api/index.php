@@ -302,11 +302,13 @@ $dirarray = scandir($dir);
 
 $elements = count($dirarray);
 
+echo '<pre>'.htmlentities(print_r($dirarray, true), ENT_SUBSTITUTE).'</pre>';
+
 for ($x = 3; $x <= $elements; $x++) {
 
 //echo $dirarray[$x]."<br>";
 
-echo '<pre>'.htmlentities(print_r($dirarray, true), ENT_SUBSTITUTE).'</pre>';
+
 
 //$subdir = "/mnt/usb/".$dirarray[$x]."/";
 //
