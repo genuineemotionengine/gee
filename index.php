@@ -63,6 +63,9 @@ echo "}\n";
 //******* Volume Down *********
 echo "function volumedown(){\n";
 echo "fetch('http://". $ipaddr ."/api/?service=15&mod=-5');\n";
+echo "if (navigator.vibrate) {\n";
+echo "navigator.vibrate(500);\n";
+echo "}\n";
 echo "}\n";
 //***********************************
 
