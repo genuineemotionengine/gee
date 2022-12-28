@@ -320,7 +320,7 @@ echo $dirarray[$x]."/".$subdirarray[$y]."<br>";
 
 
 }
-    
+echo "<br>";
 }
 
 
