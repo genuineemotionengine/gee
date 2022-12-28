@@ -12,4 +12,5 @@ button {
 
 body {
     -webkit-user-select: none;
+    overflow: hidden;
 }
