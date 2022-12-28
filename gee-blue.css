@@ -13,6 +13,5 @@ button {
 body {
     -webkit-user-select: none;
     overflow: hidden;
-    font: -apple-system-body;
-    font-size: 3em;
+
 }
