@@ -328,7 +328,7 @@ $getID3 = new getID3;
 
 $ThisFileInfo = $getID3->analyze($flacfile);
 //echo '<pre>'.htmlentities(print_r($ThisFileInfo['comments']['picture'][0], true), ENT_SUBSTITUTE).'</pre>';
-echo '<pre>'.htmlentities(print_r($ThisFileInfo, true), ENT_SUBSTITUTE).'</pre>';
+echo '<pre>'.htmlentities(print_r($ThisFileInfo['tags'], true), ENT_SUBSTITUTE).'</pre>';
 
 }
 echo "<br>";
