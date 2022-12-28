@@ -24,7 +24,7 @@ echo "<link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/bootstrap-icons@
 echo "<script src='https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js' integrity='sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3' crossorigin='anonymous'></script>\n";
 echo "<script src='https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js'></script>\n";
 }
-echo "<link rel='stylesheet' href='gee-blue.css'/>\n";
+echo "<link rel='stylesheet' href='gee-red.css'/>\n";
 echo "<script>\n";
 
 //******* Varibale Decaration *******
@@ -149,9 +149,9 @@ echo "<div class='col-2 text-center'><span id='minutesdur1'>00</span>:<span id='
 echo "</div>\n";
 echo "</div>\n";
 echo "<br/>\n";
-echo "<h1 id='title1' class='display-6'></h1>\n";
-echo "<h1 id='artist1' class='display-6'></h1>\n";
-echo "<h1 id='album1' class='display-6'></h1>\n";
+echo "<h1 id='title1' class='display-6' style='font-size: 3em;'></h1>\n";
+echo "<h1 id='artist1' class='display-6' style='font-size: 3em;'></h1>\n";
+echo "<h1 id='album1' class='display-6' style='font-size: 3em;'></h1>\n";
 echo "<button type='button' class='bg-black' onclick='getmeta(1)'><i class='bi bi-arrow-clockwise' style='font-size: 3rem; color: white;'></i></button>\n";
 echo "<button type='button' onclick='wholealbum()' class='btn btn-black' data-bs-toggle='modal' data-bs-target='#staticBackdrop'><i class='bi bi-three-dots' style='font-size: 3rem; color: white;'></i></button>\n";
 echo "<button type='button' class='bg-black' onclick='getmeta(5)'><i class='bi bi-arrow-repeat' style='font-size: 3rem; color: white;'></i></button><br/><br/><br/>\n";
