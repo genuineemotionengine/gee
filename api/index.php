@@ -293,8 +293,21 @@ echo '<pre>'.htmlentities(print_r($loadarray, true), ENT_SUBSTITUTE).'</pre>';
 
 //****************** Build Database ***************
 
-$sql = "TRUNCATE TABLE allmusic";
+$sql = "drop TABLE allmusic";
 $result = $conn->query($sql);
+echo mysqli_error($conn)."<br>";
+
+$sql = "CREATE TABLE allmusic (
+id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+albumpath varchar(512),
+title varchar(512),
+artist varchar(512),
+album varchar(512),
+albumartist varchar(512)
+)";
+
+$result = $conn->query($sql);
+echo mysqli_error($conn)."<br>";
 
 if ($service == 14){
     
