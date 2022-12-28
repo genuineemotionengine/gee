@@ -327,6 +327,11 @@ $flacfile = "/mnt/usb/".$name;
 $getID3 = new getID3;
 
 $ThisFileInfo = $getID3->analyze($flacfile);
+
+$title = $ThisFileInfo['tags']['id3v2']['title'];
+
+echo "Title: ".$title;
+
 //echo '<pre>'.htmlentities(print_r($ThisFileInfo['comments']['picture'][0], true), ENT_SUBSTITUTE).'</pre>';
 echo '<pre>'.htmlentities(print_r($ThisFileInfo['tags']['id3v2'], true), ENT_SUBSTITUTE).'</pre>';
 
