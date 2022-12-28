@@ -306,41 +306,41 @@ for ($x = 3; $x <= $elements; $x++) {
 
 //echo $dirarray[$x]."<br>";
 
+echo '<pre>'.htmlentities(print_r($dirarray, true), ENT_SUBSTITUTE).'</pre>';
 
-
-$subdir = "/mnt/usb/".$dirarray[$x]."/";
-
-$subdirarray = scandir($subdir);
-
-$subelements = count($subdirarray);
-
-for ($y = 2; $y < $subelements; $y++) {
-
-//echo $dirarray[$x]."/".$subdirarray[$y]."<br>";
-
-$name = $dirarray[$x]."/".$subdirarray[$y];
-
-echo $name."<br>";
-
-$flacfile = "/mnt/usb/".$name;
-
-$getID3 = new getID3;
-
-$ThisFileInfo = $getID3->analyze($flacfile);
-
-$title = $ThisFileInfo['tags']['id3v2']['title'][0];
-
-echo "Title: ".$title."<br>";
-
-$artist = $ThisFileInfo['tags']['id3v2']['band'][0];
-
-echo "Artist: ".$artist."<br>";
-
-//echo '<pre>'.htmlentities(print_r($ThisFileInfo['comments']['picture'][0], true), ENT_SUBSTITUTE).'</pre>';
-echo '<pre>'.htmlentities(print_r($ThisFileInfo['tags'], true), ENT_SUBSTITUTE).'</pre>';
-
-}
-echo "<br>";
+//$subdir = "/mnt/usb/".$dirarray[$x]."/";
+//
+//$subdirarray = scandir($subdir);
+//
+//$subelements = count($subdirarray);
+//
+//for ($y = 2; $y < $subelements; $y++) {
+//
+////echo $dirarray[$x]."/".$subdirarray[$y]."<br>";
+//
+//$name = $dirarray[$x]."/".$subdirarray[$y];
+//
+//echo $name."<br>";
+//
+//$flacfile = "/mnt/usb/".$name;
+//
+//$getID3 = new getID3;
+//
+//$ThisFileInfo = $getID3->analyze($flacfile);
+//
+//$title = $ThisFileInfo['tags']['id3v2']['title'][0];
+//
+//echo "Title: ".$title."<br>";
+//
+//$artist = $ThisFileInfo['tags']['id3v2']['band'][0];
+//
+//echo "Artist: ".$artist."<br>";
+//
+////echo '<pre>'.htmlentities(print_r($ThisFileInfo['comments']['picture'][0], true), ENT_SUBSTITUTE).'</pre>';
+//echo '<pre>'.htmlentities(print_r($ThisFileInfo['tags'], true), ENT_SUBSTITUTE).'</pre>';
+//
+//}
+//echo "<br>";
 }
 
 
