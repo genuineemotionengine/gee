@@ -330,10 +330,14 @@ $ThisFileInfo = $getID3->analyze($flacfile);
 
 $title = $ThisFileInfo['tags']['id3v2']['title'][0];
 
-echo "Title: ".$title;
+echo "Title: ".$title."<br>";
+
+$artist = $ThisFileInfo['tags']['id3v2']['band'][0];
+
+echo "Artist: ".$artist."<br>";
 
 //echo '<pre>'.htmlentities(print_r($ThisFileInfo['comments']['picture'][0], true), ENT_SUBSTITUTE).'</pre>';
-echo '<pre>'.htmlentities(print_r($ThisFileInfo['tags']['id3v2'], true), ENT_SUBSTITUTE).'</pre>';
+echo '<pre>'.htmlentities(print_r($ThisFileInfo['tags'], true), ENT_SUBSTITUTE).'</pre>';
 
 }
 echo "<br>";
