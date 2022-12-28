@@ -316,8 +316,11 @@ $subelements = count($subdirarray);
 
 for ($y = 2; $y < $subelements; $y++) {
 
-echo $dirarray[$x]."/".$subdirarray[$y]."<br>";
+//echo $dirarray[$x]."/".$subdirarray[$y]."<br>";
 
+$name = $dirarray[$x]."/".$subdirarray[$y];
+
+echo $name."<br>";
 
 }
 echo "<br>";
