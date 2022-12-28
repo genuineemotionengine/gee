@@ -1,0 +1,16 @@
+button {
+    border: none;
+    outline: none;
+    background: black;
+}
+
+.progress .progress-bar {
+  -webkit-transition: none;
+       -o-transition: none;
+          transition: none;
+}
+
+body {
+    -webkit-user-select: none;
+    overflow: hidden;
+}
