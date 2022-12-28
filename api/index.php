@@ -293,7 +293,7 @@ echo '<pre>'.htmlentities(print_r($loadarray, true), ENT_SUBSTITUTE).'</pre>';
 
 //****************** Build Database ***************
 
-$sql = "drop TABLE allmusic";
+$sql = "DROP TABLE allmusic";
 $result = $conn->query($sql);
 echo mysqli_error($conn)."<br>";
 
