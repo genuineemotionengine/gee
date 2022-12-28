@@ -298,7 +298,7 @@ $result = $conn->query($sql);
 echo mysqli_error($conn)."<br>";
 
 $sql = "CREATE TABLE allmusic (
-id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+id INT(6) NOT NULL AUTO_INCREMENT PRIMARY KEY,
 albumpath varchar(512),
 title varchar(512),
 artist varchar(512),
