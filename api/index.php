@@ -293,8 +293,8 @@ echo '<pre>'.htmlentities(print_r($loadarray, true), ENT_SUBSTITUTE).'</pre>';
 
 //****************** Build Database ***************
 
-//$sql = "TRUNCATE TABLE allmusic";
-//$result = $conn->query($sql);
+$sql = "TRUNCATE TABLE allmusic";
+$result = $conn->query($sql);
 
 if ($service == 14){
     
@@ -307,7 +307,7 @@ $elements = count($dirarray);
 
 //echo '<pre>'.htmlentities(print_r($dirarray, true), ENT_SUBSTITUTE).'</pre>';
 
-for ($x = 3; $x <= 10; $x++) {
+for ($x = 3; $x < $elements; $x++) {
 
 //echo $dirarray[$x]."<br>";
 
@@ -360,9 +360,9 @@ $sql="INSERT INTO allmusic (albumpath, title, artist, album, albumartist) VALUES
 
 echo $sql."<br><br>\n"; 
 
-//$conn->query($sql);
-//
-//echo mysqli_error($conn)."<br><br>";
+$conn->query($sql);
+
+echo mysqli_error($conn)."<br><br>";
 
 //echo '<pre>'.htmlentities(print_r($ThisFileInfo['comments']['picture'][0], true), ENT_SUBSTITUTE).'</pre>';
 //echo '<pre>'.htmlentities(print_r($ThisFileInfo['tags'], true), ENT_SUBSTITUTE).'</pre>';
