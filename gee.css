@@ -9,3 +9,7 @@ button {
        -o-transition: none;
           transition: none;
 }
+
+body {
+    -webkit-user-select: none;
+}
