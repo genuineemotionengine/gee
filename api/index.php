@@ -300,9 +300,16 @@ $dir = "/mnt/usb/";
 // Sort in ascending order - this is default
 $dirarray = scandir($dir);
 
+$elements = count($dirarray);
+
+for ($x = 3; $x <= $elements; $x++) {
+
+echo $dirarray[$x]."<br>";
+    
+}
 
 
-echo '<pre>'.htmlentities(print_r($dirarray, true), ENT_SUBSTITUTE).'</pre>';
+//echo '<pre>'.htmlentities(print_r($dirarray, true), ENT_SUBSTITUTE).'</pre>';
    
     
 //$subdir = "/mnt/usb/".$dirarray[4]."/";
