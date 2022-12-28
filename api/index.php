@@ -304,7 +304,7 @@ $elements = count($dirarray);
 
 for ($x = 3; $x <= $elements; $x++) {
 
-echo $dirarray[$x]."<br>";
+//echo $dirarray[$x]."<br>";
 
 
 
@@ -314,7 +314,7 @@ $subdirarray = scandir($subdir);
 
 $subelements = count($subdirarray);
 
-for ($y = 2; $y <= $subelements; $y++) {
+for ($y = 2; $y < $subelements; $y++) {
 
 echo $dirarray[$x]."/".$subdirarray[$y]."<br>";
 
