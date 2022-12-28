@@ -83,7 +83,7 @@ $result = $conn->query($sql);
 if ($result->num_rows > 0) {
     while($row = $result->fetch_assoc()) {
 
-        $myalbum = $row['albumpath'];
+        $myalbum = $row['album'];
         
         $myalbum = str_replace("&#39;","'",$myalbum);
         
