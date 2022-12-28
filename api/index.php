@@ -302,16 +302,25 @@ $dirarray = scandir($dir);
 
 
 
-echo '<pre>'.htmlentities(print_r($dirarray[23], true), ENT_SUBSTITUTE).'</pre>';
+echo '<pre>'.htmlentities(print_r($dirarray, true), ENT_SUBSTITUTE).'</pre>';
    
     
-$subdir = "/mnt/usb/".$dirarray[4]."/";
-    
-$subdirarray = scandir($subdir);  
-
-echo '<pre>'.htmlentities(print_r($subdirarray, true), ENT_SUBSTITUTE).'</pre>';
+//$subdir = "/mnt/usb/".$dirarray[4]."/";
+//    
+//$subdirarray = scandir($subdir);  
+//
+//echo '<pre>'.htmlentities(print_r($subdirarray, true), ENT_SUBSTITUTE).'</pre>';
     
 }
+
+
+
+
+
+//*********************************
+
+
+
 
 if ($service == 16){
     
