@@ -347,7 +347,7 @@ $albumartist = $ThisFileInfo['tags']['id3v2']['band'][0];
 echo "Akbum Artist: ".$albumartist."<br>";
 
 //echo '<pre>'.htmlentities(print_r($ThisFileInfo['comments']['picture'][0], true), ENT_SUBSTITUTE).'</pre>';
-//echo '<pre>'.htmlentities(print_r($ThisFileInfo['tags'], true), ENT_SUBSTITUTE).'</pre>';
+echo '<pre>'.htmlentities(print_r($ThisFileInfo['tags'], true), ENT_SUBSTITUTE).'</pre>';
 
 }
 echo "<br>";
