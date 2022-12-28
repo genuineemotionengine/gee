@@ -328,7 +328,7 @@ $getID3 = new getID3;
 
 $ThisFileInfo = $getID3->analyze($flacfile);
 
-$title = $ThisFileInfo['tags']['id3v2']['title'];
+$title = $ThisFileInfo['tags']['id3v2']['title'][0];
 
 echo "Title: ".$title;
 
