@@ -304,7 +304,7 @@ $elements = count($dirarray);
 
 //echo '<pre>'.htmlentities(print_r($dirarray, true), ENT_SUBSTITUTE).'</pre>';
 
-for ($x = 859; $x <= $elements; $x++) {
+for ($x = 3; $x <= $elements; $x++) {
 
 //echo $dirarray[$x]."<br>";
 
@@ -334,12 +334,20 @@ $title = $ThisFileInfo['tags']['id3v2']['title'][0];
 
 echo "Title: ".$title."<br>";
 
-$artist = $ThisFileInfo['tags']['id3v2']['band'][0];
+$artist = $ThisFileInfo['tags']['id3v2']['artist'][0];
 
 echo "Artist: ".$artist."<br>";
 
+$album = $ThisFileInfo['tags']['id3v2']['album'][0];
+
+echo "Album: ".$album."<br>";
+
+$albumartist = $ThisFileInfo['tags']['id3v2']['band'][0];
+
+echo "Akbum Artist: ".$albumartist."<br>";
+
 //echo '<pre>'.htmlentities(print_r($ThisFileInfo['comments']['picture'][0], true), ENT_SUBSTITUTE).'</pre>';
-echo '<pre>'.htmlentities(print_r($ThisFileInfo['tags'], true), ENT_SUBSTITUTE).'</pre>';
+//echo '<pre>'.htmlentities(print_r($ThisFileInfo['tags'], true), ENT_SUBSTITUTE).'</pre>';
 
 }
 echo "<br>";
