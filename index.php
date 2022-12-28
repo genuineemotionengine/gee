@@ -8,7 +8,7 @@ echo "<html xmlns='http://www.w3.org/1999/xhtml'>\n";
 echo "<head>\n";
 echo "<meta name='apple-mobile-web-app-capable' content='yes'/>\n";
 echo "<meta http-equiv='Content-Type' content='text/html; charset=UTF-8'/>\n";
-echo "<meta name = 'viewport' content = 'width=device-width, initial-scale = 1'/>\n";
+echo "<meta name = 'viewport' content = 'width=device-width, initial-scale = 1, user-scalable = no'/>\n";
 echo "<link rel='icon' href='/favicon.ico'/>\n";
 echo "<meta name='theme-color' content='#000000'/>\n";
 echo "<link rel='apple-touch-icon' href='/logo192.png'/>\n";
