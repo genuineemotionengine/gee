@@ -135,7 +135,7 @@ echo "<img id='image1' class='img-fluid' src='black.jpg' />\n";
 echo "<button type='button' class='bg-black' onclick='getmeta(3)'><i class='bi bi-arrow-left-short' style='font-size: 6rem; color: white;'></i></button>\n";
 echo "<button type='button' class='bg-black' onclick='getmeta(2)'><i id='playpause1' class='bi bi-pause' style='font-size: 5rem; color: white;'></i></button>\n";
 echo "<button type='button' class='bg-black' onclick='getmeta(4)'><i class='bi bi-arrow-right-short' style='font-size: 6rem; color: white;'></i></button>\n";
-echo "<div class='container pt-0 mt-0'>\n";
+echo "<div class='container pt-0 mt-0 mb-10'>\n";
 echo "<div class='row row-cols-3'>\n";
 echo "<div class='col-2 text-center'><span id='minutescur1'>00</span>:<span id='secondscur1'>00</span></div>\n";
 echo "<div class='col-8'>\n";
