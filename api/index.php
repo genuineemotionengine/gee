@@ -325,7 +325,7 @@ for ($y = 2; $y < $subelements; $y++) {
 
 $name = $dirarray[$x]."/".$subdirarray[$y];
 
-echo $name."<br>";
+//echo $name."<br>";
 
 $flacfile = "/mnt/usb/".$name;
 
@@ -335,19 +335,19 @@ $ThisFileInfo = $getID3->analyze($flacfile);
 
 $title = $ThisFileInfo['tags']['id3v2']['title'][0];
 
-echo "Title: ".$title."<br>";
+//echo "Title: ".$title."<br>";
 
 $artist = $ThisFileInfo['tags']['id3v2']['artist'][0];
 
-echo "Artist: ".$artist."<br>";
+//echo "Artist: ".$artist."<br>";
 
 $album = $ThisFileInfo['tags']['id3v2']['album'][0];
 
-echo "Album: ".$album."<br>";
+//echo "Album: ".$album."<br>";
 
 $albumartist = $ThisFileInfo['tags']['id3v2']['band'][0];
 
-echo "Album Artist: ".$albumartist."<br>";
+//echo "Album Artist: ".$albumartist."<br>";
 
 $name =  str_replace("'","&#39;",$name);
 $title =  str_replace("'","&#39;",$title);
@@ -358,17 +358,17 @@ $albumartist =  str_replace("'","&#39;",$albumartist);
 
 $sql="INSERT INTO allmusic (albumpath, title, artist, album, albumartist) VALUES ('$name', '$title', '$artist', '$album' '$albumartist')";
 
-echo $sql."<br><br>\n"; 
+//echo $sql."<br><br>\n"; 
 
 $conn->query($sql);
 
-echo mysqli_error($conn)."<br><br>";
+echo mysqli_error($conn)."<br>";
 
 //echo '<pre>'.htmlentities(print_r($ThisFileInfo['comments']['picture'][0], true), ENT_SUBSTITUTE).'</pre>';
 //echo '<pre>'.htmlentities(print_r($ThisFileInfo['tags'], true), ENT_SUBSTITUTE).'</pre>';
 
 }
-echo "<br>";
+echo $x."<br>";
 }
 
 
