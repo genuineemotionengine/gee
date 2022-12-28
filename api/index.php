@@ -306,11 +306,20 @@ for ($x = 3; $x <= $elements; $x++) {
 
 echo $dirarray[$x]."<br>";
 
+
+
 $subdir = "/mnt/usb/".$dirarray[$x]."/";
 
-$subdirarray = scandir($subdir);  
+$subdirarray = scandir($subdir);
 
-echo '<pre>'.htmlentities(print_r($subdirarray, true), ENT_SUBSTITUTE).'</pre>';
+$subelements = count($subdirarray);
+
+for ($y = 2; $y <= $subelements; $y++) {
+
+echo "&nbsp;".$subdirarray[$y]."<br>";
+
+
+}
     
 }
 
