@@ -316,7 +316,7 @@ $subelements = count($subdirarray);
 
 for ($y = 2; $y <= $subelements; $y++) {
 
-echo $subdirarray[$y]."<br>";
+echo $dirarray[$x]."/".$subdirarray[$y]."<br>";
 
 
 }
