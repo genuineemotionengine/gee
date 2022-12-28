@@ -83,7 +83,7 @@ $result = $conn->query($sql);
 if ($result->num_rows > 0) {
     while($row = $result->fetch_assoc()) {
 
-        $myalbum = $row['album'];
+        $myalbum = $row['albumpath'];
         
         $myalbum = str_replace("&#39;","'",$myalbum);
         
@@ -293,6 +293,9 @@ echo '<pre>'.htmlentities(print_r($loadarray, true), ENT_SUBSTITUTE).'</pre>';
 
 //****************** Build Database ***************
 
+//$sql = "TRUNCATE TABLE allmusic";
+//$result = $conn->query($sql);
+
 if ($service == 14){
     
 $dir = "/mnt/usb/";
@@ -304,7 +307,7 @@ $elements = count($dirarray);
 
 //echo '<pre>'.htmlentities(print_r($dirarray, true), ENT_SUBSTITUTE).'</pre>';
 
-for ($x = 3; $x <= $elements; $x++) {
+for ($x = 3; $x <= 10; $x++) {
 
 //echo $dirarray[$x]."<br>";
 
@@ -344,7 +347,22 @@ echo "Album: ".$album."<br>";
 
 $albumartist = $ThisFileInfo['tags']['id3v2']['band'][0];
 
-echo "Album Artist: ".$albumartist."<br><br>";
+echo "Album Artist: ".$albumartist."<br>";
+
+$name =  str_replace("'","&#39;",$name);
+$title =  str_replace("'","&#39;",$title);
+$artist =  str_replace("'","&#39;",$artist);
+$album =  str_replace("'","&#39;",$album);
+$albumartist =  str_replace("'","&#39;",$albumartist);
+
+
+$sql="INSERT INTO allmusic (albumpath, title, artist, album, albumartist) VALUES ('$name', '$title', '$artist', '$album' '$albumartist')";
+
+echo $sql."<br><br>\n"; 
+
+//$conn->query($sql);
+//
+//echo mysqli_error($conn)."<br><br>";
 
 //echo '<pre>'.htmlentities(print_r($ThisFileInfo['comments']['picture'][0], true), ENT_SUBSTITUTE).'</pre>';
 //echo '<pre>'.htmlentities(print_r($ThisFileInfo['tags'], true), ENT_SUBSTITUTE).'</pre>';
