@@ -302,9 +302,9 @@ $dirarray = scandir($dir);
 
 $elements = count($dirarray);
 
-echo '<pre>'.htmlentities(print_r($dirarray, true), ENT_SUBSTITUTE).'</pre>';
+//echo '<pre>'.htmlentities(print_r($dirarray, true), ENT_SUBSTITUTE).'</pre>';
 
-for ($x = 3; $x <= $elements; $x++) {
+for ($x = 859; $x <= $elements; $x++) {
 
 //echo $dirarray[$x]."<br>";
 
