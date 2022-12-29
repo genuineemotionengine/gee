@@ -164,6 +164,29 @@ include ('getmeta.php');
 
 }
 
+//***************** load allmusic playlist **********************
+
+if ($service == 20){  
+    
+$mpd->playlist_clear();    
+
+$playlist = "classical";
+
+$mpd->load_playlist($playlist);
+
+$mpd->playlist_shuffle();
+
+$mpd->repeat(1);
+
+$mpd->play(0);
+
+include ('getmeta.php');
+
+    
+
+    
+}
+
 
 //***************** get album list **********************
 
