@@ -368,7 +368,7 @@ echo json_encode($rows);
 
 //***************** load allmuisc playlist **********************
 
-if ($service == 7){  
+if ($service == 20){  
 
 $mpd->playlist_clear();
     
