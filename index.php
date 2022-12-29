@@ -93,7 +93,6 @@ echo "if (state === play){\n";
 include ('playids.php');
 echo "}\n";
 
-
 echo "if (state === pause){\n";
 include ('pauseids.php');
 echo "}\n";
@@ -110,7 +109,6 @@ echo "setInterval( function(){\n";
 echo "if (state === play){\n";
 echo "current = current + 1;\n";
 echo "}\n";
-    
 
 echo "currentpos = (current/duration)*100;\n";
 echo "currentprogress = currentpos.toFixed(0);\n";
@@ -313,4 +311,3 @@ echo "</body>\n";
 echo "</html>\n";
 
        
-
