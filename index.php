@@ -91,13 +91,12 @@ include ('metaids.php');
 
 echo "if (state === play){\n";
 include ('playids.php');
-echo "} else {\n";
+echo "}\n";
+
+
+echo "if (state === pause){\n";
 include ('pauseids.php');
 echo "}\n";
-//
-//echo "if (state === pause){\n";
-//include ('pauseids.php');
-//echo "}\n";
 
 echo "});\n";
 echo "}\n";
