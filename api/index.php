@@ -365,3 +365,23 @@ $rows = [
 echo json_encode($rows);
 
 }
+
+//***************** load allmuisc playlist **********************
+
+if ($service == 7){  
+
+$mpd->playlist_clear();
+    
+$playlist = "allmusic";
+
+$mpd->load_playlist($playlist);
+
+$mpd->playlist_shuffle();
+
+$mpd->repeat(1);
+
+$mpd->play(0);
+
+include ('getmeta.php');
+
+}
