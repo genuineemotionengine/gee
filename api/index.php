@@ -170,7 +170,7 @@ if ($service == 20){
     
 $mpd->playlist_clear();    
 
-$playlist = "classical";
+$playlist = "allmusic";
 
 $mpd->load_playlist($playlist);
 
