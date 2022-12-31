@@ -89,13 +89,13 @@ echo "current = parseInt(result.elapsed);\n";
 echo "state = result.state;\n";
 include ('metaids.php');
 
-echo "if (state === play){\n";
-include ('playids.php');
-echo "}\n";
-
-echo "if (state === pause){\n";
-include ('pauseids.php');
-echo "}\n";
+//echo "if (state === play){\n";
+//include ('playids.php');
+//echo "}\n";
+//
+//echo "if (state === pause){\n";
+//include ('pauseids.php');
+//echo "}\n";
 
 echo "});\n";
 echo "}\n";
@@ -133,7 +133,7 @@ echo "<div class='container-fluid text-center ps-0 pe-0'>\n";
 echo "<div class='d-block d-sm-none'>\n";
 echo "<img id='image1' class='img-fluid' src='black.jpg' />\n";
 echo "<button type='button' class='bg-black' onclick='getmeta(3)'><i class='bi bi-arrow-left-short' style='font-size: 6rem; color: white;'></i></button>\n";
-echo "<button type='button' class='bg-black' onclick='getmeta(2)'><i id='playpause1' class='bi bi-pause' style='font-size: 5rem; color: white;'></i></button>\n";
+echo "<button type='button' class='bg-black' onclick='getmeta(2)'><i class='bi bi-pause' style='font-size: 5rem; color: white;'></i><i class='bi bi-slash'></i><i class='bi bi-chevron-right'></i></button>\n";
 echo "<button type='button' class='bg-black' onclick='getmeta(4)'><i class='bi bi-arrow-right-short' style='font-size: 6rem; color: white;'></i></button>\n";
 echo "<div class='container pt-0 mt-0'>\n";
 echo "<div class='row row-cols-3'>\n";
