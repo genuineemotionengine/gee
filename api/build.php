@@ -76,7 +76,7 @@ $album =  str_replace("'","&#39;",$album);
 $albumartist =  str_replace("'","&#39;",$albumartist);
 
 
-$sql="INSERT INTO allmusic (albumpath, title, artist, album, albumartist) VALUES ('$name', '$title', '$artist', '$album', '$albumartist')";
+$sql="INSERT INTO app (albumpath, title, artist, album, albumartist) VALUES ('$name', '$title', '$artist', '$album', '$albumartist')";
 
 echo $sql."\n\n"; 
 
