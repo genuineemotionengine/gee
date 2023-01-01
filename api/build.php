@@ -78,7 +78,7 @@ $albumartist =  str_replace("'","&#39;",$albumartist);
 
 $sql="INSERT INTO ap (albumpath, title, artist, album, albumartist) VALUES ('$name', '$title', '$artist', '$album', '$albumartist')";
 
-echo $sql."\n\n"; 
+echo $sql."\n"; 
 
 $conn->query($sql);
 
