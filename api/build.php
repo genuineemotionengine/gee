@@ -59,7 +59,7 @@ echo $dirarray[$x]."/".$subdirarray[$y]."\n";
 
 $name = $dirarray[$x]."/".$subdirarray[$y];
 
-echo $name."\n";
+//echo $name."\n";
 
 $flacfile = "/mnt/usb/".$name;
 
