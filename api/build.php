@@ -27,7 +27,7 @@ $elements = count($dirarray);
 
 //echo '<pre>'.htmlentities(print_r($dirarray, true), ENT_SUBSTITUTE).'</pre>';
 
-for ($x = 3; $x < 4; $x++) {
+for ($x = 3; $x < $elements; $x++) {
 
 //echo $dirarray[$x]."\n";
 
@@ -76,7 +76,7 @@ $album =  str_replace("'","&#39;",$album);
 $albumartist =  str_replace("'","&#39;",$albumartist);
 
 
-$sql="INSERT INTO ap (albumpath, title, artist, album, albumartist) VALUES ('$name', '$title', '$artist', '$album', '$albumartist')";
+$sql="INSERT INTO app (albumpath, title, artist, album, albumartist) VALUES ('$name', '$title', '$artist', '$album', '$albumartist')";
 
 echo $sql."\n"; 
 
