@@ -29,7 +29,7 @@ $elements = count($dirarray);
 
 for ($x = 3; $x < 4; $x++) {
 
-echo $dirarray[$x]."\n";
+//echo $dirarray[$x]."\n";
 
 
 
@@ -41,7 +41,7 @@ $subelements = count($subdirarray);
 
 for ($y = 2; $y < $subelements; $y++) {
 
-echo $dirarray[$x]."/".$subdirarray[$y]."\n";
+//echo $dirarray[$x]."/".$subdirarray[$y]."\n";
 
 $name = $dirarray[$x]."/".$subdirarray[$y];
 
@@ -55,19 +55,19 @@ $ThisFileInfo = $getID3->analyze($flacfile);
 
 $title = $ThisFileInfo['tags']['id3v2']['title'][0];
 
-echo "Title: ".$title."\n";
+//echo "Title: ".$title."\n";
 
 $artist = $ThisFileInfo['tags']['id3v2']['artist'][0];
 
-echo "Artist: ".$artist."\n";
+//echo "Artist: ".$artist."\n";
 
 $album = $ThisFileInfo['tags']['id3v2']['album'][0];
 
-echo "Album: ".$album."\n";
+//echo "Album: ".$album."\n";
 
 $albumartist = $ThisFileInfo['tags']['id3v2']['band'][0];
 
-echo "Album Artist: ".$albumartist."\n";
+//echo "Album Artist: ".$albumartist."\n";
 
 $name =  str_replace("'","&#39;",$name);
 $title =  str_replace("'","&#39;",$title);
@@ -76,13 +76,18 @@ $album =  str_replace("'","&#39;",$album);
 $albumartist =  str_replace("'","&#39;",$albumartist);
 
 
-$sql="INSERT INTO app (albumpath, title, artist, album, albumartist) VALUES ('$name', '$title', '$artist', '$album', '$albumartist')";
+$sql="INSERT INTO ap (albumpath, title, artist, album, albumartist) VALUES ('$name', '$title', '$artist', '$album', '$albumartist')";
 
 echo $sql."\n\n"; 
 
 $conn->query($sql);
 
+if (mysqli_error($conn)){
+
 echo mysqli_error($conn)."\n";
+exit;
+}
+
 
 //echo '<pre>'.htmlentities(print_r($ThisFileInfo['comments']['picture'][0], true), ENT_SUBSTITUTE).'</pre>';
 //echo '<pre>'.htmlentities(print_r($ThisFileInfo['tags'], true), ENT_SUBSTITUTE).'</pre>';
