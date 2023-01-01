@@ -43,7 +43,7 @@ $elements = count($dirarray);
 
 for ($x = 3; $x < 4; $x++) {
 
-//echo $dirarray[$x]."<br>";
+echo $dirarray[$x]."\n";
 
 
 
@@ -55,11 +55,11 @@ $subelements = count($subdirarray);
 
 for ($y = 2; $y < $subelements; $y++) {
 
-//echo $dirarray[$x]."/".$subdirarray[$y]."<br>";
+echo $dirarray[$x]."/".$subdirarray[$y]."<br>";
 
 $name = $dirarray[$x]."/".$subdirarray[$y];
 
-//echo $name."<br>";
+echo $name."<br>";
 
 $flacfile = "/mnt/usb/".$name;
 
@@ -69,19 +69,19 @@ $ThisFileInfo = $getID3->analyze($flacfile);
 
 $title = $ThisFileInfo['tags']['id3v2']['title'][0];
 
-//echo "Title: ".$title."<br>";
+echo "Title: ".$title."<br>";
 
 $artist = $ThisFileInfo['tags']['id3v2']['artist'][0];
 
-//echo "Artist: ".$artist."<br>";
+echo "Artist: ".$artist."<br>";
 
 $album = $ThisFileInfo['tags']['id3v2']['album'][0];
 
-//echo "Album: ".$album."<br>";
+echo "Album: ".$album."<br>";
 
 $albumartist = $ThisFileInfo['tags']['id3v2']['band'][0];
 
-//echo "Album Artist: ".$albumartist."<br>";
+echo "Album Artist: ".$albumartist."<br>";
 
 $name =  str_replace("'","&#39;",$name);
 $title =  str_replace("'","&#39;",$title);
@@ -92,7 +92,7 @@ $albumartist =  str_replace("'","&#39;",$albumartist);
 
 $sql="INSERT INTO allmusic (albumpath, title, artist, album, albumartist) VALUES ('$name', '$title', '$artist', '$album' '$albumartist')";
 
-//echo $sql."<br><br>\n"; 
+echo $sql."<br><br>\n"; 
 
 //$conn->query($sql);
 //
