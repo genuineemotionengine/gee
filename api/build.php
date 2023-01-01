@@ -14,21 +14,7 @@ require_once('/var/www/html/api/getid3.php');
 
 //****************** Build Database ***************
 
-//$sql = "DROP TABLE allmusic";
-//$result = $conn->query($sql);
-//echo mysqli_error($conn)."<br>";
-//
-//$sql = "CREATE TABLE allmusic (
-//id INT(6) NOT NULL AUTO_INCREMENT PRIMARY KEY,
-//albumpath varchar(512),
-//title varchar(512),
-//artist varchar(512),
-//album varchar(512),
-//albumartist varchar(512)
-//)";
-//
-//$result = $conn->query($sql);
-//echo mysqli_error($conn)."<br>";
+
 
 
     
