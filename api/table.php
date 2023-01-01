@@ -2,9 +2,6 @@
 
 require_once('/var/www/html/api/dbconn.php');
 
-require_once('/var/www/html/api/getid3.php'); 
-
-
 $sql = "DROP TABLE app";
 $result = $conn->query($sql);
 echo mysqli_error($conn)."\n";
