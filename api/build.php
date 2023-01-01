@@ -80,15 +80,15 @@ $sql="INSERT INTO allmusic (albumpath, title, artist, album, albumartist) VALUES
 
 echo $sql."\n\n"; 
 
-//$conn->query($sql);
-//
-//echo mysqli_error($conn)."<br>";
+$conn->query($sql);
+
+echo mysqli_error($conn)."\n";
 
 //echo '<pre>'.htmlentities(print_r($ThisFileInfo['comments']['picture'][0], true), ENT_SUBSTITUTE).'</pre>';
 //echo '<pre>'.htmlentities(print_r($ThisFileInfo['tags'], true), ENT_SUBSTITUTE).'</pre>';
 
 }
-echo $x."\n";
+echo $x." done\n";
 }
 
 
