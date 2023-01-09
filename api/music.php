@@ -2,9 +2,17 @@
 
 require_once('/var/www/html/api/dbconn.php');
 
-//$random = mt_rand(1000000000, 9999999999);
+require_once('/var/www/html/api/getid3.php');
 
-$random = 4950433334;
+$dir = "/mnt/usb/";
+
+$dirarray = scandir($dir);
+
+$elements = count($dirarray);
+
+for ($x = 3; $x < 4; $x++) {
+
+$random = mt_rand(1000000000, 9999999999);
 
 echo $random."\n";
 
@@ -40,4 +48,9 @@ if ($dup == 0){
 }else {
         echo $random. " is a duplicate\n";
     }
+
+
+rename("/mnt/usb/".$dirarray[$x],"/mnt/usb/".$random);
+    
+}
     
