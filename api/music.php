@@ -33,9 +33,9 @@ if ($dup == 0){
 
     echo mysqli_error($conn)."\n";
     exit;
-    } else {
+    } 
+    
+}else {
         echo $random. " is a duplicate\n";
     }
     
-    
-}
