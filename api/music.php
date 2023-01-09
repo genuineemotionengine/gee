@@ -8,6 +8,8 @@ $dir = "/mnt/usb/";
 
 $dirarray = scandir($dir);
 
+echo '<pre>'.htmlentities(print_r($dirarray, true), ENT_SUBSTITUTE).'</pre>';
+
 $elements = count($dirarray);
 
 for ($x = 3; $x < 4; $x++) {
