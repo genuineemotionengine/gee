@@ -2,7 +2,9 @@
 
 require_once('/var/www/html/api/dbconn.php');
 
-$random = mt_rand(1000000000, 9999999999);
+//$random = mt_rand(1000000000, 9999999999);
+
+$random = 4950433334;
 
 echo $random."\n";
 
