@@ -49,7 +49,7 @@ echo "<br><br><br>";
 
 $elements--;
 for ($x = 0; $x <= $elements; $x++) {
-$sql = "SELECT id FROM allmusic WHERE album = '".$playlistarray[$x][name]."'";
+$sql = "SELECT id FROM app WHERE albumpath = '".$playlistarray[$x][name]."'";
 //echo "sql: ".$sql."<br>";
 $result = $conn->query($sql);
 if ($result->num_rows > 0) {
