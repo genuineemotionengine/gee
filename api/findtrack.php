@@ -1,6 +1,6 @@
 <?php
 
-$sql = "SELECT album FROM allmusic WHERE id = '".$trackid."'";
+$sql = "SELECT albumpath FROM app WHERE id = '".$trackid."'";
 //echo "sql: ".$sql."<br>";
 $result = $conn->query($sql);
 if ($result->num_rows > 0) {
