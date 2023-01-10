@@ -28,7 +28,7 @@ for ($y = 2; $y < $subelements; $y++) {
     
     echo "/mnt/usb/".$dirarray[$x]."/".$random.".flac\n";
         
-    rename("/mnt/usb/".$dirarray[$x]."/".$subdirarray[$y].".flac","/mnt/usb/".$dirarray[$x]."/".$random.".flac");
+    //rename("/mnt/usb/".$dirarray[$x]."/".$subdirarray[$y].".flac","/mnt/usb/".$dirarray[$x]."/".$random.".flac");
     
     
     
