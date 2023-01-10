@@ -10,11 +10,11 @@ $dirarray = scandir($dir);
 
 //echo '<pre>'.htmlentities(print_r($dirarray, true), ENT_SUBSTITUTE).'</pre>';
 
-$elements = count($dirarray);
-
-for ($x = 3; $x < $elements; $x++) {
-
-$subdir = "/mnt/usb/".$dirarray[$x]."/";
+//$elements = count($dirarray);
+//
+//for ($x = 3; $x < $elements; $x++) {
+//
+//$subdir = "/mnt/usb/".$dirarray[$x]."/";
 
 //$subdirarray = scandir($subdir);
 //
