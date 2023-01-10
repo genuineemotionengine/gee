@@ -114,9 +114,7 @@ if ($result->num_rows > 0) {
 
         $myalbum = $row['albumpath'];
         
-        echo $myalbum."<br>";
-        
-        //$myalbum = str_replace("&#39;","'",$myalbum);
+//        $myalbum = str_replace("&#39;","'",$myalbum);
         
         $myalbum = $myalbum."\n";
         
