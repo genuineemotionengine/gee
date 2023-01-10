@@ -31,6 +31,8 @@ if ($dup == 0){
 
     echo mysqli_error($conn)."\n";
     exit;
-    } 
+    } else {
+         include('/var/www/html/api/random.php'); 
+    }
     
 }
