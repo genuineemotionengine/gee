@@ -107,12 +107,12 @@ $mpd->playlist_clear();
 $playlist = "app";
 $count = 0;    
 
-$sql = "SELECT * FROM allmusic";
+$sql = "SELECT * FROM app";
 $result = $conn->query($sql);
 if ($result->num_rows > 0) {
     while($row = $result->fetch_assoc()) {
 
-        $myalbum = $row['album'];
+        $myalbum = $row['albumpath'];
         
         $myalbum = str_replace("&#39;","'",$myalbum);
         
