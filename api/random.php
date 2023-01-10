@@ -2,7 +2,7 @@
 
 $random = mt_rand(1000000000, 9999999999);
 
-echo $random."\n";
+//echo $random."\n";
 
 $dup = 0;
 
@@ -23,7 +23,7 @@ if ($dup == 0){
     
     $sql = "INSERT INTO randomcheck (number) VALUES ($random)";
     
-    echo $sql."\n"; 
+    //echo $sql."\n"; 
 
     $conn->query($sql);
 
@@ -36,7 +36,7 @@ if ($dup == 0){
         
         $random = mt_rand(1000000000, 9999999999);
 
-echo $random."\n";
+//echo $random."\n";
 
 $dup = 0;
 
@@ -57,7 +57,7 @@ if ($dup == 0){
     
     $sql = "INSERT INTO randomcheck (number) VALUES ($random)";
     
-    echo $sql."\n"; 
+    //echo $sql."\n"; 
 
     $conn->query($sql);
 
