@@ -8,27 +8,28 @@ $dir = "/mnt/usb/";
 
 $dirarray = scandir($dir);
 
-echo '<pre>'.htmlentities(print_r($dirarray, true), ENT_SUBSTITUTE).'</pre>';
+//echo '<pre>'.htmlentities(print_r($dirarray, true), ENT_SUBSTITUTE).'</pre>';
 
-//$elements = count($dirarray);
-//
-//for ($x = 3; $x < $elements; $x++) {
-//
-//$subdir = "/mnt/usb/".$dirarray[$x]."/";
+$elements = count($dirarray);
 
-//$subdirarray = scandir($subdir);
-//
-//$subelements = count($subdirarray);
-//
-//for ($y = 2; $y < $subelements; $y++) {
-//    
-//    include('/var/www/html/api/random.php'); 
-//        
-//    rename("/mnt/usb/".$dirarray[$x]."/".$subdirarray[$y],"/mnt/usb/".$dirarray[$x]."/".$random);
-//    
-//    
-//}    
-//    
+for ($x = 3; $x < $elements; $x++) {
+
+$subdir = "/mnt/usb/".$dirarray[$x]."/";
+
+$subdirarray = scandir($subdir);
+
+$subelements = count($subdirarray);
+
+for ($y = 2; $y < $subelements; $y++) {
+    
+    include('/var/www/html/api/random.php'); 
+        
+    rename("/mnt/usb/".$dirarray[$x]."/".$subdirarray[$y].".flac","/mnt/usb/".$dirarray[$x]."/".$random.".flac");
+    
+    echo "/mnt/usb/".$dirarray[$x]."/".$random.".flac\n";
+    
+}    
+    
     
     
     
@@ -38,6 +39,6 @@ echo '<pre>'.htmlentities(print_r($dirarray, true), ENT_SUBSTITUTE).'</pre>';
 //include('/var/www/html/api/random.php'); 
 //
 //rename("/mnt/usb/".$dirarray[$x],"/mnt/usb/".$random);
-//    
-//}
+    
+}
     
