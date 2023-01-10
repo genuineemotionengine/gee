@@ -8,7 +8,7 @@ if ($result->num_rows > 0) {
 
         //echo $row['album']."<br>";
         
-        $name = $row['album'];
+        $name = $row['albumpath'];
         
 
        }
