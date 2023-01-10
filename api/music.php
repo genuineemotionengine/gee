@@ -24,11 +24,13 @@ $subelements = count($subdirarray);
 
 for ($y = 2; $y < $subelements; $y++) {
     
-    include('/var/www/html/api/random.php'); 
+    include('/var/www/html/api/random.php');
+    
+    echo "/mnt/usb/".$dirarray[$x]."/".$random.".flac\n";
         
     rename("/mnt/usb/".$dirarray[$x]."/".$subdirarray[$y].".flac","/mnt/usb/".$dirarray[$x]."/".$random.".flac");
     
-    echo "/mnt/usb/".$dirarray[$x]."/".$random.".flac\n";
+    
     
 }    
     
