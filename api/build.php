@@ -27,7 +27,7 @@ $elements = count($dirarray);
 
 //echo '<pre>'.htmlentities(print_r($dirarray, true), ENT_SUBSTITUTE).'</pre>';
 
-for ($x = 3; $x < 4; $x++) {
+for ($x = 3; $x < $elements; $x++) {
 
 //echo $dirarray[$x]."\n";
 
@@ -69,7 +69,7 @@ $albumartist = $ThisFileInfo['tags']['id3v2']['band'][0];
 
 //echo "Album Artist: ".$albumartist."\n";
 
-$name =  str_replace("'","&#39;",$name);
+//$name =  str_replace("'","&#39;",$name);
 $title =  str_replace("'","&#39;",$title);
 $artist =  str_replace("'","&#39;",$artist);
 $album =  str_replace("'","&#39;",$album);
@@ -80,13 +80,13 @@ $sql="INSERT INTO app (albumpath, title, artist, album, albumartist) VALUES ('$n
 
 echo $sql."\n"; 
 
-//$conn->query($sql);
-//
-//if (mysqli_error($conn)){
-//
-//echo mysqli_error($conn)."\n";
-//exit;
-//}
+$conn->query($sql);
+
+if (mysqli_error($conn)){
+
+echo mysqli_error($conn)."\n";
+exit;
+}
 
 
 //echo '<pre>'.htmlentities(print_r($ThisFileInfo['comments']['picture'][0], true), ENT_SUBSTITUTE).'</pre>';
