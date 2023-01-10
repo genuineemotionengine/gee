@@ -35,9 +35,9 @@ echo '<pre>'.htmlentities(print_r($dirarray, true), ENT_SUBSTITUTE).'</pre>';
     
     
     
-include('/var/www/html/api/random.php'); 
-
-rename("/mnt/usb/".$dirarray[$x],"/mnt/usb/".$random);
-    
-}
+//include('/var/www/html/api/random.php'); 
+//
+//rename("/mnt/usb/".$dirarray[$x],"/mnt/usb/".$random);
+//    
+//}
     
