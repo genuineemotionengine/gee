@@ -8,7 +8,7 @@ $dir = "/mnt/usb/";
 
 $dirarray = scandir($dir);
 
-//echo '<pre>'.htmlentities(print_r($dirarray, true), ENT_SUBSTITUTE).'</pre>';
+echo '<pre>'.htmlentities(print_r($dirarray, true), ENT_SUBSTITUTE).'</pre>';
 
 $elements = count($dirarray);
 
@@ -17,6 +17,8 @@ for ($x = 3; $x < $elements; $x++) {
 $subdir = "/mnt/usb/".$dirarray[$x]."/";
 
 $subdirarray = scandir($subdir);
+
+echo '<pre>'.htmlentities(print_r($subdirarray, true), ENT_SUBSTITUTE).'</pre>';
 
 $subelements = count($subdirarray);
 
