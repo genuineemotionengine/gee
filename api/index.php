@@ -130,7 +130,7 @@ $elements = count($myalbumarray);
 
 shuffle($myalbumarray);
 
-$myfile = fopen("/mnt/usb/000Playlists/app.m3u", "w") or die("Unable to open file!");
+$myfile = fopen("/var/lib/mpd/playlists/app.m3u", "w") or die("Unable to open file!");
 
 for ($x = 0; $x < $elements; $x++) {
 

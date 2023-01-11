@@ -1,12 +1,12 @@
 <?php
 
-$statusarray = $mpd->server_status(); 
-
-if ($verbose){
-echo "Server Status";
-echo '<pre>'.htmlentities(print_r($statusarray, true), ENT_SUBSTITUTE).'</pre>';
-echo "<br><br><br>";    
-}
+//$statusarray = $mpd->server_status(); 
+//
+//if ($verbose){
+//echo "Server Status";
+//echo '<pre>'.htmlentities(print_r($statusarray, true), ENT_SUBSTITUTE).'</pre>';
+//echo "<br><br><br>";    
+//}
 
 $mySimpleArray = $mpd->current_song();
 
