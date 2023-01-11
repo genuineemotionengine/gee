@@ -2,7 +2,7 @@
 
 $timestamp = date_create_from_format("YMdHisu", NULL);
         
-echo "Timestamp ".$timestamp;
+echo "Timestamp: ".$timestamp;
 
 //require_once('/var/www/html/api/dbconn.php');
 //
