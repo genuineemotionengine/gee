@@ -23,7 +23,7 @@ echo '<pre>'.htmlentities(print_r($dirarray, true), ENT_SUBSTITUTE).'</pre>';
 
 $elements = count($dirarray);
 
-for ($x = 3; $x < $elements; $x++) {
+for ($x = 2; $x < $elements; $x++) {
     
 $timestamp = date("YmdHis");
    
