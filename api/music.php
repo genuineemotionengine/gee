@@ -4,9 +4,9 @@ for ($x = 1; $x < 100; $x++) {
 
 $timestamp = date("YmdHisu");
         
-echo "Timestamp: ".date("YmdHisu")."\n";
+echo "Timestamp: ".date("YmdHis")."\n";
 
-usleep(980000);
+usleep(900000);
 
 
 }
