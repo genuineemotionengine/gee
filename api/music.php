@@ -1,19 +1,19 @@
 <?php
+//
+//for ($x = 1; $x < 100; $x++) {
+//
+//$timestamp = date("YmdHis");
+//        
+//echo "Timestamp: ".$timestamp."\n";
+//
+//sleep(1);
+//
+//
+//}
 
-for ($x = 1; $x < 100; $x++) {
+//require_once('/var/www/html/api/dbconn.php');
 
-$timestamp = date("YmdHis");
-        
-echo "Timestamp: ".$timestamp."\n";
-
-sleep(1);
-
-
-}
-
-require_once('/var/www/html/api/dbconn.php');
-
-require_once('/var/www/html/api/getid3.php');
+//require_once('/var/www/html/api/getid3.php');
 
 $dir = "/mnt/usb/";
 
