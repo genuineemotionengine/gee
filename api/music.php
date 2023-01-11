@@ -57,7 +57,7 @@ $timestamp = date("YmdHis");
 
 rename("/mnt/usb/".$dirarray[$x],"/mnt/usb/".$timestamp);
 
-echo "/mnt/usb/".$timestamp."\n";
+echo "/mnt/usb/".$dirarray[$x]." renamed to /mnt/usb/".$timestamp."\n";
 
 sleep(1);
 
