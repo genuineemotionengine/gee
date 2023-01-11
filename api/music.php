@@ -1,6 +1,6 @@
 <?php
 
-$timestamp = date_create_from_format("YMdHisu", NULL);
+$timestamp = date("YMdHisu", NULL);
         
 echo "Timestamp: ".$timestamp;
 
