@@ -11,20 +11,24 @@ sleep(1);
 
 }
 
-//require_once('/var/www/html/api/dbconn.php');
-//
-//require_once('/var/www/html/api/getid3.php');
-//
-//$dir = "/mnt/usb/";
-//
-//$dirarray = scandir($dir);
-//
-//echo '<pre>'.htmlentities(print_r($dirarray, true), ENT_SUBSTITUTE).'</pre>';
-//
-//$elements = count($dirarray);
-//
-//for ($x = 3; $x < $elements; $x++) {
-//
+require_once('/var/www/html/api/dbconn.php');
+
+require_once('/var/www/html/api/getid3.php');
+
+$dir = "/mnt/usb/";
+
+$dirarray = scandir($dir);
+
+echo '<pre>'.htmlentities(print_r($dirarray, true), ENT_SUBSTITUTE).'</pre>';
+
+$elements = count($dirarray);
+
+for ($x = 3; $x < $elements; $x++) {
+    
+$timestamp = date("YmdHis");
+   
+
+
 //$subdir = "/mnt/usb/".$dirarray[$x]."/";
 //
 //$subdirarray = scandir($subdir);
@@ -43,15 +47,20 @@ sleep(1);
 //    
 //}    
 //    
-    
-    
-    
-    
-    
-    
+//    
+//    
+//    
+//    
+//    
+//    
 //include('/var/www/html/api/random.php'); 
-//
-//rename("/mnt/usb/".$dirarray[$x],"/mnt/usb/".$random);
+
+rename("/mnt/usb/".$dirarray[$x],"/mnt/usb/".$timestamp);
+
+echo "/mnt/usb/".$timestamp."\n";
+
+sleep(1);
+
     
-//}
+}
     
