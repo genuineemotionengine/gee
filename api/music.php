@@ -29,7 +29,7 @@ $subdir = "/mnt/usb/".$dirarray[$x]."/";
 
 $subdirarray = scandir($subdir);
 
-echo htmlentities(print_r($subdirarray, true), ENT_SUBSTITUTE).'\n';
+echo htmlentities(print_r($subdirarray, true), ENT_SUBSTITUTE);
 
 $subelements = count($subdirarray);
 
