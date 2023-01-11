@@ -6,7 +6,7 @@ $timestamp = date("YmdHisu");
         
 echo "Timestamp: ".date("YmdHisu")."\n";
 
-//sleep(1);
+sleep(1);
 
 
 }
