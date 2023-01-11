@@ -1,6 +1,6 @@
 <?php
 
-$timestamp = date("YMdHisu", NULL);
+$timestamp = date("YMdHisu");
         
 echo "Timestamp: ".$timestamp;
 
