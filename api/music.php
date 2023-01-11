@@ -2,9 +2,9 @@
 
 for ($x = 1; $x < 100; $x++) {
 
-$timestamp = date("YmdHisu");
+//$timestamp = date("YmdHisu");
         
-echo "Timestamp: ".$timestamp."<br>";
+echo "Timestamp: ".date("YmdHisu")."<br>";
 
 }
 
