@@ -4,7 +4,7 @@ for ($x = 1; $x < 100; $x++) {
 
 $timestamp = date("YmdHisu");
         
-echo "Timestamp: ".date("YmdHis")."\n";
+echo "Timestamp: ".$timestamp."\n";
 
 sleep(1);
 
