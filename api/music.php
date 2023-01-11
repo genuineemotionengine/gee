@@ -1,8 +1,12 @@
 <?php
 
+for ($x = 1; $x < 100; $x++) {
+
 $timestamp = date("YmdHisu");
         
-echo "Timestamp: ".$timestamp;
+echo "Timestamp: ".$timestamp."<br>";
+
+}
 
 //require_once('/var/www/html/api/dbconn.php');
 //
