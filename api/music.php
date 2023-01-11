@@ -19,47 +19,45 @@ $dir = "/mnt/usb/";
 
 $dirarray = scandir($dir);
 
-echo '<pre>'.htmlentities(print_r($dirarray, true), ENT_SUBSTITUTE).'</pre>';
+//echo '<pre>'.htmlentities(print_r($dirarray, true), ENT_SUBSTITUTE).'</pre>';
 
 $elements = count($dirarray);
 
 for ($x = 2; $x < $elements; $x++) {
     
-$timestamp = date("YmdHis");
-   
+$subdir = "/mnt/usb/".$dirarray[$x]."/";
 
+$subdirarray = scandir($subdir);
 
-//$subdir = "/mnt/usb/".$dirarray[$x]."/";
-//
-//$subdirarray = scandir($subdir);
-//
-//echo '<pre>'.htmlentities(print_r($subdirarray, true), ENT_SUBSTITUTE).'</pre>';
-//
-//$subelements = count($subdirarray);
-//
-//for ($y = 2; $y < $subelements; $y++) {
-//    
-//    include('/var/www/html/api/random.php');
-//    
-//    rename("/mnt/usb/".$dirarray[$x]."/".$subdirarray[$y],"/mnt/usb/".$dirarray[$x]."/".$random.".flac");
-//    
-//    echo "/mnt/usb/".$dirarray[$x]."/".$random.".flac\n";
-//    
-//}    
-//    
-//    
-//    
-//    
-//    
-//    
-//    
+echo '<pre>'.htmlentities(print_r($subdirarray, true), ENT_SUBSTITUTE).'</pre>';
+
+$subelements = count($subdirarray);
+
+for ($y = 2; $y < $subelements; $y++) {
+    
+    $timestamp = date("YmdHis");
+    
+    rename("/mnt/usb/".$dirarray[$x]."/".$subdirarray[$y],"/mnt/usb/".$dirarray[$x]."/".$timestamp.".flac");
+    
+    echo "/mnt/usb/".$dirarray[$x]."/".$subdirarray[$y]." renamed to /mnt/usb/".$dirarray[$x]."/".$timestamp.".flac\n";
+    
+    sleep(1);
+      
+}    
+    
+    
+    
+    
+    
+    
+    
 //include('/var/www/html/api/random.php'); 
 
-rename("/mnt/usb/".$dirarray[$x],"/mnt/usb/".$timestamp);
+//rename("/mnt/usb/".$dirarray[$x],"/mnt/usb/".$timestamp);
+//
+//echo "/mnt/usb/".$dirarray[$x]." renamed to /mnt/usb/".$timestamp."\n";
 
-echo "/mnt/usb/".$dirarray[$x]." renamed to /mnt/usb/".$timestamp."\n";
 
-sleep(1);
 
     
 }
