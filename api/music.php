@@ -2,7 +2,7 @@
 
 for ($x = 1; $x < 100; $x++) {
 
-$timestamp = date("YmdHisu");
+$timestamp = date("YmdHis");
         
 echo "Timestamp: ".$timestamp."\n";
 
