@@ -24,6 +24,8 @@ for ($y = 2; $y < $subelements; $y++) {
     rename("/mnt/usb/".$dirarray[$x]."/".$subdirarray[$y],"/mnt/usb/".$dirarray[$x]."/".$count.".flac");
     
     echo "/mnt/usb/".$dirarray[$x]."/".$subdirarray[$y]." renamed to /mnt/usb/".$dirarray[$x]."/".$count.".flac\n";
+    
+    $count++;
       
 }    
     
