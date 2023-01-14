@@ -1,5 +1,5 @@
 <?php
-
+$ipaddr = $_SERVER['SERVER_ADDR'];
 require_once('/var/www/html/api/dbconn.php');
 
 $sql = "DROP TABLE app";

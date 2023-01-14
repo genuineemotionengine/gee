@@ -1,4 +1,5 @@
 <?php
+
 $servername = "localhost:3306";
 $username = "geeuser";
 if ($ipaddr == "192.168.68.108"){
