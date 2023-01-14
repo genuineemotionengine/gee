@@ -4,7 +4,7 @@ parse_str($_SERVER['QUERY_STRING']);
 
 $ipaddr = $_SERVER['SERVER_ADDR'];
 
-require_once('dbconn.php');
+require_once('dbconn23.php');
 
 require_once('mpd.class.php');
 
