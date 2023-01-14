@@ -1,6 +1,6 @@
 <?php
 
-require_once('/var/www/html/api/dbconn.php');
+require_once('/var/www/html/api/dbconn23.php');
 
 //require_once('/var/www/html/api/mpd.class.php');
 
@@ -74,9 +74,10 @@ $title =  str_replace("'","&#39;",$title);
 $artist =  str_replace("'","&#39;",$artist);
 $album =  str_replace("'","&#39;",$album);
 $albumartist =  str_replace("'","&#39;",$albumartist);
+$idalbum = $dirarray[$x].$album;
 
 
-$sql="INSERT INTO app (albumpath, title, artist, album, albumartist) VALUES ('$name', '$title', '$artist', '$album', '$albumartist')";
+$sql="INSERT INTO app (albumpath, title, artist, album, albumartist, idalbum) VALUES ('$name', '$title', '$artist', '$album', '$albumartist', '$idalbum')";
 
 echo $sql."\n"; 
 
