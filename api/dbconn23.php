@@ -1,7 +1,7 @@
 <?php
 $servername = "localhost:3306";
 $username = "geeuser";
-$password = "Pergamon2022!";
+$password = "Pergamon2023!";
 $dbname = "geeapp";
 
 // Create connection
