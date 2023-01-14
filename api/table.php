@@ -17,7 +17,8 @@ albumpath varchar(512),
 title varchar(512),
 artist varchar(512),
 album varchar(512),
-albumartist varchar(512)
+albumartist varchar(512),
+idalbum varchar(512)
 )";
 
 $result = $conn->query($sql);
