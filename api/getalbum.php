@@ -16,7 +16,7 @@ if ($result->num_rows > 0) {
        
         $idalbum = $row['idalbum'];
         
-        echo "idalbum: ".$idalbum."<br>";
+        echo "idalbum: ".$idalbum."<br><br>";
 
        }
      } 
