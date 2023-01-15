@@ -53,6 +53,8 @@ $getID3 = new getID3;
 
 $ThisFileInfo = $getID3->analyze($flacfile);
 
+$track = $ThisFileInfo['tags']['id3v2']['track'][0];
+
 $title = $ThisFileInfo['tags']['id3v2']['title'][0];
 
 //echo "Title: ".$title."\n";
@@ -69,7 +71,7 @@ $albumartist = $ThisFileInfo['tags']['id3v2']['band'][0];
 
 //echo "Album Artist: ".$albumartist."\n";
 
-//$name =  str_replace("'","&#39;",$name);
+
 $title =  str_replace("'","&#39;",$title);
 $artist =  str_replace("'","&#39;",$artist);
 $album =  str_replace("'","&#39;",$album);
@@ -77,7 +79,7 @@ $albumartist =  str_replace("'","&#39;",$albumartist);
 $idalbum = $dirarray[$x].$album;
 
 
-$sql="INSERT INTO app (albumpath, title, artist, album, albumartist, idalbum) VALUES ('$name', '$title', '$artist', '$album', '$albumartist', '$idalbum')";
+$sql="INSERT INTO app (albumpath, title, artist, album, albumartist, idalbum, track) VALUES ('$name', '$title', '$artist', '$album', '$albumartist', '$idalbum', '$track')";
 
 echo $sql."\n"; 
 
