@@ -13,31 +13,39 @@ $sql = "SELECT idalbum FROM app WHERE albumpath = '".$mySimpleArray[0]['name']."
 $result = $conn->query($sql);
 if ($result->num_rows > 0) {
     while($row = $result->fetch_assoc()) {
-
-        
-        
+       
         $idalbum = $row['idalbum'];
         
         echo "idalbum: ".$idalbum."<br>";
-        
 
        }
      } 
 
 
-//$sql = "SELECT idalbum FROM app WHERE albumpath = '".$mySimpleArray[0]['name']."'";
-////echo "sql: ".$sql."<br>";
-//$result = $conn->query($sql);
-//if ($result->num_rows > 0) {
-//    while($row = $result->fetch_assoc()) {
-//
-//        //echo $row['album']."<br>";
-//        
-//        $idalbum = $row['idalbum'];
-//        
-//
-//       }
-//     } 
+$sql = "SELECT * FROM app WHERE idalbum = '".$idalbum."'";
+//echo "sql: ".$sql."<br>";
+$result = $conn->query($sql);
+if ($result->num_rows > 0) {
+    while($row = $result->fetch_assoc()) {
+
+        $albumpath = $row['albumpath'];
+        $title = $row['title'];
+        $artist = $row['artist'];
+        $album = $row['album'];
+        $albumartist = $row['albumartist'];
+        $idalbum = $row['idalbum'];
+        
+        echo "albumpath: ".$albumpath."<br>";
+        echo "title: ".$title."<br>";
+        echo "artist: ".$artist."<br>";
+        echo "album: ".$album."<br>";
+        echo "albumartist: ".$albumartist."<br>";
+        echo "idalbum: ".$idalbum."<br><br>";
+
+        
+        
+       }
+     } 
 
 
 
