@@ -61,7 +61,7 @@ $track = $ThisFileInfo['tags']['id3v2']['track'][0];
 
 $title = $ThisFileInfo['tags']['id3v2']['title'][0];
 
-//echo "Title: ".$title."\n";
+echo "Title: ".$title."\n";
 
 $artist = $ThisFileInfo['tags']['id3v2']['artist'][0];
 
