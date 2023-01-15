@@ -53,9 +53,9 @@ $getID3 = new getID3;
 
 $ThisFileInfo = $getID3->analyze($flacfile);
 
-echo htmlentities(print_r($ThisFileInfo['tags']['id3v2'], true), ENT_SUBSTITUTE);
 
-$track = $ThisFileInfo['tags']['id3v2']['track'][0];
+
+$track = $ThisFileInfo['tags']['id3v2']['track_number'][0];
 
 $title = $ThisFileInfo['tags']['id3v2']['title'][0];
 
