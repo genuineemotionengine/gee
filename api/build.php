@@ -89,7 +89,7 @@ echo $sql."\n";
 //
 //echo mysqli_error($conn)."\n";
 //exit;
-}
+//}
 
 
 //echo '<pre>'.htmlentities(print_r($ThisFileInfo['comments']['picture'][0], true), ENT_SUBSTITUTE).'</pre>';
