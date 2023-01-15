@@ -53,6 +53,10 @@ $getID3 = new getID3;
 
 $ThisFileInfo = $getID3->analyze($flacfile);
 
+echo '<pre>'.htmlentities(print_r($ThisFileInfo, true), ENT_SUBSTITUTE).'</pre>';
+
+
+
 $track = $ThisFileInfo['tags']['id3v2']['track'][0];
 
 $title = $ThisFileInfo['tags']['id3v2']['title'][0];
@@ -79,16 +83,16 @@ $albumartist =  str_replace("'","&#39;",$albumartist);
 $idalbum = $dirarray[$x].$album;
 
 
-$sql="INSERT INTO app (albumpath, title, artist, album, albumartist, idalbum, track) VALUES ('$name', '$title', '$artist', '$album', '$albumartist', '$idalbum', '$track')";
-
-echo $sql."\n"; 
-
-$conn->query($sql);
-
-if (mysqli_error($conn)){
-
-echo mysqli_error($conn)."\n";
-exit;
+//$sql="INSERT INTO app (albumpath, title, artist, album, albumartist, idalbum, track) VALUES ('$name', '$title', '$artist', '$album', '$albumartist', '$idalbum', '$track')";
+//
+//echo $sql."\n"; 
+//
+//$conn->query($sql);
+//
+//if (mysqli_error($conn)){
+//
+//echo mysqli_error($conn)."\n";
+//exit;
 }
 
 
