@@ -27,7 +27,7 @@ $elements = count($dirarray);
 
 //echo '<pre>'.htmlentities(print_r($dirarray, true), ENT_SUBSTITUTE).'</pre>';
 
-for ($x = 3; $x < 4; $x++) {
+for ($x = 3; $x < $elements; $x++) {
 
 //echo $dirarray[$x]."\n";
 
@@ -84,14 +84,14 @@ $idalbum = $dirarray[$x].$album;
 $sql="INSERT INTO app (albumpath, title, artist, album, albumartist, idalbum, track) VALUES ('$name', '$title', '$artist', '$album', '$albumartist', '$idalbum', '$track')";
 
 echo $sql."\n"; 
-//
-//$conn->query($sql);
-//
-//if (mysqli_error($conn)){
-//
-//echo mysqli_error($conn)."\n";
-//exit;
-//}
+
+$conn->query($sql);
+
+if (mysqli_error($conn)){
+
+echo mysqli_error($conn)."\n";
+exit;
+}
 
 
 //echo '<pre>'.htmlentities(print_r($ThisFileInfo['comments']['picture'][0], true), ENT_SUBSTITUTE).'</pre>';
