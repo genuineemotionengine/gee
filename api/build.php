@@ -79,9 +79,9 @@ $albumartist =  str_replace("'","&#39;",$albumartist);
 $idalbum = $dirarray[$x].$album;
 
 
-//$sql="INSERT INTO app (albumpath, title, artist, album, albumartist, idalbum, track) VALUES ('$name', '$title', '$artist', '$album', '$albumartist', '$idalbum', '$track')";
-//
-//echo $sql."\n"; 
+$sql="INSERT INTO app (albumpath, title, artist, album, albumartist, idalbum, track) VALUES ('$name', '$title', '$artist', '$album', '$albumartist', '$idalbum', '$track')";
+
+echo $sql."\n"; 
 //
 //$conn->query($sql);
 //
