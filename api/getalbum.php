@@ -8,6 +8,7 @@ echo '<pre>'.htmlentities(print_r($mySimpleArray, true), ENT_SUBSTITUTE).'</pre>
 echo "<br><br><br>";    
 }
 
+
 $sql = "SELECT idalbum FROM app WHERE albumpath = '".$mySimpleArray[0]['name']."'";
 //echo "sql: ".$sql."<br>";
 $result = $conn->query($sql);
@@ -15,9 +16,9 @@ if ($result->num_rows > 0) {
     while($row = $result->fetch_assoc()) {
        
         $idalbum = $row['idalbum'];
-        
+        if ($verbose){
         echo "idalbum: ".$idalbum."<br><br>";
-
+        }
        }
      } 
 
@@ -36,6 +37,7 @@ if ($result->num_rows > 0) {
         $albumartist = $row['albumartist'];
         $idalbum = $row['idalbum'];
         
+        if ($verbose) {
         echo "id: ".$id."<br>";
         echo "albumpath: ".$albumpath."<br>";
         echo "title: ".$title."<br>";
@@ -43,12 +45,25 @@ if ($result->num_rows > 0) {
         echo "album: ".$album."<br>";
         echo "albumartist: ".$albumartist."<br>";
         echo "idalbum: ".$idalbum."<br><br>";
-
+        }
         
         
        }
      } 
 
+     $rows = [
+        'image' => $image,
+        'title' => $title,
+        'artist' => $artist,
+        'album' => $album,
+        'elapsed' => $elapsed,
+        'duration' => $durations[0],
+        'albumartist' => $albumartist,  
+        'state' => $state
+     ]; 
+
+
+    echo json_encode($rows);
 
 
 
