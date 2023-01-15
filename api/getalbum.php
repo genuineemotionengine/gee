@@ -36,6 +36,7 @@ if ($result->num_rows > 0) {
         $album = $row['album'];
         $albumartist = $row['albumartist'];
         $idalbum = $row['idalbum'];
+        $track = $row['track'];
         
         if ($verbose) {
         echo "id: ".$id."<br>";
@@ -44,7 +45,8 @@ if ($result->num_rows > 0) {
         echo "artist: ".$artist."<br>";
         echo "album: ".$album."<br>";
         echo "albumartist: ".$albumartist."<br>";
-        echo "idalbum: ".$idalbum."<br><br>";
+        echo "idalbum: ".$idalbum."<br>";
+        echo "track: ".$track."<br><br>";
         }
         
         
