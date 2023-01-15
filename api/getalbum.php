@@ -8,7 +8,24 @@ echo '<pre>'.htmlentities(print_r($mySimpleArray, true), ENT_SUBSTITUTE).'</pre>
 echo "<br><br><br>";    
 }
 
-//$sql = "SELECT * FROM app WHERE id = '".$trackid."'";
+$sql = "SELECT idalbum FROM app WHERE albumpath = '".$mySimpleArray[0]['name']."'";
+//echo "sql: ".$sql."<br>";
+$result = $conn->query($sql);
+if ($result->num_rows > 0) {
+    while($row = $result->fetch_assoc()) {
+
+        
+        
+        $idalbum = $row['idalbum'];
+        
+        echo "idalbum: ".$idalbum."<br>";
+        
+
+       }
+     } 
+
+
+//$sql = "SELECT idalbum FROM app WHERE albumpath = '".$mySimpleArray[0]['name']."'";
 ////echo "sql: ".$sql."<br>";
 //$result = $conn->query($sql);
 //if ($result->num_rows > 0) {
@@ -16,13 +33,11 @@ echo "<br><br><br>";
 //
 //        //echo $row['album']."<br>";
 //        
-//        $name = $row['albumpath'];
+//        $idalbum = $row['idalbum'];
 //        
 //
 //       }
 //     } 
-
-
 
 
 
