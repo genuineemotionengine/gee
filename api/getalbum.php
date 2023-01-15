@@ -28,6 +28,7 @@ $result = $conn->query($sql);
 if ($result->num_rows > 0) {
     while($row = $result->fetch_assoc()) {
 
+        $id = $row['id'];
         $albumpath = $row['albumpath'];
         $title = $row['title'];
         $artist = $row['artist'];
@@ -35,6 +36,7 @@ if ($result->num_rows > 0) {
         $albumartist = $row['albumartist'];
         $idalbum = $row['idalbum'];
         
+        echo "id: ".$id."<br>";
         echo "albumpath: ".$albumpath."<br>";
         echo "title: ".$title."<br>";
         echo "artist: ".$artist."<br>";
