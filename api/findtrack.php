@@ -1,41 +1,28 @@
 <?php
 
+$mySimpleArray = $mpd->current_song();
+
+if ($verbose){
+echo "Current Song";
+echo '<pre>'.htmlentities(print_r($mySimpleArray, true), ENT_SUBSTITUTE).'</pre>'; 
+echo "<br><br><br>";    
+}
+
 $sql = "SELECT albumpath FROM app WHERE id = '".$id."'";
 echo "sql: ".$sql."<br>";
 $result = $conn->query($sql);
 if ($result->num_rows > 0) {
     while($row = $result->fetch_assoc()) {
-
        
-        
         $uri = $row['albumpath'];
-        
-        
-        
 
        }
      } 
 
-
-     echo "uri: ".$uri."<br>";
-
-    
-//$elements = count($playlistarray);
-//
-//  for ($x = 0; $x <= $elements; $x++) {
-//  if ($name != $playlistarray[$x][name]){
-//      unset($playlistarray[$x]);
-//  }else{
-//      $t = $x;
-//  }
-//}
-//
-//if ($verbose){
-//echo '<pre>'.htmlentities(print_r($playlistarray, true), ENT_SUBSTITUTE).'</pre>';
-//}
-//
-//
-//$uri = $playlistarray[$t]['name'];
+if ($verbose){
+echo "uri: ".$uri."<br>";
+}
+   
 
 $pos = $mySimpleArray[0]['Pos'];
 
