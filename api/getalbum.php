@@ -2,6 +2,8 @@
 
 $mySimpleArray = $mpd->current_song();
 
+
+
 $albumtracks = array();
 
 if ($verbose){

@@ -1,6 +1,6 @@
 <?php
 
-$sql = "SELECT albumpath FROM app WHERE id = '".$trackid."'";
+$sql = "SELECT albumpath FROM app WHERE id = '".$id."'";
 //echo "sql: ".$sql."<br>";
 $result = $conn->query($sql);
 if ($result->num_rows > 0) {
@@ -8,7 +8,7 @@ if ($result->num_rows > 0) {
 
         //echo $row['album']."<br>";
         
-        $name = $row['albumpath'];
+        $uri = $row['albumpath'];
         
 
        }
@@ -18,22 +18,22 @@ if ($result->num_rows > 0) {
      
 
     
-$elements = count($playlistarray);
-
-  for ($x = 0; $x <= $elements; $x++) {
-  if ($name != $playlistarray[$x][name]){
-      unset($playlistarray[$x]);
-  }else{
-      $t = $x;
-  }
-}
-
-if ($verbose){
-echo '<pre>'.htmlentities(print_r($playlistarray, true), ENT_SUBSTITUTE).'</pre>';
-}
-
-
-$uri = $playlistarray[$t]['name'];
+//$elements = count($playlistarray);
+//
+//  for ($x = 0; $x <= $elements; $x++) {
+//  if ($name != $playlistarray[$x][name]){
+//      unset($playlistarray[$x]);
+//  }else{
+//      $t = $x;
+//  }
+//}
+//
+//if ($verbose){
+//echo '<pre>'.htmlentities(print_r($playlistarray, true), ENT_SUBSTITUTE).'</pre>';
+//}
+//
+//
+//$uri = $playlistarray[$t]['name'];
 
 $pos = $statusarray['song'];
 
