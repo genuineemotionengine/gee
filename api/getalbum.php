@@ -31,6 +31,7 @@ $result = $conn->query($sql);
 if ($result->num_rows > 0) {
     while($row = $result->fetch_assoc()) {
 
+        $id = $row['id'];
         $albumpath = $row['albumpath'];
         $title = $row['title'];
         $artist = $row['artist'];
@@ -42,6 +43,7 @@ if ($result->num_rows > 0) {
 //        $albumartist =  str_replace("&#39;","'",$albumartist);
         
         if ($verbose) {
+        echo "id: ".$id;
         echo "albumpath: ".$albumpath."<br>";
         echo "title: ".$title."<br>";
         echo "artist: ".$artist."<br>";
@@ -50,6 +52,7 @@ if ($result->num_rows > 0) {
         }
   
         $albumtracks[$count] = array(
+            "id" => $id,
             "albumpath" => $albumpath, 
             "title" => $title, 
             "artist" => $artist,
