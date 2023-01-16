@@ -34,18 +34,18 @@ if ($result->num_rows > 0) {
         $albumpath = $row['albumpath'];
         $title = $row['title'];
         $artist = $row['artist'];
-        $albumartist = $row['albumartist'];
+//        $albumartist = $row['albumartist'];
         $track = $row['track'];
         
         $title =  str_replace("&#39;","'",$title);
         $artist =  str_replace("&#39;","'",$artist);
-        $albumartist =  str_replace("&#39;","'",$albumartist);
+//        $albumartist =  str_replace("&#39;","'",$albumartist);
         
         if ($verbose) {
         echo "albumpath: ".$albumpath."<br>";
         echo "title: ".$title."<br>";
         echo "artist: ".$artist."<br>";
-        echo "albumartist: ".$albumartist."<br>";
+//        echo "albumartist: ".$albumartist."<br>";
         echo "track: ".$track."<br><br>";
         }
   
@@ -53,7 +53,7 @@ if ($result->num_rows > 0) {
             "albumpath" => $albumpath, 
             "title" => $title, 
             "artist" => $artist,
-            "albumartist" => $albumartist,
+//            "albumartist" => $albumartist,
             "track" => $track
         );        
         
