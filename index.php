@@ -313,8 +313,8 @@ echo "<div class='modal fade' id='staticBackdrop2' data-bs-backdrop='static' dat
 echo "<div class='modal-dialog modal-dialog-scrollable'>\n";
 echo "<div class='modal-content bg-black'style='background: black;'>\n";
 echo "<div class='modal-header'>\n";
-echo "<div class='row row-cols-3'>\n";
-echo "<div class='col-3'>";
+echo "<div class='row row-cols-2'>\n";
+echo "<div class='col-5'>";
 
 echo "<form action='?mode=13' method='post'>\n";
 echo "<input type='hidden' value='$token' name='shift'>\n";
@@ -324,10 +324,10 @@ echo "<div id='suggesstion-box'></div>\n";
 echo "</form>\n";
 
 echo "</div>\n";
-echo "<div class='col-7'>\n";
-echo "<h3 id='album2'></h3>\n";
-echo "<h4 id='albumartist2'></h4>\n";
-echo "</div>\n";
+//echo "<div class='col-7'>\n";
+//echo "<h3 id='album2'></h3>\n";
+//echo "<h4 id='albumartist2'></h4>\n";
+//echo "</div>\n";
 echo "<div class='col-1'><button type='button' class='btn btn-sm' data-bs-dismiss='modal' aria-label='Close'><i class='bi bi-x' style='font-size: 3rem; color: white;'></i></button></div>\n";
 echo "</div>\n";
 echo "</div>\n";
