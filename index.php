@@ -152,7 +152,7 @@ echo "<br/>\n";
 echo "<button type='button' class='bg-black' onclick='getmeta(1)'><i class='bi bi-arrow-clockwise' style='font-size: 2.3rem; color: white;'></i></button>\n";
 echo "<button type='button' class='bg-black' onclick='getmeta(5)'><i class='bi bi-arrow-repeat' style='font-size: 2.3rem; color: white;'></i></button>\n";
 echo "<button type='button' class='btn btn-black' onclick='wholealbum()' data-bs-toggle='modal' data-bs-target='#staticBackdrop1'><i class='bi bi-three-dots' style='font-size: 2.3rem; color: white;'></i></button>\n";
-echo "<button type='button' class='btn btn-black' onclick='wholealbum()' data-bs-toggle='modal' data-bs-target='#staticBackdrop2'><i class='bi bi-search' style='font-size: 2.3rem; color: white;'></i></button>\n";
+echo "<button type='button' class='btn btn-black' onclick='search()' data-bs-toggle='modal' data-bs-target='#staticBackdrop2'><i class='bi bi-search' style='font-size: 2.3rem; color: white;'></i></button>\n";
 echo "<button type='button' class='bg-black' onclick='volumedown()'><i class='bi bi-volume-down' style='font-size: 2.3rem; color: white;'></i></button>\n";
 echo "<button type='button' class='bg-black' onclick='volumeup()'><i class='bi bi-volume-up' style='font-size: 2.3rem; color: white;'></i></button>\n";
 echo "<br/>\n";
@@ -314,7 +314,15 @@ echo "<div class='modal-dialog modal-dialog-scrollable'>\n";
 echo "<div class='modal-content bg-black'style='background: black;'>\n";
 echo "<div class='modal-header'>\n";
 echo "<div class='row row-cols-3'>\n";
-echo "<div class='col-3'>Search</div>\n";
+echo "<div class='col-3'>";
+
+echo "<form action='?mode=13' method='post'>\n";
+echo "<input type='hidden' value='$token' name='shift'>";
+echo "<input type='submit' value='Find'>&nbsp;&nbsp;&nbsp;<input type='text' id='search-box' placeholder='Album Name' name='".$token."'/>\n";
+echo "<div id='suggesstion-box'></div>\n";
+echo "</form>\n";
+
+echo "</div>\n";
 echo "<div class='col-7'>\n";
 echo "<h3 id='album2'></h3>\n";
 echo "<h4 id='albumartist2'></h4>\n";
