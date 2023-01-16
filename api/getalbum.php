@@ -62,17 +62,6 @@ if ($result->num_rows > 0) {
        }
      } 
 
-//     $rows = [
-//        'image' => $image,
-//        'title' => $title,
-//        'artist' => $artist,
-//        'album' => $album,
-//        'elapsed' => $elapsed,
-//        'duration' => $durations[0],
-//        'albumartist' => $albumartist,  
-//        'state' => $state
-//     ]; 
-     
     if ($verbose) {
         echo '<pre>'.htmlentities(print_r($albumtracks, true), ENT_SUBSTITUTE).'</pre>';
     }
