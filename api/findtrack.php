@@ -37,7 +37,7 @@ if ($result->num_rows > 0) {
 //
 //$uri = $playlistarray[$t]['name'];
 
-$pos = $statusarray['song'];
+$pos = $mySimpleArray[0]['Pos'];
 
 $pos++;
 
