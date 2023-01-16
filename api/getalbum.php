@@ -66,7 +66,7 @@ if ($result->num_rows > 0) {
         echo '<pre>'.htmlentities(print_r($albumtracks, true), ENT_SUBSTITUTE).'</pre>';
     }
 
-    echo json_encode($albumtracks);
+    //echo json_encode($albumtracks);
 
 
 

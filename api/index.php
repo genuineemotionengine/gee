@@ -200,7 +200,7 @@ if ($service == 8){
 
 include ('getalbum.php'); 
     
-echo json_encode($playlistarray);
+echo json_encode($albumtracks);
 
 }
 
