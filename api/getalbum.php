@@ -78,9 +78,9 @@ if ($result->num_rows > 0) {
 //        'albumartist' => $albumartist,  
 //        'state' => $state
 //     ]; 
-
-    echo '<pre>'.htmlentities(print_r($albumtracks, true), ENT_SUBSTITUTE).'</pre>';
-
+    if ($verbose) {
+        echo '<pre>'.htmlentities(print_r($albumtracks, true), ENT_SUBSTITUTE).'</pre>';
+    }
 
     echo json_encode($albumtracks);
 
