@@ -229,9 +229,6 @@ if ($result->num_rows > 0) {
        }
      } 
 
-if ($verbose){
-echo "uri: ".$uri."<br>";
-}
    
 
 $pos = $mySimpleArray[0]['Pos'];
