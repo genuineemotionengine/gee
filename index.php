@@ -149,12 +149,12 @@ echo "<div class='col-2 text-center'><span id='minutesdur1'>00</span>:<span id='
 echo "</div>\n";
 echo "</div>\n";
 echo "<br/>\n";
-echo "<button type='button' class='bg-black' onclick='getmeta(1)'><i class='bi bi-arrow-clockwise' style='font-size: 2.5rem; color: white;'></i></button>\n";
-echo "<button type='button' class='bg-black' onclick='getmeta(5)'><i class='bi bi-arrow-repeat' style='font-size: 2.5rem; color: white;'></i></button>\n";
-echo "<button type='button' class='btn btn-black' onclick='wholealbum()' data-bs-toggle='modal' data-bs-target='#staticBackdrop'><i class='bi bi-three-dots' style='font-size: 2.5rem; color: white;'></i></button>\n";
-echo "<button type='button' class='btn btn-black' onclick='wholealbum()' data-bs-toggle='modal' data-bs-target='#staticBackdrop'><i class='bi bi-search' style='font-size: 2.5rem; color: white;'></i></button>\n";
-echo "<button type='button' class='bg-black' onclick='volumedown()'><i class='bi bi-volume-down' style='font-size: 2.5rem; color: white;'></i></button>\n";
-echo "<button type='button' class='bg-black' onclick='volumeup()'><i class='bi bi-volume-up' style='font-size: 2.5rem; color: white;'></i></button>\n";
+echo "<button type='button' class='bg-black' onclick='getmeta(1)'><i class='bi bi-arrow-clockwise' style='font-size: 2.4rem; color: white;'></i></button>\n";
+echo "<button type='button' class='bg-black' onclick='getmeta(5)'><i class='bi bi-arrow-repeat' style='font-size: 2.4rem; color: white;'></i></button>\n";
+echo "<button type='button' class='btn btn-black' onclick='wholealbum()' data-bs-toggle='modal' data-bs-target='#staticBackdrop'><i class='bi bi-three-dots' style='font-size: 2.4rem; color: white;'></i></button>\n";
+echo "<button type='button' class='btn btn-black' onclick='wholealbum()' data-bs-toggle='modal' data-bs-target='#staticBackdrop'><i class='bi bi-search' style='font-size: 2.4rem; color: white;'></i></button>\n";
+echo "<button type='button' class='bg-black' onclick='volumedown()'><i class='bi bi-volume-down' style='font-size: 2.4rem; color: white;'></i></button>\n";
+echo "<button type='button' class='bg-black' onclick='volumeup()'><i class='bi bi-volume-up' style='font-size: 2.4rem; color: white;'></i></button>\n";
 echo "<br/>\n";
 echo "<h1 id='title1' class='display-6'></h1>\n";
 echo "<h1 id='artist1' class='display-6'></h1>\n";
