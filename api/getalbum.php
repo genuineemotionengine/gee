@@ -2,6 +2,8 @@
 
 $mySimpleArray = $mpd->current_song();
 
+$albumtracks = array();
+
 if ($verbose){
 echo "Current Song";
 echo '<pre>'.htmlentities(print_r($mySimpleArray, true), ENT_SUBSTITUTE).'</pre>'; 
@@ -22,50 +24,65 @@ if ($result->num_rows > 0) {
        }
      } 
 
-
-$sql = "SELECT * FROM app WHERE idalbum = '".$idalbum."'";
+$count = 0;
+$sql = "SELECT albumpath, title, artist, albumartist, track FROM app WHERE idalbum = '".$idalbum."'";
 //echo "sql: ".$sql."<br>";
 $result = $conn->query($sql);
 if ($result->num_rows > 0) {
     while($row = $result->fetch_assoc()) {
 
-        $id = $row['id'];
+        //$id = $row['id'];
         $albumpath = $row['albumpath'];
         $title = $row['title'];
         $artist = $row['artist'];
-        $album = $row['album'];
+        //$album = $row['album'];
         $albumartist = $row['albumartist'];
-        $idalbum = $row['idalbum'];
+        //$idalbum = $row['idalbum'];
         $track = $row['track'];
         
         if ($verbose) {
-        echo "id: ".$id."<br>";
+        //echo "id: ".$id."<br>";
         echo "albumpath: ".$albumpath."<br>";
         echo "title: ".$title."<br>";
         echo "artist: ".$artist."<br>";
-        echo "album: ".$album."<br>";
+        //echo "album: ".$album."<br>";
         echo "albumartist: ".$albumartist."<br>";
-        echo "idalbum: ".$idalbum."<br>";
+        //echo "idalbum: ".$idalbum."<br>";
         echo "track: ".$track."<br><br>";
         }
+  
+        $albumtracks[$count] = array(
+            "albumpath" => $albumpath, 
+            "title" => $title, 
+            "artist" => $artist,
+            "albumartist" => $albumartist,
+            "track" => $track
+        );
+
+
+
         
+        
+       $count++;
         
        }
      } 
 
-     $rows = [
-        'image' => $image,
-        'title' => $title,
-        'artist' => $artist,
-        'album' => $album,
-        'elapsed' => $elapsed,
-        'duration' => $durations[0],
-        'albumartist' => $albumartist,  
-        'state' => $state
-     ]; 
+//     $rows = [
+//        'image' => $image,
+//        'title' => $title,
+//        'artist' => $artist,
+//        'album' => $album,
+//        'elapsed' => $elapsed,
+//        'duration' => $durations[0],
+//        'albumartist' => $albumartist,  
+//        'state' => $state
+//     ]; 
+
+    echo '<pre>'.htmlentities(print_r($albumtracks, true), ENT_SUBSTITUTE).'</pre>';
 
 
-    echo json_encode($rows);
+    echo json_encode($albumtracks);
 
 
 
