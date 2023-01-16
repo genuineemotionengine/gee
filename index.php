@@ -318,7 +318,7 @@ echo "<div class='col-3'>";
 
 echo "<form action='?mode=13' method='post'>\n";
 echo "<input type='hidden' value='$token' name='shift'>\n";
-echo "<input type='text' id='search-box' placeholder='Album Name' name='".$token."'/><br>\n";
+echo "<input type='text' id='search-box' placeholder='Album Name' name='".$token."'/><br><br>\n";
 echo "<input type='submit' value='Find'>\n";
 echo "<div id='suggesstion-box'></div>\n";
 echo "</form>\n";
