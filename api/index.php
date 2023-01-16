@@ -208,7 +208,7 @@ echo json_encode($albumtracks);
 
 if ($service == 12){
 
-//include ('getalbum.php');
+include ('getalbum.php');
 
 include ('findtrack.php');
 
