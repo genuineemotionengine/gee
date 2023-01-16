@@ -72,6 +72,7 @@ if ($result->num_rows > 0) {
 //        'albumartist' => $albumartist,  
 //        'state' => $state
 //     ]; 
+     
     if ($verbose) {
         echo '<pre>'.htmlentities(print_r($albumtracks, true), ENT_SUBSTITUTE).'</pre>';
     }
