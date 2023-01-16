@@ -43,7 +43,7 @@ if ($result->num_rows > 0) {
 //        $albumartist =  str_replace("&#39;","'",$albumartist);
         
         if ($verbose) {
-        echo "id: ".$id;
+        echo "id: ".$id."<br>";
         echo "albumpath: ".$albumpath."<br>";
         echo "title: ".$title."<br>";
         echo "artist: ".$artist."<br>";
