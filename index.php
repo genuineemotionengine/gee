@@ -129,7 +129,7 @@ echo "</script>\n";
 .frmSearch {width: 100%;}
 #country-list{float:left;list-style:none;margin-top:-3px;padding:0;width:100%;}
 #country-list li{padding: 10px; background: #f0f0f0; border-bottom: #bbb9b9 1px solid;}
-#country-list li:hover{background:#ece3d2;cursor: pointer;}
+#country-list li:hover{background:#000000;cursor: pointer;}
 #search-box{width:80%;}
 </style>
 <script>
