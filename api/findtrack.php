@@ -10,14 +10,14 @@ if ($result->num_rows > 0) {
         
         $uri = $row['albumpath'];
         
-        echo "uri: ".$uri."<br>";
+        
         
 
        }
      } 
 
 
-     
+     echo "uri: ".$uri."<br>";
 
     
 //$elements = count($playlistarray);
