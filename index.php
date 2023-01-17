@@ -352,12 +352,12 @@ echo "<div class='modal-header'>\n";
 //echo "<div class='row row-cols-2'>\n";
 //echo "<div class='col-8'>";
 
-echo "<form class='form-group' action='?mode=13' method='post'>\n";
-echo "<input type='hidden' value='$token' name='shift'>\n";
-echo "<input class='form-control input-sm' type='text' id='search-box' placeholder='Album Name' name='".$token."'/><br><br>\n";
-echo "<input type='submit' class='bg-black' value='Find'>\n";
+//echo "<form class='form-group' action='?mode=13' method='post'>\n";
+//echo "<input type='hidden' value='$token' name='shift'>\n";
+echo "<input class='form-control input-sm bg-black' type='text' id='search-box' name='".$token."'/><br><br>\n";
+//echo "<input type='submit' class='bg-black' value='Find'>\n";
 
-echo "</form>\n";
+//echo "</form>\n";
 echo "<button type='button' class='btn btn-sm' data-bs-dismiss='modal' aria-label='Close'><i class='bi bi-x' style='font-size: 3rem; color: white;'></i></button>\n";
 
 echo "</div>\n";
