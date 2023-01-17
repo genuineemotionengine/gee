@@ -1,7 +1,7 @@
 <?php
 require_once("dbcontroller.php");
 
-require_once('/api/mpd.class.php');
+require_once('api/mpd.class.php');
 
 $db_handle = new DBController();
 
