@@ -137,7 +137,7 @@ $(document).ready(function(){
 	$("#search-box").keyup(function(){
 		$.ajax({
 		type: "POST",
-		url: "readAlbum.php",
+		url: "readCountry.php",
 		data:'keyword='+$(this).val(),
 		beforeSend: function(){
 			$("#search-box").css("background","#FFF url(LoaderIcon.gif) no-repeat 165px");

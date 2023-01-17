@@ -13,9 +13,9 @@ if(!empty($_POST["keyword"])) {
 
         echo "<ul id='country-list'>\n";
 
-        foreach($result as $row) {
+        foreach($result as $country) {
 
-            echo "<li onClick='selectCountry(".$row['artist'].")')><".$row['artist']."</li>\n";
+            echo "<li onClick='selectCountry(".$country['artist'].")')><".$country['artist']."</li>\n";
             
         }
         
