@@ -354,7 +354,7 @@ echo "<div class='modal-header'>\n";
 
 //echo "<form class='form-group' action='?mode=13' method='post'>\n";
 //echo "<input type='hidden' value='$token' name='shift'>\n";
-echo "<input class='form-control input-sm bg-black' type='text' id='search-box' name='".$token."'/><br><br>\n";
+echo "<input class='form-control input-sm bg-black text-white' type='text' id='search-box' name='".$token."'/><br><br>\n";
 //echo "<input type='submit' class='bg-black' value='Find'>\n";
 
 //echo "</form>\n";
