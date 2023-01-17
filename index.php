@@ -356,7 +356,7 @@ echo "<form action='?mode=13' method='post'>\n";
 echo "<input type='hidden' value='$token' name='shift'>\n";
 echo "<input type='text' id='search-box' placeholder='Album Name' name='".$token."'/><br><br>\n";
 echo "<input type='submit' class='bg-black' value='Find'>\n";
-echo "<div id='suggesstion-box'></div>\n";
+
 echo "</form>\n";
 
 echo "</div>\n";
@@ -368,7 +368,7 @@ echo "<div class='col-1'><button type='button' class='btn btn-sm' data-bs-dismis
 echo "</div>\n";
 echo "</div>\n";
 echo "<div class='modal-body'>\n";
-echo "<div id='fullalbum'></div>\n";
+echo "<div id='suggesstion-box'></div>\n";
 echo "</div>\n";
 echo "</div>\n";
 echo "</div>\n";
