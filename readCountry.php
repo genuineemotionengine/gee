@@ -1,7 +1,7 @@
 <?php
 require_once("dbcontroller.php");
 
-require_once('/api/getid3.php');
+require_once('./api/getid3.php');
 
 $db_handle = new DBController();
 
