@@ -5,7 +5,7 @@ $db_handle = new DBController();
 
 if(!empty($_POST["keyword"])) {
     
-    $query ="SELECT * FROM app WHERE album like '" . $_POST["keyword"] . "%' ORDER BY artist LIMIT 0,100";
+    $query ="SELECT * FROM app WHERE track like '" . $_POST["keyword"] . "%' ORDER BY track LIMIT 0,100";
     
     $result = $db_handle->runQuery($query);
     
@@ -17,7 +17,7 @@ if(!empty($_POST["keyword"])) {
 
 
             //echo "<li onClick='selectCountry(".$country['artist'].")')><".$country['artist']."</li>\n";
-            echo "<li onClick='selectCountry('".$country['album']."');'>".$country['album']."</li>\n";
+            echo "<li onClick='selectCountry('".$country['track']."');'>".$country['track']."</li>\n";
         }
         
         echo "</ul>\n";
