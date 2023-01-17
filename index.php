@@ -358,6 +358,7 @@ echo "<input type='text' id='search-box' placeholder='Album Name' name='".$token
 echo "<input type='submit' class='bg-black' value='Find'>\n";
 
 echo "</form>\n";
+echo "<button type='button' class='btn btn-sm' data-bs-dismiss='modal' aria-label='Close'><i class='bi bi-x' style='font-size: 3rem; color: white;'></i></button>\n";
 
 echo "</div>\n";
 //echo "<div class='col-7'>\n";
@@ -365,7 +366,6 @@ echo "</div>\n";
 //echo "<h4 id='albumartist2'></h4>\n";
 //echo "</div>\n";
 //echo "<div class='col-1'>\n";
-echo "<button type='button' class='btn btn-sm' data-bs-dismiss='modal' aria-label='Close'><i class='bi bi-x' style='font-size: 3rem; color: white;'></i></button>\n";
 //echo "</div>\n";
 //echo "</div>\n";
 echo "<div class='modal-body'>\n";
