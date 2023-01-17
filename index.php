@@ -24,7 +24,7 @@ echo "<link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/bootstrap-icons@
 echo "<script src='https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js' integrity='sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3' crossorigin='anonymous'></script>\n";
 echo "<script src='https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js'></script>\n";
 }
-echo "<link rel='stylesheet' href='gee-blue.css'/>\n";
+echo "<link rel='stylesheet' href='gee-red.css'/>\n";
 echo "<script>\n";
 
 //******* Varibale Decaration *******
@@ -124,14 +124,7 @@ echo "}, 1000);\n";
 echo "</script>\n";
 
 ?>
-<style>
 
-.frmSearch {width: 100%;}
-#country-list{float:left;list-style:none;margin-top:-3px;padding:0;width:100%;}
-#country-list li{padding: 10px; background: #000000; border-bottom: #bbb9b9 1px solid;}
-#country-list li:hover{background:#000000;cursor: pointer;}
-#search-box{width:80%;}
-</style>
 <script>
 $(document).ready(function(){
 	$("#search-box").keyup(function(){

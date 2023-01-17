@@ -16,3 +16,9 @@ body {
 
     
 }
+
+.frmSearch {width: 100%;}
+#country-list{float:left;list-style:none;margin-top:-3px;padding:0;width:100%;}
+#country-list li{padding: 10px; background: #000000; border-bottom: #bbb9b9 1px solid;}
+#country-list li:hover{background:#000000;cursor: pointer;}
+#search-box{width:80%;}
