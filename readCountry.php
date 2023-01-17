@@ -16,7 +16,7 @@ if(!empty($_POST["keyword"])) {
         foreach($result as $country) {
 
 
-            //echo "<li onClick='selectCountry(".$country['artist'].")')><".$country['artist']."</li>\n";
+
             echo "<li onClick='selectCountry('".$country['id']."');'>".$country['title']." - ".$country['artist']." - ".$country['album']."</li>\n";
         }
         
