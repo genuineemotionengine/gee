@@ -17,7 +17,7 @@ if(!empty($_POST["keyword"])) {
 
 
             //echo "<li onClick='selectCountry(".$country['artist'].")')><".$country['artist']."</li>\n";
-            echo "<li onClick='selectCountry('".$country['id']."');'>".$country['title']." - ".$country['artist']."</li>\n";
+            echo "<li onClick='selectCountry('".$country['id']."');'>".$country['title']." - ".$country['artist']." - ".$country['album']."</li>\n";
         }
         
         echo "</ul>\n";

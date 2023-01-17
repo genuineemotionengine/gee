@@ -350,7 +350,7 @@ echo "<div class='modal-dialog modal-dialog-scrollable'>\n";
 echo "<div class='modal-content bg-black'style='background: black;'>\n";
 echo "<div class='modal-header'>\n";
 echo "<div class='row row-cols-2'>\n";
-echo "<div class='col-11'>";
+echo "<div class='col-8'>";
 
 echo "<form action='?mode=13' method='post'>\n";
 echo "<input type='hidden' value='$token' name='shift'>\n";
