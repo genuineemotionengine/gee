@@ -137,7 +137,7 @@ $(document).ready(function(){
 	$("#search-box").keyup(function(){
 		$.ajax({
 		type: "POST",
-		url: "readCountry.php",
+		url: "readAlbum.php",
 		data:'keyword='+$(this).val(),
 		beforeSend: function(){
 			$("#search-box").css("background","#FFF url(LoaderIcon.gif) no-repeat 165px");
@@ -348,28 +348,32 @@ echo "</div>\n";
 echo "<div class='modal fade' id='staticBackdrop2' data-bs-backdrop='static' data-bs-keyboard='false' tabindex='-1' aria-labelledby='staticBackdropLabel' aria-hidden='true'>\n";
 echo "<div class='modal-dialog modal-dialog-scrollable'>\n";
 echo "<div class='modal-content bg-black'style='background: black;'>\n";
+
+
 echo "<div class='modal-header'>\n";
-echo "<div class='row row-cols-2'>\n";
-echo "<div class='col-11'>";
 
-echo "<form action='?mode=13' method='post'>\n";
-echo "<input type='hidden' value='$token' name='shift'>\n";
-echo "<input type='text' id='search-box' placeholder='Album Name' name='".$token."'/><br><br>\n";
-echo "<input type='submit' class='bg-black' value='Find'>\n";
-echo "<div id='suggesstion-box'></div>\n";
-echo "</form>\n";
+    echo "<form action='?mode=13' method='post'>\n";
+    
+        echo "<div class='row row-cols-2'>\n";
+            echo "<div class='col-11'>";
+                echo "<input type='hidden' value='$token' name='shift'>\n";
+                echo "<input type='text' id='search-box' placeholder='Album Name' name='".$token."'/><br><br>\n";
+                echo "<input type='submit' class='bg-black' value='Find'>\n";
+            echo "</div>\n";
+            echo "<div class='col-1'><button type='button' class='btn btn-sm' data-bs-dismiss='modal' aria-label='Close'><i class='bi bi-x' style='font-size: 3rem; color: white;'></i></button></div>\n";
+        echo "</div>\n";
+        
+        echo "<div class='modal-body'>\n";
+            echo "<div id='suggesstion-box'></div>\n";
+        echo "</div>\n";
+        
+    echo "</form>\n";
 
 echo "</div>\n";
-//echo "<div class='col-7'>\n";
-//echo "<h3 id='album2'></h3>\n";
-//echo "<h4 id='albumartist2'></h4>\n";
-//echo "</div>\n";
-echo "<div class='col-1'><button type='button' class='btn btn-sm' data-bs-dismiss='modal' aria-label='Close'><i class='bi bi-x' style='font-size: 3rem; color: white;'></i></button></div>\n";
-echo "</div>\n";
-echo "</div>\n";
-echo "<div class='modal-body'>\n";
-echo "<div id='fullalbum'></div>\n";
-echo "</div>\n";
+
+
+
+
 echo "</div>\n";
 echo "</div>\n";
 echo "</div>\n";
