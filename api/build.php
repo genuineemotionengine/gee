@@ -1,6 +1,6 @@
 <?php
 
-require_once('/var/www/html/api/dbconn23.php');
+require_once('/var/www/html/api/dbconn.php');
 
 //require_once('/var/www/html/api/mpd.class.php');
 
