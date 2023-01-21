@@ -51,7 +51,7 @@ $flacfile = "/mnt/usb/".$name;
 
 $getID3 = new getID3;
 
-usleep(10000);
+sleep(1);
 
 
 $ThisFileInfo = $getID3->analyze($flacfile);
