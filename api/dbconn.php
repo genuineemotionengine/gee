@@ -1,7 +1,11 @@
 <?php
 $servername = "localhost:3306";
 $username = "geeuser";
-$password = "Pergamon2022!";
+if ($ipaddr == "192.108.168.108"){
+    $password = "Pergamon2023!"; 
+} else {
+    $password = "Pergamon2022!";
+}
 $dbname = "geeapp";
 
 // Create connection
