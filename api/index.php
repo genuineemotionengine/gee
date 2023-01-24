@@ -94,72 +94,14 @@ if ($service == 3){
 
 }
 
-
 //***************** Restart Playlist **********************
 
 if ($service == 5){
     
+$sql = "SELECT * FROM app WHERE genre != 'Relaxation'";    
+
+include ('loadplaylist.php');
    
-$mpd->playlist_clear();
-    
-   
-
-$playlist = "app";
-$count = 0;    
-
-if ($select == 1){
-    $sql = "SELECT * FROM app WHERE genre != 'Relaxation'";
-}
-
-if ($select  == 2){
-    $sql = "SELECT * FROM app WHERE genre = 'Relaxation' or genre = 'Ambient' or genre = 'Chilled Electronic'";
-}
-
-if ($select  == 3){
-    $sql = "SELECT * FROM app WHERE genre = 'Classical'";
-}
-
-echo $select ."<br>";
-
-echo $sql."<br>";
-
-$result = $conn->query($sql);
-if ($result->num_rows > 0) {
-    while($row = $result->fetch_assoc()) {
-
-        $myalbum = $row['albumpath'];
-        
-//        $myalbum = str_replace("&#39;","'",$myalbum);
-        
-        $myalbum = $myalbum."\n";
-        
-        $myalbumarray[$count] = $myalbum;
-        
-        $count++;
-
-       }
-     } 
-     
-
-$elements = count($myalbumarray);
-
-shuffle($myalbumarray);
-
-$myfile = fopen("/mpd/playlists/app.m3u", "w") or die("Unable to open file!");
-
-for ($x = 0; $x < $elements; $x++) {
-
-  fwrite($myfile, $myalbumarray[$x]);
-    
-}  
-fclose($myfile);
-
-$mpd->load_playlist($playlist);
-
-$mpd->repeat(1);
-
-$mpd->play(0);
-
 include ('getmeta.php');
  
 }
@@ -167,43 +109,23 @@ include ('getmeta.php');
 //***************** load classical playlist **********************
 
 if ($service == 6){  
+
+$sql = "SELECT * FROM app WHERE genre = 'Classical'";
     
-$mpd->playlist_clear();    
-
-$playlist = "classical";
-
-$mpd->load_playlist($playlist);
-
-$mpd->playlist_shuffle();
-
-$mpd->repeat(1);
-
-$mpd->play(0);
-
+include ('loadplaylist.php');
+   
 include ('getmeta.php');
-
-    
-
-    
+   
 }
-
 
 //***************** load relaxation playlist **********************
 
-if ($service == 7){  
-
-$mpd->playlist_clear();
+if ($service == 7){
     
-$playlist = "relaxation";
+$sql = "SELECT * FROM app WHERE genre = 'Relaxation' or genre = 'Ambient' or genre = 'Chilled Electronic'";    
 
-$mpd->load_playlist($playlist);
-
-$mpd->playlist_shuffle();
-
-$mpd->repeat(1);
-
-$mpd->play(0);
-
+include ('loadplaylist.php');
+   
 include ('getmeta.php');
 
 }
