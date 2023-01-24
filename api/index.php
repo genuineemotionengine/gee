@@ -107,7 +107,18 @@ $mpd->playlist_clear();
 $playlist = "app";
 $count = 0;    
 
-$sql = "SELECT * FROM app";
+if ($playlist == 1){
+    $sql = "SELECT * FROM app WHERE genre != 'Relaxation'";
+}
+
+if ($playlist == 2){
+    $sql = "SELECT * FROM app WHERE genre = 'Relaxation' or genre = 'Ambient' or genre = 'Chilled Electronic'";
+}
+
+if ($playlist == 1){
+    $sql = "SELECT * FROM app WHERE genre = 'Classical'";
+}
+
 $result = $conn->query($sql);
 if ($result->num_rows > 0) {
     while($row = $result->fetch_assoc()) {
