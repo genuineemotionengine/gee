@@ -107,19 +107,19 @@ $mpd->playlist_clear();
 $playlist = "app";
 $count = 0;    
 
-if ($playlist == 1){
+if ($select == 1){
     $sql = "SELECT * FROM app WHERE genre != 'Relaxation'";
 }
 
-if ($playlist == 2){
+if ($select  == 2){
     $sql = "SELECT * FROM app WHERE genre = 'Relaxation' or genre = 'Ambient' or genre = 'Chilled Electronic'";
 }
 
-if ($playlist == 3){
+if ($select  == 3){
     $sql = "SELECT * FROM app WHERE genre = 'Classical'";
 }
 
-echo $playlist."<br>";
+echo $select ."<br>";
 
 echo $sql."<br>";
 
