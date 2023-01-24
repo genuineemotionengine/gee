@@ -1,5 +1,12 @@
 <?php
-require_once("dbcontroller.php");
+$ipadd = $_SERVER['SERVER_ADDR'];
+
+if ($ipadd == "192.168.68.108"){
+    require_once("dbcontroller23.php");
+} else {
+    require_once("dbcontroller.php");
+}
+
 
 $db_handle = new DBController();
 
