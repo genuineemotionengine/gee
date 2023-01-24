@@ -419,22 +419,31 @@ echo json_encode($rows);
 
 }
 
-//***************** load allmuisc playlist **********************
+//***************** serch by track **********************
 
-if ($service == 20){  
+if ($service == 21){  
 
-$mpd->playlist_clear();
-    
-$playlist = "allmusic";
+$sql="UPDATE searchterm SET term ='1'";
+$conn->query($sql);
 
-$mpd->load_playlist($playlist);
+}
 
-$mpd->playlist_shuffle();
+//***************** serch by album **********************
 
-$mpd->repeat(1);
+if ($service == 22){  
 
-$mpd->play(0);
+$sql="UPDATE searchterm SET term ='2'";
+$conn->query($sql);
 
-include ('getmeta.php');
+
+}
+
+//***************** serch by artist **********************
+
+if ($service == 23){  
+
+$sql="UPDATE searchterm SET term ='3'";
+$conn->query($sql);
+
 
 }

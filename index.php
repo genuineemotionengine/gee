@@ -72,6 +72,12 @@ echo "fetch('http://". $ipaddr ."/api/?service=15&mod=+5');\n";
 echo "}\n";
 //***********************************
 
+//******* Search Term *********
+echo "function searchterm(term){\n";
+echo "fetch('http://". $ipaddr ."/api/?service='+ term);\n";
+echo "}\n";
+//***********************************
+
 //******* Pad ***********************
 echo "function pad ( val ) { return val > 9 ? val : '0' + val; }\n";
 //***********************************
@@ -344,10 +350,9 @@ echo "<div class='modal fade' id='staticBackdrop2' data-bs-backdrop='static' dat
 echo "<div class='modal-dialog modal-dialog-scrollable'>\n";
 echo "<div class='modal-content bg-black'style='background: black;'>\n";
 echo "<div class='modal-header'>\n";
-echo "<button type='button' class='bg-black' onclick='getmeta(1)'><i class='bi bi-music-note-beamed' style='font-size: 2.3rem; color: white;'></i></button>\n";
-echo "<button type='button' class='bg-black' onclick='getmeta(1)'><i class='bi bi-vinyl' style='font-size: 2.3rem; color: white;'></i></button>\n";
-echo "<button type='button' class='bg-black' onclick='getmeta(1)'><i class='bi bi-mic' style='font-size: 2.3rem; color: white;'></i></button><br><br>\n";
-
+echo "<button type='button' class='bg-black' onclick='searchterm(21)'><i class='bi bi-music-note-beamed' style='font-size: 2.3rem; color: white;'></i></button>\n";
+echo "<button type='button' class='bg-black' onclick='searchterm(22)'><i class='bi bi-vinyl' style='font-size: 2.3rem; color: white;'></i></button>\n";
+echo "<button type='button' class='bg-black' onclick='searchterm(23)'><i class='bi bi-mic' style='font-size: 2.3rem; color: white;'></i></button><br><br>\n";
 echo "<input class='form-control input-sm bg-black text-white' type='text' id='search-box' name='".$token."'/><br>\n";
 echo "<button type='button' class='btn btn-sm' data-bs-dismiss='modal' aria-label='Close'><i class='bi bi-x' style='font-size: 3rem; color: white;'></i></button>\n";
 echo "</div>\n";
