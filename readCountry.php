@@ -3,7 +3,7 @@ $ipaddr = $_SERVER['SERVER_ADDR'];
 
 require_once('dbconn.php');
 
-$sql = "SELECT term FROM serchterm";
+$sql = "SELECT term FROM searchterm";
 
 $result = $conn->query($sql);
 if ($result->num_rows > 0) {
