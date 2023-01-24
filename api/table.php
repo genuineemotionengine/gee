@@ -19,7 +19,8 @@ artist varchar(512),
 album varchar(512),
 albumartist varchar(512),
 idalbum varchar(512),
-track varchar(512)
+track varchar(512),
+genre varchar(512)
 )";
 
 $result = $conn->query($sql);

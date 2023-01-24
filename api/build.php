@@ -76,6 +76,7 @@ $albumartist = $ThisFileInfo['tags']['id3v2']['band'][0];
 
 //echo "Album Artist: ".$albumartist."\n";
 
+$genre = $ThisFileInfo['tags']['id3v2']['genre'][0];
 
 $title =  str_replace("'","&#39;",$title);
 $artist =  str_replace("'","&#39;",$artist);
@@ -84,7 +85,7 @@ $albumartist =  str_replace("'","&#39;",$albumartist);
 $idalbum = $dirarray[$x].$album;
 
 
-$sql="INSERT INTO app (albumpath, title, artist, album, albumartist, idalbum, track) VALUES ('$name', '$title', '$artist', '$album', '$albumartist', '$idalbum', '$track')";
+$sql="INSERT INTO app (albumpath, title, artist, album, albumartist, idalbum, track, gnere) VALUES ('$name', '$title', '$artist', '$album', '$albumartist', '$idalbum', '$track', '$genre')";
 
 echo $sql."\n"; 
 
