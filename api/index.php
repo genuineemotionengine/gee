@@ -425,7 +425,9 @@ if ($service == 21){
 
 $sql="UPDATE searchterm SET term ='1'";
 $conn->query($sql);
-
+   if (mysqli_error($conn)){
+            echo mysqli_error($conn)."<br/><br/>";
+        }
 }
 
 //***************** serch by album **********************
