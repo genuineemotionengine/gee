@@ -98,7 +98,7 @@ if ($service == 3){
 
 if ($service == 5){
     
-$sql = "SELECT * FROM app WHERE genre != 'Relaxation'";    
+$sql = "SELECT albumpath FROM app WHERE genre != 'Relaxation'";    
 
 include ('loadplaylist.php');
    
@@ -110,7 +110,7 @@ include ('getmeta.php');
 
 if ($service == 6){  
 
-$sql = "SELECT * FROM app WHERE genre = 'Classical'";
+$sql = "SELECT albumpath FROM app WHERE genre = 'Classical'";
     
 include ('loadplaylist.php');
    
@@ -122,7 +122,7 @@ include ('getmeta.php');
 
 if ($service == 7){
     
-$sql = "SELECT * FROM app WHERE genre = 'Relaxation' or genre = 'Ambient' or genre = 'Chilled Electronic'";    
+$sql = "SELECT albumpath FROM app WHERE genre = 'Relaxation' or genre = 'Ambient' or genre = 'Chilled Electronic'";    
 
 include ('loadplaylist.php');
    
