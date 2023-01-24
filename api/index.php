@@ -119,6 +119,8 @@ if ($playlist == 3){
     $sql = "SELECT * FROM app WHERE genre = 'Classical'";
 }
 
+echo $playlist."<br>";
+
 echo $sql."<br>";
 
 $result = $conn->query($sql);
