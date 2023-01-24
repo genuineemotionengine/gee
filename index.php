@@ -344,7 +344,11 @@ echo "<div class='modal fade' id='staticBackdrop2' data-bs-backdrop='static' dat
 echo "<div class='modal-dialog modal-dialog-scrollable'>\n";
 echo "<div class='modal-content bg-black'style='background: black;'>\n";
 echo "<div class='modal-header'>\n";
-echo "<input class='form-control input-sm bg-black text-white' type='text' id='search-box' name='".$token."'/><br><br>\n";
+echo "<button type='button' class='bg-black' onclick='getmeta(1)'><i class='bi bi-arrow-clockwise' style='font-size: 2.3rem; color: white;'></i></button>\n";
+echo "<button type='button' class='bg-black' onclick='getmeta(1)'><i class='bi bi-arrow-clockwise' style='font-size: 2.3rem; color: white;'></i></button>\n";
+echo "<button type='button' class='bg-black' onclick='getmeta(1)'><i class='bi bi-arrow-clockwise' style='font-size: 2.3rem; color: white;'></i></button><br>\n";
+
+echo "<input class='form-control input-sm bg-black text-white' type='text' id='search-box' name='".$token."'/><br>\n";
 echo "<button type='button' class='btn btn-sm' data-bs-dismiss='modal' aria-label='Close'><i class='bi bi-x' style='font-size: 3rem; color: white;'></i></button>\n";
 echo "</div>\n";
 echo "<div class='modal-body'>\n";
