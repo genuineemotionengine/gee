@@ -115,7 +115,7 @@ if ($playlist == 2){
     $sql = "SELECT * FROM app WHERE genre = 'Relaxation' or genre = 'Ambient' or genre = 'Chilled Electronic'";
 }
 
-if ($playlist == 1){
+if ($playlist == 3){
     $sql = "SELECT * FROM app WHERE genre = 'Classical'";
 }
 
