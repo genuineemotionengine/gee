@@ -25,7 +25,18 @@ $db_handle = new DBController();
 
 if(!empty($_POST["keyword"])) {
     
-    $query ="SELECT * FROM app WHERE title like '" . $_POST["keyword"] . "%' ORDER BY title LIMIT 0,100";
+    
+    if ($term == 1){
+        $query ="SELECT * FROM app WHERE title like '" . $_POST["keyword"] . "%' ORDER BY title LIMIT 0,100";
+    }
+    
+    if ($term == 2){
+        $query ="SELECT * FROM app WHERE album like '" . $_POST["keyword"] . "%' ORDER BY title LIMIT 0,100";
+    }
+    
+    if ($term == 3){
+        $query ="SELECT * FROM app WHERE artist like '" . $_POST["keyword"] . "%' ORDER BY title LIMIT 0,100";
+    }
     
     $result = $db_handle->runQuery($query);
     
@@ -35,7 +46,18 @@ if(!empty($_POST["keyword"])) {
 
         foreach($result as $country) {
             
-            echo "<li><h4>".$country['title']." - ".$country['artist']." - ".$country['album']."</h4><button type='button' class='bg-black' onclick='insertnext(".$country['id'].")'><i class='bi bi-chevron-double-right' style='font-size: 3rem; color: white;'></i></button></li>\n";
+            if ($term == 1){             
+                echo "<li><h4>".$country['title']." - ".$country['artist']." - ".$country['album']."</h4><button type='button' class='bg-black' onclick='insertnext(".$country['id'].")'><i class='bi bi-chevron-double-right' style='font-size: 3rem; color: white;'></i></button></li>\n";
+            }
+            
+            if ($term == 2){             
+                echo "<li><h4>".$country['album']." - ".$country['artist']." - ".$country['album']."</h4><button type='button' class='bg-black' onclick='insertnext(".$country['id'].")'><i class='bi bi-chevron-double-right' style='font-size: 3rem; color: white;'></i></button></li>\n";
+            }
+            
+            if ($term == 3){             
+                echo "<li><h4>".$country['artist']." - ".$country['artist']." - ".$country['album']."</h4><button type='button' class='bg-black' onclick='insertnext(".$country['id'].")'><i class='bi bi-chevron-double-right' style='font-size: 3rem; color: white;'></i></button></li>\n";
+            }
+            
         
         }
         
