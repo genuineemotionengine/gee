@@ -1,15 +1,15 @@
 <?php
 
-require_once('dbconn23.php');
-
-$sql = "SELECT * FROM searchterm";
-$results = $conn->query($sql);
-if ($results->num_rows > 0) {
-    while($row = $results->fetch_assoc()) {
-        $term = $row['term'];
-        
-    }
-}
+//require_once('dbconn23.php');
+//
+//$sql = "SELECT * FROM searchterm";
+//$results = $conn->query($sql);
+//if ($results->num_rows > 0) {
+//    while($row = $results->fetch_assoc()) {
+//        $term = $row['term'];
+//        
+//    }
+//}
 
 
 $ipadd = $_SERVER['SERVER_ADDR'];
