@@ -53,11 +53,11 @@ if(!empty($_POST["keyword"])) {
             }
             
             if ($term == 2){             
-                echo "<li><h4>".$term.$country['album']." - ".$country['artist']." - ".$country['album']."</h4><button type='button' class='bg-black' onclick='insertnext(".$country['id'].")'><i class='bi bi-chevron-double-right' style='font-size: 3rem; color: white;'></i></button></li>\n";
+                echo "<li><h4>".$term.$country['album']." - ".$country['album']."</h4><button type='button' class='bg-black' onclick='insertnext(".$country['id'].")'><i class='bi bi-chevron-double-right' style='font-size: 3rem; color: white;'></i></button></li>\n";
             }
             
             if ($term == 3){             
-                echo "<li><h4>".$term.$country['artist']." - ".$country['artist']." - ".$country['album']."</h4><button type='button' class='bg-black' onclick='insertnext(".$country['id'].")'><i class='bi bi-chevron-double-right' style='font-size: 3rem; color: white;'></i></button></li>\n";
+                echo "<li><h4>".$term.$country['artist']." - ".$country['artist']."</h4><button type='button' class='bg-black' onclick='insertnext(".$country['id'].")'><i class='bi bi-chevron-double-right' style='font-size: 3rem; color: white;'></i></button></li>\n";
             }
             
         
