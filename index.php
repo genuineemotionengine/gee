@@ -35,6 +35,7 @@ echo "var pause = 'pause';\n";
 echo "var currentpos;\n";
 echo "var currentprogress;\n";
 echo "var state;\n";
+echo "var sterm;\n";
 //***********************************
 
 //******* Whole Album ***************
@@ -74,7 +75,8 @@ echo "}\n";
 
 //******* Search Term *********
 echo "function searchterm(term){\n";
-echo "fetch('http://". $ipaddr ."/api/?service='+ term);\n";
+//echo "fetch('http://". $ipaddr ."/api/?service='+ term);\n";
+echo "sterm = term;\n";
 echo "}\n";
 //***********************************
 
@@ -136,7 +138,7 @@ $(document).ready(function(){
 	$("#search-box").keyup(function(){
 		$.ajax({
 		type: "POST",
-		url: "readCountry.php",
+		url: "readCountry.php?term=" + sterm,
 		data:'keyword='+$(this).val(),
 		beforeSend: function(){
 			$("#search-box").css("background","#FFF url(LoaderIcon.gif) no-repeat 165px");
