@@ -35,7 +35,7 @@ echo "var pause = 'pause';\n";
 echo "var currentpos;\n";
 echo "var currentprogress;\n";
 echo "var state;\n";
-echo "var sterm;\n";
+echo "var sterm = 1;\n";
 //***********************************
 
 //******* Whole Album ***************
