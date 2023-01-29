@@ -42,6 +42,10 @@ if(!empty($_POST["keyword"])) {
     
     $result = $db_handle->runQuery($query);
     
+    if ($term == 2 || $term == 3){
+        array_unique($result);
+    }
+    
     if(!empty($result)) {
 
         echo "<ul id='country-list'>\n";
