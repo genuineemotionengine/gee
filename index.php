@@ -36,7 +36,7 @@ echo "var currentpos;\n";
 echo "var currentprogress;\n";
 echo "var state;\n";
 echo "var sterm = 1;\n";
-echo "console.log(sterm);\n";
+
 //***********************************
 
 //******* Whole Album ***************
@@ -78,6 +78,7 @@ echo "}\n";
 echo "function searchterm(term){\n";
 //echo "fetch('http://". $ipaddr ."/api/?service='+ term);\n";
 echo "sterm = term;\n";
+echo "console.log(sterm);\n";
 echo "}\n";
 //***********************************
 
