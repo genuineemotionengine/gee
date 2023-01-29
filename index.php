@@ -24,7 +24,7 @@ echo "<link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/bootstrap-icons@
 echo "<script src='https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js' integrity='sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3' crossorigin='anonymous'></script>\n";
 echo "<script src='https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js'></script>\n";
 }
-echo "<link rel='stylesheet' href='gee-red.css'/>\n";
+echo "<link rel='stylesheet' href='gee-blue.css'/>\n";
 echo "<script>\n";
 
 //******* Varibale Decaration *******
@@ -128,6 +128,15 @@ echo "}\n";
 
 echo "}, 1000);\n";
 //***********************************
+
+echo "if (sterm === 1){\n";
+echo "$('#playp').removeClass('bi-chevron-right').addClass('bi-pause');\n";
+echo "$('#playpipp').removeClass('bi-chevron-right').addClass('bi-pause');\n";
+echo "$('#playpipl').removeClass('bi-chevron-right').addClass('bi-pause');\n";
+echo "}\n";
+
+
+
 
 echo "</script>\n";
 
@@ -354,9 +363,9 @@ echo "<div class='modal fade' id='staticBackdrop2' data-bs-backdrop='static' dat
 echo "<div class='modal-dialog modal-dialog-scrollable'>\n";
 echo "<div class='modal-content bg-black'style='background: black;'>\n";
 echo "<div class='modal-header'>\n";
-echo "<button type='button' class='bg-black' onclick='searchterm(1)'><i class='bi bi-music-note-beamed' style='font-size: 2.3rem; color: white;'></i></button>\n";
-echo "<button type='button' class='bg-black' onclick='searchterm(2)'><i class='bi bi-vinyl' style='font-size: 2.3rem; color: white;'></i></button>\n";
-echo "<button type='button' class='bg-black' onclick='searchterm(3)'><i class='bi bi-mic' style='font-size: 2.3rem; color: white;'></i></button><br><br>\n";
+echo "<button type='button' id='termtrack' class='bg-black' onclick='searchterm(1)'><i class='bi bi-music-note-beamed termwhite' style='font-size: 2.3rem;'></i></button>\n";
+echo "<button type='button' id='termalbum' class='bg-black' onclick='searchterm(2)'><i class='bi bi-vinyl termgrey' style='font-size: 2.3rem;'></i></button>\n";
+echo "<button type='button' id='termartist' class='bg-black' onclick='searchterm(3)'><i class='bi bi-mic termgrey' style='font-size: 2.3rem;'></i></button><br><br>\n";
 echo "<input class='form-control input-sm bg-black text-white' type='text' id='search-box' name='".$token."'/><br>\n";
 echo "<button type='button' class='btn btn-sm' data-bs-dismiss='modal' aria-label='Close'><i class='bi bi-x' style='font-size: 3rem; color: white;'></i></button>\n";
 echo "</div>\n";
