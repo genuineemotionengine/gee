@@ -33,18 +33,15 @@ if(!empty($_POST["keyword"])) {
     }
     
     if ($term == 2){
-        $query ="SELECT * FROM app WHERE album like '" . $_POST["keyword"] . "%' ORDER BY title LIMIT 0,100";
+        $query ="SELECT DISTINCT * FROM app WHERE album like '" . $_POST["keyword"] . "%' ORDER BY title LIMIT 0,100";
     }
     
     if ($term == 3){
-        $query ="SELECT * FROM app WHERE artist like '" . $_POST["keyword"] . "%' ORDER BY title LIMIT 0,100";
+        $query ="SELECT DISTINCT * FROM app WHERE artist like '" . $_POST["keyword"] . "%' ORDER BY title LIMIT 0,100";
     }
     
     $result = $db_handle->runQuery($query);
     
-    if ($term == 2 || $term == 3){
-        array_unique($result);
-    }
     
     if(!empty($result)) {
 
