@@ -374,7 +374,7 @@ echo "<div class='modal fade' id='staticBackdrop2' data-bs-backdrop='static' dat
 echo "<div class='modal-dialog modal-dialog-scrollable'>\n";
 echo "<div class='modal-content bg-black'style='background: black;'>\n";
 echo "<div class='modal-header'>\n";
-echo "<button type='button' id='termtrack' class='bg-black termgrey' onclick='searchterm(1)'><i class='bi bi-music-note-beamed' style='font-size: 2.3rem;'></i></button>\n";
+echo "<button type='button' id='termtrack' class='bg-black termwhite' onclick='searchterm(1)'><i class='bi bi-music-note-beamed' style='font-size: 2.3rem;'></i></button>\n";
 echo "<button type='button' id='termalbum' class='bg-black termgrey' onclick='searchterm(2)'><i class='bi bi-vinyl' style='font-size: 2.3rem;'></i></button>\n";
 echo "<button type='button' id='termartist' class='bg-black termgrey' onclick='searchterm(3)'><i class='bi bi-mic' style='font-size: 2.3rem;'></i></button><br><br>\n";
 echo "<input class='form-control input-sm bg-black text-white' type='text' id='search-box' name='".$token."'/><br>\n";
