@@ -33,7 +33,7 @@ if(!empty($_POST["keyword"])) {
     }
     
     if ($term == 2){
-        $query ="SELECT DISTINCT * FROM app WHERE album like '" . $_POST["keyword"] . "%' ORDER BY album LIMIT 0,100";
+        $query ="SELECT * FROM app WHERE album like '" . $_POST["keyword"] . "%' GROUP BY album LIMIT 0,100";
     }
     
     if ($term == 3){
