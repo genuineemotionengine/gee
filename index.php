@@ -130,13 +130,22 @@ echo "}, 1000);\n";
 //***********************************
 
 echo "if (sterm === 1){\n";
-echo "$('#playp').removeClass('bi-chevron-right').addClass('bi-pause');\n";
-echo "$('#playpipp').removeClass('bi-chevron-right').addClass('bi-pause');\n";
-echo "$('#playpipl').removeClass('bi-chevron-right').addClass('bi-pause');\n";
+echo "$('#termtrack').removeClass('termgrey').addClass('termwhite');\n";
+echo "$('#termalbum').removeClass('termwhite').addClass('termgrey');\n";
+echo "$('#termartist').removeClass('termwhite').addClass('termgrey');\n";
 echo "}\n";
 
+echo "if (sterm === 2){\n";
+echo "$('#termtrack').removeClass('termwhite').addClass('termgrey');\n";
+echo "$('#termalbum').removeClass('termgrey').addClass('termwhite');\n";
+echo "$('#termartist').removeClass('termwhite').addClass('termgrey');\n";
+echo "}\n";
 
-
+echo "if (sterm === 3){\n";
+echo "$('#termtrack').removeClass('termwhite').addClass('termgrey');\n";
+echo "$('#termalbum').removeClass('termwhite').addClass('termgrey');\n";
+echo "$('#termartist').removeClass('termgrey').addClass('termwhite');\n";
+echo "}\n";
 
 echo "</script>\n";
 
