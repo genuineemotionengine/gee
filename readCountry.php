@@ -37,7 +37,7 @@ if(!empty($_POST["keyword"])) {
     }
     
     if ($term == 3){
-        $query ="SELECT DISTINCT * FROM app WHERE artist like '" . $_POST["keyword"] . "%' ORDER BY artist LIMIT 0,100";
+        $query ="SELECT * FROM app WHERE artist like '" . $_POST["keyword"] . "%' GROUP BY artist LIMIT 0,100";
     }
     
     $result = $db_handle->runQuery($query);
