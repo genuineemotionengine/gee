@@ -36,7 +36,9 @@ echo "var currentpos;\n";
 echo "var currentprogress;\n";
 echo "var state;\n";
 echo "var sterm = 1;\n";
-
+echo "var term1 = 1;\n";
+echo "var term2 = 2;\n";
+echo "var term3 = 3;\n";
 //***********************************
 
 //******* Whole Album ***************
@@ -131,19 +133,19 @@ echo "}\n";
 echo "}, 1000);\n";
 //***********************************
 
-echo "if (sterm == 1){\n";
+echo "if (sterm === term1){\n";
 echo "$('#termtrack').removeClass('termgrey').addClass('termwhite');\n";
 echo "$('#termalbum').removeClass('termwhite').addClass('termgrey');\n";
 echo "$('#termartist').removeClass('termwhite').addClass('termgrey');\n";
 echo "}\n";
 
-echo "if (sterm == 2){\n";
+echo "if (sterm === term2){\n";
 echo "$('#termtrack').removeClass('termwhite').addClass('termgrey');\n";
 echo "$('#termalbum').removeClass('termgrey').addClass('termwhite');\n";
 echo "$('#termartist').removeClass('termwhite').addClass('termgrey');\n";
 echo "}\n";
 
-echo "if (sterm == 3){\n";
+echo "if (sterm === term3){\n";
 echo "$('#termtrack').removeClass('termwhite').addClass('termgrey');\n";
 echo "$('#termalbum').removeClass('termwhite').addClass('termgrey');\n";
 echo "$('#termartist').removeClass('termgrey').addClass('termwhite');\n";
