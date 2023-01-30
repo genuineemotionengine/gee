@@ -74,6 +74,25 @@ echo "fetch('http://". $ipaddr ."/api/?service=15&mod=+5');\n";
 echo "}\n";
 //***********************************
 
+//******* Volume Up *********
+echo "function playpause(){\n";
+echo "fetch('http://". $ipaddr ."/api/?service=2');\n";
+echo "if (state === 1){\n";
+echo "state = 2;\n";
+echo "}\n";
+echo "if (state === 2){\n";
+echo "state = 1;\n";
+echo "}\n";
+echo "if (state === 1){\n";
+include ('playids.php');
+echo "}\n";
+
+echo "if (state === 2){\n";
+include ('pauseids.php');
+echo "}\n";
+echo "}\n";
+//***********************************
+
 //******* Search Term *********
 echo "function searchterm(term){\n";
 //echo "fetch('http://". $ipaddr ."/api/?service='+ term);\n";
@@ -115,16 +134,9 @@ echo "}\n";
 echo "$.getJSON('http://". $ipaddr ."/api/?service=' + control, function(result){\n";
 echo "duration = parseInt(result.duration);\n";
 echo "current = parseInt(result.elapsed);\n";
-echo "state = result.state;\n";
+//echo "state = result.state;\n";
 
 
-echo "if (state === play){\n";
-include ('playids.php');
-echo "}\n";
-
-echo "if (state === pause){\n";
-include ('pauseids.php');
-echo "}\n";
 
 include ('metaids.php');
 
@@ -139,7 +151,7 @@ echo "getmeta(1);\n";
 //**** Progress Bar Calulations *****
 echo "setInterval( function(){\n";
 
-echo "if (state === play){\n";
+echo "if (state === 1){\n";
 echo "current = current + 1;\n";
 echo "}\n";
 
@@ -198,7 +210,7 @@ echo "<div class='container-fluid text-center ps-0 pe-0'>\n";
 echo "<div class='d-block d-sm-none'>\n";
 echo "<img id='image1' class='img-fluid' src='black.jpg' />\n";
 echo "<button type='button' class='bg-black' onclick='getmeta(3)'><i class='bi bi-arrow-left-short' style='font-size: 6rem; color: white;'></i></button>\n";
-echo "<button type='button' class='bg-black' onclick='getmeta(2)'><i class='bi bi-pause' style='font-size: 5rem; color: white;'></i></button>\n";
+echo "<button type='button' id='playpause1' class='bg-black' onclick='playpause()'><i class='bi bi-pause' style='font-size: 5rem; color: white;'></i></button>\n";
 echo "<button type='button' class='bg-black' onclick='getmeta(4)'><i class='bi bi-arrow-right-short' style='font-size: 6rem; color: white;'></i></button>\n";
 echo "<div class='container pt-0 mt-0'>\n";
 echo "<div class='row row-cols-3'>\n";
