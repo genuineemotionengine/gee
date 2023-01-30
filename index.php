@@ -79,12 +79,12 @@ echo "function playpause(){\n";
 echo "fetch('http://". $ipaddr ."/api/?service=2');\n";
 echo "if (state === 1){\n";
 echo "state = 2;\n";
-echo "console.log(state);\n";
+//echo "console.log(state);\n";
 include ('pauseids.php');
 echo "}else{\n";
 //echo "if (state === 2){\n";
 echo "state = 1;\n";
-echo "console.log(state);\n";
+//echo "console.log(state);\n";
 include ('playids.php');
 echo "}\n";
 
@@ -136,9 +136,11 @@ echo "current = parseInt(result.elapsed);\n";
 //echo "state = result.state;\n";
 echo "if (result.state === play){\n";
 echo "state = 1;\n";
+include ('playids.php');
 echo "}\n";
 echo "if (result.state === pause){\n";
 echo "state = 2;\n";
+include ('pauseids.php');
 echo "}\n";
 
 
