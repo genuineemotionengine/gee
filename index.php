@@ -74,14 +74,16 @@ echo "fetch('http://". $ipaddr ."/api/?service=15&mod=+5');\n";
 echo "}\n";
 //***********************************
 
-//******* Volume Up *********
+//******* Play/Pause *********
 echo "function playpause(){\n";
 echo "fetch('http://". $ipaddr ."/api/?service=2');\n";
 echo "if (state === 1){\n";
 echo "state = 2;\n";
+echo "console.log(state);\n";
 echo "}\n";
 echo "if (state === 2){\n";
 echo "state = 1;\n";
+echo "console.log(state);\n";
 echo "}\n";
 echo "if (state === 1){\n";
 include ('playids.php');
@@ -90,7 +92,7 @@ echo "}\n";
 echo "if (state === 2){\n";
 include ('pauseids.php');
 echo "}\n";
-echo "console.log(state);\n";
+
 echo "}\n";
 //***********************************
 
