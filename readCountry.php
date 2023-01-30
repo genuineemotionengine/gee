@@ -29,7 +29,7 @@ if(!empty($_POST["keyword"])) {
     
     
     if ($term == 1){
-        $query ="SELECT * FROM app WHERE title like '" . $_POST["keyword"] . "%' ORDER BY album LIMIT 0,100";
+        $query ="SELECT * FROM app WHERE title like '" . $_POST["keyword"] . "%' ORDER BY title LIMIT 0,100";
     }
     
     if ($term == 2){
