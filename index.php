@@ -80,18 +80,14 @@ echo "fetch('http://". $ipaddr ."/api/?service=2');\n";
 echo "if (state === 1){\n";
 echo "state = 2;\n";
 echo "console.log(state);\n";
+include ('pauseids.php');
 echo "}else{\n";
 //echo "if (state === 2){\n";
 echo "state = 1;\n";
 echo "console.log(state);\n";
-echo "}\n";
-echo "if (state === 1){\n";
 include ('playids.php');
 echo "}\n";
 
-echo "if (state === 2){\n";
-include ('pauseids.php');
-echo "}\n";
 
 echo "}\n";
 //***********************************
