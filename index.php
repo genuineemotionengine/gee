@@ -136,7 +136,12 @@ echo "$.getJSON('http://". $ipaddr ."/api/?service=' + control, function(result)
 echo "duration = parseInt(result.duration);\n";
 echo "current = parseInt(result.elapsed);\n";
 //echo "state = result.state;\n";
-
+echo "if (result.state === play){\n";
+echo "state = 1;\n";
+echo "}\n";
+echo "if (result.state === pause){\n";
+echo "state = 2;\n";
+echo "}\n";
 
 
 include ('metaids.php');
