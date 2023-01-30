@@ -90,6 +90,7 @@ echo "}\n";
 echo "if (state === 2){\n";
 include ('pauseids.php');
 echo "}\n";
+echo "console.log(state);\n";
 echo "}\n";
 //***********************************
 
@@ -97,7 +98,7 @@ echo "}\n";
 echo "function searchterm(term){\n";
 //echo "fetch('http://". $ipaddr ."/api/?service='+ term);\n";
 echo "sterm = term;\n";
-echo "console.log(sterm);\n";
+
 
 echo "if (sterm === 1){\n";
 echo "$('#termtrack').removeClass('termgrey').addClass('termwhite');\n";
