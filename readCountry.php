@@ -62,7 +62,7 @@ if(!empty($_POST["keyword"])) {
             }
             
             if ($term == 2){             
-                echo "<li><h4>".$country['album']." - ".$country['albumartist']."</h4><button type='button' class='bg-black' onclick='insertnext(".$country['id'].")'><i class='bi bi-chevron-double-right' style='font-size: 3rem; color: white;'></i></button></li>\n";
+                echo "<li><h4>".$country['album']." - ".$albumartist."</h4><button type='button' class='bg-black' onclick='insertnext(".$country['id'].")'><i class='bi bi-chevron-double-right' style='font-size: 3rem; color: white;'></i></button></li>\n";
             }
             
             if ($term == 3){             
