@@ -115,16 +115,27 @@ echo "}\n";
 echo "$.getJSON('http://". $ipaddr ."/api/?service=' + control, function(result){\n";
 echo "duration = parseInt(result.duration);\n";
 echo "current = parseInt(result.elapsed);\n";
-echo "state = result.state;\n";
+//echo "state = result.state;\n";
+
+echo "if (result.state === play){\n";
+echo "state = 1;\n";
+echo "}\n";
+
+echo "if (result.state === pause){\n";
+echo "state = 2;\n";
+echo "}\n";
+
+echo "if (state === 1){\n";
+include ('playids.php');
+echo "}\n";
+
+echo "if (state === 2){\n";
+include ('pauseids.php');
+echo "}\n";
+
 include ('metaids.php');
 
-//echo "if (state === play){\n";
-//include ('playids.php');
-//echo "}\n";
-//
-//echo "if (state === pause){\n";
-//include ('pauseids.php');
-//echo "}\n";
+
 
 echo "});\n";
 echo "}\n";
