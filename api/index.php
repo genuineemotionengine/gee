@@ -449,3 +449,13 @@ $conn->query($sql);
 
 
 }
+
+//****************** MPD Test **********************
+
+if ($service == 24){  
+
+$statusarray = $mpd->server_status();
+
+echo '<pre>'.htmlentities(print_r($statusarray, true), ENT_SUBSTITUTE).'</pre>';
+
+}
