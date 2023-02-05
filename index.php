@@ -69,7 +69,7 @@ echo "}\n";
 
 //******* Volume *********
 echo "function volumeupdown(plusminus){\n";
-echo "if (plusminus === 1{\n";
+echo "if (plusminus === 1){\n";
 echo "volume = minus;\n";
 echo "}else{\n";
 echo "volume = plus;\n";
