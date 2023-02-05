@@ -39,6 +39,7 @@ echo "var sterm = 1;\n";
 echo "var volume;\n";
 echo "var plus = '+5';\n";
 echo "var minus = '-5';\n";
+echo "var volumemove;\n";
 
 //***********************************
 
@@ -70,11 +71,11 @@ echo "}\n";
 //******* Volume *********
 echo "function volumeupdown(plusminus){\n";
 echo "if (plusminus === 1){\n";
-echo "volume = minus;\n";
+echo "volumemove = minus;\n";
 echo "}else{\n";
-echo "volume = plus;\n";
+echo "volumemove = plus;\n";
 echo "}\n";
-echo "$.getJSON('http://". $ipaddr ."/api/?service=15&mod='+volume, function(result){\n";
+echo "$.getJSON('http://". $ipaddr ."/api/?service=15&mod='+volumemove, function(result){\n";
 echo "volume = parseInt(result.volume);\n";
 echo "$('#voldynamic1').css('width', volume + '%');\n";
 echo "});\n";
