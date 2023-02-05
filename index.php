@@ -36,7 +36,7 @@ echo "var currentpos;\n";
 echo "var currentprogress;\n";
 echo "var state;\n";
 echo "var sterm = 1;\n";
-echo "var = volume;\n";
+echo "var volume;\n";
 
 //***********************************
 
