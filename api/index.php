@@ -454,8 +454,8 @@ $conn->query($sql);
 
 if ($service == 24){  
 
-$statusarray = $mpd->server_status();
+$statsarray = $mpd->server_stats();
 
-echo '<pre>'.htmlentities(print_r($statusarray, true), ENT_SUBSTITUTE).'</pre>';
+echo '<pre>'.htmlentities(print_r($statsarray, true), ENT_SUBSTITUTE).'</pre>';
 
 }
