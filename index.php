@@ -246,7 +246,7 @@ echo "<div class='container pt-0 mt-0'>\n";
                 echo "</div>\n";
             echo "</div>\n";
         echo "</div>\n";
-        echo "<div class='col-2 text-center'><button type='button' class='bg-black' onclick='volumeup()'><i class='bi bi-volume-up' style='font-size: 2.3rem; color: white;'></i></button>\n";
+        echo "<div class='col-2 text-center'><button type='button' class='bg-black' onclick='volumeup()'><i class='bi bi-volume-up' style='font-size: 2.3rem; color: white;'></i></button></div>\n";
     echo "</div>\n";
 echo "</div>\n";
 
