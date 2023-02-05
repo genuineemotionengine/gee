@@ -454,10 +454,10 @@ $conn->query($sql);
 
 if ($service == 24){  
 
-//$statusarray = $mpd->getvol();
+$statusarray = $mpd->server_status();
 
-//echo '<pre>'.htmlentities(print_r($statusarray, true), ENT_SUBSTITUTE).'</pre>';
+echo '<pre>'.htmlentities(print_r($statusarray, true), ENT_SUBSTITUTE).'</pre>';
     
-echo exec('alsamixer') . " \n";    
+//echo exec('alsamixer') . " \n";    
 
 }
