@@ -454,7 +454,7 @@ $conn->query($sql);
 
 if ($service == 24){  
 
-$statsarray = $mpd->tagsall();
+$statsarray = $mpd->getvol();
 
 echo '<pre>'.htmlentities(print_r($statsarray, true), ENT_SUBSTITUTE).'</pre>';
 

@@ -32,6 +32,7 @@ define("CMD_XFADE", "crossfade");
 define("CMD_RANDOM", "random");
 define("CMD_REPEAT", "repeat");
 define("CMD_SETVOL", "setvol");
+define("CMD_GETVOL", "getvol");
 define("CMD_SINGLE", "single");
 define("CMD_NEXT", "next");
 define("CMD_PREV", "previous");
@@ -340,6 +341,14 @@ class MPD {
 		$tag_list = $this->cmd(CMD_TAGS);
 		if ($tag_list !== false) {
 			return $this->parse_list($tag_list);
+		}
+		return false;
+	}
+	
+	function getvol() {
+		$get_vol = $this->cmd(CMD_GETVOL);
+		if ($get_vol !== false) {
+			return $this->parse_list($get_vol);
 		}
 		return false;
 	}
