@@ -150,6 +150,7 @@ echo "}\n";
 echo "$.getJSON('http://". $ipaddr ."/api/?service=' + control, function(result){\n";
 echo "duration = parseInt(result.duration);\n";
 echo "current = parseInt(result.elapsed);\n";
+echo "volume = parseInt(result.volume);\n";
 //echo "state = result.state;\n";
 echo "if (result.state === play){\n";
 echo "state = 1;\n";
