@@ -107,6 +107,7 @@ class MPD {
 	private $bitrate;
 	private $audio;
 	private $single;
+        
 	
 	/**
 	 * Instantiate the MPD object 
