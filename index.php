@@ -253,7 +253,7 @@ echo "<br/>\n";
 
 echo "<div class='container pt-0 mt-0'>\n";
     echo "<div class='row row-cols-3'>\n";
-        echo "<div class='col-2 text-center'><button type='button' class='bg-black' onclick='volumedown()'><i class='bi bi-volume-down' style='font-size: 2.3rem; color: white;'></i></button></div>\n";
+        echo "<div class='col-2 text-center'><button type='button' class='bg-black' onclick='volumeupdown(1)'><i class='bi bi-volume-down' style='font-size: 2.3rem; color: white;'></i></button></div>\n";
         echo "<div class='col-8'>\n";
             echo "<div class='pt-4'>\n";
                 echo "<div class='progress bg-dark' style='height: 5px;'>\n";
@@ -261,7 +261,7 @@ echo "<div class='container pt-0 mt-0'>\n";
                 echo "</div>\n";
             echo "</div>\n";
         echo "</div>\n";
-        echo "<div class='col-2 text-center'><button type='button' class='bg-black' onclick='volumeup()'><i class='bi bi-volume-up' style='font-size: 2.3rem; color: white;'></i></button></div>\n";
+        echo "<div class='col-2 text-center'><button type='button' class='bg-black' onclick='volumeupdown(2)'><i class='bi bi-volume-up' style='font-size: 2.3rem; color: white;'></i></button></div>\n";
     echo "</div>\n";
 echo "</div>\n";
 
