@@ -198,7 +198,7 @@ if ($service == 9){
 
 $mpd->setvol($vol);
 
-//header("Location: http://". $ipaddr ."");
+
 
 
 
@@ -213,10 +213,15 @@ if ($service == 15){
 
 $mpd->adjust_vol($mod);
 
-//header("Location: http://". $ipaddr ."");
+
+$statusarray = $mpd->server_status();
+
+$volume = $statusarray['volume'];
+
+$rows = ['volume' => $volume];
 
 
-
+echo json_encode($rows);
     
 }
 
