@@ -454,8 +454,10 @@ $conn->query($sql);
 
 if ($service == 24){  
 
-$statusarray = $mpd->getvol();
+//$statusarray = $mpd->getvol();
 
-echo '<pre>'.htmlentities(print_r($statusarray, true), ENT_SUBSTITUTE).'</pre>';
+//echo '<pre>'.htmlentities(print_r($statusarray, true), ENT_SUBSTITUTE).'</pre>';
+    
+echo exec('amixer set Master 5%+') . " \n";    
 
 }
