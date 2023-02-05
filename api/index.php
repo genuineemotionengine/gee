@@ -458,6 +458,6 @@ if ($service == 24){
 
 //echo '<pre>'.htmlentities(print_r($statusarray, true), ENT_SUBSTITUTE).'</pre>';
     
-echo exec('amixer set Master 5%+') . " \n";    
+echo exec('alsamixer') . " \n";    
 
 }
