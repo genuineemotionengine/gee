@@ -454,7 +454,7 @@ $conn->query($sql);
 
 if ($service == 24){  
 
-$statsarray = $mpd->current_song();
+$statsarray = $mpd->tags();
 
 echo '<pre>'.htmlentities(print_r($statsarray, true), ENT_SUBSTITUTE).'</pre>';
 
