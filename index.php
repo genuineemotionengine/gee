@@ -37,8 +37,8 @@ echo "var currentprogress;\n";
 echo "var state;\n";
 echo "var sterm = 1;\n";
 echo "var volume;\n";
-echo "var plus = '+5';\n";
-echo "var minus = '-5';\n";
+echo "var plus = '+1';\n";
+echo "var minus = '-1';\n";
 echo "var volumemove;\n";
 echo "var vol = 5;\n";
 
