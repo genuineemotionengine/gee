@@ -40,7 +40,7 @@ echo "var volume;\n";
 echo "var plus = '+1';\n";
 echo "var minus = '-1';\n";
 echo "var volumemove;\n";
-echo "var vol = 5;\n";
+echo "var vol = 1;\n";
 
 //***********************************
 
