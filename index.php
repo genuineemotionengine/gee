@@ -40,6 +40,7 @@ echo "var volume;\n";
 echo "var plus = '+5';\n";
 echo "var minus = '-5';\n";
 echo "var volumemove;\n";
+echo "var vol = 5;\n";
 
 //***********************************
 
@@ -72,11 +73,11 @@ echo "}\n";
 echo "function volumeupdown(plusminus){\n";
 echo "if (plusminus === 1){\n";
 echo "volumemove = minus;\n";
-echo "volume - 5;\n";
+echo "volume - vol;\n";
 echo "console.log(volume);\n";
 echo "}else{\n";
 echo "volumemove = plus;\n";
-echo "volume + 5;\n";
+echo "volume + vol;\n";
 echo "console.log(volume);\n";
 echo "}\n";
 echo "fetch('http://". $ipaddr ."/api/?service=15&mod='+volumemove);\n";
