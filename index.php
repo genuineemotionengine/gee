@@ -71,6 +71,9 @@ echo "}\n";
 
 //******* Volume *********
 echo "function volumeupdown(plusminus){\n";
+
+echo "if (volume > 1 || volume < 95){\n";
+
 echo "if (plusminus === 1){\n";
 echo "volumemove = minus;\n";
 echo "volume = volume - vol;\n";
@@ -81,10 +84,10 @@ echo "volume = volume + vol;\n";
 echo "console.log(volume);\n";
 echo "}\n";
 echo "fetch('http://". $ipaddr ."/api/?service=15&mod='+volumemove);\n";
-//echo "$.getJSON('http://". $ipaddr ."/api/?service=15&mod='+volumemove, function(result){\n";
-//echo "volume = parseInt(result.volume);\n";
 echo "$('#voldynamic1').css('width', volume + '%');\n";
-//echo "});\n";
+
+echo "}\n";
+
 echo "}\n";
 //***********************************
 
