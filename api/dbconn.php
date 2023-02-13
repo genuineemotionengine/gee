@@ -1,7 +1,7 @@
 <?php
 $servername = "localhost:3306";
 $username = "geeuser";
-if ($ipaddr == "192.168.68.108" || $ipadd == "192.168.1.13"){
+if ($ipadd == "192.168.1.13"){
     $password = "Pergamon2023!"; 
 } else {
     $password = "Pergamon2022!";
