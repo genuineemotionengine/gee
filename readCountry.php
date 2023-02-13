@@ -16,11 +16,11 @@ parse_str($_SERVER['QUERY_STRING']);
 
 $ipadd = $_SERVER['SERVER_ADDR'];
 
-if ($ipadd == "192.168.1.13"){
+//if ($ipadd == "192.168.1.13"){
     require_once("dbcontroller23.php");
-} else {
-    require_once("dbcontroller.php");
-}
+//} else {
+  //  require_once("dbcontroller.php");
+//}
 
 
 $db_handle = new DBController();
