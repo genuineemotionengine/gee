@@ -2,26 +2,9 @@
 
 parse_str($_SERVER['QUERY_STRING']);
 
-//require_once('dbconn23.php');
-//
-//$sql = "SELECT * FROM searchterm";
-//$results = $conn->query($sql);
-//if ($results->num_rows > 0) {
-//    while($row = $results->fetch_assoc()) {
-//        $term = $row['term'];
-//        
-//    }
-//}
-
-
 $ipadd = $_SERVER['SERVER_ADDR'];
 
-//if ($ipadd == "192.168.1.13"){
-    require_once("dbcontroller23.php");
-//} else {
-  //  require_once("dbcontroller.php");
-//}
-
+require_once("dbcontroller.php");
 
 $db_handle = new DBController();
 
