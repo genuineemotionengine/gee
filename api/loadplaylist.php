@@ -39,6 +39,8 @@ fclose($myfile);
 
 $mpd->load_playlist($playlist);
 
+$mpd->update_db();
+
 $mpd->repeat(1);
 
 $mpd->play(0);
