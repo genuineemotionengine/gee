@@ -459,7 +459,7 @@ $conn->query($sql);
 
 if ($service == 24){  
 
-$statusarray = $mpd->server_status();
+$statusarray = $mpd->update_db();
 
 echo '<pre>'.htmlentities(print_r($statusarray, true), ENT_SUBSTITUTE).'</pre>';
     
