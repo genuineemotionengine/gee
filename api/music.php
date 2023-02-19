@@ -1,7 +1,7 @@
 <?php
 $count = 200000;
 
-$dir = "/mnt/swp/";
+$dir = "/mnt/usb/";
 
 $dirarray = scandir($dir);
 
@@ -11,7 +11,7 @@ $elements = count($dirarray);
 
 for ($x = 2; $x < $elements; $x++) {
     
-$subdir = "/mnt/swp/".$dirarray[$x]."/";
+$subdir = "/mnt/usb/".$dirarray[$x]."/";
 
 $subdirarray = scandir($subdir);
 
@@ -21,17 +21,17 @@ $subelements = count($subdirarray);
 
 for ($y = 2; $y < $subelements; $y++) {
     
-    rename("/mnt/swp/".$dirarray[$x]."/".$subdirarray[$y],"/mnt/swp/".$dirarray[$x]."/".$count.".flac");
+    rename("/mnt/usb/".$dirarray[$x]."/".$subdirarray[$y],"/mnt/usb/".$dirarray[$x]."/".$count.".flac");
     
-    echo "/mnt/swp/".$dirarray[$x]."/".$subdirarray[$y]." renamed to /mnt/swp/".$dirarray[$x]."/".$count.".flac\n";
+    echo "/mnt/usb/".$dirarray[$x]."/".$subdirarray[$y]." renamed to /mnt/usb/".$dirarray[$x]."/".$count.".flac\n";
     
     $count++;
       
 }    
     
-rename("/mnt/swp/".$dirarray[$x],"/mnt/swp/".$count);
+rename("/mnt/usb/".$dirarray[$x],"/mnt/usb/".$count);
 
-echo "/mnt/swp/".$dirarray[$x]." renamed to /mnt/swp/".$count."\n";
+echo "/mnt/usb/".$dirarray[$x]." renamed to /mnt/usb/".$count."\n";
 
 echo $x." done\n";
 
