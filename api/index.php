@@ -459,9 +459,9 @@ $conn->query($sql);
 
 if ($service == 24){  
 
-$statusarray = $mpd->update_db();
+$updatearray = $mpd->update_db();
 
-echo '<pre>'.htmlentities(print_r($statusarray, true), ENT_SUBSTITUTE).'</pre>';
+echo '<pre>'.htmlentities(print_r($updatearray, true), ENT_SUBSTITUTE).'</pre>';
     
 //echo exec('alsamixer') . " \n";    
 
