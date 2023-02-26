@@ -69,7 +69,7 @@ echo "$('#nxttracksearch'+track).removeClass('termgrey').addClass('termwhite');\
 echo "}\n";
 //***********************************
 
-//******* Volume *********
+//******* Volume Up/Down*********
 echo "function volumeupdown(plusminus){\n";
 
 echo "if (volume >= 0 && volume <= 100){\n";
@@ -95,6 +95,16 @@ echo "}\n";
 echo "function volumeup(){\n";
 //echo "fetch('http://". $ipaddr ."/api/?service=15&mod=+5');\n";
 echo "$.getJSON('http://". $ipaddr ."/api/?service=15&mod=+5', function(result){\n";
+echo "volume = parseInt(result.volume);\n";
+echo "$('#voldynamic1').css('width', volume + '%');\n";
+echo "});\n";
+echo "}\n";
+//***********************************
+
+//******* Volume Down *********
+echo "function volumedown(){\n";
+//echo "fetch('http://". $ipaddr ."/api/?service=15&mod=+5');\n";
+echo "$.getJSON('http://". $ipaddr ."/api/?service=15&mod=-5', function(result){\n";
 echo "volume = parseInt(result.volume);\n";
 echo "$('#voldynamic1').css('width', volume + '%');\n";
 echo "});\n";
@@ -264,7 +274,7 @@ echo "<br/>\n";
 
 echo "<div class='container pt-0 mt-0'>\n";
     echo "<div class='row row-cols-3'>\n";
-        echo "<div class='col-2 text-center'><button type='button' class='bg-black' onclick='volumeupdown(1)'><i class='bi bi-volume-down' style='font-size: 2.3rem; color: white;'></i></button></div>\n";
+        echo "<div class='col-2 text-center'><button type='button' class='bg-black' onclick='volumedown()'><i class='bi bi-volume-down' style='font-size: 2.3rem; color: white;'></i></button></div>\n";
         echo "<div class='col-8'>\n";
             echo "<div class='pt-4'>\n";
                 echo "<div class='progress bg-dark' style='height: 5px;'>\n";
@@ -272,7 +282,7 @@ echo "<div class='container pt-0 mt-0'>\n";
                 echo "</div>\n";
             echo "</div>\n";
         echo "</div>\n";
-        echo "<div class='col-2 text-center'><button type='button' class='bg-black' onclick='volumeupdown(2)'><i class='bi bi-volume-up' style='font-size: 2.3rem; color: white;'></i></button></div>\n";
+        echo "<div class='col-2 text-center'><button type='button' class='bg-black' onclick='volumeup()'><i class='bi bi-volume-up' style='font-size: 2.3rem; color: white;'></i></button></div>\n";
     echo "</div>\n";
 echo "</div>\n";
 
