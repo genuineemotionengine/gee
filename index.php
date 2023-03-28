@@ -450,7 +450,7 @@ echo "<div class='row row-cols-2'>\n";
     echo "</div>\n";
     echo "<div class='col-1'>\n";
     //echo "<div class='position-relative'>\n";
-    echo "<button type='button' id='termtrack' class='termwhite' onclick='searchterm(1)'><i class='bi bi-music-note-list' style='font-size: 7rem;'></i></button>\n";
+    echo "&nbsp;&nbsp;&nbsp;&nbsp;<button type='button' id='termtrack' class='termwhite' onclick='searchterm(1)'><i class='bi bi-music-note-list' style='font-size: 7rem;'></i></button>\n";
     //echo "</div>\n";
     echo "</div>\n";
 echo "</div>\n";
