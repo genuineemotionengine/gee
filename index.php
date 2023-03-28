@@ -448,7 +448,7 @@ echo "<div class='row'>\n";
     echo "<div class='col border-end'>\n";
     echo "<img id='image2' class='img-fluid' src='' style='width:200px;' />\n";
     echo "</div>\n";
-    echo "<div class='col ms-6'>\n";
+    echo "<div class='col ps-5'>\n";
     //echo "<div class='position-relative'>\n";
     echo "<button type='button' id='termtrack' class='termwhite' onclick='searchterm(1)'><i class='bi bi-music-note-list' style='font-size: 7rem;'></i></button>\n";
     //echo "</div>\n";
