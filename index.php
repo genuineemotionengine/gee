@@ -446,7 +446,7 @@ echo "</div>\n";
 echo "<div class='modal-body'>\n";
 echo "<div class='row row-cols-2'>\n";
     echo "<div class='col-4'>\n";
-    echo "<img id='image2' class='img-fluid' src='' style='width:150px;' />\n";
+    echo "<img id='image2' class='img-fluid' src='' style='width:100px;' />\n";
     echo "</div>\n";
     echo "<div class='col-4'>\n";
     echo "<button type='button' id='termtrack' class='termwhite' onclick='searchterm(1)'><i class='bi bi-music-note-list' style='font-size: 4rem;'></i></button>\n";
