@@ -444,13 +444,13 @@ echo "<div class='col-1'><button type='button' class='btn btn-sm' data-bs-dismis
 echo "</div>\n";
 echo "</div>\n";
 echo "<div class='modal-body'>\n";
-echo "<div class='row row-cols-2'>\n";
-    echo "<div class='col-6 border-end'>\n";
+echo "<div class='row'>\n";
+    echo "<div class='col border-end'>\n";
     echo "<img id='image2' class='img-fluid' src='' style='width:200px;' />\n";
     echo "</div>\n";
-    echo "<div class='col-1'>\n";
+    echo "<div class='col'>\n";
     //echo "<div class='position-relative'>\n";
-    echo "&nbsp;&nbsp;&nbsp;&nbsp;<button type='button' id='termtrack' class='termwhite' onclick='searchterm(1)'><i class='bi bi-music-note-list' style='font-size: 7rem;'></i></button>\n";
+    echo "<div ><button type='button' id='termtrack' class='termwhite' onclick='searchterm(1)'><i class='bi bi-music-note-list' style='font-size: 7rem;'></i></button></div>\n";
     //echo "</div>\n";
     echo "</div>\n";
 echo "</div>\n";
