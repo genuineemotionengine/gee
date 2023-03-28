@@ -444,7 +444,7 @@ echo "<div class='col-1'><button type='button' class='btn btn-sm' data-bs-dismis
 echo "</div>\n";
 echo "</div>\n";
 echo "<div class='modal-body'>\n";
-echo "<div id='fullalbum'></div>\n";
+//echo "<div id='fullalbum'></div>\n";
 echo "</div>\n";
 echo "</div>\n";
 echo "</div>\n";
