@@ -444,6 +444,14 @@ echo "<div class='col-1'><button type='button' class='btn btn-sm' data-bs-dismis
 echo "</div>\n";
 echo "</div>\n";
 echo "<div class='modal-body'>\n";
+echo "<div class='row row-cols-2'>\n";
+    echo "<div class='col-4'>\n";
+    echo "<img id='image2' class='img-fluid' src='' />\n";
+    echo "</div>\n";
+    echo "<div class='col-4'>\n";
+    echo "<button type='button' id='termtrack' class='termwhite' onclick='searchterm(1)'><i class='bi bi-music-note-list' style='font-size: 2.3rem;'></i></button>\n";
+    echo "</div>\n";
+echo "</div>\n";
 //echo "<div id='fullalbum'></div>\n";
 echo "</div>\n";
 echo "</div>\n";
