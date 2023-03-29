@@ -432,7 +432,7 @@ echo "<div class='modal fade' id='staticBackdrop1' data-bs-backdrop='static' dat
 echo "<div class='modal-dialog modal-dialog-scrollable'>\n";
 echo "<div class='modal-content bg-black'style='background: black;'>\n";
 echo "<div class='modal-header p-0 m-0'>\n";
-echo "<button type='button' class='btn btn-sm' data-bs-dismiss='modal' aria-label='Close'><i class='bi bi-x' style='font-size: 3rem; color: white;'></i></button>>\n";
+echo "<button type='button' class='btn btn-sm' data-bs-dismiss='modal' aria-label='Close'><i class='bi bi-x' style='font-size: 4rem; color: white;'></i></button>\n";
 echo "</div>\n";
 echo "<div class='modal-body  p-0 m-0'>\n";
 echo "<table>\n";
