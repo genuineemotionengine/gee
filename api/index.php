@@ -183,6 +183,7 @@ $results = $mpd->playlist_add_id($uri, $pos);
 
 if ($plnext){
     $mpd->next();
+    include ('getmeta.php');
 }
 
 if ($verbose){
@@ -190,6 +191,8 @@ if ($verbose){
 echo '<pre>'.htmlentities(print_r($results, true), ENT_SUBSTITUTE).'</pre>';
 
 }
+
+
 
 }
 
