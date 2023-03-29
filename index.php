@@ -445,7 +445,7 @@ echo "</div>\n";
 echo "</div>\n";
 echo "<div class='modal-body'>\n";
 echo "<table>\n";
-    echo "<tr>\n";
+    echo "<tr style='width: 250px;'>\n";
         echo "<td>\n";
         echo "<img id='image2' class='img-fluid' src='' style='width:150px;' />\n";
         echo "</td>\n";
