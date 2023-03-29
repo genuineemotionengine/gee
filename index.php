@@ -52,8 +52,8 @@ echo "let html = '<div>'\n";
 echo "for (let x in myObj) {\n";
 echo "html += '<div class=\x22border-bottom align-top\x22><br/>";
 echo "<h4>' + myObj[x].track + ' - ' + myObj[x].title + ' - ' + myObj[x].artist + '</h4>";
-echo "<button type=\x22button\x22 id=\x22nxttrack'+myObj[x].id+'\x22 class=\x22white\x22 data-bs-dismiss=\x22modal\x22 onclick=\x22playnext('+myObj[x].id+')\x22><i class=\x22bi bi-chevron-right\x22 style=\x22font-size: 3rem;\x22></i></button>&nbsp;&nbsp;&nbsp;";
-echo "<button type=\x22button\x22 id=\x22nxttrack'+myObj[x].id+'\x22 class=\x22white\x22 data-bs-dismiss=\x22modal\x22 onclick=\x22insertnext('+myObj[x].id+')\x22><i class=\x22bi bi-chevron-double-right\x22 style=\x22font-size: 3rem;\x22></i></button>";
+echo "<button type=\x22button\x22 id=\x22nxttrack'+myObj[x].id+'\x22 class=\x22termwhite\x22 data-bs-dismiss=\x22modal\x22 onclick=\x22playnext('+myObj[x].id+')\x22><i class=\x22bi bi-chevron-right\x22 style=\x22font-size: 3rem;\x22></i></button>&nbsp;&nbsp;&nbsp;";
+echo "<button type=\x22button\x22 id=\x22nxttrack'+myObj[x].id+'\x22 class=\x22termwhite\x22 data-bs-dismiss=\x22modal\x22 onclick=\x22insertnext('+myObj[x].id+')\x22><i class=\x22bi bi-chevron-double-right\x22 style=\x22font-size: 3rem;\x22></i></button>";
 echo "</div>';\n";
 echo "}\n";
 echo "html += '</div>'\n";    
@@ -73,6 +73,7 @@ echo "}\n";
 //******* Play Next Track *********
 echo "function playnext(track){\n";
 echo "fetch('http://". $ipaddr ."/api/?service=12&plnext=1&id='+ track);\n";
+echo "getmeta(1);\n";
 //echo "$('#nxttrack'+track).removeClass('termgrey').addClass('termwhite');\n";
 //echo "$('#nxttracksearch'+track).removeClass('termgrey').addClass('termwhite');\n";
 echo "}\n";
