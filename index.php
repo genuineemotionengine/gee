@@ -52,7 +52,7 @@ echo "let html = '<div>'\n";
 echo "for (let x in myObj) {\n";
 echo "html += '<div class=\x22border-bottom align-top\x22><br/>";
 echo "<h4>' + myObj[x].track + ' - ' + myObj[x].title + ' - ' + myObj[x].artist + '</h4>";
-echo "<button type=\x22button\x22 id=\x22nxttrack'+myObj[x].id+'\x22 class=\x22termgrey\x22 data-bs-dismiss=\x22modal\x22 onclick=\x22playnext('+myObj[x].id+')\x22><i class=\x22bi bi-chevron-right\x22 style=\x22font-size: 3rem;\x22></i></button>";
+echo "<button type=\x22button\x22 id=\x22nxttrack'+myObj[x].id+'\x22 class=\x22termgrey\x22 data-bs-dismiss=\x22modal\x22 onclick=\x22playnext('+myObj[x].id+')\x22><i class=\x22bi bi-chevron-right\x22 style=\x22font-size: 3rem;\x22></i></button>&nbsp;&nbsp;&nbsp;";
 echo "<button type=\x22button\x22 id=\x22nxttrack'+myObj[x].id+'\x22 class=\x22termgrey\x22 data-bs-dismiss=\x22modal\x22 onclick=\x22insertnext('+myObj[x].id+')\x22><i class=\x22bi bi-chevron-double-right\x22 style=\x22font-size: 3rem;\x22></i></button>";
 echo "</div>';\n";
 echo "}\n";
