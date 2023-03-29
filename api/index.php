@@ -181,6 +181,10 @@ echo "pos: ".$pos."<br>";
 
 $results = $mpd->playlist_add_id($uri, $pos);
 
+if ($plnext){
+    $mpd->next();
+}
+
 if ($verbose){
 
 echo '<pre>'.htmlentities(print_r($results, true), ENT_SUBSTITUTE).'</pre>';
