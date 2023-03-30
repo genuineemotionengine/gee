@@ -301,7 +301,7 @@ echo "</div>\n";
 
 //echo "<br/>\n";
 echo "<button type='button' class='bg-black' onclick='getmeta(1)'><i class='bi bi-arrow-clockwise' style='font-size: 2.3rem; color: white;'></i></button>\n";
-echo "<button type='button' class='btn btn-black' onclick='wholealbum()' data-bs-toggle='modal' data-bs-target='#modal1'><i class='bi bi-three-dots' style='font-size: 2.3rem; color: white;'></i></button>\n";
+echo "<button type='button' class='btn btn-black' data-bs-toggle='modal' data-bs-target='#modal1'><i class='bi bi-three-dots' style='font-size: 2.3rem; color: white;'></i></button>\n";
 echo "<button type='button' class='bg-black' onclick='getmeta(5)'><i class='bi bi-arrow-repeat' style='font-size: 2.3rem; color: white;'></i></button>\n";
 //echo "<button type='button' class='btn btn-black' data-bs-toggle='modal' data-bs-target='#modal2'><i class='bi bi-search' style='font-size: 2.3rem; color: white;'></i></button>\n";
 //echo "<button type='button' class='bg-black' onclick='volumedown()'><i class='bi bi-volume-down' style='font-size: 2.3rem; color: white;'></i></button>\n";
@@ -449,7 +449,7 @@ echo "<table>\n";
     echo "<tr>\n";
         echo "<td class='border-bottom border-end' style='width:250px;'>\n";
         //echo "<img id='image2' class='img-fluid  mx-auto d-block' src='' style='width:150px;' />\n";
-        echo "<button data-bs-target='#modal2' class='mx-auto d-block' data-bs-toggle='modal' data-bs-dismiss='modal'><img id='image2' class='img-fluid' src='' style='width:150px;' /></button>\n";
+        echo "<button data-bs-target='#modal2' onclick='wholealbum()' class='mx-auto d-block' data-bs-toggle='modal' data-bs-dismiss='modal'><img id='image2' class='img-fluid' src='' style='width:150px;' /></button>\n";
         echo "</td>\n";
         echo "<td class='border-bottom ps-3' style='width:250px;'>\n";
         echo "<button type='button' id='termtrack' class='termwhite mx-auto d-block' onclick='searchterm(1)'><i class='bi bi-music-note-beamed' style='font-size: 7rem;'></i></button>\n";
