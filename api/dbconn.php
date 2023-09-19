@@ -1,6 +1,6 @@
 <?php
 $servername = "localhost:3306";
-$username = "geeuser";
+$username = "gee";
 $password = "Pergamon2023!"; 
 $dbname = "geeapp";
 
