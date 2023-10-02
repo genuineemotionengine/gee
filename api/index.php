@@ -480,7 +480,7 @@ if ($service == 25){
     
 $playlist = "app";    
 
-$fullplaylist = $mpd->playlist();
+$fullplaylist = $mpd->current_song();
 
 echo '<pre>'.htmlentities(print_r($fullplaylist, true), ENT_SUBSTITUTE).'</pre>';
     
