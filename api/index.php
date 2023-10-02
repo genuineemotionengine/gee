@@ -480,24 +480,26 @@ if ($service == 26){
     
 $mySimpleArray = $mpd->current_song();
 
+$albumpath = $mySimpleArray[0]['name'];
+
 if ($verbose){
 echo "Current Song";
 echo '<pre>'.htmlentities(print_r($mySimpleArray, true), ENT_SUBSTITUTE).'</pre>'; 
 echo "<br><br><br>";    
 }
 
-//$sql = "SELECT albumpath FROM app WHERE id = '".$id."'";
-//if ($verbose){
-//echo "sql: ".$sql."<br>";
-//}
-//$result = $conn->query($sql);
-//if ($result->num_rows > 0) {
-//    while($row = $result->fetch_assoc()) {
-//       
-//        $uri = $row['albumpath'];
-//
-//       }
-//     } 
+$sql = "SELECT * FROM app WHERE albumpath = '".$albumpath."'";
+if ($verbose){
+echo "sql: ".$sql."<br>";
+}
+$result = $conn->query($sql);
+if ($result->num_rows > 0) {
+    while($row = $result->fetch_assoc()) {
+       
+        $uri = $row['albumpath'];
+
+       }
+     } 
 
    
 
@@ -506,7 +508,7 @@ $pos = $mySimpleArray[0]['Pos'];
 $pos++;
 
 if ($verbose){
-//echo "uri: ".$uri."<br>";
+echo "uri: ".$uri."<br>";
 
 echo "pos: ".$pos."<br>";
 }
