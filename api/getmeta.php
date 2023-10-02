@@ -50,6 +50,8 @@ if(isset($ThisFileInfo['comments']['picture'][0])){
     $image='data:'.$ThisFileInfo['comments']['picture'][0]['image_mime'].';charset=utf-8;base64,'.base64_encode($ThisFileInfo['comments']['picture'][0]['data']);
 }
 
+
+
 $rows = ['image' => $image,
 'title' => $title,
 'artist' => $artist,

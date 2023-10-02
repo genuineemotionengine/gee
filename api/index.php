@@ -473,3 +473,16 @@ echo '<pre>'.htmlentities(print_r($updatearray, true), ENT_SUBSTITUTE).'</pre>';
 //echo exec('alsamixer') . " \n";    
 
 }
+
+//****************** Print Playlist **********************
+
+if ($service == 25){  
+    
+$playlist = "app";    
+
+$fullplaylist = $mpd->playlistinfo($playlist);
+
+echo '<pre>'.htmlentities(print_r($fullplaylist, true), ENT_SUBSTITUTE).'</pre>';
+    
+
+}
