@@ -476,7 +476,25 @@ echo '<pre>'.htmlentities(print_r($updatearray, true), ENT_SUBSTITUTE).'</pre>';
 
 //****************** Print Playlist **********************
 
-if ($service == 26){  
+if ($service == 25){  
+    
+//$playlist = "app";    
+
+$fullplaylist = $mpd->playlist();
+
+echo '<pre>'.htmlentities(print_r($fullplaylist, true), ENT_SUBSTITUTE).'</pre>';
+    
+
+}
+
+
+
+
+//****************** Next Track working **********************
+
+if ($service == 26){
+    
+    
     
 $mySimpleArray = $mpd->current_song();
 
