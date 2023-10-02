@@ -478,11 +478,53 @@ echo '<pre>'.htmlentities(print_r($updatearray, true), ENT_SUBSTITUTE).'</pre>';
 
 if ($service == 26){  
     
-//$playlist = "app";    
+$mySimpleArray = $mpd->current_song();
 
-$fullplaylist = $mpd->current_song();
+if ($verbose){
+echo "Current Song";
+echo '<pre>'.htmlentities(print_r($mySimpleArray, true), ENT_SUBSTITUTE).'</pre>'; 
+echo "<br><br><br>";    
+}
 
-echo '<pre>'.htmlentities(print_r($fullplaylist, true), ENT_SUBSTITUTE).'</pre>';
+$sql = "SELECT albumpath FROM app WHERE id = '".$id."'";
+if ($verbose){
+echo "sql: ".$sql."<br>";
+}
+$result = $conn->query($sql);
+if ($result->num_rows > 0) {
+    while($row = $result->fetch_assoc()) {
+       
+        $uri = $row['albumpath'];
+
+       }
+     } 
+
+   
+
+$pos = $mySimpleArray[0]['Pos'];
+
+$pos++;
+
+if ($verbose){
+echo "uri: ".$uri."<br>";
+
+echo "pos: ".$pos."<br>";
+}
+
+
+//$results = $mpd->playlist_add_id($uri, $pos);
+//
+//if ($plnext){
+//    $mpd->next();
+//    
+//}
+//
+//if ($verbose){
+//
+//echo '<pre>'.htmlentities(print_r($results, true), ENT_SUBSTITUTE).'</pre>';
+//
+//}
+
     
 
 }
