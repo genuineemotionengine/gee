@@ -514,7 +514,7 @@ $type = "Pos";
 
 $what = $pos;
 
-$results = $mpd->search($type, $what);
+$results = $mpd->find($type, $what);
 
 
 if ($verbose){
