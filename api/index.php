@@ -476,9 +476,9 @@ echo '<pre>'.htmlentities(print_r($updatearray, true), ENT_SUBSTITUTE).'</pre>';
 
 //****************** Print Playlist **********************
 
-if ($service == 25){  
+if ($service == 26){  
     
-$playlist = "app";    
+//$playlist = "app";    
 
 $fullplaylist = $mpd->current_song();
 
