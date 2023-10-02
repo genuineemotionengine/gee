@@ -497,6 +497,8 @@ if ($result->num_rows > 0) {
     while($row = $result->fetch_assoc()) {
        
         $uri = $row['albumpath'];
+        $title = $row['title'];
+        $artist = $row['artist'];
 
        }
      } 
@@ -509,6 +511,8 @@ $pos++;
 
 if ($verbose){
 echo "uri: ".$uri."<br>";
+echo "title: ".$title."<br>";
+echo "artist: ".$artist."<br>";
 
 echo "pos: ".$pos."<br>";
 }
