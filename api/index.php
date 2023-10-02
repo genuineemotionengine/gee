@@ -486,18 +486,18 @@ echo '<pre>'.htmlentities(print_r($mySimpleArray, true), ENT_SUBSTITUTE).'</pre>
 echo "<br><br><br>";    
 }
 
-$sql = "SELECT albumpath FROM app WHERE id = '".$id."'";
-if ($verbose){
-echo "sql: ".$sql."<br>";
-}
-$result = $conn->query($sql);
-if ($result->num_rows > 0) {
-    while($row = $result->fetch_assoc()) {
-       
-        $uri = $row['albumpath'];
-
-       }
-     } 
+//$sql = "SELECT albumpath FROM app WHERE id = '".$id."'";
+//if ($verbose){
+//echo "sql: ".$sql."<br>";
+//}
+//$result = $conn->query($sql);
+//if ($result->num_rows > 0) {
+//    while($row = $result->fetch_assoc()) {
+//       
+//        $uri = $row['albumpath'];
+//
+//       }
+//     } 
 
    
 
@@ -506,24 +506,22 @@ $pos = $mySimpleArray[0]['Pos'];
 $pos++;
 
 if ($verbose){
-echo "uri: ".$uri."<br>";
+//echo "uri: ".$uri."<br>";
 
 echo "pos: ".$pos."<br>";
 }
+$type = "Pos";
+
+$what = $pos;
+
+$results = search($type, $what);
 
 
-//$results = $mpd->playlist_add_id($uri, $pos);
-//
-//if ($plnext){
-//    $mpd->next();
-//    
-//}
-//
-//if ($verbose){
-//
-//echo '<pre>'.htmlentities(print_r($results, true), ENT_SUBSTITUTE).'</pre>';
-//
-//}
+if ($verbose){
+
+echo '<pre>'.htmlentities(print_r($results, true), ENT_SUBSTITUTE).'</pre>';
+
+}
 
     
 
