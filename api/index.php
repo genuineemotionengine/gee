@@ -514,11 +514,12 @@ $type = "Pos";
 
 $what = $pos;
 
-$results = search($type, $what);
+$results = $mpd->search($type, $what);
 
 
 if ($verbose){
 
+echo "Next Song";    
 echo '<pre>'.htmlentities(print_r($results, true), ENT_SUBSTITUTE).'</pre>';
 
 }
