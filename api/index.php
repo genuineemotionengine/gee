@@ -276,13 +276,15 @@ echo '<pre>'.htmlentities(print_r($playlistarray, true), ENT_SUBSTITUTE).'</pre>
 
 if ($service == 11){
     
-$statusarray = $mpd->server_status();    
+$currentArray = $mpd->current_song(); 
   
-$playlist = "relaxation";
+$playlist = "app";
 
 $pos = $statusarray['song'];
 
-$pos = "+".$pos;
+$pos = $currentArray[0]['Pos'];
+
+$pos++;
 
 //$range = "0:";
 
@@ -500,6 +502,16 @@ if ($service == 26){
 
 
     
+$statusArray = $mpd->status();
+
+//$albumpath = $mySimpleArray[0]['name'];
+
+if ($verbose){
+echo "Status";
+echo '<pre>'.htmlentities(print_r($statusArray, true), ENT_SUBSTITUTE).'</pre>'; 
+echo "<br><br><br>";    
+}
+
 $currentArray = $mpd->current_song();
 
 //$albumpath = $mySimpleArray[0]['name'];
@@ -507,18 +519,6 @@ $currentArray = $mpd->current_song();
 if ($verbose){
 echo "Current Song";
 echo '<pre>'.htmlentities(print_r($currentArray, true), ENT_SUBSTITUTE).'</pre>'; 
-echo "<br><br><br>";    
-}
-
-$mpd->next();
-
-$nextArray = $mpd->current_song();
-
-$mpd->prev();
-
-if ($verbose){
-echo "Next Song";
-echo '<pre>'.htmlentities(print_r($nextArray, true), ENT_SUBSTITUTE).'</pre>'; 
 echo "<br><br><br>";    
 }
 
