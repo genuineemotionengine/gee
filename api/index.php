@@ -533,7 +533,7 @@ echo "<br><br><br>";
 
 $type = "Name";
 
-$what = "21";
+$what = "";
 
 echo "type: ".$type."<br>";
 
