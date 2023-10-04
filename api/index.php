@@ -522,7 +522,7 @@ echo '<pre>'.htmlentities(print_r($currentArray, true), ENT_SUBSTITUTE).'</pre>'
 echo "<br><br><br>";    
 }
 
-$type = "Song";
+$type = "song";
 
 $what = "75";
 
