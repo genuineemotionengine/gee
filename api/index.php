@@ -533,7 +533,7 @@ echo "<br><br><br>";
 
 $type = "Name";
 
-$what = "210900/210866.flac";
+$what = "21";
 
 echo "type: ".$type."<br>";
 
