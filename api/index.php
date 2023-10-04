@@ -530,7 +530,7 @@ echo "type: ".$type."<br>";
 
 echo "what: ".$what."<br><br>";
 
-$findArray = $mpd->tagsall();
+$findArray = $mpd->tags();
 
 //$albumpath = $mySimpleArray[0]['name'];
 
