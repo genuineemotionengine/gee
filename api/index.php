@@ -522,13 +522,13 @@ echo '<pre>'.htmlentities(print_r($currentArray, true), ENT_SUBSTITUTE).'</pre>'
 echo "<br><br><br>";    
 }
 
-$type = "Pos";
+$type = "Artist";
 
-$what = "20";
+$what = "Bush";
 
 echo "type: ".$type."<br>";
 
-echo "what: ".$what."<br>";
+echo "what: ".$what."<br><br>";
 
 $findArray = $mpd->find($type, $what);
 
