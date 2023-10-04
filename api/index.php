@@ -522,6 +522,23 @@ echo '<pre>'.htmlentities(print_r($currentArray, true), ENT_SUBSTITUTE).'</pre>'
 echo "<br><br><br>";    
 }
 
+$type = "Pos";
+
+$what = "20";
+
+echo "type: ".$type."<br>";
+
+echo "what: ".$what."<br>";
+
+$findArray = $mpd->find($type, $what);
+
+//$albumpath = $mySimpleArray[0]['name'];
+
+if ($verbose){
+echo "Find";
+echo '<pre>'.htmlentities(print_r($findArray, true), ENT_SUBSTITUTE).'</pre>'; 
+echo "<br><br><br>";    
+}
 
 
 
