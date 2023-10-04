@@ -560,7 +560,7 @@ echo "<br><br><br>";
 //echo "artist: ".$artist."<br>";
 
 
-}
+//}
 
 
 //if ($verbose){
