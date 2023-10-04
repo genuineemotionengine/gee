@@ -494,19 +494,37 @@ echo '<pre>'.htmlentities(print_r($fullplaylist, true), ENT_SUBSTITUTE).'</pre>'
 
 if ($service == 26){
     
-$playlist = "app";    
+//$playlist = "app";    
+//
+//$fullplaylist = $mpd->playlistinfo($playlist);    
 
-$fullplaylist = $mpd->playlistinfo($playlist);    
+
     
-$mySimpleArray = $mpd->current_song();
+$currentArray = $mpd->current_song();
 
 //$albumpath = $mySimpleArray[0]['name'];
 
 if ($verbose){
 echo "Current Song";
-echo '<pre>'.htmlentities(print_r($mySimpleArray, true), ENT_SUBSTITUTE).'</pre>'; 
+echo '<pre>'.htmlentities(print_r($currentArray, true), ENT_SUBSTITUTE).'</pre>'; 
 echo "<br><br><br>";    
 }
+
+$mpd->next();
+
+$nextArray = $mpd->current_song();
+
+$mpd->prev();
+
+if ($verbose){
+echo "Next Song";
+echo '<pre>'.htmlentities(print_r($nextArray, true), ENT_SUBSTITUTE).'</pre>'; 
+echo "<br><br><br>";    
+}
+
+
+
+
 
 //$sql = "SELECT * FROM app WHERE albumpath = '".$albumpath."'";
 //if ($verbose){
@@ -525,21 +543,21 @@ echo "<br><br><br>";
 //
    
 
-$pos = $mySimpleArray[0]['Pos'];
-
-$pos++;
-
-if ($verbose){
-    
-echo "pos: ".$pos."<br>";    
-    
-$uri = $fullplaylist[$pos]['name'];
-$title = $fullplaylist[$pos]['Title'];  
-$artist = $fullplaylist[$pos]['Artist'];  
-    
-echo "uri: ".$uri."<br>";
-echo "title: ".$title."<br>";
-echo "artist: ".$artist."<br>";
+//$pos = $mySimpleArray[0]['Pos'];
+//
+//$pos++;
+//
+//if ($verbose){
+//    
+//echo "pos: ".$pos."<br>";    
+//    
+//$uri = $fullplaylist[$pos]['name'];
+//$title = $fullplaylist[$pos]['Title'];  
+//$artist = $fullplaylist[$pos]['Artist'];  
+//    
+//echo "uri: ".$uri."<br>";
+//echo "title: ".$title."<br>";
+//echo "artist: ".$artist."<br>";
 
 
 }
