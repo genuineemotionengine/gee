@@ -522,9 +522,9 @@ echo '<pre>'.htmlentities(print_r($currentArray, true), ENT_SUBSTITUTE).'</pre>'
 echo "<br><br><br>";    
 }
 
-$type = "basename";
+$type = "Artist";
 
-$what = "210650.flac";
+$what = "Tangerine Dream";
 
 echo "type: ".$type."<br>";
 
