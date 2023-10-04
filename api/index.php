@@ -522,7 +522,7 @@ echo '<pre>'.htmlentities(print_r($currentArray, true), ENT_SUBSTITUTE).'</pre>'
 echo "<br><br><br>";    
 }
 
-$type = "name";
+$type = "Name";
 
 $what = "210900/210866.flac";
 
@@ -530,13 +530,23 @@ echo "type: ".$type."<br>";
 
 echo "what: ".$what."<br><br>";
 
-$findArray = $mpd->tags();
+$findArray = $mpd->search($type, $what);
+
+//$albumpath = $mySimpleArray[0]['name'];
+
+if ($verbose){
+echo "Search";
+echo '<pre>'.htmlentities(print_r($findArray, true), ENT_SUBSTITUTE).'</pre>'; 
+echo "<br><br><br>";    
+}
+
+$tagsArray = $mpd->tags();
 
 //$albumpath = $mySimpleArray[0]['name'];
 
 if ($verbose){
 echo "tags";
-echo '<pre>'.htmlentities(print_r($findArray, true), ENT_SUBSTITUTE).'</pre>'; 
+echo '<pre>'.htmlentities(print_r($tagsArray, true), ENT_SUBSTITUTE).'</pre>'; 
 echo "<br><br><br>";    
 }
 
