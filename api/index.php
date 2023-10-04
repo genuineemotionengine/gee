@@ -499,6 +499,15 @@ if ($service == 26){
 //$playlist = "app";    
 //
 //$fullplaylist = $mpd->playlistinfo($playlist);    
+$tagsArray = $mpd->tags();
+
+//$albumpath = $mySimpleArray[0]['name'];
+
+if ($verbose){
+echo "tags";
+echo '<pre>'.htmlentities(print_r($tagsArray, true), ENT_SUBSTITUTE).'</pre>'; 
+echo "<br><br><br>";    
+}
 
 
     
@@ -540,15 +549,6 @@ echo '<pre>'.htmlentities(print_r($findArray, true), ENT_SUBSTITUTE).'</pre>';
 echo "<br><br><br>";    
 }
 
-$tagsArray = $mpd->tags();
-
-//$albumpath = $mySimpleArray[0]['name'];
-
-if ($verbose){
-echo "tags";
-echo '<pre>'.htmlentities(print_r($tagsArray, true), ENT_SUBSTITUTE).'</pre>'; 
-echo "<br><br><br>";    
-}
 
 
 
