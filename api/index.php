@@ -502,7 +502,7 @@ if ($service == 26){
 
 
     
-$statusArray = $mpd->status();
+$statusArray = $mpd->server_status();
 
 //$albumpath = $mySimpleArray[0]['name'];
 
