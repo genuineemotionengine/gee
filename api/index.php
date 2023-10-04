@@ -531,9 +531,9 @@ echo '<pre>'.htmlentities(print_r($currentArray, true), ENT_SUBSTITUTE).'</pre>'
 echo "<br><br><br>";    
 }
 
-$type = "Name";
+$type = "Title";
 
-$what = "";
+$what = "h";
 
 echo "type: ".$type."<br>";
 
