@@ -530,12 +530,12 @@ echo "type: ".$type."<br>";
 
 echo "what: ".$what."<br><br>";
 
-$findArray = $mpd->search($type, $what);
+$findArray = $mpd->tagtypes();
 
 //$albumpath = $mySimpleArray[0]['name'];
 
 if ($verbose){
-echo "Search";
+echo "tags";
 echo '<pre>'.htmlentities(print_r($findArray, true), ENT_SUBSTITUTE).'</pre>'; 
 echo "<br><br><br>";    
 }
