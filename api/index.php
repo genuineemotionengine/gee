@@ -533,7 +533,7 @@ echo "<br><br><br>";
 
 $type = "Title";
 
-$what = "h";
+$what = "Flaphead";
 
 echo "type: ".$type."<br>";
 
