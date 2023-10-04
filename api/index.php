@@ -498,7 +498,10 @@ if ($service == 26){
     
 //$playlist = "app";    
 //
-//$fullplaylist = $mpd->playlistinfo($playlist);    
+//$fullplaylist = $mpd->playlistinfo($playlist);
+
+$mpd->tagsall();
+    
 $tagsArray = $mpd->tags();
 
 //$albumpath = $mySimpleArray[0]['name'];
