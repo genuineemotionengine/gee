@@ -500,7 +500,7 @@ if ($service == 26){
 //
 //$fullplaylist = $mpd->playlistinfo($playlist);
 
-$mpd->tagsall();
+//$mpd->tagsall();
     
 $tagsArray = $mpd->tags();
 
