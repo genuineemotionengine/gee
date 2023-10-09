@@ -14,8 +14,8 @@ require_once('dbconn.php');
 
 require_once('mpd.class.php');
 
-//require_once('getid3.php');   
-//
+require_once('getid3.php');   
+
 //$mpd = new mpd('localhost', 6600);
 //
 //if ($mpd === true) {
