@@ -1,12 +1,6 @@
 <?php
 
-parse_str($_SERVER['QUERY_STRING'], $qsarray);
-
-echo '<pre>'.htmlentities(print_r($qsarray, true), ENT_SUBSTITUTE).'</pre>';
-
-$service = $qsarray['service'];
-//$id = $qsarray['id'];
-//$mod = $qsarray['mod'];
+parse_str($_SERVER['QUERY_STRING']);
 
 $ipaddr = $_SERVER['SERVER_ADDR'];
 
@@ -17,11 +11,6 @@ require_once('mpd.class.php');
 require_once('getid3.php');   
 
 $mpd = new mpd('localhost', 6600);
-
-$statusarray = $mpd->server_status();
-
-echo '<pre>'.htmlentities(print_r($statusarray, true), ENT_SUBSTITUTE).'</pre>';
-
 
 //***************** Just Get Meta **********************
 
