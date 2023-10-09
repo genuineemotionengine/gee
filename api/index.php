@@ -2,6 +2,8 @@
 
 parse_str($_SERVER['QUERY_STRING'], $qsarray);
 
+echo '<pre>'.htmlentities(print_r($qsarray, true), ENT_SUBSTITUTE).'</pre>';
+
 $service = $qsarray['service'];
 //$id = $qsarray['id'];
 //$mod = $qsarray['mod'];
