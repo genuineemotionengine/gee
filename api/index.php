@@ -16,13 +16,12 @@ require_once('mpd.class.php');
 
 require_once('getid3.php');   
 
-//$mpd = new mpd('localhost', 6600);
-//
-//if ($mpd === true) {
-//  // connection successful
-//} else {
-//  echo $mpd->get_error();
-//}
+$mpd = new mpd('localhost', 6600);
+
+$statusarray = $mpd->server_status();
+
+echo '<pre>'.htmlentities(print_r($statusarray, true), ENT_SUBSTITUTE).'</pre>';
+
 
 //***************** Just Get Meta **********************
 
