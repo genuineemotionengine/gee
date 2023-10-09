@@ -1,6 +1,10 @@
 <?php
 
-parse_str($_SERVER['QUERY_STRING']);
+parse_str($_SERVER['QUERY_STRING'], $qsarray);
+
+$service = $qsarray['service'];
+$id = $qsarray['id'];
+$mod = $qsarray['mod'];
 
 $ipaddr = $_SERVER['SERVER_ADDR'];
 
