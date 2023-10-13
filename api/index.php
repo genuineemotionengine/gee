@@ -1,8 +1,8 @@
 <?php
 
-parse_str($_SERVER['QUERY_STRING'], $qsarray);
+parse_str($_SERVER['QUERY_STRING']);
 
-$service = $qsarray['service'];
+//$service = $qsarray['service'];
 //$id = $qsarray['id'];
 //$sort = $qsarray['sort'];
 
