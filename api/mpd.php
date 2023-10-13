@@ -8,7 +8,7 @@ $mpd = new mpd(NULL, 0, 0);
 
 
 
-$mpdarray = $mpd->get_error();
+$mpdarray = $mpd->server_status();
 
 echo "MPD Response:<br><br>";
 
