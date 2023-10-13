@@ -4,7 +4,7 @@ require('mpd.class.php');
 
 $mpd = new mpd('localhost', 6600);
 
-$mpdarray = $mpd->get_connection_status();
+$mpdarray = $mpd->get_error();
 
 echo "MPD Response:<br><br>";
 
