@@ -2,7 +2,7 @@
 
 parse_str($_SERVER['QUERY_STRING'], $qsarray);
 
-//$service = $qsarray['service'];
+$service = $qsarray['service'];
 //$id = $qsarray['id'];
 //$sort = $qsarray['sort'];
 
