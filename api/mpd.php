@@ -1,12 +1,8 @@
 <?php
 
-require('mpd.class.php');
+require_once('mpd.class.php');
 
-//$mpd = new mpd('localhost', 6600);
-
-$mpd = new mpd(NULL, 0, 0);
-
-
+$mpd = new mpd('localhost', 6600);
 
 $mpdarray = $mpd->server_status();
 
