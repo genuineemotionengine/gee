@@ -4,7 +4,7 @@ require('mpd.class.php');
 
 $mpd = new mpd('localhost', 6600);
 
-$mpdarray = $mpd->get_error();
+$mpdarray = $mpd->get_version();
 
 echo "MPD Response:<br><br>";
 
