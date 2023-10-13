@@ -1,6 +1,6 @@
 <?php
 
-require('mpd.class.php');
+require_once('mpd.class.php');
 
 $mpd = new mpd('localhost', 6600);
 
