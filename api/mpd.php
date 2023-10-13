@@ -2,7 +2,7 @@
 
 require_once('mpd.class.php');
 
-$mpd = new mpd('localhost', 6600);
+$mpd = mpd('localhost', 6600);
 
 $mpdarray = $mpd->get_version();
 
