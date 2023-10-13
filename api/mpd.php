@@ -1,10 +1,14 @@
 <?php
 
-require_once('mpd.class.php');
+require('mpd.class.php');
 
-$mpd = mpd('localhost', 6600);
+//$mpd = new mpd('localhost', 6600);
 
-$mpdarray = $mpd->get_version();
+$mpd = new mpd(NULL, 0, 0);
+
+
+
+$mpdarray = $mpd->get_error();
 
 echo "MPD Response:<br><br>";
 
