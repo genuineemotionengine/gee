@@ -4,7 +4,7 @@ require_once('mpd.class.php');
 
 $mpd = new mpd('localhost', 6600);
 
-$mpdarray = $mpd->server_status();
+$mpdarray = $mpd->get_version();
 
 echo '<pre>'.htmlentities(print_r($mpdarray, true), ENT_SUBSTITUTE).'</pre>';
 
