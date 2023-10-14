@@ -10,6 +10,8 @@ if ( !$mpd->connected)
 {
   echo "\nCould not connect to the MPD server\n";
   exit(1);
+} else {
+  echo "\nConnected to the MPD server\n";  
 }
 
 
