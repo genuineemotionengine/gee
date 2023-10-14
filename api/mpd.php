@@ -1,7 +1,6 @@
 <?php
 
-$mpd_host= "localhost";
-$mpd_port= "6600";
+
 
 require_once('mpd.class.php');
 

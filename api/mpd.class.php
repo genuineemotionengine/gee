@@ -120,9 +120,9 @@ function addErr($err){
 
 class mpd {
 	// TCP/Connection variables
-	var $host;
-	var $port;
-    var $password;
+	var $host = "localhost";
+	var $port = "6600";
+        var $password;
 
 	var $mpd_sock   = NULL;
 	var $connected  = FALSE;
