@@ -1,10 +1,10 @@
 <?php
 
-include('config.php');
+//include('config.php');
 
 require_once('mpd.class.php');
 
-$mpd = new mpd($host,$mpdPort);
+$mpd = new mpd();
 
 if ( !$mpd->connected)
 {
