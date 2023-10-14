@@ -1,8 +1,11 @@
 <?php
 
+$mpd_host= "localhost";
+$mpd_port= "6600";
+
 require_once('mpd.class.php');
 
-$mpd = new mpd('localhost', 6600);
+$mpd = new mpd;
 
 $mpdarray = $mpd->server_status();
 
