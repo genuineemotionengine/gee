@@ -7,7 +7,7 @@
 //$mpdpassword = null;
 
 
-require('mpd.class.php');
+include('mpd.class.php');
 
 $mpd = new mpd('localhost',6601);
 
