@@ -1,5 +1,21 @@
 <?php
 
+use Kolbasyatin\MPD\MPD\MPDClient;
+use Kolbasyatin\MPD\MPD\MPDConnection;
+
+
+$connection = new MPDConnection('localhost:6600');
+$client = new MPDClient($connection);
+
+$client->play(); // Send the command
+$answer = $client->status(); // Get the result
+
+
+
+
+
+
+
 //include('config.php');
 
 //$host = null;
@@ -7,30 +23,30 @@
 //$mpdpassword = null;
 
 
-require_once('mpd.class.php');
-
-$mpd = new mpd('localhost', 6600);
-
-
-
-
-//if ( !$mpd->connected)
-//{
-//  echo "Could not connect to the MPD server<br><br>";
-//  exit(1);
-//} else {
-//  echo "Connected to the MPD server<br><br>";  
-//}
-
-if ($mpd === true) { echo "Connected to the MPD server<br><br>"; } else { echo $mpdarray = $mpd->get_error (); }
-
-//$mpd = new mpd;
-
-//$mpdarray = $mpd->server_status();
-
-echo "MPD Response:<br><br>";
-
-echo '<pre>'.htmlentities(print_r($mpdarray, true), ENT_SUBSTITUTE).'</pre>';
+//require_once('mpd.class.php');
+//
+//$mpd = new mpd('localhost', 6600);
+//
+//
+//
+//
+////if ( !$mpd->connected)
+////{
+////  echo "Could not connect to the MPD server<br><br>";
+////  exit(1);
+////} else {
+////  echo "Connected to the MPD server<br><br>";  
+////}
+//
+//if ($mpd === true) { echo "Connected to the MPD server<br><br>"; } else { echo $mpdarray = $mpd->get_error (); }
+//
+////$mpd = new mpd;
+//
+////$mpdarray = $mpd->server_status();
+//
+//echo "MPD Response:<br><br>";
+//
+//echo '<pre>'.htmlentities(print_r($mpdarray, true), ENT_SUBSTITUTE).'</pre>';
 
 
 
