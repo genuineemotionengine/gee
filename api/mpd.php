@@ -9,7 +9,7 @@
 
 require_once('mpd.class.php');
 
-$mpd = new mpd(null,0,0);
+$mpd = new mpd('localhost', 6600);
 
 if ( !$mpd->connected)
 {
