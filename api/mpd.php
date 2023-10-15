@@ -9,7 +9,7 @@ $mpdpassword = null;
 
 require_once('mpd.class.php');
 
-$mpd = new mpd($host,$port,$mpdpassword);
+$mpd = new mpd($host,$port);
 
 if ( !$mpd->connected)
 {
