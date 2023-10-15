@@ -18,7 +18,11 @@ try{
   return false;
 }
 
+$mpdarray = $mphpd->status();
 
+echo "MPD Response:<br><br>";
+
+echo '<pre>'.htmlentities(print_r($mpdarray, true), ENT_SUBSTITUTE).'</pre>';
 
 
 
