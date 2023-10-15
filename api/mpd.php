@@ -6,7 +6,7 @@ use FloFaber\MphpD\MphpD;
 use FloFaber\MphpD\MPDException;
 
 $mphpd = new MphpD([
-  "host" => "127.0.0.1",
+  "host" => "localhost",
   "port" => 6600,
   "timeout" => 5
 ]);
