@@ -22,11 +22,11 @@ $mpd = new mpd('localhost', 6600);
 //  echo "Connected to the MPD server<br><br>";  
 //}
 
-if ($mpd === true) { echo "Connected to the MPD server<br><br>"; } else { echo $mpd->get_error (); }
+if ($mpd === true) { echo "Connected to the MPD server<br><br>"; } else { echo $mpdarray = $mpd->get_error (); }
 
 //$mpd = new mpd;
 
-$mpdarray = $mpd->server_status();
+//$mpdarray = $mpd->server_status();
 
 echo "MPD Response:<br><br>";
 
