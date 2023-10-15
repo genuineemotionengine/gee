@@ -11,13 +11,13 @@ require_once('mpd.class.php');
 
 $mpd = new mpd(null,0,0);
 
-//if ( !$mpd->connected)
-//{
-//  echo "Could not connect to the MPD server<br><br>";
-//  exit(1);
-//} else {
-//  echo "Connected to the MPD server<br><br>";  
-//}
+if ( !$mpd->connected)
+{
+  echo "Could not connect to the MPD server<br><br>";
+  exit(1);
+} else {
+  echo "Connected to the MPD server<br><br>";  
+}
 
 
 //$mpd = new mpd;
