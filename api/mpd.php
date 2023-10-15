@@ -2,14 +2,14 @@
 
 //include('config.php');
 
-$host = null;
-$port = 0;
-$mpdpassword = null;
+//$host = null;
+//$port = 0;
+//$mpdpassword = null;
 
 
 require_once('mpd.class.php');
 
-$mpd = new mpd($host,$port);
+$mpd = new mpd('127.0.0.1',6600);
 
 if ( !$mpd->connected)
 {
