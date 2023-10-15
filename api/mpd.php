@@ -3,7 +3,7 @@
 //include('config.php');
 
 $host = 'localhost';
-$port = '6600';
+$port = 6600;
 $mpdpassword = null;
 
 
