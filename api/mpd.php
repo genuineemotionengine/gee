@@ -2,8 +2,8 @@
 
 //include('config.php');
 
-$host = 'localhost';
-$port = 6600;
+$host = null;
+$port = 0;
 $mpdpassword = null;
 
 
@@ -13,10 +13,10 @@ $mpd = new mpd($host,$port);
 
 if ( !$mpd->connected)
 {
-  echo "Could not connect to the MPD server<br>";
-  //exit(1);
+  echo "Could not connect to the MPD server<br><br>";
+  exit(1);
 } else {
-  echo "Connected to the MPD server";  
+  echo "Connected to the MPD server<br><br>";  
 }
 
 
