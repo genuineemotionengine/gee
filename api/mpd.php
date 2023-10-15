@@ -1,14 +1,22 @@
 <?php
 
-use Kolbasyatin\MPD\MPD\MPDClient;
-use Kolbasyatin\MPD\MPD\MPDConnection;
+require_once __DIR__ . "/MphpD/MphpD.php";
 
+use FloFaber\MphpD\MphpD;
+use FloFaber\MphpD\MPDException;
 
-$connection = new MPDConnection('localhost:6600', null);
-$client = new MPDClient($connection);
+$mphpd = new MphpD([
+  "host" => "127.0.0.1",
+  "port" => 6600,
+  "timeout" => 5
+]);
 
-$client->play(); // Send the command
-$answer = $client->status(); // Get the result
+try{
+  $mphpd->connect();
+}catch (MPDException $e){
+  echo $e->getMessage();
+  return false;
+}
 
 
 
