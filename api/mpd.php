@@ -9,7 +9,7 @@
 
 require_once('mpd.class.php');
 
-$mpd = new mpd('192.168.68.108',6601);
+$mpd = new mpd('192.168.68.108',6600);
 
 //if ( !$mpd->connected)
 //{
