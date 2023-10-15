@@ -13,10 +13,10 @@ $mpd = new mpd($host,$port);
 
 if ( !$mpd->connected)
 {
-  echo "\nCould not connect to the MPD server\n";
-  exit(1);
+  echo "Could not connect to the MPD server<br>";
+  //exit(1);
 } else {
-  echo "\nConnected to the MPD server\n";  
+  echo "Connected to the MPD server";  
 }
 
 
