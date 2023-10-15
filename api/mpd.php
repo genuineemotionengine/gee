@@ -18,7 +18,10 @@ try{
   return false;
 }
 
-$mpdarray = $mphpd->status();
+$mpdarray = $mphpd->player()->current_song();
+
+
+
 
 echo "MPD Response:<br><br>";
 
