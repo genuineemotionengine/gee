@@ -55,13 +55,16 @@ $command = 'mpc queued';
 exec($command, $output);
 echo '<pre>'.htmlentities(print_r($output, true), ENT_SUBSTITUTE).'</pre>';
 
-$nextsong = $output[0];
 
 $nextsong = explode("-",$output[0]);
 
-echo "'".$nextsong[0]."'"."<br><br>";
+$nexttitle = rtrim($nextsong[1]);
 
-echo "'".$nextsong[1]."'"."<br><br>";
+$nextartist = rtrim($nextsong[0]);
+
+echo "'".$nextartist."'"."<br><br>";
+
+echo "'".$nexttitle."'"."<br><br>";
 
 $rows = ['image' => $image,
 'title' => $title,
