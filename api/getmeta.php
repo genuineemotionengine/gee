@@ -24,15 +24,15 @@ $mySimpleArray = $mphpd->player()->current_song();
     
 echo '<pre>'.htmlentities(print_r($mySimpleArray, true), ENT_SUBSTITUTE).'</pre>';
       
-$flacfile = $mySimpleArray[0]['file'];
+$flacfile = $mySimpleArray['file'];
 
-$album = $mySimpleArray[0]['Album'];
+$album = $mySimpleArray['album'];
 
-$artist = $mySimpleArray[0]['Artist'];
+$artist = $mySimpleArray['artist'];
 
-$title = $mySimpleArray[0]['Title'];
+$title = $mySimpleArray['title'];
 
-$albumartist = $mySimpleArray[0]['AlbumArtist'];
+$albumartist = $mySimpleArray['albumartist'];
 
 if (stripos("$albumartist, Various Artists - ", "Various Artists - ") === 0){
     $albumartist = "Various Artists";
