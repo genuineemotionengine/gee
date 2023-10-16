@@ -41,7 +41,7 @@ fclose($myfile);
 
 $mphpd->playlist($playlist)->load([0]);
 
-$mphpd->player()->repeat();
+//$mphpd->player()->repeat();
 
 //$mphpd->player()->play();
 
