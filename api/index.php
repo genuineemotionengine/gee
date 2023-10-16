@@ -19,8 +19,8 @@ use FloFaber\MphpD\MPDException;
 
 $mphpd = new MphpD([
   "host" => "localhost",
-  "port" => 6600,
-  "timeout" => 5
+  "port" => 6600
+  //"timeout" => 5
 ]);
 
 try{
