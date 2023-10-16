@@ -20,7 +20,7 @@ try{
 
 //$mpdarray = $mphpd->player()->current_song();
 
-$mpdarray = $mphpd->playlist()->clear();
+$mpdarray = $mphpd->queue()->clear();
 
 
 echo "MPD Response:<br><br>";
