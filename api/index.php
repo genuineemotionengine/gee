@@ -40,27 +40,12 @@ if ($service == 1){
 }
 
 
-    
 //***************** Next **********************
 
 if ($service == 4){ 
     
-//    $statusarray = $mphpd->status();
-//
-//    $state = $statusarray['state'];
-    
     $mphpd->player()->next();
-    
-//    if ($state === 'play'){
-//        $pause = 0;
-//    }
-//
-//    if ($state === 'pause'){
-//        $pause = 1;
-//    }
-//
-//    $mpd->pause($pause);    
-    
+   
     include ('getmeta.php');
 
 }
@@ -71,18 +56,6 @@ if ($service == 4){
 
 if ($service == 2){
 
-//    $statusarray = $mphpd->status();
-//
-//    $state = $statusarray['state'];
-//
-//    if ($state == 'play'){
-//        $pause = 1;
-//    }
-//
-//    if ($state == 'pause'){
-//        $pause = 0;
-//    }
-    
     $mphpd->player()->pause();
 
     include ('getmeta.php');
@@ -93,22 +66,8 @@ if ($service == 2){
 
 if ($service == 3){
     
-//    $statusarray = $mphpd->status();
-//
-//    $state = $statusarray['state'];
-    
     $mphpd->player()->previous();
     
-//    if ($state === 'play'){
-//        $pause = 0;
-//    }
-//
-//    if ($state === 'pause'){
-//        $pause = 1;
-//    }
-//
-//    $mpd->pause($pause);
-
     include ('getmeta.php');
 
 }
