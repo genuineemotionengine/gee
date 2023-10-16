@@ -60,7 +60,7 @@ $nextsong = explode("-",$output[0]);
 
 $nexttitle = rtrim($nextsong[1]);
 
-$nextartist = rtrim($nextsong[0]);
+$nextartist = ltrim($nextsong[0]);
 
 echo "'".$nextartist."'"."<br><br>";
 
