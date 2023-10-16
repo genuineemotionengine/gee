@@ -1,20 +1,35 @@
 <?php
 
-parse_str($_SERVER['QUERY_STRING']);
+parse_str($_SERVER['QUERY_STRING'], $qsarray);
 
-//$service = $qsarray['service'];
-//$id = $qsarray['id'];
+$service = $qsarray['service'];
+$id = $qsarray['id'];
 //$sort = $qsarray['sort'];
 
 $ipaddr = $_SERVER['SERVER_ADDR'];
 
 require_once('dbconn.php');
 
-require_once('mpd.class.php');
-
 require_once('getid3.php');   
 
-$mpd = new mpd('localhost', 6600);
+require_once __DIR__ . "/MphpD/MphpD.php";
+
+use FloFaber\MphpD\MphpD;
+use FloFaber\MphpD\MPDException;
+
+$mphpd = new MphpD([
+  "host" => "localhost",
+  "port" => 6600,
+  "timeout" => 5
+]);
+
+try{
+  $mphpd->connect();
+}catch (MPDException $e){
+  echo $e->getMessage();
+  return false;
+}
+
 
 //***************** Just Get Meta **********************
 

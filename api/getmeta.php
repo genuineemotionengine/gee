@@ -1,6 +1,6 @@
 <?php
 
-$statusarray = $mpd->server_status();
+$statusarray = $mphpd->status();
 
 //echo '<pre>'.htmlentities(print_r($statusarray, true), ENT_SUBSTITUTE).'</pre>';
     
@@ -20,7 +20,7 @@ $durations = explode(".",$duration);
 
 $refresh = $durations[0] - $elapsed;
 
-$mySimpleArray = $mpd->current_song();
+$mySimpleArray = $mphpd->player()->current_song();
     
 //echo '<pre>'.htmlentities(print_r($mySimpleArray, true), ENT_SUBSTITUTE).'</pre>';
       
