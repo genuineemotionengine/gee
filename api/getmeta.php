@@ -53,8 +53,7 @@ if(isset($ThisFileInfo['comments']['picture'][0])){
 
 $command = 'mpc queued';
 exec($command, $output);
-echo '<pre>'.htmlentities(print_r($output, true), ENT_SUBSTITUTE).'</pre>';
-
+//echo '<pre>'.htmlentities(print_r($output, true), ENT_SUBSTITUTE).'</pre>';
 
 $nextsong = explode("-",$output[0]);
 
@@ -62,9 +61,9 @@ $nexttitle = ltrim($nextsong[1]);
 
 $nextartist = rtrim($nextsong[0]);
 
-echo "'".$nextartist."'"."<br><br>";
-
-echo "'".$nexttitle."'"."<br><br>";
+//echo "'".$nextartist."'"."<br><br>";
+//
+//echo "'".$nexttitle."'"."<br><br>";
 
 $rows = ['image' => $image,
 'title' => $title,
