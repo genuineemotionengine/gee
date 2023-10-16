@@ -58,9 +58,9 @@ echo '<pre>'.htmlentities(print_r($output, true), ENT_SUBSTITUTE).'</pre>';
 
 $nextsong = explode("-",$output[0]);
 
-$nexttitle = rtrim($nextsong[1]);
+$nexttitle = ltrim($nextsong[1]);
 
-$nextartist = ltrim($nextsong[0]);
+$nextartist = rtrim($nextsong[0]);
 
 echo "'".$nextartist."'"."<br><br>";
 
