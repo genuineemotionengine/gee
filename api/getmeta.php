@@ -57,7 +57,7 @@ echo '<pre>'.htmlentities(print_r($output, true), ENT_SUBSTITUTE).'</pre>';
 
 $nextsong = $output[0];
 
-echo $nextsong."<br>";
+echo $nextsong."<br><br>";
 
 $rows = ['image' => $image,
 'title' => $title,
