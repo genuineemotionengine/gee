@@ -20,7 +20,7 @@ try{
 
 //$mpdarray = $mphpd->player()->current_song();
 
-$status = $mphpd->status();
+$mpdarray = $mphpd->status();
 
 
 echo "MPD Response:<br><br>";
