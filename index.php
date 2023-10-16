@@ -299,7 +299,7 @@ echo "<button type='button' class='bg-black' onclick='getmeta(5)'><i class='bi b
 //echo "<button type='button' class='btn btn-black' data-bs-toggle='modal' data-bs-target='#modal2'><i class='bi bi-search' style='font-size: 2.3rem; color: white;'></i></button>\n";
 //echo "<button type='button' class='bg-black' onclick='volumedown()'><i class='bi bi-volume-down' style='font-size: 2.3rem; color: white;'></i></button>\n";
 //echo "<button type='button' class='bg-black' onclick='volumeup()'><i class='bi bi-volume-up' style='font-size: 2.3rem; color: white;'></i></button>\n";
-echo "<h5>Next: <span id='nexttitle1'></span> - <span id='nextartist1'></span></h5>\n";
+echo "<h6>Next: <span id='nexttitle1'></span> - <span id='nextartist1'></span></h6>\n";
 echo "<h2 id='title1'></h2>\n";
 echo "<h2 id='artist1'></h2>\n";
 echo "<h2 id='album1'></h2>\n";
