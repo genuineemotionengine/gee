@@ -7,6 +7,8 @@ echo "$('#title".$x."').text(result.title);\n";
 echo "$('#artist".$x."').text(result.artist);\n";
 echo "$('#album".$x."').text(result.album);\n";
 echo "$('#albumartist".$x."').text(result.albumartist);\n";
+echo "$('#nexttitle".$x."').text(result.nexttitle);\n";
+echo "$('#nextartist".$x."').text(result.nextartist);\n";
 echo "$('#secondsdur".$x."').html(pad(result.duration%60));\n";
 echo "$('#minutesdur".$x."').html(pad(parseInt(result.duration/60,10)));\n";
 echo "$('#secondscur".$x."').html(pad(current%60));\n";
