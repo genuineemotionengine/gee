@@ -55,7 +55,7 @@ $command = 'mpc queued';
 exec($command, $output);
 //echo '<pre>'.htmlentities(print_r($output, true), ENT_SUBSTITUTE).'</pre>';
 
-$nextsong = explode("-",$output[0]);
+$nextsong = explode(" - ",$output[0]);
 
 $nexttitle = ltrim($nextsong[1]);
 
