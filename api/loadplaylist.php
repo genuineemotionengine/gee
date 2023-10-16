@@ -1,6 +1,6 @@
 <?php
 
-//$mphpd->queue()->clear();
+$mphpd->queue()->clear();
 
 $playlist = "app";
 
