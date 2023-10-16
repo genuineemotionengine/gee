@@ -24,7 +24,7 @@ $mySimpleArray = $mphpd->player()->current_song();
     
 echo '<pre>'.htmlentities(print_r($mySimpleArray, true), ENT_SUBSTITUTE).'</pre>';
       
-$flacfile = $mySimpleArray[0]['name'];
+$flacfile = $mySimpleArray[0]['file'];
 
 $album = $mySimpleArray[0]['Album'];
 
