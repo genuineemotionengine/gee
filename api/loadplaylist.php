@@ -1,6 +1,6 @@
 <?php
 
-$mpd->playlist_clear();
+$mphpd->playlist()->clear();
 
 $playlist = "app";
 
@@ -37,10 +37,10 @@ for ($x = 0; $x < $elements; $x++) {
 }  
 fclose($myfile);
 
-$mpd->load_playlist($playlist);
+//$mpd->load_playlist($playlist);
 
-//$mpd->update_db();
+$mphpd->playlist($playlist)->load();
 
-$mpd->repeat(1);
+$mphpd->player()->repeat();
 
-$mpd->play(0);
+$mphpd->player()->play();
