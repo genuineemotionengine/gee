@@ -39,7 +39,7 @@ fclose($myfile);
 
 //$mpd->load_playlist($playlist);
 
-$mphpd->playlist($playlist)->load();
+//$mphpd->playlist($playlist)->load();
 
 $mphpd->player()->repeat();
 
