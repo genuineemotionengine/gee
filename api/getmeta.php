@@ -51,6 +51,10 @@ if(isset($ThisFileInfo['comments']['picture'][0])){
 }
 
 
+$command = 'mpc queued';
+exec($command, $output);
+echo '<pre>'.htmlentities(print_r($output, true), ENT_SUBSTITUTE).'</pre>';
+
 
 $rows = ['image' => $image,
 'title' => $title,
@@ -60,7 +64,7 @@ $rows = ['image' => $image,
 'duration' => $durations[0],
 'albumartist' => $albumartist,
 'volume' => $volume,
-//'nexttitle' => $nexttitle,
+//'nextsong' => $nextsong,
 //'nextartist' => $nextartist,    
 'state' => $state
      ];
