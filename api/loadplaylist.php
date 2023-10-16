@@ -39,8 +39,8 @@ fclose($myfile);
 
 //$mpd->load_playlist($playlist);
 
-//$mphpd->playlist()->load();
-//
+$mphpd->playlist()->load();
+
 //$mphpd->player()->repeat();
 //
 //$mphpd->player()->play();
