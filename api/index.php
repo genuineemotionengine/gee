@@ -78,7 +78,7 @@ if ($service == 5){
     
 $sql = "SELECT albumpath FROM app WHERE genre != 'Relaxation'";
 
-$mphpd->playlist()->clear();
+$mphpd->queue()->clear();
 
 //include ('loadplaylist.php');
    
