@@ -18,9 +18,9 @@ try{
   return false;
 }
 
-$mpdarray = $mphpd->player()->current_song();
+//$mpdarray = $mphpd->player()->current_song();
 
-$mpdarray = $mphpd->status();
+$mpdarray = $mphpd->playlist()->clear();
 
 
 echo "MPD Response:<br><br>";
