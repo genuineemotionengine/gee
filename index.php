@@ -189,7 +189,9 @@ echo "}\n";
 
 include ('metaids.php');
 
-
+echo "if (control === 5){\n";
+echo "location.reload();\n";
+echo "}\n";
 
 echo "});\n";
 echo "}\n";
