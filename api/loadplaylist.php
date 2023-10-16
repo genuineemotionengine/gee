@@ -45,7 +45,7 @@ $mphpd->playlist($playlist)->load([0]);
 
 $mphpd->player()->repeat(MPD_STATE_ON);
 
-$mphpd->player()->play([0]);
+//$mphpd->player()->play([0]);
 
 
 echo "done";
