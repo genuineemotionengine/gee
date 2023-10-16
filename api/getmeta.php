@@ -55,6 +55,9 @@ $command = 'mpc queued';
 exec($command, $output);
 echo '<pre>'.htmlentities(print_r($output, true), ENT_SUBSTITUTE).'</pre>';
 
+$nextsong = $output[0];
+
+echo $nextsong."<br>";
 
 $rows = ['image' => $image,
 'title' => $title,
@@ -64,8 +67,8 @@ $rows = ['image' => $image,
 'duration' => $durations[0],
 'albumartist' => $albumartist,
 'volume' => $volume,
-//'nextsong' => $nextsong,
-//'nextartist' => $nextartist,    
+'nexttitle' => $nexttitle,
+'nextartist' => $nextartist,    
 'state' => $state
      ];
 
