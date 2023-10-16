@@ -48,4 +48,4 @@ $mphpd->player()->repeat(MPD_STATE_ON);
 $mphpd->player()->play(0);
 
 
-echo "done";
+//echo "done";
