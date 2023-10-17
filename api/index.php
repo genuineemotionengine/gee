@@ -6,6 +6,8 @@ $service = $qsarray['service'];
 $id = $qsarray['id'];
 $mod = $qsarray['mod'];
 $verbose = $qsarray['verbose'];
+$plnext = $qsarray['plnext'];
+
 
 $ipaddr = $_SERVER['SERVER_ADDR'];
 
@@ -124,7 +126,7 @@ echo json_encode($albumtracks);
 
 if ($service == 12){
 
-$mySimpleArray = $mpd->current_song();
+$mySimpleArray = $mphpd->player()->current_song();
 
 if ($verbose){
 echo "Current Song";
@@ -147,7 +149,7 @@ if ($result->num_rows > 0) {
 
    
 
-$pos = $mySimpleArray[0]['Pos'];
+$pos = $mySimpleArray['pos'];
 
 $pos++;
 
@@ -158,7 +160,7 @@ echo "pos: ".$pos."<br>";
 }
 
 
-$results = $mpd->playlist_add_id($uri, $pos);
+$results = $mphpd->playlist()->add($uri, $pos);
 
 if ($plnext){
     $mpd->next();
