@@ -4,7 +4,7 @@ parse_str($_SERVER['QUERY_STRING'], $qsarray);
 
 $service = $qsarray['service'];
 $id = $qsarray['id'];
-//$sort = $qsarray['sort'];
+$mod = $qsarray['mod'];
 
 $ipaddr = $_SERVER['SERVER_ADDR'];
 
@@ -196,7 +196,9 @@ if ($service == 15){
     
 
 
-$mpd->adjust_vol($mod);
+//$mpd->adjust_vol($mod);
+
+$mphpd->player()->volume($mod);
 
 
 //$statusarray = $mpd->server_status();
