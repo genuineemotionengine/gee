@@ -199,14 +199,14 @@ if ($service == 15){
 $mpd->adjust_vol($mod);
 
 
-$statusarray = $mpd->server_status();
-
-$volume = $statusarray['volume'];
-
-$rows = ['volume' => $volume];
-
-
-echo json_encode($rows);
+//$statusarray = $mpd->server_status();
+//
+//$volume = $statusarray['volume'];
+//
+//$rows = ['volume' => $volume];
+//
+//
+//echo json_encode($rows);
     
 }
 
