@@ -200,9 +200,9 @@ if ($service == 15){
 
 $mpdarray = $mphpd->player()->volume($mod);
 
-echo "MPD Response:<br>";
-
-echo '<pre>'.htmlentities(print_r($mpdarray, true), ENT_SUBSTITUTE).'</pre>';
+//echo "MPD Response:<br>";
+//
+//echo '<pre>'.htmlentities(print_r($mpdarray, true), ENT_SUBSTITUTE).'</pre>';
     
 }
 
