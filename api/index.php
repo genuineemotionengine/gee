@@ -198,17 +198,11 @@ if ($service == 15){
 
 //$mpd->adjust_vol($mod);
 
-$mphpd->player()->volume($mod);
+$mpdarray = $mphpd->player()->volume($mod);
 
+echo "MPD Response:<br>";
 
-//$statusarray = $mpd->server_status();
-//
-//$volume = $statusarray['volume'];
-//
-//$rows = ['volume' => $volume];
-//
-//
-//echo json_encode($rows);
+echo '<pre>'.htmlentities(print_r($mpdarray, true), ENT_SUBSTITUTE).'</pre>';
     
 }
 
