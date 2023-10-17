@@ -66,7 +66,7 @@ echo "}\n";
 //******* Play Next Track *********
 echo "function playnext(track){\n";
 echo "fetch('http://". $ipaddr ."/api/?service=12&plnext=1&id='+ track);\n";
-echo "location.reload();\n";
+//echo "location.reload();\n";
 //echo "$('#nxttrack'+track).removeClass('termgrey').addClass('termwhite');\n";
 //echo "$('#nxttracksearch'+track).removeClass('termgrey').addClass('termwhite');\n";
 echo "}\n";
