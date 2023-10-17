@@ -1,6 +1,6 @@
 <?php
 
-$mySimpleArray = $mpd->current_song();
+$mySimpleArray = $mphpd->player()->current_song();
 
 $albumtracks = array();
 
