@@ -160,18 +160,18 @@ echo "pos: ".$pos."<br>";
 }
 
 
-//$results = $mphpd->playlist("app")->add($uri, $pos);
+$results = $mphpd->playlist()->add($uri, $pos);
 
-try{
-  $results = $mphpd->playlist("app")->add($uri, $pos);
-}catch (MPDException $e){
-  echo $e->getMessage();
-  return false;
-}
+//try{
+//  $results = $mphpd->playlist("app")->add($uri, $pos);
+//}catch (MPDException $e){
+//  echo $e->getMessage();
+//  return false;
+//}
 
 
 if ($plnext){
-    $mpd->next();
+    $mphpd->player()->next();
     
 }
 
