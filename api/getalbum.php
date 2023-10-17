@@ -11,7 +11,7 @@ echo "<br><br><br>";
 }
 
 
-$sql = "SELECT idalbum FROM app WHERE albumpath = '".$mySimpleArray[0]['name']."'";
+$sql = "SELECT idalbum FROM app WHERE albumpath = '".$mySimpleArray[0]['file']."'";
 //echo "sql: ".$sql."<br>";
 $result = $conn->query($sql);
 if ($result->num_rows > 0) {
