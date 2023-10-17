@@ -96,10 +96,11 @@ echo "}\n";
 
 //******* Volume Up *********
 echo "function volumeup(){\n";
-echo "fetch('http://". $ipaddr ."/api/?service=15&mod=+5');\n";
+echo "volume = volume + 5;\n";
+echo "fetch('http://". $ipaddr ."/api/?service=15&mod='+volume);\n";
 //echo "$.getJSON('http://". $ipaddr ."/api/?service=15&mod=+5', function(result){\n";
 //echo "volume = parseInt(result.volume);\n";
-echo "volume = volume + 5;\n";
+
 echo "$('#voldynamic1').css('width', volume + '%');\n";
 //echo "});\n";
 echo "}\n";
@@ -107,10 +108,11 @@ echo "}\n";
 
 //******* Volume Down *********
 echo "function volumedown(){\n";
-echo "fetch('http://". $ipaddr ."/api/?service=15&mod=-5');\n";
+echo "volume = volume - 5;\n";
+echo "fetch('http://". $ipaddr ."/api/?service=15&mod='+volume);\n";
 //echo "$.getJSON('http://". $ipaddr ."/api/?service=15&mod=-5', function(result){\n";
 //echo "volume = parseInt(result.volume);\n";
-echo "volume = volume - 5;\n";
+
 echo "$('#voldynamic1').css('width', volume + '%');\n";
 //echo "});\n";
 echo "}\n";
