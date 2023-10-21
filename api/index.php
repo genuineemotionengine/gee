@@ -176,14 +176,17 @@ $results = $mphpd->playlist("app")->add($uri, $pos);
 //}
 if ($verbose){
 
-echo "MPD Response:<br>";
+echo "Playlist Add:<br>";
 echo '<pre>'.htmlentities(print_r($results, true), ENT_SUBSTITUTE).'</pre>';
 
 }
 
 
 if ($verbose){
-    $results = $mphpd->queue->get($pos);
+    $results = $mphpd->queue->get($pos = -1);
+    
+    echo "Queue Get:<br>";
+    echo '<pre>'.htmlentities(print_r($results, true), ENT_SUBSTITUTE).'</pre>';
 }
 
 //if ($plnext){
