@@ -153,7 +153,7 @@ if ($result->num_rows > 0) {
 
 //$pos++;
 
-$pos = "+0";
+$pos = "+";
 
 if ($verbose){
 echo "uri: ".$uri."<br>";
@@ -162,7 +162,7 @@ echo "pos: ".$pos."<br>";
 }
 
 
-$results = $mphpd->queue()->add($uri, $pos);
+$results = $mphpd->playlist("app")->add($uri, $pos);
 
 //try{
 //  $results = $mphpd->playlist("app")->add($uri, $pos);
