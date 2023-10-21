@@ -149,11 +149,11 @@ if ($result->num_rows > 0) {
 
    
 
-//$pos = $mySimpleArray['pos'];
+$pos = $mySimpleArray['pos'];
 
 //$pos++;
 
-$pos = "+";
+$pos = "+".$pos;
 
 if ($verbose){
 echo "uri: ".$uri."<br>";
