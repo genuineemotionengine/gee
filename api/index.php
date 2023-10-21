@@ -160,7 +160,7 @@ echo "pos: ".$pos."<br>";
 }
 
 
-$results = $mphpd->playlist("app")->add($uri, $pos);
+$results = $mphpd->queue()->add($uri, $pos);
 
 //try{
 //  $results = $mphpd->playlist("app")->add($uri, $pos);
