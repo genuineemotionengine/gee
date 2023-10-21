@@ -182,6 +182,10 @@ echo '<pre>'.htmlentities(print_r($results, true), ENT_SUBSTITUTE).'</pre>';
 }
 
 
+if ($verbose){
+    $results = $mphpd->queue->get($pos);
+}
+
 //if ($plnext){
 //    $mphpd->player()->next();
 //    
