@@ -134,7 +134,7 @@ echo '<pre>'.htmlentities(print_r($mySimpleArray, true), ENT_SUBSTITUTE).'</pre>
 echo "<br><br><br>";    
 }
 
-$sql = "SELECT albumpath FROM app WHERE id = '".$id."'";
+$sql = "SELECT * FROM app WHERE id = '".$id."'";
 if ($verbose){
 echo "sql: ".$sql."<br>";
 }
