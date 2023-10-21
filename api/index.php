@@ -160,7 +160,7 @@ echo "pos: ".$pos."<br>";
 }
 
 
-$mphpd->playlist("app")->add($uri, $pos);
+$results = $mphpd->playlist("app")->add($uri, $pos);
 
 //try{
 //  $results = $mphpd->playlist("app")->add($uri, $pos);
@@ -168,12 +168,12 @@ $mphpd->playlist("app")->add($uri, $pos);
 //  echo $e->getMessage();
 //  return false;
 //}
-//if ($verbose){
-//
-//echo "MPD Response:<br>";
-//echo '<pre>'.htmlentities(print_r($results, true), ENT_SUBSTITUTE).'</pre>';
-//
-//}
+if ($verbose){
+
+echo "MPD Response:<br>";
+echo '<pre>'.htmlentities(print_r($results, true), ENT_SUBSTITUTE).'</pre>';
+
+}
 
 
 //if ($plnext){
