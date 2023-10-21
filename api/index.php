@@ -186,7 +186,7 @@ $pos = $mySimpleArray['pos'];
 //$pos++;
 
 if ($verbose){
-    $results = $mphpd->queue()->get($pos = +1);
+    $results = $mphpd->queue()->get(int|$pos);
     
     echo "Queue Get:<br>";
     echo '<pre>'.htmlentities(print_r($results, true), ENT_SUBSTITUTE).'</pre>';
