@@ -2,12 +2,12 @@
 
 $statusarray = $mphpd->status();
 
-if ($verbose){
-echo "Status";
-echo '<pre>'.htmlentities(print_r($statusarray, true), ENT_SUBSTITUTE).'</pre>'; 
-echo "<br><br><br>";    
-}
-    
+//if ($verbose){
+//echo "Status";
+//echo '<pre>'.htmlentities(print_r($statusarray, true), ENT_SUBSTITUTE).'</pre>'; 
+//echo "<br><br><br>";    
+//}
+//    
 $elapsed = $statusarray['elapsed'];
 
 $volume = $statusarray['volume'];
