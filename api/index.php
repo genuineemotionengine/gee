@@ -183,7 +183,7 @@ echo '<pre>'.htmlentities(print_r($results, true), ENT_SUBSTITUTE).'</pre>';
 
 
 if ($verbose){
-    $results = $mphpd->queue->get($pos = -1);
+    $results = $mphpd->queue->get($pos);
     
     echo "Queue Get:<br>";
     echo '<pre>'.htmlentities(print_r($results, true), ENT_SUBSTITUTE).'</pre>';
