@@ -60,6 +60,7 @@ echo "function insertnext(track){\n";
 echo "fetch('http://". $ipaddr ."/api/?service=12&id='+ track);\n";
 echo "$('#nxttracks'+track).removeClass('termgrey').addClass('termwhite');\n";
 //echo "$('#nxttracksearch'+track).removeClass('termgrey').addClass('termwhite');\n";
+echo "getmeta(1);\n";
 echo "}\n";
 //***********************************
 
