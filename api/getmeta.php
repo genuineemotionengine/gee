@@ -2,7 +2,11 @@
 
 $statusarray = $mphpd->status();
 
-//echo '<pre>'.htmlentities(print_r($statusarray, true), ENT_SUBSTITUTE).'</pre>';
+if ($verbose){
+echo "Status";
+echo '<pre>'.htmlentities(print_r($statusarray, true), ENT_SUBSTITUTE).'</pre>'; 
+echo "<br><br><br>";    
+}
     
 $elapsed = $statusarray['elapsed'];
 
@@ -22,7 +26,11 @@ $refresh = $durations[0] - $elapsed;
 
 $mySimpleArray = $mphpd->player()->current_song();
     
-//echo '<pre>'.htmlentities(print_r($mySimpleArray, true), ENT_SUBSTITUTE).'</pre>';
+if ($verbose){
+echo "Current Song";
+echo '<pre>'.htmlentities(print_r($mySimpleArray, true), ENT_SUBSTITUTE).'</pre>'; 
+echo "<br><br><br>";    
+}
       
 $flacfile = $mySimpleArray['file'];
 
