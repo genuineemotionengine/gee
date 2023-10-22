@@ -11,12 +11,12 @@ $mphpd = new MphpD([
   "timeout" => 5
 ]);
 
-try{
-  $mphpd->connect();
-}catch (MPDException $e){
-  echo $e->getMessage();
-  return false;
-}
+//try{
+//  $mphpd->connect();
+//}catch (MPDException $e){
+//  echo $e->getMessage();
+//  return false;
+//}
 
 //$mpdarray = $mphpd->player()->current_song();
 
