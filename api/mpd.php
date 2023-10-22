@@ -28,6 +28,8 @@ $pos = $mpdarray['pos'];
 
 $pos++;
 
+echo "next pos: ".$pos."<br><br>";
+
 $queuearray = $mphpd->queue()->get([$pos,1]);
 
 echo "Queue Get:<br><br>";
