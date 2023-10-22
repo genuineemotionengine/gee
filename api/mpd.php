@@ -18,6 +18,8 @@ try{
   return false;
 }
 
+$mphpd->queue()->shuffle();
+
 $mpdarray = $mphpd->player()->current_song();
 
 echo "Current Song:<br><br>";
