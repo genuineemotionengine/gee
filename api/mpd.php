@@ -30,7 +30,9 @@ $pos++;
 
 echo "next pos: ".$pos."<br><br>";
 
-$queuearray = $mphpd->queue()->get([$pos,1]);
+$amount = 1;
+
+$queuearray = $mphpd->queue()->get($pos,$amount);
 
 echo "Queue Get:<br><br>";
 
