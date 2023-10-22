@@ -18,7 +18,7 @@ try{
   return false;
 }
 
-$mphpd->queue()->shuffle();
+//$mphpd->queue()->shuffle();
 
 $mpdarray = $mphpd->player()->current_song();
 
