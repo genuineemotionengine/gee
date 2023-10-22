@@ -20,52 +20,13 @@ try{
 
 $mpdarray = $mphpd->player()->current_song();
 
-//$mpdarray = $mphpd->queue()->clear();
-
-
-echo "MPD Response:<br><br>";
+echo "Current Song:<br><br>";
 
 echo '<pre>'.htmlentities(print_r($mpdarray, true), ENT_SUBSTITUTE).'</pre>';
 
 
+$queuearray = $mphpd->queue()->get([0,10]);
 
+echo "Queue Get:<br><br>";
 
-
-//include('config.php');
-
-//$host = null;
-//$port = 0;
-//$mpdpassword = null;
-
-
-//require_once('mpd.class.php');
-//
-//$mpd = new mpd('localhost', 6600);
-//
-//
-//
-//
-////if ( !$mpd->connected)
-////{
-////  echo "Could not connect to the MPD server<br><br>";
-////  exit(1);
-////} else {
-////  echo "Connected to the MPD server<br><br>";  
-////}
-//
-//if ($mpd === true) { echo "Connected to the MPD server<br><br>"; } else { echo $mpdarray = $mpd->get_error (); }
-//
-////$mpd = new mpd;
-//
-////$mpdarray = $mpd->server_status();
-//
-//echo "MPD Response:<br><br>";
-//
-//echo '<pre>'.htmlentities(print_r($mpdarray, true), ENT_SUBSTITUTE).'</pre>';
-
-
-
-//$output = array();
-//$command = 'mpc';
-//exec($command, $output);
-//print_r($output);
+echo '<pre>'.htmlentities(print_r($queuearray, true), ENT_SUBSTITUTE).'</pre>';
