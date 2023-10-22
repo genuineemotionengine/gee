@@ -24,8 +24,11 @@ echo "Current Song:<br><br>";
 
 echo '<pre>'.htmlentities(print_r($mpdarray, true), ENT_SUBSTITUTE).'</pre>';
 
+$pos = $mpdarray['pos'];
 
-$queuearray = $mphpd->queue()->get([0,10]);
+$pos++;
+
+$queuearray = $mphpd->queue()->get([$pos,1]);
 
 echo "Queue Get:<br><br>";
 
