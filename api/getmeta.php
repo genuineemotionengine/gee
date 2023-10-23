@@ -58,16 +58,30 @@ if(isset($ThisFileInfo['comments']['picture'][0])){
     $image='data:'.$ThisFileInfo['comments']['picture'][0]['image_mime'].';charset=utf-8;base64,'.base64_encode($ThisFileInfo['comments']['picture'][0]['data']);
 }
 
+$pos = $mySimpleArray['pos'];
 
-$command = 'mpc queued';
-exec($command, $output);
-//echo '<pre>'.htmlentities(print_r($output, true), ENT_SUBSTITUTE).'</pre>';
+$pos++;
 
-$nextsong = explode(" - ",$output[0]);
 
-$nexttitle = ltrim($nextsong[1]);
+$queuearray = $mphpd->queue()->get($pos);
 
-$nextartist = rtrim($nextsong[0]);
+//echo '<pre>'.htmlentities(print_r($queuearray, true), ENT_SUBSTITUTE).'</pre>';
+
+$nexttitle = $queuearray['title'];
+
+$nextartist = $queuearray['artist'];
+
+
+
+//$command = 'mpc queued';
+//exec($command, $output);
+////echo '<pre>'.htmlentities(print_r($output, true), ENT_SUBSTITUTE).'</pre>';
+//
+//$nextsong = explode(" - ",$output[0]);
+//
+//$nexttitle = ltrim($nextsong[1]);
+//
+//$nextartist = rtrim($nextsong[0]);
 
 //echo "'".$nextartist."'"."<br><br>";
 //
