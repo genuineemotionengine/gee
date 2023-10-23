@@ -31,3 +31,10 @@ body {
     color: grey;
 }
 
+@font-face {
+    font-family: 'helveticaneue_lt_45_lightRg';
+    src: url('lte50263-webfont.woff2') format('woff2'),
+         url('lte50263-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
