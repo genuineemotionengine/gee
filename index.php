@@ -451,7 +451,7 @@ echo "<table>\n";
         echo "<button data-bs-target='#modal2' onclick='wholealbum()' class='mx-auto d-block' data-bs-toggle='modal' data-bs-dismiss='modal'><img id='image2' class='img-fluid' src='' style='width:150px;' /></button>\n";
         echo "</td>\n";
         echo "<td class='border-bottom ps-3' style='width:250px;'>\n";
-        echo "<button data-bs-target='#modal3' data-bs-toggle='modal' data-bs-dismiss='modal' type='button' id='termtrack' class='termwhite mx-auto d-block'><i class='bi bi-music-note-beamed' style='font-size: 7rem;'></i></button>\n";
+        echo "<button data-bs-target='#modal3' data-bs-toggle='modal' data-bs-dismiss='modal' type='button' id='termtrack' class='termwhite mx-auto d-block' onclick='searchterm(2)'><i class='bi bi-music-note-beamed' style='font-size: 7rem;'></i></button>\n";
         echo "</td>\n";
     echo "</tr>\n";
     echo "<tr>\n";
