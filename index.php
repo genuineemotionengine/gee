@@ -518,7 +518,7 @@ echo "<div class='modal fade' id='modal3' data-bs-backdrop='static' data-bs-keyb
 echo "<div class='modal-dialog modal-dialog-scrollable'>\n";
 echo "<div class='modal-content bg-black'style='background: black;'>\n";
 echo "<div class='modal-header'>\n";
-echo "Track Search<br>\n";
+echo "<div class='row'>Track Search</div>\n";
 //    echo "<div class='row row-cols-3'>\n";
 //    echo "<div class='col-3'><img id='image6' class='img-fluid' src='' /></div>\n";
 //    echo "<div class='col-7'>\n";
