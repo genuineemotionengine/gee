@@ -518,7 +518,7 @@ echo "<div class='modal fade' id='modal3' data-bs-backdrop='static' data-bs-keyb
 echo "<div class='modal-dialog modal-dialog-scrollable'>\n";
 echo "<div class='modal-content bg-black'style='background: black;'>\n";
 echo "<div class='modal-header'>\n";
-echo "<div class='row'>Track Search</div>\n";
+
 //    echo "<div class='row row-cols-3'>\n";
 //    echo "<div class='col-3'><img id='image6' class='img-fluid' src='' /></div>\n";
 //    echo "<div class='col-7'>\n";
@@ -526,12 +526,12 @@ echo "<div class='row'>Track Search</div>\n";
 //    echo "<h4 id='albumartist6'></h4>\n";
 //    echo "</div>\n";
 
-echo "<div class='row'>\n";
+
     echo "<input class='form-control input-sm bg-black text-white' type='text' id='search-box' name='".$token."'/>\n";
 
     
     echo "<div class='col-1'><button type='button' class='btn btn-sm' data-bs-dismiss='modal' aria-label='Close'><i class='bi bi-x' style='font-size: 3rem; color: white;'></i></button></div>\n";
-echo "</div>\n";
+
 echo "</div>\n";
 
 
