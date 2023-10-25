@@ -43,7 +43,7 @@ if(!empty($_POST["keyword"])) {
 
             
             if ($term == 1){             
-                echo "<li><h4>".$country['title']." - ".$country['artist']." - ".$country['album']."</h4><button type='button' id='nxttracksearch".$country['id']."' class='termgrey' onclick='insertnext(".$country['id'].")'><i class='bi bi-chevron-double-right' style='font-size: 3rem;'></i></button></li>\n";
+                echo "<li><h4>".$country['title']."<br>".$country['artist']."<br>".$country['album']."</h4><button type='button' id='nxttracksearch".$country['id']."' class='termgrey' onclick='insertnext(".$country['id'].")'><i class='bi bi-chevron-double-right' style='font-size: 3rem;'></i></button></li>\n";
             }
             
             if ($term == 2){             
