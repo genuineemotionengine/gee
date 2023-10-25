@@ -4,7 +4,7 @@ parse_str($_SERVER['QUERY_STRING'], $qsarray);
 
 $term = $qsarray['term'];
 
-$ipadd = $_SERVER['SERVER_ADDR'];
+//$ipadd = $_SERVER['SERVER_ADDR'];
 
 require_once("dbcontroller.php");
 
