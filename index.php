@@ -435,7 +435,7 @@ echo "</div>\n\n";
 
 //*************************
 
-//*********** Modal 1 id 2 ***************
+//*********** Modal 1 id 2 Search Panel ***************
 
 echo "<div class='modal fade' id='modal1' data-bs-backdrop='static' data-bs-keyboard='false' tabindex='-1' aria-labelledby='staticBackdropLabel' aria-hidden='true'>\n";
 echo "<div class='modal-dialog modal-dialog-scrollable'>\n";
@@ -451,7 +451,7 @@ echo "<table>\n";
         echo "<button data-bs-target='#modal2' onclick='wholealbum()' class='mx-auto d-block' data-bs-toggle='modal' data-bs-dismiss='modal'><img id='image2' class='img-fluid' src='' style='width:150px;' /></button>\n";
         echo "</td>\n";
         echo "<td class='border-bottom ps-3' style='width:250px;'>\n";
-        echo "<button type='button' id='termtrack' class='termwhite mx-auto d-block' onclick='searchterm(1)'><i class='bi bi-music-note-beamed' style='font-size: 7rem;'></i></button>\n";
+        echo "<button data-bs-target='#modal3' type='button' id='termtrack' class='termwhite mx-auto d-block''><i class='bi bi-music-note-beamed' style='font-size: 7rem;'></i></button>\n";
         echo "</td>\n";
     echo "</tr>\n";
     echo "<tr>\n";
@@ -479,7 +479,7 @@ echo "</div>\n";
 
 //*************************
 
-//*********** Modal 2 id 6 ***************
+//*********** Modal 2 id 6 Whole Album ***************
 
 echo "<div class='modal fade' id='modal2' data-bs-backdrop='static' data-bs-keyboard='false' tabindex='-1' aria-labelledby='staticBackdropLabel' aria-hidden='true'>\n";
 echo "<div class='modal-dialog modal-dialog-scrollable'>\n";
@@ -504,6 +504,42 @@ echo "</div>\n";
 echo "</div>\n";
 echo "<div class='modal-body'>\n";
 echo "<div id='fullalbum'></div>\n";
+//echo "<div id='suggesstion-box'></div>\n";
+echo "</div>\n";
+echo "</div>\n";
+echo "</div>\n";
+echo "</div>\n";
+
+//*************************
+
+//*********** Modal 3 id 6 Track Search ***************
+
+echo "<div class='modal fade' id='modal3' data-bs-backdrop='static' data-bs-keyboard='false' tabindex='-1' aria-labelledby='staticBackdropLabel' aria-hidden='true'>\n";
+echo "<div class='modal-dialog modal-dialog-scrollable'>\n";
+echo "<div class='modal-content bg-black'style='background: black;'>\n";
+echo "<div class='modal-header'>\n";
+
+//    echo "<div class='row row-cols-3'>\n";
+//    echo "<div class='col-3'><img id='image6' class='img-fluid' src='' /></div>\n";
+//    echo "<div class='col-7'>\n";
+//    echo "<h3 id='album6'></h3>\n";
+//    echo "<h4 id='albumartist6'></h4>\n";
+//    echo "</div>\n";
+    echo "<input class='form-control input-sm bg-black text-white' type='text' id='search-box' name='".$token."'/><br>\n";
+
+    
+    echo "<div class='col-1'><button type='button' class='btn btn-sm' data-bs-dismiss='modal' aria-label='Close'><i class='bi bi-x' style='font-size: 3rem; color: white;'></i></button></div>\n";
+echo "</div>\n";
+
+
+//echo "<button type='button' id='termtrack' class='termwhite' onclick='searchterm(1)'><i class='bi bi-music-note-beamed' style='font-size: 2.3rem;'></i></button>\n";
+//echo "<button type='button' id='termalbum' class='termgrey' onclick='searchterm(2)'><i class='bi bi-vinyl' style='font-size: 2.3rem;'></i></button>\n";
+//echo "<button type='button' id='termartist' class='termgrey' onclick='searchterm(3)'><i class='bi bi-mic' style='font-size: 2.3rem;'></i></button><br><br>\n";
+//echo "<input class='form-control input-sm bg-black text-white' type='text' id='search-box' name='".$token."'/><br>\n";
+//echo "<button type='button' class='btn btn-sm' data-bs-dismiss='modal' aria-label='Close'><i class='bi bi-x' style='font-size: 3rem; color: white;'></i></button>\n";
+echo "</div>\n";
+echo "<div class='modal-body'>\n";
+//echo "<div id='fullalbum'></div>\n";
 //echo "<div id='suggesstion-box'></div>\n";
 echo "</div>\n";
 echo "</div>\n";
