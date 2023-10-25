@@ -543,7 +543,7 @@ echo "</div>\n";
 echo "</div>\n";
 echo "<div class='modal-body'>\n";
 //echo "<div id='fullalbum'></div>\n";
-//echo "<div id='suggesstion-box'></div>\n";
+echo "<div id='suggesstion-box'></div>\n";
 echo "</div>\n";
 echo "</div>\n";
 echo "</div>\n";
