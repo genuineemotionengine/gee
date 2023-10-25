@@ -1,6 +1,8 @@
 <?php
 
-parse_str($_SERVER['QUERY_STRING']);
+parse_str($_SERVER['QUERY_STRING'], $qsarray);
+
+$term = $qsarray['term'];
 
 $ipadd = $_SERVER['SERVER_ADDR'];
 
