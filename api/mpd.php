@@ -34,7 +34,7 @@ echo "next pos: ".$pos."<br><br>";
 
 //$amount = 5;
 
-$queuearray = $mphpd->queue()->get($pos);
+$queuearray = $mphpd->queue()->get();
 
 echo "Queue Get:<br><br>";
 
