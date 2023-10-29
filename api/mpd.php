@@ -4,6 +4,7 @@ require_once __DIR__ . "/MphpD/MphpD.php";
 
 use FloFaber\MphpD\MphpD;
 use FloFaber\MphpD\MPDException;
+use FloFaber\MphpD\Filter;
 
 $mphpd = new MphpD([
   "host" => "localhost",
@@ -20,22 +21,26 @@ try{
 
 //$mphpd->queue()->shuffle();
 
-$mpdarray = $mphpd->player()->current_song();
+$filter = "202139/202138.flac";
 
-echo "Current Song:<br><br>";
+$sort = "file";
+
+$mpdarray = $mphpd->queue()->search($filter, $sort);
+
+echo "Searched Song:<br><br>";
 
 echo '<pre>'.htmlentities(print_r($mpdarray, true), ENT_SUBSTITUTE).'</pre>';
 
-$pos = $mpdarray['pos'];
+//$pos = $mpdarray['pos'];
 
-$pos++;
+//$pos++;
 
-echo "next pos: ".$pos."<br><br>";
+//echo "next pos: ".$pos."<br><br>";
 
 //$amount = 5;
 
-$queuearray = $mphpd->queue()->get();
+//$queuearray = $mphpd->queue()->get();
 
-echo "Queue Get:<br><br>";
+//echo "Queue Get:<br><br>";
 
-echo '<pre>'.htmlentities(print_r($queuearray, true), ENT_SUBSTITUTE).'</pre>';
+//echo '<pre>'.htmlentities(print_r($queuearray, true), ENT_SUBSTITUTE).'</pre>';
