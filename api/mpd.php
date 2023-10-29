@@ -6,7 +6,7 @@ use FloFaber\MphpD\MphpD;
 use FloFaber\MphpD\MPDException;
 use FloFaber\MphpD\Filter;
 
-$mphpd = new MphpD([
+$mphpd = new Filter([
   "host" => "localhost",
   "port" => 6600,
   "timeout" => 5
