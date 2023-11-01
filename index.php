@@ -427,9 +427,9 @@ echo "<div class='d-none d-xl-block'>\n";
 //echo "<br>\n";
 echo "<img id='image3' src='black.jpg'/>\n";
 echo "<br>\n";
-echo "<h1 id='title3' class='display-4'></h1>\n";
-echo "<h1 id='artist3' class='display-6'></h1>\n";
-echo "<h1 id='album3' class='display-6'></h1>\n";
+echo "<h1 id='title3'></h1>\n";
+echo "<h2 id='artist3'></h2>\n";
+echo "<h2 id='album3'></h2>\n";
 echo "</div>\n";
 echo "</div>\n\n";
 
