@@ -426,7 +426,7 @@ echo "<div class='container text-center'>\n";
 echo "<div class='d-none d-xl-block'>\n";  
 //echo "<br>\n";
 echo "<img id='image3' src='black.jpg'/>\n";
-echo "<br>\n";
+echo "<br><br>\n";
 echo "<h1 id='title3'></h1>\n";
 echo "<h2 id='artist3'></h2>\n";
 echo "<h2 id='album3'></h2>\n";
