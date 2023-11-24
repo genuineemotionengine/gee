@@ -105,6 +105,10 @@ exit;
 //echo '<pre>'.htmlentities(print_r($ThisFileInfo['tags'], true), ENT_SUBSTITUTE).'</pre>';
 
 }
+
+$albumartist =  str_replace("&#39;","'",$albumartist);
+$album =  str_replace("&#39;","'",$album);
+
 echo $x." - ".$album." - ".$albumartist."\n";
 }
 
