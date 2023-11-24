@@ -105,7 +105,7 @@ exit;
 //echo '<pre>'.htmlentities(print_r($ThisFileInfo['tags'], true), ENT_SUBSTITUTE).'</pre>';
 
 }
-echo $x." done\n";
+echo $x." - ".$album." - ".$albumartist."\n";
 }
 
 
