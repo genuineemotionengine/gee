@@ -2,7 +2,7 @@
 
 require_once('/var/www/html/api/getid3.php'); 
 
-$flacfile = "/mnt/usb/213261/213256.flac";
+$flacfile = "/test/id3/Wes Montgomery - Full House/01 Wes Montgomery - Full House.flac";
 
 $getID3 = new getID3;
 
