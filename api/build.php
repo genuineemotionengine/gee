@@ -87,7 +87,10 @@ $idalbum = $dirarray[$x].$album;
 
 $sql="INSERT INTO app (albumpath, artist, album, title, albumartist, idalbum, track, genre) VALUES ('$name', '$artist', '$album', '$title', '$albumartist', '$idalbum', '$track', '$genre')";
 
-echo $sql."\n"; 
+if (!$title or !$artist or !$album or !$albumartist){
+
+echo $sql."\n";
+}
 
 $conn->query($sql);
 
