@@ -47,7 +47,7 @@ $name = $dirarray[$x]."/".$subdirarray[$y];
 
 //echo $name."\n";
 
-$flacfile = "/mnt/usb/".$name;
+$flacfile = "/test/id3/".$name;
 
 $getID3 = new getID3;
 
