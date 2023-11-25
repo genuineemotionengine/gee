@@ -4,7 +4,7 @@ require_once('/var/www/html/api/dbconn.php');
 
 //require_once('/var/www/html/api/mpd.class.php');
 
-require_once('/var/www/html/api/id3/GetID3.php');   
+require_once('/var/www/html/api/Getid3.php');   
 
 //$mpd = new mpd('localhost', 6600);
 
@@ -18,7 +18,7 @@ require_once('/var/www/html/api/id3/GetID3.php');
 
 
     
-$dir = "/mnt/usb/";
+$dir = "/test/id3/";
 
 // Sort in ascending order - this is default
 $dirarray = scandir($dir,2);
@@ -49,7 +49,7 @@ $name = $dirarray[$x]."/".$subdirarray[$y];
 
 $flacfile = "/mnt/usb/".$name;
 
-$getID3 = new GetID3;
+$getID3 = new getID3;
 
 //sleep(1);
 
