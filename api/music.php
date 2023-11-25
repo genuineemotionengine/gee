@@ -1,5 +1,5 @@
 <?php
-$count = 100000;
+$count = 300000;
 
 $dir = "/mnt/usb/";
 
