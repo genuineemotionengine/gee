@@ -33,7 +33,7 @@ for ($x = 3; $x < $elements; $x++) {
 
 
 
-$subdir = "/mnt/usb/".$dirarray[$x]."/";
+$subdir = "/test/id3/".$dirarray[$x]."/";
 
 $subdirarray = scandir($subdir);
 
