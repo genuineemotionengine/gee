@@ -21,13 +21,13 @@ require_once('/var/www/html/api/getid3.php');
 $dir = "/test/id3/";
 
 // Sort in ascending order - this is default
-$dirarray = scandir($dir,2);
+$dirarray = scandir($dir);
 
 $elements = count($dirarray);
 
 //echo '<pre>'.htmlentities(print_r($dirarray, true), ENT_SUBSTITUTE).'</pre>';
 
-for ($x = 3; $x < $elements; $x++) {
+for ($x = 0; $x < $elements; $x++) {
 
 //echo $dirarray[$x]."\n";
 
