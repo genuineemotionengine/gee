@@ -1,6 +1,6 @@
 <?php
 
-require_once('/var/www/html/api/getID3.php'); 
+require_once('/var/www/html/api/getid3.php'); 
 
 $flacfile = "/test/id3/Roy Ayers - A Shining Symbol/01 - Running Away - Roy Ayers.flac";
 
