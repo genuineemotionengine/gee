@@ -49,7 +49,7 @@ $name = $dirarray[$x]."/".$subdirarray[$y];
 
 $flacfile = "/mnt/usb/".$name;
 
-$getID3 = new GetID3\GetID3;
+$getID3 = new GetID3;
 
 //sleep(1);
 
