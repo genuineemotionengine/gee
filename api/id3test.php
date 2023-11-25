@@ -10,4 +10,5 @@ $getID3 = new GetID3;
 
 $ThisFileInfo = $getID3->analyze($flacfile);
 
-echo '<pre>'.htmlentities(print_r($ThisFileInfo, true), ENT_SUBSTITUTE).'</pre>';
+//echo '<pre>'.htmlentities(print_r($ThisFileInfo, true), ENT_SUBSTITUTE).'</pre>';
+print_r($ThisFileInfo, true);
