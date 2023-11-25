@@ -2,9 +2,9 @@
 
 require_once('/var/www/html/api/getid3.php'); 
 
-$flacfile = "/test/id3/Roy Ayers - A Shining Symbol/01 - Running Away - Roy Ayers.flac";
+//$flacfile = "/test/id3/Roy Ayers - A Shining Symbol/01 - Running Away - Roy Ayers.flac";
 
-//$flacfile = "/test/id3/Weezer - Hash Pipe/01 Weezer - Hash Pipe.flac";
+$flacfile = "/test/id3/Weezer - Hash Pipe/01 Weezer - Hash Pipe.flac";
 
 $getID3 = new GetID3;
 
