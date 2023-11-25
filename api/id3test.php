@@ -1,6 +1,6 @@
 <?php
 
-require_once('/var/www/html/api/getid3.php'); 
+require_once('/var/www/html/api/id3/GetID3.php'); 
 
 $flacfile = "/test/id3/Roy Ayers - A Shining Symbol/01 - Running Away - Roy Ayers.flac";
 
@@ -10,5 +10,4 @@ $getID3 = new GetID3;
 
 $ThisFileInfo = $getID3->analyze($flacfile);
 
-//echo '<pre>'.htmlentities(print_r($ThisFileInfo, true), ENT_SUBSTITUTE).'</pre>';
-print_r($ThisFileInfo, true);
+echo '<pre>'.htmlentities(print_r($ThisFileInfo, true), ENT_SUBSTITUTE).'</pre>';
