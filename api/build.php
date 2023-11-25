@@ -58,25 +58,25 @@ $ThisFileInfo = $getID3->analyze($flacfile);
 
 
 
-$track = $ThisFileInfo['tags']['id3v2']['track_number'][0];
+$track = $ThisFileInfo['id3v2']['track_number'][0];
 
-$title = $ThisFileInfo['tags']['id3v2']['title'][0];
+$title = $ThisFileInfo['id3v2']['title'][0];
 
 //echo "Title: ".$title."\n";
 
-$artist = $ThisFileInfo['tags']['id3v2']['artist'][0];
+$artist = $ThisFileInfo['id3v2']['artist'][0];
 
 //echo "Artist: ".$artist."\n";
 
-$album = $ThisFileInfo['tags']['id3v2']['album'][0];
+$album = $ThisFileInfo['id3v2']['album'][0];
 
 //echo "Album: ".$album."\n";
 
-$albumartist = $ThisFileInfo['tags']['id3v2']['band'][0];
+$albumartist = $ThisFileInfo['id3v2']['band'][0];
 
 //echo "Album Artist: ".$albumartist."\n";
 
-$genre = $ThisFileInfo['tags']['id3v2']['genre'][0];
+$genre = $ThisFileInfo['id3v2']['genre'][0];
 
 $title =  str_replace("'","&#39;",$title);
 $artist =  str_replace("'","&#39;",$artist);
