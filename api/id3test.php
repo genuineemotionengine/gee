@@ -1,8 +1,8 @@
 <?php
 
-require_once('/var/www/html/api/id3/GetID3.php'); 
+require_once('/var/www/html/api/getID3.php'); 
 
-$flacfile = "/test/id3/Wes Montgomery - Full House/05 - Round Midnight - Wes Montgomery.flac";
+$flacfile = "/test/id3/Roy Ayers - A Shining Symbol/01 - Running Away - Roy Ayers.flac";
 
 //$flacfile = "/test/id3/Weezer - Hash Pipe/01 Weezer - Hash Pipe.flac";
 
