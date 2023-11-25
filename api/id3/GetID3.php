@@ -1,6 +1,6 @@
 <?php
 
-namespace JamesHeinrich\GetID3;
+//namespace JamesHeinrich\GetID3;
 
 /////////////////////////////////////////////////////////////////
 /// getID3() by James Heinrich <info@getid3.org>               //
