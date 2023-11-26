@@ -27,7 +27,7 @@ $elements = count($dirarray);
 
 //echo '<pre>'.htmlentities(print_r($dirarray, true), ENT_SUBSTITUTE).'</pre>';
 
-for ($x = 0; $x < $elements; $x++) {
+for ($x = 3; $x < $elements; $x++) {
 
 //echo $dirarray[$x]."\n";
 
