@@ -18,7 +18,7 @@ require_once('/var/www/html/api/id3/getid3.php');
 
 
     
-$dir = "/test/id3/";
+$dir = "/mnt/usb/";
 
 // Sort in ascending order - this is default
 $dirarray = scandir($dir);
@@ -33,7 +33,7 @@ for ($x = 0; $x < $elements; $x++) {
 
 
 
-$subdir = "/test/id3/".$dirarray[$x]."/";
+$subdir = "/mnt/usb/".$dirarray[$x]."/";
 
 $subdirarray = scandir($subdir);
 
@@ -47,7 +47,7 @@ $name = $dirarray[$x]."/".$subdirarray[$y];
 
 //echo $name."\n";
 
-$flacfile = "/test/id3/".$name;
+$flacfile = "/mnt/usb/".$name;
 
 $getID3 = new getID3;
 
