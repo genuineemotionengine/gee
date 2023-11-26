@@ -1,12 +1,12 @@
 <?php
 
-require_once('/var/www/html/api/id3/GetID3.php'); 
+require_once('/var/www/html/api/id3/getid3.php'); 
 
 $flacfile = "/test/id3/Roy Ayers - A Shining Symbol/01 - Running Away - Roy Ayers.flac";
 
 //$flacfile = "/test/id3/Weezer - Hash Pipe/01 Weezer - Hash Pipe.flac";
 
-$getID3 = new GetID3;
+$getID3 = new getID3;
 
 $ThisFileInfo = $getID3->analyze($flacfile);
 
