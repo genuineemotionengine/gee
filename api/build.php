@@ -58,7 +58,7 @@ $ThisFileInfo = $getID3->analyze($flacfile);
 
 
 
-$track = $ThisFileInfo[tags]["id3v2"]["track_number"][0];
+$track = $ThisFileInfo["tags"]["id3v2"]["track_number"][0];
 
 $title = $ThisFileInfo["tags"]["id3v2"]["title"][0];
 
