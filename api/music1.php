@@ -31,10 +31,9 @@ for ($y = 2; $y < $subelements; $y++) {
     
 rename("/mnt/usb/".$dirarray[$x],"/mnt/usb/".$count);
 
-echo "/mnt/usb/".$dirarray[$x]." renamed to /mnt/usb/".$count."\n";
+echo $x." - /mnt/usb/".$dirarray[$x]." renamed to /mnt/usb/".$count."\n";
 
-echo $x." done\n";
-
+//echo $x." done\n";
 $count++;
 }
     
