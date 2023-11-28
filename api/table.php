@@ -38,4 +38,4 @@ $result = $conn->query($sql);
 echo mysqli_error($conn)."\n";
 
 
-echo "Database Dropped\n\n";
+echo "Table dropped\n\n";
