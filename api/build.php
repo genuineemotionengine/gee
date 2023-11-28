@@ -101,7 +101,7 @@ exit;
 $albumartist =  str_replace("&#39;","'",$albumartist);
 $album =  str_replace("&#39;","'",$album);
 
-echo $x." - ".$albumartist." - ".$album."\n";
+//echo $x." - ".$albumartist." - ".$album."\n";
 }
 
 
