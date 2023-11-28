@@ -83,7 +83,7 @@ if (!$title or !$artist or !$album or !$albumartist){
 
 echo $sql."\n";
 }
-
+echo $y.".";
 $conn->query($sql);
 
 if (mysqli_error($conn)){
@@ -101,7 +101,7 @@ exit;
 $albumartist =  str_replace("&#39;","'",$albumartist);
 $album =  str_replace("&#39;","'",$album);
 
-echo $x." - ".$albumartist." - ".$album."\n";
+echo "\n".$x." - ".$albumartist." - ".$album."\n";
 }
 
 
