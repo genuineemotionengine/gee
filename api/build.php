@@ -27,6 +27,8 @@ $elements = count($dirarray);
 
 //echo '<pre>'.htmlentities(print_r($dirarray, true), ENT_SUBSTITUTE).'</pre>';
 
+$a = 1;
+
 for ($x = 3; $x < $elements; $x++) {
 
 //echo $dirarray[$x]."\n";
@@ -103,7 +105,8 @@ $t++;
 $albumartist =  str_replace("&#39;","'",$albumartist);
 $album =  str_replace("&#39;","'",$album);
 
-echo "\n".$x." - ".$albumartist." - ".$album."\n\n";
+echo "\n".$a." - ".$albumartist." - ".$album."\n\n";
+$a++;
 }
 
 
