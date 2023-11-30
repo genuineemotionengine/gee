@@ -39,6 +39,8 @@ $subdirarray = scandir($subdir);
 
 $subelements = count($subdirarray);
 
+$t = 1;
+
 for ($y = 2; $y < $subelements; $y++) {
 
 //echo $dirarray[$x]."/".$subdirarray[$y]."\n";
@@ -83,7 +85,7 @@ if (!$title or !$artist or !$album or !$albumartist){
 
 echo $sql."\n";
 }
-echo $y.".";
+echo $t.".";
 $conn->query($sql);
 
 if (mysqli_error($conn)){
@@ -95,7 +97,7 @@ exit;
 
 //echo '<pre>'.htmlentities(print_r($ThisFileInfo['comments']['picture'][0], true), ENT_SUBSTITUTE).'</pre>';
 //echo '<pre>'.htmlentities(print_r($ThisFileInfo['tags'], true), ENT_SUBSTITUTE).'</pre>';
-
+$t++;
 }
 
 $albumartist =  str_replace("&#39;","'",$albumartist);
