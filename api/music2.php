@@ -1,6 +1,8 @@
 <?php
 $count = 200000;
 
+$a = 1;
+
 $dir = "/mnt/usb/";
 
 $dirarray = scandir($dir);
@@ -31,10 +33,11 @@ for ($y = 2; $y < $subelements; $y++) {
     
 rename("/mnt/usb/".$dirarray[$x],"/mnt/usb/".$count);
 
-echo $x." - /mnt/usb/".$dirarray[$x]." renamed to /mnt/usb/".$count."\n";
+echo $a." - /mnt/usb/".$dirarray[$x]." renamed to /mnt/usb/".$count."\n";
 
 //echo $x." done\n";
 
 $count++;
+$a++;
 }
     
