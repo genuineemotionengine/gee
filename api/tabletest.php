@@ -6,9 +6,9 @@ require_once('/var/www/html/api/dbconn.php');
 //$result = $conn->query($sql);
 //echo mysqli_error($conn)."\n";
 //
-//$sql = "DROP TABLE apptest";
-//$result = $conn->query($sql);
-//echo mysqli_error($conn)."\n";
+$sql = "DROP TABLE apptest";
+$result = $conn->query($sql);
+echo mysqli_error($conn)."\n";
 
 //$sql = "CREATE TABLE randomcheck (
 //id INT(6) NOT NULL AUTO_INCREMENT PRIMARY KEY,
@@ -38,4 +38,4 @@ $result = $conn->query($sql);
 echo mysqli_error($conn)."\n";
 
 
-echo "Table dropped\n\n";
+echo "Table dropped and re-created\n\n";
