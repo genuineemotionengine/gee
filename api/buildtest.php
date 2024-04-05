@@ -25,9 +25,9 @@ $dirarray = scandir($dir);
 
 $elements = count($dirarray);
 
-echo htmlentities(print_r($dirarray, true), ENT_SUBSTITUTE);
+//echo htmlentities(print_r($dirarray, true), ENT_SUBSTITUTE);
 
-echo "elements: ".$elements."\n";
+//echo "elements: ".$elements."\n";
 
 
 
@@ -35,7 +35,7 @@ $a = 1;
 
 for ($x = 2; $x < $elements; $x++) {
 
-echo $dirarray[$x]."\n";
+//echo $dirarray[$x]."\n";
 
 
 
@@ -43,7 +43,7 @@ $subdir = "/mnt/test/".$dirarray[$x]."/";
 
 $subdirarray = scandir($subdir);
 
-echo htmlentities(print_r($subdirarray, true), ENT_SUBSTITUTE);
+//echo htmlentities(print_r($subdirarray, true), ENT_SUBSTITUTE);
 
 $subelements = count($subdirarray);
 
