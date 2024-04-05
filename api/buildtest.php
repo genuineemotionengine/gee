@@ -29,9 +29,9 @@ echo '<pre>'.htmlentities(print_r($dirarray, true), ENT_SUBSTITUTE).'</pre>';
 
 $a = 1;
 
-for ($x = 3; $x < $elements; $x++) {
+for ($x = 3; $x <= $elements; $x++) {
 
-echo $dirarray[$x]."\n";
+//echo $dirarray[$x]."\n";
 
 
 
