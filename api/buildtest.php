@@ -27,7 +27,7 @@ $elements = count($dirarray);
 
 echo htmlentities(print_r($dirarray, true), ENT_SUBSTITUTE).'\n';
 
-echo "elements: ".$elements."\n"
+echo "elements: ".$elements."\n";
 
 
 
