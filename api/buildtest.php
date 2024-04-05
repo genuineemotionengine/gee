@@ -25,13 +25,17 @@ $dirarray = scandir($dir);
 
 $elements = count($dirarray);
 
-echo '<pre>'.htmlentities(print_r($dirarray, true), ENT_SUBSTITUTE).'</pre>';
+echo htmlentities(print_r($dirarray, true), ENT_SUBSTITUTE).'\n';
+
+echo "elements: ".$elements."\n"
+
+
 
 $a = 1;
 
 for ($x = 3; $x <= $elements; $x++) {
 
-//echo $dirarray[$x]."\n";
+echo $dirarray[$x]."\n";
 
 
 
