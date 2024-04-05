@@ -31,7 +31,7 @@ $a = 1;
 
 for ($x = 3; $x < $elements; $x++) {
 
-//echo $dirarray[$x]."\n";
+echo $dirarray[$x]."\n";
 
 
 
