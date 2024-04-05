@@ -25,7 +25,7 @@ $dirarray = scandir($dir);
 
 $elements = count($dirarray);
 
-echo htmlentities(print_r($dirarray, true), ENT_SUBSTITUTE).'\n';
+echo htmlentities(print_r($dirarray, true), ENT_SUBSTITUTE);
 
 echo "elements: ".$elements."\n";
 
@@ -47,7 +47,7 @@ $subelements = count($subdirarray);
 
 $t = 1;
 
-for ($y = 2; $y < $subelements; $y++) {
+for ($y = 2; $y <= $subelements; $y++) {
 
 //echo $dirarray[$x]."/".$subdirarray[$y]."\n";
 
