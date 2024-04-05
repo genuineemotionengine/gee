@@ -33,7 +33,7 @@ echo "elements: ".$elements."\n";
 
 $a = 1;
 
-for ($x = 3; $x <= $elements; $x++) {
+for ($x = 2; $x <= $elements; $x++) {
 
 echo $dirarray[$x]."\n";
 
