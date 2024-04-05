@@ -33,7 +33,7 @@ echo "elements: ".$elements."\n";
 
 $a = 1;
 
-for ($x = 2; $x <= $elements; $x++) {
+for ($x = 2; $x < $elements; $x++) {
 
 echo $dirarray[$x]."\n";
 
@@ -49,7 +49,7 @@ $subelements = count($subdirarray);
 
 $t = 1;
 
-for ($y = 2; $y <= $subelements; $y++) {
+for ($y = 2; $y < $subelements; $y++) {
 
 //echo $dirarray[$x]."/".$subdirarray[$y]."\n";
 
