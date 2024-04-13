@@ -45,7 +45,7 @@ for ($y = 2; $y < $subelements; $y++) {
     
     echo htmlentities(print_r($tagstrip, true), ENT_SUBSTITUTE);
     
-
+    echo $tagstrip[0]."\n";
 
     //$tagwriter->filename = '/path/to/file.mp3';
     $tagwriter->filename = $flacfile;
