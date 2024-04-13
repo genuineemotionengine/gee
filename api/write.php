@@ -77,10 +77,10 @@ for ($y = 2; $y < $subelements; $y++) {
         if ($tagwriter->WriteTags()) {
                 echo "Successfully wrote tags\n";
                 if (!empty($tagwriter->warnings)) {
-                        echo "There were some warnings:\n".$tagwriter->warnings."\n";
+                        echo "There were some warnings:".$tagwriter->warnings."\n";
                 }
         } else {
-                echo 'Failed to write tags!\n'.implode($tagwriter->errors)."\n";
+                echo "Failed to write tags!".implode($tagwriter->errors)."\n";
         }
 
 //        $chk++;
