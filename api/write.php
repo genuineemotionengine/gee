@@ -60,12 +60,12 @@ if ($result->num_rows > 0) {
 
         // write tags
         if ($tagwriter->WriteTags()) {
-                echo 'Successfully wrote tags<br>';
+                echo 'Successfully wrote tags\n';
                 if (!empty($tagwriter->warnings)) {
-                        echo 'There were some warnings:<br>'.implode('<br><br>', $tagwriter->warnings);
+                        echo 'There were some warnings:\n'.implode('\n\n', $tagwriter->warnings);
                 }
         } else {
-                echo 'Failed to write tags!<br>'.implode('<br><br>', $tagwriter->errors);
+                echo 'Failed to write tags!\n'.implode('\n\n', $tagwriter->errors);
         }
 
     }
