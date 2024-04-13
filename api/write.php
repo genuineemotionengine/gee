@@ -22,7 +22,7 @@ if ($result->num_rows > 0) {
             
         $albumpath[$chk] = $row['albumpath'];
         echo $albumpath[$chk]."\n";
-        $chk++;
+        
 
         $flacfile = "/mnt/test/".$albumpath[$chk];
         
@@ -68,5 +68,8 @@ if ($result->num_rows > 0) {
                 echo 'Failed to write tags!\n'.implode('\n\n', $tagwriter->errors);
         }
 
+        $chk++;
+        
+        
     }
 }
