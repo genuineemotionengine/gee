@@ -21,20 +21,19 @@ if ($result->num_rows > 0) {
         while($row = $result->fetch_assoc()) {
             
         $albumpath[$chk] = $row['albumpath'];
+        
         echo $albumpath[$chk]."\n";
         
-
         $flacfile = "/mnt/test/".$albumpath[$chk];
+        
         echo $flacfile."\n";
-        
-        
-        
-//        $ThisFileInfo = $getID3->analyze($flacfile);
-//
-//        $track = $ThisFileInfo["tags"]["id3v2"]["track_number"][0];        
-//            
-//
-//
+               
+        $ThisFileInfo = $getID3->analyze($flacfile);
+
+        $track = $ThisFileInfo["tags"]["id3v2"]["track_number"][0];        
+            
+        echo $track."\n";
+
 //        //$tagwriter->filename = '/path/to/file.mp3';
 //        $tagwriter->filename = $flacfile;
 //
