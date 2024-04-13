@@ -15,24 +15,57 @@ $tagwriter = new getid3_writetags;
 
 $chk = 0;
 
-$sql = "SELECT albumpath FROM apptest";
-$result = $conn->query($sql);
-if ($result->num_rows > 0) {
-        while($row = $result->fetch_assoc()) {
-            
-        $albumpath[$chk] = $row['albumpath'];
-        
-        echo $albumpath[$chk]."\n";
-        
-        $flacfile = "/mnt/test/".$albumpath[$chk];
-        
-        echo $flacfile."\n";
-               
-        $ThisFileInfo = $getID3->analyze($flacfile);
+$dir = "/mnt/test/";
 
-        $track = $ThisFileInfo["tags"]["id3v2"]["track_number"][0];        
-            
-        echo $track."\n";
+$dirarray = scandir($dir);
+
+//echo '<pre>'.htmlentities(print_r($dirarray, true), ENT_SUBSTITUTE).'</pre>';
+
+$elements = count($dirarray);
+
+for ($x = 2; $x < $elements; $x++) {
+    
+$subdir = "/mnt/test/".$dirarray[$x]."/";
+
+$subdirarray = scandir($subdir);
+
+//echo htmlentities(print_r($subdirarray, true), ENT_SUBSTITUTE);
+
+$subelements = count($subdirarray);
+
+for ($y = 2; $y < $subelements; $y++) {
+    
+    //rename("/mnt/test/".$dirarray[$x]."/".$subdirarray[$y],"/mnt/test/".$dirarray[$x]."/".$count.".flac");
+    
+    echo "/mnt/test/".$dirarray[$x]."/".$subdirarray[$y]."\n";
+    
+    //$count++;
+      
+}    
+     
+    
+    
+    
+    
+
+//$sql = "SELECT albumpath FROM apptest";
+//$result = $conn->query($sql);
+//if ($result->num_rows > 0) {
+//        while($row = $result->fetch_assoc()) {
+//            
+//        $albumpath[$chk] = $row['albumpath'];
+//        
+//        echo $albumpath[$chk]."\n";
+//        
+//        $flacfile = "/mnt/test/".$albumpath[$chk];
+//        
+//        echo $flacfile."\n";
+//               
+//        $ThisFileInfo = $getID3->analyze($flacfile);
+//
+//        $track = $ThisFileInfo["tags"]["id3v2"]["track_number"][0];        
+//            
+//        echo $track."\n";
 
 //        //$tagwriter->filename = '/path/to/file.mp3';
 //        $tagwriter->filename = $flacfile;
@@ -70,8 +103,8 @@ if ($result->num_rows > 0) {
 //                echo 'Failed to write tags!\n'.implode('\n\n', $tagwriter->errors);
 //        }
 
-        $chk++;
+//        $chk++;
         
         
     }
-}
+//}
