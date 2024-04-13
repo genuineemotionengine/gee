@@ -37,7 +37,9 @@ for ($y = 2; $y < $subelements; $y++) {
     
     //rename("/mnt/test/".$dirarray[$x]."/".$subdirarray[$y],"/mnt/test/".$dirarray[$x]."/".$count.".flac");
     
-    echo "/mnt/test/".$dirarray[$x]."/".$subdirarray[$y]."\n";
+    $flacfile = "/mnt/test/".$dirarray[$x]."/".$subdirarray[$y]."\n";
+    
+    echo $flacfile."\n";
     
     $tagstrip = explode('*',$subdirarray[$y]);
     
@@ -47,7 +49,7 @@ for ($y = 2; $y < $subelements; $y++) {
     
     //$count++;
       
-}    
+   
      
     
     
@@ -110,7 +112,7 @@ for ($y = 2; $y < $subelements; $y++) {
 //        }
 
 //        $chk++;
-        
+ }        
         
     }
 //}
