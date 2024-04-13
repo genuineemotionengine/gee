@@ -50,8 +50,8 @@ for ($y = 2; $y < $subelements; $y++) {
     //$tagwriter->filename = '/path/to/file.mp3';
     $tagwriter->filename = $flacfile;
 
-    $tagwriter->tagformats = array('id3v1', 'id3v2.3');
-   // $tagwriter->tagformats = array('id3v2.3');
+    //$tagwriter->tagformats = array('id3v1', 'id3v2.3');
+   $tagwriter->tagformats = array('id3v2');
 
     // set various options (optional)
     $tagwriter->overwrite_tags    = true;  // if true will erase existing tag data and write only passed data; if false will merge passed data with existing tag data (experimental)
@@ -84,6 +84,11 @@ for ($y = 2; $y < $subelements; $y++) {
         }
 
 //        $chk++;
+        $ThisFileInfo = $getID3->analyze($flacfile);
+
+        $track = $ThisFileInfo["tags"]["id3v2"]["track_number"][0];
+        
+        echo $track."\n";
  }        
         
     }
