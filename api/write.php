@@ -39,6 +39,12 @@ for ($y = 2; $y < $subelements; $y++) {
     
     echo "/mnt/test/".$dirarray[$x]."/".$subdirarray[$y]."\n";
     
+    $tagstrip = explode('*',$subdirarray[$y]);
+    
+    echo htmlentities(print_r($tagstrip, true), ENT_SUBSTITUTE);
+    
+
+    
     //$count++;
       
 }    
