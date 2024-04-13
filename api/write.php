@@ -37,7 +37,7 @@ for ($y = 2; $y < $subelements; $y++) {
     
     //rename("/mnt/test/".$dirarray[$x]."/".$subdirarray[$y],"/mnt/test/".$dirarray[$x]."/".$count.".flac");
     
-    $flacfile = "/mnt/test/".$dirarray[$x]."/".$subdirarray[$y]."\n";
+    $flacfile = "/mnt/test/".$dirarray[$x]."/".$subdirarray[$y];
     
     echo $flacfile."\n";
     
