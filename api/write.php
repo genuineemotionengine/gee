@@ -61,7 +61,7 @@ for ($y = 2; $y < $subelements; $y++) {
 
         // populate data array
         $TagData = array(
-                'track_number'           => array($tagstrip[0])
+                'track_number'           => array('1')
         //	'artist'                 => array('The Artist'),
         //	'album'                  => array('Greatest Hits'),
         //	'year'                   => array('2004'),
