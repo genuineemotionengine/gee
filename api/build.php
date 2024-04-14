@@ -60,17 +60,17 @@ $getID3 = new getID3;
 
 $ThisFileInfo = $getID3->analyze($flacfile);
 
-$track = $ThisFileInfo["tags"]["vorbiscomment"]["tracknumber"][0];
+$track = $ThisFileInfo["tags"]["id3v2"]["track_number"][0];
 
-$title = $ThisFileInfo["tags"]["vorbiscomment"]["title"][0];
+$title = $ThisFileInfo["tags"]["id3v2"]["title"][0];
 
-$artist = $ThisFileInfo["tags"]["vorbiscomment"]["artist"][0];
+$artist = $ThisFileInfo["tags"]["id3v2"]["artist"][0];
 
-$album = $ThisFileInfo["tags"]["vorbiscomment"]["album"][0];
+$album = $ThisFileInfo["tags"]["id3v2"]["album"][0];
 
-$albumartist = $ThisFileInfo["tags"]["vorbiscomment"]["albumartist"][0];
+$albumartist = $ThisFileInfo["tags"]["id3v2"]["band"][0];
 
-$genre = $ThisFileInfo["tags"]["vorbiscomment"]["genre"][0];
+$genre = $ThisFileInfo["tags"]["id3v2"]["genre"][0];
 
 $title =  str_replace("'","&#39;",$title);
 $artist =  str_replace("'","&#39;",$artist);
