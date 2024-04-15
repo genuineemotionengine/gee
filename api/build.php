@@ -21,7 +21,7 @@ require_once('/var/www/html/api/id3/getid3.php');
 $dir = "/mnt/usb/";
 
 // Sort in ascending order - this is default
-$dirarray = scandir($dir,1);
+$dirarray = scandir($dir);
 
 $elements = count($dirarray);
 
