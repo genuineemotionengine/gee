@@ -103,7 +103,7 @@ $t++;
 $albumartist =  str_replace("&#39;","'",$albumartist);
 $album =  str_replace("&#39;","'",$album);
 
-echo "\n".$a." - ".$albumartist." - ".$album."\n\n";
+echo "\n".$a." - ".$albumartist." - ".$album." - ".$dirarray[$x]."\n\n";
 $a++;
 }
 
