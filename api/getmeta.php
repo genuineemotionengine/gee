@@ -26,12 +26,12 @@ $refresh = $durations[0] - $elapsed;
 
 $mySimpleArray = $mphpd->player()->current_song();
     
-//if ($verbose){
-//echo "Current Song";
-//echo '<pre>'.htmlentities(print_r($mySimpleArray, true), ENT_SUBSTITUTE).'</pre>'; 
-//echo "<br><br><br>";    
-//}
-//      
+if ($verbose){
+echo "Current Song";
+echo '<pre>'.htmlentities(print_r($mySimpleArray, true), ENT_SUBSTITUTE).'</pre>'; 
+echo "<br><br><br>";    
+}
+      
 $flacfile = $mySimpleArray['file'];
 
 $album = $mySimpleArray['album'];
