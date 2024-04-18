@@ -38,4 +38,4 @@ $result = $conn->query($sql);
 echo mysqli_error($conn)."\n";
 
 
-echo "Table dropped and re-created\n\n";
+echo "Table created\n\n";
