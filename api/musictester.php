@@ -1,6 +1,6 @@
 <?php
 
-$count = 100000;
+
 
 $dir = "/mnt/usb/";
 
@@ -11,3 +11,5 @@ echo htmlentities(print_r($dirarray[0], true), ENT_SUBSTITUTE);
 echo htmlentities(print_r($dirarray[1], true), ENT_SUBSTITUTE);
 
 echo htmlentities(print_r($dirarray[2], true), ENT_SUBSTITUTE);
+
+$count = 100000;
