@@ -19,8 +19,8 @@
 //echo $count;
 
 
-    if (function_exists("fputs")) {
-            echo "You have fputs\n";
+    if (function_exists("fread")) {
+            echo "You have fread\n";
     } else {
-            echo "You don't have fputs\n";
+            echo "You don't have fread\n";
     }
