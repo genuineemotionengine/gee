@@ -19,8 +19,8 @@
 //echo $count;
 
 
-    if (function_exists("fread")) {
-            echo "You have fread\n";
+    if (function_exists("stream_get_meta_data")) {
+            echo "You have stream_get_meta_data\n";
     } else {
-            echo "You don't have fread\n";
+            echo "You don't have stream_get_meta_data\n";
     }
