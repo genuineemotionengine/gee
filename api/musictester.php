@@ -19,8 +19,8 @@
 //echo $count;
 
 
-    if (function_exists("stream_get_meta_data")) {
-            echo "You have stream_get_meta_data\n";
+    if (function_exists("stream_set_chunk_size")) {
+            echo "You have stream_set_chunk_size\n";
     } else {
-            echo "You don't have stream_get_meta_data\n";
+            echo "You don't have stream_set_chunk_size\n";
     }
