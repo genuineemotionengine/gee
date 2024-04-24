@@ -19,8 +19,8 @@
 //echo $count;
 
 
-    if (function_exists("stream_set_timeout")) {
-            echo "You have stream_set_timeout\n";
+    if (function_exists("stream_socket_client")) {
+            echo "You have stream_socket_client\n";
     } else {
-            echo "You don't have stream_set_timeout\n";
+            echo "You don't have stream_socket_client\n";
     }
