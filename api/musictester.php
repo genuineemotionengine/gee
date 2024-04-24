@@ -19,8 +19,8 @@
 //echo $count;
 
 
-    if (function_exists("fgets")) {
-            echo "You have fgets";
+    if (function_exists("fputs")) {
+            echo "You have fputs\n";
     } else {
-            echo "You don't have fgets";
+            echo "You don't have fputs\n";
     }
