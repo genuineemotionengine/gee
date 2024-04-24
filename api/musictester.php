@@ -19,8 +19,8 @@
 //echo $count;
 
 
-    if (function_exists("stream_set_chunk_size")) {
-            echo "You have stream_set_chunk_size\n";
+    if (function_exists("stream_set_timeout")) {
+            echo "You have stream_set_timeout\n";
     } else {
-            echo "You don't have stream_set_chunk_size\n";
+            echo "You don't have stream_set_timeout\n";
     }
