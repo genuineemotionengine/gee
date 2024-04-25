@@ -156,7 +156,7 @@ if ($result->num_rows > 0) {
 
 //$pos++;
 
-$pos = "+1";
+$pos = "+0";
 
 if ($verbose){
 echo "uri: ".$uri."<br>";
