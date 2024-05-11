@@ -61,13 +61,13 @@ $y = 2;
     $tagwriter->filename = $flacfile;
 
     //$tagwriter->tagformats = array('id3v1', 'id3v2.3');
-   //$tagwriter->tagformats = array('id3v2');
+   $tagwriter->tagformats = array('id3v2');
 
     // set various options (optional)
     $tagwriter->overwrite_tags    = true;  // if true will erase existing tag data and write only passed data; if false will merge passed data with existing tag data (experimental)
-    //$tagwriter->remove_other_tags = false; // if true removes other tag formats (e.g. ID3v1, ID3v2, APE, Lyrics3, etc) that may be present in the file and only write the specified tag format(s). If false leaves any unspecified tag formats as-is.
+    $tagwriter->remove_other_tags = false; // if true removes other tag formats (e.g. ID3v1, ID3v2, APE, Lyrics3, etc) that may be present in the file and only write the specified tag format(s). If false leaves any unspecified tag formats as-is.
     //$tagwriter->tag_encoding      = $TextEncoding;
-    $tagwriter->remove_other_tags = true;
+    //$tagwriter->remove_other_tags = true;
 
         // populate data array
         $TagData = array(
