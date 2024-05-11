@@ -53,10 +53,12 @@ $y = 2;
     
     echo htmlentities(print_r($tagstrip, true), ENT_SUBSTITUTE);
     
-    echo $tagstrip[1]."\n";
+    $title = $tagstrip[1];
+    
+    echo $title."\n";
 
     //$tagwriter->filename = '/path/to/file.mp3';
-    //$tagwriter->filename = $flacfile;
+    $tagwriter->filename = $flacfile;
 
     //$tagwriter->tagformats = array('id3v1', 'id3v2.3');
    //$tagwriter->tagformats = array('id3v2');
@@ -68,8 +70,8 @@ $y = 2;
     //$tagwriter->remove_other_tags = true;
 
         // populate data array
-        //$TagData = array(
-        //        'track_number'           => array('1')
+        $TagData = array(
+                'title'           => array($title)
         //	'artist'                 => array('The Artist'),
         //	'album'                  => array('Greatest Hits'),
         //	'year'                   => array('2004'),
@@ -78,18 +80,18 @@ $y = 2;
         //	'track_number'           => array('04/16'),
         //	'popularimeter'          => array('email'=>'user@example.net', 'rating'=>128, 'data'=>0),
         //	'unique_file_identifier' => array('ownerid'=>'user@example.net', 'data'=>md5(time())),
-        //);
-        //$tagwriter->tag_data = $TagData;
+        );
+        $tagwriter->tag_data = $TagData;
 
-        // write tags
-        //if ($tagwriter->WriteTags()) {
-        //        echo "Successfully wrote tags\n";
-        //        if (!empty($tagwriter->warnings)) {
-        //                echo "There were some warnings:".$tagwriter->warnings."\n";
-        //        }
-        //} else {
-        //        echo "Failed to write tags!".implode($tagwriter->errors)."\n";
-        //}
+        //write tags
+        if ($tagwriter->WriteTags()) {
+                echo "Successfully wrote tags\n";
+                if (!empty($tagwriter->warnings)) {
+                        echo "There were some warnings:".$tagwriter->warnings."\n";
+                }
+        } else {
+                echo "Failed to write tags!".implode($tagwriter->errors)."\n";
+        }
 
 //        $chk++;
         $ThisFileInfo = $getID3->analyze($flacfile);
