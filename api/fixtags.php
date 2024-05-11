@@ -99,6 +99,8 @@ $y = 2;
         $title = $ThisFileInfo["tags"]["id3v2"]["title"][0];
         
         echo $title."\n";
+        
+        echo htmlentities(print_r($ThisFileInfo, true), ENT_SUBSTITUTE);
  //}        
         
 //    }
