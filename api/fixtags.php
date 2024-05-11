@@ -23,7 +23,9 @@ $dirarray = scandir($dir);
 
 $elements = count($dirarray);
 
-for ($x = 2; $x < $elements; $x++) {
+//for ($x = 2; $x < $elements; $x++) {
+
+$x = 2;
     
 $subdir = "/mnt/test/".$dirarray[$x]."/";
 
@@ -33,7 +35,9 @@ $subdirarray = scandir($subdir);
 
 $subelements = count($subdirarray);
 
-for ($y = 2; $y < $subelements; $y++) {
+//for ($y = 2; $y < $subelements; $y++) {
+
+$y = 2;
     
     //rename("/mnt/test/".$dirarray[$x]."/".$subdirarray[$y],"/mnt/test/".$dirarray[$x]."/".$count.".flac");
     
@@ -89,7 +93,7 @@ for ($y = 2; $y < $subelements; $y++) {
  //       $track = $ThisFileInfo["tags"]["id3v2"]["track_number"][0];
         
 //        echo $track."\n";
- }        
+ //}        
         
-    }
+//    }
 //}
