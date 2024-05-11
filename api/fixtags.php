@@ -61,7 +61,7 @@ $y = 2;
     $tagwriter->filename = $flacfile;
 
    //$tagwriter->tagformats = array('id3v1', 'id3v2.3');
-   $tagwriter->tagformats = array('id3v2.3');
+   //$tagwriter->tagformats = array('id3v2.3');
    //$tagwriter->tagformats = array('id3v2');
 
     // set various options (optional)
