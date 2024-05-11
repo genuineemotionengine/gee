@@ -72,7 +72,7 @@ $y = 2;
 
         // populate data array
         $TagData = array(
-                'title'           => array('All Nights Long')
+                '["tags"]["id3v2"]["title"][0]'           => array('All Nights Long')
         //	'artist'                 => array('The Artist'),
         //	'album'                  => array('Greatest Hits'),
         //	'year'                   => array('2004'),
