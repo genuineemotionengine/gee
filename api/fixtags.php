@@ -45,15 +45,15 @@ $y = 2;
     
     echo $flacfile."\n";
     
-    $ThisFileInfo = $getID3->analyze($flacfile);
+    //$ThisFileInfo = $getID3->analyze($flacfile);
     
-    echo htmlentities(print_r($ThisFileInfo, true), ENT_SUBSTITUTE);
+    //echo htmlentities(print_r($ThisFileInfo, true), ENT_SUBSTITUTE);
     
-    //$tagstrip = explode('*',$subdirarray[$y]);
+    $tagstrip = explode('*',$subdirarray[$y]);
     
-    //echo htmlentities(print_r($tagstrip, true), ENT_SUBSTITUTE);
+    echo htmlentities(print_r($tagstrip, true), ENT_SUBSTITUTE);
     
-    //echo $tagstrip[0]."\n";
+    echo $tagstrip[1]."\n";
 
     //$tagwriter->filename = '/path/to/file.mp3';
     //$tagwriter->filename = $flacfile;
