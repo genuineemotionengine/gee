@@ -45,6 +45,10 @@ $y = 2;
     
     echo $flacfile."\n";
     
+    $ThisFileInfo = $getID3->analyze($flacfile);
+    
+    echo htmlentities(print_r($ThisFileInfo, true), ENT_SUBSTITUTE);
+    
     //$tagstrip = explode('*',$subdirarray[$y]);
     
     //echo htmlentities(print_r($tagstrip, true), ENT_SUBSTITUTE);
