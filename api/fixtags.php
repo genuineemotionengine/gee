@@ -73,9 +73,8 @@ $y = 7;
     
 
         // populate data array
-        $TagData = array('gee' => 
-                        array('id3v2' =>
-                            array('title'           => array('All Nights Long')
+        $TagData = array(
+            'title'           => array('All Nights Long')
         //	'artist'                 => array('The Artist'),
         //	'album'                  => array('Greatest Hits'),
         //	'year'                   => array('2004'),
@@ -84,20 +83,25 @@ $y = 7;
         //	'track_number'           => array('04/16'),
         //	'popularimeter'          => array('email'=>'user@example.net', 'rating'=>128, 'data'=>0),
         //	'unique_file_identifier' => array('ownerid'=>'user@example.net', 'data'=>md5(time())),
-        )));
+        );
         //$tagwriter->tag_data = $TagData;
         
         echo htmlentities(print_r($TagData, true), ENT_SUBSTITUTE);
 
         //write tags
-        
+
+
+$result = id3_set_tag( $flacfile, $data, ID3_V1_0 );
+if ($result === true) {
+    echo "Tag successfully updated\n";
+}        
          
         
-        $myflacfile = fopen($flacfile, "a") or die("Unable to open file!");
-        
-        fwrite($myflacfile, $TagData);
-	
-        fclose($myflacfile);
+//        $myflacfile = fopen($flacfile, "a") or die("Unable to open file!");
+//        
+//        fwrite($myflacfile, $TagData);
+//	
+//        fclose($myflacfile);
         
         
 //        if ($tagwriter->WriteTags()) {
