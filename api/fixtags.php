@@ -11,7 +11,7 @@ $getID3 = new getID3;
 
 require_once('/var/www/html/api/id3/write.php');
 // Initialize getID3 tag-writing module
-$tagwriter = new getid3_writetags;
+$tagwriter = new getid3_write_id3v2;
 
 $chk = 0;
 
@@ -61,7 +61,7 @@ $y = 2;
     $tagwriter->filename = $flacfile;
 
    //$tagwriter->tagformats = array('id3v1', 'id3v2.3');
-   //$tagwriter->tagformats = array('id3v2.3');
+   $tagwriter->tagformats = array('id3v2.3');
    //$tagwriter->tagformats = array('id3v2');
 
     // set various options (optional)
@@ -72,7 +72,7 @@ $y = 2;
 
         // populate data array
         $TagData = array(
-                '["tags"]["id3v2"]["title"][0]'           => array('All Nights Long')
+                'title'           => array('All Nights Long')
         //	'artist'                 => array('The Artist'),
         //	'album'                  => array('Greatest Hits'),
         //	'year'                   => array('2004'),
