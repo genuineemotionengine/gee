@@ -192,7 +192,7 @@ class getid3_writetags
 					break;
 
 				case 'flac':
-					$AllowedTagFormats = array('metaflac');
+					$AllowedTagFormats = array('metaflac', 'id3v2.3');
 					break;
 
 				case 'real':
