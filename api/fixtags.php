@@ -69,7 +69,7 @@ $y = 7;
     //$tagwriter->remove_other_tags = false; // if true removes other tag formats (e.g. ID3v1, ID3v2, APE, Lyrics3, etc) that may be present in the file and only write the specified tag format(s). If false leaves any unspecified tag formats as-is.
     //$tagwriter->tag_encoding      = $TextEncoding;
     //$tagwriter->remove_other_tags = true;
-   $tagwriter->merge_existing_data = false;
+   $tagwriter->merge_existing_data = true;
     
 
         // populate data array
