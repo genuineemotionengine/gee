@@ -103,7 +103,7 @@ $y = 6;
         
         echo $title."\n";
         
-        echo htmlentities(print_r($ThisFileInfo, true), ENT_SUBSTITUTE);
+        //echo htmlentities(print_r($ThisFileInfo, true), ENT_SUBSTITUTE);
  //}        
         
 //    }
