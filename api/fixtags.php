@@ -85,7 +85,7 @@ $y = 2;
         $tagwriter->tag_data = $TagData;
 
         //write tags
-        if ($tagwriter->WriteTags()) {
+        if ($tagwriter->WriteID3v2()) {
                 echo "Successfully wrote tags\n";
                 if (!empty($tagwriter->warnings)) {
                         echo "There were some warnings:".$tagwriter->warnings."\n";
