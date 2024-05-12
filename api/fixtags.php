@@ -58,7 +58,7 @@ $y = 7;
     echo $title."\n";
 
     //$tagwriter->filename = '/path/to/file.mp3';
-    $tagwriter->filename = $flacfile;
+    //$tagwriter->filename = $flacfile;
 
    //$tagwriter->tagformats = array('id3v1', 'id3v2.3');
    //$tagwriter->tagformats = array('id3v2.3');
@@ -69,11 +69,11 @@ $y = 7;
     //$tagwriter->remove_other_tags = false; // if true removes other tag formats (e.g. ID3v1, ID3v2, APE, Lyrics3, etc) that may be present in the file and only write the specified tag format(s). If false leaves any unspecified tag formats as-is.
     //$tagwriter->tag_encoding      = $TextEncoding;
     //$tagwriter->remove_other_tags = true;
-   $tagwriter->merge_existing_data = false;
+   //$tagwriter->merge_existing_data = false;
     
 
         // populate data array
-        $TagData = array('tags' => 
+        $TagData = array('gee' => 
                         array('id3v2' =>
                             array('title'           => array('All Nights Long')
         //	'artist'                 => array('The Artist'),
@@ -85,19 +85,29 @@ $y = 7;
         //	'popularimeter'          => array('email'=>'user@example.net', 'rating'=>128, 'data'=>0),
         //	'unique_file_identifier' => array('ownerid'=>'user@example.net', 'data'=>md5(time())),
         )));
-        $tagwriter->tag_data = $TagData;
+        //$tagwriter->tag_data = $TagData;
         
         echo htmlentities(print_r($TagData, true), ENT_SUBSTITUTE);
 
         //write tags
-        if ($tagwriter->WriteTags()) {
-                echo "Successfully wrote tags\n";
-                if (!empty($tagwriter->warnings)) {
-                        echo "There were some warnings:".$tagwriter->warnings."\n";
-                }
-        } else {
-                echo "Failed to write tags!".implode($tagwriter->errors)."\n";
-        }
+        
+         
+        
+        $myflacfile = fopen($flacfile, "a") or die("Unable to open file!");
+        
+        fwrite($myflacfile, $TagData);
+	
+        fclose($myflacfile);
+        
+        
+//        if ($tagwriter->WriteTags()) {
+//                echo "Successfully wrote tags\n";
+//                if (!empty($tagwriter->warnings)) {
+//                        echo "There were some warnings:".$tagwriter->warnings."\n";
+//                }
+//        } else {
+//                echo "Failed to write tags!".implode($tagwriter->errors)."\n";
+//        }
 
 //        $chk++;
         $ThisFileInfo = $getID3->analyze($flacfile);
@@ -106,7 +116,7 @@ $y = 7;
         
         echo $title."\n";
         
-        echo htmlentities(print_r($ThisFileInfo["tags"], true), ENT_SUBSTITUTE);
+        echo htmlentities(print_r($ThisFileInfo, true), ENT_SUBSTITUTE);
  //}        
         
 //    }
