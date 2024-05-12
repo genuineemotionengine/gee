@@ -9,9 +9,9 @@ require_once('/var/www/html/api/id3/getid3.php');
 $getID3 = new getID3;
 $getID3->setOption(array('encoding'=>$TextEncoding));
 
-require_once('/var/www/html/api/id3/write.id3v2.php');
+require_once('/var/www/html/api/id3/write.php');
 // Initialize getID3 tag-writing module
-$tagwriter = new getid3_write_id3v2;
+$tagwriter = new getid3_write;
 
 $chk = 0;
 
@@ -37,7 +37,7 @@ $subelements = count($subdirarray);
 
 //for ($y = 2; $y < $subelements; $y++) {
 
-$y = 6;
+$y = 7;
     
     //rename("/mnt/test/".$dirarray[$x]."/".$subdirarray[$y],"/mnt/test/".$dirarray[$x]."/".$count.".flac");
     
