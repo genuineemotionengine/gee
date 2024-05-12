@@ -189,96 +189,96 @@ class getid3_write_id3v2
 	/**
 	 * @return bool
 	 */
-//	public function RemoveID3v2() {
-//		// File MUST be writeable - CHMOD(646) at least. It's best if the
-//		// directory is also writeable, because that method is both faster and less susceptible to errors.
-//		if (getID3::is_writable(dirname($this->filename))) {
-//
-//			// preferred method - only one copying operation, minimal chance of corrupting
-//			// original file if script is interrupted, but required directory to be writeable
-//			if (is_readable($this->filename) && is_file($this->filename) && ($fp_source = fopen($this->filename, 'rb'))) {
-//
-//				// Initialize getID3 engine
-//				$getID3 = new getID3;
-//				$OldThisFileInfo = $getID3->analyze($this->filename);
-//				if (!getid3_lib::intValueSupported($OldThisFileInfo['filesize'])) {
-//					$this->errors[] = 'Unable to remove ID3v2 because file is larger than '.round(PHP_INT_MAX / 1073741824).'GB';
-//					fclose($fp_source);
-//					return false;
-//				}
-//				rewind($fp_source);
-//				if ($OldThisFileInfo['avdataoffset'] !== false) {
-//					fseek($fp_source, $OldThisFileInfo['avdataoffset']);
-//				}
-//				if (getID3::is_writable($this->filename) && ($fp_temp = fopen($this->filename.'getid3tmp', 'w+b'))) {
-//					while ($buffer = fread($fp_source, $this->fread_buffer_size)) {
-//						fwrite($fp_temp, $buffer, strlen($buffer));
-//					}
-//					fclose($fp_temp);
-//				} else {
-//					$this->errors[] = 'Could not fopen("'.$this->filename.'getid3tmp", "w+b")';
-//				}
-//				fclose($fp_source);
-//			} else {
-//				$this->errors[] = 'Could not fopen("'.$this->filename.'", "rb")';
-//			}
-//			if (file_exists($this->filename)) {
-//				unlink($this->filename);
-//			}
-//			rename($this->filename.'getid3tmp', $this->filename);
-//
-//		} elseif (getID3::is_writable($this->filename)) {
-//
-//			// less desirable alternate method - double-copies the file, overwrites original file
-//			// and could corrupt source file if the script is interrupted or an error occurs.
-//			if (is_readable($this->filename) && is_file($this->filename) && ($fp_source = fopen($this->filename, 'rb'))) {
-//
-//				// Initialize getID3 engine
-//				$getID3 = new getID3;
-//				$OldThisFileInfo = $getID3->analyze($this->filename);
-//				if (!getid3_lib::intValueSupported($OldThisFileInfo['filesize'])) {
-//					$this->errors[] = 'Unable to remove ID3v2 because file is larger than '.round(PHP_INT_MAX / 1073741824).'GB';
-//					fclose($fp_source);
-//					return false;
-//				}
-//				rewind($fp_source);
-//				if ($OldThisFileInfo['avdataoffset'] !== false) {
-//					fseek($fp_source, $OldThisFileInfo['avdataoffset']);
-//				}
-//				if ($fp_temp = tmpfile()) {
-//					while ($buffer = fread($fp_source, $this->fread_buffer_size)) {
-//						fwrite($fp_temp, $buffer, strlen($buffer));
-//					}
-//					fclose($fp_source);
-//					if (getID3::is_writable($this->filename) && ($fp_source = fopen($this->filename, 'wb'))) {
-//						rewind($fp_temp);
-//						while ($buffer = fread($fp_temp, $this->fread_buffer_size)) {
-//							fwrite($fp_source, $buffer, strlen($buffer));
-//						}
-//						fseek($fp_temp, -128, SEEK_END);
-//						fclose($fp_source);
-//					} else {
-//						$this->errors[] = 'Could not fopen("'.$this->filename.'", "wb")';
-//					}
-//					fclose($fp_temp);
-//				} else {
-//					$this->errors[] = 'Could not create tmpfile()';
-//				}
-//			} else {
-//				$this->errors[] = 'Could not fopen("'.$this->filename.'", "rb")';
-//			}
-//
-//		} else {
-//
-//			$this->errors[] = 'Directory and file both not writeable';
-//
-//		}
-//
-//		if (!empty($this->errors)) {
-//			return false;
-//		}
-//		return true;
-//	}
+	public function RemoveID3v2() {
+		// File MUST be writeable - CHMOD(646) at least. It's best if the
+		// directory is also writeable, because that method is both faster and less susceptible to errors.
+		if (getID3::is_writable(dirname($this->filename))) {
+
+			// preferred method - only one copying operation, minimal chance of corrupting
+			// original file if script is interrupted, but required directory to be writeable
+			if (is_readable($this->filename) && is_file($this->filename) && ($fp_source = fopen($this->filename, 'rb'))) {
+
+				// Initialize getID3 engine
+				$getID3 = new getID3;
+				$OldThisFileInfo = $getID3->analyze($this->filename);
+				if (!getid3_lib::intValueSupported($OldThisFileInfo['filesize'])) {
+					$this->errors[] = 'Unable to remove ID3v2 because file is larger than '.round(PHP_INT_MAX / 1073741824).'GB';
+					fclose($fp_source);
+					return false;
+				}
+				rewind($fp_source);
+				if ($OldThisFileInfo['avdataoffset'] !== false) {
+					fseek($fp_source, $OldThisFileInfo['avdataoffset']);
+				}
+				if (getID3::is_writable($this->filename) && ($fp_temp = fopen($this->filename.'getid3tmp', 'w+b'))) {
+					while ($buffer = fread($fp_source, $this->fread_buffer_size)) {
+						fwrite($fp_temp, $buffer, strlen($buffer));
+					}
+					fclose($fp_temp);
+				} else {
+					$this->errors[] = 'Could not fopen("'.$this->filename.'getid3tmp", "w+b")';
+				}
+				fclose($fp_source);
+			} else {
+				$this->errors[] = 'Could not fopen("'.$this->filename.'", "rb")';
+			}
+			if (file_exists($this->filename)) {
+				unlink($this->filename);
+			}
+			rename($this->filename.'getid3tmp', $this->filename);
+
+		} elseif (getID3::is_writable($this->filename)) {
+
+			// less desirable alternate method - double-copies the file, overwrites original file
+			// and could corrupt source file if the script is interrupted or an error occurs.
+			if (is_readable($this->filename) && is_file($this->filename) && ($fp_source = fopen($this->filename, 'rb'))) {
+
+				// Initialize getID3 engine
+				$getID3 = new getID3;
+				$OldThisFileInfo = $getID3->analyze($this->filename);
+				if (!getid3_lib::intValueSupported($OldThisFileInfo['filesize'])) {
+					$this->errors[] = 'Unable to remove ID3v2 because file is larger than '.round(PHP_INT_MAX / 1073741824).'GB';
+					fclose($fp_source);
+					return false;
+				}
+				rewind($fp_source);
+				if ($OldThisFileInfo['avdataoffset'] !== false) {
+					fseek($fp_source, $OldThisFileInfo['avdataoffset']);
+				}
+				if ($fp_temp = tmpfile()) {
+					while ($buffer = fread($fp_source, $this->fread_buffer_size)) {
+						fwrite($fp_temp, $buffer, strlen($buffer));
+					}
+					fclose($fp_source);
+					if (getID3::is_writable($this->filename) && ($fp_source = fopen($this->filename, 'wb'))) {
+						rewind($fp_temp);
+						while ($buffer = fread($fp_temp, $this->fread_buffer_size)) {
+							fwrite($fp_source, $buffer, strlen($buffer));
+						}
+						fseek($fp_temp, -128, SEEK_END);
+						fclose($fp_source);
+					} else {
+						$this->errors[] = 'Could not fopen("'.$this->filename.'", "wb")';
+					}
+					fclose($fp_temp);
+				} else {
+					$this->errors[] = 'Could not create tmpfile()';
+				}
+			} else {
+				$this->errors[] = 'Could not fopen("'.$this->filename.'", "rb")';
+			}
+
+		} else {
+
+			$this->errors[] = 'Directory and file both not writeable';
+
+		}
+
+		if (!empty($this->errors)) {
+			return false;
+		}
+		return true;
+	}
 
 	/**
 	 * @param array $flags
