@@ -14,7 +14,7 @@ $subdir = "/mnt/test/".$dirarray[$x]."/";
 
 $subdirarray = scandir($subdir);
 
-$y = 6;
+$y = 7;
     
 $flacfile = "/mnt/test/".$dirarray[$x]."/".$subdirarray[$y];
 
@@ -22,4 +22,4 @@ echo $flacfile."\n";
 
 $ThisFileInfo = $getID3->analyze($flacfile);
 
-echo htmlentities(print_r($ThisFileInfo, true), ENT_SUBSTITUTE);
+echo htmlentities(print_r($ThisFileInfo["tags"], true), ENT_SUBSTITUTE);
