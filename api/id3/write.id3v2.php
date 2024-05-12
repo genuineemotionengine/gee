@@ -64,7 +64,7 @@ class getid3_write_id3v2
 	 *
 	 * @var bool
 	 */
-	public $merge_existing_data         = false;
+	public $merge_existing_data         = true;
 
 	/**
 	 * Default text encoding (ISO-8859-1) if not explicitly passed.
