@@ -37,7 +37,7 @@ $subelements = count($subdirarray);
 
 //for ($y = 2; $y < $subelements; $y++) {
 
-$y = 4;
+$y = 5;
     
     //rename("/mnt/test/".$dirarray[$x]."/".$subdirarray[$y],"/mnt/test/".$dirarray[$x]."/".$count.".flac");
     
