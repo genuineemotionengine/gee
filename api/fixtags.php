@@ -85,6 +85,8 @@ $y = 7;
         //	'unique_file_identifier' => array('ownerid'=>'user@example.net', 'data'=>md5(time())),
         );
         $tagwriter->tag_data = $TagData;
+        
+        echo htmlentities(print_r($TagData, true), ENT_SUBSTITUTE);
 
         //write tags
         if ($tagwriter->WriteTags()) {
