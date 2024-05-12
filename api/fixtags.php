@@ -2,12 +2,12 @@
 
 require_once('/var/www/html/api/dbconn.php');
 
-//$TextEncoding = 'UTF-8';
+$TextEncoding = 'UTF-8';
 
 require_once('/var/www/html/api/id3/getid3.php');
 // Initialize getID3 engine
 $getID3 = new getID3;
-//$getID3->setOption(array('encoding'=>$TextEncoding));
+$getID3->setOption(array('encoding'=>$TextEncoding));
 
 require_once('/var/www/html/api/id3/write.id3v2.php');
 // Initialize getID3 tag-writing module
