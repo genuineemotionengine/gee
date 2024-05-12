@@ -11,7 +11,7 @@ $getID3->setOption(array('encoding'=>$TextEncoding));
 
 require_once('/var/www/html/api/id3/write.php');
 // Initialize getID3 tag-writing module
-$tagwriter = new getid3_write;
+$tagwriter = new getid3_writetags;
 
 $chk = 0;
 
