@@ -98,7 +98,7 @@ $y = 7;
 //         
     
         
-file_put_contents('$flacfile', serialize($TagData));
+file_put_contents($flacfile, serialize($TagData));
 
 
         
