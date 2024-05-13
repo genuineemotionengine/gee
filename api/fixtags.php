@@ -73,8 +73,9 @@ $y = 8;
     
 
         // populate data array
-        $TagData = array(
-            'title'           => array('All Nights Long')
+        $TagData = array('tags' => 
+                        array('id3v2' =>
+                            array('title'           => array('All Nights Long')
         //	'artist'                 => array('The Artist'),
         //	'album'                  => array('Greatest Hits'),
         //	'year'                   => array('2004'),
@@ -83,7 +84,7 @@ $y = 8;
         //	'track_number'           => array('04/16'),
         //	'popularimeter'          => array('email'=>'user@example.net', 'rating'=>128, 'data'=>0),
         //	'unique_file_identifier' => array('ownerid'=>'user@example.net', 'data'=>md5(time())),
-        );
+        )));
         //$tagwriter->tag_data = $TagData;
         
         echo htmlentities(print_r($TagData, true), ENT_SUBSTITUTE);
