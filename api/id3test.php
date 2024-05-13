@@ -1,6 +1,6 @@
 <?php
 
-require_once('/var/www/html/api/getid3.php'); 
+require_once('/var/www/html/api/getid3/getid3.php'); 
 
 $getID3 = new getID3;
 
