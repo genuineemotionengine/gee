@@ -67,9 +67,9 @@ $getID3 = new getID3;
 $ThisFileInfo = $getID3->analyze($flacfile);
 
 if (isset($ThisFileInfo["tags"]["id3v2"]["track_number"])){   
-    $track = $ThisFileInfo["tags"]["vorbiscomment"]["tracknumber"][0];
-} else {
     $track = $ThisFileInfo["tags"]["id3v2"]["track_number"][0];
+} else {
+    $track = $ThisFileInfo["tags"]["vorbiscomment"]["tracknumber"][0];
 }
 
 
