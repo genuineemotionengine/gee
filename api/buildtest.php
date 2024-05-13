@@ -74,7 +74,7 @@ $artist = $ThisFileInfo["tags"]["vorbiscomment"]["artist"][0];
 
 $album = $ThisFileInfo["tags"]["vorbiscomment"]["album"][0];
 
-$albumartist = $ThisFileInfo["tags"]["vorbiscomment"]["band"][0];
+$albumartist = $ThisFileInfo["tags"]["vorbiscomment"]["albumartist"][0];
 
 $genre = $ThisFileInfo["tags"]["vorbiscomment"]["genre"][0];
 
