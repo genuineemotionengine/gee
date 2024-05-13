@@ -72,10 +72,10 @@ if (!$ThisFileInfo["tags"]["id3v2"]["track_number"][0]){
     $track = $ThisFileInfo["tags"]["id3v2"]["track_number"][0];
 }
 
-if ($ThisFileInfo["tags"]["id3v2"]["title"][0] == ""){    
-    $title = $ThisFileInfo["tags"]["vorbiscomment"]["title"][0];
+if (array_key_exists(["tags"]["id3v2"]["title"],$ThisFileInfo)){
+    $title = $ThisFileInfo["tags"]["id3v2"]["title"][0];    
 } else {
-    $title = $ThisFileInfo["tags"]["id3v2"]["title"][0];
+    $title = $ThisFileInfo["tags"]["vorbiscomment"]["title"][0];
 }
 
 if (!$ThisFileInfo["tags"]["id3v2"]["artist"][0]){    
