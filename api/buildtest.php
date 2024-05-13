@@ -79,28 +79,28 @@ if (isset($ThisFileInfo["tags"]["id3v2"]["title"])){
     $title = $ThisFileInfo["tags"]["vorbiscomment"]["title"][0];
 }
 
-if (isset($ThisFileInfo["tags"]["id3v2"]["artist"])){    
-    $artist = $ThisFileInfo["tags"]["vorbiscomment"]["artist"][0];
-} else {
+if (isset($ThisFileInfo["tags"]["id3v2"]["artist"])){
     $artist = $ThisFileInfo["tags"]["id3v2"]["artist"][0];
+    } else {
+    $artist = $ThisFileInfo["tags"]["vorbiscomment"]["artist"][0];
 }
 
 if (isset($ThisFileInfo["tags"]["id3v2"]["album"])){    
-    $album = $ThisFileInfo["tags"]["vorbiscomment"]["album"][0];
-} else {
     $album = $ThisFileInfo["tags"]["id3v2"]["album"][0];
+} else {
+    $album = $ThisFileInfo["tags"]["vorbiscomment"]["album"][0];
 }
 
 if (isset($ThisFileInfo["tags"]["id3v2"]["band"])){   
-    $albumartist = $ThisFileInfo["tags"]["vorbiscomment"]["albumartist"][0];
-} else {
     $albumartist = $ThisFileInfo["tags"]["id3v2"]["band"][0];
+} else {
+    $albumartist = $ThisFileInfo["tags"]["vorbiscomment"]["albumartist"][0];
 }
 
 if (isset($ThisFileInfo["tags"]["id3v2"]["genre"])){    
-    $genre = $ThisFileInfo["tags"]["vorbiscomment"]["genre"][0];
-} else {
     $genre = $ThisFileInfo["tags"]["id3v2"]["genre"][0];
+} else {
+    $genre = $ThisFileInfo["tags"]["vorbiscomment"]["genre"][0];
 }
 
 
