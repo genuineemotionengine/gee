@@ -72,7 +72,8 @@ if (!$ThisFileInfo["tags"]["id3v2"]["track_number"][0]){
     $track = $ThisFileInfo["tags"]["id3v2"]["track_number"][0];
 }
 
-if (array_key_exists(["tags"]["id3v2"]["title"],$ThisFileInfo)){
+//if (array_key_exists(["tags"]["id3v2"]["title"],$ThisFileInfo)){
+if (isset($ThisFileInfo["tags"]["id3v2"]["title"])){
     $title = $ThisFileInfo["tags"]["id3v2"]["title"][0];    
 } else {
     $title = $ThisFileInfo["tags"]["vorbiscomment"]["title"][0];
