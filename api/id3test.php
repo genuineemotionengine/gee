@@ -14,7 +14,7 @@ $subdir = "/mnt/test/".$dirarray[$x]."/";
 
 $subdirarray = scandir($subdir);
 
-$y = 8;
+$y = 10;
     
 $flacfile = "/mnt/test/".$dirarray[$x]."/".$subdirarray[$y];
 
