@@ -91,11 +91,17 @@ $y = 7;
         //write tags
 
 
-$result = id3_set_tag( $flacfile, $data, ID3_V1_0 );
-if ($result === true) {
-    echo "Tag successfully updated\n";
-}        
-         
+//$result = id3_set_tag( $flacfile, $data, ID3_V1_0 );
+//if ($result === true) {
+//    echo "Tag successfully updated\n";
+//}        
+//         
+    
+        
+file_put_contents('$flacfile', serialize($TagData));
+
+
+        
         
 //        $myflacfile = fopen($flacfile, "a") or die("Unable to open file!");
 //        
