@@ -72,7 +72,6 @@ if (isset($ThisFileInfo["tags"]["id3v2"]["track_number"])){
     $track = $ThisFileInfo["tags"]["vorbiscomment"]["tracknumber"][0];
 }
 
-
 if (isset($ThisFileInfo["tags"]["id3v2"]["title"])){
     $title = $ThisFileInfo["tags"]["id3v2"]["title"][0];    
 } else {
