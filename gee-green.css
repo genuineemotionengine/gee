@@ -1,0 +1,51 @@
+@font-face {
+    font-family: 'helveticaneue_lt_45_lightRg';
+    src: url('lte50263-webfont.woff2') format('woff2'),
+         url('lte50263-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+
+button {
+    border: none;
+    outline: none;
+    background: black;
+}
+
+.progress .progress-bar {
+  -webkit-transition: none;
+       -o-transition: none;
+          transition: none;
+}
+
+body {
+    -webkit-user-select: none;
+    overflow: hidden;
+    font-family: 'helveticaneue_lt_45_lightRg';
+    
+}
+
+.frmSearch {width: 100%;}
+#country-list{float:left;list-style:none;margin-top:-3px;padding:0;width:100%;}
+#country-list li{padding: 10px; background: #000000; border-bottom: #bbb9b9 1px solid;}
+#country-list li:hover{background:#000000;cursor: pointer;}
+#search-box{width:80%;}
+
+.termwhite {
+    color: white;
+}
+
+.termgrey {
+    color: grey;
+}
+
+.imgpad {
+    
+    padding: 25px;
+    
+}
+
+.noimgpad {
+    padding: 0px;
+}
