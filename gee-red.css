@@ -40,4 +40,12 @@ body {
     color: grey;
 }
 
+.imgpad {
+    
+    padding: 10px;
+    
+}
 
+.noimgpad {
+    padding: 0px;
+}
