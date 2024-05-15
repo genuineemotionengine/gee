@@ -263,7 +263,7 @@ echo "<body style='background: black;' class='p-3 mb-2 bg-black text-white pt-0 
 
 echo "<div class='container-fluid text-center ps-0 pe-0'>\n";
 echo "<div class='d-block d-sm-none'>\n";
-echo "<div id='imagepad1' class='imgpad'><img id='image1' class='img-fluid' src='black.jpg' /></div>\n";
+echo "<div id='imagepad1' class='imgpad' onclick='playpause()'><img id='image1' class='img-fluid' src='black.jpg' /></div>\n";
 echo "<button type='button' class='bg-black' onclick='getmeta(3)'><i class='bi bi-arrow-left-short' style='font-size: 5rem; color: white;'></i></button>\n";
 echo "<button type='button' class='bg-black' onclick='playpause()'><i id='playpause1' class='bi bi-pause' style='font-size: 5rem; color: white;'></i></button>\n";
 echo "<button type='button' class='bg-black' onclick='getmeta(4)'><i class='bi bi-arrow-right-short' style='font-size: 5rem; color: white;'></i></button>\n";
