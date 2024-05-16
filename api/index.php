@@ -298,7 +298,15 @@ echo '<pre>'.htmlentities(print_r($loadarray, true), ENT_SUBSTITUTE).'</pre>';
 
 }
 
-
+if ($service == 13){
+    
+    $time = 0;
+    
+    $mphpd->player()->seek_cur($time);
+    
+    include ('getmeta.php');
+    
+}
 
 
 
