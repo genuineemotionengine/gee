@@ -267,7 +267,7 @@ echo "<div id='imagepad1' class='imgpad' onclick='playpause()'><img id='image1' 
 echo "<button type='button' class='bg-black' onclick='getmeta(3)'><i class='bi bi-arrow-left-short' style='font-size: 5rem; color: white;'></i></button>\n";
 echo "<button type='button' class='bg-black' onclick='getmeta(3)'><i class='bi bi-skip-start' style='font-size: 5rem; color: white;padding: 0px;'></i></button>\n";
 //echo "<button type='button' class='bg-black' onclick='playpause()'><i id='playpause1' class='bi bi-pause' style='font-size: 5rem; color: white;'></i></button>\n";
-echo "<button type='button' class='bg-black' onclick='getmeta(4)'><i class='bi bi-arrow-right-short' style='font-size: 5rem; color: white;'></i></button>\n";
+echo "<button type='button' class='bg-black' onclick='getmeta(4)'><i class='bi bi-skip-forward' style='font-size: 5rem; color: white;'></i></button>\n";
 
 echo "<div class='container pt-0 mt-0'>\n";
     echo "<div class='row row-cols-3'>\n";
