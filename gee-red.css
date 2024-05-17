@@ -69,3 +69,13 @@ body {
   background-color: red;
   z-index: 1;
 }
+
+#imgthree {
+  position: absolute;
+  left: 284px;
+  top: 0px;
+  height: 142px;
+  width: 142px;
+  background-color: green;
+  z-index: 1;
+}

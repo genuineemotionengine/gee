@@ -270,6 +270,8 @@ echo "<div id='imgone' onclick='playpause()'></div>";
 
 echo "<div id='imgtwo' onclick='getmeta(13)'></div>";
 
+echo "<div id='imgthree'></div>";
+
 echo "<div id='imagepad1' class='imgpad'><img id='image1' class='img-fluid' src='black.jpg' /></div>\n";
 
 
