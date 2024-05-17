@@ -197,7 +197,7 @@ if ($plnext){
     
 }
 
-
+include ('getmeta.php');
 
 }
 
