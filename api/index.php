@@ -194,10 +194,11 @@ if ($verbose){
 
 if ($plnext){
     $mphpd->player()->next();
+    include ('getmeta.php');
     
 }
 
-include ('getmeta.php');
+
 
 }
 
