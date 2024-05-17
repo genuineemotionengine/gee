@@ -46,6 +46,7 @@ if(!empty($_POST["keyword"])) {
                 echo "<li><h4>".$country['title']."<br>".$country['artist']."<br>".$country['album']."</h4>"
                         . "<button type='button' class='termgrey' data-bs-dismiss='modal' class='termgrey' onclick='playnext(".$country['id'].")'><i class='bi bi-chevron-right' style='font-size: 3rem;'></i></button>"
                         . "<button type='button' id='nxttracks".$country['id']."' class='termgrey' onclick='insertnext(".$country['id'].")'><i class='bi bi-chevron-double-right' style='font-size: 3rem;'></i></button>"
+                        . "<button type='button' data-bs-dismiss='modal' id='nxttracks".$country['id']."' class='termgrey' onclick='insertnext(".$country['id'].")'><i class='bi bi-arrow-right' style='font-size: 3rem;'></i></button>"
                         . "</li>\n";
             }
             
