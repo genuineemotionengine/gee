@@ -49,3 +49,13 @@ body {
 .noimgpad {
     padding: 0px;
 }
+
+#imgplaypause {
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  height: 50px;
+  width: 50px;
+  background-color: white;
+  z-index: 1;
+}
