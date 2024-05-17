@@ -298,13 +298,28 @@ echo '<pre>'.htmlentities(print_r($loadarray, true), ENT_SUBSTITUTE).'</pre>';
 
 }
 
+//*************** Restart Track ****************
+
 if ($service == 13){
     
-    $time = 0;
+    $mySimpleArray = $mphpd->player()->current_song();
+
+    if ($verbose){
+    echo "Current Song";
+    echo '<pre>'.htmlentities(print_r($mySimpleArray, true), ENT_SUBSTITUTE).'</pre>'; 
+    echo "<br><br><br>";    
+    }
+
     
-    $mphpd->player()->seek_cur($time);
     
-    include ('getmeta.php');
+//    $time = 0;
+    
+//    $mphpd->player()->seek_cur($time);
+    
+    
+    
+    
+    //include ('getmeta.php');
     
 }
 
