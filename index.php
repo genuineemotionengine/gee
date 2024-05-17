@@ -266,7 +266,7 @@ echo "<body style='background: black;' class='p-3 mb-2 bg-black text-white pt-0 
 echo "<div class='container-fluid text-center ps-0 pe-0'>\n";
 echo "<div class='d-block d-sm-none'>\n";
 
-echo "<div id='imgone' onclick='playpause()'></div>";
+echo "<div id='imgone'></div>";
 
 echo "<div id='imgtwo' onclick='getmeta(13)'></div>";
 
@@ -274,7 +274,7 @@ echo "<div id='imgthree'></div>";
 
 echo "<div id='imgfour'></div>";
 
-echo "<div id='imgfive'></div>";
+echo "<div id='imgfive' onclick='playpause()'></div>";
 
 echo "<div id='imgsix'></div>";
 
