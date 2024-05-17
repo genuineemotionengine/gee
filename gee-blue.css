@@ -52,10 +52,10 @@ body {
 
 #imgplaypause {
   position: absolute;
-  left: 166px;
+  left: 142px;
   top: 0px;
-  height: 250px;
-  width: 166px;
+  height: 214px;
+  width: 142px;
   background-color: white;
   z-index: 1;
 }
