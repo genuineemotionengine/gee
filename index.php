@@ -268,7 +268,7 @@ echo "<div class='d-block d-sm-none'>\n";
 
 echo "<div id='imgone'></div>";
 
-echo "<div id='imgtwo' onclick='getmeta(13)'></div>";
+echo "<div id='imgtwo'></div>";
 
 echo "<div id='imgthree'></div>";
 
@@ -280,7 +280,7 @@ echo "<div id='imgsix'></div>";
 
 echo "<div id='imgseven'></div>";
 
-echo "<div id='imgeight'></div>";
+echo "<div id='imgeight' onclick='getmeta(13)'></div>";
 
 echo "<div id='imgnine'></div>";
 
