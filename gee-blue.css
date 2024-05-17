@@ -59,3 +59,14 @@ body {
   background-color: white;
   z-index: 1;
 }
+
+#imgrestart {
+  position: absolute;
+  left: 142px;
+  top: 0px;
+  height: 214px;
+  width: 142px;
+  background-color: red;
+  z-index: 1;
+}
+
