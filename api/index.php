@@ -319,7 +319,7 @@ if ($service == 13){
     }
 
   
-    $pos = $currentArray['id'];
+    $pos = $currentArray['pos'];
 
             
     $mphpd->player()->play($pos);        
