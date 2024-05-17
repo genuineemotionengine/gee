@@ -82,28 +82,28 @@ body {
 
 #imgfour {
   position: absolute;
-  left: 142px;
-  top: 0px;
+  left: 0px;
+  top: 142px;
   height: 142px;
   width: 142px;
-  background-color: red;
+  background-color: orange;
   z-index: 1;
 }
 
 #imgfive {
   position: absolute;
   left: 142px;
-  top: 0px;
+  top: 142px;
   height: 142px;
   width: 142px;
-  background-color: red;
+  background-color: yellow;
   z-index: 1;
 }
 
 #imgsix {
   position: absolute;
-  left: 142px;
-  top: 0px;
+  left: 284px;
+  top: 142px;
   height: 142px;
   width: 142px;
   background-color: red;
@@ -112,31 +112,31 @@ body {
 
 #imgseven {
   position: absolute;
-  left: 142px;
-  top: 0px;
+  left: 0px;
+  top: 284px;
   height: 142px;
   width: 142px;
-  background-color: red;
+  background-color: purple;
   z-index: 1;
 }
 
 #imgeight {
   position: absolute;
   left: 142px;
-  top: 0px;
+  top: 284px;
   height: 142px;
   width: 142px;
-  background-color: red;
+  background-color: chartreuse;
   z-index: 1;
 }
 
 #imgnine {
   position: absolute;
-  left: 142px;
-  top: 0px;
+  left: 284px;
+  top: 284px;
   height: 142px;
   width: 142px;
-  background-color: red;
+  background-color: pink;
   z-index: 1;
 }
 
