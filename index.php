@@ -266,8 +266,8 @@ echo "<body style='background: black;' class='p-3 mb-2 bg-black text-white pt-0 
 echo "<div class='container-fluid text-center ps-0 pe-0'>\n";
 echo "<div class='d-block d-sm-none'>\n";
 
-echo "<div id='imgplaypause'></div>";
-echo "<div id='imagepad1' class='imgpad' onclick='playpause()'><img id='image1' class='img-fluid' src='black.jpg' /></div>\n";
+echo "<div id='imgplaypause' onclick='playpause()'></div>";
+echo "<div id='imagepad1' class='imgpad'><img id='image1' class='img-fluid' src='black.jpg' /></div>\n";
 
 
 
