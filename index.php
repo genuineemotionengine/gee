@@ -17,7 +17,7 @@ echo "<link href='https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstra
 echo "<link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css'/>\n";
 echo "<script src='https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js' integrity='sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3' crossorigin='anonymous'></script>\n";
 echo "<script src='https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js'></script>\n";
-echo "<link rel='stylesheet' href='gee-blue.css'/>\n";
+echo "<link rel='stylesheet' href='gee-red.css'/>\n";
 echo "<script>\n";
 
 //******* Varibale Decaration *******
@@ -266,8 +266,9 @@ echo "<body style='background: black;' class='p-3 mb-2 bg-black text-white pt-0 
 echo "<div class='container-fluid text-center ps-0 pe-0'>\n";
 echo "<div class='d-block d-sm-none'>\n";
 
-echo "<div id='imgplaypause' onclick='playpause()'></div>";
-echo "<div id='imgrestart' onclick='getmeta(13)'></div>";
+echo "<div id='imgone' onclick='playpause()'></div>";
+
+echo "<div id='imgtwo' onclick='getmeta(13)'></div>";
 
 echo "<div id='imagepad1' class='imgpad'><img id='image1' class='img-fluid' src='black.jpg' /></div>\n";
 

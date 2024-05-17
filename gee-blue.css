@@ -50,21 +50,91 @@ body {
     padding: 0px;
 }
 
-#imgplaypause {
+#imgone {
   position: absolute;
-  left: 142px;
-  top: 214px;
-  height: 214px;
+  left: 0px;
+  top: 0px;
+  height: 142px;
   width: 142px;
-  background-color: white;
+  background-color: blue;
   z-index: 1;
 }
 
-#imgrestart {
+#imgtwo {
   position: absolute;
   left: 142px;
   top: 0px;
-  height: 214px;
+  height: 142px;
+  width: 142px;
+  background-color: red;
+  z-index: 1;
+}
+
+#imgthree {
+  position: absolute;
+  left: 284px;
+  top: 0px;
+  height: 142px;
+  width: 142px;
+  background-color: red;
+  z-index: 1;
+}
+
+#imgfour {
+  position: absolute;
+  left: 142px;
+  top: 0px;
+  height: 142px;
+  width: 142px;
+  background-color: red;
+  z-index: 1;
+}
+
+#imgfive {
+  position: absolute;
+  left: 142px;
+  top: 0px;
+  height: 142px;
+  width: 142px;
+  background-color: red;
+  z-index: 1;
+}
+
+#imgsix {
+  position: absolute;
+  left: 142px;
+  top: 0px;
+  height: 142px;
+  width: 142px;
+  background-color: red;
+  z-index: 1;
+}
+
+#imgseven {
+  position: absolute;
+  left: 142px;
+  top: 0px;
+  height: 142px;
+  width: 142px;
+  background-color: red;
+  z-index: 1;
+}
+
+#imgeight {
+  position: absolute;
+  left: 142px;
+  top: 0px;
+  height: 142px;
+  width: 142px;
+  background-color: red;
+  z-index: 1;
+}
+
+#imgnine {
+  position: absolute;
+  left: 142px;
+  top: 0px;
+  height: 142px;
   width: 142px;
   background-color: red;
   z-index: 1;
