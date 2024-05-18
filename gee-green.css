@@ -74,7 +74,6 @@ body {
   top: 0px;
   height: 142px;
   width: 142px;
-  background-color: green;
   z-index: 1;
 }
 
@@ -84,7 +83,6 @@ body {
   top: 142px;
   height: 142px;
   width: 142px;
-  background-color: orange;
   z-index: 1;
 }
 
@@ -103,7 +101,6 @@ body {
   top: 142px;
   height: 142px;
   width: 142px;
-  background-color: red;
   z-index: 1;
 }
 
