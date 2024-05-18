@@ -272,7 +272,8 @@ echo "<div id='imgone' onclick='getmeta(1)'></div>";
 //***************** More *****************
 echo "<div id='imgtwo' data-bs-toggle='modal' data-bs-target='#modal1'></div>";
 
-echo "<div id='imgthree'></div>";
+//***************** Restart Playlist *****************
+echo "<div id='imgthree' onclick='getmeta(5)'></div>";
 
 echo "<div id='imgfour'></div>";
 
