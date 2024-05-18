@@ -17,7 +17,7 @@ echo "<link href='https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstra
 echo "<link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css'/>\n";
 echo "<script src='https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js' integrity='sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3' crossorigin='anonymous'></script>\n";
 echo "<script src='https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js'></script>\n";
-echo "<link rel='stylesheet' href='gee-red.css'/>\n";
+echo "<link rel='stylesheet' href='gee-blue.css'/>\n";
 echo "<script>\n";
 
 //******* Varibale Decaration *******
@@ -274,12 +274,14 @@ echo "<div id='imgthree'></div>";
 
 echo "<div id='imgfour'></div>";
 
+//***************** Play/Pause *****************
 echo "<div id='imgfive' onclick='playpause()'></div>";
 
 echo "<div id='imgsix'></div>";
 
 echo "<div id='imgseven'></div>";
 
+//***************** Restart Track *****************
 echo "<div id='imgeight' onclick='getmeta(13)'></div>";
 
 echo "<div id='imgnine'></div>";
