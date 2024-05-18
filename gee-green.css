@@ -50,12 +50,88 @@ body {
     padding: 0px;
 }
 
-#imgplaypause {
+#imgone {
   position: absolute;
-  left: 166px;
+  left: 0px;
   top: 0px;
-  height: 250px;
-  width: 166px;
-  background-color: white;
+  height: 142px;
+  width: 142px;
   z-index: 1;
 }
+
+#imgtwo {
+  position: absolute;
+  left: 142px;
+  top: 0px;
+  height: 142px;
+  width: 142px;
+  background-color: red;
+  z-index: 1;
+}
+
+#imgthree {
+  position: absolute;
+  left: 284px;
+  top: 0px;
+  height: 142px;
+  width: 142px;
+  background-color: green;
+  z-index: 1;
+}
+
+#imgfour {
+  position: absolute;
+  left: 0px;
+  top: 142px;
+  height: 142px;
+  width: 142px;
+  background-color: orange;
+  z-index: 1;
+}
+
+#imgfive {
+  position: absolute;
+  left: 142px;
+  top: 142px;
+  height: 142px;
+  width: 142px;
+  z-index: 1;
+}
+
+#imgsix {
+  position: absolute;
+  left: 284px;
+  top: 142px;
+  height: 142px;
+  width: 142px;
+  background-color: red;
+  z-index: 1;
+}
+
+#imgseven {
+  position: absolute;
+  left: 0px;
+  top: 284px;
+  height: 142px;
+  width: 142px;
+  z-index: 1;
+}
+
+#imgeight {
+  position: absolute;
+  left: 142px;
+  top: 284px;
+  height: 142px;
+  width: 142px;
+  z-index: 1;
+}
+
+#imgnine {
+  position: absolute;
+  left: 284px;
+  top: 284px;
+  height: 142px;
+  width: 142px;
+  z-index: 1;
+}
+
