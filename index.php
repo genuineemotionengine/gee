@@ -295,7 +295,7 @@ echo "<div id='imgnine' onclick='getmeta(4)'></div>";
 
 echo "<div id='imagepad1' class='imgpad'><img id='image1' class='img-fluid' src='black.jpg' /></div>\n";
 
-echo "<h6>".gethostname()."</h6>";
+echo "<br><h6>".gethostname()."</h6>";
 
 //echo "<button type='button' class='bg-black' onclick='getmeta(3)'><i class='bi bi-rewind' style='font-size: 4rem; color: white;'></i></button>\n";
 //echo "<button type='button' class='bg-black' onclick='getmeta(13)'><i class='bi bi-skip-start' style='font-size: 4rem; color: white;padding: 0px;'></i></button>\n";
