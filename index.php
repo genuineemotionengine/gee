@@ -275,11 +275,13 @@ echo "<div id='imgtwo' data-bs-toggle='modal' data-bs-target='#modal1'></div>";
 //***************** Restart Playlist *****************
 echo "<div id='imgthree' onclick='getmeta(5)'></div>";
 
+//***************** Not Allocated *****************
 echo "<div id='imgfour'></div>";
 
 //***************** Play/Pause *****************
 echo "<div id='imgfive' onclick='playpause()'></div>";
 
+//***************** Not Allocated *****************
 echo "<div id='imgsix'></div>";
 
 //***************** Previous Track *****************
@@ -295,10 +297,10 @@ echo "<div id='imagepad1' class='imgpad'><img id='image1' class='img-fluid' src=
 
 
 
-echo "<button type='button' class='bg-black' onclick='getmeta(3)'><i class='bi bi-rewind' style='font-size: 4rem; color: white;'></i></button>\n";
-echo "<button type='button' class='bg-black' onclick='getmeta(13)'><i class='bi bi-skip-start' style='font-size: 4rem; color: white;padding: 0px;'></i></button>\n";
+//echo "<button type='button' class='bg-black' onclick='getmeta(3)'><i class='bi bi-rewind' style='font-size: 4rem; color: white;'></i></button>\n";
+//echo "<button type='button' class='bg-black' onclick='getmeta(13)'><i class='bi bi-skip-start' style='font-size: 4rem; color: white;padding: 0px;'></i></button>\n";
 //echo "<button type='button' class='bg-black' onclick='playpause()'><i id='playpause1' class='bi bi-pause' style='font-size: 5rem; color: white;'></i></button>\n";
-echo "<button type='button' class='bg-black' onclick='getmeta(4)'><i class='bi bi-fast-forward' style='font-size: 4rem; color: white;'></i></button>\n";
+//echo "<button type='button' class='bg-black' onclick='getmeta(4)'><i class='bi bi-fast-forward' style='font-size: 4rem; color: white;'></i></button>\n";
 
 echo "<div class='container pt-0 mt-0'>\n";
     echo "<div class='row row-cols-3'>\n";
@@ -331,9 +333,9 @@ echo "</div>\n";
 
 
 //echo "<br/>\n";
-echo "<button type='button' class='bg-black' onclick='getmeta(1)'><i class='bi bi-arrow-clockwise' style='font-size: 2.3rem; color: white;'></i></button>\n";
-echo "<button type='button' class='btn btn-black' data-bs-toggle='modal' data-bs-target='#modal1'><i class='bi bi-three-dots' style='font-size: 2.3rem; color: white;'></i></button>\n";
-echo "<button type='button' class='bg-black' onclick='getmeta(5)'><i class='bi bi-arrow-repeat' style='font-size: 2.3rem; color: white;'></i></button>\n";
+//echo "<button type='button' class='bg-black' onclick='getmeta(1)'><i class='bi bi-arrow-clockwise' style='font-size: 2.3rem; color: white;'></i></button>\n";
+//echo "<button type='button' class='btn btn-black' data-bs-toggle='modal' data-bs-target='#modal1'><i class='bi bi-three-dots' style='font-size: 2.3rem; color: white;'></i></button>\n";
+//echo "<button type='button' class='bg-black' onclick='getmeta(5)'><i class='bi bi-arrow-repeat' style='font-size: 2.3rem; color: white;'></i></button>\n";
 //echo "<button type='button' class='btn btn-black' data-bs-toggle='modal' data-bs-target='#modal2'><i class='bi bi-search' style='font-size: 2.3rem; color: white;'></i></button>\n";
 //echo "<button type='button' class='bg-black' onclick='volumedown()'><i class='bi bi-volume-down' style='font-size: 2.3rem; color: white;'></i></button>\n";
 //echo "<button type='button' class='bg-black' onclick='volumeup()'><i class='bi bi-volume-up' style='font-size: 2.3rem; color: white;'></i></button>\n";
