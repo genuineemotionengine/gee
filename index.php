@@ -269,7 +269,8 @@ echo "<div class='d-block d-sm-none'>\n";
 //***************** Refresh Meta *****************
 echo "<div id='imgone' onclick='getmeta(1)'></div>";
 
-echo "<div id='imgtwo'><button type='button' data-bs-toggle='modal' data-bs-target='#modal1'></button></div>";
+//***************** More *****************
+echo "<div id='imgtwo' data-bs-toggle='modal' data-bs-target='#modal1'></div>";
 
 echo "<div id='imgthree'></div>";
 
