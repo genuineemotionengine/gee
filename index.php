@@ -279,12 +279,14 @@ echo "<div id='imgfive' onclick='playpause()'></div>";
 
 echo "<div id='imgsix'></div>";
 
-echo "<div id='imgseven'></div>";
+//***************** Previous Track *****************
+echo "<div id='imgseven' onclick='getmeta(3)'></div>";
 
-//***************** Restart Track *****************
+//***************** Restart Current Track *****************
 echo "<div id='imgeight' onclick='getmeta(13)'></div>";
 
-echo "<div id='imgnine'></div>";
+//***************** Next Track *****************
+echo "<div id='imgnine' onclick='getmeta(4)'></div>";
 
 echo "<div id='imagepad1' class='imgpad'><img id='image1' class='img-fluid' src='black.jpg' /></div>\n";
 
