@@ -2,6 +2,7 @@
 //parse_str($_SERVER['QUERY_STRING']);
 $ipaddr = $_SERVER['SERVER_ADDR'];
 $hosty = gethostname();
+$hosty = strtoupper($hosty);
 
 echo "<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Strict//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd'>\n";
 echo "<html xmlns='http://www.w3.org/1999/xhtml'>\n";
@@ -295,7 +296,7 @@ echo "<div id='imgnine' onclick='getmeta(4)'></div>";
 
 echo "<div id='imagepad1' class='imgpad'><img id='image1' class='img-fluid' src='black.jpg' /></div>\n";
 
-echo "<div class='pt-3'><h6>".gethostname()."</h6></div>";
+echo "<div class='pt-3'><h6>".$hosty."</h6></div>";
 
 //echo "<button type='button' class='bg-black' onclick='getmeta(3)'><i class='bi bi-rewind' style='font-size: 4rem; color: white;'></i></button>\n";
 //echo "<button type='button' class='bg-black' onclick='getmeta(13)'><i class='bi bi-skip-start' style='font-size: 4rem; color: white;padding: 0px;'></i></button>\n";
