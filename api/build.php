@@ -4,7 +4,7 @@ require_once('/var/www/html/api/dbconn.php');
 
 //require_once('/var/www/html/api/mpd.class.php');
 
-require_once('/var/www/html/api/id3/getid3.php');   
+require_once('/var/www/html/api/getid3/getid3.php');   
 
 //$mpd = new mpd('localhost', 6600);
 
