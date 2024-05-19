@@ -25,7 +25,7 @@ $dirarray = scandir($dir);
 
 $elements = count($dirarray);
 
-echo htmlentities(print_r($dirarray, true), ENT_SUBSTITUTE);
+//echo htmlentities(print_r($dirarray, true), ENT_SUBSTITUTE);
 
 $a = 1;
 
