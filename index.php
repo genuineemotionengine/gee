@@ -341,10 +341,10 @@ echo "</div>\n";
 //echo "<button type='button' class='bg-black' onclick='volumedown()'><i class='bi bi-volume-down' style='font-size: 2.3rem; color: white;'></i></button>\n";
 //echo "<button type='button' class='bg-black' onclick='volumeup()'><i class='bi bi-volume-up' style='font-size: 2.3rem; color: white;'></i></button>\n";
 
-echo "<h2 id='title1'></h2>\n";
-echo "<h2 id='artist1'></h2>\n";
-echo "<h2 id='album1'></h2>\n";
-echo "<h6>Next: <span id='nexttitle1'></span> - <span id='nextartist1'></span></h6>\n";
+echo "<h1 id='title1'></h1>\n";
+echo "<h1 id='artist1'></h1>\n";
+echo "<h1 id='album1'></h1>\n";
+echo "<h5>Next: <span id='nexttitle1'></span> - <span id='nextartist1'></span></h5>\n";
 echo "</div>\n";
 echo "</div>\n\n";
 
