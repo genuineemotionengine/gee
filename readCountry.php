@@ -51,7 +51,7 @@ if(!empty($_POST["keyword"])) {
             }
             
             if ($term == 2){             
-                echo "<li><h4>".$country['album']." - ".$albumartist."</h4><button type='button' class='bg-black' onclick='searchalbum(".$country['idalbum'].")'><i class='bi bi-chevron-right' style='font-size: 3rem; color: white;'></i></button></li>\n";
+                echo "<li><h4>".$country['album']." - ".$albumartist."</h4><button data-bs-target='#modal2' class='mx-auto d-block' data-bs-toggle='modal' data-bs-dismiss='modal' onclick='searchalbum(".$country['idalbum'].")'><i class='bi bi-chevron-right' style='font-size: 3rem; color: white;'></i></button></li>\n";
             }
             
             if ($term == 3){             
