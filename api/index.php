@@ -486,6 +486,14 @@ echo $x."<br>";
 }
 //****************** time elapsed ********************
 
+
+
+
+
+
+
+
+
 if ($service == 16){
     
 $statusarray = $mpd->server_status();

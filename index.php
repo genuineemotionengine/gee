@@ -57,6 +57,25 @@ echo "})\n";
 echo "}\n";
 //***********************************
 
+//******* Search Album ***************
+echo "function searchalbum(album){\n";
+echo "getmeta(1);\n";
+echo "$.getJSON('http://". $ipaddr ."/api/?service=8' + album, function(myObj){\n";
+echo "let html = '<div>'\n";
+echo "for (let x in myObj) {\n";
+echo "html += '<div class=\x22border-bottom align-top\x22><br/>";
+echo "<h4>' + myObj[x].track + ' - ' + myObj[x].title + ' - ' + myObj[x].artist + '</h4>";
+echo "<button type=\x22button\x22 id=\x22nxttrack'+myObj[x].id+'\x22 class=\x22termgrey\x22 data-bs-dismiss=\x22modal\x22 onclick=\x22playnext('+myObj[x].id+')\x22><i class=\x22bi bi-chevron-right\x22 style=\x22font-size: 3rem;\x22></i></button>&nbsp;&nbsp;&nbsp;";
+echo "<button type=\x22button\x22 id=\x22nxttracks'+myObj[x].id+'\x22 class=\x22termgrey\x22 onclick=\x22insertnext('+myObj[x].id+')\x22><i class=\x22bi bi-chevron-double-right\x22 style=\x22font-size: 3rem;\x22></i></button>&nbsp;&nbsp;&nbsp;";
+echo "<button type=\x22button\x22 id=\x22nxttracks'+myObj[x].id+'\x22 class=\x22termgrey\x22 data-bs-dismiss=\x22modal\x22 onclick=\x22insertnext('+myObj[x].id+')\x22><i class=\x22bi bi-arrow-right\x22 style=\x22font-size: 3rem;\x22></i></button>";
+echo "</div>';\n";
+echo "}\n";
+echo "html += '</div>'\n";    
+echo "document.getElementById('fullalbum').innerHTML = html;\n";
+echo "})\n";
+echo "}\n";
+//***********************************
+
 //******* Insert Next Track *********
 echo "function insertnext(track){\n";
 echo "fetch('http://". $ipaddr ."/api/?service=12&id='+ track);\n";
