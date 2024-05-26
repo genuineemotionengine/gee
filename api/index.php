@@ -337,7 +337,7 @@ if ($service == 13){
     echo "<br><br><br>";    
     }
     
-    $pausestatus = $pstatusArray['state'];
+    $pausestatus = $statusArray['state'];
   
     $pos = $currentArray['pos'];
 
