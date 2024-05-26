@@ -54,7 +54,9 @@ if ($service == 4){
     $mphpd->player()->next();
     
     if ($pausestatus == "pause"){
+        
         $mphpd->player()->pause();
+        
     }
    
     include ('getmeta.php');
