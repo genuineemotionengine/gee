@@ -45,9 +45,17 @@ if ($service == 1){
 
 //***************** Next **********************
 
-if ($service == 4){ 
+if ($service == 4){
+    
+    $pstatusarray = $mphpd->status();
+    
+    $pausestatus = $pstatusarray['state'];
     
     $mphpd->player()->next();
+    
+    if ($pausestatus == "pause"){
+        $mphpd->player()->pause();
+    }
    
     include ('getmeta.php');
 
