@@ -491,7 +491,7 @@ echo "<table>\n";
     echo "</tr>\n";
     echo "<tr>\n";
         echo "<td class='border-bottom border-end' style='width:250px;'>\n";
-        echo "<button type='button' id='termtrack' class='termwhite mx-auto d-block' onclick='searchterm(1)'><i class='bi bi-vinyl' style='font-size: 7rem;'></i></button>\n";
+        echo "<button type='button' data-bs-target='#modal4' data-bs-toggle='modal' data-bs-dismiss='modal' type='button' id='termtrack' class='termwhite mx-auto d-block' onclick='searchterm(2)'><i class='bi bi-vinyl' style='font-size: 7rem;'></i></button>\n";
         echo "</td>\n";
         echo "<td class='border-bottom ps-3' style='width:250px;'>\n";
         echo "<button type='button' id='termtrack' class='termwhite mx-auto d-block' onclick='searchterm(1)'><i class='bi bi-mic' style='font-size: 7rem;'></i></button>\n";
@@ -567,6 +567,28 @@ echo "</div>\n";
 echo "</div>\n";
 
 //*************************
+
+//*********** Modal 4 id 7 Album Search ***************
+
+echo "<div class='modal fade' id='modal4' data-bs-backdrop='static' data-bs-keyboard='false' tabindex='-1' aria-labelledby='staticBackdropLabel' aria-hidden='true'>\n";
+echo "<div class='modal-dialog modal-dialog-scrollable'>\n";
+echo "<div class='modal-content bg-black'style='background: black;'>\n";
+
+    echo "<div class='modal-header'>\n";
+    echo "<input class='form-control input-sm bg-black text-white' type='text' id='search-box' name='".$token."'/>\n";
+    echo "<div class='col-1'><button type='button' class='btn btn-sm' data-bs-dismiss='modal' aria-label='Close'><i class='bi bi-x' style='font-size: 3rem; color: white;'></i></button></div>\n";
+    echo "</div>\n";
+
+    echo "<div class='modal-body'>\n";
+    echo "<div id='suggesstion-box'></div>\n";
+    echo "</div>\n";
+
+echo "</div>\n";
+echo "</div>\n";
+echo "</div>\n";
+
+//*************************
+
 
 
 echo "</body>\n";
