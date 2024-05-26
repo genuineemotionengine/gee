@@ -59,8 +59,8 @@ echo "}\n";
 
 //******* Search Album ***************
 echo "function searchalbum(album){\n";
-echo "getmeta(1);\n";
-echo "$.getJSON('http://". $ipaddr ."/api/?service=8' + album, function(myObj){\n";
+//echo "getmeta(1);\n";
+echo "$.getJSON('http://". $ipaddr ."/api/?service=17' + album, function(myObj){\n";
 echo "let html = '<div>'\n";
 echo "for (let x in myObj) {\n";
 echo "html += '<div class=\x22border-bottom align-top\x22><br/>";
