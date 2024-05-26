@@ -491,7 +491,7 @@ echo "<table>\n";
     echo "</tr>\n";
     echo "<tr>\n";
         echo "<td class='border-bottom border-end' style='width:250px;'>\n";
-        echo "<button data-bs-target='#modal3' data-bs-toggle='modal' data-bs-dismiss='modal' type='button' id='termtrack' class='termwhite mx-auto d-block' onclick='searchterm(2)'><i class='bi bi-music-note-beamed' style='font-size: 7rem;'></i></button>\n";
+        echo "<button data-bs-target='#modal3' data-bs-toggle='modal' data-bs-dismiss='modal' type='button' id='termtrack' class='termwhite mx-auto d-block' onclick='searchterm(2)'><i class='bi bi-vinyl' style='font-size: 7rem;'></i></button>\n";
         echo "</td>\n";
         echo "<td class='border-bottom ps-3' style='width:250px;'>\n";
         echo "<button type='button' id='termtrack' class='termwhite mx-auto d-block' onclick='searchterm(1)'><i class='bi bi-mic' style='font-size: 7rem;'></i></button>\n";
