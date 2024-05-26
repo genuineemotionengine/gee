@@ -336,30 +336,37 @@ if ($service == 13){
     echo '<pre>'.htmlentities(print_r($statusArray, true), ENT_SUBSTITUTE).'</pre>'; 
     echo "<br><br><br>";    
     }
-
+    
+    $pausestatus = $pstatusArray['state'];
   
     $pos = $currentArray['pos'];
 
-            
-    $mphpd->player()->play($pos);        
+    $mphpd->player()->play($pos);
     
-    
-    $currentArray = $mphpd->player()->current_song();
-
-    if ($verbose){
-    echo "Current Song";
-    echo '<pre>'.htmlentities(print_r($currentArray, true), ENT_SUBSTITUTE).'</pre>'; 
-    echo "<br><br><br>";    
+    if ($pausestatus == "pause"){
+        
+        $mphpd->player()->pause();
+        
     }
+ 
     
-
-    $statusArray = $mphpd->status();
-
-    if ($verbose){
-    echo "Status";
-    echo '<pre>'.htmlentities(print_r($statusArray, true), ENT_SUBSTITUTE).'</pre>'; 
-    echo "<br><br><br>";    
-    }
+    
+//    $currentArray = $mphpd->player()->current_song();
+//
+//    if ($verbose){
+//    echo "Current Song";
+//    echo '<pre>'.htmlentities(print_r($currentArray, true), ENT_SUBSTITUTE).'</pre>'; 
+//    echo "<br><br><br>";    
+//    }
+//    
+//
+//    $statusArray = $mphpd->status();
+//
+//    if ($verbose){
+//    echo "Status";
+//    echo '<pre>'.htmlentities(print_r($statusArray, true), ENT_SUBSTITUTE).'</pre>'; 
+//    echo "<br><br><br>";    
+//    }
 
     
     include ('getmeta.php');
