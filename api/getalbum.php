@@ -26,7 +26,7 @@ if ($result->num_rows > 0) {
 } 
 
 $count = 0;
-$sql = "SELECT * FROM app WHERE idalbum = '".$idalbum."'";
+$sql = "SELECT * FROM app WHERE idalbum = '".$idalbum."' order by track ASC";
 //echo "sql: ".$sql."<br>";
 $result = $conn->query($sql);
 if ($result->num_rows > 0) {
