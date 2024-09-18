@@ -35,8 +35,8 @@ $elements = count($albumarray);
 
 echo $elements."\n";
 
-//for ($x = 0; $x < $elements; $x++) {
-//
-//echo $albumarray[$x]."\n";
-//
-//}
+for ($x = 0; $x < $elements; $x++) {
+
+echo $albumarray[$x]."\n";
+
+}
