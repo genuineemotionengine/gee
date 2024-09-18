@@ -26,7 +26,9 @@ if ($result->num_rows > 0) {
         
     }
 } 
-$albumarray = array_unique($albumarray);
+
+
+//$albumarray = array_unique($albumarray);
 
 $elements = count($albumarray);
 
