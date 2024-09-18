@@ -11,7 +11,7 @@ if ($result->num_rows > 0) {
        
         
         
-            echo $row['album']." - ".$row['albumartist'];
+            echo $row['album']." - ".$row['albumartist']."\n";
         
         
     }
