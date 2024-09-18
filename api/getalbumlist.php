@@ -9,9 +9,10 @@ $result = $conn->query($sql);
 if ($result->num_rows > 0) {
     while($row = $result->fetch_assoc()) {
        
+            $albumartist = $row['albumartist'];
+            $album = $row['album'];
         
-        
-            echo $row['albumartist']." - ".$row['album']."\n";
+            echo $albumartist." - ".$album."\n";
         
         
     }
