@@ -2,6 +2,7 @@
 
 require_once('dbconn.php');
 
+$y = 0;
 
 $sql = "SELECT * FROM app order by albumartist ASC";
 //echo "sql: ".$sql."<br>";
@@ -11,7 +12,7 @@ if ($result->num_rows > 0) {
         
        
        
-            $y = 0;
+            
         
             $albumartist = $row['albumartist'];
             $album = $row['album'];
@@ -28,7 +29,7 @@ if ($result->num_rows > 0) {
 } 
 
 
-//$albumarray = array_unique($albumarray);
+$albumarray = array_unique($albumarray);
 
 $elements = count($albumarray);
 
