@@ -8,8 +8,11 @@ $sql = "SELECT * FROM app order by albumartist ASC";
 $result = $conn->query($sql);
 if ($result->num_rows > 0) {
     while($row = $result->fetch_assoc()) {
+        
+            $albumtest = $row['album'];
+            $albumtest =  str_replace("&#39;","'",$albumtest);        
        
-            if ($album != $row['album']){
+            if ($album != $albumtest){
         
             $albumartist = $row['albumartist'];
             $album = $row['album'];
