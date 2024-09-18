@@ -11,6 +11,9 @@ if ($result->num_rows > 0) {
        
             $albumartist = $row['albumartist'];
             $album = $row['album'];
+            
+            $album =  str_replace("&#39;","'",$album);
+            $albumartist =  str_replace("&#39;","'",$albumartist);
         
             echo $albumartist." - ".$album."\n";
         
