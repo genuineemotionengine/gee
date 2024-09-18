@@ -9,10 +9,9 @@ $result = $conn->query($sql);
 if ($result->num_rows > 0) {
     while($row = $result->fetch_assoc()) {
         
-            $albumtest = $row['album'];
-            $albumtest =  str_replace("&#39;","'",$albumtest);        
        
-            if ($album != $albumtest){
+       
+            $y = 0;
         
             $albumartist = $row['albumartist'];
             $album = $row['album'];
@@ -20,12 +19,19 @@ if ($result->num_rows > 0) {
             $album =  str_replace("&#39;","'",$album);
             $albumartist =  str_replace("&#39;","'",$albumartist);
             
+            $albumarray[$y] = $albumartist." - ".$album;
+            $y++;
             
-        
-            echo $albumartist." - ".$album."\n";
-            }
+            
         
     }
 } 
+$albumarray = array_unique($albumarray);
 
+$elements = count($albumarray);
 
+for ($x = 0; $x < $elements; $x++) {
+
+echo $albumarray[$x]."\n";
+
+}
