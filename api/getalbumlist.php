@@ -3,7 +3,7 @@
 require_once('dbconn.php');
 
 
-$sql = "SELECT * FROM app order by album DESC";
+$sql = "SELECT * FROM app order by albumartist DESC";
 //echo "sql: ".$sql."<br>";
 $result = $conn->query($sql);
 if ($result->num_rows > 0) {
@@ -11,7 +11,7 @@ if ($result->num_rows > 0) {
        
         
         
-            echo $row['album']." - ".$row['albumartist']."\n";
+            echo $row['albumartist']." - ".$row['album']."\n";
         
         
     }
