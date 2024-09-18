@@ -33,7 +33,7 @@ if ($result->num_rows > 0) {
 
 $elements = count($albumarray);
 
-echo $elements;
+echo $elements."\n";
 
 //for ($x = 0; $x < $elements; $x++) {
 //
