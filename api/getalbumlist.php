@@ -3,7 +3,7 @@
 require_once('dbconn.php');
 
 
-$sql = "SELECT * FROM app order by albumartist DESC";
+$sql = "SELECT * FROM app order by albumartist ASC";
 //echo "sql: ".$sql."<br>";
 $result = $conn->query($sql);
 if ($result->num_rows > 0) {
