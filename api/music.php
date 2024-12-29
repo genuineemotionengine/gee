@@ -7,11 +7,13 @@ $dir = "/mnt/usb/";
 
 $dirarray = scandir($dir);
 
-if ($dirarray[2] >= 200000){
-    $count = 300000;
-} else {
-    $count = 200000; 
-}
+//if ($dirarray[2] >= 200000){
+//    $count = 100000;
+//} else {
+//    $count = 200000; 
+//}
+
+$count = 300000;
 
 echo $count;
 
