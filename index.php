@@ -223,7 +223,7 @@ echo "});\n";
 echo "}\n";
 //***********************************
 
-//**** Get Meta ***********
+//**** Get Meta every 5 secs***********
 
 echo "setInterval( function(){\n";
 
