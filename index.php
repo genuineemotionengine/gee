@@ -223,7 +223,14 @@ echo "});\n";
 echo "}\n";
 //***********************************
 
+//**** Get Meta ***********
+
+echo "setInterval( function(){\n";
+
 echo "getmeta(1);\n";
+
+echo "}, 5000);\n";
+//**************************
 
 //**** Progress Bar Calulations *****
 echo "setInterval( function(){\n";
