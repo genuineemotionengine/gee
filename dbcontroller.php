@@ -2,7 +2,7 @@
 class DBController {
 	private $host = "localhost:3306";
 	private $user = "gee";
-	private $password = "Pergamon2023!";
+	private $password = "pergamon";
 	private $database = "geeapp";
 	private $conns;
 	

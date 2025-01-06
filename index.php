@@ -35,7 +35,7 @@ echo "var plus = '+1';\n";
 echo "var minus = '-1';\n";
 echo "var volumemove;\n";
 echo "var vol = 1;\n";
-//echo "var gmt = 5000;";
+echo "var gmt = 5000;";
 
 //***********************************
 
@@ -226,11 +226,12 @@ echo "}\n";
 
 //**** Get Meta Timer***********
 
-//echo "setInterval( function(){\n";
+echo "setInterval( function(){\n";
 
 echo "getmeta(1);\n";
 
-//echo "}, gmt);\n";
+echo "}, gmt);\n";
+
 //**************************
 
 //**** Progress Bar Calulations *****
