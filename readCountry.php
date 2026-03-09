@@ -2,7 +2,9 @@
 
 parse_str($_SERVER['QUERY_STRING'], $qsarray);
 
-$term = $qsarray['term'];
+//$term = $qsarray['term'];
+
+$term = 1;
 
 //$ipadd = $_SERVER['SERVER_ADDR'];
 
