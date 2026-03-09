@@ -1,8 +1,8 @@
 <?php
 $servername = "localhost:3306";
-$username = "gee";
+$username = "geeuser";
 $password = "pergamon";  
-$dbname = "geeapp";
+$dbname = "gee";
 
 // Create connection
 $conn = new mysqli($servername, $username, $password, $dbname);
