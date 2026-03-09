@@ -18,7 +18,7 @@ require_once('/var/www/html/api/getid3/getid3.php');
 
 
     
-$dir = "/mnt/usb/";
+$dir = "/mnt/music/";
 
 // Sort in ascending order - this is default
 $dirarray = scandir($dir);
@@ -35,7 +35,7 @@ for ($x = 2; $x < $elements; $x++) {
 
 
 
-$subdir = "/mnt/usb/".$dirarray[$x]."/";
+$subdir = "/mnt/music/".$dirarray[$x]."/";
 
 $subdirarray = scandir($subdir);
 
@@ -51,7 +51,7 @@ $name = $dirarray[$x]."/".$subdirarray[$y];
 
 //echo $name."\n";
 
-$flacfile = "/mnt/usb/".$name;
+$flacfile = "/mnt/music/".$name;
 
 $getID3 = new getID3;
 
@@ -135,7 +135,7 @@ $a++;
 //echo '<pre>'.htmlentities(print_r($dirarray, true), ENT_SUBSTITUTE).'</pre>';
    
     
-//$subdir = "/mnt/usb/".$dirarray[4]."/";
+//$subdir = "/mnt/music/".$dirarray[4]."/";
 //    
 //$subdirarray = scandir($subdir);  
 //

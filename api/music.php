@@ -3,7 +3,7 @@
 
 $a = 1;
 
-$dir = "/mnt/usb/";
+$dir = "/mnt/music/";
 
 $dirarray = scandir($dir);
 
@@ -23,7 +23,7 @@ $elements = count($dirarray);
 
 for ($x = 2; $x < $elements; $x++) {
     
-$subdir = "/mnt/usb/".$dirarray[$x]."/";
+$subdir = "/mnt/music/".$dirarray[$x]."/";
 
 $subdirarray = scandir($subdir);
 
@@ -33,17 +33,17 @@ $subelements = count($subdirarray);
 
 for ($y = 2; $y < $subelements; $y++) {
     
-    rename("/mnt/usb/".$dirarray[$x]."/".$subdirarray[$y],"/mnt/usb/".$dirarray[$x]."/".$count.".flac");
+    rename("/mnt/music/".$dirarray[$x]."/".$subdirarray[$y],"/mnt/music/".$dirarray[$x]."/".$count.".flac");
     
-    //echo "/mnt/usb/".$dirarray[$x]."/".$subdirarray[$y]." renamed to /mnt/usb/".$dirarray[$x]."/".$count.".flac\n";
+    //echo "/mnt/music/".$dirarray[$x]."/".$subdirarray[$y]." renamed to /mnt/music/".$dirarray[$x]."/".$count.".flac\n";
     
     $count++;
       
 }    
     
-rename("/mnt/usb/".$dirarray[$x],"/mnt/usb/".$count);
+rename("/mnt/music/".$dirarray[$x],"/mnt/music/".$count);
 
-echo $a." - /mnt/usb/".$dirarray[$x]." renamed to /mnt/usb/".$count."\n";
+echo $a." - /mnt/music/".$dirarray[$x]." renamed to /mnt/music/".$count."\n";
 
 //echo $x." done\n";
 $count++;
