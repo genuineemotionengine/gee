@@ -2,8 +2,8 @@
 class DBController {
 	private $host = "localhost:3306";
 	private $user = "gee";
-	private $password = "pergamon";
-	private $database = "geeapp";
+	private $password = "tangram";
+	private $database = "gee";
 	private $conns;
 	
 	function __construct() {
