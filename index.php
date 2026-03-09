@@ -42,7 +42,7 @@ echo "var gmt = 5000;";
 //******* Whole Album ***************
 echo "function wholealbum(){\n";
 echo "getmeta(1);\n";
-echo "$.getJSON('http://". $ipaddr ."/api/?service=8', function(myObj){\n";
+echo "$.getJSON('http://emily.local/api/?service=8', function(myObj){\n";
 echo "let html = '<div>'\n";
 echo "for (let x in myObj) {\n";
 echo "html += '<div class=\x22border-bottom align-top\x22><br/>";
@@ -61,7 +61,7 @@ echo "}\n";
 //******* Search Album ***************
 echo "function searchalbum(album){\n";
 //echo "getmeta(1);\n";
-echo "$.getJSON('http://". $ipaddr ."/api/?service=17' + album, function(myObj){\n";
+echo "$.getJSON('http://emily.local/api/?service=17' + album, function(myObj){\n";
 echo "let html = '<div>'\n";
 echo "for (let x in myObj) {\n";
 echo "html += '<div class=\x22border-bottom align-top\x22><br/>";
@@ -79,7 +79,7 @@ echo "}\n";
 
 //******* Insert Next Track *********
 echo "function insertnext(track){\n";
-echo "fetch('http://". $ipaddr ."/api/?service=12&id='+ track);\n";
+echo "fetch('http://emily.local/api/?service=12&id='+ track);\n";
 echo "$('#nxttracks'+track).removeClass('termgrey').addClass('termwhite');\n";
 //echo "$('#nxttracksearch'+track).removeClass('termgrey').addClass('termwhite');\n";
 echo "getmeta(1);\n";
@@ -88,7 +88,7 @@ echo "}\n";
 
 //******* Play Next Track *********
 echo "function playnext(track){\n";
-echo "fetch('http://". $ipaddr ."/api/?service=12&plnext=1&id='+ track);\n";
+echo "fetch('http://emily.local/api/?service=12&plnext=1&id='+ track);\n";
 //echo "location.reload();\n";
 
 //echo "$('#nxttrack'+track).removeClass('termgrey').addClass('termwhite');\n";
@@ -111,7 +111,7 @@ echo "volumemove = plus;\n";
 echo "volume = volume + vol;\n";
 echo "console.log(volume);\n";
 echo "}\n";
-echo "fetch('http://". $ipaddr ."/api/?service=15&mod='+volumemove);\n";
+echo "fetch('http://emily.local/api/?service=15&mod='+volumemove);\n";
 echo "$('#voldynamic1').css('width', volume + '%');\n";
 
 echo "}\n";
@@ -122,8 +122,8 @@ echo "}\n";
 //******* Volume Up *********
 echo "function volumeup(){\n";
 echo "volume = volume + 5;\n";
-echo "fetch('http://". $ipaddr ."/api/?service=15&mod='+volume);\n";
-//echo "$.getJSON('http://". $ipaddr ."/api/?service=15&mod=+5', function(result){\n";
+echo "fetch('http://emily.local/api/?service=15&mod='+volume);\n";
+//echo "$.getJSON('http://emily.local/api/?service=15&mod=+5', function(result){\n";
 //echo "volume = parseInt(result.volume);\n";
 
 echo "$('#voldynamic1').css('width', volume + '%');\n";
@@ -134,8 +134,8 @@ echo "}\n";
 //******* Volume Down *********
 echo "function volumedown(){\n";
 echo "volume = volume - 5;\n";
-echo "fetch('http://". $ipaddr ."/api/?service=15&mod='+volume);\n";
-//echo "$.getJSON('http://". $ipaddr ."/api/?service=15&mod=-5', function(result){\n";
+echo "fetch('http://emily.local/api/?service=15&mod='+volume);\n";
+//echo "$.getJSON('http://emily.local/api/?service=15&mod=-5', function(result){\n";
 //echo "volume = parseInt(result.volume);\n";
 
 echo "$('#voldynamic1').css('width', volume + '%');\n";
@@ -145,7 +145,7 @@ echo "}\n";
 
 //******* Play/Pause *********
 echo "function playpause(){\n";
-echo "fetch('http://". $ipaddr ."/api/?service=2');\n";
+echo "fetch('http://emily.local/api/?service=2');\n";
 echo "if (state === 1){\n";
 echo "state = 2;\n";
 //echo "console.log(state);\n";
@@ -163,7 +163,7 @@ echo "}\n";
 
 //******* Search Term *********
 echo "function searchterm(term){\n";
-//echo "fetch('http://". $ipaddr ."/api/?service='+ term);\n";
+//echo "fetch('http://emily.local/api/?service='+ term);\n";
 echo "sterm = term;\n";
 
 
@@ -199,7 +199,7 @@ echo "if (control === 4 || control === 3){\n";
 include ('zeroprogids.php');
 echo "}\n";
 
-echo "$.getJSON('http://". $ipaddr ."/api/?service=' + control, function(result){\n";
+echo "$.getJSON('http://emily.local/api/?service=' + control, function(result){\n";
 echo "duration = parseInt(result.duration);\n";
 echo "current = parseInt(result.elapsed);\n";
 echo "volume = parseInt(result.volume);\n";
