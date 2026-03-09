@@ -46,7 +46,7 @@ if (stripos("$albumartist, Various Artists - ", "Various Artists - ") === 0){
     $albumartist = "Various Artists";
 }
 
-$flacfile = "/mnt/usb/".$flacfile;
+$flacfile = "/mnt/music/".$flacfile;
 
 $getID3 = new getID3;
 
