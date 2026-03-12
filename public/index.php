@@ -323,6 +323,115 @@ function searchTracks(value) {
 
     }, 250);
 }
+
+let albumSearchTimer;
+
+function searchAlbums(value) {
+
+    clearTimeout(albumSearchTimer);
+
+    albumSearchTimer = setTimeout(function () {
+
+        if (!value.trim()) {
+            document.getElementById('album-suggestion-box').innerHTML = '';
+            return;
+        }
+
+        $.getJSON('/api/search-albums.php?q=' + encodeURIComponent(value), function (myObj) {
+
+            let html = '<div>';
+
+            for (let x in myObj) {
+                const album = escapeHtml(myObj[x].album || '');
+                const albumartist = escapeHtml(myObj[x].albumartist || '');
+                const trackCount = myObj[x].track_count || 0;
+
+                html += '<div class="border-bottom align-top"><br/>';
+                html += '<h4>' + album + '</h4>';
+                html += '<div>' + albumartist + ' (' + trackCount + ' tracks)</div><br/>';
+
+                html += '<button type="button" class="termgrey" data-bs-dismiss="modal" onclick="playAlbumNextByName(' + jsString(albumartist) + ',' + jsString(album) + ')">';
+                html += '<i class="bi bi-chevron-right" style="font-size: 3rem;"></i></button>&nbsp;&nbsp;&nbsp;';
+
+                html += '<button type="button" class="termgrey" onclick="insertAlbumNextByName(' + jsString(albumartist) + ',' + jsString(album) + ')">';
+                html += '<i class="bi bi-chevron-double-right" style="font-size: 3rem;"></i></button>&nbsp;&nbsp;&nbsp;';
+
+                html += '<button type="button" class="termgrey" data-bs-dismiss="modal" onclick="playAlbumNowByName(' + jsString(albumartist) + ',' + jsString(album) + ')">';
+                html += '<i class="bi bi-arrow-right" style="font-size: 3rem;"></i></button>&nbsp;&nbsp;&nbsp;';
+
+                html += '<button type="button" class="termgrey" onclick="openAlbumTracksByName(' + jsString(albumartist) + ',' + jsString(album) + ')">';
+                html += '<i class="bi bi-arrow-down" style="font-size: 3rem;"></i></button>';
+
+                html += '</div>';
+            }
+
+            html += '</div>';
+
+            document.getElementById('album-suggestion-box').innerHTML = html;
+        });
+
+    }, 250);
+}
+
+function escapeHtml(value) {
+    return String(value)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#39;');
+}
+
+function jsString(value) {
+    return JSON.stringify(String(value ?? ''));
+}
+
+
+function openAlbumTracksByName(albumartist, album) {
+    $.getJSON(
+        '/api/get-album-tracks.php?albumartist=' + encodeURIComponent(albumartist) + '&album=' + encodeURIComponent(album),
+        function (myObj) {
+
+            let html = '<div>';
+
+            for (let x in myObj) {
+                const track = escapeHtml(myObj[x].track || '');
+                const title = escapeHtml(myObj[x].title || '');
+                const artist = escapeHtml(myObj[x].artist || '');
+
+                html += '<div class="border-bottom align-top"><br/>';
+                html += '<h4>' + track + ' - ' + title + ' - ' + artist + '</h4>';
+
+                html += '<button type="button" class="termgrey" data-bs-dismiss="modal" onclick="playnext(' + myObj[x].id + ')">';
+                html += '<i class="bi bi-chevron-right" style="font-size: 3rem;"></i></button>&nbsp;&nbsp;&nbsp;';
+
+                html += '<button type="button" class="termgrey" onclick="insertnext(' + myObj[x].id + ')">';
+                html += '<i class="bi bi-chevron-double-right" style="font-size: 3rem;"></i></button>&nbsp;&nbsp;&nbsp;';
+
+                html += '<button type="button" class="termgrey" data-bs-dismiss="modal" onclick="playnow(' + myObj[x].id + ')">';
+                html += '<i class="bi bi-arrow-right" style="font-size: 3rem;"></i></button>';
+
+                html += '</div>';
+            }
+
+            html += '</div>';
+
+            document.getElementById('fullalbum').innerHTML = html;
+
+            const albumSearchModalEl = document.getElementById('modalAlbumSearch');
+            const albumModalEl = document.getElementById('modal2'); // change if your album-track modal uses a different ID
+
+            const albumSearchModal = bootstrap.Modal.getInstance(albumSearchModalEl);
+            if (albumSearchModal) {
+                albumSearchModal.hide();
+            }
+
+            const albumModal = new bootstrap.Modal(albumModalEl);
+            albumModal.show();
+        }
+    );
+}
+
 </script>
 <?php
 
@@ -560,7 +669,8 @@ echo "<table>\n";
     echo "</tr>\n";
     echo "<tr>\n";
         echo "<td class='border-bottom border-end' style='width:250px;'>\n";
-        echo "<button data-bs-target='#modal3' data-bs-toggle='modal' data-bs-dismiss='modal' type='button' id='termtrack' class='termwhite mx-auto d-block' onclick='searchterm(2)'><i class='bi bi-vinyl' style='font-size: 7rem;'></i></button>\n";
+        //echo "<button data-bs-target='#modal3' data-bs-toggle='modal' data-bs-dismiss='modal' type='button' id='termtrack' class='termwhite mx-auto d-block' onclick='searchterm(2)'><i class='bi bi-vinyl' style='font-size: 7rem;'></i></button>\n";
+        echo "<button type='button' class='termgrey' data-bs-toggle='modal' data-bs-target='#modalAlbumSearch'><i class='bi bi-vinyl' style='font-size: 7rem;'></i><</button>\n";
         echo "</td>\n";
         echo "<td class='border-bottom ps-3' style='width:250px;'>\n";
         echo "<button type='button' id='termtrack' class='termwhite mx-auto d-block' onclick='searchterm(1)'><i class='bi bi-mic' style='font-size: 7rem;'></i></button>\n";
@@ -640,22 +750,39 @@ echo "</div>\n";
 
 //*********** Modal 4 id 7 Album Search ***************
 
-echo "<div class='modal fade' id='modal4' data-bs-backdrop='static' data-bs-keyboard='false' tabindex='-1' aria-labelledby='staticBackdropLabel' aria-hidden='true'>\n";
+echo "<div class='modal fade' id='modalAlbumSearch' data-bs-backdrop='static' data-bs-keyboard='false' tabindex='-1' aria-hidden='true'>\n";
 echo "<div class='modal-dialog modal-dialog-scrollable'>\n";
-echo "<div class='modal-content bg-black'style='background: black;'>\n";
+echo "<div class='modal-content bg-black' style='background:black;'>\n";
 
-    echo "<div class='modal-header'>\n";
-    echo "<input class='form-control input-sm bg-black text-white' type='text' id='search-box' name='".$token."'/>\n";
-    echo "<div class='col-1'><button type='button' class='btn btn-sm' data-bs-dismiss='modal' aria-label='Close'><i class='bi bi-x' style='font-size: 3rem; color: white;'></i></button></div>\n";
-    echo "</div>\n";
+echo "<div class='modal-header'>\n";
+echo "<input class='form-control input-sm bg-black text-white' type='text' id='album-search-box' onkeyup='searchAlbums(this.value)' />\n";
+echo "<div class='col-1'><button type='button' class='btn btn-sm' data-bs-dismiss='modal' aria-label='Close'><i class='bi bi-x' style='font-size: 3rem; color: white;'></i></button></div>\n";
+echo "</div>\n";
 
-    echo "<div class='modal-body'>\n";
-    echo "<div id='suggesstion-box'></div>\n";
-    echo "</div>\n";
+echo "<div class='modal-body'>\n";
+echo "<div id='album-suggestion-box'></div>\n";
+echo "</div>\n";
 
 echo "</div>\n";
 echo "</div>\n";
 echo "</div>\n";
+
+//echo "<div class='modal fade' id='modal4' data-bs-backdrop='static' data-bs-keyboard='false' tabindex='-1' aria-labelledby='staticBackdropLabel' aria-hidden='true'>\n";
+//echo "<div class='modal-dialog modal-dialog-scrollable'>\n";
+//echo "<div class='modal-content bg-black'style='background: black;'>\n";
+//
+//    echo "<div class='modal-header'>\n";
+//    echo "<input class='form-control input-sm bg-black text-white' type='text' id='search-box' name='".$token."'/>\n";
+//    echo "<div class='col-1'><button type='button' class='btn btn-sm' data-bs-dismiss='modal' aria-label='Close'><i class='bi bi-x' style='font-size: 3rem; color: white;'></i></button></div>\n";
+//    echo "</div>\n";
+//
+//    echo "<div class='modal-body'>\n";
+//    echo "<div id='suggesstion-box'></div>\n";
+//    echo "</div>\n";
+//
+//echo "</div>\n";
+//echo "</div>\n";
+//echo "</div>\n";
 
 //*************************
 
