@@ -10,15 +10,15 @@ echo "<head>\n";
 echo "<meta name='apple-mobile-web-app-capable' content='yes'/>\n";
 echo "<meta http-equiv='Content-Type' content='text/html; charset=UTF-8'/>\n";
 echo "<meta name = 'viewport' content = 'width=device-width, initial-scale = 1, user-scalable = no'/>\n";
-echo "<link rel='icon' href='/favicon.ico'/>\n";
+echo "<link rel='icon' href='/img/favicon.ico'/>\n";
 echo "<meta name='theme-color' content='#000000'/>\n";
-echo "<link rel='apple-touch-icon' href='/logo192.png'/>\n";
+echo "<link rel='apple-touch-icon' href='/img/logo192.png'/>\n";
 echo "<title>".$hosty."</title>\n";
 echo "<link href='https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css' rel='stylesheet' integrity='sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT' crossorigin='anonymous'/>\n";
 echo "<link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css'/>\n";
 echo "<script src='https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js' integrity='sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3' crossorigin='anonymous'></script>\n";
 echo "<script src='https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js'></script>\n";
-echo "<link rel='stylesheet' href='gee-blue.css'/>\n";
+echo "<link rel='stylesheet' href='/css/gee-blue.css'/>\n";
 echo "<script>\n";
 
 //******* Varibale Decaration *******
@@ -42,7 +42,7 @@ echo "var gmt = 5000;";
 //******* Whole Album ***************
 echo "function wholealbum(){\n";
 echo "getmeta(1);\n";
-echo "$.getJSON('http://emily.local/api/?service=8', function(myObj){\n";
+echo "$.getJSON('/api/?service=8', function(myObj){\n";
 echo "let html = '<div>'\n";
 echo "for (let x in myObj) {\n";
 echo "html += '<div class=\x22border-bottom align-top\x22><br/>";
@@ -61,7 +61,7 @@ echo "}\n";
 //******* Search Album ***************
 echo "function searchalbum(album){\n";
 //echo "getmeta(1);\n";
-echo "$.getJSON('http://emily.local/api/?service=17' + album, function(myObj){\n";
+echo "$.getJSON('/api/?service=17' + album, function(myObj){\n";
 echo "let html = '<div>'\n";
 echo "for (let x in myObj) {\n";
 echo "html += '<div class=\x22border-bottom align-top\x22><br/>";
@@ -79,7 +79,7 @@ echo "}\n";
 
 //******* Insert Next Track *********
 echo "function insertnext(track){\n";
-echo "fetch('http://emily.local/api/?service=12&id='+ track);\n";
+echo "fetch('/api/?service=12&id='+ track);\n";
 echo "$('#nxttracks'+track).removeClass('termgrey').addClass('termwhite');\n";
 //echo "$('#nxttracksearch'+track).removeClass('termgrey').addClass('termwhite');\n";
 echo "getmeta(1);\n";
@@ -88,7 +88,7 @@ echo "}\n";
 
 //******* Play Next Track *********
 echo "function playnext(track){\n";
-echo "fetch('http://emily.local/api/?service=12&plnext=1&id='+ track);\n";
+echo "fetch('/api/?service=12&plnext=1&id='+ track);\n";
 //echo "location.reload();\n";
 
 //echo "$('#nxttrack'+track).removeClass('termgrey').addClass('termwhite');\n";
@@ -111,7 +111,7 @@ echo "volumemove = plus;\n";
 echo "volume = volume + vol;\n";
 echo "console.log(volume);\n";
 echo "}\n";
-echo "fetch('http://emily.local/api/?service=15&mod='+volumemove);\n";
+echo "fetch('/api/?service=15&mod='+volumemove);\n";
 echo "$('#voldynamic1').css('width', volume + '%');\n";
 
 echo "}\n";
@@ -122,8 +122,8 @@ echo "}\n";
 //******* Volume Up *********
 echo "function volumeup(){\n";
 echo "volume = volume + 5;\n";
-echo "fetch('http://emily.local/api/?service=15&mod='+volume);\n";
-//echo "$.getJSON('http://emily.local/api/?service=15&mod=+5', function(result){\n";
+echo "fetch('/api/?service=15&mod='+volume);\n";
+//echo "$.getJSON('/api/?service=15&mod=+5', function(result){\n";
 //echo "volume = parseInt(result.volume);\n";
 
 echo "$('#voldynamic1').css('width', volume + '%');\n";
@@ -134,8 +134,8 @@ echo "}\n";
 //******* Volume Down *********
 echo "function volumedown(){\n";
 echo "volume = volume - 5;\n";
-echo "fetch('http://emily.local/api/?service=15&mod='+volume);\n";
-//echo "$.getJSON('http://emily.local/api/?service=15&mod=-5', function(result){\n";
+echo "fetch('/api/?service=15&mod='+volume);\n";
+//echo "$.getJSON('/api/?service=15&mod=-5', function(result){\n";
 //echo "volume = parseInt(result.volume);\n";
 
 echo "$('#voldynamic1').css('width', volume + '%');\n";
@@ -145,16 +145,16 @@ echo "}\n";
 
 //******* Play/Pause *********
 echo "function playpause(){\n";
-echo "fetch('http://emily.local/api/?service=2');\n";
+echo "fetch('/api/?service=2');\n";
 echo "if (state === 1){\n";
 echo "state = 2;\n";
 //echo "console.log(state);\n";
-include ('pauseids.php');
+require_once __DIR__ . '/pauseids.php';
 echo "}else{\n";
 //echo "if (state === 2){\n";
 echo "state = 1;\n";
 //echo "console.log(state);\n";
-include ('playids.php');
+require_once __DIR__ . '/playids.php';
 echo "}\n";
 
 
@@ -163,7 +163,7 @@ echo "}\n";
 
 //******* Search Term *********
 echo "function searchterm(term){\n";
-//echo "fetch('http://emily.local/api/?service='+ term);\n";
+//echo "fetch('/api/?service='+ term);\n";
 echo "sterm = term;\n";
 
 
@@ -196,25 +196,25 @@ echo "function pad ( val ) { return val > 9 ? val : '0' + val; }\n";
 echo "function getmeta(control){\n";
 
 echo "if (control === 4 || control === 3){\n";
-include ('zeroprogids.php');
+require_once __DIR__ . '/zeroprogids.php';
 echo "}\n";
 
-echo "$.getJSON('http://emily.local/api/?service=' + control, function(result){\n";
+echo "$.getJSON('/api/?service=' + control, function(result){\n";
 echo "duration = parseInt(result.duration);\n";
 echo "current = parseInt(result.elapsed);\n";
 echo "volume = parseInt(result.volume);\n";
 //echo "state = result.state;\n";
 echo "if (result.state === play){\n";
 echo "state = 1;\n";
-include ('playids.php');
+require_once __DIR__ . '/playids.php';
 echo "}\n";
 echo "if (result.state === pause){\n";
 echo "state = 2;\n";
-include ('pauseids.php');
+require_once __DIR__ . '/pauseids.php';
 echo "}\n";
 
 
-include ('metaids.php');
+require_once __DIR__ . '/metaids.php';
 
 echo "if (control === 5){\n";
 echo "location.reload();\n";
@@ -243,7 +243,7 @@ echo "}\n";
 
 echo "currentpos = (current/duration)*100;\n";
 echo "currentprogress = currentpos.toFixed(0);\n";
-include ('progressids.php');
+require_once __DIR__ . '/progressids.php';
 
 echo "if (current >= duration){\n";
 echo "getmeta(1);\n";
@@ -258,30 +258,71 @@ echo "</script>\n";
 ?>
 
 <script>
-$(document).ready(function(){
-	$("#search-box").keyup(function(){
-		$.ajax({
-		type: "POST",
-		url: "readCountry.php",
-		data:'keyword='+$(this).val(),
-		beforeSend: function(){
-			$("#search-box").css("background","#FFF url(LoaderIcon.gif) no-repeat 165px");
-		},
-		success: function(data){
-			$("#suggesstion-box").show();
-			$("#suggesstion-box").html(data);
-			$("#search-box").css("background","#FFF");
-		}
-		});
-	});
-});
+//$(document).ready(function(){
+//	$("#search-box").keyup(function(){
+//		$.ajax({
+//		type: "POST",
+//		url: "readCountry.php",
+//		data:'keyword='+$(this).val(),
+//		beforeSend: function(){
+//			$("#search-box").css("background","#FFF url(LoaderIcon.gif) no-repeat 165px");
+//		},
+//		success: function(data){
+//			$("#suggesstion-box").show();
+//			$("#suggesstion-box").html(data);
+//			$("#search-box").css("background","#FFF");
+//		}
+//		});
+//	});
+//});
+//
+//function selectCountry(val) {
+//$("#search-box").val(val);
+//$("#suggesstion-box").hide();
+//}
 
-function selectCountry(val) {
-$("#search-box").val(val);
-$("#suggesstion-box").hide();
+let searchTimer;
+
+function searchTracks(value) {
+
+    clearTimeout(searchTimer);
+
+    searchTimer = setTimeout(function(){
+
+        if (!value.trim()) {
+            document.getElementById('suggestion-box').innerHTML = '';
+            return;
+        }
+
+        $.getJSON('/api/search.php?q=' + encodeURIComponent(value), function(myObj){
+
+            let html = '<div>';
+
+            for (let x in myObj) {
+
+                html += '<div class="border-bottom align-top"><br/>';
+                html += '<h4>' + myObj[x].track + ' - ' + myObj[x].title + ' - ' + myObj[x].artist + '</h4>';
+
+                html += '<button type="button" class="termgrey" data-bs-dismiss="modal" onclick="playnext(' + myObj[x].id + ')">';
+                html += '<i class="bi bi-chevron-right" style="font-size:3rem;"></i></button>&nbsp;&nbsp;&nbsp;';
+
+                html += '<button type="button" class="termgrey" onclick="insertnext(' + myObj[x].id + ')">';
+                html += '<i class="bi bi-chevron-double-right" style="font-size:3rem;"></i></button>&nbsp;&nbsp;&nbsp;';
+
+                html += '<button type="button" class="termgrey" data-bs-dismiss="modal" onclick="playnow(' + myObj[x].id + ')">';
+                html += '<i class="bi bi-arrow-right" style="font-size:3rem;"></i></button>';
+
+                html += '</div>';
+            }
+
+            html += '</div>';
+
+            document.getElementById('suggestion-box').innerHTML = html;
+
+        });
+
+    }, 250);
 }
-
-
 </script>
 <?php
 
@@ -322,7 +363,7 @@ echo "<div id='imgeight' onclick='getmeta(13)'></div>";
 //***************** Next Track *****************
 echo "<div id='imgnine' onclick='getmeta(4)'></div>";
 
-echo "<div id='imagepad1' class='imgpad'><img id='image1' class='img-fluid' src='black.jpg' /></div>\n";
+echo "<div id='imagepad1' class='imgpad'><img id='image1' class='img-fluid' src='/img/black.jpg' /></div>\n";
 
 echo "<div class='pt-3'><h6>".$hosty."</h6></div>";
 
@@ -384,7 +425,7 @@ echo "</div>\n\n";
 
 echo "<div class='container-fluid text-center ps-0 pe-0'>\n";
 echo "<div class='d-none d-md-block d-lg-none'>\n";
-echo "<img id='image4' class='img-fluid' src='black.jpg' />\n";
+echo "<img id='image4' class='img-fluid' src='/img/black.jpg' />\n";
 echo "<br/>\n";
 echo "<button type='button' class='bg-black' onclick='getmeta(3)'><i class='bi bi-arrow-left-short' style='font-size: 6rem; color: white;'></i></button>\n";
 echo "<button type='button' class='bg-black' onclick='getmeta(2)'><i id='playpause4' class='bi bi-pause' style='font-size: 5rem; color: white;'></i></button>\n";
@@ -434,7 +475,7 @@ echo "<div class='container-fluid text-center ps-0 pe-0'>\n";
 echo "<div class='d-none d-lg-block d-xl-none'>\n";
 echo "<div class='row row-cols-2'>\n";
 echo "<div class='col'>\n";
-echo "<img id='image5' class='img-fluid' src='black.jpg' />\n";
+echo "<img id='image5' class='img-fluid' src='/img/black.jpg' />\n";
 echo "</div>\n";
 echo "<div class='col'>\n";
 echo "<button type='button' class='bg-black' onclick='getmeta(3)'><i class='bi bi-arrow-left-short' style='font-size: 6rem; color: white;'></i></button>\n";
@@ -488,7 +529,7 @@ echo "</div>\n\n";
 echo "<div class='container text-center'>\n";
 echo "<div class='d-none d-xl-block'>\n";  
 //echo "<br>\n";
-echo "<img id='image3' src='black.jpg'/>\n";
+echo "<img id='image3' src='/img/black.jpg'/>\n";
 echo "<br><br>\n";
 echo "<h1 id='title3'></h1>\n";
 echo "<h2 id='artist3'></h2>\n";
@@ -582,12 +623,13 @@ echo "<div class='modal-dialog modal-dialog-scrollable'>\n";
 echo "<div class='modal-content bg-black'style='background: black;'>\n";
 
     echo "<div class='modal-header'>\n";
-    echo "<input class='form-control input-sm bg-black text-white' type='text' id='search-box' name='".$token."'/>\n";
+    //echo "<input class='form-control input-sm bg-black text-white' type='text' id='search-box' name='".$token."'/>\n";
+    echo "<input class='form-control input-sm bg-black text-white' type='text' id='search-box' onkeyup='searchTracks(this.value)' name='".$token."'/>\n";
     echo "<div class='col-1'><button type='button' class='btn btn-sm' data-bs-dismiss='modal' aria-label='Close'><i class='bi bi-x' style='font-size: 3rem; color: white;'></i></button></div>\n";
     echo "</div>\n";
 
     echo "<div class='modal-body'>\n";
-    echo "<div id='suggesstion-box'></div>\n";
+    echo "<div id='suggestion-box'></div>\n";
     echo "</div>\n";
 
 echo "</div>\n";

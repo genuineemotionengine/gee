@@ -11,7 +11,8 @@ $plnext = $qsarray['plnext'];
 
 $ipaddr = $_SERVER['SERVER_ADDR'];
 
-require_once('dbconn.php');
+require_once __DIR__ . '/../core/bootstrap.php';
+$conn = gee_db();
 
 require_once('getid3.php');   
 
