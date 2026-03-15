@@ -1,5 +1,6 @@
 <?php
 //parse_str($_SERVER['QUERY_STRING']);
+
 $ipaddr = $_SERVER['SERVER_ADDR'];
 $hosty = gethostname();
 $hosty = strtoupper($hosty);
