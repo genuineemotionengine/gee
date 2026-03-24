@@ -18,5 +18,5 @@ define('GEE_DB_HOST', 'localhost');
 define('GEE_DB_PORT', 3306);
 define('GEE_DB_NAME', 'gee');
 define('GEE_DB_USER', 'geeuser');
-define('GEE_DB_PASS', 'pergamon');
+define('GEE_DB_PASS', 'geepassword');
 
