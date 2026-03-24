@@ -6,6 +6,8 @@ require_once '/var/www/app/core/bootstrap.php';
 
 require_once '/var/www/app/api/getid3/getid3.php';
 
+$conn = gee_db();
+
 
 //****************** Build Database ***************
 
@@ -97,21 +99,59 @@ $album =  str_replace("'","&#39;",$album);
 $albumartist =  str_replace("'","&#39;",$albumartist);
 $idalbum = $dirarray[$x].$album;
 
+$stmt = $conn->prepare("
+    INSERT INTO app (
+        albumpath,
+        artist,
+        album,
+        title,
+        albumartist,
+        idalbum,
+        track,
+        genre
+    ) VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+");
 
-$sql="INSERT INTO app (albumpath, artist, album, title, albumartist, idalbum, track, genre) VALUES ('$name', '$artist', '$album', '$title', '$albumartist', '$idalbum', '$track', '$genre')";
-
-if (!$title or !$artist or !$album or !$albumartist){
-
-echo $sql."\n";
+if (!$stmt) {
+    echo "Prepare failed: " . $conn->error . "\n";
+    exit;
 }
-echo $t.".";
-$conn->query($sql);
 
-if (mysqli_error($conn)){
+$stmt->bind_param(
+    "ssssssss",
+    $name,
+    $artist,
+    $album,
+    $title,
+    $albumartist,
+    $idalbum,
+    $track,
+    $genre
+);
 
-echo mysqli_error($conn)."\n";
-exit;
+if (!$stmt->execute()) {
+    echo "Execute failed: " . $stmt->error . "\n";
+    $stmt->close();
+    exit;
 }
+
+$stmt->close();
+
+
+//$sql="INSERT INTO app (albumpath, artist, album, title, albumartist, idalbum, track, genre) VALUES ('$name', '$artist', '$album', '$title', '$albumartist', '$idalbum', '$track', '$genre')";
+//
+//if (!$title or !$artist or !$album or !$albumartist){
+//
+//echo $sql."\n";
+//}
+//echo $t.".";
+//$conn->query($sql);
+//
+//if (mysqli_error($conn)){
+//
+//echo mysqli_error($conn)."\n";
+//exit;
+//}
 
 
 //echo '<pre>'.htmlentities(print_r($ThisFileInfo['comments']['picture'][0], true), ENT_SUBSTITUTE).'</pre>';
