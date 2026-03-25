@@ -138,24 +138,6 @@ if (!$stmt->execute()) {
 $stmt->close();
 
 
-//$sql="INSERT INTO app (albumpath, artist, album, title, albumartist, idalbum, track, genre) VALUES ('$name', '$artist', '$album', '$title', '$albumartist', '$idalbum', '$track', '$genre')";
-//
-//if (!$title or !$artist or !$album or !$albumartist){
-//
-//echo $sql."\n";
-//}
-//echo $t.".";
-//$conn->query($sql);
-//
-//if (mysqli_error($conn)){
-//
-//echo mysqli_error($conn)."\n";
-//exit;
-//}
-
-
-//echo '<pre>'.htmlentities(print_r($ThisFileInfo['comments']['picture'][0], true), ENT_SUBSTITUTE).'</pre>';
-//echo '<pre>'.htmlentities(print_r($ThisFileInfo['tags'], true), ENT_SUBSTITUTE).'</pre>';
 $t++;
 }
 
@@ -167,14 +149,65 @@ $a++;
 }
 
 
-//echo '<pre>'.htmlentities(print_r($dirarray, true), ENT_SUBSTITUTE).'</pre>';
-   
-    
-//$subdir = "/mnt/music/".$dirarray[4]."/";
-//    
-//$subdirarray = scandir($subdir);  
+///***************** Load Playlist ***********************
+
+$playlist = "app";
+
+$count = 0;
+
+$sql = "SELECT albumpath FROM app WHERE genre != 'Relaxation'";
+
+$stmt = $conn->prepare($sql);
+
+if (!$stmt) {
+    echo "Prepare failed: " . $conn->error . "\n";
+    exit;
+}
+
+$stmt->bind_param("s", $album);
+
+if (!$stmt->execute()) {
+    echo "Execute failed: " . $stmt->error . "\n";
+    $stmt->close();
+    exit;
+}
+
+$result = $stmt->get_result();
+
+while ($row = $result->fetch_assoc()) {
+    $myalbumarray[$count++] = $row['albumpath'] . "\n";
+}
+
+$stmt->close();
+
+//$result = $conn->query($sql);
+//if ($result->num_rows > 0) {
+//    while($row = $result->fetch_assoc()) {
 //
-//echo '<pre>'.htmlentities(print_r($subdirarray, true), ENT_SUBSTITUTE).'</pre>';
+//        $myalbum = $row['albumpath'];       
+//        
+//        $myalbum = $myalbum."\n";
+//        
+//        $myalbumarray[$count] = $myalbum;
+//        
+//        $count++;
+//
+//    }
+//} 
+    
+
+$elements = count($myalbumarray);
+
+shuffle($myalbumarray);
+
+$myfile = fopen("/var/lib/mpd/playlists/app.m3u", "w") or die("Unable to open file!");
+
+for ($x = 0; $x < $elements; $x++) {
+
+  fwrite($myfile, $myalbumarray[$x]);
+    
+}  
+fclose($myfile);
     
 
 
