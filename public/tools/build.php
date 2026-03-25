@@ -138,7 +138,6 @@ for ($x = 2; $x < $elements; $x++) {
             $genre = (string)$ThisFileInfo['tags']['vorbiscomment']['genre'][0];
         }
 
-        // Preserve your existing apostrophe handling
         $title = str_replace("'", '&#39;', $title);
         $artist = str_replace("'", '&#39;', $artist);
         $album = str_replace("'", '&#39;', $album);
@@ -177,7 +176,7 @@ for ($x = 2; $x < $elements; $x++) {
     $displayAlbumArtist = str_replace('&#39;', "'", $albumartist);
     $displayAlbum = str_replace('&#39;', "'", $album);
 
-    echo $a . " - Adding: " . $displayAlbumArtist . " - " . $displayAlbum . " - " . $artistFolder . " - Done\n";
+    echo $a . " - " . $displayAlbumArtist . " - " . $displayAlbum . " - " . $artistFolder . "\n";
     $a++;
 }
 
@@ -238,4 +237,38 @@ foreach ($myalbumarray as $line) {
 fclose($myfile);
 
 echo "4. Playlist written to {$playlistPath}\n";
-echo "5. Build finished successfully\n";
+
+/*
+|--------------------------------------------------------------------------
+| Load playlist into MPD and leave paused
+|--------------------------------------------------------------------------
+*/
+echo "5. Loading playlist into MPD\n";
+
+exec('sudo -u mpd mpc clear 2>&1', $outputClear, $rcClear);
+exec('sudo -u mpd mpc load app 2>&1', $outputLoad, $rcLoad);
+exec('sudo -u mpd mpc play 2>&1', $outputPlay, $rcPlay);
+exec('sudo -u mpd mpc pause 2>&1', $outputPause, $rcPause);
+
+if ($rcClear !== 0) {
+    echo "mpc clear failed:\n" . implode("\n", $outputClear) . "\n";
+    exit(1);
+}
+
+if ($rcLoad !== 0) {
+    echo "mpc load app failed:\n" . implode("\n", $outputLoad) . "\n";
+    exit(1);
+}
+
+if ($rcPlay !== 0) {
+    echo "mpc play failed:\n" . implode("\n", $outputPlay) . "\n";
+    exit(1);
+}
+
+if ($rcPause !== 0) {
+    echo "mpc pause failed:\n" . implode("\n", $outputPause) . "\n";
+    exit(1);
+}
+
+echo "6. MPD queue loaded and paused\n";
+echo "7. Build finished successfully\n";
