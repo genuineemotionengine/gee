@@ -1,105 +1,32 @@
 <?php
 
-
+declare(strict_types=1);
 
 require_once '/var/www/app/core/bootstrap.php';
-
 require_once '/var/www/app/api/getid3/getid3.php';
 
 $conn = gee_db();
 
+echo "1. Starting build\n";
 
-//****************** Build Database ***************
-
-
-
-
-    
-$dir = "/mnt/music/";
-
-// Sort in ascending order - this is default
-$dirarray = scandir($dir);
-
-$elements = count($dirarray);
-
-//echo htmlentities(print_r($dirarray, true), ENT_SUBSTITUTE);
-
-$a = 1;
-
-for ($x = 2; $x < $elements; $x++) {
-
-//echo $dirarray[$x]."\n";
-
-
-
-$subdir = "/mnt/music/".$dirarray[$x]."/";
-
-$subdirarray = scandir($subdir);
-
-$subelements = count($subdirarray);
-
-$t = 1;
-
-for ($y = 2; $y < $subelements; $y++) {
-
-//echo $dirarray[$x]."/".$subdirarray[$y]."\n";
-
-$name = $dirarray[$x]."/".$subdirarray[$y];
-
-//echo $name."\n";
-
-$flacfile = "/mnt/music/".$name;
-
-$getID3 = new getID3;
-
-//sleep(1);
-
-
-$ThisFileInfo = $getID3->analyze($flacfile);
-
-if (isset($ThisFileInfo["tags"]["id3v2"]["track_number"])){   
-    $track = $ThisFileInfo["tags"]["id3v2"]["track_number"][0];
-} else {
-    $track = $ThisFileInfo["tags"]["vorbiscomment"]["tracknumber"][0];
+/*
+|--------------------------------------------------------------------------
+| Reset app table
+|--------------------------------------------------------------------------
+*/
+if (!$conn->query('TRUNCATE TABLE app')) {
+    echo "Failed to truncate app table: " . $conn->error . "\n";
+    exit(1);
 }
 
-if (isset($ThisFileInfo["tags"]["id3v2"]["title"])){
-    $title = $ThisFileInfo["tags"]["id3v2"]["title"][0];    
-} else {
-    $title = $ThisFileInfo["tags"]["vorbiscomment"]["title"][0];
-}
+echo "2. Cleared app table\n";
 
-if (isset($ThisFileInfo["tags"]["id3v2"]["artist"])){
-    $artist = $ThisFileInfo["tags"]["id3v2"]["artist"][0];
-    } else {
-    $artist = $ThisFileInfo["tags"]["vorbiscomment"]["artist"][0];
-}
-
-if (isset($ThisFileInfo["tags"]["id3v2"]["album"])){    
-    $album = $ThisFileInfo["tags"]["id3v2"]["album"][0];
-} else {
-    $album = $ThisFileInfo["tags"]["vorbiscomment"]["album"][0];
-}
-
-if (isset($ThisFileInfo["tags"]["id3v2"]["band"])){   
-    $albumartist = $ThisFileInfo["tags"]["id3v2"]["band"][0];
-} else {
-    $albumartist = $ThisFileInfo["tags"]["vorbiscomment"]["albumartist"][0];
-}
-
-if (isset($ThisFileInfo["tags"]["id3v2"]["genre"])){    
-    $genre = $ThisFileInfo["tags"]["id3v2"]["genre"][0];
-} else {
-    $genre = $ThisFileInfo["tags"]["vorbiscomment"]["genre"][0];
-}
-
-$title =  str_replace("'","&#39;",$title);
-$artist =  str_replace("'","&#39;",$artist);
-$album =  str_replace("'","&#39;",$album);
-$albumartist =  str_replace("'","&#39;",$albumartist);
-$idalbum = $dirarray[$x].$album;
-
-$stmt = $conn->prepare("
+/*
+|--------------------------------------------------------------------------
+| Prepare insert statement once
+|--------------------------------------------------------------------------
+*/
+$insertStmt = $conn->prepare("
     INSERT INTO app (
         albumpath,
         artist,
@@ -112,102 +39,203 @@ $stmt = $conn->prepare("
     ) VALUES (?, ?, ?, ?, ?, ?, ?, ?)
 ");
 
-if (!$stmt) {
-    echo "Prepare failed: " . $conn->error . "\n";
-    exit;
+if (!$insertStmt) {
+    echo "Prepare failed for insert: " . $conn->error . "\n";
+    exit(1);
 }
 
-$stmt->bind_param(
-    "ssssssss",
-    $name,
-    $artist,
-    $album,
-    $title,
-    $albumartist,
-    $idalbum,
-    $track,
-    $genre
-);
+/*
+|--------------------------------------------------------------------------
+| Scan music library
+|--------------------------------------------------------------------------
+*/
+$dir = '/mnt/music/';
 
-if (!$stmt->execute()) {
-    echo "Execute failed: " . $stmt->error . "\n";
-    $stmt->close();
-    exit;
+if (!is_dir($dir)) {
+    echo "Music directory does not exist: {$dir}\n";
+    exit(1);
 }
 
-$stmt->close();
-
-
-$t++;
+$dirarray = scandir($dir);
+if ($dirarray === false) {
+    echo "Failed to scan music directory: {$dir}\n";
+    exit(1);
 }
 
-$albumartist =  str_replace("&#39;","'",$albumartist);
-$album =  str_replace("&#39;","'",$album);
+$elements = count($dirarray);
+$getID3 = new getID3();
 
-echo "\n".$a." - ".$albumartist." - ".$album." - ".$dirarray[$x];
-$a++;
+$a = 1;
+
+for ($x = 2; $x < $elements; $x++) {
+    $artistFolder = $dirarray[$x];
+    $subdir = $dir . $artistFolder . '/';
+
+    if (!is_dir($subdir)) {
+        continue;
+    }
+
+    $subdirarray = scandir($subdir);
+    if ($subdirarray === false) {
+        echo "Failed to scan subdirectory: {$subdir}\n";
+        continue;
+    }
+
+    $subelements = count($subdirarray);
+
+    for ($y = 2; $y < $subelements; $y++) {
+        $fileName = $subdirarray[$y];
+        $flacfile = $subdir . $fileName;
+
+        if (!is_file($flacfile)) {
+            continue;
+        }
+
+        $name = $artistFolder . '/' . $fileName;
+
+        $ThisFileInfo = $getID3->analyze($flacfile);
+
+        $track = '';
+        $title = '';
+        $artist = '';
+        $album = '';
+        $albumartist = '';
+        $genre = '';
+
+        if (isset($ThisFileInfo['tags']['id3v2']['track_number'][0])) {
+            $track = (string)$ThisFileInfo['tags']['id3v2']['track_number'][0];
+        } elseif (isset($ThisFileInfo['tags']['vorbiscomment']['tracknumber'][0])) {
+            $track = (string)$ThisFileInfo['tags']['vorbiscomment']['tracknumber'][0];
+        }
+
+        if (isset($ThisFileInfo['tags']['id3v2']['title'][0])) {
+            $title = (string)$ThisFileInfo['tags']['id3v2']['title'][0];
+        } elseif (isset($ThisFileInfo['tags']['vorbiscomment']['title'][0])) {
+            $title = (string)$ThisFileInfo['tags']['vorbiscomment']['title'][0];
+        }
+
+        if (isset($ThisFileInfo['tags']['id3v2']['artist'][0])) {
+            $artist = (string)$ThisFileInfo['tags']['id3v2']['artist'][0];
+        } elseif (isset($ThisFileInfo['tags']['vorbiscomment']['artist'][0])) {
+            $artist = (string)$ThisFileInfo['tags']['vorbiscomment']['artist'][0];
+        }
+
+        if (isset($ThisFileInfo['tags']['id3v2']['album'][0])) {
+            $album = (string)$ThisFileInfo['tags']['id3v2']['album'][0];
+        } elseif (isset($ThisFileInfo['tags']['vorbiscomment']['album'][0])) {
+            $album = (string)$ThisFileInfo['tags']['vorbiscomment']['album'][0];
+        }
+
+        if (isset($ThisFileInfo['tags']['id3v2']['band'][0])) {
+            $albumartist = (string)$ThisFileInfo['tags']['id3v2']['band'][0];
+        } elseif (isset($ThisFileInfo['tags']['vorbiscomment']['albumartist'][0])) {
+            $albumartist = (string)$ThisFileInfo['tags']['vorbiscomment']['albumartist'][0];
+        }
+
+        if (isset($ThisFileInfo['tags']['id3v2']['genre'][0])) {
+            $genre = (string)$ThisFileInfo['tags']['id3v2']['genre'][0];
+        } elseif (isset($ThisFileInfo['tags']['vorbiscomment']['genre'][0])) {
+            $genre = (string)$ThisFileInfo['tags']['vorbiscomment']['genre'][0];
+        }
+
+        // Preserve your existing apostrophe handling
+        $title = str_replace("'", '&#39;', $title);
+        $artist = str_replace("'", '&#39;', $artist);
+        $album = str_replace("'", '&#39;', $album);
+        $albumartist = str_replace("'", '&#39;', $albumartist);
+
+        $idalbum = $artistFolder . $album;
+
+        if (!$title || !$artist || !$album || !$albumartist) {
+            echo "Skipping incomplete row:\n";
+            echo "Path: {$name}\n";
+            echo "Artist: {$artist}\n";
+            echo "Album: {$album}\n";
+            echo "Title: {$title}\n";
+            echo "Album Artist: {$albumartist}\n";
+            continue;
+        }
+
+        $insertStmt->bind_param(
+            'ssssssss',
+            $name,
+            $artist,
+            $album,
+            $title,
+            $albumartist,
+            $idalbum,
+            $track,
+            $genre
+        );
+
+        if (!$insertStmt->execute()) {
+            echo "Execute failed: " . $insertStmt->error . "\n";
+            exit(1);
+        }
+    }
+
+    $displayAlbumArtist = str_replace('&#39;', "'", $albumartist);
+    $displayAlbum = str_replace('&#39;', "'", $album);
+
+    echo $a . " - " . $displayAlbumArtist . " - " . $displayAlbum . " - " . $artistFolder . "\n";
+    $a++;
 }
 
+$insertStmt->close();
 
-///***************** Load Playlist ***********************
+echo "3. Database build complete\n";
 
-$playlist = "app";
+/*
+|--------------------------------------------------------------------------
+| Build playlist file
+|--------------------------------------------------------------------------
+*/
+$playlistStmt = $conn->prepare("
+    SELECT albumpath
+    FROM app
+    WHERE genre != 'Relaxation'
+");
 
-$count = 0;
-
-$sql = "SELECT albumpath FROM app WHERE genre != 'Relaxation'";
-
-$stmt = $conn->prepare($sql);
-
-if (!$stmt) {
-    echo "Prepare failed: " . $conn->error . "\n";
-    exit;
+if (!$playlistStmt) {
+    echo "Prepare failed for playlist query: " . $conn->error . "\n";
+    exit(1);
 }
 
-$stmt->bind_param("s", $album);
-
-if (!$stmt->execute()) {
-    echo "Execute failed: " . $stmt->error . "\n";
-    $stmt->close();
-    exit;
+if (!$playlistStmt->execute()) {
+    echo "Execute failed for playlist query: " . $playlistStmt->error . "\n";
+    $playlistStmt->close();
+    exit(1);
 }
 
-$result = $stmt->get_result();
+$result = $playlistStmt->get_result();
+$myalbumarray = [];
 
 while ($row = $result->fetch_assoc()) {
-    $myalbumarray[$count++] = $row['albumpath'] . "\n";
+    $myalbumarray[] = $row['albumpath'] . "\n";
 }
 
-$stmt->close();
+$playlistStmt->close();
 
-//$result = $conn->query($sql);
-//if ($result->num_rows > 0) {
-//    while($row = $result->fetch_assoc()) {
-//
-//        $myalbum = $row['albumpath'];       
-//        
-//        $myalbum = $myalbum."\n";
-//        
-//        $myalbumarray[$count] = $myalbum;
-//        
-//        $count++;
-//
-//    }
-//} 
-    
-
-$elements = count($myalbumarray);
+if (empty($myalbumarray)) {
+    echo "No tracks found for playlist generation.\n";
+    exit(1);
+}
 
 shuffle($myalbumarray);
 
-$myfile = fopen("/var/lib/mpd/playlists/app.m3u", "w") or die("Unable to open file!");
+$playlistPath = '/var/lib/mpd/playlists/app.m3u';
+$myfile = fopen($playlistPath, 'w');
 
-for ($x = 0; $x < $elements; $x++) {
+if ($myfile === false) {
+    echo "Unable to open playlist file for writing: {$playlistPath}\n";
+    exit(1);
+}
 
-  fwrite($myfile, $myalbumarray[$x]);
-    
-}  
+foreach ($myalbumarray as $line) {
+    fwrite($myfile, $line);
+}
+
 fclose($myfile);
-    
 
-
+echo "4. Playlist written to {$playlistPath}\n";
+echo "5. Build finished successfully\n";
