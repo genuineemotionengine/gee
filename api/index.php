@@ -37,25 +37,16 @@ try{
 
 //***************** Just Get Meta **********************
 
-if ($service == 1){ 
-    
-    $dir = "/var/lib/mpd/playlists/";
+if ($service == 1) {
 
-    $dirarray = scandir($dir);
-    
-    if (!$dirarray[2]){
+    $playlistPath = "/var/lib/mpd/playlists/app.m3u";
+
+    if (!is_file($playlistPath)) {
         $sql = "SELECT albumpath FROM app WHERE genre != 'Relaxation'";
-
-        include ('loadplaylist.php');
-        
-        include ('getmeta.php');
-        
-    } else {
-    
-    include ('getmeta.php');
-    
+        include('loadplaylist.php');
     }
 
+    include('getmeta.php');
 }
 
 
