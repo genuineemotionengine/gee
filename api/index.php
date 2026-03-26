@@ -39,7 +39,22 @@ try{
 
 if ($service == 1){ 
     
+    $dir = "/var/lib/mpd/playlists/";
+
+    $dirarray = scandir($dir);
+    
+    if (!$dirarray){
+        $sql = "SELECT albumpath FROM app WHERE genre != 'Relaxation'";
+
+        include ('loadplaylist.php');
+        
+        include ('getmeta.php');
+        
+    } else {
+    
     include ('getmeta.php');
+    
+    }
 
 }
 

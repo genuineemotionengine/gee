@@ -189,86 +189,86 @@ echo "3. Database build complete\n";
 | Build playlist file
 |--------------------------------------------------------------------------
 */
-$playlistStmt = $conn->prepare("
-    SELECT albumpath
-    FROM app
-    WHERE genre != 'Relaxation'
-");
-
-if (!$playlistStmt) {
-    echo "Prepare failed for playlist query: " . $conn->error . "\n";
-    exit(1);
-}
-
-if (!$playlistStmt->execute()) {
-    echo "Execute failed for playlist query: " . $playlistStmt->error . "\n";
-    $playlistStmt->close();
-    exit(1);
-}
-
-$result = $playlistStmt->get_result();
-$myalbumarray = [];
-
-while ($row = $result->fetch_assoc()) {
-    $myalbumarray[] = $row['albumpath'] . "\n";
-}
-
-$playlistStmt->close();
-
-if (empty($myalbumarray)) {
-    echo "No tracks found for playlist generation.\n";
-    exit(1);
-}
-
-shuffle($myalbumarray);
-
-$playlistPath = '/var/lib/mpd/playlists/app.m3u';
-$myfile = fopen($playlistPath, 'w');
-
-if ($myfile === false) {
-    echo "Unable to open playlist file for writing: {$playlistPath}\n";
-    exit(1);
-}
-
-foreach ($myalbumarray as $line) {
-    fwrite($myfile, $line);
-}
-
-fclose($myfile);
-
-echo "4. Playlist written to {$playlistPath}\n";
-
-/*
-|--------------------------------------------------------------------------
-| Load playlist into MPD and leave paused
-|--------------------------------------------------------------------------
-*/
-echo "5. Loading playlist into MPD\n";
-
-exec('sudo -u mpd mpc clear 2>&1', $outputClear, $rcClear);
-exec('sudo -u mpd mpc load app 2>&1', $outputLoad, $rcLoad);
-exec('sudo -u mpd mpc play 2>&1', $outputPlay, $rcPlay);
-exec('sudo -u mpd mpc pause 2>&1', $outputPause, $rcPause);
-
-if ($rcClear !== 0) {
-    echo "mpc clear failed:\n" . implode("\n", $outputClear) . "\n";
-    exit(1);
-}
-
-if ($rcLoad !== 0) {
-    echo "mpc load app failed:\n" . implode("\n", $outputLoad) . "\n";
-    exit(1);
-}
-
-if ($rcPlay !== 0) {
-    echo "mpc play failed:\n" . implode("\n", $outputPlay) . "\n";
-    exit(1);
-}
-
-if ($rcPause !== 0) {
-    echo "mpc pause failed:\n" . implode("\n", $outputPause) . "\n";
-    exit(1);
-}
-
-echo "6. MPD queue loaded and paused\n";
-echo "7. Build finished successfully\n";
+//$playlistStmt = $conn->prepare("
+//    SELECT albumpath
+//    FROM app
+//    WHERE genre != 'Relaxation'
+//");
+//
+//if (!$playlistStmt) {
+//    echo "Prepare failed for playlist query: " . $conn->error . "\n";
+//    exit(1);
+//}
+//
+//if (!$playlistStmt->execute()) {
+//    echo "Execute failed for playlist query: " . $playlistStmt->error . "\n";
+//    $playlistStmt->close();
+//    exit(1);
+//}
+//
+//$result = $playlistStmt->get_result();
+//$myalbumarray = [];
+//
+//while ($row = $result->fetch_assoc()) {
+//    $myalbumarray[] = $row['albumpath'] . "\n";
+//}
+//
+//$playlistStmt->close();
+//
+//if (empty($myalbumarray)) {
+//    echo "No tracks found for playlist generation.\n";
+//    exit(1);
+//}
+//
+//shuffle($myalbumarray);
+//
+//$playlistPath = '/var/lib/mpd/playlists/app.m3u';
+//$myfile = fopen($playlistPath, 'w');
+//
+//if ($myfile === false) {
+//    echo "Unable to open playlist file for writing: {$playlistPath}\n";
+//    exit(1);
+//}
+//
+//foreach ($myalbumarray as $line) {
+//    fwrite($myfile, $line);
+//}
+//
+//fclose($myfile);
+//
+//echo "4. Playlist written to {$playlistPath}\n";
+//
+///*
+//|--------------------------------------------------------------------------
+//| Load playlist into MPD and leave paused
+//|--------------------------------------------------------------------------
+//*/
+//echo "5. Loading playlist into MPD\n";
+//
+//exec('sudo -u mpd mpc clear 2>&1', $outputClear, $rcClear);
+//exec('sudo -u mpd mpc load app 2>&1', $outputLoad, $rcLoad);
+//exec('sudo -u mpd mpc play 2>&1', $outputPlay, $rcPlay);
+//exec('sudo -u mpd mpc pause 2>&1', $outputPause, $rcPause);
+//
+//if ($rcClear !== 0) {
+//    echo "mpc clear failed:\n" . implode("\n", $outputClear) . "\n";
+//    exit(1);
+//}
+//
+//if ($rcLoad !== 0) {
+//    echo "mpc load app failed:\n" . implode("\n", $outputLoad) . "\n";
+//    exit(1);
+//}
+//
+//if ($rcPlay !== 0) {
+//    echo "mpc play failed:\n" . implode("\n", $outputPlay) . "\n";
+//    exit(1);
+//}
+//
+//if ($rcPause !== 0) {
+//    echo "mpc pause failed:\n" . implode("\n", $outputPause) . "\n";
+//    exit(1);
+//}
+//
+//echo "6. MPD queue loaded and paused\n";
+//echo "7. Build finished successfully\n";
