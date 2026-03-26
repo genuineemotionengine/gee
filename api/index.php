@@ -43,7 +43,7 @@ if ($service == 1){
 
     $dirarray = scandir($dir);
     
-    if (!$dirarray){
+    if (!$dirarray[2]){
         $sql = "SELECT albumpath FROM app WHERE genre != 'Relaxation'";
 
         include ('loadplaylist.php');
