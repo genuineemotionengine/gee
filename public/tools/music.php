@@ -15,7 +15,7 @@ if ($dirarray[2] >= 200000){
 
 //$count = 300000;
 
-echo $count;
+echo $count."\n";
 
 //echo '<pre>'.htmlentities(print_r($dirarray, true), ENT_SUBSTITUTE).'</pre>';
 
