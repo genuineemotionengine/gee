@@ -9,22 +9,86 @@ $conn = gee_db();
 $cookieName = 'gee_selected_renderer';
 $selectedRendererId = isset($_COOKIE[$cookieName]) ? (int) $_COOKIE[$cookieName] : 0;
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['renderer_id'])) {
-    $selectedRendererId = (int) $_POST['renderer_id'];
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    if (isset($_POST['renderer_id']) && !isset($_POST['assign_stream'])) {
+        $selectedRendererId = (int) $_POST['renderer_id'];
 
-    setcookie(
-        $cookieName,
-        (string) $selectedRendererId,
-        [
-            'expires' => time() + (86400 * 30),
-            'path' => '/',
-            'httponly' => false,
-            'samesite' => 'Lax'
-        ]
-    );
+        setcookie(
+            $cookieName,
+            (string) $selectedRendererId,
+            [
+                'expires' => time() + (86400 * 30),
+                'path' => '/',
+                'httponly' => false,
+                'samesite' => 'Lax'
+            ]
+        );
 
-    header('Location: /renderers.php');
+        header('Location: /renderers.php');
+        exit;
+    }
+
+    if (isset($_POST['assign_stream'], $_POST['renderer_id'], $_POST['stream_id'])) {
+        $rendererId = (int) $_POST['renderer_id'];
+        $streamId = (int) $_POST['stream_id'];
+        $selectedRendererId = $rendererId;
+
+        $setCookie = setcookie(
+            $cookieName,
+            (string) $selectedRendererId,
+            [
+                'expires' => time() + (86400 * 30),
+                'path' => '/',
+                'httponly' => false,
+                'samesite' => 'Lax'
+            ]
+        );
+
+        $stmt = $conn->prepare("
+            INSERT INTO renderer_stream_map (renderer_id, stream_id)
+            VALUES (?, ?)
+            ON DUPLICATE KEY UPDATE
+                stream_id = VALUES(stream_id),
+                updated_at = CURRENT_TIMESTAMP
+        ");
+
+        if (!$stmt) {
+            http_response_code(500);
+            echo 'Failed to prepare stream assignment query: ' . htmlspecialchars($conn->error, ENT_QUOTES, 'UTF-8');
+            exit;
+        }
+
+        $stmt->bind_param('ii', $rendererId, $streamId);
+
+        if (!$stmt->execute()) {
+            http_response_code(500);
+            echo 'Failed to assign stream: ' . htmlspecialchars($stmt->error, ENT_QUOTES, 'UTF-8');
+            $stmt->close();
+            exit;
+        }
+
+        $stmt->close();
+
+        header('Location: /renderers.php');
+        exit;
+    }
+}
+
+$streamsResult = $conn->query("
+    SELECT id, stream_key, stream_name, stream_format, fifo_path, is_active
+    FROM streams
+    ORDER BY stream_name ASC
+");
+
+if (!$streamsResult) {
+    http_response_code(500);
+    echo 'Failed to load streams: ' . htmlspecialchars($conn->error, ENT_QUOTES, 'UTF-8');
     exit;
+}
+
+$streams = [];
+while ($row = $streamsResult->fetch_assoc()) {
+    $streams[] = $row;
 }
 
 $sql = "
@@ -100,14 +164,14 @@ if (empty($renderers)) {
     }
 }
 
-function e(?string $value): string
+function e(null|string|int $value): string
 {
     return htmlspecialchars((string)$value, ENT_QUOTES, 'UTF-8');
 }
 
 function displayRendererName(array $renderer): string
 {
-    return $renderer['display_name'] ?: $renderer['hostname'];
+    return !empty($renderer['display_name']) ? $renderer['display_name'] : $renderer['hostname'];
 }
 
 function yesNo($value): string
@@ -131,7 +195,7 @@ function yesNo($value): string
         }
 
         .container {
-            max-width: 1100px;
+            max-width: 1200px;
             margin: 0 auto;
         }
 
@@ -147,7 +211,8 @@ function yesNo($value): string
             margin-bottom: 20px;
         }
 
-        .selector-form {
+        .selector-form,
+        .stream-form {
             display: flex;
             gap: 12px;
             align-items: center;
@@ -195,6 +260,14 @@ function yesNo($value): string
             word-break: break-word;
         }
 
+        .assignment-box {
+            margin-top: 18px;
+            padding: 16px;
+            background: #222;
+            border: 1px solid #333;
+            border-radius: 10px;
+        }
+
         table {
             width: 100%;
             border-collapse: collapse;
@@ -224,6 +297,11 @@ function yesNo($value): string
         .empty {
             color: #bbb;
             font-style: italic;
+        }
+
+        .small {
+            font-size: 12px;
+            color: #aaa;
         }
     </style>
 </head>
@@ -307,6 +385,27 @@ function yesNo($value): string
                     <div class="context-label">IP Address</div>
                     <div class="context-value"><?= e($selectedRenderer['ip']) ?></div>
                 </div>
+            </div>
+
+            <div class="assignment-box">
+                <h2 style="margin-bottom: 10px;">Assign Stream</h2>
+                <form method="post" class="stream-form">
+                    <input type="hidden" name="assign_stream" value="1">
+                    <input type="hidden" name="renderer_id" value="<?= (int)$selectedRenderer['renderer_id'] ?>">
+
+                    <label for="stream_id">Stream for <?= e(displayRendererName($selectedRenderer)) ?>:</label>
+                    <select name="stream_id" id="stream_id">
+                        <?php foreach ($streams as $stream): ?>
+                            <option value="<?= (int)$stream['id'] ?>"
+                                <?= ((int)$stream['id'] === (int)$selectedRenderer['stream_id']) ? 'selected' : '' ?>>
+                                <?= e($stream['stream_name']) ?> — <?= e($stream['stream_format']) ?>
+                            </option>
+                        <?php endforeach; ?>
+                    </select>
+
+                    <button type="submit">Save Assignment</button>
+                </form>
+                <p class="small">This updates the renderer-to-stream mapping in Gee Core. Audio engine orchestration comes next.</p>
             </div>
         <?php endif; ?>
     </div>
