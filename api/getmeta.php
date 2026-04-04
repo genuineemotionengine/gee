@@ -1,5 +1,19 @@
 <?php
 
+$geeRendererContext = $GLOBALS['gee_renderer_context'] ?? null;
+
+$geeRendererName = null;
+$geeStreamKey = null;
+$geeStreamFormat = null;
+$geeFifoPath = null;
+
+if (is_array($geeRendererContext)) {
+    $geeRendererName = $geeRendererContext['display_name'] ?: $geeRendererContext['hostname'];
+    $geeStreamKey = $geeRendererContext['stream_key'] ?? null;
+    $geeStreamFormat = $geeRendererContext['stream_format'] ?? null;
+    $geeFifoPath = $geeRendererContext['fifo_path'] ?? null;
+}
+
 $statusarray = $mphpd->status();
 
 if ($verbose){
@@ -88,16 +102,19 @@ $nextartist = $queuearray['artist'];
 //echo "'".$nexttitle."'"."<br><br>";
 
 $rows = ['image' => $image,
-'title' => $title,
-'artist' => $artist,
-'album' => $album,
-'elapsed' => $elapsed,
-'duration' => $durations[0],
-'albumartist' => $albumartist,
-'volume' => $volume,
-'nexttitle' => $nexttitle,
-'nextartist' => $nextartist,    
-'state' => $state
+    'title' => $title,
+    'artist' => $artist,
+    'album' => $album,
+    'elapsed' => $elapsed,
+    'duration' => $durations[0],
+    'albumartist' => $albumartist,
+    'volume' => $volume,
+    'nexttitle' => $nexttitle,
+    'nextartist' => $nextartist,    
+    'state' => $state,
+    'renderer' => $geeRendererName,
+    'stream_key' => $geeStreamKey,
+    'stream_format' => $geeStreamFormat        
      ];
 
 
