@@ -2,24 +2,31 @@
 
 declare(strict_types=1);
 
-require_once __DIR__ . '/../core/streams.php';
+require_once __DIR__ . '/../core/bootstrap.php';
+require_once __DIR__ . '/../core/renderer_runtime.php';
 
-$geeRendererContext = gee_get_stream_context_from_renderer_globals();
+$geeRuntimeContext = $GLOBALS['gee_runtime_context'] ?? null;
+
+if (!is_array($geeRuntimeContext)) {
+    $geeRuntimeContext = gee_get_renderer_runtime_context();
+}
 
 $geeRendererName = null;
+$geeActiveStream = null;
+$geeAllowedStreams = [];
 $geeStreamKey = null;
 $geeStreamFormat = null;
-$geeFifoPath = null;
 $geeMpdHost = '127.0.0.1';
 $geeMpdPort = 6601;
 
-if (is_array($geeRendererContext)) {
-    $geeRendererName = $geeRendererContext['display_name'] ?? ($geeRendererContext['hostname'] ?? null);
-    $geeStreamKey = $geeRendererContext['stream_key'] ?? null;
-    $geeStreamFormat = $geeRendererContext['stream_format'] ?? null;
-    $geeFifoPath = $geeRendererContext['fifo_path'] ?? null;
-    $geeMpdHost = gee_get_mpd_host_from_stream($geeRendererContext);
-    $geeMpdPort = gee_get_mpd_port_from_stream($geeRendererContext);
+if (is_array($geeRuntimeContext)) {
+    $geeRendererName = $geeRuntimeContext['display_name'] ?: ($geeRuntimeContext['hostname'] ?? null);
+    $geeActiveStream = $geeRuntimeContext['active_stream'] ?? null;
+    $geeAllowedStreams = $geeRuntimeContext['allowed_streams'] ?? [];
+    $geeStreamKey = $geeRuntimeContext['stream_key'] ?? null;
+    $geeStreamFormat = $geeRuntimeContext['stream_format'] ?? null;
+    $geeMpdHost = (string)($geeRuntimeContext['mpd_host'] ?? '127.0.0.1');
+    $geeMpdPort = (int)($geeRuntimeContext['mpd_port'] ?? 6601);
 }
 
 $statusarray = $mphpd->status();
@@ -30,16 +37,11 @@ if (!is_array($statusarray)) {
         'status' => 'error',
         'message' => 'MPD status() did not return an array.',
         'renderer' => $geeRendererName,
+        'active_stream' => $geeActiveStream,
         'stream_key' => $geeStreamKey,
         'stream_format' => $geeStreamFormat,
     ]);
     exit;
-}
-
-if ($verbose ?? false) {
-    echo "Status";
-    echo '<pre>' . htmlentities(print_r($statusarray, true), ENT_SUBSTITUTE) . '</pre>';
-    echo "<br><br><br>";
 }
 
 $elapsedRaw = (string)($statusarray['elapsed'] ?? '0');
@@ -55,12 +57,6 @@ $duration = $durationParts[0] ?? '0';
 
 $mySimpleArray = $mphpd->player()->current_song();
 
-if ($verbose ?? false) {
-    echo "Current Song";
-    echo '<pre>' . htmlentities(print_r($mySimpleArray, true), ENT_SUBSTITUTE) . '</pre>';
-    echo "<br><br><br>";
-}
-
 if (!is_array($mySimpleArray) || empty($mySimpleArray['file'])) {
     echo json_encode([
         'image' => null,
@@ -75,6 +71,8 @@ if (!is_array($mySimpleArray) || empty($mySimpleArray['file'])) {
         'nextartist' => '',
         'state' => $state,
         'renderer' => $geeRendererName,
+        'active_stream' => $geeActiveStream,
+        'allowed_streams' => $geeAllowedStreams,
         'stream_key' => $geeStreamKey,
         'stream_format' => $geeStreamFormat,
         'message' => 'No current song loaded'
@@ -92,8 +90,40 @@ if (stripos($albumartist, 'Various Artists - ') === 0) {
     $albumartist = 'Various Artists';
 }
 
-$flacfile = GEE_MUSIC_ROOT . '/' . ltrim($flacfileRel, '/');
+/*
+|--------------------------------------------------------------------------
+| Fallback to DB metadata if MPD tags are sparse
+|--------------------------------------------------------------------------
+*/
+if ($title === '' || $artist === '' || $album === '' || $albumartist === '') {
+    $conn = gee_db();
+    $stmt = $conn->prepare("
+        SELECT title, artist, album, albumartist
+        FROM app
+        WHERE albumpath = ?
+        LIMIT 1
+    ");
 
+    if ($stmt) {
+        $stmt->bind_param('s', $flacfileRel);
+
+        if ($stmt->execute()) {
+            $result = $stmt->get_result();
+            $row = $result ? $result->fetch_assoc() : null;
+
+            if ($row) {
+                $title = $title !== '' ? $title : (string)($row['title'] ?? '');
+                $artist = $artist !== '' ? $artist : (string)($row['artist'] ?? '');
+                $album = $album !== '' ? $album : (string)($row['album'] ?? '');
+                $albumartist = $albumartist !== '' ? $albumartist : (string)($row['albumartist'] ?? '');
+            }
+        }
+
+        $stmt->close();
+    }
+}
+
+$flacfile = GEE_MUSIC_ROOT . '/' . ltrim($flacfileRel, '/');
 $image = null;
 
 if (is_file($flacfile)) {
@@ -134,6 +164,8 @@ $rows = [
     'nextartist' => $nextartist,
     'state' => $state,
     'renderer' => $geeRendererName,
+    'active_stream' => $geeActiveStream,
+    'allowed_streams' => $geeAllowedStreams,
     'stream_key' => $geeStreamKey,
     'stream_format' => $geeStreamFormat
 ];

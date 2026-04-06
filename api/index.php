@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 require_once __DIR__ . '/../core/bootstrap.php';
 require_once __DIR__ . '/../core/renderers.php';
-require_once __DIR__ . '/../core/streams.php';
+require_once __DIR__ . '/../core/renderer_runtime.php';
 require_once __DIR__ . '/getid3.php';
 require_once __DIR__ . '/MphpD/MphpD.php';
 
@@ -13,9 +13,9 @@ use FloFaber\MphpD\MPDException;
 
 parse_str($_SERVER['QUERY_STRING'] ?? '', $qsarray);
 
-$service = isset($qsarray['service']) ? (int)$qsarray['service'] : 0;
-$id = isset($qsarray['id']) ? (int)$qsarray['id'] : 0;
-$mod = isset($qsarray['mod']) ? (int)$qsarray['mod'] : 0;
+$service = isset($qsarray['service']) ? (int) $qsarray['service'] : 0;
+$id = isset($qsarray['id']) ? (int) $qsarray['id'] : 0;
+$mod = isset($qsarray['mod']) ? (int) $qsarray['mod'] : 0;
 $verbose = !empty($qsarray['verbose']);
 $plnext = !empty($qsarray['plnext']);
 
@@ -23,7 +23,7 @@ $conn = gee_db();
 
 /*
 |--------------------------------------------------------------------------
-| Resolve renderer + stream context before connecting to MPD
+| Resolve renderer-first runtime context
 |--------------------------------------------------------------------------
 */
 $rendererContext = gee_get_selected_renderer_context();
@@ -32,14 +32,31 @@ if ($rendererContext === null) {
     $rendererContext = gee_get_first_renderer_context();
 }
 
-if ($rendererContext !== null) {
-    $GLOBALS['gee_renderer_context'] = $rendererContext;
+if ($rendererContext === null) {
+    http_response_code(500);
+    echo json_encode([
+        'status' => 'error',
+        'message' => 'No renderer context available.'
+    ]);
+    exit;
 }
 
-$streamContext = gee_get_stream_context_from_renderer_globals();
+$geeRuntimeContext = gee_get_renderer_runtime_context($rendererContext);
 
-$mpdHost = gee_get_mpd_host_from_stream($streamContext);
-$mpdPort = gee_get_mpd_port_from_stream($streamContext);
+if ($geeRuntimeContext === null) {
+    http_response_code(500);
+    echo json_encode([
+        'status' => 'error',
+        'message' => 'Unable to resolve renderer runtime context.'
+    ]);
+    exit;
+}
+
+$GLOBALS['gee_renderer_context'] = $rendererContext;
+$GLOBALS['gee_runtime_context'] = $geeRuntimeContext;
+
+$mpdHost = (string) $geeRuntimeContext['mpd_host'];
+$mpdPort = (int) $geeRuntimeContext['mpd_port'];
 
 $mphpd = new MphpD([
     'host' => $mpdHost,
@@ -61,7 +78,7 @@ try {
 |--------------------------------------------------------------------------
 */
 if ($service === 1) {
-    $playlistPath = gee_get_playlist_path_from_stream($streamContext);
+    $playlistPath = (string) $geeRuntimeContext['playlist_path'];
 
     if (!is_file($playlistPath)) {
         $sql = "SELECT albumpath FROM app WHERE genre != 'Relaxation'";
@@ -217,10 +234,10 @@ if ($service === 12) {
     $pos = '+0';
 
     if ($verbose) {
-        echo "uri: " . htmlentities((string)$uri, ENT_SUBSTITUTE) . "<br>";
-        echo "title: " . htmlentities((string)$title, ENT_SUBSTITUTE) . "<br>";
-        echo "artist: " . htmlentities((string)$artist, ENT_SUBSTITUTE) . "<br>";
-        echo "pos: " . htmlentities((string)$pos, ENT_SUBSTITUTE) . "<br><br>";
+        echo "uri: " . htmlentities((string) $uri, ENT_SUBSTITUTE) . "<br>";
+        echo "title: " . htmlentities((string) $title, ENT_SUBSTITUTE) . "<br>";
+        echo "artist: " . htmlentities((string) $artist, ENT_SUBSTITUTE) . "<br>";
+        echo "pos: " . htmlentities((string) $pos, ENT_SUBSTITUTE) . "<br><br>";
     }
 
     $results = $mphpd->queue()->add_id($uri, $pos);
@@ -268,7 +285,7 @@ if ($service === 13) {
     }
 
     $pauseStatus = $statusArray['state'] ?? null;
-    $pos = isset($currentArray['pos']) ? (int)$currentArray['pos'] : 0;
+    $pos = isset($currentArray['pos']) ? (int) $currentArray['pos'] : 0;
 
     $mphpd->player()->play($pos);
 
