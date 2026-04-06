@@ -5,6 +5,10 @@ declare(strict_types=1);
 require_once __DIR__ . '/bootstrap.php';
 require_once __DIR__ . '/renderers.php';
 require_once __DIR__ . '/renderer_runtime.php';
+require_once __DIR__ . '/../api/MphpD/MphpD.php';
+
+use FloFaber\MphpD\MphpD;
+use FloFaber\MphpD\MPDException;
 
 function gee_get_renderer_session(int $rendererId): ?array
 {
@@ -180,11 +184,6 @@ function gee_get_active_stream_from_session_or_default(?array $rendererContext =
 
     return null;
 }
-
-require_once __DIR__ . '/../api/MphpD/MphpD.php';
-
-use FloFaber\MphpD\MphpD;
-use FloFaber\MphpD\MPDException;
 
 function gee_capture_renderer_session_from_mpd(?array $rendererContext = null): ?array
 {
