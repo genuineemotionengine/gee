@@ -41,7 +41,7 @@ $mphpd = new MphpD([
 try{
   $mphpd->connect();
 }catch (MPDException $e){
-    echo $mpdHost." ".$mpdPort."<br><br>";
+    echo "host & port: ".$mpdHost." ".$mpdPort."<br><br>";
   echo $e->getMessage();
   return false;
 }
