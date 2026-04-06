@@ -26,17 +26,17 @@ require_once __DIR__ . "/MphpD/MphpD.php";
 use FloFaber\MphpD\MphpD;
 use FloFaber\MphpD\MPDException;
 
-$mphpd = new MphpD([
-  "host" => "localhost",
-  "port" => 6600,
-  "timeout" => 5
-]);
+//$mphpd = new MphpD([
+//  "host" => "localhost",
+//  "port" => 6600,
+//  "timeout" => 5
+//]);
 
-$mphpd = new MphpD([
-    "host" => $mpdHost,
-    "port" => $mpdPort,
-    "timeout" => 5
-]);
+//$mphpd = new MphpD([
+//    "host" => $mpdHost,
+//    "port" => $mpdPort,
+//    "timeout" => 5
+//]);
 
 try{
   $mphpd->connect();
