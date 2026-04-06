@@ -1,5 +1,5 @@
 <?php
-
+require_once __DIR__ . '/renderer_sessions.php';
 
 declare(strict_types=1);
 
@@ -102,6 +102,12 @@ function gee_get_selected_stream_for_renderer(array $rendererContext): ?string
  */
 function gee_get_active_stream_for_renderer(array $rendererContext): string
 {
+    $sessionStream = gee_get_active_stream_from_session_or_default($rendererContext);
+
+    if ($sessionStream !== null) {
+        return $sessionStream;
+    }
+
     $selected = gee_get_selected_stream_for_renderer($rendererContext);
 
     if ($selected !== null) {

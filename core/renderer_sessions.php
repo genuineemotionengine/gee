@@ -180,3 +180,117 @@ function gee_get_active_stream_from_session_or_default(?array $rendererContext =
 
     return null;
 }
+
+require_once __DIR__ . '/../api/MphpD/MphpD.php';
+
+use FloFaber\MphpD\MphpD;
+use FloFaber\MphpD\MPDException;
+
+function gee_capture_renderer_session_from_mpd(?array $rendererContext = null): ?array
+{
+    if (!is_array($rendererContext)) {
+        $rendererContext = gee_get_selected_renderer_context();
+
+        if ($rendererContext === null) {
+            $rendererContext = gee_get_first_renderer_context();
+        }
+    }
+
+    if (!is_array($rendererContext)) {
+        return null;
+    }
+
+    $rendererId = (int)($rendererContext['renderer_id'] ?? $rendererContext['id'] ?? 0);
+
+    if ($rendererId <= 0) {
+        return null;
+    }
+
+    $runtime = gee_get_renderer_runtime_context($rendererContext);
+
+    if (!is_array($runtime)) {
+        return null;
+    }
+
+    $activeStream = (string)($runtime['active_stream'] ?? gee_get_default_stream_for_renderer($rendererContext));
+    $mpdHost = (string)($runtime['mpd_host'] ?? '127.0.0.1');
+    $mpdPort = (int)($runtime['mpd_port'] ?? 6601);
+
+    try {
+        $mphpd = new MphpD([
+            'host' => $mpdHost,
+            'port' => $mpdPort,
+            'timeout' => 5,
+        ]);
+
+        $mphpd->connect();
+
+        $status = $mphpd->status();
+        $currentSong = $mphpd->player()->current_song();
+
+        $currentTrackUri = null;
+        $currentTrackPos = 0;
+        $elapsedSeconds = 0.0;
+        $playbackState = (string)($status['state'] ?? 'stop');
+
+        if (is_array($currentSong)) {
+            $currentTrackUri = !empty($currentSong['file']) ? (string)$currentSong['file'] : null;
+            $currentTrackPos = isset($currentSong['pos']) ? (int)$currentSong['pos'] : 0;
+        }
+
+        if (isset($status['elapsed'])) {
+            $elapsedSeconds = (float)$status['elapsed'];
+        }
+
+        gee_save_renderer_session(
+            $rendererId,
+            $activeStream,
+            $currentTrackUri,
+            $currentTrackPos,
+            $elapsedSeconds,
+            $playbackState
+        );
+
+        return gee_get_renderer_session($rendererId);
+
+    } catch (MPDException $e) {
+        throw new RuntimeException('Failed to capture renderer session from MPD: ' . $e->getMessage(), 0, $e);
+    }
+}
+
+function gee_set_renderer_active_stream(int $rendererId, string $activeStream): bool
+{
+    $session = gee_ensure_renderer_session($rendererId, $activeStream);
+
+    return gee_save_renderer_session(
+        $rendererId,
+        $activeStream,
+        $session['current_track_uri'] ?? null,
+        (int)($session['current_track_pos'] ?? 0),
+        (float)($session['elapsed_seconds'] ?? 0),
+        (string)($session['playback_state'] ?? 'stop')
+    );
+}
+
+function gee_set_renderer_active_stream_for_context(?array $rendererContext, string $activeStream): bool
+{
+    if (!is_array($rendererContext)) {
+        $rendererContext = gee_get_selected_renderer_context();
+
+        if ($rendererContext === null) {
+            $rendererContext = gee_get_first_renderer_context();
+        }
+    }
+
+    if (!is_array($rendererContext)) {
+        return false;
+    }
+
+    $rendererId = (int)($rendererContext['renderer_id'] ?? $rendererContext['id'] ?? 0);
+
+    if ($rendererId <= 0) {
+        return false;
+    }
+
+    return gee_set_renderer_active_stream($rendererId, $activeStream);
+}
