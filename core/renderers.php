@@ -53,7 +53,6 @@ function gee_get_renderer_context(int $rendererId): ?array
 
     $result = $stmt->get_result();
     $row = $result ? $result->fetch_assoc() : null;
-
     $stmt->close();
 
     return $row ?: null;
@@ -88,6 +87,7 @@ function gee_get_first_renderer_context(): ?array
     $result = $conn->query("
         SELECT id
         FROM renderers
+        WHERE COALESCE(is_active, 1) = 1
         ORDER BY COALESCE(display_name, hostname) ASC
         LIMIT 1
     ");
@@ -105,3 +105,33 @@ function gee_get_first_renderer_context(): ?array
     return gee_get_renderer_context((int) $row['id']);
 }
 
+function gee_resolve_renderer_context(string $cookieName = 'gee_selected_renderer'): ?array
+{
+    $rendererContext = gee_get_selected_renderer_context($cookieName);
+
+    if ($rendererContext === null) {
+        $rendererContext = gee_get_first_renderer_context();
+    }
+
+    if ($rendererContext !== null) {
+        $GLOBALS['gee_renderer_context'] = $rendererContext;
+    }
+
+    return $rendererContext;
+}
+
+function gee_get_renderer_display_name(?array $rendererContext): ?string
+{
+    if (!is_array($rendererContext)) {
+        return null;
+    }
+
+    $displayName = trim((string) ($rendererContext['display_name'] ?? ''));
+    if ($displayName !== '') {
+        return $displayName;
+    }
+
+    $hostname = trim((string) ($rendererContext['hostname'] ?? ''));
+
+    return $hostname !== '' ? $hostname : null;
+}

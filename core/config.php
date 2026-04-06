@@ -20,3 +20,24 @@ define('GEE_DB_NAME', 'gee');
 define('GEE_DB_USER', 'geeuser');
 define('GEE_DB_PASS', 'geepassword');
 
+/*
+|--------------------------------------------------------------------------
+| Gee stream defaults
+|--------------------------------------------------------------------------
+|
+| Keep these aligned with your systemd MPD instances.
+|
+*/
+define('GEE_STREAM_SAFE_KEY', 'stream_safe');
+define('GEE_STREAM_HIRES_KEY', 'stream_hires');
+
+define('GEE_STREAM_SAFE_MPD_HOST', '127.0.0.1');
+define('GEE_STREAM_SAFE_MPD_PORT', 6601);
+define('GEE_STREAM_HIRES_MPD_HOST', '127.0.0.1');
+define('GEE_STREAM_HIRES_MPD_PORT', 6602);
+
+define('GEE_STREAM_SAFE_PLAYLIST_DIR', '/var/lib/mpd-safe/playlists');
+define('GEE_STREAM_HIRES_PLAYLIST_DIR', '/var/lib/mpd-hires/playlists');
+
+define('GEE_STREAM_SAFE_PLAYLIST_FILE', 'stream_safe.m3u');
+define('GEE_STREAM_HIRES_PLAYLIST_FILE', 'stream_hires.m3u');

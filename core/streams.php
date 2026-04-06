@@ -3,106 +3,109 @@
 declare(strict_types=1);
 
 require_once __DIR__ . '/renderers.php';
+require_once __DIR__ . '/config.php';
+
+function gee_get_stream_runtime_config(string $streamKey): array
+{
+    switch ($streamKey) {
+        case GEE_STREAM_HIRES_KEY:
+            return [
+                'playlist_filename' => GEE_STREAM_HIRES_PLAYLIST_FILE,
+                'playlist_name' => pathinfo(GEE_STREAM_HIRES_PLAYLIST_FILE, PATHINFO_FILENAME),
+                'playlist_directory' => GEE_STREAM_HIRES_PLAYLIST_DIR,
+                'playlist_path' => rtrim(GEE_STREAM_HIRES_PLAYLIST_DIR, '/') . '/' . GEE_STREAM_HIRES_PLAYLIST_FILE,
+                'mpd_host' => GEE_STREAM_HIRES_MPD_HOST,
+                'mpd_port' => GEE_STREAM_HIRES_MPD_PORT,
+            ];
+
+        case GEE_STREAM_SAFE_KEY:
+        default:
+            return [
+                'playlist_filename' => GEE_STREAM_SAFE_PLAYLIST_FILE,
+                'playlist_name' => pathinfo(GEE_STREAM_SAFE_PLAYLIST_FILE, PATHINFO_FILENAME),
+                'playlist_directory' => GEE_STREAM_SAFE_PLAYLIST_DIR,
+                'playlist_path' => rtrim(GEE_STREAM_SAFE_PLAYLIST_DIR, '/') . '/' . GEE_STREAM_SAFE_PLAYLIST_FILE,
+                'mpd_host' => GEE_STREAM_SAFE_MPD_HOST,
+                'mpd_port' => GEE_STREAM_SAFE_MPD_PORT,
+            ];
+    }
+}
+
+function gee_apply_stream_runtime(?array $rendererContext): array
+{
+    $baseContext = is_array($rendererContext) ? $rendererContext : [];
+    $streamKey = $baseContext['stream_key'] ?? GEE_STREAM_SAFE_KEY;
+
+    return array_merge($baseContext, gee_get_stream_runtime_config((string) $streamKey));
+}
 
 function gee_get_stream_context_from_renderer_globals(): ?array
 {
     $rendererContext = $GLOBALS['gee_renderer_context'] ?? null;
 
     if (!is_array($rendererContext)) {
-        $rendererContext = gee_get_selected_renderer_context();
-
-        if ($rendererContext === null) {
-            $rendererContext = gee_get_first_renderer_context();
-        }
+        $rendererContext = gee_resolve_renderer_context();
     }
 
     if (!is_array($rendererContext)) {
         return null;
     }
 
-    $streamKey = $rendererContext['stream_key'] ?? 'stream_safe';
-
-    $streamRuntime = gee_get_stream_runtime_config($streamKey);
-
-    return array_merge($rendererContext, $streamRuntime);
+    return gee_apply_stream_runtime($rendererContext);
 }
 
-function gee_get_stream_runtime_config(string $streamKey): array
+function gee_resolve_stream_context(string $cookieName = 'gee_selected_renderer'): ?array
 {
-    switch ($streamKey) {
-        case 'stream_hires':
-            return [
-                'playlist_filename' => 'stream_hires.m3u',
-                'playlist_name' => 'stream_hires',
-                'playlist_directory' => '/var/lib/mpd-hires/playlists',
-                'playlist_path' => '/var/lib/mpd-hires/playlists/stream_hires.m3u',
-                'mpd_host' => '127.0.0.1',
-                'mpd_port' => 6602,
-            ];
+    $rendererContext = gee_resolve_renderer_context($cookieName);
 
-        case 'stream_safe':
-        default:
-            return [
-                'playlist_filename' => 'stream_safe.m3u',
-                'playlist_name' => 'stream_safe',
-                'playlist_directory' => '/var/lib/mpd-safe/playlists',
-                'playlist_path' => '/var/lib/mpd-safe/playlists/stream_safe.m3u',
-                'mpd_host' => '127.0.0.1',
-                'mpd_port' => 6601,
-            ];
+    if (!is_array($rendererContext)) {
+        return null;
     }
+
+    $streamContext = gee_apply_stream_runtime($rendererContext);
+    $GLOBALS['gee_renderer_context'] = $streamContext;
+
+    return $streamContext;
 }
 
 function gee_get_playlist_filename_from_stream(?array $streamContext): string
 {
-    if (is_array($streamContext) && !empty($streamContext['playlist_filename'])) {
-        return $streamContext['playlist_filename'];
-    }
-
-    return 'stream_safe.m3u';
+    return (is_array($streamContext) && !empty($streamContext['playlist_filename']))
+        ? (string) $streamContext['playlist_filename']
+        : GEE_STREAM_SAFE_PLAYLIST_FILE;
 }
 
 function gee_get_playlist_name_from_stream(?array $streamContext): string
 {
-    if (is_array($streamContext) && !empty($streamContext['playlist_name'])) {
-        return $streamContext['playlist_name'];
-    }
-
-    return 'stream_safe';
+    return (is_array($streamContext) && !empty($streamContext['playlist_name']))
+        ? (string) $streamContext['playlist_name']
+        : pathinfo(GEE_STREAM_SAFE_PLAYLIST_FILE, PATHINFO_FILENAME);
 }
 
 function gee_get_playlist_directory_from_stream(?array $streamContext): string
 {
-    if (is_array($streamContext) && !empty($streamContext['playlist_directory'])) {
-        return $streamContext['playlist_directory'];
-    }
-
-    return '/var/lib/mpd-safe/playlists';
+    return (is_array($streamContext) && !empty($streamContext['playlist_directory']))
+        ? (string) $streamContext['playlist_directory']
+        : GEE_STREAM_SAFE_PLAYLIST_DIR;
 }
 
 function gee_get_playlist_path_from_stream(?array $streamContext): string
 {
-    if (is_array($streamContext) && !empty($streamContext['playlist_path'])) {
-        return $streamContext['playlist_path'];
-    }
-
-    return '/var/lib/mpd-safe/playlists/stream_safe.m3u';
+    return (is_array($streamContext) && !empty($streamContext['playlist_path']))
+        ? (string) $streamContext['playlist_path']
+        : rtrim(GEE_STREAM_SAFE_PLAYLIST_DIR, '/') . '/' . GEE_STREAM_SAFE_PLAYLIST_FILE;
 }
 
 function gee_get_mpd_host_from_stream(?array $streamContext): string
 {
-    if (is_array($streamContext) && !empty($streamContext['mpd_host'])) {
-        return (string)$streamContext['mpd_host'];
-    }
-
-    return '127.0.0.1';
+    return (is_array($streamContext) && !empty($streamContext['mpd_host']))
+        ? (string) $streamContext['mpd_host']
+        : GEE_STREAM_SAFE_MPD_HOST;
 }
 
 function gee_get_mpd_port_from_stream(?array $streamContext): int
 {
-    if (is_array($streamContext) && !empty($streamContext['mpd_port'])) {
-        return (int)$streamContext['mpd_port'];
-    }
-
-    return 6601;
+    return (is_array($streamContext) && !empty($streamContext['mpd_port']))
+        ? (int) $streamContext['mpd_port']
+        : GEE_STREAM_SAFE_MPD_PORT;
 }

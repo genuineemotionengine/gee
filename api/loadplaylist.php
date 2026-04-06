@@ -4,107 +4,81 @@ declare(strict_types=1);
 
 require_once '/var/www/app/core/bootstrap.php';
 require_once '/var/www/app/core/streams.php';
+require_once __DIR__ . '/MphpD/MphpD.php';
+
+use FloFaber\MphpD\MphpD;
+use FloFaber\MphpD\MPDException;
 
 $conn = gee_db();
-
 $rendererContext = gee_get_stream_context_from_renderer_globals();
 
-$playlistFilename = gee_get_playlist_filename_from_stream($rendererContext);
 $playlistName = gee_get_playlist_name_from_stream($rendererContext);
 $playlistDirectory = gee_get_playlist_directory_from_stream($rendererContext);
 $playlistPath = gee_get_playlist_path_from_stream($rendererContext);
 $mpdHost = gee_get_mpd_host_from_stream($rendererContext);
 $mpdPort = gee_get_mpd_port_from_stream($rendererContext);
 
+$tracks = [];
 
-
-$myalbumarray = [];
-$count = 0;
-
-if (!isset($sql) || trim((string)$sql) === '') {
+if (!isset($sql) || trim((string) $sql) === '') {
     $sql = "SELECT albumpath FROM app WHERE genre != 'Relaxation'";
 }
 
-$stmt = $conn->prepare($sql);
-
-if (!$stmt) {
-    echo "Prepare failed: " . $conn->error . "\n";
-    exit;
+$result = $conn->query($sql);
+if (!$result) {
+    throw new RuntimeException('Playlist query failed: ' . $conn->error);
 }
-
-if (!$stmt->execute()) {
-    echo "Execute failed: " . $stmt->error . "\n";
-    $stmt->close();
-    exit;
-}
-
-$result = $stmt->get_result();
 
 while ($row = $result->fetch_assoc()) {
-    $myalbumarray[$count++] = $row['albumpath'] . "\n";
+    $albumpath = trim((string) ($row['albumpath'] ?? ''));
+    if ($albumpath !== '') {
+        $tracks[] = $albumpath;
+    }
 }
 
-$stmt->close();
-
-if (empty($myalbumarray)) {
-    echo "No tracks found for playlist generation.\n";
-    exit;
+if (empty($tracks)) {
+    throw new RuntimeException('No tracks found for playlist generation.');
 }
 
 if (!is_dir($playlistDirectory)) {
-    echo "Playlist directory does not exist: {$playlistDirectory}\n";
-    exit;
+    throw new RuntimeException('Playlist directory does not exist: ' . $playlistDirectory);
 }
 
-shuffle($myalbumarray);
+shuffle($tracks);
+$playlistBody = implode("\n", $tracks) . "\n";
 
-$myfile = fopen($playlistPath, 'w');
-
-if ($myfile === false) {
-    echo "Unable to open playlist file for writing: {$playlistPath}\n";
-    exit;
+if (file_put_contents($playlistPath, $playlistBody) === false) {
+    throw new RuntimeException('Unable to write playlist file: ' . $playlistPath);
 }
 
-foreach ($myalbumarray as $line) {
-    fwrite($myfile, $line);
-}
-
-fclose($myfile);
-
-/*
-|--------------------------------------------------------------------------
-| Create MPD connection for the selected stream
-|--------------------------------------------------------------------------
-|
-| Replace this section with your actual mphpd connection bootstrap if needed.
-| The important thing is that the MPD client connects to:
-|   $mpdHost
-|   $mpdPort
-|
-*/
-if (!class_exists('Mphpd')) {
-    echo "Mphpd class is not available\n";
-    exit;
-}
-
-$mphpd = new Mphpd([
+$mphpd = new MphpD([
     'host' => $mpdHost,
     'port' => $mpdPort,
+    'timeout' => 5,
 ]);
 
-$mphpd->queue()->clear();
-$mphpd->playlist($playlistName)->load([0]);
-$mphpd->player()->repeat(MPD_STATE_ON);
-$mphpd->player()->play(0);
-$mphpd->player()->pause();
+try {
+    $mphpd->connect();
+    $mphpd->queue()->clear();
+    $mphpd->playlist($playlistName)->load([0]);
+    $mphpd->player()->repeat(1);
+    $mphpd->player()->play(0);
+    $mphpd->player()->pause();
+} catch (MPDException $e) {
+    throw new RuntimeException('Failed to load playlist into MPD: ' . $e->getMessage(), 0, $e);
+}
+
+if (!headers_sent()) {
+    header('Content-Type: application/json');
+}
 
 echo json_encode([
     'status' => 'ok',
-    'renderer' => $rendererContext['display_name'] ?: ($rendererContext['hostname'] ?? null),
+    'renderer' => gee_get_renderer_display_name($rendererContext),
     'stream_key' => $rendererContext['stream_key'] ?? null,
     'stream_format' => $rendererContext['stream_format'] ?? null,
     'playlist_name' => $playlistName,
     'playlist_path' => $playlistPath,
     'mpd_host' => $mpdHost,
-    'mpd_port' => $mpdPort
+    'mpd_port' => $mpdPort,
 ]);
