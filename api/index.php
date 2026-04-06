@@ -32,11 +32,11 @@ use FloFaber\MphpD\MPDException;
 //  "timeout" => 5
 //]);
 
-//$mphpd = new MphpD([
-//    "host" => $mpdHost,
-//    "port" => $mpdPort,
-//    "timeout" => 5
-//]);
+$mphpd = new MphpD([
+    "host" => $mpdHost,
+    "port" => $mpdPort,
+    "timeout" => 5
+]);
 
 try{
   $mphpd->connect();
@@ -51,6 +51,8 @@ try{
 
 
 if ($service == 1) {
+    
+    echo $mpdHost." ".$mpdPort."<br><br>";
 
     $rendererContext = gee_get_selected_renderer_context();
 

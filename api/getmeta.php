@@ -20,11 +20,11 @@ if (is_array($geeRendererContext)) {
     $geeMpdPort = gee_get_mpd_port_from_stream($geeRendererContext);
 }
 
-$mphpd = new MphpD([
-    "host" => $mpdHost,
-    "port" => $mpdPort,
-    "timeout" => 5
-]);
+//$mphpd = new MphpD([
+//    "host" => $mpdHost,
+//    "port" => $mpdPort,
+//    "timeout" => 5
+//]);
 
 
 $statusarray = $mphpd->status();
