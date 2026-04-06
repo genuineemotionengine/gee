@@ -1,17 +1,21 @@
 <?php
 
-$geeRendererContext = $GLOBALS['gee_renderer_context'] ?? null;
+$geeRendererContext = gee_get_stream_context_from_renderer_globals();
 
 $geeRendererName = null;
 $geeStreamKey = null;
 $geeStreamFormat = null;
 $geeFifoPath = null;
+$geeMpdHost = '127.0.0.1';
+$geeMpdPort = 6601;
 
 if (is_array($geeRendererContext)) {
     $geeRendererName = $geeRendererContext['display_name'] ?: $geeRendererContext['hostname'];
     $geeStreamKey = $geeRendererContext['stream_key'] ?? null;
     $geeStreamFormat = $geeRendererContext['stream_format'] ?? null;
     $geeFifoPath = $geeRendererContext['fifo_path'] ?? null;
+    $geeMpdHost = gee_get_mpd_host_from_stream($geeRendererContext);
+    $geeMpdPort = gee_get_mpd_port_from_stream($geeRendererContext);
 }
 
 $statusarray = $mphpd->status();

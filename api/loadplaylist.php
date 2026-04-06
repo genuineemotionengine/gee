@@ -9,10 +9,12 @@ $conn = gee_db();
 
 $rendererContext = gee_get_stream_context_from_renderer_globals();
 
-$streamKey = $rendererContext['stream_key'] ?? 'stream_safe';
 $playlistFilename = gee_get_playlist_filename_from_stream($rendererContext);
+$playlistName = gee_get_playlist_name_from_stream($rendererContext);
+$playlistDirectory = gee_get_playlist_directory_from_stream($rendererContext);
 $playlistPath = gee_get_playlist_path_from_stream($rendererContext);
-$playlist = pathinfo($playlistFilename, PATHINFO_FILENAME);
+$mpdHost = gee_get_mpd_host_from_stream($rendererContext);
+$mpdPort = gee_get_mpd_port_from_stream($rendererContext);
 
 $myalbumarray = [];
 $count = 0;
@@ -47,6 +49,11 @@ if (empty($myalbumarray)) {
     exit;
 }
 
+if (!is_dir($playlistDirectory)) {
+    echo "Playlist directory does not exist: {$playlistDirectory}\n";
+    exit;
+}
+
 shuffle($myalbumarray);
 
 $myfile = fopen($playlistPath, 'w');
@@ -64,28 +71,38 @@ fclose($myfile);
 
 /*
 |--------------------------------------------------------------------------
-| Load playlist into MPD using mphpd
+| Create MPD connection for the selected stream
 |--------------------------------------------------------------------------
+|
+| Replace this section with your actual mphpd connection bootstrap if needed.
+| The important thing is that the MPD client connects to:
+|   $mpdHost
+|   $mpdPort
+|
 */
-if (!isset($mphpd)) {
-    echo "mphpd is not available in loadplaylist.php\n";
+if (!class_exists('Mphpd')) {
+    echo "Mphpd class is not available\n";
     exit;
 }
 
+$mphpd = new Mphpd([
+    'host' => $mpdHost,
+    'port' => $mpdPort,
+]);
+
 $mphpd->queue()->clear();
-
-$mphpd->playlist($playlist)->load([0]);
-
+$mphpd->playlist($playlistName)->load([0]);
 $mphpd->player()->repeat(MPD_STATE_ON);
-
 $mphpd->player()->play(0);
-
 $mphpd->player()->pause();
 
 echo json_encode([
     'status' => 'ok',
     'renderer' => $rendererContext['display_name'] ?: ($rendererContext['hostname'] ?? null),
-    'stream_key' => $streamKey,
-    'playlist_file' => $playlistFilename,
-    'playlist_path' => $playlistPath
+    'stream_key' => $rendererContext['stream_key'] ?? null,
+    'stream_format' => $rendererContext['stream_format'] ?? null,
+    'playlist_name' => $playlistName,
+    'playlist_path' => $playlistPath,
+    'mpd_host' => $mpdHost,
+    'mpd_port' => $mpdPort
 ]);
