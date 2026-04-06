@@ -13,13 +13,12 @@ $conn = gee_db();
 
 $rendererContext = gee_get_stream_context_from_renderer_globals();
 
+$playlistFilename = gee_get_playlist_filename_from_stream($rendererContext);
 $playlistName = gee_get_playlist_name_from_stream($rendererContext);
 $playlistDirectory = gee_get_playlist_directory_from_stream($rendererContext);
 $playlistPath = gee_get_playlist_path_from_stream($rendererContext);
 $mpdHost = gee_get_mpd_host_from_stream($rendererContext);
 $mpdPort = gee_get_mpd_port_from_stream($rendererContext);
-
-$myalbumarray = [];
 
 if (!isset($sql) || trim((string)$sql) === '') {
     $sql = "SELECT albumpath FROM app WHERE genre != 'Relaxation'";
@@ -39,34 +38,43 @@ if (!$stmt->execute()) {
 
 $result = $stmt->get_result();
 
+$tracks = [];
+
 while ($row = $result->fetch_assoc()) {
-    $myalbumarray[] = $row['albumpath'] . "\n";
+    $track = trim((string)($row['albumpath'] ?? ''));
+    if ($track !== '') {
+        $tracks[] = $track;
+    }
 }
 
 $stmt->close();
 
-if (empty($myalbumarray)) {
+if (empty($tracks)) {
     throw new RuntimeException('No tracks found for playlist generation.');
 }
+
+shuffle($tracks);
 
 if (!is_dir($playlistDirectory)) {
     throw new RuntimeException("Playlist directory does not exist: {$playlistDirectory}");
 }
 
-shuffle($myalbumarray);
+/*
+|--------------------------------------------------------------------------
+| Write .m3u file for visibility/debugging
+|--------------------------------------------------------------------------
+*/
+$playlistText = implode("\n", $tracks) . "\n";
 
-$myfile = fopen($playlistPath, 'w');
-
-if ($myfile === false) {
-    throw new RuntimeException("Unable to open playlist file for writing: {$playlistPath}");
+if (file_put_contents($playlistPath, $playlistText) === false) {
+    throw new RuntimeException("Unable to write playlist file: {$playlistPath}");
 }
 
-foreach ($myalbumarray as $line) {
-    fwrite($myfile, $line);
-}
-
-fclose($myfile);
-
+/*
+|--------------------------------------------------------------------------
+| Connect to the correct MPD instance and build queue directly
+|--------------------------------------------------------------------------
+*/
 $mphpd = new MphpD([
     'host' => $mpdHost,
     'port' => $mpdPort,
@@ -75,13 +83,32 @@ $mphpd = new MphpD([
 
 try {
     $mphpd->connect();
+
+    // Clear queue
     $mphpd->queue()->clear();
 
-    // Use MPD command interface rather than saved-playlist API assumptions
-    $mphpd->sendCommand('load', [$playlistName]);
+    // Add every track directly into MPD queue
+    foreach ($tracks as $track) {
+        $mphpd->queue()->add($track);
+    }
+
+    // Start at first track, then pause so metadata is available
     $mphpd->player()->repeat(1);
     $mphpd->player()->play(0);
     $mphpd->player()->pause();
+
 } catch (MPDException $e) {
     throw new RuntimeException('MPD error: ' . $e->getMessage(), 0, $e);
 }
+
+echo json_encode([
+    'status' => 'ok',
+    'renderer' => $rendererContext['display_name'] ?? ($rendererContext['hostname'] ?? null),
+    'stream_key' => $rendererContext['stream_key'] ?? null,
+    'stream_format' => $rendererContext['stream_format'] ?? null,
+    'playlist_name' => $playlistName,
+    'playlist_path' => $playlistPath,
+    'track_count' => count($tracks),
+    'mpd_host' => $mpdHost,
+    'mpd_port' => $mpdPort
+]);
