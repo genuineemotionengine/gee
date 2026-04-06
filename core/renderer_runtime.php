@@ -1,54 +1,21 @@
 <?php
-require_once __DIR__ . '/renderer_sessions.php';
 
 declare(strict_types=1);
 
 require_once __DIR__ . '/renderers.php';
+require_once __DIR__ . '/renderer_sessions.php';
 
 /*
 |--------------------------------------------------------------------------
 | Renderer-first runtime model
 |--------------------------------------------------------------------------
-|
-| Renderer is the parent context.
-| Stream exists only within the renderer.
-|
-| Rule set implemented here:
-| - renderer must always come first
-| - only renderer-owned streams are allowed
-| - highest supported stream is selected by default
-| - user may override stream within renderer context
-|
 */
 
-/**
- * Return the supported streams for a renderer.
- *
- * For now, all current renderers support:
- * - safe
- * - hires
- *
- * This keeps the model aligned with your current rule set:
- *   Rose      -> safe, hires
- *   Lucy      -> safe, hires
- *   Veronica  -> safe, hires
- *   Emily     -> safe, hires
- *   Olivia    -> safe, hires (when added)
- *
- * Later we can make this capability-driven from hardware fields.
- */
 function gee_get_allowed_streams_for_renderer(array $rendererContext): array
 {
     return ['safe', 'hires'];
 }
 
-/**
- * Return the best default stream for a renderer.
- *
- * Rule:
- * - highest supported stream first
- * - fallback to safe
- */
 function gee_get_default_stream_for_renderer(array $rendererContext): string
 {
     $allowed = gee_get_allowed_streams_for_renderer($rendererContext);
@@ -60,9 +27,6 @@ function gee_get_default_stream_for_renderer(array $rendererContext): string
     return 'safe';
 }
 
-/**
- * Build a per-renderer cookie name for remembering stream choice.
- */
 function gee_get_renderer_stream_cookie_name(array $rendererContext): string
 {
     $rendererId = (int)($rendererContext['renderer_id'] ?? $rendererContext['id'] ?? 0);
@@ -76,9 +40,6 @@ function gee_get_renderer_stream_cookie_name(array $rendererContext): string
     return 'gee_stream_renderer_' . $rendererId;
 }
 
-/**
- * Read the selected stream for this renderer from cookie, if valid.
- */
 function gee_get_selected_stream_for_renderer(array $rendererContext): ?string
 {
     $cookieName = gee_get_renderer_stream_cookie_name($rendererContext);
@@ -93,13 +54,6 @@ function gee_get_selected_stream_for_renderer(array $rendererContext): ?string
     return in_array($stream, $allowed, true) ? $stream : null;
 }
 
-/**
- * Return the active stream for the renderer.
- *
- * Order:
- * 1. stored per-renderer stream preference
- * 2. best default stream for renderer
- */
 function gee_get_active_stream_for_renderer(array $rendererContext): string
 {
     $sessionStream = gee_get_active_stream_from_session_or_default($rendererContext);
@@ -117,9 +71,6 @@ function gee_get_active_stream_for_renderer(array $rendererContext): string
     return gee_get_default_stream_for_renderer($rendererContext);
 }
 
-/**
- * Persist the selected stream for a renderer.
- */
 function gee_set_selected_stream_for_renderer(array $rendererContext, string $stream): bool
 {
     $stream = strtolower(trim($stream));
@@ -143,20 +94,6 @@ function gee_set_selected_stream_for_renderer(array $rendererContext, string $st
     );
 }
 
-/**
- * Return runtime config for a renderer-owned stream.
- *
- * IMPORTANT:
- * For now we keep your existing working MPD/playlist model:
- * - safe  -> 6601 / /var/lib/mpd-safe/playlists
- * - hires -> 6602 / /var/lib/mpd-hires/playlists
- *
- * This is a transitional step.
- *
- * Later, for full Rule 7 and renderer-session preservation,
- * we will move toward renderer-owned session state with
- * stream handover preserving queue/position.
- */
 function gee_get_runtime_config_for_renderer_stream(array $rendererContext, string $stream): array
 {
     $stream = strtolower(trim($stream));
@@ -191,9 +128,6 @@ function gee_get_runtime_config_for_renderer_stream(array $rendererContext, stri
     }
 }
 
-/**
- * Resolve full runtime context for the selected renderer.
- */
 function gee_get_renderer_runtime_context(?array $rendererContext = null): ?array
 {
     if (!is_array($rendererContext)) {
