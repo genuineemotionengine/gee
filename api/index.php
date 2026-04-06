@@ -26,25 +26,18 @@ require_once __DIR__ . "/MphpD/MphpD.php";
 use FloFaber\MphpD\MphpD;
 use FloFaber\MphpD\MPDException;
 
-//$mphpd = new MphpD([
-//  "host" => "localhost",
-//  "port" => 6600,
-//  "timeout" => 5
-//]);
+$mphpd = new MphpD([
+  "host" => "localhost",
+  "port" => 6600,
+  "timeout" => 5
+]);
 
-//$mphpd = new MphpD([
-//    "host" => $mpdHost,
-//    "port" => $mpdPort,
-//    "timeout" => 5
-//]);
-//
-//try{
-//  $mphpd->connect();
-//}catch (MPDException $e){
-//    echo "host & port: ".$mpdHost." ".$mpdPort."<br><br>";
-//  echo $e->getMessage();
-//  return false;
-//}
+try{
+  $mphpd->connect();
+}catch (MPDException $e){
+  echo $e->getMessage();
+  return false;
+}
 
 
 //***************** Just Get Meta **********************
@@ -52,8 +45,6 @@ use FloFaber\MphpD\MPDException;
 
 
 if ($service == 1) {
-    
-    echo $mpdHost." ".$mpdPort."<br><br>";
 
     $rendererContext = gee_get_selected_renderer_context();
 
