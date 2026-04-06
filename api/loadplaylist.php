@@ -16,11 +16,19 @@ $playlistPath = gee_get_playlist_path_from_stream($rendererContext);
 $mpdHost = gee_get_mpd_host_from_stream($rendererContext);
 $mpdPort = gee_get_mpd_port_from_stream($rendererContext);
 
-//$mphpd = new MphpD([
-//    "host" => $mpdHost,
-//    "port" => $mpdPort,
-//    "timeout" => 5
-//]);
+$mphpd = new MphpD([
+    "host" => $mpdHost,
+    "port" => $mpdPort,
+    "timeout" => 5
+]);
+
+try{
+  $mphpd->connect();
+}catch (MPDException $e){
+    echo "host & port: ".$mpdHost." ".$mpdPort."<br><br>";
+  echo $e->getMessage();
+  return false;
+}
 
 $myalbumarray = [];
 $count = 0;

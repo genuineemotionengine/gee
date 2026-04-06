@@ -32,19 +32,19 @@ use FloFaber\MphpD\MPDException;
 //  "timeout" => 5
 //]);
 
-$mphpd = new MphpD([
-    "host" => $mpdHost,
-    "port" => $mpdPort,
-    "timeout" => 5
-]);
-
-try{
-  $mphpd->connect();
-}catch (MPDException $e){
-    echo "host & port: ".$mpdHost." ".$mpdPort."<br><br>";
-  echo $e->getMessage();
-  return false;
-}
+//$mphpd = new MphpD([
+//    "host" => $mpdHost,
+//    "port" => $mpdPort,
+//    "timeout" => 5
+//]);
+//
+//try{
+//  $mphpd->connect();
+//}catch (MPDException $e){
+//    echo "host & port: ".$mpdHost." ".$mpdPort."<br><br>";
+//  echo $e->getMessage();
+//  return false;
+//}
 
 
 //***************** Just Get Meta **********************
