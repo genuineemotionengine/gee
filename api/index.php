@@ -1,6 +1,8 @@
 <?php
 
 require_once '/var/www/app/core/renderers.php';
+require_once '/var/www/app/core/streams.php';
+
 
 parse_str($_SERVER['QUERY_STRING'], $qsarray);
 
@@ -40,17 +42,7 @@ try{
 
 //***************** Just Get Meta **********************
 
-//if ($service == 1) {
-//
-//    $playlistPath = "/var/lib/mpd/playlists/app.m3u";
-//
-//    if (!is_file($playlistPath)) {
-//        $sql = "SELECT albumpath FROM app WHERE genre != 'Relaxation'";
-//        include('loadplaylist.php');
-//    }
-//
-//    include('getmeta.php');
-//}
+
 
 if ($service == 1) {
 
@@ -64,7 +56,7 @@ if ($service == 1) {
         $GLOBALS['gee_renderer_context'] = $rendererContext;
     }
 
-    $playlistPath = "/var/lib/mpd/playlists/app.m3u";
+    $playlistPath = gee_get_playlist_path_from_stream($rendererContext);
 
     if (!is_file($playlistPath)) {
         $sql = "SELECT albumpath FROM app WHERE genre != 'Relaxation'";
@@ -73,6 +65,7 @@ if ($service == 1) {
 
     include('getmeta.php');
 }
+
 
 
 //***************** Next **********************
