@@ -1,5 +1,7 @@
 <?php
 
+require_once '/var/www/app/core/streams.php';
+
 $geeRendererContext = gee_get_stream_context_from_renderer_globals();
 
 $geeRendererName = null;
@@ -17,6 +19,13 @@ if (is_array($geeRendererContext)) {
     $geeMpdHost = gee_get_mpd_host_from_stream($geeRendererContext);
     $geeMpdPort = gee_get_mpd_port_from_stream($geeRendererContext);
 }
+
+$mphpd = new MphpD([
+    "host" => $mpdHost,
+    "port" => $mpdPort,
+    "timeout" => 5
+]);
+
 
 $statusarray = $mphpd->status();
 
