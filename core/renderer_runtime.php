@@ -13,12 +13,7 @@ function gee_get_allowed_streams_for_renderer(array $rendererContext): array
 function gee_get_default_stream_for_renderer(array $rendererContext): string
 {
     $allowed = gee_get_allowed_streams_for_renderer($rendererContext);
-
-    if (in_array('hires', $allowed, true)) {
-        return 'hires';
-    }
-
-    return 'safe';
+    return in_array('hires', $allowed, true) ? 'hires' : 'safe';
 }
 
 function gee_get_renderer_stream_cookie_name(array $rendererContext): string
@@ -88,80 +83,106 @@ function gee_set_selected_stream_for_renderer(array $rendererContext, string $st
     );
 }
 
+function gee_get_renderer_base_config(string $hostname): ?array
+{
+    return match (strtolower($hostname)) {
+        'rose' => [
+            'safe_port' => 6601,
+            'hires_port' => 6602,
+            'safe_key' => 'rose_safe',
+            'hires_key' => 'rose_hires',
+            'safe_name' => 'Rose Safe',
+            'hires_name' => 'Rose Hi-Res',
+            'safe_dir' => '/var/lib/mpd-rose-safe/playlists',
+            'hires_dir' => '/var/lib/mpd-rose-hires/playlists',
+            'safe_file' => 'rose_safe.m3u',
+            'hires_file' => 'rose_hires.m3u',
+        ],
+        'lucy' => [
+            'safe_port' => 6603,
+            'hires_port' => 6604,
+            'safe_key' => 'lucy_safe',
+            'hires_key' => 'lucy_hires',
+            'safe_name' => 'Lucy Safe',
+            'hires_name' => 'Lucy Hi-Res',
+            'safe_dir' => '/var/lib/mpd-lucy-safe/playlists',
+            'hires_dir' => '/var/lib/mpd-lucy-hires/playlists',
+            'safe_file' => 'lucy_safe.m3u',
+            'hires_file' => 'lucy_hires.m3u',
+        ],
+        'veronica' => [
+            'safe_port' => 6605,
+            'hires_port' => 6606,
+            'safe_key' => 'veronica_safe',
+            'hires_key' => 'veronica_hires',
+            'safe_name' => 'Veronica Safe',
+            'hires_name' => 'Veronica Hi-Res',
+            'safe_dir' => '/var/lib/mpd-veronica-safe/playlists',
+            'hires_dir' => '/var/lib/mpd-veronica-hires/playlists',
+            'safe_file' => 'veronica_safe.m3u',
+            'hires_file' => 'veronica_hires.m3u',
+        ],
+        'emily' => [
+            'safe_port' => 6607,
+            'hires_port' => 6608,
+            'safe_key' => 'emily_safe',
+            'hires_key' => 'emily_hires',
+            'safe_name' => 'Emily Safe',
+            'hires_name' => 'Emily Hi-Res',
+            'safe_dir' => '/var/lib/mpd-emily-safe/playlists',
+            'hires_dir' => '/var/lib/mpd-emily-hires/playlists',
+            'safe_file' => 'emily_safe.m3u',
+            'hires_file' => 'emily_hires.m3u',
+        ],
+        default => null,
+    };
+}
+
 function gee_get_runtime_config_for_renderer_stream(array $rendererContext, string $stream): array
 {
     $stream = strtolower(trim($stream));
     $hostname = strtolower(trim((string)($rendererContext['hostname'] ?? '')));
+    $base = gee_get_renderer_base_config($hostname);
 
-    /*
-    |--------------------------------------------------------------------------
-    | Rose-only isolated mapping
-    |--------------------------------------------------------------------------
-    */
-    if ($hostname === 'rose') {
-        switch ($stream) {
-            case 'hires':
-                return [
-                    'stream_key' => 'rose_hires',
-                    'stream_name' => 'Rose Hi-Res',
-                    'stream_format' => '192000:24:2',
-                    'playlist_filename' => 'rose_hires.m3u',
-                    'playlist_name' => 'rose_hires',
-                    'playlist_directory' => '/var/lib/mpd-rose-hires/playlists',
-                    'playlist_path' => '/var/lib/mpd-rose-hires/playlists/rose_hires.m3u',
-                    'mpd_host' => '127.0.0.1',
-                    'mpd_port' => 6602,
-                ];
-
-            case 'safe':
-            default:
-                return [
-                    'stream_key' => 'rose_safe',
-                    'stream_name' => 'Rose Safe',
-                    'stream_format' => '44100:16:2',
-                    'playlist_filename' => 'rose_safe.m3u',
-                    'playlist_name' => 'rose_safe',
-                    'playlist_directory' => '/var/lib/mpd-rose-safe/playlists',
-                    'playlist_path' => '/var/lib/mpd-rose-safe/playlists/rose_safe.m3u',
-                    'mpd_host' => '127.0.0.1',
-                    'mpd_port' => 6601,
-                ];
-        }
-    }
-
-    /*
-    |--------------------------------------------------------------------------
-    | Temporary fallback for non-Rose renderers
-    |--------------------------------------------------------------------------
-    */
-    switch ($stream) {
-        case 'hires':
+    if ($base !== null) {
+        if ($stream === 'hires') {
             return [
-                'stream_key' => 'stream_hires',
-                'stream_name' => 'Hi-Res',
+                'stream_key' => $base['hires_key'],
+                'stream_name' => $base['hires_name'],
                 'stream_format' => '192000:24:2',
-                'playlist_filename' => 'stream_hires.m3u',
-                'playlist_name' => 'stream_hires',
-                'playlist_directory' => '/var/lib/mpd-hires/playlists',
-                'playlist_path' => '/var/lib/mpd-hires/playlists/stream_hires.m3u',
+                'playlist_filename' => $base['hires_file'],
+                'playlist_name' => pathinfo($base['hires_file'], PATHINFO_FILENAME),
+                'playlist_directory' => $base['hires_dir'],
+                'playlist_path' => $base['hires_dir'] . '/' . $base['hires_file'],
                 'mpd_host' => '127.0.0.1',
-                'mpd_port' => 6602,
+                'mpd_port' => $base['hires_port'],
             ];
+        }
 
-        case 'safe':
-        default:
-            return [
-                'stream_key' => 'stream_safe',
-                'stream_name' => 'Safe',
-                'stream_format' => '44100:16:2',
-                'playlist_filename' => 'stream_safe.m3u',
-                'playlist_name' => 'stream_safe',
-                'playlist_directory' => '/var/lib/mpd-safe/playlists',
-                'playlist_path' => '/var/lib/mpd-safe/playlists/stream_safe.m3u',
-                'mpd_host' => '127.0.0.1',
-                'mpd_port' => 6601,
-            ];
+        return [
+            'stream_key' => $base['safe_key'],
+            'stream_name' => $base['safe_name'],
+            'stream_format' => '44100:16:2',
+            'playlist_filename' => $base['safe_file'],
+            'playlist_name' => pathinfo($base['safe_file'], PATHINFO_FILENAME),
+            'playlist_directory' => $base['safe_dir'],
+            'playlist_path' => $base['safe_dir'] . '/' . $base['safe_file'],
+            'mpd_host' => '127.0.0.1',
+            'mpd_port' => $base['safe_port'],
+        ];
     }
+
+    return [
+        'stream_key' => 'stream_safe',
+        'stream_name' => 'Safe',
+        'stream_format' => '44100:16:2',
+        'playlist_filename' => 'stream_safe.m3u',
+        'playlist_name' => 'stream_safe',
+        'playlist_directory' => '/var/lib/mpd-safe/playlists',
+        'playlist_path' => '/var/lib/mpd-safe/playlists/stream_safe.m3u',
+        'mpd_host' => '127.0.0.1',
+        'mpd_port' => 6601,
+    ];
 }
 
 function gee_get_renderer_runtime_context(?array $rendererContext = null): ?array
