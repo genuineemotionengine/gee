@@ -87,22 +87,58 @@ if ($service === 1) {
     |--------------------------------------------------------------------------
     */
     if ($rendererId > 0 && $lastRendererId !== $rendererId) {
-        gee_restore_renderer_session_to_mpd($rendererContext);
-        gee_set_last_selected_renderer_id($rendererId);
+        try {
+            gee_restore_renderer_session_to_mpd($rendererContext);
+            gee_set_last_selected_renderer_id($rendererId);
 
-        // Re-resolve runtime after restore, in case session-owned stream matters
-        $geeRuntimeContext = gee_get_renderer_runtime_context($rendererContext);
-        $GLOBALS['gee_runtime_context'] = $geeRuntimeContext;
+            // Re-resolve runtime after restore, in case the renderer session
+            // owns a different active stream than the one initially resolved.
+            $geeRuntimeContext = gee_get_renderer_runtime_context($rendererContext);
+            $GLOBALS['gee_runtime_context'] = $geeRuntimeContext;
+
+            // Reconnect MPD client to the now-correct runtime context
+            $mpdHost = (string)($geeRuntimeContext['mpd_host'] ?? '127.0.0.1');
+            $mpdPort = (int)($geeRuntimeContext['mpd_port'] ?? 6601);
+
+            $mphpd = new MphpD([
+                'host' => $mpdHost,
+                'port' => $mpdPort,
+                'timeout' => 5,
+            ]);
+
+            $mphpd->connect();
+
+        } catch (\Throwable $e) {
+            http_response_code(500);
+            echo json_encode([
+                'status' => 'error',
+                'message' => 'Renderer session restore failed',
+                'renderer_id' => $rendererId,
+                'details' => $e->getMessage(),
+            ]);
+            exit;
+        }
     }
 
-    $playlistPath = (string) $geeRuntimeContext['playlist_path'];
+    $playlistPath = (string)($geeRuntimeContext['playlist_path'] ?? '');
 
-    if (!is_file($playlistPath)) {
+    if ($playlistPath !== '' && !is_file($playlistPath)) {
         $sql = "SELECT albumpath FROM app WHERE genre != 'Relaxation'";
         include __DIR__ . '/loadplaylist.php';
     }
 
-    gee_capture_renderer_session_from_mpd($rendererContext);
+    try {
+        gee_capture_renderer_session_from_mpd($rendererContext);
+    } catch (\Throwable $e) {
+        http_response_code(500);
+        echo json_encode([
+            'status' => 'error',
+            'message' => 'Renderer session capture failed',
+            'renderer_id' => $rendererId,
+            'details' => $e->getMessage(),
+        ]);
+        exit;
+    }
 
     include __DIR__ . '/getmeta.php';
     exit;
