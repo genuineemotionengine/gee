@@ -5,11 +5,23 @@ declare(strict_types=1);
 require_once __DIR__ . '/../core/bootstrap.php';
 require_once __DIR__ . '/../core/renderers.php';
 require_once __DIR__ . '/../core/renderer_runtime.php';
+require_once __DIR__ . '/../core/renderer_sessions.php';
 require_once __DIR__ . '/getid3.php';
 require_once __DIR__ . '/MphpD/MphpD.php';
 
 use FloFaber\MphpD\MphpD;
 use FloFaber\MphpD\MPDException;
+
+function gee_normalize_stream_key_to_active_stream(?string $streamKey): ?string
+{
+    $streamKey = strtolower(trim((string)$streamKey));
+
+    return match ($streamKey) {
+        'stream_safe', 'safe' => 'safe',
+        'stream_hires', 'hires' => 'hires',
+        default => null,
+    };
+}
 
 parse_str($_SERVER['QUERY_STRING'] ?? '', $qsarray);
 
@@ -23,7 +35,7 @@ $conn = gee_db();
 
 /*
 |--------------------------------------------------------------------------
-| Resolve renderer-first runtime context
+| Resolve renderer context
 |--------------------------------------------------------------------------
 */
 $rendererContext = gee_get_selected_renderer_context();
@@ -41,6 +53,32 @@ if ($rendererContext === null) {
     exit;
 }
 
+$rendererId = (int)($rendererContext['renderer_id'] ?? $rendererContext['id'] ?? 0);
+
+/*
+|--------------------------------------------------------------------------
+| Sync session stream from renderer-context row
+|--------------------------------------------------------------------------
+|
+| The renderer context page is currently where stream changes happen.
+| The player itself only polls service=1, so we reconcile the session here.
+|
+*/
+$sessionBeforeSync = gee_get_renderer_session_for_context($rendererContext);
+$sessionStreamBeforeSync = is_array($sessionBeforeSync) ? (string)($sessionBeforeSync['active_stream'] ?? '') : '';
+$contextStream = gee_normalize_stream_key_to_active_stream($rendererContext['stream_key'] ?? null);
+$streamChangedByContext = false;
+
+if ($rendererId > 0 && $contextStream !== null && $sessionStreamBeforeSync !== $contextStream) {
+    gee_set_renderer_active_stream($rendererId, $contextStream);
+    $streamChangedByContext = true;
+}
+
+/*
+|--------------------------------------------------------------------------
+| Resolve renderer-first runtime context
+|--------------------------------------------------------------------------
+*/
 $geeRuntimeContext = gee_get_renderer_runtime_context($rendererContext);
 
 if ($geeRuntimeContext === null) {
@@ -78,25 +116,23 @@ try {
 |--------------------------------------------------------------------------
 */
 if ($service === 1) {
-    $rendererId = (int)($rendererContext['renderer_id'] ?? $rendererContext['id'] ?? 0);
     $lastRendererId = gee_get_last_selected_renderer_id();
+    $rendererChanged = ($rendererId > 0 && $lastRendererId !== $rendererId);
 
     /*
     |--------------------------------------------------------------------------
-    | If renderer changed, restore that renderer's saved session first
+    | If renderer changed or stream changed in renderer context, restore the
+    | renderer session into the correct MPD before returning metadata.
     |--------------------------------------------------------------------------
     */
-    if ($rendererId > 0 && $lastRendererId !== $rendererId) {
+    if (($rendererChanged || $streamChangedByContext) && $rendererId > 0) {
         try {
             gee_restore_renderer_session_to_mpd($rendererContext);
             gee_set_last_selected_renderer_id($rendererId);
 
-            // Re-resolve runtime after restore, in case the renderer session
-            // owns a different active stream than the one initially resolved.
             $geeRuntimeContext = gee_get_renderer_runtime_context($rendererContext);
             $GLOBALS['gee_runtime_context'] = $geeRuntimeContext;
 
-            // Reconnect MPD client to the now-correct runtime context
             $mpdHost = (string)($geeRuntimeContext['mpd_host'] ?? '127.0.0.1');
             $mpdPort = (int)($geeRuntimeContext['mpd_port'] ?? 6601);
 
@@ -107,13 +143,11 @@ if ($service === 1) {
             ]);
 
             $mphpd->connect();
-
         } catch (\Throwable $e) {
             http_response_code(500);
             echo json_encode([
                 'status' => 'error',
-                'message' => 'Renderer session restore failed',
-                'renderer_id' => $rendererId,
+                'message' => 'Renderer restore failed.',
                 'details' => $e->getMessage(),
             ]);
             exit;
@@ -133,8 +167,7 @@ if ($service === 1) {
         http_response_code(500);
         echo json_encode([
             'status' => 'error',
-            'message' => 'Renderer session capture failed',
-            'renderer_id' => $rendererId,
+            'message' => 'Renderer session capture failed.',
             'details' => $e->getMessage(),
         ]);
         exit;
@@ -143,6 +176,7 @@ if ($service === 1) {
     include __DIR__ . '/getmeta.php';
     exit;
 }
+
 /*
 |--------------------------------------------------------------------------
 | Service 2 - Pause / Play toggle
@@ -150,6 +184,7 @@ if ($service === 1) {
 */
 if ($service === 2) {
     $mphpd->player()->pause();
+    gee_capture_renderer_session_from_mpd($rendererContext);
     include __DIR__ . '/getmeta.php';
     exit;
 }
@@ -169,6 +204,7 @@ if ($service === 3) {
         $mphpd->player()->pause();
     }
 
+    gee_capture_renderer_session_from_mpd($rendererContext);
     include __DIR__ . '/getmeta.php';
     exit;
 }
@@ -188,6 +224,7 @@ if ($service === 4) {
         $mphpd->player()->pause();
     }
 
+    gee_capture_renderer_session_from_mpd($rendererContext);
     include __DIR__ . '/getmeta.php';
     exit;
 }
@@ -200,6 +237,7 @@ if ($service === 4) {
 if ($service === 5) {
     $sql = "SELECT albumpath FROM app WHERE genre != 'Relaxation'";
     include __DIR__ . '/loadplaylist.php';
+    gee_capture_renderer_session_from_mpd($rendererContext);
     include __DIR__ . '/getmeta.php';
     exit;
 }
@@ -212,6 +250,7 @@ if ($service === 5) {
 if ($service === 6) {
     $sql = "SELECT albumpath FROM app WHERE genre = 'Classical'";
     include __DIR__ . '/loadplaylist.php';
+    gee_capture_renderer_session_from_mpd($rendererContext);
     include __DIR__ . '/getmeta.php';
     exit;
 }
@@ -224,6 +263,7 @@ if ($service === 6) {
 if ($service === 7) {
     $sql = "SELECT albumpath FROM app WHERE genre = 'Relaxation' OR genre = 'Ambient' OR genre = 'Chilled Electronic'";
     include __DIR__ . '/loadplaylist.php';
+    gee_capture_renderer_session_from_mpd($rendererContext);
     include __DIR__ . '/getmeta.php';
     exit;
 }
@@ -303,9 +343,12 @@ if ($service === 12) {
 
     if ($plnext) {
         $mphpd->player()->next();
+        gee_capture_renderer_session_from_mpd($rendererContext);
         include __DIR__ . '/getmeta.php';
         exit;
     }
+
+    gee_capture_renderer_session_from_mpd($rendererContext);
 
     echo json_encode([
         'status' => 'ok',
@@ -347,6 +390,7 @@ if ($service === 13) {
         $mphpd->player()->pause();
     }
 
+    gee_capture_renderer_session_from_mpd($rendererContext);
     include __DIR__ . '/getmeta.php';
     exit;
 }
