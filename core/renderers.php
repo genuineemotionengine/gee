@@ -135,3 +135,38 @@ function gee_get_renderer_display_name(?array $rendererContext): ?string
 
     return $hostname !== '' ? $hostname : null;
 }
+function gee_get_last_renderer_cookie_name(): string
+{
+    return 'gee_last_renderer';
+}
+
+function gee_get_last_selected_renderer_id(): ?int
+{
+    $cookieName = gee_get_last_renderer_cookie_name();
+
+    if (!isset($_COOKIE[$cookieName])) {
+        return null;
+    }
+
+    $rendererId = (int) $_COOKIE[$cookieName];
+
+    return $rendererId > 0 ? $rendererId : null;
+}
+
+function gee_set_last_selected_renderer_id(int $rendererId): bool
+{
+    if ($rendererId <= 0) {
+        return false;
+    }
+
+    return setcookie(
+        gee_get_last_renderer_cookie_name(),
+        (string) $rendererId,
+        [
+            'expires' => time() + (86400 * 30),
+            'path' => '/',
+            'httponly' => false,
+            'samesite' => 'Lax',
+        ]
+    );
+}
