@@ -293,3 +293,127 @@ function gee_set_renderer_active_stream_for_context(?array $rendererContext, str
 
     return gee_set_renderer_active_stream($rendererId, $activeStream);
 }
+
+function gee_restore_renderer_session_to_mpd(?array $rendererContext = null): array
+{
+    if (!is_array($rendererContext)) {
+        $rendererContext = gee_get_selected_renderer_context();
+
+        if ($rendererContext === null) {
+            $rendererContext = gee_get_first_renderer_context();
+        }
+    }
+
+    if (!is_array($rendererContext)) {
+        throw new RuntimeException('No renderer context available for restore.');
+    }
+
+    $rendererId = (int)($rendererContext['renderer_id'] ?? $rendererContext['id'] ?? 0);
+
+    if ($rendererId <= 0) {
+        throw new RuntimeException('Invalid renderer id for restore.');
+    }
+
+    $session = gee_get_renderer_session_for_context($rendererContext);
+
+    if (!is_array($session)) {
+        throw new RuntimeException('No renderer session available for restore.');
+    }
+
+    $runtime = gee_get_renderer_runtime_context($rendererContext);
+
+    if (!is_array($runtime)) {
+        throw new RuntimeException('No renderer runtime context available for restore.');
+    }
+
+    $mpdHost = (string)($runtime['mpd_host'] ?? '127.0.0.1');
+    $mpdPort = (int)($runtime['mpd_port'] ?? 6601);
+
+    $currentTrackUri = $session['current_track_uri'] ?? null;
+    $currentTrackPos = (int)($session['current_track_pos'] ?? 0);
+    $elapsedSeconds = (float)($session['elapsed_seconds'] ?? 0);
+    $playbackState = (string)($session['playback_state'] ?? 'stop');
+
+    $mphpd = new MphpD([
+        'host' => $mpdHost,
+        'port' => $mpdPort,
+        'timeout' => 5,
+    ]);
+
+    try {
+        $mphpd->connect();
+
+        if ($currentTrackUri !== null && $currentTrackUri !== '') {
+            $queue = $mphpd->queue()->get();
+            $foundPos = null;
+
+            if (is_array($queue)) {
+                foreach ($queue as $idx => $track) {
+                    if (!empty($track['file']) && (string)$track['file'] === (string)$currentTrackUri) {
+                        if (isset($track['pos'])) {
+                            $foundPos = (int)$track['pos'];
+                        } else {
+                            $foundPos = (int)$idx;
+                        }
+                        break;
+                    }
+                }
+            }
+
+            // If the track is not already in the queue, rebuild a minimal queue with just that track
+            if ($foundPos === null) {
+                $mphpd->queue()->clear();
+                $mphpd->queue()->add($currentTrackUri);
+                $foundPos = 0;
+            }
+
+            $mphpd->player()->play($foundPos);
+
+            if ($elapsedSeconds > 0) {
+                // Use seekcur if available in your MPD/MphpD combo
+                try {
+                    $mphpd->player()->seekcur((string)$elapsedSeconds);
+                } catch (\Throwable $e) {
+                    // Fallback: try play position only if seek is not supported cleanly
+                }
+            }
+
+            if ($playbackState === 'pause') {
+                $mphpd->player()->pause();
+            } elseif ($playbackState === 'stop') {
+                // safest stop behavior after loading track
+                try {
+                    $mphpd->sendCommand('stop');
+                } catch (\Throwable $e) {
+                    // ignore if not supported
+                }
+            }
+        }
+
+        return [
+            'status' => 'ok',
+            'renderer_id' => $rendererId,
+            'active_stream' => $session['active_stream'] ?? null,
+            'current_track_uri' => $currentTrackUri,
+            'current_track_pos' => $currentTrackPos,
+            'elapsed_seconds' => $elapsedSeconds,
+            'playback_state' => $playbackState,
+            'mpd_host' => $mpdHost,
+            'mpd_port' => $mpdPort,
+        ];
+
+    } catch (MPDException $e) {
+        throw new RuntimeException('Failed to restore renderer session to MPD: ' . $e->getMessage(), 0, $e);
+    }
+}
+
+function gee_restore_selected_renderer_session_to_mpd(): array
+{
+    $rendererContext = gee_get_selected_renderer_context();
+
+    if ($rendererContext === null) {
+        $rendererContext = gee_get_first_renderer_context();
+    }
+
+    return gee_restore_renderer_session_to_mpd($rendererContext);
+}
