@@ -78,23 +78,6 @@ try {
 |--------------------------------------------------------------------------
 */
 if ($service === 1) {
-    $rendererId = (int)($rendererContext['renderer_id'] ?? $rendererContext['id'] ?? 0);
-    $lastRendererId = gee_get_last_selected_renderer_id();
-
-    /*
-    |--------------------------------------------------------------------------
-    | If renderer changed, restore that renderer's saved session first
-    |--------------------------------------------------------------------------
-    */
-    if ($rendererId > 0 && $lastRendererId !== $rendererId) {
-        gee_restore_renderer_session_to_mpd($rendererContext);
-        gee_set_last_selected_renderer_id($rendererId);
-
-        // Re-resolve runtime after restore, in case session-owned stream matters
-        $geeRuntimeContext = gee_get_renderer_runtime_context($rendererContext);
-        $GLOBALS['gee_runtime_context'] = $geeRuntimeContext;
-    }
-
     $playlistPath = (string) $geeRuntimeContext['playlist_path'];
 
     if (!is_file($playlistPath)) {
@@ -102,11 +85,10 @@ if ($service === 1) {
         include __DIR__ . '/loadplaylist.php';
     }
 
-    gee_capture_renderer_session_from_mpd($rendererContext);
-
     include __DIR__ . '/getmeta.php';
     exit;
 }
+
 /*
 |--------------------------------------------------------------------------
 | Service 2 - Pause / Play toggle
