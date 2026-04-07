@@ -5,12 +5,6 @@ declare(strict_types=1);
 require_once __DIR__ . '/renderers.php';
 require_once __DIR__ . '/renderer_sessions.php';
 
-/*
-|--------------------------------------------------------------------------
-| Renderer-first runtime model
-|--------------------------------------------------------------------------
-*/
-
 function gee_get_allowed_streams_for_renderer(array $rendererContext): array
 {
     return ['safe', 'hires'];
@@ -97,7 +91,49 @@ function gee_set_selected_stream_for_renderer(array $rendererContext, string $st
 function gee_get_runtime_config_for_renderer_stream(array $rendererContext, string $stream): array
 {
     $stream = strtolower(trim($stream));
+    $hostname = strtolower(trim((string)($rendererContext['hostname'] ?? '')));
 
+    /*
+    |--------------------------------------------------------------------------
+    | Rose-only isolated mapping
+    |--------------------------------------------------------------------------
+    */
+    if ($hostname === 'rose') {
+        switch ($stream) {
+            case 'hires':
+                return [
+                    'stream_key' => 'rose_hires',
+                    'stream_name' => 'Rose Hi-Res',
+                    'stream_format' => '192000:24:2',
+                    'playlist_filename' => 'rose_hires.m3u',
+                    'playlist_name' => 'rose_hires',
+                    'playlist_directory' => '/var/lib/mpd-rose-hires/playlists',
+                    'playlist_path' => '/var/lib/mpd-rose-hires/playlists/rose_hires.m3u',
+                    'mpd_host' => '127.0.0.1',
+                    'mpd_port' => 6602,
+                ];
+
+            case 'safe':
+            default:
+                return [
+                    'stream_key' => 'rose_safe',
+                    'stream_name' => 'Rose Safe',
+                    'stream_format' => '44100:16:2',
+                    'playlist_filename' => 'rose_safe.m3u',
+                    'playlist_name' => 'rose_safe',
+                    'playlist_directory' => '/var/lib/mpd-rose-safe/playlists',
+                    'playlist_path' => '/var/lib/mpd-rose-safe/playlists/rose_safe.m3u',
+                    'mpd_host' => '127.0.0.1',
+                    'mpd_port' => 6601,
+                ];
+        }
+    }
+
+    /*
+    |--------------------------------------------------------------------------
+    | Temporary fallback for non-Rose renderers
+    |--------------------------------------------------------------------------
+    */
     switch ($stream) {
         case 'hires':
             return [
