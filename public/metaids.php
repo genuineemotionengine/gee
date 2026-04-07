@@ -13,6 +13,6 @@ echo "$('#secondsdur".$x."').html(pad(result.duration%60));\n";
 echo "$('#minutesdur".$x."').html(pad(parseInt(result.duration/60,10)));\n";
 echo "$('#secondscur".$x."').html(pad(current%60));\n";
 echo "$('#minutescur".$x."').html(pad(parseInt(current/60,10)));\n";
-echo "$('#current-renderer".$x."').text(data.renderer_display)";
+echo "$('#current-renderer".$x."').text(result.renderer_display)";
 
 }
