@@ -164,10 +164,10 @@ $rows = [
     'nextartist' => $nextartist,
     'state' => $state,
     'renderer' => $geeRendererName,
+    'renderer_display' => strtoupper((string)$geeRendererName),
     'active_stream' => $geeActiveStream,
     'allowed_streams' => $geeAllowedStreams,
     'stream_key' => $geeStreamKey,
     'stream_format' => $geeStreamFormat
 ];
-
 echo json_encode($rows);

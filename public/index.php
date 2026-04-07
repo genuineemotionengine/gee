@@ -21,7 +21,7 @@ echo "<meta name = 'viewport' content = 'width=device-width, initial-scale = 1, 
 echo "<link rel='icon' href='/img/favicon.ico'/>\n";
 echo "<meta name='theme-color' content='#000000'/>\n";
 echo "<link rel='apple-touch-icon' href='/img/logo192.png'/>\n";
-echo "<title>".htmlspecialchars($rendererName, ENT_QUOTES, 'UTF-8')."</title>\n";
+echo "<title id='current-renderer2'>".htmlspecialchars($rendererName, ENT_QUOTES, 'UTF-8')."</title>\n";
 echo "<link href='https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css' rel='stylesheet' integrity='sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT' crossorigin='anonymous'/>\n";
 echo "<link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css'/>\n";
 echo "<script src='https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js' integrity='sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3' crossorigin='anonymous'></script>\n";
@@ -484,7 +484,7 @@ echo "<div id='imagepad1' class='imgpad'><img id='image1' class='img-fluid' src=
 
 //echo "<div class='pt-3'><h6>".$hosty."</h6></div>";
 
-echo "<div class='pt-3'><h6>" . htmlspecialchars($rendererName, ENT_QUOTES, 'UTF-8') . "</h6></div>";
+echo "<div class='pt-3'><h6 id='current-renderer1'>" . htmlspecialchars($rendererName, ENT_QUOTES, 'UTF-8') . "</h6></div>";
 
 //echo "<button type='button' class='bg-black' onclick='getmeta(3)'><i class='bi bi-rewind' style='font-size: 4rem; color: white;'></i></button>\n";
 //echo "<button type='button' class='bg-black' onclick='getmeta(13)'><i class='bi bi-skip-start' style='font-size: 4rem; color: white;padding: 0px;'></i></button>\n";
