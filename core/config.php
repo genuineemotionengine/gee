@@ -17,8 +17,8 @@ define('GEE_DEFAULT_ARTWORK', '/assets/images/default-album.png');
 define('GEE_DB_HOST', 'localhost');
 define('GEE_DB_PORT', 3306);
 define('GEE_DB_NAME', 'gee');
-define('GEE_DB_USER', 'geeuser');
-define('GEE_DB_PASS', 'geepassword');
+define('GEE_DB_USER', 'gee');
+define('GEE_DB_PASS', 'gee');
 
 /*
 |--------------------------------------------------------------------------
