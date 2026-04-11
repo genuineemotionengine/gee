@@ -239,6 +239,22 @@ $snapclientConfig = build_snapclient_config($data, $rendererId, $CORE_HOST, $COR
 write_text_file($mpdConfigPath, $mpdConfig);
 write_text_file($snapclientConfigPath, $snapclientConfig);
 
+$regenerateScript = '/usr/local/bin/gee-regenerate-audio-runtime.sh';
+
+if (is_file($regenerateScript) && is_executable($regenerateScript)) {
+    $output = [];
+    $returnCode = 0;
+
+    exec($regenerateScript . ' 2>&1', $output, $returnCode);
+
+    if ($returnCode !== 0) {
+        fail(
+            'Renderer registered, but audio runtime regeneration failed: ' . implode(' | ', $output),
+            500
+        );
+    }
+}
+
 respond([
     'success' => true,
     'renderer_id' => $rendererId,
