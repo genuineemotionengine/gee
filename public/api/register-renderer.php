@@ -108,6 +108,7 @@ function delete_generated_files(string $rendererDir): void
         $rendererDir . '/config_version.txt',
         $rendererDir . '/mpd.conf',
         $rendererDir . '/snapclient.conf',
+        $rendererDir . '/mpd.runtime.conf',
     ];
 
     foreach ($generatedFiles as $file) {
@@ -133,9 +134,6 @@ function build_mpd_config(array $profile, string $rendererId, string $rendererDi
 # Gee canonical MPD config
 # Renderer ID: {$rendererId}
 # Renderer Name: {$rendererName}
-#
-# This is the Geecore-generated canonical config artifact.
-# Runtime service-specific values can be layered on later.
 # ------------------------------------------------------------------
 
 music_directory "{$musicDir}"
@@ -155,7 +153,6 @@ audio_output {
     path "{$fifoPath}"
     format "{$sampleFormat}"
 }
-
 CONF;
 }
 
@@ -173,9 +170,6 @@ function build_snapclient_config(array $profile, string $rendererId, string $cor
 # Gee canonical Snapclient config
 # Renderer ID: {$rendererId}
 # Renderer Name: {$rendererName}
-#
-# This is the Geecore-generated canonical renderer config artifact.
-# It is not yet being pushed into the live Snapclient service layer.
 # ------------------------------------------------------------------
 
 [gee]
@@ -190,7 +184,6 @@ installer_version = {$installerVersion}
 [server]
 host = {$coreHost}
 port = {$corePort}
-
 CONF;
 }
 
@@ -245,7 +238,7 @@ if (is_file($regenerateScript) && is_executable($regenerateScript)) {
     $output = [];
     $returnCode = 0;
 
-    exec($regenerateScript . ' 2>&1', $output, $returnCode);
+    exec('sudo ' . escapeshellarg($regenerateScript) . ' 2>&1', $output, $returnCode);
 
     if ($returnCode !== 0) {
         fail(
