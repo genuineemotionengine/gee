@@ -20,8 +20,8 @@ function safe_renderer_id(string $value): string
     return preg_replace('/[^a-z0-9\-]/', '', strtolower($value));
 }
 
-$rendererId = isset($_GET['renderer_id']) ? safe_renderer_id((string)$_GET['renderer_id']) : '';
-$type = isset($_GET['type']) ? trim((string)$_GET['type']) : '';
+$rendererId = isset($_GET['renderer_id']) ? safe_renderer_id((string) $_GET['renderer_id']) : '';
+$type = isset($_GET['type']) ? trim((string) $_GET['type']) : '';
 
 if ($rendererId === '') {
     fail('Missing or invalid renderer_id');
@@ -41,13 +41,19 @@ $fileMap = [
     'snapclient' => $rendererDir . '/snapclient.conf',
 ];
 
-$configPath = $fileMap[$type];
+$configPath = $fileMap[$type] ?? '';
 
-if (!is_file($configPath)) {
+if ($configPath === '' || !is_file($configPath)) {
     fail('Requested config file not found', 404);
+}
+
+$content = file_get_contents($configPath);
+if ($content === false) {
+    fail('Failed to read config file', 500);
 }
 
 header('Content-Type: text/plain');
 header('Cache-Control: no-store');
-readfile($configPath);
+
+echo rtrim($content, "\r\n") . PHP_EOL;
 exit;
