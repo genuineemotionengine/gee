@@ -13,13 +13,11 @@ body {
     font-family: Arial, sans-serif;
     text-align: center;
 }
-
 #player {
     max-width: 700px;
     margin: 0 auto;
     padding: 20px;
 }
-
 #artwork img {
     width: 100%;
     max-width: 500px;
@@ -27,52 +25,41 @@ body {
     display: block;
     margin: 0 auto;
 }
-
 #renderer {
     margin-top: 20px;
     font-size: 0.95rem;
     opacity: 0.85;
     letter-spacing: 0.08em;
 }
-
 #status {
     margin-top: 8px;
     font-size: 0.9rem;
     opacity: 0.75;
 }
-
 #title {
     font-size: 2rem;
     margin-top: 20px;
     min-height: 2.4rem;
 }
-
-#artist,
-#album {
+#artist, #album {
     font-size: 1.2rem;
     margin-top: 10px;
     min-height: 1.5rem;
 }
-
-#progress-wrap,
-#volume-wrap {
+#progress-wrap, #volume-wrap {
     margin-top: 24px;
 }
-
 progress {
     width: 100%;
     max-width: 500px;
 }
-
-#controls,
-#secondary-controls {
+#controls, #secondary-controls, #playlist-controls {
     margin-top: 24px;
     display: flex;
     justify-content: center;
     gap: 12px;
     flex-wrap: wrap;
 }
-
 button {
     background: #111;
     color: #fff;
@@ -81,11 +68,9 @@ button {
     cursor: pointer;
     min-width: 90px;
 }
-
 button:hover {
     background: #1a1a1a;
 }
-
 .idle {
     opacity: 0.6;
 }
@@ -103,6 +88,10 @@ button:hover {
     <div id="title">Loading...</div>
     <div id="artist"></div>
     <div id="album"></div>
+
+    <div id="playlist-controls">
+        <button type="button" onclick="loadMusic()">Load Music</button>
+    </div>
 
     <div id="progress-wrap">
         <div><span id="elapsed">0:00</span> / <span id="duration">0:00</span></div>
@@ -241,6 +230,22 @@ async function changeVolume(delta) {
         await fetchMeta();
     } catch (err) {
         console.error('changeVolume failed', err);
+    }
+}
+
+async function loadMusic() {
+    try {
+        const res = await fetch('/api/?service=5', { cache: 'no-store' });
+        const data = await res.json();
+
+        if (data.status !== 'ok') {
+            console.error('loadMusic failed', data);
+            return;
+        }
+
+        await fetchMeta();
+    } catch (err) {
+        console.error('loadMusic failed', err);
     }
 }
 

@@ -11,6 +11,74 @@ require_once __DIR__ . '/MphpD/MphpD.php';
 use FloFaber\MphpD\MphpD;
 use FloFaber\MphpD\MPDException;
 
+function gee_build_and_load_playlist(array $runtime, string $whereSql): array
+{
+    $conn = gee_db();
+
+    $stmt = $conn->prepare($whereSql);
+    if (!$stmt) {
+        throw new RuntimeException('Failed to prepare playlist query: ' . $conn->error);
+    }
+
+    if (!$stmt->execute()) {
+        $error = $stmt->error;
+        $stmt->close();
+        throw new RuntimeException('Failed to execute playlist query: ' . $error);
+    }
+
+    $result = $stmt->get_result();
+    $tracks = [];
+
+    while ($row = $result->fetch_assoc()) {
+        $track = trim((string)($row['albumpath'] ?? ''));
+        if ($track !== '') {
+            $tracks[] = $track;
+        }
+    }
+
+    $stmt->close();
+
+    if (empty($tracks)) {
+        throw new RuntimeException('No tracks found for playlist generation.');
+    }
+
+    shuffle($tracks);
+
+    $playlistDirectory = (string)$runtime['playlist_directory'];
+    $playlistPath = (string)$runtime['playlist_path'];
+
+    if (!is_dir($playlistDirectory) && !mkdir($playlistDirectory, 0775, true) && !is_dir($playlistDirectory)) {
+        throw new RuntimeException('Unable to create playlist directory: ' . $playlistDirectory);
+    }
+
+    $playlistText = implode("\n", $tracks) . "\n";
+
+    if (file_put_contents($playlistPath, $playlistText) === false) {
+        throw new RuntimeException('Unable to write playlist file: ' . $playlistPath);
+    }
+
+    $mphpd = new MphpD([
+        'host' => (string)$runtime['mpd_host'],
+        'port' => (int)$runtime['mpd_port'],
+        'timeout' => 5,
+    ]);
+
+    $mphpd->connect();
+    $mphpd->queue()->clear();
+
+    foreach ($tracks as $track) {
+        $mphpd->queue()->add($track);
+    }
+
+    $mphpd->player()->repeat(1);
+    $mphpd->player()->play(0);
+
+    return [
+        'playlist_path' => $playlistPath,
+        'track_count' => count($tracks),
+    ];
+}
+
 parse_str($_SERVER['QUERY_STRING'] ?? '', $qs);
 
 $service = isset($qs['service']) ? (int)$qs['service'] : 0;
@@ -132,6 +200,24 @@ if ($service === 4) {
         $mphpd->player()->pause();
     }
     gee_json_response(['status' => 'ok']);
+}
+
+if ($service === 5) {
+    try {
+        $playlist = gee_build_and_load_playlist(
+            $runtime,
+            "SELECT albumpath FROM app WHERE genre != 'Relaxation'"
+        );
+
+        gee_json_response([
+            'status' => 'ok',
+            'message' => 'Music loaded',
+            'track_count' => $playlist['track_count'],
+            'playlist_path' => $playlist['playlist_path'],
+        ]);
+    } catch (\Throwable $e) {
+        gee_fail('Playlist load failed: ' . $e->getMessage(), 500);
+    }
 }
 
 if ($service === 13) {
