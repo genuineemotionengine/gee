@@ -1,434 +1,154 @@
 <?php
 
-
 declare(strict_types=1);
-
-ini_set('display_errors', '1');
-ini_set('display_startup_errors', '1');
-error_reporting(E_ALL);
 
 require_once __DIR__ . '/../core/bootstrap.php';
 require_once __DIR__ . '/../core/renderers.php';
-require_once __DIR__ . '/../core/renderer_runtime.php';
-require_once __DIR__ . '/../core/renderer_sessions.php';
+require_once __DIR__ . '/../core/runtime.php';
 require_once __DIR__ . '/getid3.php';
 require_once __DIR__ . '/MphpD/MphpD.php';
 
 use FloFaber\MphpD\MphpD;
 use FloFaber\MphpD\MPDException;
 
-function gee_normalize_stream_key_to_active_stream(?string $streamKey): ?string
-{
-    $streamKey = strtolower(trim((string)$streamKey));
+parse_str($_SERVER['QUERY_STRING'] ?? '', $qs);
 
-    return match ($streamKey) {
-        'stream_safe', 'safe' => 'safe',
-        'stream_hires', 'hires' => 'hires',
-        default => null,
-    };
-}
+$service = isset($qs['service']) ? (int)$qs['service'] : 0;
+$mod = isset($qs['mod']) ? (int)$qs['mod'] : 0;
 
-parse_str($_SERVER['QUERY_STRING'] ?? '', $qsarray);
-
-$service = isset($qsarray['service']) ? (int) $qsarray['service'] : 0;
-$id = isset($qsarray['id']) ? (int) $qsarray['id'] : 0;
-$mod = isset($qsarray['mod']) ? (int) $qsarray['mod'] : 0;
-$verbose = !empty($qsarray['verbose']);
-$plnext = !empty($qsarray['plnext']);
-
-$conn = gee_db();
-
-/*
-|--------------------------------------------------------------------------
-| Resolve renderer context
-|--------------------------------------------------------------------------
-*/
-$rendererContext = gee_get_selected_renderer_context();
-
+$rendererContext = gee_get_selected_or_first_renderer_context();
 if ($rendererContext === null) {
-    $rendererContext = gee_get_first_renderer_context();
+    gee_fail('No registered renderer available.', 500);
 }
 
-if ($rendererContext === null) {
-    http_response_code(500);
-    echo json_encode([
-        'status' => 'error',
-        'message' => 'No renderer context available.'
-    ]);
-    exit;
+$runtime = gee_get_renderer_runtime_context($rendererContext);
+if ($runtime === null) {
+    gee_fail('No renderer runtime context available.', 500);
 }
-
-$rendererId = (int)($rendererContext['renderer_id'] ?? $rendererContext['id'] ?? 0);
-
-/*
-|--------------------------------------------------------------------------
-| Sync session stream from renderer-context row
-|--------------------------------------------------------------------------
-|
-| The renderer context page is currently where stream changes happen.
-| The player itself only polls service=1, so we reconcile the session here.
-|
-*/
-$sessionBeforeSync = gee_get_renderer_session_for_context($rendererContext);
-$sessionStreamBeforeSync = is_array($sessionBeforeSync) ? (string)($sessionBeforeSync['active_stream'] ?? '') : '';
-$contextStream = gee_normalize_stream_key_to_active_stream($rendererContext['stream_key'] ?? null);
-$streamChangedByContext = false;
-
-if ($rendererId > 0 && $contextStream !== null && $sessionStreamBeforeSync !== $contextStream) {
-    gee_set_renderer_active_stream($rendererId, $contextStream);
-    $streamChangedByContext = true;
-}
-
-/*
-|--------------------------------------------------------------------------
-| Resolve renderer-first runtime context
-|--------------------------------------------------------------------------
-*/
-$geeRuntimeContext = gee_get_renderer_runtime_context($rendererContext);
-
-if ($geeRuntimeContext === null) {
-    http_response_code(500);
-    echo json_encode([
-        'status' => 'error',
-        'message' => 'Unable to resolve renderer runtime context.'
-    ]);
-    exit;
-}
-
-$GLOBALS['gee_renderer_context'] = $rendererContext;
-$GLOBALS['gee_runtime_context'] = $geeRuntimeContext;
-
-$mpdHost = (string) $geeRuntimeContext['mpd_host'];
-$mpdPort = (int) $geeRuntimeContext['mpd_port'];
-
-$mphpd = new MphpD([
-    'host' => $mpdHost,
-    'port' => $mpdPort,
-    'timeout' => 5,
-]);
 
 try {
+    $mphpd = new MphpD([
+        'host' => (string)$runtime['mpd_host'],
+        'port' => (int)$runtime['mpd_port'],
+        'timeout' => 5,
+    ]);
+
     $mphpd->connect();
 } catch (MPDException $e) {
-    http_response_code(500);
-    echo 'MPD connection failed: ' . $e->getMessage();
-    exit;
+    gee_fail('MPD connection failed: ' . $e->getMessage(), 500);
 }
 
-/*
-|--------------------------------------------------------------------------
-| Service 1 - Get Meta
-|--------------------------------------------------------------------------
-*/
-/*
-|--------------------------------------------------------------------------
-| Service 1 - Get Meta
-|--------------------------------------------------------------------------
-*/
 if ($service === 1) {
-    try {
-        $lastRendererId = gee_get_last_selected_renderer_id();
-        $rendererChanged = ($rendererId > 0 && $lastRendererId !== $rendererId);
+    $status = $mphpd->status();
+    $song = $mphpd->player()->current_song();
 
-        /*
-        |--------------------------------------------------------------------------
-        | If renderer changed or stream changed in renderer context, restore the
-        | renderer session into the correct MPD before returning metadata.
-        |--------------------------------------------------------------------------
-        */
-        if (($rendererChanged || $streamChangedByContext) && $rendererId > 0) {
-            gee_restore_renderer_session_to_mpd($rendererContext);
-            gee_set_last_selected_renderer_id($rendererId);
+    $elapsed = (string)($status['elapsed'] ?? '0');
+    $duration = (string)($status['duration'] ?? '0');
 
-            $geeRuntimeContext = gee_get_renderer_runtime_context($rendererContext);
-            $GLOBALS['gee_runtime_context'] = $geeRuntimeContext;
+    $elapsed = explode('.', $elapsed)[0] ?? '0';
+    $duration = explode('.', $duration)[0] ?? '0';
 
-            $mpdHost = (string)($geeRuntimeContext['mpd_host'] ?? '127.0.0.1');
-            $mpdPort = (int)($geeRuntimeContext['mpd_port'] ?? 6601);
+    $title = (string)($song['title'] ?? '');
+    $artist = (string)($song['artist'] ?? '');
+    $album = (string)($song['album'] ?? '');
+    $albumartist = (string)($song['albumartist'] ?? '');
+    $file = (string)($song['file'] ?? '');
 
-            $mphpd = new MphpD([
-                'host' => $mpdHost,
-                'port' => $mpdPort,
-                'timeout' => 5,
-            ]);
-
-            $mphpd->connect();
-        }
-
-        $playlistPath = (string)($geeRuntimeContext['playlist_path'] ?? '');
-
-        if ($playlistPath !== '' && !is_file($playlistPath)) {
-            $sql = "SELECT albumpath FROM app WHERE genre != 'Relaxation'";
-            include __DIR__ . '/loadplaylist.php';
-        }
-
-        gee_capture_renderer_session_from_mpd($rendererContext);
-
-        include __DIR__ . '/getmeta.php';
-        exit;
-
-    } catch (\Throwable $e) {
-        http_response_code(500);
-        header('Content-Type: application/json');
-
-        echo json_encode([
-            'status' => 'error',
-            'message' => 'service=1 failed',
-            'details' => $e->getMessage(),
-            'file' => basename((string)$e->getFile()),
-            'line' => $e->getLine(),
-            'renderer_id' => $rendererId,
-            'renderer' => $rendererContext['display_name'] ?? ($rendererContext['hostname'] ?? null),
-            'stream_key' => $rendererContext['stream_key'] ?? null,
-            'playlist_path' => $geeRuntimeContext['playlist_path'] ?? null,
-            'mpd_host' => $geeRuntimeContext['mpd_host'] ?? null,
-            'mpd_port' => $geeRuntimeContext['mpd_port'] ?? null,
-        ], JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES);
-
-        exit;
-    }
-}
-/*
-|--------------------------------------------------------------------------
-| Service 2 - Pause / Play toggle
-|--------------------------------------------------------------------------
-*/
-if ($service === 2) {
-    $mphpd->player()->pause();
-    gee_capture_renderer_session_from_mpd($rendererContext);
-    include __DIR__ . '/getmeta.php';
-    exit;
-}
-
-/*
-|--------------------------------------------------------------------------
-| Service 3 - Previous
-|--------------------------------------------------------------------------
-*/
-if ($service === 3) {
-    $statusArray = $mphpd->status();
-    $pauseStatus = $statusArray['state'] ?? null;
-
-    $mphpd->player()->previous();
-
-    if ($pauseStatus === 'pause') {
-        $mphpd->player()->pause();
-    }
-
-    gee_capture_renderer_session_from_mpd($rendererContext);
-    include __DIR__ . '/getmeta.php';
-    exit;
-}
-
-/*
-|--------------------------------------------------------------------------
-| Service 4 - Next
-|--------------------------------------------------------------------------
-*/
-if ($service === 4) {
-    $statusArray = $mphpd->status();
-    $pauseStatus = $statusArray['state'] ?? null;
-
-    $mphpd->player()->next();
-
-    if ($pauseStatus === 'pause') {
-        $mphpd->player()->pause();
-    }
-
-    gee_capture_renderer_session_from_mpd($rendererContext);
-    include __DIR__ . '/getmeta.php';
-    exit;
-}
-
-/*
-|--------------------------------------------------------------------------
-| Service 5 - Restart Playlist
-|--------------------------------------------------------------------------
-*/
-if ($service === 5) {
-    $sql = "SELECT albumpath FROM app WHERE genre != 'Relaxation'";
-    include __DIR__ . '/loadplaylist.php';
-    gee_capture_renderer_session_from_mpd($rendererContext);
-    include __DIR__ . '/getmeta.php';
-    exit;
-}
-
-/*
-|--------------------------------------------------------------------------
-| Service 6 - Classical Playlist
-|--------------------------------------------------------------------------
-*/
-if ($service === 6) {
-    $sql = "SELECT albumpath FROM app WHERE genre = 'Classical'";
-    include __DIR__ . '/loadplaylist.php';
-    gee_capture_renderer_session_from_mpd($rendererContext);
-    include __DIR__ . '/getmeta.php';
-    exit;
-}
-
-/*
-|--------------------------------------------------------------------------
-| Service 7 - Relaxation Playlist
-|--------------------------------------------------------------------------
-*/
-if ($service === 7) {
-    $sql = "SELECT albumpath FROM app WHERE genre = 'Relaxation' OR genre = 'Ambient' OR genre = 'Chilled Electronic'";
-    include __DIR__ . '/loadplaylist.php';
-    gee_capture_renderer_session_from_mpd($rendererContext);
-    include __DIR__ . '/getmeta.php';
-    exit;
-}
-
-/*
-|--------------------------------------------------------------------------
-| Service 8 - Album List
-|--------------------------------------------------------------------------
-*/
-if ($service === 8) {
-    include __DIR__ . '/getalbum.php';
-    echo json_encode($albumtracks ?? []);
-    exit;
-}
-
-/*
-|--------------------------------------------------------------------------
-| Service 12 - Play Next
-|--------------------------------------------------------------------------
-*/
-if ($service === 12) {
-    $currentSong = $mphpd->player()->current_song();
-
-    if ($verbose) {
-        echo "Current Song";
-        echo '<pre>' . htmlentities(print_r($currentSong, true), ENT_SUBSTITUTE) . '</pre>';
-        echo "<br><br><br>";
-    }
-
-    $stmt = $conn->prepare("SELECT albumpath, title, artist FROM app WHERE id = ?");
-
-    if (!$stmt) {
-        http_response_code(500);
-        echo 'Prepare failed: ' . $conn->error;
-        exit;
-    }
-
-    $stmt->bind_param('i', $id);
-
-    if (!$stmt->execute()) {
-        $error = $stmt->error;
+    if (($title === '' || $artist === '' || $album === '' || $albumartist === '') && $file !== '') {
+        $stmt = gee_db()->prepare("
+            SELECT title, artist, album, albumartist
+            FROM app
+            WHERE albumpath = ?
+            LIMIT 1
+        ");
+        $stmt->bind_param('s', $file);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        $row = $result ? $result->fetch_assoc() : null;
         $stmt->close();
-        http_response_code(500);
-        echo 'Execute failed: ' . $error;
-        exit;
+
+        if ($row) {
+            $title = $title !== '' ? $title : (string)($row['title'] ?? '');
+            $artist = $artist !== '' ? $artist : (string)($row['artist'] ?? '');
+            $album = $album !== '' ? $album : (string)($row['album'] ?? '');
+            $albumartist = $albumartist !== '' ? $albumartist : (string)($row['albumartist'] ?? '');
+        }
     }
 
-    $result = $stmt->get_result();
-    $row = $result ? $result->fetch_assoc() : null;
-    $stmt->close();
+    $image = null;
+    $fullPath = $file !== '' ? GEE_MUSIC_ROOT . '/' . ltrim($file, '/') : '';
 
-    if (!$row) {
-        http_response_code(404);
-        echo 'Track not found.';
-        exit;
+    if ($fullPath !== '' && is_file($fullPath)) {
+        $getID3 = new getID3();
+        $info = $getID3->analyze($fullPath);
+
+        if (isset($info['comments']['picture'][0])) {
+            $image = 'data:' .
+                $info['comments']['picture'][0]['image_mime'] .
+                ';charset=utf-8;base64,' .
+                base64_encode($info['comments']['picture'][0]['data']);
+        }
     }
 
-    $uri = $row['albumpath'];
-    $title = $row['title'];
-    $artist = $row['artist'];
-
-    $pos = '+0';
-
-    if ($verbose) {
-        echo "uri: " . htmlentities((string) $uri, ENT_SUBSTITUTE) . "<br>";
-        echo "title: " . htmlentities((string) $title, ENT_SUBSTITUTE) . "<br>";
-        echo "artist: " . htmlentities((string) $artist, ENT_SUBSTITUTE) . "<br>";
-        echo "pos: " . htmlentities((string) $pos, ENT_SUBSTITUTE) . "<br><br>";
-    }
-
-    $results = $mphpd->queue()->add_id($uri, $pos);
-
-    if ($verbose) {
-        echo "Playlist Add:<br>";
-        echo '<pre>' . htmlentities(print_r($results, true), ENT_SUBSTITUTE) . '</pre>';
-    }
-
-    if ($plnext) {
-        $mphpd->player()->next();
-        gee_capture_renderer_session_from_mpd($rendererContext);
-        include __DIR__ . '/getmeta.php';
-        exit;
-    }
-
-    gee_capture_renderer_session_from_mpd($rendererContext);
-
-    echo json_encode([
+    gee_json_response([
         'status' => 'ok',
-        'uri' => $uri,
+        'renderer_id' => $rendererContext['renderer_id'],
+        'renderer_display' => strtoupper((string)$rendererContext['display_name']),
+        'active_stream' => $runtime['active_stream'],
+        'stream_key' => $runtime['stream_key'],
+        'stream_format' => $runtime['stream_format'],
+        'image' => $image,
         'title' => $title,
         'artist' => $artist,
+        'album' => $album,
+        'albumartist' => $albumartist,
+        'elapsed' => (int)$elapsed,
+        'duration' => (int)$duration,
+        'volume' => (int)($status['volume'] ?? 0),
+        'state' => (string)($status['state'] ?? 'stop'),
     ]);
-    exit;
 }
 
-/*
-|--------------------------------------------------------------------------
-| Service 13 - Restart Current Track
-|--------------------------------------------------------------------------
-*/
-if ($service === 13) {
-    $currentArray = $mphpd->player()->current_song();
+if ($service === 2) {
+    $mphpd->player()->pause();
+    gee_json_response(['status' => 'ok']);
+}
 
-    if ($verbose) {
-        echo "Current Song";
-        echo '<pre>' . htmlentities(print_r($currentArray, true), ENT_SUBSTITUTE) . '</pre>';
-        echo "<br><br><br>";
-    }
-
-    $statusArray = $mphpd->status();
-
-    if ($verbose) {
-        echo "Status";
-        echo '<pre>' . htmlentities(print_r($statusArray, true), ENT_SUBSTITUTE) . '</pre>';
-        echo "<br><br><br>";
-    }
-
-    $pauseStatus = $statusArray['state'] ?? null;
-    $pos = isset($currentArray['pos']) ? (int) $currentArray['pos'] : 0;
-
-    $mphpd->player()->play($pos);
-
-    if ($pauseStatus === 'pause') {
+if ($service === 3) {
+    $status = $mphpd->status();
+    $pauseState = (string)($status['state'] ?? '');
+    $mphpd->player()->previous();
+    if ($pauseState === 'pause') {
         $mphpd->player()->pause();
     }
-
-    gee_capture_renderer_session_from_mpd($rendererContext);
-    include __DIR__ . '/getmeta.php';
-    exit;
+    gee_json_response(['status' => 'ok']);
 }
 
-/*
-|--------------------------------------------------------------------------
-| Service 15 - Volume adjust
-|--------------------------------------------------------------------------
-*/
+if ($service === 4) {
+    $status = $mphpd->status();
+    $pauseState = (string)($status['state'] ?? '');
+    $mphpd->player()->next();
+    if ($pauseState === 'pause') {
+        $mphpd->player()->pause();
+    }
+    gee_json_response(['status' => 'ok']);
+}
+
+if ($service === 13) {
+    $song = $mphpd->player()->current_song();
+    $status = $mphpd->status();
+    $pauseState = (string)($status['state'] ?? '');
+    $pos = isset($song['pos']) ? (int)$song['pos'] : 0;
+    $mphpd->player()->play($pos);
+    if ($pauseState === 'pause') {
+        $mphpd->player()->pause();
+    }
+    gee_json_response(['status' => 'ok']);
+}
+
 if ($service === 15) {
     $mphpd->player()->volume($mod);
-
-    echo json_encode([
-        'status' => 'ok',
-        'mod' => $mod,
-    ]);
-    exit;
+    gee_json_response(['status' => 'ok', 'mod' => $mod]);
 }
 
-/*
-|--------------------------------------------------------------------------
-| Unknown service
-|--------------------------------------------------------------------------
-*/
-http_response_code(400);
-echo json_encode([
-    'status' => 'error',
-    'message' => 'Unknown or unsupported service.',
-    'service' => $service,
-]);
+gee_fail('Unknown or unsupported service.', 400, ['service' => $service]);
