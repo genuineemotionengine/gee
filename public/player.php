@@ -51,8 +51,8 @@ function updateUI(data) {
     document.getElementById('artist').innerText = data.artist || '';
     document.getElementById('album').innerText = data.album || '';
 
-    if (data.cover) {
-        document.getElementById('cover').src = data.cover;
+    if (data.image) {
+        document.getElementById('cover').src = data.image;
     }
 }
 

@@ -154,12 +154,23 @@ if ($service === 1) {
         }
     }
 
-    $playlistPath = (string)($geeRuntimeContext['playlist_path'] ?? '');
+$playlistPath = (string)($geeRuntimeContext['playlist_path'] ?? '');
 
-    if ($playlistPath !== '' && !is_file($playlistPath)) {
+if ($playlistPath !== '' && !is_file($playlistPath)) {
+    try {
         $sql = "SELECT albumpath FROM app WHERE genre != 'Relaxation'";
         include __DIR__ . '/loadplaylist.php';
+    } catch (\Throwable $e) {
+        http_response_code(500);
+        echo json_encode([
+            'status' => 'error',
+            'message' => 'Playlist bootstrap failed.',
+            'details' => $e->getMessage(),
+            'playlist_path' => $playlistPath,
+        ]);
+        exit;
     }
+}
 
     try {
         gee_capture_renderer_session_from_mpd($rendererContext);
