@@ -2,166 +2,201 @@
 
 declare(strict_types=1);
 
-require_once __DIR__ . '/bootstrap.php';
+const GEE_RENDERERS_DIR = '/var/lib/gee-core/renderers';
+const GEE_RENDERER_COOKIE = 'gee_selected_renderer';
 
-function gee_get_renderer_context(int $rendererId): ?array
+function gee_get_renderer_cookie_name(): string
 {
-    $conn = gee_db();
-
-    $stmt = $conn->prepare("
-        SELECT
-            r.id AS renderer_id,
-            r.hostname,
-            r.ip,
-            r.platform,
-            r.audio_profile,
-            r.alsa_device,
-            r.max_sample_rate,
-            r.bit_depth,
-            r.channels,
-            r.quality_tier,
-            r.preferred_stream_format,
-            r.status,
-            r.room,
-            r.display_name,
-            r.is_active AS renderer_active,
-            s.id AS stream_id,
-            s.stream_key,
-            s.stream_name,
-            s.stream_format,
-            s.audio_source_type,
-            s.fifo_path,
-            s.is_active AS stream_active
-        FROM renderers r
-        LEFT JOIN renderer_stream_map rsm ON r.id = rsm.renderer_id
-        LEFT JOIN streams s ON rsm.stream_id = s.id
-        WHERE r.id = ?
-        LIMIT 1
-    ");
-
-    if (!$stmt) {
-        throw new RuntimeException('Failed to prepare renderer context query: ' . $conn->error);
-    }
-
-    $stmt->bind_param('i', $rendererId);
-
-    if (!$stmt->execute()) {
-        $error = $stmt->error;
-        $stmt->close();
-        throw new RuntimeException('Failed to execute renderer context query: ' . $error);
-    }
-
-    $result = $stmt->get_result();
-    $row = $result ? $result->fetch_assoc() : null;
-    $stmt->close();
-
-    return $row ?: null;
+    return GEE_RENDERER_COOKIE;
 }
 
-function gee_get_selected_renderer_id(string $cookieName = 'gee_selected_renderer'): ?int
+function gee_get_renderers_base_dir(): string
 {
-    if (!isset($_COOKIE[$cookieName])) {
+    return GEE_RENDERERS_DIR;
+}
+
+function gee_safe_renderer_id(string $value): string
+{
+    return preg_replace('/[^a-z0-9\-]/', '', strtolower($value));
+}
+
+function gee_get_registered_renderer_ids(): array
+{
+    $baseDir = gee_get_renderers_base_dir();
+
+    if (!is_dir($baseDir)) {
+        return [];
+    }
+
+    $ids = [];
+    $entries = scandir($baseDir);
+
+    if ($entries === false) {
+        return [];
+    }
+
+    foreach ($entries as $entry) {
+        if ($entry === '.' || $entry === '..') {
+            continue;
+        }
+
+        $fullPath = $baseDir . '/' . $entry;
+
+        if (!is_dir($fullPath)) {
+            continue;
+        }
+
+        $safeId = gee_safe_renderer_id($entry);
+
+        if ($safeId !== '') {
+            $ids[] = $safeId;
+        }
+    }
+
+    sort($ids, SORT_NATURAL | SORT_FLAG_CASE);
+
+    return $ids;
+}
+
+function gee_get_renderer_profile_path(string $rendererId): string
+{
+    return gee_get_renderers_base_dir() . '/' . $rendererId . '/profile.json';
+}
+
+function gee_read_renderer_profile(string $rendererId): ?array
+{
+    $rendererId = gee_safe_renderer_id($rendererId);
+
+    if ($rendererId === '') {
         return null;
     }
 
-    $rendererId = (int) $_COOKIE[$cookieName];
+    $profilePath = gee_get_renderer_profile_path($rendererId);
 
-    return $rendererId > 0 ? $rendererId : null;
-}
-
-function gee_get_selected_renderer_context(string $cookieName = 'gee_selected_renderer'): ?array
-{
-    $rendererId = gee_get_selected_renderer_id($cookieName);
-
-    if ($rendererId === null) {
+    if (!is_file($profilePath)) {
         return null;
     }
 
-    return gee_get_renderer_context($rendererId);
-}
+    $json = file_get_contents($profilePath);
 
-function gee_get_first_renderer_context(): ?array
-{
-    $conn = gee_db();
-
-    $result = $conn->query("
-        SELECT id
-        FROM renderers
-        WHERE COALESCE(is_active, 1) = 1
-        ORDER BY COALESCE(display_name, hostname) ASC
-        LIMIT 1
-    ");
-
-    if (!$result) {
-        throw new RuntimeException('Failed to fetch first renderer: ' . $conn->error);
-    }
-
-    $row = $result->fetch_assoc();
-
-    if (!$row) {
+    if ($json === false || trim($json) === '') {
         return null;
     }
 
-    return gee_get_renderer_context((int) $row['id']);
-}
+    $data = json_decode($json, true);
 
-function gee_resolve_renderer_context(string $cookieName = 'gee_selected_renderer'): ?array
-{
-    $rendererContext = gee_get_selected_renderer_context($cookieName);
-
-    if ($rendererContext === null) {
-        $rendererContext = gee_get_first_renderer_context();
-    }
-
-    if ($rendererContext !== null) {
-        $GLOBALS['gee_renderer_context'] = $rendererContext;
-    }
-
-    return $rendererContext;
-}
-
-function gee_get_renderer_display_name(?array $rendererContext): ?string
-{
-    if (!is_array($rendererContext)) {
+    if (!is_array($data)) {
         return null;
     }
 
-    $displayName = trim((string) ($rendererContext['display_name'] ?? ''));
-    if ($displayName !== '') {
-        return $displayName;
-    }
-
-    $hostname = trim((string) ($rendererContext['hostname'] ?? ''));
-
-    return $hostname !== '' ? $hostname : null;
-}
-function gee_get_last_renderer_cookie_name(): string
-{
-    return 'gee_last_renderer';
+    return $data;
 }
 
-function gee_get_last_selected_renderer_id(): ?int
+function gee_build_renderer_context(string $rendererId, array $profile): array
 {
-    $cookieName = gee_get_last_renderer_cookie_name();
+    $rendererId = gee_safe_renderer_id($rendererId);
 
-    if (!isset($_COOKIE[$cookieName])) {
+    $hostname = trim((string)($profile['hostname'] ?? $rendererId));
+    $displayName = trim((string)($profile['renderer_name'] ?? $hostname));
+    $ip = trim((string)($profile['ip_address'] ?? ''));
+    $model = trim((string)($profile['model'] ?? ''));
+    $macAddress = trim((string)($profile['mac_address'] ?? ''));
+    $installerVersion = trim((string)($profile['installer_version'] ?? '1'));
+
+    return [
+        'renderer_id' => $rendererId,
+        'id' => $rendererId,
+        'hostname' => $hostname,
+        'display_name' => $displayName,
+        'ip' => $ip,
+        'ip_address' => $ip,
+        'model' => $model,
+        'mac_address' => $macAddress,
+        'installer_version' => $installerVersion,
+
+        // Compatibility placeholders for older UI/API expectations
+        'room' => null,
+        'status' => 'active',
+        'is_active' => 1,
+        'audio_profile' => 'safe',
+        'alsa_device' => 'default',
+        'max_sample_rate' => 44100,
+        'bit_depth' => 16,
+        'channels' => 2,
+        'quality_tier' => 'standard',
+        'preferred_stream_format' => '44100:16:2',
+        'stream_id' => null,
+        'stream_key' => 'safe',
+        'stream_name' => 'Safe',
+        'stream_format' => '44100:16:2',
+        'fifo_path' => '/run/gee/snapfifo-' . $rendererId,
+        'audio_source_type' => 'pipe',
+        'stream_active' => 1,
+    ];
+}
+
+function gee_get_renderer_context(string $rendererId): ?array
+{
+    $rendererId = gee_safe_renderer_id($rendererId);
+
+    if ($rendererId === '') {
         return null;
     }
 
-    $rendererId = (int) $_COOKIE[$cookieName];
+    $profile = gee_read_renderer_profile($rendererId);
 
-    return $rendererId > 0 ? $rendererId : null;
+    if ($profile === null) {
+        return null;
+    }
+
+    return gee_build_renderer_context($rendererId, $profile);
 }
 
-function gee_set_last_selected_renderer_id(int $rendererId): bool
+function gee_get_all_renderer_contexts(): array
 {
-    if ($rendererId <= 0) {
+    $contexts = [];
+
+    foreach (gee_get_registered_renderer_ids() as $rendererId) {
+        $context = gee_get_renderer_context($rendererId);
+
+        if ($context !== null) {
+            $contexts[] = $context;
+        }
+    }
+
+    usort($contexts, static function (array $a, array $b): int {
+        $aName = strtolower((string)($a['display_name'] ?? $a['hostname'] ?? ''));
+        $bName = strtolower((string)($b['display_name'] ?? $b['hostname'] ?? ''));
+        return $aName <=> $bName;
+    });
+
+    return $contexts;
+}
+
+function gee_get_selected_renderer_id_from_cookie(): ?string
+{
+    $cookieName = gee_get_renderer_cookie_name();
+
+    if (empty($_COOKIE[$cookieName])) {
+        return null;
+    }
+
+    $rendererId = gee_safe_renderer_id((string)$_COOKIE[$cookieName]);
+
+    return $rendererId !== '' ? $rendererId : null;
+}
+
+function gee_set_selected_renderer_cookie(string $rendererId): bool
+{
+    $rendererId = gee_safe_renderer_id($rendererId);
+
+    if ($rendererId === '') {
         return false;
     }
 
     return setcookie(
-        gee_get_last_renderer_cookie_name(),
-        (string) $rendererId,
+        gee_get_renderer_cookie_name(),
+        $rendererId,
         [
             'expires' => time() + (86400 * 30),
             'path' => '/',
@@ -169,4 +204,31 @@ function gee_set_last_selected_renderer_id(int $rendererId): bool
             'samesite' => 'Lax',
         ]
     );
+}
+
+function gee_get_selected_renderer_context(): ?array
+{
+    $selectedRendererId = gee_get_selected_renderer_id_from_cookie();
+
+    if ($selectedRendererId === null) {
+        return null;
+    }
+
+    return gee_get_renderer_context($selectedRendererId);
+}
+
+function gee_get_first_renderer_context(): ?array
+{
+    $all = gee_get_all_renderer_contexts();
+    return $all[0] ?? null;
+}
+
+function gee_get_selected_or_first_renderer_context(): ?array
+{
+    return gee_get_selected_renderer_context() ?? gee_get_first_renderer_context();
+}
+
+function gee_renderer_exists(string $rendererId): bool
+{
+    return gee_get_renderer_context($rendererId) !== null;
 }
