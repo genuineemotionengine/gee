@@ -115,18 +115,23 @@ try {
 | Service 1 - Get Meta
 |--------------------------------------------------------------------------
 */
+/*
+|--------------------------------------------------------------------------
+| Service 1 - Get Meta
+|--------------------------------------------------------------------------
+*/
 if ($service === 1) {
-    $lastRendererId = gee_get_last_selected_renderer_id();
-    $rendererChanged = ($rendererId > 0 && $lastRendererId !== $rendererId);
+    try {
+        $lastRendererId = gee_get_last_selected_renderer_id();
+        $rendererChanged = ($rendererId > 0 && $lastRendererId !== $rendererId);
 
-    /*
-    |--------------------------------------------------------------------------
-    | If renderer changed or stream changed in renderer context, restore the
-    | renderer session into the correct MPD before returning metadata.
-    |--------------------------------------------------------------------------
-    */
-    if (($rendererChanged || $streamChangedByContext) && $rendererId > 0) {
-        try {
+        /*
+        |--------------------------------------------------------------------------
+        | If renderer changed or stream changed in renderer context, restore the
+        | renderer session into the correct MPD before returning metadata.
+        |--------------------------------------------------------------------------
+        */
+        if (($rendererChanged || $streamChangedByContext) && $rendererId > 0) {
             gee_restore_renderer_session_to_mpd($rendererContext);
             gee_set_last_selected_renderer_id($rendererId);
 
@@ -143,51 +148,41 @@ if ($service === 1) {
             ]);
 
             $mphpd->connect();
-        } catch (\Throwable $e) {
-            http_response_code(500);
-            echo json_encode([
-                'status' => 'error',
-                'message' => 'Renderer restore failed.',
-                'details' => $e->getMessage(),
-            ]);
-            exit;
         }
-    }
 
-$playlistPath = (string)($geeRuntimeContext['playlist_path'] ?? '');
+        $playlistPath = (string)($geeRuntimeContext['playlist_path'] ?? '');
 
-if ($playlistPath !== '' && !is_file($playlistPath)) {
-    try {
-        $sql = "SELECT albumpath FROM app WHERE genre != 'Relaxation'";
-        include __DIR__ . '/loadplaylist.php';
-    } catch (\Throwable $e) {
-        http_response_code(500);
-        echo json_encode([
-            'status' => 'error',
-            'message' => 'Playlist bootstrap failed.',
-            'details' => $e->getMessage(),
-            'playlist_path' => $playlistPath,
-        ]);
-        exit;
-    }
-}
+        if ($playlistPath !== '' && !is_file($playlistPath)) {
+            $sql = "SELECT albumpath FROM app WHERE genre != 'Relaxation'";
+            include __DIR__ . '/loadplaylist.php';
+        }
 
-    try {
         gee_capture_renderer_session_from_mpd($rendererContext);
+
+        include __DIR__ . '/getmeta.php';
+        exit;
+
     } catch (\Throwable $e) {
         http_response_code(500);
+        header('Content-Type: application/json');
+
         echo json_encode([
             'status' => 'error',
-            'message' => 'Renderer session capture failed.',
+            'message' => 'service=1 failed',
             'details' => $e->getMessage(),
-        ]);
+            'file' => basename((string)$e->getFile()),
+            'line' => $e->getLine(),
+            'renderer_id' => $rendererId,
+            'renderer' => $rendererContext['display_name'] ?? ($rendererContext['hostname'] ?? null),
+            'stream_key' => $rendererContext['stream_key'] ?? null,
+            'playlist_path' => $geeRuntimeContext['playlist_path'] ?? null,
+            'mpd_host' => $geeRuntimeContext['mpd_host'] ?? null,
+            'mpd_port' => $geeRuntimeContext['mpd_port'] ?? null,
+        ], JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES);
+
         exit;
     }
-
-    include __DIR__ . '/getmeta.php';
-    exit;
 }
-
 /*
 |--------------------------------------------------------------------------
 | Service 2 - Pause / Play toggle
