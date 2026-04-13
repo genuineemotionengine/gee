@@ -223,7 +223,7 @@ if ($service === 21) {
         gee_fail('Missing renderer_id.', 400);
     }
 
-    $rendererContext = gee_get_renderer_context_by_id($rendererId);
+    $rendererContext = gee_get_renderer_context($rendererId);
     if (!is_array($rendererContext)) {
         gee_fail('Renderer not found.', 404, ['renderer_id' => $rendererId]);
     }
