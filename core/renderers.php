@@ -69,15 +69,16 @@ function gee_build_renderer_context(string $rendererId, array $profile): array
     $hostname = trim((string)($profile['hostname'] ?? $rendererId));
     $displayName = trim((string)($profile['renderer_name'] ?? $hostname));
 
-    return [
-        'renderer_id' => $rendererId,
-        'hostname' => $hostname,
-        'display_name' => $displayName,
-        'ip_address' => trim((string)($profile['ip_address'] ?? '')),
-        'mac_address' => trim((string)($profile['mac_address'] ?? '')),
-        'model' => trim((string)($profile['model'] ?? '')),
-        'installer_version' => trim((string)($profile['installer_version'] ?? '1')),
-    ];
+return [
+    'renderer_id' => $rendererId,
+    'renderer_name' => trim((string)($profile['renderer_name'] ?? '')),
+    'hostname' => $hostname,
+    'display_name' => $displayName,
+    'ip_address' => trim((string)($profile['ip_address'] ?? '')),
+    'mac_address' => trim((string)($profile['mac_address'] ?? '')),
+    'model' => trim((string)($profile['model'] ?? '')),
+    'installer_version' => trim((string)($profile['installer_version'] ?? '1')),
+];
 }
 
 function gee_get_renderer_context(string $rendererId): ?array
