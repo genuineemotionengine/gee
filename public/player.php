@@ -12,7 +12,7 @@
 <div id="player">
 
     <div id="artwork">
-        <img id="cover" src="/img/default.png" alt="Artwork">
+        <img id="cover" src="/img/black.jpg" alt="Artwork">
     </div>
 
     <div id="meta">
