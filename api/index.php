@@ -11,11 +11,43 @@ require_once __DIR__ . '/MphpD/MphpD.php';
 use FloFaber\MphpD\MphpD;
 use FloFaber\MphpD\MPDException;
 
-function gee_build_and_load_playlist(array $runtime, string $whereSql): array
+function gee_get_query_string_int(string $key, int $default = 0): int
+{
+    return isset($_GET[$key]) ? (int)$_GET[$key] : $default;
+}
+
+function gee_get_query_string_string(string $key, string $default = ''): string
+{
+    if (!isset($_GET[$key])) {
+        return $default;
+    }
+
+    $value = trim((string)$_GET[$key]);
+    return $value !== '' ? $value : $default;
+}
+
+function gee_connect_mpd(array $runtime): MphpD
+{
+    try {
+        $mphpd = new MphpD([
+            'host' => (string)($runtime['mpd_host'] ?? '127.0.0.1'),
+            'port' => (int)($runtime['mpd_port'] ?? 6600),
+            'timeout' => 5,
+        ]);
+
+        $mphpd->connect();
+
+        return $mphpd;
+    } catch (MPDException $e) {
+        throw new RuntimeException('MPD connection failed: ' . $e->getMessage(), 0, $e);
+    }
+}
+
+function gee_build_and_load_playlist(array $runtime, string $sql): array
 {
     $conn = gee_db();
 
-    $stmt = $conn->prepare($whereSql);
+    $stmt = $conn->prepare($sql);
     if (!$stmt) {
         throw new RuntimeException('Failed to prepare playlist query: ' . $conn->error);
     }
@@ -38,14 +70,18 @@ function gee_build_and_load_playlist(array $runtime, string $whereSql): array
 
     $stmt->close();
 
-    if (empty($tracks)) {
+    if ($tracks === []) {
         throw new RuntimeException('No tracks found for playlist generation.');
     }
 
     shuffle($tracks);
 
-    $playlistDirectory = (string)$runtime['playlist_directory'];
-    $playlistPath = (string)$runtime['playlist_path'];
+    $playlistDirectory = (string)($runtime['playlist_directory'] ?? '');
+    $playlistPath = (string)($runtime['playlist_path'] ?? '');
+
+    if ($playlistDirectory === '' || $playlistPath === '') {
+        throw new RuntimeException('Renderer runtime playlist paths are incomplete.');
+    }
 
     if (!is_dir($playlistDirectory) && !mkdir($playlistDirectory, 0775, true) && !is_dir($playlistDirectory)) {
         throw new RuntimeException('Unable to create playlist directory: ' . $playlistDirectory);
@@ -57,13 +93,8 @@ function gee_build_and_load_playlist(array $runtime, string $whereSql): array
         throw new RuntimeException('Unable to write playlist file: ' . $playlistPath);
     }
 
-    $mphpd = new MphpD([
-        'host' => (string)$runtime['mpd_host'],
-        'port' => (int)$runtime['mpd_port'],
-        'timeout' => 5,
-    ]);
+    $mphpd = gee_connect_mpd($runtime);
 
-    $mphpd->connect();
     $mphpd->queue()->clear();
 
     foreach ($tracks as $track) {
@@ -79,31 +110,167 @@ function gee_build_and_load_playlist(array $runtime, string $whereSql): array
     ];
 }
 
-parse_str($_SERVER['QUERY_STRING'] ?? '', $qs);
-
-$service = isset($qs['service']) ? (int)$qs['service'] : 0;
-$mod = isset($qs['mod']) ? (int)$qs['mod'] : 0;
-
-$rendererContext = gee_get_selected_or_first_renderer_context();
-if ($rendererContext === null) {
-    gee_fail('No registered renderer available.', 500);
+function gee_renderer_summary(array $rendererContext): array
+{
+    return [
+        'renderer_id' => (string)($rendererContext['renderer_id'] ?? ''),
+        'renderer_name' => (string)($rendererContext['renderer_name'] ?? ''),
+        'display_name' => (string)($rendererContext['display_name'] ?? ''),
+        'hostname' => (string)($rendererContext['hostname'] ?? ''),
+        'ip_address' => (string)($rendererContext['ip_address'] ?? ''),
+        'mac_address' => (string)($rendererContext['mac_address'] ?? ''),
+        'model' => (string)($rendererContext['model'] ?? ''),
+        'installer_version' => (string)($rendererContext['installer_version'] ?? ''),
+    ];
 }
 
-$runtime = gee_get_renderer_runtime_context($rendererContext);
-if ($runtime === null) {
-    gee_fail('No renderer runtime context available.', 500);
+function gee_renderer_runtime_summary(array $runtime): array
+{
+    return [
+        'renderer_id' => (string)($runtime['renderer_id'] ?? ''),
+        'renderer_name' => (string)($runtime['renderer_name'] ?? ''),
+        'display_name' => (string)($runtime['display_name'] ?? ''),
+        'hostname' => (string)($runtime['hostname'] ?? ''),
+        'ip_address' => (string)($runtime['ip_address'] ?? ''),
+        'config_version' => (string)($runtime['config_version'] ?? ''),
+
+        'runtime_ready' => (bool)($runtime['runtime_ready'] ?? false),
+        'renderer_dir' => (string)($runtime['renderer_dir'] ?? ''),
+        'runtime_dir' => (string)($runtime['runtime_dir'] ?? ''),
+        'runtime_conf_path' => (string)($runtime['runtime_conf_path'] ?? ''),
+        'canonical_conf_path' => (string)($runtime['canonical_conf_path'] ?? ''),
+
+        'music_directory' => (string)($runtime['music_directory'] ?? ''),
+        'playlist_directory' => (string)($runtime['playlist_directory'] ?? ''),
+        'playlist_filename' => (string)($runtime['playlist_filename'] ?? ''),
+        'playlist_path' => (string)($runtime['playlist_path'] ?? ''),
+
+        'db_file' => (string)($runtime['db_file'] ?? ''),
+        'log_file' => (string)($runtime['log_file'] ?? ''),
+        'state_file' => (string)($runtime['state_file'] ?? ''),
+        'sticker_file' => (string)($runtime['sticker_file'] ?? ''),
+
+        'active_stream' => (string)($runtime['active_stream'] ?? ''),
+        'stream_key' => (string)($runtime['stream_key'] ?? ''),
+        'stream_name' => (string)($runtime['stream_name'] ?? ''),
+        'stream_format' => (string)($runtime['stream_format'] ?? ''),
+        'fifo_path' => (string)($runtime['fifo_path'] ?? ''),
+
+        'bind_to_address' => (string)($runtime['bind_to_address'] ?? ''),
+        'mpd_host' => (string)($runtime['mpd_host'] ?? ''),
+        'mpd_port' => (int)($runtime['mpd_port'] ?? 0),
+        'mpd_port_source' => (string)($runtime['mpd_port_source'] ?? ''),
+    ];
 }
+
+function gee_get_selected_runtime_or_fail(): array
+{
+    $rendererContext = gee_get_selected_or_first_renderer_context();
+
+    if (!is_array($rendererContext)) {
+        gee_fail('No registered renderer available.', 500);
+    }
+
+    $runtime = gee_get_renderer_runtime_context($rendererContext);
+
+    if (!is_array($runtime)) {
+        gee_fail('No renderer runtime context available.', 500);
+    }
+
+    return $runtime;
+}
+
+$service = gee_get_query_string_int('service');
+$mod = gee_get_query_string_int('mod');
+$rendererId = gee_safe_renderer_id(gee_get_query_string_string('renderer_id'));
+
+/*
+|--------------------------------------------------------------------------
+| Renderer services
+|--------------------------------------------------------------------------
+*/
+
+if ($service === 20) {
+    $allRenderers = gee_get_all_renderer_contexts();
+    $selectedRendererId = gee_get_selected_renderer_id();
+
+    $items = [];
+
+    foreach ($allRenderers as $rendererContext) {
+        $summary = gee_renderer_summary($rendererContext);
+        $runtime = gee_get_renderer_runtime_context($rendererContext);
+
+        $summary['selected'] = $selectedRendererId !== null
+            ? ($summary['renderer_id'] === $selectedRendererId)
+            : false;
+
+        $summary['runtime_ready'] = is_array($runtime) ? (bool)($runtime['runtime_ready'] ?? false) : false;
+        $summary['config_version'] = is_array($runtime) ? (string)($runtime['config_version'] ?? '') : '';
+
+        $items[] = $summary;
+    }
+
+    gee_json_response([
+        'status' => 'ok',
+        'count' => count($items),
+        'selected_renderer_id' => $selectedRendererId,
+        'renderers' => $items,
+    ]);
+}
+
+if ($service === 21) {
+    if ($rendererId === '') {
+        gee_fail('Missing renderer_id.', 400);
+    }
+
+    $rendererContext = gee_get_renderer_context_by_id($rendererId);
+    if (!is_array($rendererContext)) {
+        gee_fail('Renderer not found.', 404, ['renderer_id' => $rendererId]);
+    }
+
+    gee_set_selected_renderer_cookie($rendererId);
+
+    $runtime = gee_get_renderer_runtime_context($rendererContext);
+    if (!is_array($runtime)) {
+        gee_fail('Renderer runtime context unavailable.', 500, ['renderer_id' => $rendererId]);
+    }
+
+    gee_json_response([
+        'status' => 'ok',
+        'message' => 'Renderer selected.',
+        'selected_renderer_id' => $rendererId,
+        'renderer' => gee_renderer_summary($rendererContext),
+        'runtime' => gee_renderer_runtime_summary($runtime),
+    ]);
+}
+
+if ($service === 22) {
+    $runtime = gee_get_selected_runtime_or_fail();
+
+    gee_json_response([
+        'status' => 'ok',
+        'selected_renderer_id' => (string)($runtime['renderer_id'] ?? ''),
+        'runtime' => gee_renderer_runtime_summary($runtime),
+    ]);
+}
+
+/*
+|--------------------------------------------------------------------------
+| Playback services
+|--------------------------------------------------------------------------
+*/
+
+$runtime = gee_get_selected_runtime_or_fail();
 
 try {
-    $mphpd = new MphpD([
-        'host' => (string)$runtime['mpd_host'],
-        'port' => (int)$runtime['mpd_port'],
-        'timeout' => 5,
+    $mphpd = gee_connect_mpd($runtime);
+} catch (RuntimeException $e) {
+    gee_fail($e->getMessage(), 500, [
+        'renderer_id' => (string)($runtime['renderer_id'] ?? ''),
+        'mpd_host' => (string)($runtime['mpd_host'] ?? ''),
+        'mpd_port' => (int)($runtime['mpd_port'] ?? 0),
+        'mpd_port_source' => (string)($runtime['mpd_port_source'] ?? ''),
     ]);
-
-    $mphpd->connect();
-} catch (MPDException $e) {
-    gee_fail('MPD connection failed: ' . $e->getMessage(), 500);
 }
 
 if ($service === 1) {
@@ -129,17 +296,20 @@ if ($service === 1) {
             WHERE albumpath = ?
             LIMIT 1
         ");
-        $stmt->bind_param('s', $file);
-        $stmt->execute();
-        $result = $stmt->get_result();
-        $row = $result ? $result->fetch_assoc() : null;
-        $stmt->close();
 
-        if ($row) {
-            $title = $title !== '' ? $title : (string)($row['title'] ?? '');
-            $artist = $artist !== '' ? $artist : (string)($row['artist'] ?? '');
-            $album = $album !== '' ? $album : (string)($row['album'] ?? '');
-            $albumartist = $albumartist !== '' ? $albumartist : (string)($row['albumartist'] ?? '');
+        if ($stmt) {
+            $stmt->bind_param('s', $file);
+            $stmt->execute();
+            $result = $stmt->get_result();
+            $row = $result ? $result->fetch_assoc() : null;
+            $stmt->close();
+
+            if ($row) {
+                $title = $title !== '' ? $title : (string)($row['title'] ?? '');
+                $artist = $artist !== '' ? $artist : (string)($row['artist'] ?? '');
+                $album = $album !== '' ? $album : (string)($row['album'] ?? '');
+                $albumartist = $albumartist !== '' ? $albumartist : (string)($row['albumartist'] ?? '');
+            }
         }
     }
 
@@ -160,11 +330,12 @@ if ($service === 1) {
 
     gee_json_response([
         'status' => 'ok',
-        'renderer_id' => $rendererContext['renderer_id'],
-        'renderer_display' => strtoupper((string)$rendererContext['display_name']),
-        'active_stream' => $runtime['active_stream'],
-        'stream_key' => $runtime['stream_key'],
-        'stream_format' => $runtime['stream_format'],
+        'renderer_id' => (string)($runtime['renderer_id'] ?? ''),
+        'renderer_name' => (string)($runtime['renderer_name'] ?? ''),
+        'renderer_display' => strtoupper((string)($runtime['display_name'] ?? '')),
+        'active_stream' => (string)($runtime['active_stream'] ?? ''),
+        'stream_key' => (string)($runtime['stream_key'] ?? ''),
+        'stream_format' => (string)($runtime['stream_format'] ?? ''),
         'image' => $image,
         'title' => $title,
         'artist' => $artist,
@@ -185,20 +356,26 @@ if ($service === 2) {
 if ($service === 3) {
     $status = $mphpd->status();
     $pauseState = (string)($status['state'] ?? '');
+
     $mphpd->player()->previous();
+
     if ($pauseState === 'pause') {
         $mphpd->player()->pause();
     }
+
     gee_json_response(['status' => 'ok']);
 }
 
 if ($service === 4) {
     $status = $mphpd->status();
     $pauseState = (string)($status['state'] ?? '');
+
     $mphpd->player()->next();
+
     if ($pauseState === 'pause') {
         $mphpd->player()->pause();
     }
+
     gee_json_response(['status' => 'ok']);
 }
 
@@ -215,8 +392,11 @@ if ($service === 5) {
             'track_count' => $playlist['track_count'],
             'playlist_path' => $playlist['playlist_path'],
         ]);
-    } catch (\Throwable $e) {
-        gee_fail('Playlist load failed: ' . $e->getMessage(), 500);
+    } catch (Throwable $e) {
+        gee_fail('Playlist load failed: ' . $e->getMessage(), 500, [
+            'renderer_id' => (string)($runtime['renderer_id'] ?? ''),
+            'playlist_path' => (string)($runtime['playlist_path'] ?? ''),
+        ]);
     }
 }
 
@@ -225,16 +405,22 @@ if ($service === 13) {
     $status = $mphpd->status();
     $pauseState = (string)($status['state'] ?? '');
     $pos = isset($song['pos']) ? (int)$song['pos'] : 0;
+
     $mphpd->player()->play($pos);
+
     if ($pauseState === 'pause') {
         $mphpd->player()->pause();
     }
+
     gee_json_response(['status' => 'ok']);
 }
 
 if ($service === 15) {
     $mphpd->player()->volume($mod);
-    gee_json_response(['status' => 'ok', 'mod' => $mod]);
+    gee_json_response([
+        'status' => 'ok',
+        'mod' => $mod,
+    ]);
 }
 
 gee_fail('Unknown or unsupported service.', 400, ['service' => $service]);
