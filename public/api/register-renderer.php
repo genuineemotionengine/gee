@@ -5,9 +5,15 @@ declare(strict_types=1);
 header('Content-Type: application/json');
 
 $BASE_DIR = '/var/lib/gee-core/renderers';
+$RUNTIME_BASE_DIR = '/var/lib/gee-core/runtime';
 $CORE_HOST = 'geecore.local';
 $CORE_SNAPSERVER_PORT = 1704;
-$DEFAULT_SAMPLE_FORMAT = '44100:16:2';
+
+$SAFE_SAMPLE_FORMAT = '44100:16:2';
+$HIRES_SAMPLE_FORMAT = '192000:24:2';
+
+$PORT_RANGE_START = 6601;
+$PORT_RANGE_END = 7999;
 
 function respond(array $data, int $status = 200): void
 {
@@ -16,12 +22,12 @@ function respond(array $data, int $status = 200): void
     exit;
 }
 
-function fail(string $message, int $status = 400): void
+function fail(string $message, int $status = 400, array $extra = []): void
 {
-    respond([
+    respond(array_merge([
         'success' => false,
-        'error' => $message
-    ], $status);
+        'error' => $message,
+    ], $extra), $status);
 }
 
 function get_json_input(): array
@@ -101,14 +107,34 @@ function write_version(string $path, int $version): void
     }
 }
 
+function read_json_file(string $path): ?array
+{
+    if (!is_file($path)) {
+        return null;
+    }
+
+    $json = file_get_contents($path);
+    if ($json === false || trim($json) === '') {
+        return null;
+    }
+
+    $data = json_decode($json, true);
+    return is_array($data) ? $data : null;
+}
+
 function delete_generated_files(string $rendererDir): void
 {
     $generatedFiles = [
         $rendererDir . '/profile.json',
         $rendererDir . '/config_version.txt',
+        $rendererDir . '/runtime.json',
         $rendererDir . '/mpd.conf',
-        $rendererDir . '/snapclient.conf',
         $rendererDir . '/mpd.runtime.conf',
+        $rendererDir . '/mpd.safe.conf',
+        $rendererDir . '/mpd.hires.conf',
+        $rendererDir . '/mpd.safe.runtime.conf',
+        $rendererDir . '/mpd.hires.runtime.conf',
+        $rendererDir . '/snapclient.conf',
     ];
 
     foreach ($generatedFiles as $file) {
@@ -118,22 +144,28 @@ function delete_generated_files(string $rendererDir): void
     }
 }
 
-function build_mpd_config(array $profile, string $rendererId, string $rendererDir, string $sampleFormat): string
-{
-    $rendererName = (string)$profile['renderer_name'];
+function build_mpd_config(
+    array $profile,
+    string $rendererId,
+    string $rendererName,
+    string $rendererDir,
+    string $streamKey,
+    string $sampleFormat
+): string {
     $musicDir = '/mnt/music';
     $playlistDir = $rendererDir . '/playlists';
-    $dbFile = $rendererDir . '/mpd.db';
-    $stateFile = $rendererDir . '/mpd.state';
-    $stickerFile = $rendererDir . '/sticker.sql';
-    $logFile = $rendererDir . '/mpd.log';
-    $fifoPath = '/run/gee/snapfifo-' . $rendererId;
+    $dbFile = $rendererDir . '/mpd.' . $streamKey . '.db';
+    $stateFile = $rendererDir . '/mpd.' . $streamKey . '.state';
+    $stickerFile = $rendererDir . '/sticker.' . $streamKey . '.sql';
+    $logFile = $rendererDir . '/mpd.' . $streamKey . '.log';
+    $fifoPath = '/run/gee/snapfifo-' . $rendererId . '-' . $streamKey;
 
     return <<<CONF
 # ------------------------------------------------------------------
 # Gee canonical MPD config
 # Renderer ID: {$rendererId}
 # Renderer Name: {$rendererName}
+# Stream: {$streamKey}
 # ------------------------------------------------------------------
 
 music_directory "{$musicDir}"
@@ -149,7 +181,7 @@ follow_outside_symlinks "yes"
 
 audio_output {
     type "fifo"
-    name "Gee {$rendererName}"
+    name "Gee {$rendererName} {$streamKey}"
     path "{$fifoPath}"
     format "{$sampleFormat}"
 }
@@ -187,13 +219,116 @@ port = {$corePort}
 CONF;
 }
 
+function collect_assigned_ports(string $baseDir, string $skipRendererId = ''): array
+{
+    $assigned = [];
+
+    foreach (glob($baseDir . '/*') ?: [] as $rendererDir) {
+        if (!is_dir($rendererDir)) {
+            continue;
+        }
+
+        $rendererId = basename($rendererDir);
+        if ($skipRendererId !== '' && $rendererId === $skipRendererId) {
+            continue;
+        }
+
+        $runtimePath = $rendererDir . '/runtime.json';
+        $runtime = read_json_file($runtimePath);
+
+        if (!is_array($runtime)) {
+            continue;
+        }
+
+        $streams = $runtime['streams'] ?? null;
+        if (!is_array($streams)) {
+            continue;
+        }
+
+        foreach (['safe', 'hires'] as $streamKey) {
+            $stream = $streams[$streamKey] ?? null;
+            if (!is_array($stream)) {
+                continue;
+            }
+
+            $port = $stream['mpd_port'] ?? null;
+            if (is_int($port) && $port > 0) {
+                $assigned[$port] = true;
+            } elseif (is_string($port) && ctype_digit($port)) {
+                $assigned[(int)$port] = true;
+            }
+        }
+    }
+
+    return $assigned;
+}
+
+function allocate_port_pair(string $baseDir, string $rendererId, int $start, int $end): array
+{
+    $assigned = collect_assigned_ports($baseDir, $rendererId);
+
+    for ($safePort = $start; $safePort < $end; $safePort += 2) {
+        $hiresPort = $safePort + 1;
+
+        if ($hiresPort > $end) {
+            break;
+        }
+
+        if (!isset($assigned[$safePort]) && !isset($assigned[$hiresPort])) {
+            return [$safePort, $hiresPort];
+        }
+    }
+
+    fail('No available MPD port pair could be allocated.', 500);
+}
+
+function build_runtime_definition(
+    string $rendererId,
+    string $rendererDir,
+    int $configVersion,
+    int $safePort,
+    int $hiresPort,
+    string $safeFormat,
+    string $hiresFormat
+): array {
+    $runtimeDir = '/var/lib/gee-core/runtime/' . $rendererId;
+    $playlistDir = $runtimeDir . '/playlists';
+
+    return [
+        'renderer_id' => $rendererId,
+        'config_version' => $configVersion,
+        'streams' => [
+            'safe' => [
+                'mpd_port' => $safePort,
+                'format' => $safeFormat,
+                'fifo_path' => '/run/gee/snapfifo-' . $rendererId . '-safe',
+                'playlist_filename' => $rendererId . '_safe.m3u',
+                'playlist_path' => $playlistDir . '/' . $rendererId . '_safe.m3u',
+                'mpd_runtime_conf' => $rendererDir . '/mpd.safe.runtime.conf',
+                'canonical_mpd_conf' => $rendererDir . '/mpd.safe.conf',
+                'runtime_dir' => $runtimeDir . '/safe',
+            ],
+            'hires' => [
+                'mpd_port' => $hiresPort,
+                'format' => $hiresFormat,
+                'fifo_path' => '/run/gee/snapfifo-' . $rendererId . '-hires',
+                'playlist_filename' => $rendererId . '_hires.m3u',
+                'playlist_path' => $playlistDir . '/' . $rendererId . '_hires.m3u',
+                'mpd_runtime_conf' => $rendererDir . '/mpd.hires.runtime.conf',
+                'canonical_mpd_conf' => $rendererDir . '/mpd.hires.conf',
+                'runtime_dir' => $runtimeDir . '/hires',
+            ],
+        ],
+    ];
+}
+
 $data = get_json_input();
 
 validate_required($data, [
     'renderer_id',
     'renderer_name',
     'hostname',
-    'mac_address'
+    'mac_address',
 ]);
 
 $rendererId = safe_renderer_id((string)$data['renderer_id']);
@@ -205,15 +340,21 @@ if ($rendererId === '') {
 $rendererDir = $BASE_DIR . '/' . $rendererId;
 $profilePath = $rendererDir . '/profile.json';
 $configVersionPath = $rendererDir . '/config_version.txt';
-$mpdConfigPath = $rendererDir . '/mpd.conf';
+$runtimePath = $rendererDir . '/runtime.json';
+$mpdSafeConfigPath = $rendererDir . '/mpd.safe.conf';
+$mpdHiresConfigPath = $rendererDir . '/mpd.hires.conf';
 $snapclientConfigPath = $rendererDir . '/snapclient.conf';
 
 if (!is_dir($BASE_DIR)) {
     fail('Renderer base directory is missing on Geecore', 500);
 }
 
+ensure_dir($BASE_DIR);
+ensure_dir($RUNTIME_BASE_DIR);
+
 $isReregister = is_dir($rendererDir);
 $currentVersion = read_version($configVersionPath);
+$existingRuntime = read_json_file($runtimePath);
 
 if ($isReregister) {
     delete_generated_files($rendererDir);
@@ -226,10 +367,76 @@ write_json_file($profilePath, $data);
 $newVersion = $currentVersion + 1;
 write_version($configVersionPath, $newVersion);
 
-$mpdConfig = build_mpd_config($data, $rendererId, $rendererDir, $DEFAULT_SAMPLE_FORMAT);
+$rendererName = trim((string)$data['renderer_name']);
+
+$existingSafePort = null;
+$existingHiresPort = null;
+
+if (is_array($existingRuntime)) {
+    $streams = $existingRuntime['streams'] ?? null;
+    if (is_array($streams)) {
+        $safe = $streams['safe'] ?? null;
+        $hires = $streams['hires'] ?? null;
+
+        if (is_array($safe) && isset($safe['mpd_port']) && ctype_digit((string)$safe['mpd_port'])) {
+            $existingSafePort = (int)$safe['mpd_port'];
+        }
+
+        if (is_array($hires) && isset($hires['mpd_port']) && ctype_digit((string)$hires['mpd_port'])) {
+            $existingHiresPort = (int)$hires['mpd_port'];
+        }
+    }
+}
+
+if (
+    is_int($existingSafePort) && $existingSafePort > 0 &&
+    is_int($existingHiresPort) && $existingHiresPort === ($existingSafePort + 1)
+) {
+    $safePort = $existingSafePort;
+    $hiresPort = $existingHiresPort;
+} else {
+    [$safePort, $hiresPort] = allocate_port_pair(
+        $BASE_DIR,
+        $rendererId,
+        $PORT_RANGE_START,
+        $PORT_RANGE_END
+    );
+}
+
+$runtimeDefinition = build_runtime_definition(
+    $rendererId,
+    $rendererDir,
+    $newVersion,
+    $safePort,
+    $hiresPort,
+    $SAFE_SAMPLE_FORMAT,
+    $HIRES_SAMPLE_FORMAT
+);
+
+write_json_file($runtimePath, $runtimeDefinition);
+
+$mpdSafeConfig = build_mpd_config(
+    $data,
+    $rendererId,
+    $rendererName,
+    $rendererDir,
+    'safe',
+    $SAFE_SAMPLE_FORMAT
+);
+
+$mpdHiresConfig = build_mpd_config(
+    $data,
+    $rendererId,
+    $rendererName,
+    $rendererDir,
+    'hires',
+    $HIRES_SAMPLE_FORMAT
+);
+
 $snapclientConfig = build_snapclient_config($data, $rendererId, $CORE_HOST, $CORE_SNAPSERVER_PORT);
 
-write_text_file($mpdConfigPath, $mpdConfig);
+write_text_file($mpdSafeConfigPath, $mpdSafeConfig);
+write_text_file($mpdHiresConfigPath, $mpdHiresConfig);
 write_text_file($snapclientConfigPath, $snapclientConfig);
 
 $regenerateScript = '/usr/local/bin/gee-regenerate-audio-runtime.sh';
@@ -252,13 +459,16 @@ respond([
     'success' => true,
     'renderer_id' => $rendererId,
     'config_version' => $newVersion,
+    'runtime' => $runtimeDefinition,
     'message' => $isReregister
         ? 'Renderer re-registered successfully'
         : 'Renderer registered successfully',
     'generated_files' => [
         'profile.json',
         'config_version.txt',
-        'mpd.conf',
-        'snapclient.conf'
-    ]
+        'runtime.json',
+        'mpd.safe.conf',
+        'mpd.hires.conf',
+        'snapclient.conf',
+    ],
 ]);
