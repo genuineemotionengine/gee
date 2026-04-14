@@ -193,7 +193,7 @@ function gee_stream_block(?array $runtime, string $streamKey, string $rendererId
         }
 
         .wrap {
-            max-width: 1400px;
+            max-width: 1440px;
             margin: 0 auto;
         }
 
@@ -277,8 +277,9 @@ function gee_stream_block(?array $runtime, string $streamKey, string $rendererId
 
         .grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(420px, 1fr));
-            gap: 16px;
+            grid-template-columns: repeat(auto-fit, minmax(460px, 1fr));
+            gap: 18px;
+            align-items: start;
         }
 
         .card {
@@ -287,6 +288,8 @@ function gee_stream_block(?array $runtime, string $streamKey, string $rendererId
             border-radius: 18px;
             padding: 18px;
             box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+            min-width: 0;
+            overflow: hidden;
         }
 
         .card.selected {
@@ -338,6 +341,11 @@ function gee_stream_block(?array $runtime, string $streamKey, string $rendererId
             padding-right: 12px;
         }
 
+        .meta td:last-child {
+            word-break: break-word;
+            overflow-wrap: anywhere;
+        }
+
         .meta tr:last-child td {
             border-bottom: 0;
         }
@@ -371,11 +379,12 @@ function gee_stream_block(?array $runtime, string $streamKey, string $rendererId
             display: flex;
             gap: 10px;
             margin-top: 16px;
+            flex-wrap: wrap;
         }
 
         .stream-grid {
             display: grid;
-            grid-template-columns: 1fr 1fr;
+            grid-template-columns: 1fr;
             gap: 14px;
             margin-top: 16px;
         }
@@ -407,7 +416,7 @@ function gee_stream_block(?array $runtime, string $streamKey, string $rendererId
         }
 
         @media (max-width: 900px) {
-            .stream-grid {
+            .grid {
                 grid-template-columns: 1fr;
             }
         }
