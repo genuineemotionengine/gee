@@ -6,49 +6,31 @@ require_once __DIR__ . '/renderers.php';
 
 const GEE_RUNTIME_ROOT = '/var/lib/gee-core/runtime';
 
-/**
- * Return the absolute path to a renderer's canonical config directory.
- */
 function gee_get_renderer_dir(string $rendererId): string
 {
     return GEE_RENDERERS_DIR . '/' . $rendererId;
 }
 
-/**
- * Return the absolute path to a renderer's live runtime directory.
- */
 function gee_get_renderer_runtime_dir(string $rendererId): string
 {
     return GEE_RUNTIME_ROOT . '/' . $rendererId;
 }
 
-/**
- * Return the path to the renderer's canonical MPD config.
- */
 function gee_get_renderer_mpd_conf_path(string $rendererId): string
 {
     return gee_get_renderer_dir($rendererId) . '/mpd.conf';
 }
 
-/**
- * Return the path to the renderer's live MPD runtime config.
- */
 function gee_get_renderer_mpd_runtime_conf_path(string $rendererId): string
 {
     return gee_get_renderer_dir($rendererId) . '/mpd.runtime.conf';
 }
 
-/**
- * Return the path to the renderer's config version file.
- */
 function gee_get_renderer_config_version_path(string $rendererId): string
 {
     return gee_get_renderer_dir($rendererId) . '/config_version.txt';
 }
 
-/**
- * Read a renderer config version if present.
- */
 function gee_read_renderer_config_version(string $rendererId): string
 {
     $path = gee_get_renderer_config_version_path($rendererId);
@@ -65,21 +47,6 @@ function gee_read_renderer_config_version(string $rendererId): string
     return trim($value);
 }
 
-/**
- * Parse a simple MPD config file into a structured array.
- *
- * Supports top-level directives like:
- *   music_directory "/mnt/music"
- *   bind_to_address "127.0.0.1"
- *   port "6600"
- *
- * And audio_output blocks like:
- *   audio_output {
- *       type "fifo"
- *       path "/run/gee/snapfifo-rose"
- *       format "44100:16:2"
- *   }
- */
 function gee_parse_mpd_config_file(string $path): array
 {
     if (!is_file($path)) {
@@ -143,9 +110,6 @@ function gee_parse_mpd_config_file(string $path): array
     return $config;
 }
 
-/**
- * Return the first audio_output block matching the requested type.
- */
 function gee_find_audio_output_by_type(array $parsedConfig, string $type): ?array
 {
     $outputs = $parsedConfig['audio_outputs'] ?? null;
@@ -166,9 +130,6 @@ function gee_find_audio_output_by_type(array $parsedConfig, string $type): ?arra
     return null;
 }
 
-/**
- * Return a directive value from a parsed config file.
- */
 function gee_get_mpd_directive(array $parsedConfig, string $key, string $default = ''): string
 {
     $directives = $parsedConfig['directives'] ?? null;
@@ -180,9 +141,6 @@ function gee_get_mpd_directive(array $parsedConfig, string $key, string $default
     return is_string($value) ? trim($value) : $default;
 }
 
-/**
- * Build the standard playlist filename for the renderer's active stream.
- */
 function gee_build_renderer_playlist_filename(string $rendererId, string $streamKey): string
 {
     $rendererId = gee_safe_renderer_id($rendererId);
@@ -199,9 +157,99 @@ function gee_build_renderer_playlist_filename(string $rendererId, string $stream
     return $rendererId . '_' . $streamKey . '.m3u';
 }
 
-/**
- * Return a runtime-aware renderer context.
- */
+function gee_is_valid_stream_key(string $streamKey): bool
+{
+    return in_array($streamKey, ['safe', 'hires'], true);
+}
+
+function gee_get_selected_stream(): string
+{
+    $stream = isset($_COOKIE[GEE_SELECTED_STREAM_COOKIE])
+        ? trim((string)$_COOKIE[GEE_SELECTED_STREAM_COOKIE])
+        : '';
+
+    return gee_is_valid_stream_key($stream) ? $stream : 'safe';
+}
+
+function gee_set_selected_stream_cookie(string $streamKey): bool
+{
+    if (!gee_is_valid_stream_key($streamKey)) {
+        return false;
+    }
+
+    return setcookie(
+        GEE_SELECTED_STREAM_COOKIE,
+        $streamKey,
+        [
+            'expires' => time() + 60 * 60 * 24 * 30,
+            'path' => '/',
+            'secure' => false,
+            'httponly' => false,
+            'samesite' => 'Lax',
+        ]
+    );
+}
+
+function gee_read_renderer_runtime_json(string $rendererId): ?array
+{
+    $path = gee_get_renderer_dir($rendererId) . '/runtime.json';
+
+    if (!is_file($path)) {
+        return null;
+    }
+
+    $json = file_get_contents($path);
+    if ($json === false || trim($json) === '') {
+        return null;
+    }
+
+    $data = json_decode($json, true);
+    return is_array($data) ? $data : null;
+}
+
+function gee_get_renderer_stream_runtime(array $runtime, ?string $streamKey = null): array
+{
+    $streamKey = $streamKey !== null && gee_is_valid_stream_key($streamKey)
+        ? $streamKey
+        : gee_get_selected_stream();
+
+    $rendererId = (string)($runtime['renderer_id'] ?? '');
+    $runtimeDir = (string)($runtime['runtime_dir'] ?? '');
+    $rendererDir = (string)($runtime['renderer_dir'] ?? '');
+
+    $runtimeJson = $rendererId !== '' ? gee_read_renderer_runtime_json($rendererId) : null;
+
+    $stream = is_array($runtimeJson)
+        && isset($runtimeJson['streams'][$streamKey])
+        && is_array($runtimeJson['streams'][$streamKey])
+            ? $runtimeJson['streams'][$streamKey]
+            : [];
+
+    $playlistDirectory = $runtimeDir !== '' ? $runtimeDir . '/playlists' : '';
+    $playlistFilename = (string)($stream['playlist_filename'] ?? gee_build_renderer_playlist_filename($rendererId, $streamKey));
+    $playlistPath = (string)($stream['playlist_path'] ?? ($playlistDirectory !== '' ? $playlistDirectory . '/' . $playlistFilename : ''));
+    $fifoPath = (string)($stream['fifo_path'] ?? '');
+    $streamFormat = (string)($stream['format'] ?? '');
+    $mpdPort = isset($stream['mpd_port']) ? (int)$stream['mpd_port'] : (int)($runtime['mpd_port'] ?? 6600);
+    $runtimeConfPath = (string)($stream['mpd_runtime_conf'] ?? '');
+    $runtimeStreamDir = (string)($stream['runtime_dir'] ?? '');
+
+    return array_merge($runtime, [
+        'active_stream' => $streamKey,
+        'stream_key' => $streamKey,
+        'stream_name' => ucfirst($streamKey),
+        'stream_format' => $streamFormat,
+        'fifo_path' => $fifoPath,
+        'playlist_directory' => $playlistDirectory,
+        'playlist_filename' => $playlistFilename,
+        'playlist_path' => $playlistPath,
+        'mpd_port' => $mpdPort,
+        'mpd_port_source' => isset($stream['mpd_port']) ? 'runtime_json' : (string)($runtime['mpd_port_source'] ?? 'fallback'),
+        'runtime_conf_path' => $runtimeConfPath !== '' ? $runtimeConfPath : (string)($runtime['runtime_conf_path'] ?? ''),
+        'stream_runtime_dir' => $runtimeStreamDir,
+    ]);
+}
+
 function gee_get_renderer_runtime_context(?array $rendererContext = null): ?array
 {
     if (!is_array($rendererContext)) {
@@ -312,19 +360,9 @@ function gee_get_renderer_runtime_context(?array $rendererContext = null): ?arra
         }
     }
 
-    // Current live platform behaviour is safe stream only.
-    $activeStream = 'safe';
-    $streamKey = 'safe';
-    $streamName = 'Safe';
+    $runtimeReady = is_dir($runtimeDir) && is_dir($playlistDirectory);
 
-    $playlistFilename = gee_build_renderer_playlist_filename($rendererId, $streamKey);
-    $playlistPath = rtrim($playlistDirectory, '/') . '/' . $playlistFilename;
-
-    $runtimeReady = is_dir($runtimeDir)
-        && is_dir($playlistDirectory)
-        && is_file($runtimeConfPath);
-
-    return array_merge($rendererContext, [
+    $baseRuntime = array_merge($rendererContext, [
         'renderer_dir' => $rendererDir,
         'runtime_dir' => $runtimeDir,
         'config_version' => gee_read_renderer_config_version($rendererId),
@@ -335,17 +373,12 @@ function gee_get_renderer_runtime_context(?array $rendererContext = null): ?arra
 
         'music_directory' => $musicDirectory,
         'playlist_directory' => $playlistDirectory,
-        'playlist_filename' => $playlistFilename,
-        'playlist_path' => $playlistPath,
 
         'db_file' => $dbFile,
         'log_file' => $logFile,
         'state_file' => $stateFile,
         'sticker_file' => $stickerFile,
 
-        'active_stream' => $activeStream,
-        'stream_key' => $streamKey,
-        'stream_name' => $streamName,
         'stream_format' => $streamFormat,
         'fifo_path' => $fifoPath,
 
@@ -354,4 +387,6 @@ function gee_get_renderer_runtime_context(?array $rendererContext = null): ?arra
         'mpd_port' => $mpdPort,
         'mpd_port_source' => $portSource,
     ]);
+
+    return gee_get_renderer_stream_runtime($baseRuntime);
 }

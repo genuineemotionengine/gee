@@ -177,12 +177,13 @@ function gee_get_selected_runtime_or_fail(): array
         gee_fail('No renderer runtime context available.', 500);
     }
 
-    return $runtime;
+    return gee_get_renderer_stream_runtime($runtime);
 }
 
 $service = gee_get_query_string_int('service');
 $mod = gee_get_query_string_int('mod');
 $rendererId = gee_safe_renderer_id(gee_get_query_string_string('renderer_id'));
+$streamKey = trim((string)($_GET['stream'] ?? ''));
 
 /*
 |--------------------------------------------------------------------------
@@ -214,6 +215,7 @@ if ($service === 20) {
         'status' => 'ok',
         'count' => count($items),
         'selected_renderer_id' => $selectedRendererId,
+        'selected_stream' => gee_get_selected_stream(),
         'renderers' => $items,
     ]);
 }
@@ -228,17 +230,24 @@ if ($service === 21) {
         gee_fail('Renderer not found.', 404, ['renderer_id' => $rendererId]);
     }
 
-    gee_set_selected_renderer_cookie($rendererId);
+    if (!gee_set_selected_renderer_cookie($rendererId)) {
+        gee_fail('Failed to set renderer selection cookie.', 500, [
+            'renderer_id' => $rendererId,
+        ]);
+    }
 
     $runtime = gee_get_renderer_runtime_context($rendererContext);
     if (!is_array($runtime)) {
         gee_fail('Renderer runtime context unavailable.', 500, ['renderer_id' => $rendererId]);
     }
 
+    $runtime = gee_get_renderer_stream_runtime($runtime);
+
     gee_json_response([
         'status' => 'ok',
         'message' => 'Renderer selected.',
         'selected_renderer_id' => $rendererId,
+        'selected_stream' => gee_get_selected_stream(),
         'renderer' => gee_renderer_summary($rendererContext),
         'runtime' => gee_renderer_runtime_summary($runtime),
     ]);
@@ -250,6 +259,39 @@ if ($service === 22) {
     gee_json_response([
         'status' => 'ok',
         'selected_renderer_id' => (string)($runtime['renderer_id'] ?? ''),
+        'selected_stream' => (string)($runtime['stream_key'] ?? 'safe'),
+        'runtime' => gee_renderer_runtime_summary($runtime),
+    ]);
+}
+
+if ($service === 23) {
+    if (!gee_is_valid_stream_key($streamKey)) {
+        gee_fail('Invalid stream. Use safe or hires.', 400);
+    }
+
+    if (!gee_set_selected_stream_cookie($streamKey)) {
+        gee_fail('Failed to set selected stream cookie.', 500);
+    }
+
+    $runtime = gee_get_selected_runtime_or_fail();
+    $runtime = gee_get_renderer_stream_runtime($runtime, $streamKey);
+
+    gee_json_response([
+        'status' => 'ok',
+        'message' => 'Stream selected.',
+        'selected_stream' => $streamKey,
+        'runtime' => gee_renderer_runtime_summary($runtime),
+    ]);
+}
+
+if ($service === 24) {
+    $runtime = gee_get_selected_runtime_or_fail();
+    $runtime = gee_get_renderer_stream_runtime($runtime);
+
+    gee_json_response([
+        'status' => 'ok',
+        'selected_renderer_id' => (string)($runtime['renderer_id'] ?? ''),
+        'selected_stream' => (string)($runtime['stream_key'] ?? 'safe'),
         'runtime' => gee_renderer_runtime_summary($runtime),
     ]);
 }
@@ -267,6 +309,7 @@ try {
 } catch (RuntimeException $e) {
     gee_fail($e->getMessage(), 500, [
         'renderer_id' => (string)($runtime['renderer_id'] ?? ''),
+        'stream_key' => (string)($runtime['stream_key'] ?? ''),
         'mpd_host' => (string)($runtime['mpd_host'] ?? ''),
         'mpd_port' => (int)($runtime['mpd_port'] ?? 0),
         'mpd_port_source' => (string)($runtime['mpd_port_source'] ?? ''),
@@ -395,6 +438,7 @@ if ($service === 5) {
     } catch (Throwable $e) {
         gee_fail('Playlist load failed: ' . $e->getMessage(), 500, [
             'renderer_id' => (string)($runtime['renderer_id'] ?? ''),
+            'stream_key' => (string)($runtime['stream_key'] ?? ''),
             'playlist_path' => (string)($runtime['playlist_path'] ?? ''),
         ]);
     }

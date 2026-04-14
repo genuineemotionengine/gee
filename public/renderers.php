@@ -10,6 +10,7 @@ $message = '';
 $messageType = 'info';
 
 $selectRendererId = gee_safe_renderer_id((string)($_GET['select'] ?? ''));
+$selectStream = trim((string)($_GET['stream'] ?? ''));
 
 if ($selectRendererId !== '') {
     $rendererContext = gee_get_renderer_context($selectRendererId);
@@ -18,12 +19,46 @@ if ($selectRendererId !== '') {
         $message = 'Renderer not found: ' . htmlspecialchars($selectRendererId, ENT_QUOTES, 'UTF-8');
         $messageType = 'error';
     } else {
-        if (gee_set_selected_renderer_cookie($selectRendererId)) {
-            header('Location: /renderers.php?selected=' . rawurlencode($selectRendererId));
+        $rendererOk = gee_set_selected_renderer_cookie($selectRendererId);
+        $streamOk = true;
+
+        if ($selectStream !== '') {
+            if (!gee_is_valid_stream_key($selectStream)) {
+                $message = 'Invalid stream selection.';
+                $messageType = 'error';
+                $streamOk = false;
+            } else {
+                $streamOk = gee_set_selected_stream_cookie($selectStream);
+            }
+        }
+
+        if ($rendererOk && $streamOk) {
+            $url = '/renderers.php?selected=' . rawurlencode($selectRendererId);
+            if ($selectStream !== '' && gee_is_valid_stream_key($selectStream)) {
+                $url .= '&stream_selected=' . rawurlencode($selectStream);
+            }
+            header('Location: ' . $url);
             exit;
         }
 
-        $message = 'Failed to set selected renderer cookie.';
+        if ($message === '') {
+            $message = 'Failed to update selection.';
+            $messageType = 'error';
+        }
+    }
+}
+
+if ($selectRendererId === '' && $selectStream !== '') {
+    if (!gee_is_valid_stream_key($selectStream)) {
+        $message = 'Invalid stream selection.';
+        $messageType = 'error';
+    } else {
+        if (gee_set_selected_stream_cookie($selectStream)) {
+            header('Location: /renderers.php?stream_selected=' . rawurlencode($selectStream));
+            exit;
+        }
+
+        $message = 'Failed to set selected stream cookie.';
         $messageType = 'error';
     }
 }
@@ -36,33 +71,41 @@ if (isset($_GET['selected'])) {
     }
 }
 
+if (isset($_GET['stream_selected'])) {
+    $streamNotice = trim((string)$_GET['stream_selected']);
+    if (gee_is_valid_stream_key($streamNotice)) {
+        $message = 'Selected stream: ' . htmlspecialchars($streamNotice, ENT_QUOTES, 'UTF-8');
+        $messageType = 'success';
+    }
+}
+
 $selectedRendererId = gee_get_selected_renderer_id();
+$selectedStream = gee_get_selected_stream();
 $renderers = gee_get_all_renderer_contexts();
 
 $rows = [];
 
 foreach ($renderers as $rendererContext) {
     $runtime = gee_get_renderer_runtime_context($rendererContext);
-
     $rendererId = (string)($rendererContext['renderer_id'] ?? '');
-    $playlistPath = is_array($runtime) ? (string)($runtime['playlist_path'] ?? '') : '';
-    $runtimeDir = is_array($runtime) ? (string)($runtime['runtime_dir'] ?? '') : '';
-    $runtimeConfPath = is_array($runtime) ? (string)($runtime['runtime_conf_path'] ?? '') : '';
+
+    $safeRuntime = is_array($runtime) ? gee_get_renderer_stream_runtime($runtime, 'safe') : null;
+    $hiresRuntime = is_array($runtime) ? gee_get_renderer_stream_runtime($runtime, 'hires') : null;
+
+    $safePlaylistExists = is_array($safeRuntime) && is_file((string)($safeRuntime['playlist_path'] ?? ''));
+    $hiresPlaylistExists = is_array($hiresRuntime) && is_file((string)($hiresRuntime['playlist_path'] ?? ''));
     $configVersion = is_array($runtime) ? (string)($runtime['config_version'] ?? '') : '';
-    $runtimeReady = is_array($runtime) ? (bool)($runtime['runtime_ready'] ?? false) : false;
-    $playlistExists = $playlistPath !== '' && is_file($playlistPath);
-    $runtimeDirExists = $runtimeDir !== '' && is_dir($runtimeDir);
-    $runtimeConfExists = $runtimeConfPath !== '' && is_file($runtimeConfPath);
 
     $rows[] = [
         'renderer' => $rendererContext,
         'runtime' => $runtime,
+        'safe_runtime' => $safeRuntime,
+        'hires_runtime' => $hiresRuntime,
         'selected' => ($selectedRendererId !== null && $selectedRendererId === $rendererId),
-        'runtime_ready' => $runtimeReady,
-        'runtime_dir_exists' => $runtimeDirExists,
-        'runtime_conf_exists' => $runtimeConfExists,
-        'playlist_exists' => $playlistExists,
+        'selected_stream' => $selectedStream,
         'config_version' => $configVersion,
+        'safe_playlist_exists' => $safePlaylistExists,
+        'hires_playlist_exists' => $hiresPlaylistExists,
     ];
 }
 
@@ -80,6 +123,50 @@ function gee_value(?string $value): string
     return $value !== ''
         ? htmlspecialchars($value, ENT_QUOTES, 'UTF-8')
         : '<span class="muted">—</span>';
+}
+
+function gee_stream_block(?array $runtime, string $streamKey, string $rendererId, bool $isSelectedRenderer, string $selectedStream, bool $playlistExists): string
+{
+    $isSelectedStream = $isSelectedRenderer && $selectedStream === $streamKey;
+
+    $port = is_array($runtime) ? (string)($runtime['mpd_port'] ?? '') : '';
+    $format = is_array($runtime) ? (string)($runtime['stream_format'] ?? '') : '';
+    $fifo = is_array($runtime) ? (string)($runtime['fifo_path'] ?? '') : '';
+    $playlist = is_array($runtime) ? (string)($runtime['playlist_path'] ?? '') : '';
+    $runtimeConf = is_array($runtime) ? (string)($runtime['runtime_conf_path'] ?? '') : '';
+    $portSource = is_array($runtime) ? (string)($runtime['mpd_port_source'] ?? '') : '';
+
+    $html = '<div class="stream-block">';
+    $html .= '<div class="stream-head">';
+    $html .= '<div class="stream-title">' . htmlspecialchars(ucfirst($streamKey), ENT_QUOTES, 'UTF-8') . '</div>';
+
+    if ($isSelectedStream) {
+        $html .= '<div class="selected-tag">Active Stream</div>';
+    }
+
+    $html .= '</div>';
+    $html .= '<table class="meta">';
+    $html .= '<tr><td>MPD Port</td><td>' . gee_value($port) . '</td></tr>';
+    $html .= '<tr><td>Port Source</td><td>' . gee_value($portSource) . '</td></tr>';
+    $html .= '<tr><td>Format</td><td>' . gee_value($format) . '</td></tr>';
+    $html .= '<tr><td>FIFO</td><td>' . gee_value($fifo) . '</td></tr>';
+    $html .= '<tr><td>Playlist</td><td>' . gee_value($playlist) . '</td></tr>';
+    $html .= '<tr><td>Playlist Exists</td><td>' . gee_badge($playlistExists) . '</td></tr>';
+    $html .= '<tr><td>Runtime Conf</td><td>' . gee_value($runtimeConf) . '</td></tr>';
+    $html .= '</table>';
+
+    $html .= '<div class="actions">';
+    $html .= '<a class="btn primary" href="/renderers.php?select='
+        . rawurlencode($rendererId)
+        . '&stream='
+        . rawurlencode($streamKey)
+        . '">Select '
+        . htmlspecialchars(ucfirst($streamKey), ENT_QUOTES, 'UTF-8')
+        . '</a>';
+    $html .= '</div>';
+    $html .= '</div>';
+
+    return $html;
 }
 
 ?><!doctype html>
@@ -190,7 +277,7 @@ function gee_value(?string $value): string
 
         .grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(420px, 1fr));
             gap: 16px;
         }
 
@@ -286,10 +373,43 @@ function gee_value(?string $value): string
             margin-top: 16px;
         }
 
+        .stream-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 14px;
+            margin-top: 16px;
+        }
+
+        .stream-block {
+            background: #090909;
+            border: 1px solid #1d1d1d;
+            border-radius: 14px;
+            padding: 14px;
+        }
+
+        .stream-head {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+
+        .stream-title {
+            font-size: 16px;
+            font-weight: 600;
+        }
+
         .footer-note {
             margin-top: 20px;
             color: #888888;
             font-size: 12px;
+        }
+
+        @media (max-width: 900px) {
+            .stream-grid {
+                grid-template-columns: 1fr;
+            }
         }
 
         @media (max-width: 700px) {
@@ -315,7 +435,8 @@ function gee_value(?string $value): string
     <div class="toolbar">
         <div class="toolbar-left">
             <span class="pill">Count: <?= count($rows) ?></span>
-            <span class="pill">Selected: <?= gee_value($selectedRendererId) ?></span>
+            <span class="pill">Selected Renderer: <?= gee_value($selectedRendererId) ?></span>
+            <span class="pill">Selected Stream: <?= gee_value($selectedStream) ?></span>
         </div>
         <div class="toolbar-right">
             <a class="btn" href="/renderers.php">Refresh</a>
@@ -354,7 +475,7 @@ function gee_value(?string $value): string
                         </div>
 
                         <?php if ($row['selected']): ?>
-                            <div class="selected-tag">Selected</div>
+                            <div class="selected-tag">Selected Renderer</div>
                         <?php endif; ?>
                     </div>
 
@@ -385,56 +506,17 @@ function gee_value(?string $value): string
                         </tr>
                         <tr>
                             <td>Runtime Ready</td>
-                            <td><?= gee_badge($row['runtime_ready']) ?></td>
-                        </tr>
-                        <tr>
-                            <td>Runtime Dir Exists</td>
-                            <td><?= gee_badge($row['runtime_dir_exists']) ?></td>
-                        </tr>
-                        <tr>
-                            <td>Runtime Conf Exists</td>
-                            <td><?= gee_badge($row['runtime_conf_exists']) ?></td>
-                        </tr>
-                        <tr>
-                            <td>Playlist Exists</td>
-                            <td><?= gee_badge($row['playlist_exists']) ?></td>
+                            <td><?= gee_badge(is_array($runtime) ? (bool)($runtime['runtime_ready'] ?? false) : false) ?></td>
                         </tr>
                         <tr>
                             <td>Runtime Directory</td>
                             <td><?= gee_value(is_array($runtime) ? (string)($runtime['runtime_dir'] ?? '') : '') ?></td>
                         </tr>
-                        <tr>
-                            <td>Playlist Path</td>
-                            <td><?= gee_value(is_array($runtime) ? (string)($runtime['playlist_path'] ?? '') : '') ?></td>
-                        </tr>
-                        <tr>
-                            <td>FIFO Path</td>
-                            <td><?= gee_value(is_array($runtime) ? (string)($runtime['fifo_path'] ?? '') : '') ?></td>
-                        </tr>
-                        <tr>
-                            <td>Stream Format</td>
-                            <td><?= gee_value(is_array($runtime) ? (string)($runtime['stream_format'] ?? '') : '') ?></td>
-                        </tr>
-                        <tr>
-                            <td>MPD Host</td>
-                            <td><?= gee_value(is_array($runtime) ? (string)($runtime['mpd_host'] ?? '') : '') ?></td>
-                        </tr>
-                        <tr>
-                            <td>MPD Port</td>
-                            <td><?= gee_value(is_array($runtime) ? (string)($runtime['mpd_port'] ?? '') : '') ?></td>
-                        </tr>
-                        <tr>
-                            <td>Port Source</td>
-                            <td><?= gee_value(is_array($runtime) ? (string)($runtime['mpd_port_source'] ?? '') : '') ?></td>
-                        </tr>
                     </table>
 
-                    <div class="actions">
-                        <?php if (!$row['selected']): ?>
-                            <a class="btn primary" href="/renderers.php?select=<?= rawurlencode($rendererId) ?>">Select</a>
-                        <?php else: ?>
-                            <span class="btn" style="opacity:.65; cursor:default;">Currently Selected</span>
-                        <?php endif; ?>
+                    <div class="stream-grid">
+                        <?= gee_stream_block($row['safe_runtime'], 'safe', $rendererId, $row['selected'], $row['selected_stream'], (bool)$row['safe_playlist_exists']) ?>
+                        <?= gee_stream_block($row['hires_runtime'], 'hires', $rendererId, $row['selected'], $row['selected_stream'], (bool)$row['hires_playlist_exists']) ?>
                     </div>
                 </div>
             <?php endforeach; ?>
@@ -442,7 +524,7 @@ function gee_value(?string $value): string
     <?php endif; ?>
 
     <div class="footer-note">
-        This page is intended as an interim renderer diagnostics view before full player integration.
+        This page is intended as the renderer and stream diagnostics view before full player integration.
     </div>
 </div>
 </body>
