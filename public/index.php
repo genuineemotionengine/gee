@@ -20,7 +20,7 @@ body {
 }
 #artwork img {
     width: 100%;
-    max-width: 500px;
+    max-width: 100px;
     background: #111;
     display: block;
     margin: 0 auto;
