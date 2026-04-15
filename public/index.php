@@ -14,7 +14,7 @@ body {
     text-align: center;
 }
 #player {
-    max-width: 700px;
+    max-width: 760px;
     margin: 0 auto;
     padding: 20px;
 }
@@ -28,7 +28,13 @@ body {
 #renderer {
     margin-top: 20px;
     font-size: 0.95rem;
-    opacity: 0.85;
+    opacity: 0.9;
+    letter-spacing: 0.08em;
+}
+#stream {
+    margin-top: 6px;
+    font-size: 0.9rem;
+    opacity: 0.8;
     letter-spacing: 0.08em;
 }
 #status {
@@ -46,8 +52,38 @@ body {
     margin-top: 10px;
     min-height: 1.5rem;
 }
-#progress-wrap, #volume-wrap {
+#selectors,
+#progress-wrap,
+#volume-wrap {
     margin-top: 24px;
+}
+#selectors {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+    max-width: 500px;
+    margin-left: auto;
+    margin-right: auto;
+}
+.selector-block {
+    background: #0d0d0d;
+    border: 1px solid #222;
+    padding: 12px;
+    text-align: left;
+}
+.selector-block label {
+    display: block;
+    margin-bottom: 8px;
+    font-size: 0.85rem;
+    opacity: 0.8;
+    letter-spacing: 0.06em;
+}
+select {
+    width: 100%;
+    background: #111;
+    color: #fff;
+    border: 1px solid #444;
+    padding: 10px;
 }
 progress {
     width: 100%;
@@ -74,6 +110,17 @@ button:hover {
 .idle {
     opacity: 0.6;
 }
+#message {
+    margin-top: 16px;
+    min-height: 1.3rem;
+    font-size: 0.9rem;
+    opacity: 0.8;
+}
+@media (max-width: 640px) {
+    #selectors {
+        grid-template-columns: 1fr;
+    }
+}
 </style>
 </head>
 <body>
@@ -83,7 +130,24 @@ button:hover {
     </div>
 
     <div id="renderer">LOADING...</div>
+    <div id="stream">STREAM: --</div>
     <div id="status">Connecting...</div>
+
+    <div id="selectors">
+        <div class="selector-block">
+            <label for="rendererSelect">RENDERER</label>
+            <select id="rendererSelect"></select>
+        </div>
+        <div class="selector-block">
+            <label for="streamSelect">STREAM</label>
+            <select id="streamSelect">
+                <option value="safe">Safe</option>
+                <option value="hires">Hires</option>
+            </select>
+        </div>
+    </div>
+
+    <div id="message"></div>
 
     <div id="title">Loading...</div>
     <div id="artist"></div>
@@ -118,6 +182,8 @@ button:hover {
 
 <script>
 const DEFAULT_COVER = '/img/black.jpg';
+let rendererList = [];
+let isUpdatingSelectors = false;
 
 function fmt(sec) {
     sec = parseInt(sec || 0, 10);
@@ -126,8 +192,13 @@ function fmt(sec) {
     return `${m}:${String(s).padStart(2, '0')}`;
 }
 
-function setIdleState(rendererName = '') {
+function setMessage(text = '') {
+    document.getElementById('message').innerText = text;
+}
+
+function setIdleState(rendererName = '', streamName = '') {
     document.getElementById('renderer').innerText = rendererName || 'NO RENDERER';
+    document.getElementById('stream').innerText = streamName ? `STREAM: ${streamName}` : 'STREAM: --';
     document.getElementById('status').innerText = 'Stopped';
     document.getElementById('title').innerText = 'Nothing playing';
     document.getElementById('artist').innerText = '';
@@ -163,6 +234,109 @@ function applyPlaybackState(state) {
     document.getElementById('player').classList.add('idle');
 }
 
+async function fetchRendererList() {
+    try {
+        const res = await fetch('/api/?service=20', { cache: 'no-store' });
+        const data = await res.json();
+
+        if (!data || data.status !== 'ok' || !Array.isArray(data.renderers)) {
+            return;
+        }
+
+        rendererList = data.renderers;
+        populateRendererSelect(data.selected_renderer_id || '');
+        setStreamSelect(data.selected_stream || 'safe');
+    } catch (err) {
+        console.error('fetchRendererList failed', err);
+    }
+}
+
+function populateRendererSelect(selectedRendererId = '') {
+    const select = document.getElementById('rendererSelect');
+    const previous = select.value;
+
+    isUpdatingSelectors = true;
+    select.innerHTML = '';
+
+    if (!rendererList.length) {
+        const option = document.createElement('option');
+        option.value = '';
+        option.textContent = 'No renderers';
+        select.appendChild(option);
+        isUpdatingSelectors = false;
+        return;
+    }
+
+    rendererList.forEach(renderer => {
+        const option = document.createElement('option');
+        option.value = renderer.renderer_id || '';
+        option.textContent = renderer.display_name || renderer.renderer_name || renderer.renderer_id || 'Unknown';
+        select.appendChild(option);
+    });
+
+    const finalValue = selectedRendererId || previous || (rendererList[0]?.renderer_id ?? '');
+    select.value = finalValue;
+
+    isUpdatingSelectors = false;
+}
+
+function setStreamSelect(streamKey = 'safe') {
+    const select = document.getElementById('streamSelect');
+    isUpdatingSelectors = true;
+    select.value = (streamKey === 'hires') ? 'hires' : 'safe';
+    isUpdatingSelectors = false;
+}
+
+async function selectRenderer(rendererId) {
+    if (!rendererId) {
+        return;
+    }
+
+    try {
+        setMessage('Switching renderer...');
+        const res = await fetch(`/api/?service=21&renderer_id=${encodeURIComponent(rendererId)}`, { cache: 'no-store' });
+        const data = await res.json();
+
+        if (!data || data.status !== 'ok') {
+            console.error('selectRenderer failed', data);
+            setMessage('Renderer switch failed');
+            return;
+        }
+
+        setMessage(`Renderer selected: ${data.renderer?.display_name || rendererId}`);
+        await fetchRendererList();
+        await fetchMeta();
+    } catch (err) {
+        console.error('selectRenderer failed', err);
+        setMessage('Renderer switch failed');
+    }
+}
+
+async function selectStream(streamKey) {
+    if (!streamKey) {
+        return;
+    }
+
+    try {
+        setMessage('Switching stream...');
+        const res = await fetch(`/api/?service=23&stream=${encodeURIComponent(streamKey)}`, { cache: 'no-store' });
+        const data = await res.json();
+
+        if (!data || data.status !== 'ok') {
+            console.error('selectStream failed', data);
+            setMessage('Stream switch failed');
+            return;
+        }
+
+        setMessage(`Stream selected: ${streamKey}`);
+        await fetchRendererList();
+        await fetchMeta();
+    } catch (err) {
+        console.error('selectStream failed', err);
+        setMessage('Stream switch failed');
+    }
+}
+
 async function fetchMeta() {
     try {
         const res = await fetch('/api/?service=1', { cache: 'no-store' });
@@ -179,7 +353,11 @@ function updateUI(data) {
         return;
     }
 
-    document.getElementById('renderer').innerText = data.renderer_display || '';
+    const rendererDisplay = data.renderer_display || data.renderer_name || data.renderer_id || '';
+    const streamDisplay = data.stream_key ? `STREAM: ${String(data.stream_key).toUpperCase()}` : 'STREAM: --';
+
+    document.getElementById('renderer').innerText = rendererDisplay;
+    document.getElementById('stream').innerText = streamDisplay;
 
     const title = data.title || '';
     const artist = data.artist || '';
@@ -187,7 +365,7 @@ function updateUI(data) {
     const state = data.state || 'stop';
 
     if (!title && !artist && !album && state === 'stop') {
-        setIdleState(data.renderer_display || '');
+        setIdleState(rendererDisplay, streamDisplay);
     } else {
         document.getElementById('title').innerText = title || 'Unknown Title';
         document.getElementById('artist').innerText = artist || '';
@@ -240,17 +418,40 @@ async function loadMusic() {
 
         if (data.status !== 'ok') {
             console.error('loadMusic failed', data);
+            setMessage('Load Music failed');
             return;
         }
 
+        setMessage('Music loaded');
         await fetchMeta();
     } catch (err) {
         console.error('loadMusic failed', err);
+        setMessage('Load Music failed');
     }
 }
 
+document.getElementById('rendererSelect').addEventListener('change', async function () {
+    if (isUpdatingSelectors) {
+        return;
+    }
+    await selectRenderer(this.value);
+});
+
+document.getElementById('streamSelect').addEventListener('change', async function () {
+    if (isUpdatingSelectors) {
+        return;
+    }
+    await selectStream(this.value);
+});
+
+async function initialisePlayer() {
+    await fetchRendererList();
+    await fetchMeta();
+    setMessage('');
+}
+
 setInterval(fetchMeta, 5000);
-fetchMeta();
+initialisePlayer();
 </script>
 </body>
 </html>
