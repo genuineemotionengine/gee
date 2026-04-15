@@ -31,7 +31,7 @@ function gee_connect_mpd(array $runtime): MphpD
     try {
         $mphpd = new MphpD([
             'host' => (string)($runtime['mpd_host'] ?? '127.0.0.1'),
-            'port' => (int)($runtime['mpd_port'] ?? 6600),
+            'port' => (int)$runtime['mpd_port'],
             'timeout' => 5,
         ]);
 
@@ -165,19 +165,13 @@ function gee_renderer_runtime_summary(array $runtime): array
 
 function gee_get_selected_runtime_or_fail(): array
 {
-    $rendererContext = gee_get_selected_or_first_renderer_context();
-
-    if (!is_array($rendererContext)) {
-        gee_fail('No registered renderer available.', 500);
-    }
-
-    $runtime = gee_get_renderer_runtime_context($rendererContext);
+    $runtime = gee_get_active_runtime();
 
     if (!is_array($runtime)) {
-        gee_fail('No renderer runtime context available.', 500);
+        gee_fail('No active renderer runtime available.', 500);
     }
 
-    return gee_get_renderer_stream_runtime($runtime);
+    return $runtime;
 }
 
 $service = gee_get_query_string_int('service');
@@ -286,7 +280,6 @@ if ($service === 23) {
 
 if ($service === 24) {
     $runtime = gee_get_selected_runtime_or_fail();
-    $runtime = gee_get_renderer_stream_runtime($runtime);
 
     gee_json_response([
         'status' => 'ok',

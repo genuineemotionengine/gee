@@ -215,7 +215,6 @@ function gee_get_renderer_stream_runtime(array $runtime, ?string $streamKey = nu
 
     $rendererId = (string)($runtime['renderer_id'] ?? '');
     $runtimeDir = (string)($runtime['runtime_dir'] ?? '');
-    $rendererDir = (string)($runtime['renderer_dir'] ?? '');
 
     $runtimeJson = $rendererId !== '' ? gee_read_renderer_runtime_json($rendererId) : null;
 
@@ -389,4 +388,21 @@ function gee_get_renderer_runtime_context(?array $rendererContext = null): ?arra
     ]);
 
     return gee_get_renderer_stream_runtime($baseRuntime);
+}
+
+function gee_get_active_runtime(): ?array
+{
+    $rendererContext = gee_get_selected_or_first_renderer_context();
+
+    if (!is_array($rendererContext)) {
+        return null;
+    }
+
+    $runtime = gee_get_renderer_runtime_context($rendererContext);
+
+    if (!is_array($runtime)) {
+        return null;
+    }
+
+    return gee_get_renderer_stream_runtime($runtime);
 }
