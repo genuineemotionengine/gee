@@ -43,6 +43,96 @@ function gee_connect_mpd(array $runtime): MphpD
     }
 }
 
+function gee_snapcast_request(string $method, array $params = []): ?array
+{
+    $payload = json_encode([
+        'id' => random_int(1, 999999),
+        'jsonrpc' => '2.0',
+        'method' => $method,
+        'params' => $params,
+    ]);
+
+    if ($payload === false) {
+        return null;
+    }
+
+    $ch = curl_init('http://127.0.0.1:1780/jsonrpc');
+
+    curl_setopt_array($ch, [
+        CURLOPT_RETURNTRANSFER => true,
+        CURLOPT_POST => true,
+        CURLOPT_HTTPHEADER => ['Content-Type: application/json'],
+        CURLOPT_POSTFIELDS => $payload,
+        CURLOPT_TIMEOUT => 3,
+    ]);
+
+    $response = curl_exec($ch);
+
+    if ($response === false) {
+        curl_close($ch);
+        return null;
+    }
+
+    curl_close($ch);
+
+    $decoded = json_decode($response, true);
+    return is_array($decoded) ? $decoded : null;
+}
+
+function gee_snapcast_get_group_id_for_renderer(string $rendererHostname): ?string
+{
+    $rendererHostname = trim($rendererHostname);
+    if ($rendererHostname === '') {
+        return null;
+    }
+
+    $status = gee_snapcast_request('Server.GetStatus');
+
+    if (!isset($status['result']['server']['groups']) || !is_array($status['result']['server']['groups'])) {
+        return null;
+    }
+
+    foreach ($status['result']['server']['groups'] as $group) {
+        if (!is_array($group) || !isset($group['clients']) || !is_array($group['clients'])) {
+            continue;
+        }
+
+        foreach ($group['clients'] as $client) {
+            $hostName = trim((string)($client['host']['name'] ?? ''));
+            if ($hostName === $rendererHostname) {
+                return isset($group['id']) ? (string)$group['id'] : null;
+            }
+        }
+    }
+
+    return null;
+}
+
+function gee_snapcast_set_renderer_stream(array $runtime): bool
+{
+    $rendererId = trim((string)($runtime['renderer_id'] ?? ''));
+    $rendererHostname = trim((string)($runtime['hostname'] ?? ''));
+    $streamKey = trim((string)($runtime['stream_key'] ?? ''));
+
+    if ($rendererId === '' || $rendererHostname === '' || $streamKey === '') {
+        return false;
+    }
+
+    $groupId = gee_snapcast_get_group_id_for_renderer($rendererHostname);
+    if ($groupId === null || $groupId === '') {
+        return false;
+    }
+
+    $streamId = $rendererId . '-' . $streamKey;
+
+    $result = gee_snapcast_request('Group.SetStream', [
+        'id' => $groupId,
+        'stream_id' => $streamId,
+    ]);
+
+    return is_array($result) && !isset($result['error']);
+}
+
 function gee_build_and_load_playlist(array $runtime, string $sql): array
 {
     $conn = gee_db();
@@ -237,11 +327,14 @@ if ($service === 21) {
 
     $runtime = gee_get_renderer_stream_runtime($runtime);
 
+    $snapcastSwitched = gee_snapcast_set_renderer_stream($runtime);
+
     gee_json_response([
         'status' => 'ok',
         'message' => 'Renderer selected.',
         'selected_renderer_id' => $rendererId,
         'selected_stream' => gee_get_selected_stream(),
+        'snapcast_stream_switched' => $snapcastSwitched,
         'renderer' => gee_renderer_summary($rendererContext),
         'runtime' => gee_renderer_runtime_summary($runtime),
     ]);
@@ -270,10 +363,13 @@ if ($service === 23) {
     $runtime = gee_get_selected_runtime_or_fail();
     $runtime = gee_get_renderer_stream_runtime($runtime, $streamKey);
 
+    $snapcastSwitched = gee_snapcast_set_renderer_stream($runtime);
+
     gee_json_response([
         'status' => 'ok',
         'message' => 'Stream selected.',
         'selected_stream' => $streamKey,
+        'snapcast_stream_switched' => $snapcastSwitched,
         'runtime' => gee_renderer_runtime_summary($runtime),
     ]);
 }
