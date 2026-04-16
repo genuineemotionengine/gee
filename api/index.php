@@ -79,6 +79,12 @@ function gee_snapcast_request(string $method, array $params = []): ?array
     return is_array($decoded) ? $decoded : null;
 }
 
+function gee_snapcast_get_status(): ?array
+{
+    $status = gee_snapcast_request('Server.GetStatus');
+    return is_array($status) ? $status : null;
+}
+
 function gee_snapcast_get_group_id_for_renderer(string $rendererHostname): ?string
 {
     $rendererHostname = trim($rendererHostname);
@@ -86,7 +92,7 @@ function gee_snapcast_get_group_id_for_renderer(string $rendererHostname): ?stri
         return null;
     }
 
-    $status = gee_snapcast_request('Server.GetStatus');
+    $status = gee_snapcast_get_status();
 
     if (!isset($status['result']['server']['groups']) || !is_array($status['result']['server']['groups'])) {
         return null;
@@ -106,6 +112,82 @@ function gee_snapcast_get_group_id_for_renderer(string $rendererHostname): ?stri
     }
 
     return null;
+}
+
+function gee_snapcast_get_client_for_renderer(array $runtime): ?array
+{
+    $rendererHostname = trim((string)($runtime['hostname'] ?? ''));
+    $rendererMac = strtolower(trim((string)($runtime['mac_address'] ?? '')));
+
+    if ($rendererHostname === '' && $rendererMac === '') {
+        return null;
+    }
+
+    $status = gee_snapcast_get_status();
+
+    if (!isset($status['result']['server']['groups']) || !is_array($status['result']['server']['groups'])) {
+        return null;
+    }
+
+    foreach ($status['result']['server']['groups'] as $group) {
+        if (!is_array($group) || !isset($group['clients']) || !is_array($group['clients'])) {
+            continue;
+        }
+
+        foreach ($group['clients'] as $client) {
+            $hostName = trim((string)($client['host']['name'] ?? ''));
+            $clientId = strtolower(trim((string)($client['id'] ?? '')));
+
+            if (($rendererHostname !== '' && $hostName === $rendererHostname)
+                || ($rendererMac !== '' && $clientId === $rendererMac)) {
+                return $client;
+            }
+        }
+    }
+
+    return null;
+}
+
+function gee_snapcast_get_client_volume_for_renderer(array $runtime): int
+{
+    $client = gee_snapcast_get_client_for_renderer($runtime);
+
+    if (!is_array($client)) {
+        return 0;
+    }
+
+    return max(0, min(100, (int)($client['config']['volume']['percent'] ?? 0)));
+}
+
+function gee_snapcast_adjust_renderer_volume(array $runtime, int $delta): ?int
+{
+    $client = gee_snapcast_get_client_for_renderer($runtime);
+
+    if (!is_array($client)) {
+        return null;
+    }
+
+    $clientId = trim((string)($client['id'] ?? ''));
+    if ($clientId === '') {
+        return null;
+    }
+
+    $current = max(0, min(100, (int)($client['config']['volume']['percent'] ?? 0)));
+    $target = max(0, min(100, $current + $delta));
+
+    $result = gee_snapcast_request('Client.SetVolume', [
+        'id' => $clientId,
+        'volume' => [
+            'muted' => false,
+            'percent' => $target,
+        ],
+    ]);
+
+    if (!is_array($result) || isset($result['error'])) {
+        return null;
+    }
+
+    return $target;
 }
 
 function gee_snapcast_set_renderer_stream(array $runtime): bool
@@ -460,6 +542,8 @@ if ($service === 1) {
         }
     }
 
+    $snapcastVolume = gee_snapcast_get_client_volume_for_renderer($runtime);
+
     gee_json_response([
         'status' => 'ok',
         'renderer_id' => (string)($runtime['renderer_id'] ?? ''),
@@ -475,7 +559,7 @@ if ($service === 1) {
         'albumartist' => $albumartist,
         'elapsed' => (int)$elapsed,
         'duration' => (int)$duration,
-        'volume' => (int)($status['volume'] ?? 0),
+        'volume' => $snapcastVolume,
         'state' => (string)($status['state'] ?? 'stop'),
     ]);
 }
@@ -549,10 +633,19 @@ if ($service === 13) {
 }
 
 if ($service === 15) {
-    $mphpd->player()->volume($mod);
+    $newVolume = gee_snapcast_adjust_renderer_volume($runtime, $mod);
+
+    if ($newVolume === null) {
+        gee_fail('Failed to adjust renderer volume via Snapcast.', 500, [
+            'renderer_id' => (string)($runtime['renderer_id'] ?? ''),
+            'hostname' => (string)($runtime['hostname'] ?? ''),
+        ]);
+    }
+
     gee_json_response([
         'status' => 'ok',
         'mod' => $mod,
+        'volume' => $newVolume,
     ]);
 }
 
