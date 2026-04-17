@@ -228,7 +228,12 @@ function gee_get_renderer_stream_runtime(array $runtime, ?string $streamKey = nu
     $playlistFilename = (string)($stream['playlist_filename'] ?? gee_build_renderer_playlist_filename($rendererId, $streamKey));
     $playlistPath = (string)($stream['playlist_path'] ?? ($playlistDirectory !== '' ? $playlistDirectory . '/' . $playlistFilename : ''));
     $fifoPath = (string)($stream['fifo_path'] ?? '');
+
     $streamFormat = (string)($stream['format'] ?? '');
+    if ($streamKey === 'hires' && preg_match('/^192000:/', $streamFormat)) {
+        $streamFormat = '96000:24:2';
+    }
+
     $mpdPort = isset($stream['mpd_port']) ? (int)$stream['mpd_port'] : (int)($runtime['mpd_port'] ?? 6600);
     $runtimeConfPath = (string)($stream['mpd_runtime_conf'] ?? '');
     $runtimeStreamDir = (string)($stream['runtime_dir'] ?? '');
