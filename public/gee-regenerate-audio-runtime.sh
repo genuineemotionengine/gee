@@ -49,13 +49,13 @@ normalise_stream_format() {
   local stream_key="${2:-}"
   local sample_format="${3:-}"
 
-  if [[ "${stream_key}" == "hires" && "${sample_format}" == 192000:* ]]; then
-    log "Downgrading ${renderer_id}:${stream_key} from ${sample_format} to 96000:24:2 for stability"
-    echo "96000:24:2"
+  if [[ "${stream_key}" == "hires" && "${sample_format}" =~ ^192000: ]]; then
+    echo "[$(timestamp)] Downgrading ${renderer_id}:${stream_key} from ${sample_format} to 96000:24:2 for stability" | tee -a "${LOG_FILE}" >&2
+    printf '%s\n' "96000:24:2"
     return 0
   fi
 
-  echo "${sample_format}"
+  printf '%s\n' "${sample_format}"
 }
 
 build_stream_runtime_mpd_conf() {
