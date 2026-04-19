@@ -6,7 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#000000">
 <link rel="icon" href="/favicon.ico">
-<link rel="stylesheet" href="/css/gee.css?v=20260419h">
+<link rel="stylesheet" href="/css/gee.css?v=20260419i">
 </head>
 <body>
 <div id="app">
@@ -61,7 +61,7 @@
                         <div class="volume-bar-wrap">
                             <button type="button" class="volume-step" id="volDownButton" title="Volume down" aria-label="Volume down">−</button>
 
-                            <div class="volume-bar" role="progressbar" aria-label="Volume" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+                            <div id="volumeBar" class="volume-bar" role="progressbar" aria-label="Volume" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
                                 <div id="volumeFill" class="volume-fill"></div>
                             </div>
 
@@ -179,6 +179,7 @@ function setIdleState(rendererName = '', streamName = '') {
     document.getElementById('cover').src = DEFAULT_COVER;
     document.getElementById('player').classList.add('idle', 'state-stop');
     document.getElementById('player').classList.remove('state-play', 'state-pause');
+    updateVolumeUI(0);
     updateSheetSummary();
 }
 
@@ -200,6 +201,13 @@ function applyPlaybackState(state) {
     }
 
     player.classList.add('idle', 'state-stop');
+}
+
+function updateVolumeUI(volume) {
+    const safeVolume = Math.max(0, Math.min(100, parseInt(volume ?? 0, 10) || 0));
+    uiState.volume = safeVolume;
+    document.getElementById('volumeFill').style.width = `${safeVolume}%`;
+    document.getElementById('volumeBar').setAttribute('aria-valuenow', String(safeVolume));
 }
 
 function updateSheetSummary() {
@@ -358,7 +366,6 @@ function updateUI(data) {
     uiState.title = data.title || '';
     uiState.artist = data.artist || '';
     uiState.album = data.album || '';
-    uiState.volume = Math.max(0, Math.min(100, parseInt(data.volume ?? 0, 10) || 0));
 
     document.getElementById('renderer').textContent = rendererDisplay || 'No renderer';
     document.getElementById('stream').textContent = streamKey ? String(streamKey).toUpperCase() : '--';
@@ -391,9 +398,7 @@ function updateUI(data) {
     document.getElementById('progressFill').style.width = `${progress}%`;
     document.querySelector('.track-bar').setAttribute('aria-valuenow', String(progress));
 
-    document.getElementById('volumeFill').style.width = `${uiState.volume}%`;
-    document.querySelector('.volume-bar').setAttribute('aria-valuenow', String(uiState.volume));
-
+    updateVolumeUI(data.volume ?? 0);
     applyPlaybackState(state);
     updateSheetSummary();
 }
@@ -418,13 +423,19 @@ async function sendCommand(service, successMessage = '') {
 
 async function changeVolume(delta) {
     try {
-        const data = await safeJson(fetch(`/api/?service=15&mod=${encodeURIComponent(delta)}`, { cache: 'no-store' }));
+        const res = await fetch(`/api/?service=15&mod=${encodeURIComponent(delta)}`, {
+            cache: 'no-store'
+        });
 
-        if (!data || data.status !== 'ok') {
-            console.error('changeVolume failed', data);
+        if (!res.ok) {
+            const body = await res.text();
+            console.error('changeVolume failed', res.status, body);
             setMessage('Volume change failed');
             return;
         }
+
+        uiState.volume = Math.max(0, Math.min(100, uiState.volume + delta));
+        updateVolumeUI(uiState.volume);
 
         await fetchMeta(true);
     } catch (err) {
