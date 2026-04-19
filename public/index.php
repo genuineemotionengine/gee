@@ -6,7 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#000000">
 <link rel="icon" href="/favicon.ico">
-<link rel="stylesheet" href="/css/gee.css?v=20260419d">
+<link rel="stylesheet" href="/css/gee.css?v=20260419e">
 </head>
 <body>
 <div id="app">
@@ -36,7 +36,7 @@
                 <div class="context-line">
                     <span id="renderer" class="context-renderer">Loading…</span>
                     <span class="context-sep">·</span>
-                    <span id="stream" class="context-stream">Stream: --</span>
+                    <span id="stream" class="context-stream">--</span>
                 </div>
 
                 <div class="meta">
@@ -59,8 +59,8 @@
 
                 <div class="transport-panel">
                     <div class="transport-row">
-                        <button type="button" class="transport-button large" id="playPauseButton" title="Play / Pause">
-                            <span id="playPauseLabel" class="transport-icon">▶</span>
+                        <button type="button" class="transport-minimal" id="playPauseButton" title="Play / Pause">
+                            <span id="playPauseLabel" class="transport-minimal-label">Play</span>
                         </button>
                     </div>
 
@@ -189,7 +189,7 @@ function setIdleState(rendererName = '', streamName = '') {
     document.getElementById('progressFill').style.width = '0%';
     document.querySelector('.track-bar').setAttribute('aria-valuenow', '0');
     document.getElementById('cover').src = DEFAULT_COVER;
-    document.getElementById('playPauseLabel').textContent = '▶';
+    document.getElementById('playPauseLabel').textContent = 'Play';
     document.getElementById('player').classList.add('idle', 'state-stop');
     document.getElementById('player').classList.remove('state-play', 'state-pause');
     updateSheetSummary();
@@ -203,7 +203,7 @@ function applyPlaybackState(state) {
     player.classList.remove('state-play', 'state-pause', 'state-stop');
 
     if (state === 'play') {
-        playPauseLabel.textContent = '⏸';
+        playPauseLabel.textContent = 'Pause';
         status.textContent = 'Playing';
         player.classList.remove('idle');
         player.classList.add('state-play');
@@ -211,14 +211,14 @@ function applyPlaybackState(state) {
     }
 
     if (state === 'pause') {
-        playPauseLabel.textContent = '▶';
+        playPauseLabel.textContent = 'Play';
         status.textContent = 'Paused';
         player.classList.remove('idle');
         player.classList.add('state-pause');
         return;
     }
 
-    playPauseLabel.textContent = '▶';
+    playPauseLabel.textContent = 'Play';
     status.textContent = 'Stopped';
     player.classList.add('idle', 'state-stop');
 }
