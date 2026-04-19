@@ -43,7 +43,60 @@ function gee_connect_mpd(array $runtime): MphpD
     }
 }
 
-function gee_snapcast_request(string $method, array $params = []): ?array
+/*
+|--------------------------------------------------------------------------
+| Snapcast helpers
+|--------------------------------------------------------------------------
+|
+| IMPORTANT:
+| - Use Snapserver TCP control port 1705 first.
+| - Only fall back to HTTP 1780/jsonrpc if needed.
+| - On this Core, 1780 appears to hang / return nothing.
+|
+*/
+
+function gee_snapcast_request_tcp(string $method, array $params = []): ?array
+{
+    $payload = json_encode([
+        'id' => random_int(1, 999999),
+        'jsonrpc' => '2.0',
+        'method' => $method,
+        'params' => $params,
+    ]);
+
+    if ($payload === false) {
+        return null;
+    }
+
+    $errno = 0;
+    $errstr = '';
+
+    $fp = @fsockopen('127.0.0.1', 1705, $errno, $errstr, 2.0);
+    if (!is_resource($fp)) {
+        return null;
+    }
+
+    stream_set_timeout($fp, 2, 0);
+
+    $written = @fwrite($fp, $payload . "\r\n");
+    if ($written === false) {
+        fclose($fp);
+        return null;
+    }
+
+    $response = @fgets($fp, 65536);
+    $meta = stream_get_meta_data($fp);
+    fclose($fp);
+
+    if ($response === false || ($meta['timed_out'] ?? false)) {
+        return null;
+    }
+
+    $decoded = json_decode(trim($response), true);
+    return is_array($decoded) ? $decoded : null;
+}
+
+function gee_snapcast_request_http(string $method, array $params = []): ?array
 {
     $payload = json_encode([
         'id' => random_int(1, 999999),
@@ -63,7 +116,8 @@ function gee_snapcast_request(string $method, array $params = []): ?array
         CURLOPT_POST => true,
         CURLOPT_HTTPHEADER => ['Content-Type: application/json'],
         CURLOPT_POSTFIELDS => $payload,
-        CURLOPT_TIMEOUT => 3,
+        CURLOPT_TIMEOUT => 2,
+        CURLOPT_CONNECTTIMEOUT => 1,
     ]);
 
     $response = curl_exec($ch);
@@ -77,6 +131,16 @@ function gee_snapcast_request(string $method, array $params = []): ?array
 
     $decoded = json_decode($response, true);
     return is_array($decoded) ? $decoded : null;
+}
+
+function gee_snapcast_request(string $method, array $params = []): ?array
+{
+    $tcp = gee_snapcast_request_tcp($method, $params);
+    if (is_array($tcp)) {
+        return $tcp;
+    }
+
+    return gee_snapcast_request_http($method, $params);
 }
 
 function gee_snapcast_get_status(): ?array
@@ -212,44 +276,22 @@ function gee_snapcast_get_client_for_renderer(array $runtime): ?array
                 return $client;
             }
 
-            if (
-                $rendererHostnameLower !== ''
-                && $hostNameLower !== ''
-                && $hostNameLower === $rendererHostnameLower
-            ) {
+            if ($rendererHostnameLower !== '' && $hostNameLower === $rendererHostnameLower) {
                 $fallbacks[] = $client;
                 continue;
             }
 
-            if (
-                $rendererId !== ''
-                && (
-                    $hostNameLower === $rendererId
-                    || $clientIdLower === $rendererId
-                )
-            ) {
+            if ($rendererId !== '' && ($hostNameLower === $rendererId || $clientIdLower === $rendererId)) {
                 $fallbacks[] = $client;
                 continue;
             }
 
-            if (
-                $rendererName !== ''
-                && (
-                    $hostNameLower === $rendererName
-                    || $clientIdLower === $rendererName
-                )
-            ) {
+            if ($rendererName !== '' && ($hostNameLower === $rendererName || $clientIdLower === $rendererName)) {
                 $fallbacks[] = $client;
                 continue;
             }
 
-            if (
-                $displayName !== ''
-                && (
-                    $hostNameLower === $displayName
-                    || $clientIdLower === $displayName
-                )
-            ) {
+            if ($displayName !== '' && ($hostNameLower === $displayName || $clientIdLower === $displayName)) {
                 $fallbacks[] = $client;
                 continue;
             }
