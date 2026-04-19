@@ -6,7 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#000000">
 <link rel="icon" href="/favicon.ico">
-<link rel="stylesheet" href="/css/gee.css?v=20260419f">
+<link rel="stylesheet" href="/css/gee.css?v=20260419g">
 </head>
 <body>
 <div id="app">
@@ -52,7 +52,6 @@
 
                     <div class="time-row">
                         <span id="elapsed">0:00</span>
-                        <span id="status">Connecting…</span>
                         <span id="duration">0:00</span>
                     </div>
                 </div>
@@ -60,7 +59,7 @@
                 <div class="transport-panel">
                     <div class="volume-panel">
                         <div class="volume-head">
-                            <span class="volume-label">Volume</span>
+                            <span class="volume-spacer"></span>
                             <span id="volume" class="volume-value">0</span>
                         </div>
 
@@ -174,7 +173,6 @@ function setMessage(text = '') {
 function setIdleState(rendererName = '', streamName = '') {
     document.getElementById('renderer').textContent = rendererName || 'No renderer';
     document.getElementById('stream').textContent = streamName ? String(streamName).toUpperCase() : '--';
-    document.getElementById('status').textContent = 'Stopped';
     document.getElementById('title').textContent = 'Nothing playing';
     document.getElementById('artist').textContent = '';
     document.getElementById('album').textContent = '';
@@ -190,25 +188,21 @@ function setIdleState(rendererName = '', streamName = '') {
 
 function applyPlaybackState(state) {
     const player = document.getElementById('player');
-    const status = document.getElementById('status');
 
     player.classList.remove('state-play', 'state-pause', 'state-stop');
 
     if (state === 'play') {
-        status.textContent = 'Playing';
         player.classList.remove('idle');
         player.classList.add('state-play');
         return;
     }
 
     if (state === 'pause') {
-        status.textContent = 'Paused';
         player.classList.remove('idle');
         player.classList.add('state-pause');
         return;
     }
 
-    status.textContent = 'Stopped';
     player.classList.add('idle', 'state-stop');
 }
 
@@ -348,7 +342,6 @@ async function fetchMeta(force = false) {
         updateUI(data);
     } catch (err) {
         console.error('fetchMeta failed', err);
-        document.getElementById('status').textContent = 'Connection error';
         setMessage('Unable to reach Gee Core');
     } finally {
         isFetchingMeta = false;

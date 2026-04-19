@@ -287,9 +287,16 @@ select{
     align-items:center;
     justify-content:space-between;
     gap:10px;
+    min-height:12px;
 }
 
-.volume-label,
+.volume-spacer{
+    display:block;
+    width:1px;
+    height:1px;
+    opacity:0;
+}
+
 .volume-value{
     color:var(--muted);
     font-size:.72rem;
@@ -544,7 +551,6 @@ select{
 
     .context-line,
     .time-row,
-    .volume-label,
     .volume-value{
         font-size:.68rem;
     }
