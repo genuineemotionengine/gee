@@ -85,6 +85,53 @@ function gee_snapcast_get_status(): ?array
     return is_array($status) ? $status : null;
 }
 
+function gee_normalize_mac(string $value): string
+{
+    $value = strtolower(trim($value));
+    return preg_replace('/[^a-f0-9]/', '', $value) ?? '';
+}
+
+function gee_snapcast_debug_client_summary(array $client): array
+{
+    return [
+        'id' => (string)($client['id'] ?? ''),
+        'host_name' => (string)($client['host']['name'] ?? ''),
+        'connected' => (bool)($client['connected'] ?? false),
+        'volume_percent' => (int)($client['config']['volume']['percent'] ?? 0),
+        'volume_muted' => (bool)($client['config']['volume']['muted'] ?? false),
+    ];
+}
+
+function gee_snapcast_debug_all_clients(): array
+{
+    $status = gee_snapcast_get_status();
+    $items = [];
+
+    if (!isset($status['result']['server']['groups']) || !is_array($status['result']['server']['groups'])) {
+        return $items;
+    }
+
+    foreach ($status['result']['server']['groups'] as $group) {
+        if (!is_array($group) || !isset($group['clients']) || !is_array($group['clients'])) {
+            continue;
+        }
+
+        foreach ($group['clients'] as $client) {
+            $items[] = [
+                'group_id' => (string)($group['id'] ?? ''),
+                'id' => (string)($client['id'] ?? ''),
+                'id_normalized' => gee_normalize_mac((string)($client['id'] ?? '')),
+                'host_name' => trim((string)($client['host']['name'] ?? '')),
+                'connected' => (bool)($client['connected'] ?? false),
+                'volume_percent' => (int)($client['config']['volume']['percent'] ?? 0),
+                'volume_muted' => (bool)($client['config']['volume']['muted'] ?? false),
+            ];
+        }
+    }
+
+    return $items;
+}
+
 function gee_snapcast_get_group_id_for_renderer(string $rendererHostname): ?string
 {
     $rendererHostname = trim($rendererHostname);
@@ -117,9 +164,22 @@ function gee_snapcast_get_group_id_for_renderer(string $rendererHostname): ?stri
 function gee_snapcast_get_client_for_renderer(array $runtime): ?array
 {
     $rendererHostname = trim((string)($runtime['hostname'] ?? ''));
-    $rendererMac = strtolower(trim((string)($runtime['mac_address'] ?? '')));
+    $rendererHostnameLower = strtolower($rendererHostname);
 
-    if ($rendererHostname === '' && $rendererMac === '') {
+    $rendererMacRaw = (string)($runtime['mac_address'] ?? '');
+    $rendererMac = gee_normalize_mac($rendererMacRaw);
+
+    $rendererId = strtolower(trim((string)($runtime['renderer_id'] ?? '')));
+    $rendererName = strtolower(trim((string)($runtime['renderer_name'] ?? '')));
+    $displayName = strtolower(trim((string)($runtime['display_name'] ?? '')));
+
+    if (
+        $rendererHostname === ''
+        && $rendererMac === ''
+        && $rendererId === ''
+        && $rendererName === ''
+        && $displayName === ''
+    ) {
         return null;
     }
 
@@ -129,6 +189,8 @@ function gee_snapcast_get_client_for_renderer(array $runtime): ?array
         return null;
     }
 
+    $fallbacks = [];
+
     foreach ($status['result']['server']['groups'] as $group) {
         if (!is_array($group) || !isset($group['clients']) || !is_array($group['clients'])) {
             continue;
@@ -136,16 +198,65 @@ function gee_snapcast_get_client_for_renderer(array $runtime): ?array
 
         foreach ($group['clients'] as $client) {
             $hostName = trim((string)($client['host']['name'] ?? ''));
-            $clientId = strtolower(trim((string)($client['id'] ?? '')));
+            $hostNameLower = strtolower($hostName);
 
-            if (($rendererHostname !== '' && $hostName === $rendererHostname)
-                || ($rendererMac !== '' && $clientId === $rendererMac)) {
+            $clientId = trim((string)($client['id'] ?? ''));
+            $clientIdLower = strtolower($clientId);
+            $clientIdNormalized = gee_normalize_mac($clientId);
+
+            if ($rendererHostname !== '' && $hostName === $rendererHostname) {
                 return $client;
+            }
+
+            if ($rendererMac !== '' && $clientIdNormalized !== '' && $clientIdNormalized === $rendererMac) {
+                return $client;
+            }
+
+            if (
+                $rendererHostnameLower !== ''
+                && $hostNameLower !== ''
+                && $hostNameLower === $rendererHostnameLower
+            ) {
+                $fallbacks[] = $client;
+                continue;
+            }
+
+            if (
+                $rendererId !== ''
+                && (
+                    $hostNameLower === $rendererId
+                    || $clientIdLower === $rendererId
+                )
+            ) {
+                $fallbacks[] = $client;
+                continue;
+            }
+
+            if (
+                $rendererName !== ''
+                && (
+                    $hostNameLower === $rendererName
+                    || $clientIdLower === $rendererName
+                )
+            ) {
+                $fallbacks[] = $client;
+                continue;
+            }
+
+            if (
+                $displayName !== ''
+                && (
+                    $hostNameLower === $displayName
+                    || $clientIdLower === $displayName
+                )
+            ) {
+                $fallbacks[] = $client;
+                continue;
             }
         }
     }
 
-    return null;
+    return $fallbacks[0] ?? null;
 }
 
 function gee_snapcast_get_client_volume_for_renderer(array $runtime): int
@@ -633,12 +744,20 @@ if ($service === 13) {
 }
 
 if ($service === 15) {
+    $matchedClient = gee_snapcast_get_client_for_renderer($runtime);
     $newVolume = gee_snapcast_adjust_renderer_volume($runtime, $mod);
 
     if ($newVolume === null) {
         gee_fail('Failed to adjust renderer volume via Snapcast.', 500, [
             'renderer_id' => (string)($runtime['renderer_id'] ?? ''),
+            'renderer_name' => (string)($runtime['renderer_name'] ?? ''),
+            'display_name' => (string)($runtime['display_name'] ?? ''),
             'hostname' => (string)($runtime['hostname'] ?? ''),
+            'runtime_mac' => (string)($runtime['mac_address'] ?? ''),
+            'runtime_mac_normalized' => gee_normalize_mac((string)($runtime['mac_address'] ?? '')),
+            'mod' => $mod,
+            'matched_client' => is_array($matchedClient) ? gee_snapcast_debug_client_summary($matchedClient) : null,
+            'available_clients' => gee_snapcast_debug_all_clients(),
         ]);
     }
 
