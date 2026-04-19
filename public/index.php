@@ -6,7 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#000000">
 <link rel="icon" href="/favicon.ico">
-<link rel="stylesheet" href="/css/gee.css?v=20260419b">
+<link rel="stylesheet" href="/css/gee.css?v=20260419c">
 </head>
 <body>
 <div id="app">
@@ -15,16 +15,6 @@
             <div class="hero">
                 <div class="art-frame">
                     <img id="cover" src="/img/black.jpg" alt="Artwork">
-
-                    <div class="status-chip">
-                        <span class="status-dot"></span>
-                        <span id="statusChipText" class="status-chip-text">Stopped</span>
-                    </div>
-
-                    <div class="center-glyph" aria-hidden="true">
-                        <span class="glyph-play"></span>
-                        <span class="glyph-pause"></span>
-                    </div>
 
                     <div class="art-grid" aria-label="Player controls">
                         <button type="button" class="zone" data-zone="refresh" title="Refresh"></button>
@@ -38,11 +28,6 @@
                         <button type="button" class="zone" data-zone="prev" title="Previous"></button>
                         <button type="button" class="zone" data-zone="restart" title="Restart Track"></button>
                         <button type="button" class="zone" data-zone="next" title="Next"></button>
-                    </div>
-
-                    <div class="transport-hints" aria-hidden="true">
-                        <span class="transport-pill">Prev</span>
-                        <span class="transport-pill">Next</span>
                     </div>
                 </div>
             </div>
@@ -87,16 +72,8 @@
                     </div>
 
                     <div class="transport-row">
-                        <button type="button" class="transport-button" id="prevButton" title="Previous">
-                            <span class="transport-icon">⏮</span>
-                        </button>
-
                         <button type="button" class="transport-button large" id="playPauseButton" title="Play / Pause">
                             <span id="playPauseLabel" class="transport-icon">▶</span>
-                        </button>
-
-                        <button type="button" class="transport-button" id="nextButton" title="Next">
-                            <span class="transport-icon">⏭</span>
                         </button>
                     </div>
 
@@ -210,7 +187,6 @@ function setIdleState(rendererName = '', streamName = '') {
     document.getElementById('renderer').textContent = rendererName || 'No renderer';
     document.getElementById('stream').textContent = streamName ? `Stream: ${String(streamName).toUpperCase()}` : 'Stream: --';
     document.getElementById('status').textContent = 'Stopped';
-    document.getElementById('statusChipText').textContent = 'Stopped';
     document.getElementById('title').textContent = 'Nothing playing';
     document.getElementById('artist').textContent = '';
     document.getElementById('album').textContent = '';
@@ -228,7 +204,6 @@ function setIdleState(rendererName = '', streamName = '') {
 function applyPlaybackState(state) {
     const player = document.getElementById('player');
     const status = document.getElementById('status');
-    const chip = document.getElementById('statusChipText');
     const playPauseLabel = document.getElementById('playPauseLabel');
 
     player.classList.remove('state-play', 'state-pause', 'state-stop');
@@ -236,7 +211,6 @@ function applyPlaybackState(state) {
     if (state === 'play') {
         playPauseLabel.textContent = '⏸';
         status.textContent = 'Playing';
-        chip.textContent = 'Playing';
         player.classList.remove('idle');
         player.classList.add('state-play');
         return;
@@ -245,7 +219,6 @@ function applyPlaybackState(state) {
     if (state === 'pause') {
         playPauseLabel.textContent = '▶';
         status.textContent = 'Paused';
-        chip.textContent = 'Paused';
         player.classList.remove('idle');
         player.classList.add('state-pause');
         return;
@@ -253,7 +226,6 @@ function applyPlaybackState(state) {
 
     playPauseLabel.textContent = '▶';
     status.textContent = 'Stopped';
-    chip.textContent = 'Stopped';
     player.classList.add('idle', 'state-stop');
 }
 
@@ -394,7 +366,6 @@ async function fetchMeta(force = false) {
     } catch (err) {
         console.error('fetchMeta failed', err);
         document.getElementById('status').textContent = 'Connection error';
-        document.getElementById('statusChipText').textContent = 'Offline';
         setMessage('Unable to reach Gee Core');
     } finally {
         isFetchingMeta = false;
@@ -549,8 +520,6 @@ function bindEvents() {
     document.getElementById('closeSheetButton').addEventListener('click', closeMoreSheet);
     document.getElementById('sheetBackdrop').addEventListener('click', closeMoreSheet);
 
-    document.getElementById('prevButton').addEventListener('click', () => sendCommand(3));
-    document.getElementById('nextButton').addEventListener('click', () => sendCommand(4));
     document.getElementById('playPauseButton').addEventListener('click', () => sendCommand(2));
     document.getElementById('volDownButton').addEventListener('click', () => changeVolume(-5));
     document.getElementById('volUpButton').addEventListener('click', () => changeVolume(5));
