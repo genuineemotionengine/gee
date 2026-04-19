@@ -6,7 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#000000">
 <link rel="icon" href="/favicon.ico">
-<link rel="stylesheet" href="/css/gee.css?v=20260419c">
+<link rel="stylesheet" href="/css/gee.css?v=20260419d">
 </head>
 <body>
 <div id="app">
@@ -33,18 +33,10 @@
             </div>
 
             <div class="player-body">
-                <div class="topline">
-                    <div class="device-stack">
-                        <div id="renderer" class="device-name">Loading…</div>
-                        <div id="stream" class="stream-name">Stream: --</div>
-                    </div>
-
-                    <div class="top-actions">
-                        <button type="button" id="refreshButton" class="ghost-button icon" title="Refresh">↻</button>
-                        <button type="button" id="moreButton" class="ghost-button" title="More">
-                            <span class="mini">More</span>
-                        </button>
-                    </div>
+                <div class="context-line">
+                    <span id="renderer" class="context-renderer">Loading…</span>
+                    <span class="context-sep">·</span>
+                    <span id="stream" class="context-stream">Stream: --</span>
                 </div>
 
                 <div class="meta">
@@ -54,36 +46,38 @@
                 </div>
 
                 <div class="progress-wrap">
+                    <div class="track-bar" role="progressbar" aria-label="Track progress" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+                        <div id="progressFill" class="track-fill"></div>
+                    </div>
+
                     <div class="time-row">
                         <span id="elapsed">0:00</span>
                         <span id="status">Connecting…</span>
                         <span id="duration">0:00</span>
                     </div>
-
-                    <div class="track-bar" role="progressbar" aria-label="Track progress" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
-                        <div id="progressFill" class="track-fill"></div>
-                    </div>
                 </div>
 
-                <div class="controls-row">
-                    <div class="volume-buttons">
-                        <button type="button" class="volume-button" id="volDownButton" title="Volume down">−</button>
-                        <button type="button" class="volume-button" id="volUpButton" title="Volume up">+</button>
-                    </div>
-
+                <div class="transport-panel">
                     <div class="transport-row">
                         <button type="button" class="transport-button large" id="playPauseButton" title="Play / Pause">
                             <span id="playPauseLabel" class="transport-icon">▶</span>
                         </button>
                     </div>
 
-                    <div class="volume-wrap">
-                        <div class="volume-row">
-                            <span>Volume</span>
-                            <span id="volume">0</span>
+                    <div class="volume-panel">
+                        <div class="volume-head">
+                            <span class="volume-label">Volume</span>
+                            <span id="volume" class="volume-value">0</span>
                         </div>
-                        <div class="volume-bar" role="progressbar" aria-label="Volume" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
-                            <div id="volumeFill" class="volume-fill"></div>
+
+                        <div class="volume-bar-wrap">
+                            <button type="button" class="volume-step" id="volDownButton" title="Volume down">−</button>
+
+                            <div class="volume-bar" role="progressbar" aria-label="Volume" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+                                <div id="volumeFill" class="volume-fill"></div>
+                            </div>
+
+                            <button type="button" class="volume-step" id="volUpButton" title="Volume up">+</button>
                         </div>
                     </div>
                 </div>
@@ -102,7 +96,7 @@
 
         <div class="sheet-header">
             <div class="sheet-title">Player options</div>
-            <button type="button" id="closeSheetButton" class="ghost-button icon" title="Close">×</button>
+            <button type="button" id="closeSheetButton" class="sheet-close" title="Close">×</button>
         </div>
 
         <div class="sheet-grid">
@@ -185,7 +179,7 @@ function setMessage(text = '') {
 
 function setIdleState(rendererName = '', streamName = '') {
     document.getElementById('renderer').textContent = rendererName || 'No renderer';
-    document.getElementById('stream').textContent = streamName ? `Stream: ${String(streamName).toUpperCase()}` : 'Stream: --';
+    document.getElementById('stream').textContent = streamName ? String(streamName).toUpperCase() : '--';
     document.getElementById('status').textContent = 'Stopped';
     document.getElementById('title').textContent = 'Nothing playing';
     document.getElementById('artist').textContent = '';
@@ -379,7 +373,6 @@ function updateUI(data) {
 
     const rendererDisplay = data.renderer_display || data.renderer_name || data.renderer_id || '';
     const streamKey = data.stream_key || '';
-    const streamDisplay = streamKey ? `Stream: ${String(streamKey).toUpperCase()}` : 'Stream: --';
 
     uiState.rendererDisplay = rendererDisplay;
     uiState.streamKey = streamKey || 'safe';
@@ -390,7 +383,7 @@ function updateUI(data) {
     uiState.volume = parseInt(data.volume ?? 0, 10) || 0;
 
     document.getElementById('renderer').textContent = rendererDisplay || 'No renderer';
-    document.getElementById('stream').textContent = streamDisplay;
+    document.getElementById('stream').textContent = streamKey ? String(streamKey).toUpperCase() : '--';
 
     const title = data.title || '';
     const artist = data.artist || '';
@@ -515,8 +508,6 @@ function bindEvents() {
         await selectStream(this.value);
     });
 
-    document.getElementById('refreshButton').addEventListener('click', () => fetchMeta(true));
-    document.getElementById('moreButton').addEventListener('click', openMoreSheet);
     document.getElementById('closeSheetButton').addEventListener('click', closeMoreSheet);
     document.getElementById('sheetBackdrop').addEventListener('click', closeMoreSheet);
 
