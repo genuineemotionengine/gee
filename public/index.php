@@ -3,10 +3,10 @@
 <head>
 <meta charset="UTF-8">
 <title>Gee Player</title>
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover user-scalable=no">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no">
 <meta name="theme-color" content="#000000">
 <link rel="icon" href="/favicon.ico">
-<link rel="stylesheet" href="/css/gee.css?v=20260419k">
+<link rel="stylesheet" href="/css/gee.css?v=120260419k">
 </head>
 <body>
 <div id="app">

@@ -1,3 +1,12 @@
+@font-face {
+    font-family: 'GeeHelvetica';
+    src: url('/css/font/lte50263-webfont.woff2') format('woff2'),
+         url('/css/font/lte50263-webfont.woff') format('woff');
+    font-weight: 300;
+    font-style: normal;
+    font-display: swap;
+}
+
 :root{
     --bg:#000000;
     --panel:#0d0d0d;
@@ -29,18 +38,39 @@ body{
 
 body{
     color:var(--text);
-    font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","SF Pro Text","Helvetica Neue",Arial,sans-serif;
+    font-family:
+        'GeeHelvetica',
+        'Helvetica Neue',
+        Helvetica,
+        Arial,
+        -apple-system,
+        BlinkMacSystemFont,
+        sans-serif;
+    font-weight:300;
     -webkit-font-smoothing:antialiased;
     text-rendering:optimizeLegibility;
     overflow-x:hidden;
     overflow-y:auto;
     user-select:none;
+    -webkit-text-size-adjust:100%;
 }
 
 button,
 input,
-select{
+select,
+textarea{
     font:inherit;
+    font-size:16px;
+}
+
+button,
+select,
+.zone,
+.volume-step,
+.sheet-close,
+.sheet-action{
+    touch-action:manipulation;
+    -webkit-tap-highlight-color:transparent;
 }
 
 button{
@@ -136,7 +166,6 @@ select{
     cursor:pointer;
     background:transparent;
     transition:background var(--transition);
-    -webkit-tap-highlight-color:transparent;
 }
 
 .zone:active{
@@ -203,8 +232,8 @@ select{
     width:100%;
     font-size:2.15rem;
     line-height:1;
-    font-weight:600;
-    letter-spacing:-0.04em;
+    font-weight:300;
+    letter-spacing:-0.03em;
     min-height:2.2rem;
 }
 
@@ -223,6 +252,8 @@ select{
     color:var(--muted);
     min-height:1.1rem;
 }
+
+
 
 /* --------------------------------
    PROGRESS
