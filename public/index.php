@@ -6,7 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#000000">
 <link rel="icon" href="/favicon.ico">
-<link rel="stylesheet" href="/css/gee.css?v=20260419i">
+<link rel="stylesheet" href="/css/gee.css?v=20260419j">
 </head>
 <body>
 <div id="app">
@@ -423,20 +423,18 @@ async function sendCommand(service, successMessage = '') {
 
 async function changeVolume(delta) {
     try {
-        const res = await fetch(`/api/?service=15&mod=${encodeURIComponent(delta)}`, {
+        const data = await safeJson(fetch(`/api/?service=15&mod=${encodeURIComponent(delta)}`, {
             cache: 'no-store'
-        });
+        }));
 
-        if (!res.ok) {
-            const body = await res.text();
-            console.error('changeVolume failed', res.status, body);
+        if (!data || data.status !== 'ok') {
+            console.error('changeVolume failed', data);
             setMessage('Volume change failed');
             return;
         }
 
-        uiState.volume = Math.max(0, Math.min(100, uiState.volume + delta));
-        updateVolumeUI(uiState.volume);
-
+        updateVolumeUI(data.volume ?? uiState.volume);
+        setMessage('');
         await fetchMeta(true);
     } catch (err) {
         console.error('changeVolume failed', err);
