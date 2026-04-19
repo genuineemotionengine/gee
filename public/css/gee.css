@@ -279,29 +279,7 @@ select{
 .volume-panel{
     display:flex;
     flex-direction:column;
-    gap:12px;
-}
-
-.volume-head{
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    gap:10px;
-    min-height:12px;
-}
-
-.volume-spacer{
-    display:block;
-    width:1px;
-    height:1px;
-    opacity:0;
-}
-
-.volume-value{
-    color:var(--muted);
-    font-size:.72rem;
-    letter-spacing:.18em;
-    text-transform:uppercase;
+    gap:0;
 }
 
 .volume-bar-wrap{
@@ -324,6 +302,7 @@ select{
     align-items:center;
     justify-content:center;
     transition:transform var(--transition), border-color var(--transition), background var(--transition);
+    cursor:pointer;
 }
 
 .volume-step:hover{
@@ -428,6 +407,7 @@ select{
     align-items:center;
     justify-content:center;
     font-size:1.2rem;
+    cursor:pointer;
 }
 
 .sheet-grid{
@@ -478,6 +458,7 @@ select{
     background:#0b0b0b;
     color:#ffffff;
     transition:transform var(--transition), background var(--transition), border-color var(--transition);
+    cursor:pointer;
 }
 
 .sheet-action:hover{
@@ -550,8 +531,7 @@ select{
     }
 
     .context-line,
-    .time-row,
-    .volume-value{
+    .time-row{
         font-size:.68rem;
     }
 }

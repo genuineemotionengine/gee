@@ -6,7 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#000000">
 <link rel="icon" href="/favicon.ico">
-<link rel="stylesheet" href="/css/gee.css?v=20260419g">
+<link rel="stylesheet" href="/css/gee.css?v=20260419h">
 </head>
 <body>
 <div id="app">
@@ -58,19 +58,14 @@
 
                 <div class="transport-panel">
                     <div class="volume-panel">
-                        <div class="volume-head">
-                            <span class="volume-spacer"></span>
-                            <span id="volume" class="volume-value">0</span>
-                        </div>
-
                         <div class="volume-bar-wrap">
-                            <button type="button" class="volume-step" id="volDownButton" title="Volume down">−</button>
+                            <button type="button" class="volume-step" id="volDownButton" title="Volume down" aria-label="Volume down">−</button>
 
                             <div class="volume-bar" role="progressbar" aria-label="Volume" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
                                 <div id="volumeFill" class="volume-fill"></div>
                             </div>
 
-                            <button type="button" class="volume-step" id="volUpButton" title="Volume up">+</button>
+                            <button type="button" class="volume-step" id="volUpButton" title="Volume up" aria-label="Volume up">+</button>
                         </div>
                     </div>
                 </div>
@@ -134,6 +129,7 @@
 <script>
 const DEFAULT_COVER = '/img/black.jpg';
 const POLL_INTERVAL_MS = 5000;
+const VOLUME_STEP = 5;
 
 let rendererList = [];
 let isUpdatingSelectors = false;
@@ -362,7 +358,7 @@ function updateUI(data) {
     uiState.title = data.title || '';
     uiState.artist = data.artist || '';
     uiState.album = data.album || '';
-    uiState.volume = parseInt(data.volume ?? 0, 10) || 0;
+    uiState.volume = Math.max(0, Math.min(100, parseInt(data.volume ?? 0, 10) || 0));
 
     document.getElementById('renderer').textContent = rendererDisplay || 'No renderer';
     document.getElementById('stream').textContent = streamKey ? String(streamKey).toUpperCase() : '--';
@@ -395,10 +391,8 @@ function updateUI(data) {
     document.getElementById('progressFill').style.width = `${progress}%`;
     document.querySelector('.track-bar').setAttribute('aria-valuenow', String(progress));
 
-    const volume = Math.max(0, Math.min(100, parseInt(data.volume ?? 0, 10) || 0));
-    document.getElementById('volume').textContent = String(volume);
-    document.getElementById('volumeFill').style.width = `${volume}%`;
-    document.querySelector('.volume-bar').setAttribute('aria-valuenow', String(volume));
+    document.getElementById('volumeFill').style.width = `${uiState.volume}%`;
+    document.querySelector('.volume-bar').setAttribute('aria-valuenow', String(uiState.volume));
 
     applyPlaybackState(state);
     updateSheetSummary();
@@ -414,12 +408,7 @@ async function sendCommand(service, successMessage = '') {
             return;
         }
 
-        if (successMessage) {
-            setMessage(successMessage);
-        } else {
-            setMessage('');
-        }
-
+        setMessage(successMessage || '');
         await fetchMeta(true);
     } catch (err) {
         console.error('sendCommand failed', err);
@@ -493,8 +482,13 @@ function bindEvents() {
     document.getElementById('closeSheetButton').addEventListener('click', closeMoreSheet);
     document.getElementById('sheetBackdrop').addEventListener('click', closeMoreSheet);
 
-    document.getElementById('volDownButton').addEventListener('click', () => changeVolume(-5));
-    document.getElementById('volUpButton').addEventListener('click', () => changeVolume(5));
+    document.getElementById('volDownButton').addEventListener('click', async () => {
+        await changeVolume(-VOLUME_STEP);
+    });
+
+    document.getElementById('volUpButton').addEventListener('click', async () => {
+        await changeVolume(VOLUME_STEP);
+    });
 
     document.getElementById('sheetLoadMusic').addEventListener('click', async () => {
         closeMoreSheet();
