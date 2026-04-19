@@ -266,46 +266,14 @@ select{
 }
 
 /* --------------------------------
-   TRANSPORT / VOLUME
+   VOLUME
 -------------------------------- */
 
 .transport-panel{
     display:flex;
     flex-direction:column;
-    gap:22px;
+    gap:18px;
     padding-top:4px;
-}
-
-.transport-row{
-    display:flex;
-    justify-content:center;
-    align-items:center;
-}
-
-.transport-minimal{
-    display:inline-flex;
-    align-items:center;
-    justify-content:center;
-    padding:0;
-    color:#ffffff;
-    background:transparent;
-    border:0;
-    letter-spacing:.18em;
-    text-transform:uppercase;
-    transition:opacity var(--transition), transform var(--transition);
-}
-
-.transport-minimal:hover{
-    opacity:.78;
-}
-
-.transport-minimal:active{
-    transform:scale(.98);
-}
-
-.transport-minimal-label{
-    font-size:.8rem;
-    line-height:1;
 }
 
 .volume-panel{
@@ -577,8 +545,7 @@ select{
     .context-line,
     .time-row,
     .volume-label,
-    .volume-value,
-    .transport-minimal-label{
+    .volume-value{
         font-size:.68rem;
     }
 }

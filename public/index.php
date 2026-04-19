@@ -6,7 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#000000">
 <link rel="icon" href="/favicon.ico">
-<link rel="stylesheet" href="/css/gee.css?v=20260419e">
+<link rel="stylesheet" href="/css/gee.css?v=20260419f">
 </head>
 <body>
 <div id="app">
@@ -58,12 +58,6 @@
                 </div>
 
                 <div class="transport-panel">
-                    <div class="transport-row">
-                        <button type="button" class="transport-minimal" id="playPauseButton" title="Play / Pause">
-                            <span id="playPauseLabel" class="transport-minimal-label">Play</span>
-                        </button>
-                    </div>
-
                     <div class="volume-panel">
                         <div class="volume-head">
                             <span class="volume-label">Volume</span>
@@ -189,7 +183,6 @@ function setIdleState(rendererName = '', streamName = '') {
     document.getElementById('progressFill').style.width = '0%';
     document.querySelector('.track-bar').setAttribute('aria-valuenow', '0');
     document.getElementById('cover').src = DEFAULT_COVER;
-    document.getElementById('playPauseLabel').textContent = 'Play';
     document.getElementById('player').classList.add('idle', 'state-stop');
     document.getElementById('player').classList.remove('state-play', 'state-pause');
     updateSheetSummary();
@@ -198,12 +191,10 @@ function setIdleState(rendererName = '', streamName = '') {
 function applyPlaybackState(state) {
     const player = document.getElementById('player');
     const status = document.getElementById('status');
-    const playPauseLabel = document.getElementById('playPauseLabel');
 
     player.classList.remove('state-play', 'state-pause', 'state-stop');
 
     if (state === 'play') {
-        playPauseLabel.textContent = 'Pause';
         status.textContent = 'Playing';
         player.classList.remove('idle');
         player.classList.add('state-play');
@@ -211,14 +202,12 @@ function applyPlaybackState(state) {
     }
 
     if (state === 'pause') {
-        playPauseLabel.textContent = 'Play';
         status.textContent = 'Paused';
         player.classList.remove('idle');
         player.classList.add('state-pause');
         return;
     }
 
-    playPauseLabel.textContent = 'Play';
     status.textContent = 'Stopped';
     player.classList.add('idle', 'state-stop');
 }
@@ -511,7 +500,6 @@ function bindEvents() {
     document.getElementById('closeSheetButton').addEventListener('click', closeMoreSheet);
     document.getElementById('sheetBackdrop').addEventListener('click', closeMoreSheet);
 
-    document.getElementById('playPauseButton').addEventListener('click', () => sendCommand(2));
     document.getElementById('volDownButton').addEventListener('click', () => changeVolume(-5));
     document.getElementById('volUpButton').addEventListener('click', () => changeVolume(5));
 
