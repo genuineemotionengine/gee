@@ -7,7 +7,7 @@
 <meta name="theme-color" content="#000000">
 <link rel="icon" href="/favicon.ico">
 <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
-<link rel="stylesheet" href="/css/gee.css?v=20260420l">
+<link rel="stylesheet" href="/css/gee.css?v=20260420n">
 </head>
 <body>
 <div id="app">
@@ -31,15 +31,51 @@
                             <button type="button" class="zone" data-zone="restart" title="Restart Track"></button>
                             <button type="button" class="zone" data-zone="next" title="Next"></button>
                         </div>
+
+                        <div id="gridHelper" class="grid-helper" aria-hidden="true">
+                            <div class="grid-helper-cell"></div>
+                            <div class="grid-helper-cell"></div>
+                            <div class="grid-helper-cell"></div>
+                            <div class="grid-helper-cell"></div>
+                            <div class="grid-helper-cell"></div>
+                            <div class="grid-helper-cell"></div>
+                            <div class="grid-helper-cell"></div>
+                            <div class="grid-helper-cell"></div>
+                            <div class="grid-helper-cell"></div>
+                        </div>
                     </div>
                 </div>
             </div>
 
             <div class="player-body">
                 <div class="context-line">
-                    <span id="renderer" class="context-renderer">Loading…</span>
-                    <span class="context-sep">·</span>
-                    <span id="stream" class="context-stream">--</span>
+                    <div class="context-meta-line">
+                        <span id="renderer" class="context-renderer">Loading…</span>
+                        <span class="context-sep">·</span>
+                        <span id="stream" class="context-stream">--</span>
+                    </div>
+
+                    <button
+                        type="button"
+                        id="gridHelperToggle"
+                        class="context-eye-button"
+                        aria-label="Show navigation grid"
+                        title="Show navigation grid"
+                    >
+                        <span class="eye-icon eye-off" aria-hidden="false">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" aria-hidden="true">
+                                <path d="m10.79 12.912-1.614-1.615a3.5 3.5 0 0 1-4.474-4.474l-2.06-2.06C.938 6.278 0 8 0 8s3 5.5 8 5.5a7 7 0 0 0 2.79-.588M5.21 3.088A7 7 0 0 1 8 2.5c5 0 8 5.5 8 5.5s-.939 1.721-2.641 3.238l-2.062-2.062a3.5 3.5 0 0 0-4.474-4.474z"/>
+                                <path d="M5.525 7.646a2.5 2.5 0 0 0 2.829 2.829zm4.95.708-2.829-2.83a2.5 2.5 0 0 1 2.829 2.829zm3.171 6-12-12 .708-.708 12 12z"/>
+                            </svg>
+                        </span>
+
+                        <span class="eye-icon eye-on" aria-hidden="true">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" aria-hidden="true">
+                                <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0"/>
+                                <path d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8m8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7"/>
+                            </svg>
+                        </span>
+                    </button>
                 </div>
 
                 <div class="progress-wrap">
@@ -150,6 +186,6 @@
     </div>
 </div>
 
-<script src="/js/gee-player.js?v=20260420m"></script>
+<script src="/js/gee-player.js?v=20260420n"></script>
 </body>
 </html>

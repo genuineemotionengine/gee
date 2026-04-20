@@ -4,6 +4,7 @@ const GeePlayer = (() => {
     const DEFAULT_COVER = '/img/black.jpg';
     const META_POLL_INTERVAL_MS = 15000;
     const PROGRESS_TICK_INTERVAL_MS = 1000;
+    const GRID_HELPER_DURATION_MS = 5000;
     const VOLUME_STEP = 5;
 
     const state = {
@@ -12,6 +13,8 @@ const GeePlayer = (() => {
         isFetchingMeta: false,
         metaPollHandle: null,
         progressTickHandle: null,
+        gridHelperTimeoutHandle: null,
+        gridHelperVisible: false,
 
         ui: {
             rendererDisplay: '',
@@ -67,6 +70,9 @@ const GeePlayer = (() => {
         els.sheetBackdrop = document.getElementById('sheetBackdrop');
         els.closeSheetButton = document.getElementById('closeSheetButton');
         els.sheetStatusSummary = document.getElementById('sheetStatusSummary');
+
+        els.gridHelper = document.getElementById('gridHelper');
+        els.gridHelperToggle = document.getElementById('gridHelperToggle');
 
         els.zones = document.querySelectorAll('.zone');
     }
@@ -170,6 +176,45 @@ const GeePlayer = (() => {
             <div style="margin-top:6px;">${escapeHtml(stream)} · ${escapeHtml(playbackState)}</div>
             <div style="margin-top:8px; color:#8e8e93;">${escapeHtml(title)}</div>
         `;
+    }
+
+    function setGridHelperVisible(visible) {
+        state.gridHelperVisible = visible;
+        els.player.classList.toggle('grid-helper-visible', visible);
+        els.gridHelper.setAttribute('aria-hidden', visible ? 'false' : 'true');
+        els.gridHelperToggle.setAttribute('aria-label', visible ? 'Hide navigation grid' : 'Show navigation grid');
+        els.gridHelperToggle.setAttribute('title', visible ? 'Hide navigation grid' : 'Show navigation grid');
+    }
+
+    function hideGridHelper() {
+        if (state.gridHelperTimeoutHandle !== null) {
+            window.clearTimeout(state.gridHelperTimeoutHandle);
+            state.gridHelperTimeoutHandle = null;
+        }
+
+        setGridHelperVisible(false);
+    }
+
+    function showGridHelper() {
+        if (state.gridHelperTimeoutHandle !== null) {
+            window.clearTimeout(state.gridHelperTimeoutHandle);
+            state.gridHelperTimeoutHandle = null;
+        }
+
+        setGridHelperVisible(true);
+
+        state.gridHelperTimeoutHandle = window.setTimeout(() => {
+            hideGridHelper();
+        }, GRID_HELPER_DURATION_MS);
+    }
+
+    function toggleGridHelper() {
+        if (state.gridHelperVisible) {
+            hideGridHelper();
+            return;
+        }
+
+        showGridHelper();
     }
 
     function setIdleState(rendererName = '', streamName = '') {
@@ -450,6 +495,10 @@ const GeePlayer = (() => {
         els.closeSheetButton.addEventListener('click', closeMoreSheet);
         els.sheetBackdrop.addEventListener('click', closeMoreSheet);
 
+        els.gridHelperToggle.addEventListener('click', () => {
+            toggleGridHelper();
+        });
+
         els.volDownButton.addEventListener('click', async () => {
             await changeVolume(-VOLUME_STEP);
         });
@@ -503,6 +552,7 @@ const GeePlayer = (() => {
         window.addEventListener('keydown', (event) => {
             if (event.key === 'Escape') {
                 closeMoreSheet();
+                hideGridHelper();
             }
         });
     }
@@ -511,6 +561,7 @@ const GeePlayer = (() => {
         cacheElements();
         bindEvents();
         startProgressTicker();
+        setGridHelperVisible(false);
 
         await fetchRendererList();
         await fetchMeta(true);
@@ -533,4 +584,3 @@ const GeePlayer = (() => {
 document.addEventListener('DOMContentLoaded', () => {
     GeePlayer.init();
 });
-

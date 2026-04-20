@@ -74,7 +74,8 @@ select,
 .volume-step,
 .sheet-close,
 .sheet-action,
-.gee-footer-logo{
+.gee-footer-logo,
+.context-eye-button{
     touch-action:manipulation;
     -webkit-tap-highlight-color:transparent;
 }
@@ -167,6 +168,7 @@ select{
         radial-gradient(circle at 50% 50%, rgba(255,255,255,.02), transparent 56%);
     pointer-events:none;
     z-index:1;
+    transition:opacity 180ms ease;
 }
 
 #cover{
@@ -176,6 +178,11 @@ select{
     object-fit:cover;
     border-radius:0;
     background:#0f0f0f;
+    transition:opacity 180ms ease;
+}
+
+.player.grid-helper-visible #cover{
+    opacity:0.5;
 }
 
 .art-grid{
@@ -206,6 +213,26 @@ select{
     background:transparent;
 }
 
+.grid-helper{
+    position:absolute;
+    inset:0;
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    grid-template-rows:repeat(3,1fr);
+    z-index:3;
+    opacity:0;
+    pointer-events:none;
+    transition:opacity 180ms ease;
+}
+
+.player.grid-helper-visible .grid-helper{
+    opacity:1;
+}
+
+.grid-helper-cell{
+    border:3px solid #ffffff;
+}
+
 /* --------------------------------
    BODY / TYPOGRAPHY
 -------------------------------- */
@@ -222,8 +249,8 @@ select{
 .context-line{
     display:flex;
     align-items:center;
-    justify-content:center;
-    gap:8px;
+    justify-content:space-between;
+    gap:12px;
     min-height:16px;
     color:var(--muted);
     font-size:.72rem;
@@ -241,6 +268,16 @@ select{
     font-weight:normal;
 }
 
+.context-meta-line{
+    min-width:0;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:8px;
+    flex:1 1 auto;
+    overflow:hidden;
+}
+
 .context-renderer,
 .context-stream{
     overflow:hidden;
@@ -251,6 +288,50 @@ select{
 .context-sep{
     color:#4e4e52;
     flex:0 0 auto;
+}
+
+.context-eye-button{
+    flex:0 0 auto;
+    width:18px;
+    height:18px;
+    color:var(--muted);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    cursor:pointer;
+    position:relative;
+}
+
+.context-eye-button svg{
+    display:block;
+    width:16px;
+    height:16px;
+    fill:currentColor;
+}
+
+.eye-icon{
+    position:absolute;
+    inset:0;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    transition:opacity 160ms ease;
+}
+
+.eye-on{
+    opacity:0;
+}
+
+.eye-off{
+    opacity:1;
+}
+
+.player.grid-helper-visible .eye-on{
+    opacity:1;
+}
+
+.player.grid-helper-visible .eye-off{
+    opacity:0;
 }
 
 .meta{
@@ -299,6 +380,7 @@ select{
     letter-spacing:-0.025em;
     opacity:0.68;
 }
+
 /* --------------------------------
    PROGRESS
 -------------------------------- */
@@ -791,6 +873,16 @@ select{
 
     .context-line{
         font-size:.68rem;
+    }
+
+    .context-eye-button{
+        width:16px;
+        height:16px;
+    }
+
+    .context-eye-button svg{
+        width:14px;
+        height:14px;
     }
 
     .gee-footer-logo img{
