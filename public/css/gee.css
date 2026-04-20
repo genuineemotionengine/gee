@@ -69,7 +69,8 @@ select,
 .zone,
 .volume-step,
 .sheet-close,
-.sheet-action{
+.sheet-action,
+.gee-footer-logo{
     touch-action:manipulation;
     -webkit-tap-highlight-color:transparent;
 }
@@ -92,7 +93,7 @@ select{
     display:flex;
     align-items:flex-start;
     justify-content:center;
-    padding:0 0 calc(28px + env(safe-area-inset-bottom));
+    padding:0 0 calc(120px + env(safe-area-inset-bottom));
 }
 
 .player-shell{
@@ -388,6 +389,36 @@ select{
 }
 
 /* --------------------------------
+   FOOTER LOGO
+-------------------------------- */
+
+.gee-footer-logo{
+    position:fixed;
+    left:50%;
+    bottom:calc(18px + env(safe-area-inset-bottom));
+    transform:translateX(-50%);
+    z-index:40;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    opacity:0.72;
+    transition:opacity 180ms ease, transform 180ms ease;
+    text-decoration:none;
+}
+
+.gee-footer-logo:hover{
+    opacity:1;
+    transform:translateX(-50%) scale(1.01);
+}
+
+.gee-footer-logo img{
+    display:block;
+    width:min(240px, 58vw);
+    height:auto;
+    pointer-events:none;
+}
+
+/* --------------------------------
    BOTTOM SHEET
 -------------------------------- */
 
@@ -628,5 +659,9 @@ select{
     .context-line,
     .time-row{
         font-size:.68rem;
+    }
+
+    .gee-footer-logo img{
+        width:min(210px, 64vw);
     }
 }
