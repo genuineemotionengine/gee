@@ -225,34 +225,31 @@ select{
     flex-direction:column;
     align-items:center;
     text-align:center;
-    gap:5px;
+    gap:2px; /* tighter grouping */
 }
 
-.meta-primary{
+/* unified typography */
+.meta-primary,
+.meta-secondary,
+.meta-tertiary{
     width:100%;
     font-size:2.15rem;
-    line-height:1;
+    line-height:1.05; /* slightly relaxed but still tight */
     font-weight:300;
     letter-spacing:-0.03em;
-    min-height:2.2rem;
+    color:#ffffff;
+    margin:0; /* remove any browser defaults */
+    padding:0;
 }
 
+/* optional subtle refinement: slightly soften lower lines */
 .meta-secondary{
-    width:100%;
-    font-size:1.08rem;
-    line-height:1.18;
-    color:#f1f1f4;
-    min-height:1.2rem;
+    opacity:0.9;
 }
 
 .meta-tertiary{
-    width:100%;
-    font-size:.9rem;
-    line-height:1.3;
-    color:var(--muted);
-    min-height:1.1rem;
+    opacity:0.75;
 }
-
 
 
 /* --------------------------------
