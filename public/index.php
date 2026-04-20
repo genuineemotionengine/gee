@@ -6,7 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no">
 <meta name="theme-color" content="#000000">
 <link rel="icon" href="/favicon.ico">
-<link rel="stylesheet" href="/css/gee.css?v=5">
+<link rel="stylesheet" href="/css/gee.css?v=20260420b">
 </head>
 <body>
 <div id="app">
@@ -39,12 +39,6 @@
                     <span id="stream" class="context-stream">--</span>
                 </div>
 
-                <div class="meta">
-                    <div id="title" class="meta-primary">Loading…</div>
-                    <div id="artist" class="meta-secondary"></div>
-                    <div id="album" class="meta-tertiary"></div>
-                </div>
-
                 <div class="progress-wrap">
                     <div class="track-bar" role="progressbar" aria-label="Track progress" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
                         <div id="progressFill" class="track-fill"></div>
@@ -68,6 +62,12 @@
                             <button type="button" class="volume-step" id="volUpButton" title="Volume up" aria-label="Volume up">+</button>
                         </div>
                     </div>
+                </div>
+
+                <div class="meta">
+                    <div id="title" class="meta-primary">Loading…</div>
+                    <div id="artist" class="meta-secondary"></div>
+                    <div id="album" class="meta-tertiary"></div>
                 </div>
 
                 <div id="message" class="message"></div>

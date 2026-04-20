@@ -235,6 +235,7 @@ select{
     align-items:center;
     text-align:center;
     gap:2px;
+    padding-top:4px;
 }
 
 .meta-primary,
@@ -274,7 +275,7 @@ select{
     display:flex;
     flex-direction:column;
     gap:10px;
-    padding-top:6px;
+    padding-top:2px;
 }
 
 .track-bar,
@@ -321,8 +322,8 @@ select{
 .transport-panel{
     display:flex;
     flex-direction:column;
-    gap:18px;
-    padding-top:4px;
+    gap:0;
+    padding-top:0;
 }
 
 .volume-panel{
