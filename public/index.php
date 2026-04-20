@@ -6,7 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no">
 <meta name="theme-color" content="#000000">
 <link rel="icon" href="/favicon.ico">
-<link rel="stylesheet" href="/css/gee.css?v=20260420f">
+<link rel="stylesheet" href="/css/gee.css?v=20260420g">
 </head>
 <body>
 <div id="app">
@@ -140,13 +140,15 @@
 
 <script>
 const DEFAULT_COVER = '/img/black.jpg';
-const POLL_INTERVAL_MS = 5000;
+const META_POLL_INTERVAL_MS = 15000;
+const PROGRESS_TICK_INTERVAL_MS = 1000;
 const VOLUME_STEP = 5;
 
 let rendererList = [];
 let isUpdatingSelectors = false;
 let isFetchingMeta = false;
-let activePollHandle = null;
+let metaPollHandle = null;
+let progressTickHandle = null;
 
 let uiState = {
     rendererDisplay: '',
@@ -156,6 +158,12 @@ let uiState = {
     artist: '',
     album: '',
     volume: 0
+};
+
+let playbackClock = {
+    elapsed: 0,
+    duration: 0,
+    state: 'stop'
 };
 
 function fmt(sec) {
@@ -178,19 +186,59 @@ function setMessage(text = '') {
     document.getElementById('message').textContent = text;
 }
 
+function renderProgress(elapsed, duration) {
+    const safeElapsed = Math.max(0, parseInt(elapsed || 0, 10));
+    const safeDuration = Math.max(0, parseInt(duration || 0, 10));
+    const progress = safeDuration > 0
+        ? Math.max(0, Math.min(100, Math.round((safeElapsed / safeDuration) * 100)))
+        : 0;
+
+    document.getElementById('elapsed').textContent = fmt(safeElapsed);
+    document.getElementById('duration').textContent = fmt(safeDuration);
+    document.getElementById('progressFill').style.width = `${progress}%`;
+    document.querySelector('.track-bar').setAttribute('aria-valuenow', String(progress));
+}
+
+function syncPlaybackClock(elapsed, duration, state) {
+    playbackClock.elapsed = Math.max(0, parseInt(elapsed || 0, 10));
+    playbackClock.duration = Math.max(0, parseInt(duration || 0, 10));
+    playbackClock.state = String(state || 'stop');
+    renderProgress(playbackClock.elapsed, playbackClock.duration);
+}
+
+function startProgressTicker() {
+    if (progressTickHandle !== null) {
+        window.clearInterval(progressTickHandle);
+    }
+
+    progressTickHandle = window.setInterval(async () => {
+        if (playbackClock.state !== 'play') {
+            return;
+        }
+
+        if (playbackClock.duration <= 0) {
+            return;
+        }
+
+        playbackClock.elapsed += 1;
+        renderProgress(playbackClock.elapsed, playbackClock.duration);
+
+        if (playbackClock.elapsed >= playbackClock.duration) {
+            await fetchMeta(true);
+        }
+    }, PROGRESS_TICK_INTERVAL_MS);
+}
+
 function setIdleState(rendererName = '', streamName = '') {
     document.getElementById('renderer').textContent = rendererName || 'No renderer';
     document.getElementById('stream').textContent = streamName ? String(streamName).toUpperCase() : '--';
     document.getElementById('title').textContent = 'Nothing playing';
     document.getElementById('artist').textContent = '';
     document.getElementById('album').textContent = '';
-    document.getElementById('elapsed').textContent = '0:00';
-    document.getElementById('duration').textContent = '0:00';
-    document.getElementById('progressFill').style.width = '0%';
-    document.querySelector('.track-bar').setAttribute('aria-valuenow', '0');
     document.getElementById('cover').src = DEFAULT_COVER;
     document.getElementById('player').classList.add('idle', 'state-stop');
     document.getElementById('player').classList.remove('state-play', 'state-pause');
+    syncPlaybackClock(0, 0, 'stop');
     updateVolumeUI(0);
     updateSheetSummary();
 }
@@ -371,21 +419,22 @@ function updateUI(data) {
 
     const rendererDisplay = data.renderer_display || data.renderer_name || data.renderer_id || '';
     const streamKey = data.stream_key || '';
-
-    uiState.rendererDisplay = rendererDisplay;
-    uiState.streamKey = streamKey || 'safe';
-    uiState.status = data.state || 'stop';
-    uiState.title = data.title || '';
-    uiState.artist = data.artist || '';
-    uiState.album = data.album || '';
-
-    document.getElementById('renderer').textContent = rendererDisplay || 'No renderer';
-    document.getElementById('stream').textContent = streamKey ? String(streamKey).toUpperCase() : '--';
-
     const title = data.title || '';
     const artist = data.artist || '';
     const album = data.album || '';
     const state = data.state || 'stop';
+    const elapsed = parseInt(data.elapsed || 0, 10);
+    const duration = parseInt(data.duration || 0, 10);
+
+    uiState.rendererDisplay = rendererDisplay;
+    uiState.streamKey = streamKey || 'safe';
+    uiState.status = state;
+    uiState.title = title;
+    uiState.artist = artist;
+    uiState.album = album;
+
+    document.getElementById('renderer').textContent = rendererDisplay || 'No renderer';
+    document.getElementById('stream').textContent = streamKey ? String(streamKey).toUpperCase() : '--';
 
     if (!title && !artist && !album && state === 'stop') {
         setIdleState(rendererDisplay, streamKey);
@@ -393,6 +442,7 @@ function updateUI(data) {
         document.getElementById('title').textContent = title || 'Unknown Title';
         document.getElementById('artist').textContent = artist || '';
         document.getElementById('album').textContent = album || '';
+        syncPlaybackClock(elapsed, duration, state);
     }
 
     if (data.image) {
@@ -400,15 +450,6 @@ function updateUI(data) {
     } else if (!title && !artist && !album) {
         document.getElementById('cover').src = DEFAULT_COVER;
     }
-
-    const elapsed = parseInt(data.elapsed || 0, 10);
-    const duration = parseInt(data.duration || 0, 10);
-    const progress = duration > 0 ? Math.max(0, Math.min(100, Math.round((elapsed / duration) * 100))) : 0;
-
-    document.getElementById('elapsed').textContent = fmt(elapsed);
-    document.getElementById('duration').textContent = fmt(duration);
-    document.getElementById('progressFill').style.width = `${progress}%`;
-    document.querySelector('.track-bar').setAttribute('aria-valuenow', String(progress));
 
     updateVolumeUI(data.volume ?? 0);
     applyPlaybackState(state);
@@ -562,10 +603,18 @@ function bindEvents() {
 
 async function initialisePlayer() {
     bindEvents();
+    startProgressTicker();
     await fetchRendererList();
     await fetchMeta(true);
     setMessage('');
-    activePollHandle = window.setInterval(fetchMeta, POLL_INTERVAL_MS);
+
+    if (metaPollHandle !== null) {
+        window.clearInterval(metaPollHandle);
+    }
+
+    metaPollHandle = window.setInterval(() => {
+        fetchMeta(false);
+    }, META_POLL_INTERVAL_MS);
 }
 
 initialisePlayer();
