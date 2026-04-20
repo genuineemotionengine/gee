@@ -274,23 +274,31 @@ select{
         Helvetica,
         Arial,
         sans-serif !important;
-    font-size:2.15rem;
-    line-height:1.05;
     font-weight:normal !important;
-    letter-spacing:-0.03em;
     color:#ffffff;
     font-style:normal;
     font-synthesis:none;
 }
 
+.meta-primary{
+    font-size:2.15rem;
+    line-height:1.05;
+    letter-spacing:-0.03em;
+}
+
 .meta-secondary{
-    opacity:0.9;
+    font-size:1.55rem;
+    line-height:1.05;
+    letter-spacing:-0.025em;
+    opacity:0.88;
 }
 
 .meta-tertiary{
-    opacity:0.75;
+    font-size:1.55rem;
+    line-height:1.05;
+    letter-spacing:-0.025em;
+    opacity:0.68;
 }
-
 /* --------------------------------
    PROGRESS
 -------------------------------- */
@@ -752,10 +760,13 @@ select{
         gap:16px;
     }
 
-    .meta-primary,
+    .meta-primary{
+        font-size:1.78rem;
+    }
+
     .meta-secondary,
     .meta-tertiary{
-        font-size:1.78rem;
+        font-size:1.28rem;
     }
 
     .progress-row,
