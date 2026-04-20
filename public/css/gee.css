@@ -300,7 +300,7 @@ select{
 
 .progress-row{
     display:grid;
-    grid-template-columns:34px 1fr 34px;
+    grid-template-columns:48px 1fr 48px;
     align-items:center;
     gap:12px;
 }
@@ -359,19 +359,18 @@ select{
 
 .volume-bar-wrap{
     display:grid;
-    grid-template-columns:34px 1fr 34px;
+    grid-template-columns:48px 1fr 48px;
     align-items:center;
     gap:12px;
 }
 
 .volume-step{
-    width:34px;
-    height:34px;
+    width:48px;
+    height:48px;
     border-radius:999px;
     border:1px solid var(--border-strong);
     background:#0d0d0d;
     color:#ffffff;
-    font-size:1.2rem;
     line-height:1;
     display:flex;
     align-items:center;
@@ -385,6 +384,14 @@ select{
         Arial,
         sans-serif;
     font-weight:normal;
+}
+
+.volume-step svg{
+    display:block;
+    width:16px;
+    height:16px;
+    color:#ffffff;
+    fill:currentColor;
 }
 
 .volume-step:hover{
@@ -672,13 +679,13 @@ select{
 
     .progress-row,
     .volume-bar-wrap{
-        grid-template-columns:32px 1fr 32px;
+        grid-template-columns:40px 1fr 40px;
         gap:10px;
     }
 
     .volume-step{
-        width:32px;
-        height:32px;
+        width:40px;
+        height:40px;
     }
 
     .time-value{
