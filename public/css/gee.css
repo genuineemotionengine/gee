@@ -247,9 +247,9 @@ select{
 }
 
 .context-line{
-    display:flex;
+    display:grid;
+    grid-template-columns:1fr auto 1fr;
     align-items:center;
-    justify-content:space-between;
     gap:12px;
     min-height:16px;
     color:var(--muted);
@@ -257,8 +257,6 @@ select{
     letter-spacing:.18em;
     text-transform:uppercase;
     white-space:nowrap;
-    overflow:hidden;
-    text-align:center;
     font-family:
         'helveticaneue_lt_45_lightRg',
         'Helvetica Neue',
@@ -268,29 +266,34 @@ select{
     font-weight:normal;
 }
 
+.context-stream-left{
+    justify-self:start;
+    text-align:left;
+    overflow:hidden;
+    text-overflow:ellipsis;
+}
+
 .context-meta-line{
     min-width:0;
     display:flex;
     align-items:center;
     justify-content:center;
-    gap:8px;
-    flex:1 1 auto;
     overflow:hidden;
 }
 
-.context-renderer,
+.context-renderer{
+    overflow:hidden;
+    text-overflow:ellipsis;
+    text-align:center;
+}
+
 .context-stream{
     overflow:hidden;
     text-overflow:ellipsis;
-    max-width:42%;
-}
-
-.context-sep{
-    color:#4e4e52;
-    flex:0 0 auto;
 }
 
 .context-eye-button{
+    justify-self:end;
     flex:0 0 auto;
     width:18px;
     height:18px;
@@ -873,6 +876,7 @@ select{
 
     .context-line{
         font-size:.68rem;
+        gap:8px;
     }
 
     .context-eye-button{

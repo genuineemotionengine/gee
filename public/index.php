@@ -49,10 +49,10 @@
 
             <div class="player-body">
                 <div class="context-line">
+                    <span id="stream" class="context-stream context-stream-left">--</span>
+
                     <div class="context-meta-line">
                         <span id="renderer" class="context-renderer">Loading…</span>
-                        <span class="context-sep">·</span>
-                        <span id="stream" class="context-stream">--</span>
                     </div>
 
                     <button
