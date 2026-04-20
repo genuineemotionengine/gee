@@ -134,6 +134,20 @@ select{
     border-radius:0;
     overflow:hidden;
     background:#0b0b0b;
+
+    /* NEW */
+    padding:0;
+    transition:padding 220ms ease;
+}
+
+/* 👇 PAUSED STATE */
+.player.state-pause .art-frame{
+    padding:20px;
+}
+
+/* 👇 ensure playing is flush */
+.player.state-play .art-frame{
+    padding:0;
 }
 
 .art-frame::after{
