@@ -6,7 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no">
 <meta name="theme-color" content="#000000">
 <link rel="icon" href="/favicon.ico">
-<link rel="stylesheet" href="/css/gee.css?v=20260420g">
+<link rel="stylesheet" href="/css/gee.css?v=20260420h">
 </head>
 <body>
 <div id="app">
@@ -42,13 +42,14 @@
                 </div>
 
                 <div class="progress-wrap">
-                    <div class="track-bar" role="progressbar" aria-label="Track progress" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
-                        <div id="progressFill" class="track-fill"></div>
-                    </div>
+                    <div class="progress-row">
+                        <span id="elapsed" class="time-value">0:00</span>
 
-                    <div class="time-row">
-                        <span id="elapsed">0:00</span>
-                        <span id="duration">0:00</span>
+                        <div class="track-bar" role="progressbar" aria-label="Track progress" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+                            <div id="progressFill" class="track-fill"></div>
+                        </div>
+
+                        <span id="duration" class="time-value">0:00</span>
                     </div>
                 </div>
 

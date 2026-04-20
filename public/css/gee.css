@@ -294,8 +294,31 @@ select{
 .progress-wrap{
     display:flex;
     flex-direction:column;
-    gap:10px;
+    gap:0;
     padding-top:2px;
+}
+
+.progress-row{
+    display:grid;
+    grid-template-columns:34px 1fr 34px;
+    align-items:center;
+    gap:12px;
+}
+
+.time-value{
+    color:#ffffff;
+    font-size:1.44rem;
+    line-height:1;
+    letter-spacing:-0.02em;
+    font-family:
+        'helveticaneue_lt_45_lightRg',
+        'Helvetica Neue',
+        Helvetica,
+        Arial,
+        sans-serif;
+    font-weight:normal;
+    text-align:center;
+    white-space:nowrap;
 }
 
 .track-bar,
@@ -315,24 +338,6 @@ select{
     border-radius:999px;
     background:#ffffff;
     transition:width 180ms linear;
-}
-
-.time-row{
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    gap:10px;
-    color:var(--muted);
-    font-size:.72rem;
-    letter-spacing:.14em;
-    text-transform:uppercase;
-    font-family:
-        'helveticaneue_lt_45_lightRg',
-        'Helvetica Neue',
-        Helvetica,
-        Arial,
-        sans-serif;
-    font-weight:normal;
 }
 
 /* --------------------------------
@@ -665,6 +670,7 @@ select{
         font-size:1.78rem;
     }
 
+    .progress-row,
     .volume-bar-wrap{
         grid-template-columns:32px 1fr 32px;
         gap:10px;
@@ -675,8 +681,11 @@ select{
         height:32px;
     }
 
-    .context-line,
-    .time-row{
+    .time-value{
+        font-size:1.18rem;
+    }
+
+    .context-line{
         font-size:.68rem;
     }
 
