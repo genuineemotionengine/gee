@@ -6,7 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no">
 <meta name="theme-color" content="#000000">
 <link rel="icon" href="/favicon.ico">
-<link rel="stylesheet" href="/css/gee.css?v=220260419k">
+<link rel="stylesheet" href="/css/gee.css?v=320260419k">
 </head>
 <body>
 <div id="app">
