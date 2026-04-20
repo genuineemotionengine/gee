@@ -367,15 +367,11 @@ select{
 .volume-step{
     width:48px;
     height:48px;
-    border-radius:999px;
-    border:1px solid var(--border-strong);
-    background:#0d0d0d;
     color:#ffffff;
     line-height:1;
     display:flex;
     align-items:center;
     justify-content:center;
-    transition:transform var(--transition), border-color var(--transition), background var(--transition);
     cursor:pointer;
     font-family:
         'helveticaneue_lt_45_lightRg',
@@ -388,15 +384,10 @@ select{
 
 .volume-step svg{
     display:block;
-    width:16px;
-    height:16px;
+    width:24px;
+    height:24px;
     color:#ffffff;
     fill:currentColor;
-}
-
-.volume-step:hover{
-    border-color:#3a3a3a;
-    background:#121212;
 }
 
 .volume-step:active{
@@ -686,6 +677,11 @@ select{
     .volume-step{
         width:40px;
         height:40px;
+    }
+
+    .volume-step svg{
+        width:20px;
+        height:20px;
     }
 
     .time-value{
