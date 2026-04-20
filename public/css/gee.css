@@ -133,24 +133,28 @@ select{
     aspect-ratio:1 / 1;
     border-radius:0;
     overflow:hidden;
+    background:#000000;
+}
+
+.art-stage{
+    position:absolute;
+    inset:0;
+    overflow:hidden;
     background:#0b0b0b;
-
-    /* NEW */
-    padding:0;
-    transition:padding 220ms ease;
+    transition:inset 220ms ease;
 }
 
-/* 👇 PAUSED STATE */
-.player.state-pause .art-frame{
-    padding:20px;
+.player.state-pause .art-stage{
+    inset:20px;
 }
 
-/* 👇 ensure playing is flush */
-.player.state-play .art-frame{
-    padding:0;
+.player.state-play .art-stage,
+.player.state-stop .art-stage,
+.player.idle .art-stage{
+    inset:0;
 }
 
-.art-frame::after{
+.art-stage::after{
     content:"";
     position:absolute;
     inset:0;
@@ -158,6 +162,7 @@ select{
         linear-gradient(to bottom, rgba(0,0,0,.04), rgba(0,0,0,.12)),
         radial-gradient(circle at 50% 50%, rgba(255,255,255,.02), transparent 56%);
     pointer-events:none;
+    z-index:1;
 }
 
 #cover{
