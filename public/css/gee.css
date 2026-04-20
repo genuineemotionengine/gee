@@ -21,6 +21,10 @@
     --content-width:min(100%, 500px);
     --transition:180ms ease;
     --sheet-radius:28px;
+    --desktop-player-width:640px;
+    --desktop-body-width:640px;
+    --landscape-art-width:50vw;
+    --landscape-panel-width:50vw;
 }
 
 *{
@@ -639,7 +643,93 @@ select{
 }
 
 /* --------------------------------
-   RESPONSIVE
+   DESKTOP
+-------------------------------- */
+
+@media (min-width: 900px){
+    :root{
+        --player-width:var(--desktop-player-width);
+        --content-width:var(--desktop-body-width);
+    }
+
+    .art-frame{
+        width:100%;
+        max-width:100%;
+        margin-left:0;
+        margin-right:0;
+    }
+
+    .player{
+        width:var(--desktop-player-width);
+    }
+
+    .player-body{
+        width:var(--desktop-body-width);
+    }
+}
+
+/* --------------------------------
+   MOBILE LANDSCAPE
+-------------------------------- */
+
+@media (max-width: 899px) and (orientation: landscape){
+    #app{
+        min-height:100svh;
+        padding:0;
+    }
+
+    .player-shell{
+        width:100%;
+    }
+
+    .player{
+        width:100%;
+        max-width:none;
+        min-height:100svh;
+        display:grid;
+        grid-template-columns:var(--landscape-art-width) var(--landscape-panel-width);
+        align-items:stretch;
+    }
+
+    .hero{
+        width:100%;
+        height:100svh;
+    }
+
+    .art-frame{
+        width:100%;
+        max-width:100%;
+        height:100%;
+        aspect-ratio:auto;
+        margin-left:0;
+        margin-right:0;
+    }
+
+    .player-body{
+        width:100%;
+        min-height:100svh;
+        padding:18px 18px 110px;
+        justify-content:center;
+    }
+
+    .gee-footer-logo{
+        left:auto;
+        right:18px;
+        bottom:calc(18px + env(safe-area-inset-bottom));
+        transform:none;
+    }
+
+    .gee-footer-logo:hover{
+        transform:none scale(1.01);
+    }
+
+    .gee-footer-logo img{
+        width:min(180px, 24vw);
+    }
+}
+
+/* --------------------------------
+   SMALL MOBILE
 -------------------------------- */
 
 @media (max-width: 700px){
