@@ -384,8 +384,8 @@ select{
 
 .volume-step svg{
     display:block;
-    width:24px;
-    height:24px;
+    width:28px;
+    height:28px;
     color:#ffffff;
     fill:currentColor;
 }
@@ -680,8 +680,8 @@ select{
     }
 
     .volume-step svg{
-        width:20px;
-        height:20px;
+        width:24px;
+        height:24px;
     }
 
     .time-value{
