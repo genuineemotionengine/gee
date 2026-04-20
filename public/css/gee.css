@@ -1,8 +1,8 @@
 @font-face {
-    font-family: 'GeeHelvetica';
+    font-family: 'helveticaneue_lt_45_lightRg';
     src: url('/css/font/lte50263-webfont.woff2') format('woff2'),
          url('/css/font/lte50263-webfont.woff') format('woff');
-    font-weight: 300;
+    font-weight: normal;
     font-style: normal;
     font-display: swap;
 }
@@ -39,15 +39,16 @@ body{
 body{
     color:var(--text);
     font-family:
-        'GeeHelvetica',
+        'helveticaneue_lt_45_lightRg',
         'Helvetica Neue',
         Helvetica,
         Arial,
         -apple-system,
         BlinkMacSystemFont,
         sans-serif;
-    font-weight:300;
+    font-weight:normal;
     -webkit-font-smoothing:antialiased;
+    -moz-osx-font-smoothing:grayscale;
     text-rendering:optimizeLegibility;
     overflow-x:hidden;
     overflow-y:auto;
@@ -107,8 +108,9 @@ select{
 }
 
 .player.idle .meta-primary,
-.player.idle .meta-secondary{
-    opacity:.78;
+.player.idle .meta-secondary,
+.player.idle .meta-tertiary{
+    opacity:.92;
 }
 
 /* --------------------------------
@@ -206,6 +208,13 @@ select{
     white-space:nowrap;
     overflow:hidden;
     text-align:center;
+    font-family:
+        'helveticaneue_lt_45_lightRg',
+        'Helvetica Neue',
+        Helvetica,
+        Arial,
+        sans-serif;
+    font-weight:normal;
 }
 
 .context-renderer,
@@ -225,24 +234,30 @@ select{
     flex-direction:column;
     align-items:center;
     text-align:center;
-    gap:2px; /* tighter grouping */
+    gap:2px;
 }
 
-/* unified typography */
 .meta-primary,
 .meta-secondary,
 .meta-tertiary{
     width:100%;
+    margin:0;
+    padding:0;
+    font-family:
+        'helveticaneue_lt_45_lightRg',
+        'Helvetica Neue',
+        Helvetica,
+        Arial,
+        sans-serif !important;
     font-size:2.15rem;
-    line-height:1.05; /* slightly relaxed but still tight */
-    font-weight:300;
+    line-height:1.05;
+    font-weight:normal !important;
     letter-spacing:-0.03em;
     color:#ffffff;
-    margin:0; /* remove any browser defaults */
-    padding:0;
+    font-style:normal;
+    font-synthesis:none;
 }
 
-/* optional subtle refinement: slightly soften lower lines */
 .meta-secondary{
     opacity:0.9;
 }
@@ -250,7 +265,6 @@ select{
 .meta-tertiary{
     opacity:0.75;
 }
-
 
 /* --------------------------------
    PROGRESS
@@ -291,6 +305,13 @@ select{
     font-size:.72rem;
     letter-spacing:.14em;
     text-transform:uppercase;
+    font-family:
+        'helveticaneue_lt_45_lightRg',
+        'Helvetica Neue',
+        Helvetica,
+        Arial,
+        sans-serif;
+    font-weight:normal;
 }
 
 /* --------------------------------
@@ -331,6 +352,13 @@ select{
     justify-content:center;
     transition:transform var(--transition), border-color var(--transition), background var(--transition);
     cursor:pointer;
+    font-family:
+        'helveticaneue_lt_45_lightRg',
+        'Helvetica Neue',
+        Helvetica,
+        Arial,
+        sans-serif;
+    font-weight:normal;
 }
 
 .volume-step:hover{
@@ -349,6 +377,13 @@ select{
     letter-spacing:.02em;
     padding-top:2px;
     text-align:center;
+    font-family:
+        'helveticaneue_lt_45_lightRg',
+        'Helvetica Neue',
+        Helvetica,
+        Arial,
+        sans-serif;
+    font-weight:normal;
 }
 
 /* --------------------------------
@@ -422,6 +457,13 @@ select{
     letter-spacing:.1em;
     text-transform:uppercase;
     color:#f5f5f7;
+    font-family:
+        'helveticaneue_lt_45_lightRg',
+        'Helvetica Neue',
+        Helvetica,
+        Arial,
+        sans-serif;
+    font-weight:normal;
 }
 
 .sheet-close{
@@ -436,6 +478,13 @@ select{
     justify-content:center;
     font-size:1.2rem;
     cursor:pointer;
+    font-family:
+        'helveticaneue_lt_45_lightRg',
+        'Helvetica Neue',
+        Helvetica,
+        Arial,
+        sans-serif;
+    font-weight:normal;
 }
 
 .sheet-grid{
@@ -457,7 +506,13 @@ select{
     letter-spacing:.14em;
     text-transform:uppercase;
     color:var(--muted);
-    font-weight:600;
+    font-weight:normal;
+    font-family:
+        'helveticaneue_lt_45_lightRg',
+        'Helvetica Neue',
+        Helvetica,
+        Arial,
+        sans-serif;
 }
 
 .sheet-card select{
@@ -469,6 +524,13 @@ select{
     background:#090909;
     color:#ffffff;
     outline:none;
+    font-family:
+        'helveticaneue_lt_45_lightRg',
+        'Helvetica Neue',
+        Helvetica,
+        Arial,
+        sans-serif;
+    font-weight:normal;
 }
 
 .sheet-actions{
@@ -487,6 +549,13 @@ select{
     color:#ffffff;
     transition:transform var(--transition), background var(--transition), border-color var(--transition);
     cursor:pointer;
+    font-family:
+        'helveticaneue_lt_45_lightRg',
+        'Helvetica Neue',
+        Helvetica,
+        Arial,
+        sans-serif;
+    font-weight:normal;
 }
 
 .sheet-action:hover{
@@ -539,13 +608,10 @@ select{
         gap:16px;
     }
 
-    .meta-primary{
+    .meta-primary,
+    .meta-secondary,
+    .meta-tertiary{
         font-size:1.78rem;
-        min-height:1.9rem;
-    }
-
-    .meta-secondary{
-        font-size:1rem;
     }
 
     .volume-bar-wrap{
