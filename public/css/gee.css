@@ -893,3 +893,40 @@ select{
         width:min(210px, 64vw);
     }
 }
+
+.zone{
+    position:relative;
+    cursor:pointer;
+    background:transparent;
+    transition:background var(--transition);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+}
+
+.zone-icon{
+    width:34px;
+    height:34px;
+    color:#ffffff;
+    opacity:0;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    transition:opacity 180ms ease, transform 180ms ease;
+    pointer-events:none;
+}
+
+.zone-icon svg{
+    display:block;
+    width:28px;
+    height:28px;
+    fill:currentColor;
+}
+
+.player.grid-helper-visible .zone-icon{
+    opacity:1;
+}
+
+.zone:active .zone-icon{
+    transform:scale(.96);
+}

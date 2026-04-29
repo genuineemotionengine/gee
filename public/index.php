@@ -7,7 +7,7 @@
 <meta name="theme-color" content="#000000">
 <link rel="icon" href="/favicon.ico">
 <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
-<link rel="stylesheet" href="/css/gee.css?v=120260420o">
+<link rel="stylesheet" href="/css/gee.css?v=100">
 </head>
 <body>
 <div id="app">
@@ -18,19 +18,84 @@
                     <div class="art-stage">
                         <img id="cover" src="/img/black.jpg" alt="Artwork">
 
-                        <div class="art-grid" aria-label="Player controls">
-                            <button type="button" class="zone" data-zone="refresh" title="Refresh"></button>
-                            <button type="button" class="zone" data-zone="more" title="More"></button>
-                            <button type="button" class="zone" data-zone="load" title="Load Music"></button>
 
-                            <button type="button" class="zone disabled" tabindex="-1" aria-hidden="true"></button>
-                            <button type="button" class="zone" data-zone="playpause" title="Play / Pause"></button>
-                            <button type="button" class="zone disabled" tabindex="-1" aria-hidden="true"></button>
+                        
+                        
+                    <div class="art-grid" aria-label="Player controls">
+                        <button type="button" class="zone" data-zone="refresh" title="Refresh">
+                            <span class="zone-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M8 3a5 5 0 1 0 4.546 2.914.5.5 0 0 1 .908-.417A6 6 0 1 1 8 2z"/><path d="M8 4.466V.534a.25.25 0 0 1 .41-.192l2.36 1.966c.12.1.12.284 0 .384L8.41 4.658A.25.25 0 0 1 8 4.466"/></svg>
+                            </span>
+                        </button>
 
-                            <button type="button" class="zone" data-zone="prev" title="Previous"></button>
-                            <button type="button" class="zone" data-zone="restart" title="Restart Track"></button>
-                            <button type="button" class="zone" data-zone="next" title="Next"></button>
-                        </div>
+                        <button type="button" class="zone" data-zone="search" title="Search">
+                            <span class="zone-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0"/></svg>
+                            </span>
+                        </button>
+
+                        <button type="button" class="zone" data-zone="load" title="Load Music">
+                            <span class="zone-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M3.5 6a.5.5 0 0 0-.5.5v8a.5.5 0 0 0 .5.5h9a.5.5 0 0 0 .5-.5v-8a.5.5 0 0 0-.5-.5h-2a.5.5 0 0 1 0-1h2A1.5 1.5 0 0 1 14 6.5v8a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 2 14.5v-8A1.5 1.5 0 0 1 3.5 5h2a.5.5 0 0 1 0 1z"/><path fill-rule="evenodd" d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708z"/></svg>
+                            </span>
+                        </button>
+
+                        <button type="button" class="zone" data-zone="multiroom" title="Multi Room">
+                            <span class="zone-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M8.707 1.5a1 1 0 0 0-1.414 0L.646 8.146a.5.5 0 0 0 .708.708L2 8.207V13.5A1.5 1.5 0 0 0 3.5 15h4a.5.5 0 1 0 0-1h-4a.5.5 0 0 1-.5-.5V7.207l5-5 6.646 6.647a.5.5 0 0 0 .708-.708L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293z"/><path d="M16 12.5a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0m-3.5-2a.5.5 0 0 0-.5.5v1h-1a.5.5 0 0 0 0 1h1v1a.5.5 0 1 0 1 0v-1h1a.5.5 0 1 0 0-1h-1v-1a.5.5 0 0 0-.5-.5"/></svg>
+                            </span>
+                        </button>
+
+                        <button type="button" class="zone" data-zone="playpause" title="Play / Pause">
+                            <span class="zone-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M10.804 8 5 4.633v6.734zm.792-.696a.802.802 0 0 1 0 1.392l-6.363 3.692C4.713 12.69 4 12.345 4 11.692V4.308c0-.653.713-.998 1.233-.696z"/></svg>
+                            </span>
+                        </button>
+
+                        <button type="button" class="zone" data-zone="renderers" title="Renderers">
+                            <span class="zone-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M12 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1zM4 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2z"/><path d="M8 4.75a.75.75 0 1 1 0-1.5.75.75 0 0 1 0 1.5M8 6a2 2 0 1 0 0-4 2 2 0 0 0 0 4m0 3a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3m-3.5 1.5a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0"/></svg>
+                            </span>
+                        </button>
+
+                        <button type="button" class="zone" data-zone="prev" title="Previous">
+                            <span class="zone-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0"/></svg>
+                            </span>
+                        </button>
+
+                        <button type="button" class="zone" data-zone="restart" title="Restart Track">
+                            <span class="zone-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M11.854 3.646a.5.5 0 0 1 0 .708L8.207 8l3.647 3.646a.5.5 0 0 1-.708.708l-4-4a.5.5 0 0 1 0-.708l4-4a.5.5 0 0 1 .708 0M4.5 1a.5.5 0 0 0-.5.5v13a.5.5 0 0 0 1 0v-13a.5.5 0 0 0-.5-.5"/></svg>
+                            </span>
+                        </button>
+
+                        <button type="button" class="zone" data-zone="next" title="Next">
+                            <span class="zone-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708"/></svg>
+                            </span>
+                        </button>
+                    </div>                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
 
                         <div id="gridHelper" class="grid-helper" aria-hidden="true">
                             <div class="grid-helper-cell"></div>
