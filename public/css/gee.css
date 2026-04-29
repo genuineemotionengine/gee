@@ -930,3 +930,8 @@ select{
 .zone:active .zone-icon{
     transform:scale(.96);
 }
+
+.zone-icon-play svg{
+    width:38px;
+    height:38px;
+}
