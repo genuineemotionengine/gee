@@ -905,8 +905,8 @@ select{
 }
 
 .zone-icon{
-    width:34px;
-    height:34px;
+    width:42px;
+    height:42px;
     color:#ffffff;
     opacity:0;
     display:flex;
@@ -918,8 +918,8 @@ select{
 
 .zone-icon svg{
     display:block;
-    width:28px;
-    height:28px;
+    width:34px;
+    height:34px;
     fill:currentColor;
 }
 
