@@ -500,7 +500,7 @@ function gee_stream_block(?array $runtime, string $streamKey, string $rendererId
                     <div class="card-head">
                         <div>
                             <div class="title"><?= htmlspecialchars($cardTitle, ENT_QUOTES, 'UTF-8') ?></div>
-                            <div class="subtitle">Renderer ID: <?= gee_value($rendererId) ?></div>
+                            <div class="subtitle">Renderer ID: <?= gee_value($selectedRendererLabel) ?></div>
                         </div>
 
                         <?php if ($row['selected']): ?>
