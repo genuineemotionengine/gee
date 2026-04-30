@@ -603,7 +603,7 @@ const GeePlayer = (() => {
 
                     default:
                         break;
-}                }
+                }
             });
         });
 
