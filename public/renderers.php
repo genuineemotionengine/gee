@@ -83,6 +83,26 @@ $selectedRendererId = gee_get_selected_renderer_id();
 $selectedStream = gee_get_selected_stream();
 $renderers = gee_get_all_renderer_contexts();
 
+$selectedRendererLabel = '';
+
+foreach ($renderers as $rendererContext) {
+    $rendererId = (string)($rendererContext['renderer_id'] ?? '');
+
+    if ($selectedRendererId !== null && $rendererId === $selectedRendererId) {
+        $rendererName = (string)($rendererContext['renderer_name'] ?? '');
+        $displayName = (string)($rendererContext['display_name'] ?? '');
+        $hostname = (string)($rendererContext['hostname'] ?? '');
+
+        $selectedRendererLabel = $rendererName !== ''
+            ? $rendererName
+            : ($displayName !== ''
+                ? $displayName
+                : ($hostname !== '' ? $hostname : $rendererId));
+
+        break;
+    }
+}
+
 $rows = [];
 
 foreach ($renderers as $rendererContext) {
@@ -444,7 +464,7 @@ function gee_stream_block(?array $runtime, string $streamKey, string $rendererId
     <div class="toolbar">
         <div class="toolbar-left">
             <span class="pill">Count: <?= count($rows) ?></span>
-            <span class="pill">Selected Renderer: <?= gee_value($selectedRendererId) ?></span>
+            <span class="pill">Selected Renderer: <?= gee_value($selectedRendererLabel) ?></span>
             <span class="pill">Selected Stream: <?= gee_value($selectedStream) ?></span>
         </div>
         <div class="toolbar-right">
