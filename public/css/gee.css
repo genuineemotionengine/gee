@@ -1014,3 +1014,10 @@ select{
 .feature-modal-body{
     height:100%;
 }
+
+.feature-modal-iframe{
+    width:100%;
+    height:100%;
+    border:0;
+    background:#050505;
+}

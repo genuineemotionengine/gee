@@ -223,13 +223,21 @@ const GeePlayer = (() => {
         showGridHelper();
     }
 
-    function openFeatureModal(title = '') {
+    function openFeatureModal(title = '', iframeSrc = '') {
         if (!els.featureModal || !els.featureModalBackdrop) {
             return;
         }
 
         els.featureModalTitle.textContent = title;
         els.featureModalBody.innerHTML = '';
+
+        if (iframeSrc !== '') {
+            const iframe = document.createElement('iframe');
+            iframe.className = 'feature-modal-iframe';
+            iframe.src = iframeSrc;
+            iframe.title = title;
+            els.featureModalBody.appendChild(iframe);
+        }
 
         els.featureModal.classList.add('open');
         els.featureModalBackdrop.classList.add('open');
@@ -586,7 +594,7 @@ const GeePlayer = (() => {
                         break;
 
                     case 'renderers':
-                        openFeatureModal('Renderers');
+                        openFeatureModal('Renderers', '/renderers.php');
                         break;
 
                     case 'prev':
