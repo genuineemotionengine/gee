@@ -552,9 +552,9 @@ function gee_stream_block(?array $runtime, string $streamKey, string $rendererId
         </div>
     <?php endif; ?>
 
-    <div class="footer-note">
+<!--    <div class="footer-note">
         This page is intended as the renderer and stream diagnostics view before full player integration.
-    </div>
+    </div>-->
 </div>
 </body>
 </html>
