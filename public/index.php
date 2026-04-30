@@ -7,7 +7,7 @@
 <meta name="theme-color" content="#000000">
 <link rel="icon" href="/favicon.ico">
 <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
-<link rel="stylesheet" href="/css/gee.css?v=102">
+<link rel="stylesheet" href="/css/gee.css?v=103">
 </head>
 <body>
 <div id="app">
@@ -231,6 +231,25 @@
     </div>
 </div>
 
-<script src="/js/gee-player.js?v=20260420n"></script>
+<div id="featureModalBackdrop" class="feature-modal-backdrop"></div>
+
+<div id="featureModal" class="feature-modal" aria-hidden="true">
+    <div class="feature-modal-panel">
+        <button
+            type="button"
+            id="featureModalClose"
+            class="feature-modal-close"
+            aria-label="Close"
+            title="Close"
+        >
+            ×
+        </button>
+
+        <div id="featureModalTitle" class="feature-modal-title"></div>
+        <div id="featureModalBody" class="feature-modal-body"></div>
+    </div>
+</div>
+
+<script src="/js/gee-player.js?v=20260420o"></script>
 </body>
 </html>

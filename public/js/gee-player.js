@@ -73,6 +73,12 @@ const GeePlayer = (() => {
 
         els.gridHelper = document.getElementById('gridHelper');
         els.gridHelperToggle = document.getElementById('gridHelperToggle');
+        
+        els.featureModal = document.getElementById('featureModal');
+        els.featureModalBackdrop = document.getElementById('featureModalBackdrop');
+        els.featureModalClose = document.getElementById('featureModalClose');
+        els.featureModalTitle = document.getElementById('featureModalTitle');
+        els.featureModalBody = document.getElementById('featureModalBody');     
 
         els.zones = document.querySelectorAll('.zone');
     }
@@ -215,6 +221,31 @@ const GeePlayer = (() => {
         }
 
         showGridHelper();
+    }
+
+    function openFeatureModal(title = '') {
+        if (!els.featureModal || !els.featureModalBackdrop) {
+            return;
+        }
+
+        els.featureModalTitle.textContent = title;
+        els.featureModalBody.innerHTML = '';
+
+        els.featureModal.classList.add('open');
+        els.featureModalBackdrop.classList.add('open');
+        els.featureModal.setAttribute('aria-hidden', 'false');
+
+        hideGridHelper();
+    }
+
+    function closeFeatureModal() {
+        if (!els.featureModal || !els.featureModalBackdrop) {
+            return;
+        }
+
+        els.featureModal.classList.remove('open');
+        els.featureModalBackdrop.classList.remove('open');
+        els.featureModal.setAttribute('aria-hidden', 'true');
     }
 
     function setIdleState(rendererName = '', streamName = '') {
@@ -494,6 +525,14 @@ const GeePlayer = (() => {
 
         els.closeSheetButton.addEventListener('click', closeMoreSheet);
         els.sheetBackdrop.addEventListener('click', closeMoreSheet);
+        
+        if (els.featureModalClose) {
+            els.featureModalClose.addEventListener('click', closeFeatureModal);
+        }
+
+        if (els.featureModalBackdrop) {
+            els.featureModalBackdrop.addEventListener('click', closeFeatureModal);
+        }
 
         els.gridHelperToggle.addEventListener('click', () => {
             toggleGridHelper();
@@ -525,27 +564,46 @@ const GeePlayer = (() => {
                     case 'refresh':
                         await fetchMeta(true);
                         break;
+
+                    case 'search':
+                        openFeatureModal('Search');
+                        break;
+
                     case 'more':
                         openMoreSheet();
                         break;
+
                     case 'load':
                         await loadMusic();
                         break;
+
+                    case 'multiroom':
+                        openFeatureModal('Multi Room');
+                        break;
+
                     case 'playpause':
                         await sendCommand(2);
                         break;
+
+                    case 'renderers':
+                        openFeatureModal('Renderers');
+                        break;
+
                     case 'prev':
                         await sendCommand(3);
                         break;
+
                     case 'restart':
                         await sendCommand(13);
                         break;
+
                     case 'next':
                         await sendCommand(4);
                         break;
+
                     default:
                         break;
-                }
+}                }
             });
         });
 
@@ -553,6 +611,7 @@ const GeePlayer = (() => {
             if (event.key === 'Escape') {
                 closeMoreSheet();
                 hideGridHelper();
+                closeFeatureModal();
             }
         });
     }
