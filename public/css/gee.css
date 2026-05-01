@@ -1026,9 +1026,10 @@ select{
    SEARCH LAUNCH GRID
 -------------------------------- */
 
+
 .search-launch-grid{
     width:100%;
-    height:calc(100% - 18px);
+    aspect-ratio:2 / 3;
     display:grid;
     grid-template-columns:repeat(2, 1fr);
     grid-template-rows:repeat(3, 1fr);
