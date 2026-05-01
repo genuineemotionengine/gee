@@ -5,6 +5,8 @@ const GeePlayer = (() => {
     const META_POLL_INTERVAL_MS = 15000;
     const PROGRESS_TICK_INTERVAL_MS = 1000;
     const GRID_HELPER_DURATION_MS = 5000;
+    const SEARCH_DEBOUNCE_MS = 220;
+    const TRACK_SEARCH_ENDPOINT = '/search.php';
     const VOLUME_STEP = 5;
 
     const state = {
@@ -15,6 +17,7 @@ const GeePlayer = (() => {
         progressTickHandle: null,
         gridHelperTimeoutHandle: null,
         gridHelperVisible: false,
+        searchTimeoutHandle: null,
 
         ui: {
             rendererDisplay: '',
@@ -73,12 +76,12 @@ const GeePlayer = (() => {
 
         els.gridHelper = document.getElementById('gridHelper');
         els.gridHelperToggle = document.getElementById('gridHelperToggle');
-        
+
         els.featureModal = document.getElementById('featureModal');
         els.featureModalBackdrop = document.getElementById('featureModalBackdrop');
         els.featureModalClose = document.getElementById('featureModalClose');
         els.featureModalTitle = document.getElementById('featureModalTitle');
-        els.featureModalBody = document.getElementById('featureModalBody');     
+        els.featureModalBody = document.getElementById('featureModalBody');
 
         els.zones = document.querySelectorAll('.zone');
     }
@@ -106,6 +109,7 @@ const GeePlayer = (() => {
     function renderProgress(elapsed, duration) {
         const safeElapsed = Math.max(0, parseInt(elapsed || 0, 10));
         const safeDuration = Math.max(0, parseInt(duration || 0, 10));
+
         const progress = safeDuration > 0
             ? Math.max(0, Math.min(100, Math.round((safeElapsed / safeDuration) * 100)))
             : 0;
@@ -120,6 +124,7 @@ const GeePlayer = (() => {
         state.playbackClock.elapsed = Math.max(0, parseInt(elapsed || 0, 10));
         state.playbackClock.duration = Math.max(0, parseInt(duration || 0, 10));
         state.playbackClock.state = String(playbackState || 'stop');
+
         renderProgress(state.playbackClock.elapsed, state.playbackClock.duration);
     }
 
@@ -149,6 +154,7 @@ const GeePlayer = (() => {
     function updateVolumeUI(volume) {
         const safeVolume = Math.max(0, Math.min(100, parseInt(volume ?? 0, 10) || 0));
         state.ui.volume = safeVolume;
+
         els.volumeFill.style.width = `${safeVolume}%`;
         els.volumeBar.setAttribute('aria-valuenow', String(safeVolume));
     }
@@ -186,6 +192,7 @@ const GeePlayer = (() => {
 
     function setGridHelperVisible(visible) {
         state.gridHelperVisible = visible;
+
         els.player.classList.toggle('grid-helper-visible', visible);
         els.gridHelper.setAttribute('aria-hidden', visible ? 'false' : 'true');
         els.gridHelperToggle.setAttribute('aria-label', visible ? 'Hide navigation grid' : 'Show navigation grid');
@@ -254,6 +261,173 @@ const GeePlayer = (() => {
         els.featureModal.classList.remove('open');
         els.featureModalBackdrop.classList.remove('open');
         els.featureModal.setAttribute('aria-hidden', 'true');
+    }
+
+function openSearchModal() {
+    openFeatureModal('Search');
+
+    els.featureModalBody.innerHTML = `
+        <div class="search-launch-grid">
+            <button type="button" class="search-launch-tile" data-search-mode="current-album" title="Current Playing Album">
+                <span class="search-launch-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16">
+                        <path d="M6.002 5.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0"/>
+                        <path d="M2.002 1a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2zm12 1a1 1 0 0 1 1 1v6.5l-3.777-1.947a.5.5 0 0 0-.577.093l-3.71 3.71-2.66-1.772a.5.5 0 0 0-.63.062L1.002 12V3a1 1 0 0 1 1-1z"/>
+                    </svg>
+                </span>
+            </button>
+
+            <button type="button" class="search-launch-tile" data-search-mode="track-search" title="Track Search">
+                <span class="search-launch-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16">
+                        <path d="M6 13c0 1.105-1.12 2-2.5 2S1 14.105 1 13s1.12-2 2.5-2 2.5.896 2.5 2m9-2c0 1.105-1.12 2-2.5 2s-2.5-.895-2.5-2 1.12-2 2.5-2 2.5.895 2.5 2"/>
+                        <path fill-rule="evenodd" d="M14 11V2h1v9zM6 3v10H5V3z"/>
+                        <path d="M5 2.905a1 1 0 0 1 .9-.995l8-.8a1 1 0 0 1 1.1.995V3L5 4z"/>
+                    </svg>
+                </span>
+            </button>
+
+            <button type="button" class="search-launch-tile" data-search-mode="album-search" title="Album Search">
+                <span class="search-launch-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16">
+                        <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/>
+                        <path d="M8 6a2 2 0 1 0 0 4 2 2 0 0 0 0-4M4 8a4 4 0 1 1 8 0 4 4 0 0 1-8 0"/>
+                        <path d="M9 8a1 1 0 1 1-2 0 1 1 0 0 1 2 0"/>
+                    </svg>
+                </span>
+            </button>
+
+            <button type="button" class="search-launch-tile" data-search-mode="artist-search" title="Artist Search">
+                <span class="search-launch-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16">
+                        <path d="M3.5 6.5A.5.5 0 0 1 4 7v1a4 4 0 0 0 8 0V7a.5.5 0 0 1 1 0v1a5 5 0 0 1-4.5 4.975V15h3a.5.5 0 0 1 0 1h-7a.5.5 0 0 1 0-1h3v-2.025A5 5 0 0 1 3 8V7a.5.5 0 0 1 .5-.5"/>
+                        <path d="M10 8a2 2 0 1 1-4 0V3a2 2 0 1 1 4 0zM8 0a3 3 0 0 0-3 3v5a3 3 0 0 0 6 0V3a3 3 0 0 0-3-3"/>
+                    </svg>
+                </span>
+            </button>
+
+            <button type="button" class="search-launch-tile" data-search-mode="playlist" title="Playlist">
+                <span class="search-launch-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16">
+                        <path d="M12 13c0 1.105-1.12 2-2.5 2S7 14.105 7 13s1.12-2 2.5-2 2.5.895 2.5 2"/>
+                        <path fill-rule="evenodd" d="M12 3v10h-1V3z"/>
+                        <path d="M11 2.82a1 1 0 0 1 .804-.98l3-.6A1 1 0 0 1 16 2.22V4l-5 1z"/>
+                        <path fill-rule="evenodd" d="M0 11.5a.5.5 0 0 1 .5-.5H4a.5.5 0 0 1 0 1H.5a.5.5 0 0 1-.5-.5m0-4A.5.5 0 0 1 .5 7H8a.5.5 0 0 1 0 1H.5a.5.5 0 0 1-.5-.5m0-4A.5.5 0 0 1 .5 3H8a.5.5 0 0 1 0 1H.5a.5.5 0 0 1-.5-.5"/>
+                    </svg>
+                </span>
+            </button>
+
+            <button type="button" class="search-launch-tile" data-search-mode="track-list" title="Full Track List">
+                <span class="search-launch-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16">
+                        <path fill-rule="evenodd" d="M5 11.5a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5"/>
+                        <path d="M1.713 11.865v-.474H2c.217 0 .363-.137.363-.317 0-.185-.158-.31-.361-.31-.223 0-.367.152-.373.31h-.59c.016-.467.373-.787.986-.787.588-.002.954.291.957.703a.595.595 0 0 1-.492.594v.033a.615.615 0 0 1 .569.631c.003.533-.502.8-1.051.8-.656 0-1-.37-1.008-.794h.582c.008.178.186.306.422.309.254 0 .424-.145.422-.35-.002-.195-.155-.348-.414-.348h-.3zm-.004-4.699h-.604v-.035c0-.408.295-.844.958-.844.583 0 .96.326.96.756 0 .389-.257.617-.476.848l-.537.572v.03h1.054V9H1.143v-.395l.957-.99c.138-.142.293-.304.293-.508 0-.18-.147-.32-.342-.32a.33.33 0 0 0-.342.338zM2.564 5h-.635V2.924h-.031l-.598.42v-.567l.629-.443h.635z"/>
+                    </svg>
+                </span>
+            </button>
+        </div>
+    `;
+}
+    async function searchTracks(query) {
+        const results = document.getElementById('trackSearchResults');
+
+        if (!results) {
+            return;
+        }
+
+        try {
+            const url = `${TRACK_SEARCH_ENDPOINT}?q=${encodeURIComponent(query)}`;
+            const data = await safeJson(fetch(url, { cache: 'no-store' }));
+
+            if (!Array.isArray(data) || data.length === 0) {
+                results.innerHTML = '<div class="search-modal-empty">No tracks found</div>';
+                return;
+            }
+
+            results.innerHTML = data.map(renderTrackSearchResult).join('');
+        } catch (err) {
+            console.error('searchTracks failed', err);
+            results.innerHTML = '<div class="search-modal-empty">Search failed</div>';
+        }
+    }
+
+    function renderTrackSearchResult(track) {
+        const id = parseInt(track.id || 0, 10);
+        const title = escapeHtml(track.title || 'Unknown Title');
+        const artist = escapeHtml(track.artist || '');
+        const album = escapeHtml(track.album || '');
+
+        return `
+            <div class="search-result-row" data-track-id="${id}">
+                <div class="search-result-main">
+                    <div class="search-result-title">${title}</div>
+                    <div class="search-result-artist">${artist}</div>
+                    <div class="search-result-album">${album}</div>
+                </div>
+
+                <div class="search-result-actions">
+                    <button type="button" class="search-result-action" data-search-action="play-next" data-track-id="${id}" title="Play next" aria-label="Play next">
+                        ${iconChevronRight()}
+                    </button>
+
+                    <button type="button" class="search-result-action" data-search-action="insert-next" data-track-id="${id}" title="Queue next" aria-label="Queue next">
+                        ${iconChevronDoubleRight()}
+                    </button>
+
+                    <button type="button" class="search-result-action" data-search-action="play-now" data-track-id="${id}" title="Play now" aria-label="Play now">
+                        ${iconArrowRight()}
+                    </button>
+                </div>
+            </div>
+        `;
+    }
+
+    function iconChevronRight() {
+        return `
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" aria-hidden="true">
+                <path fill-rule="evenodd" d="M6.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L11.793 8 6.646 2.354a.5.5 0 0 1 0-.708"/>
+            </svg>
+        `;
+    }
+
+    function iconChevronDoubleRight() {
+        return `
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" aria-hidden="true">
+                <path fill-rule="evenodd" d="M3.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L8.793 8 3.646 2.354a.5.5 0 0 1 0-.708"/>
+                <path fill-rule="evenodd" d="M7.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L12.793 8 7.646 2.354a.5.5 0 0 1 0-.708"/>
+            </svg>
+        `;
+    }
+
+    function iconArrowRight() {
+        return `
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" aria-hidden="true">
+                <path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8"/>
+            </svg>
+        `;
+    }
+
+    function handleSearchResultAction(action, trackId) {
+        if (!trackId) {
+            return;
+        }
+
+        if (action === 'play-next') {
+            setMessage('Play next action not wired yet');
+            closeFeatureModal();
+            return;
+        }
+
+        if (action === 'insert-next') {
+            setMessage('Queue next action not wired yet');
+            return;
+        }
+
+        if (action === 'play-now') {
+            setMessage('Play now action not wired yet');
+            closeFeatureModal();
+            return;
+        }
     }
 
     function setIdleState(rendererName = '', streamName = '') {
@@ -339,6 +513,7 @@ const GeePlayer = (() => {
 
         try {
             setMessage('Switching renderer…');
+
             const data = await safeJson(
                 fetch(`/api/?service=21&renderer_id=${encodeURIComponent(rendererId)}`, { cache: 'no-store' })
             );
@@ -365,6 +540,7 @@ const GeePlayer = (() => {
 
         try {
             setMessage('Switching stream…');
+
             const data = await safeJson(
                 fetch(`/api/?service=23&stream=${encodeURIComponent(streamKey)}`, { cache: 'no-store' })
             );
@@ -488,6 +664,7 @@ const GeePlayer = (() => {
     async function loadMusic() {
         try {
             setMessage('Loading music…');
+
             const data = await safeJson(fetch('/api/?service=5', { cache: 'no-store' }));
 
             if (!data || data.status !== 'ok') {
@@ -521,6 +698,7 @@ const GeePlayer = (() => {
             if (state.isUpdatingSelectors) {
                 return;
             }
+
             await selectRenderer(this.value);
         });
 
@@ -528,12 +706,13 @@ const GeePlayer = (() => {
             if (state.isUpdatingSelectors) {
                 return;
             }
+
             await selectStream(this.value);
         });
 
         els.closeSheetButton.addEventListener('click', closeMoreSheet);
         els.sheetBackdrop.addEventListener('click', closeMoreSheet);
-        
+
         if (els.featureModalClose) {
             els.featureModalClose.addEventListener('click', closeFeatureModal);
         }
@@ -564,6 +743,19 @@ const GeePlayer = (() => {
             await sendCommand(13);
         });
 
+        document.addEventListener('click', (event) => {
+            const actionButton = event.target.closest('.search-result-action');
+
+            if (!actionButton) {
+                return;
+            }
+
+            const action = actionButton.dataset.searchAction || '';
+            const trackId = parseInt(actionButton.dataset.trackId || '0', 10);
+
+            handleSearchResultAction(action, trackId);
+        });
+
         els.zones.forEach((zone) => {
             zone.addEventListener('click', async () => {
                 const action = zone.dataset.zone || '';
@@ -574,7 +766,7 @@ const GeePlayer = (() => {
                         break;
 
                     case 'search':
-                        openFeatureModal('Search');
+                        openSearchModal();
                         break;
 
                     case 'more':

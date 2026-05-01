@@ -1021,3 +1021,58 @@ select{
     border:0;
     background:#050505;
 }
+
+/* --------------------------------
+   SEARCH LAUNCH GRID
+-------------------------------- */
+
+.search-launch-grid{
+    width:100%;
+    height:calc(100% - 18px);
+    display:grid;
+    grid-template-columns:repeat(2, 1fr);
+    grid-template-rows:repeat(3, 1fr);
+    border:1px solid #ffffff;
+    margin-top:28px;
+}
+
+.search-launch-tile{
+    position:relative;
+    border-right:1px solid #ffffff;
+    border-bottom:1px solid #ffffff;
+    color:#ffffff;
+    background:transparent;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    cursor:pointer;
+}
+
+.search-launch-tile:nth-child(2n){
+    border-right:0;
+}
+
+.search-launch-tile:nth-child(n+5){
+    border-bottom:0;
+}
+
+.search-launch-icon{
+    width:42px;
+    height:42px;
+    color:#ffffff;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    pointer-events:none;
+}
+
+.search-launch-icon svg{
+    display:block;
+    width:34px;
+    height:34px;
+    fill:currentColor;
+}
+
+.search-launch-tile:active .search-launch-icon{
+    transform:scale(.96);
+}
