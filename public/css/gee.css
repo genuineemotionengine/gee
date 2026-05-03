@@ -1164,3 +1164,19 @@ select{
     font-size:1rem;
     padding:24px 0;
 }
+
+.meta-next{
+    width:100%;
+    margin-top:6px;
+    font-size:1.05rem;
+    line-height:1.1;
+    letter-spacing:-0.01em;
+    color:rgba(255,255,255,.55);
+    text-align:center;
+    font-family:
+        'helveticaneue_lt_45_lightRg',
+        'Helvetica Neue',
+        Helvetica,
+        Arial,
+        sans-serif;
+}

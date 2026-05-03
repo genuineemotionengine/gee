@@ -160,9 +160,10 @@
                 </div>
 
                 <div class="meta">
-                    <div id="title" class="meta-primary">Loading…</div>
+                    <div id="title" class="meta-primary"></div>
                     <div id="artist" class="meta-secondary"></div>
                     <div id="album" class="meta-tertiary"></div>
+                    <div id="nextTrack" class="meta-next"></div>
                 </div>
 
                 <div id="message" class="message"></div>

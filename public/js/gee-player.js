@@ -82,6 +82,7 @@ const GeePlayer = (() => {
         els.featureModalClose = document.getElementById('featureModalClose');
         els.featureModalTitle = document.getElementById('featureModalTitle');
         els.featureModalBody = document.getElementById('featureModalBody');
+        els.nextTrack = document.getElementById('nextTrack');
 
         els.zones = document.querySelectorAll('.zone');
     }
@@ -649,6 +650,15 @@ function openTrackSearchPanel() {
         updateVolumeUI(data.volume ?? 0);
         applyPlaybackState(playbackState);
         updateSheetSummary();
+        
+        if (data.next_title) {
+            const nextArtist = data.next_artist ? ` - ${data.next_artist}` : '';
+            els.nextTrack.textContent = `Next: ${data.next_title}${nextArtist}`;
+        } else {
+            els.nextTrack.textContent = '';
+        }
+        
+        
     }
 
     async function fetchMeta(force = false) {
