@@ -6,7 +6,7 @@ const GeePlayer = (() => {
     const PROGRESS_TICK_INTERVAL_MS = 1000;
     const GRID_HELPER_DURATION_MS = 5000;
     const SEARCH_DEBOUNCE_MS = 220;
-    const TRACK_SEARCH_ENDPOINT = '/search.php';
+    const TRACK_SEARCH_ENDPOINT = '/api/search.php';
     const VOLUME_STEP = 5;
 
     const state = {
