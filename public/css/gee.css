@@ -1078,3 +1078,89 @@ select{
 .search-launch-tile:active .search-launch-icon{
     transform:scale(.96);
 }
+
+/* --------------------------------
+   SEARCH MODAL
+-------------------------------- */
+
+.search-modal{
+    width:100%;
+    height:100%;
+    display:flex;
+    flex-direction:column;
+    gap:22px;
+    padding-top:42px;
+}
+
+.search-modal-input{
+    width:100%;
+    height:54px;
+    border:1px solid rgba(255,255,255,.85);
+    background:transparent;
+    color:#ffffff;
+    border-radius:8px;
+    padding:0 18px;
+    font-size:1.25rem;
+    outline:none;
+    font-family:
+        'helveticaneue_lt_45_lightRg',
+        'Helvetica Neue',
+        Helvetica,
+        Arial,
+        sans-serif;
+}
+
+.search-modal-results{
+    flex:1;
+    overflow-y:auto;
+    -webkit-overflow-scrolling:touch;
+    padding-right:4px;
+}
+
+.search-result-row{
+    border-bottom:1px solid rgba(255,255,255,.75);
+    padding:22px 0 20px;
+}
+
+.search-result-title,
+.search-result-artist,
+.search-result-album{
+    color:#ffffff;
+    font-size:1.45rem;
+    line-height:1.18;
+    letter-spacing:-0.03em;
+}
+
+.search-result-artist,
+.search-result-album{
+    color:rgba(255,255,255,.72);
+}
+
+.search-result-actions{
+    display:flex;
+    align-items:center;
+    gap:34px;
+    margin-top:18px;
+}
+
+.search-result-action{
+    width:44px;
+    height:44px;
+    color:rgba(255,255,255,.58);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    cursor:pointer;
+}
+
+.search-result-action svg{
+    width:38px;
+    height:38px;
+    fill:currentColor;
+}
+
+.search-modal-empty{
+    color:var(--muted);
+    font-size:1rem;
+    padding:24px 0;
+}

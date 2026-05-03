@@ -328,6 +328,53 @@ function openSearchModal() {
         </div>
     `;
 }
+
+function openTrackSearchPanel() {
+    els.featureModalTitle.textContent = 'Track Search';
+
+    els.featureModalBody.innerHTML = `
+        <div class="search-modal">
+            <input
+                id="trackSearchInput"
+                class="search-modal-input"
+                type="search"
+                autocomplete="off"
+                autocapitalize="off"
+                spellcheck="false"
+                placeholder=""
+            >
+
+            <div id="trackSearchResults" class="search-modal-results"></div>
+        </div>
+    `;
+
+    const input = document.getElementById('trackSearchInput');
+    const results = document.getElementById('trackSearchResults');
+
+    window.setTimeout(() => {
+        input.focus();
+    }, 80);
+
+    input.addEventListener('input', () => {
+        const query = input.value.trim();
+
+        if (state.searchTimeoutHandle !== null) {
+            window.clearTimeout(state.searchTimeoutHandle);
+            state.searchTimeoutHandle = null;
+        }
+
+        if (query.length < 2) {
+            results.innerHTML = '';
+            return;
+        }
+
+        state.searchTimeoutHandle = window.setTimeout(() => {
+            searchTracks(query);
+        }, SEARCH_DEBOUNCE_MS);
+    });
+}
+
+
     async function searchTracks(query) {
         const results = document.getElementById('trackSearchResults');
 
@@ -754,6 +801,20 @@ function openSearchModal() {
             const trackId = parseInt(actionButton.dataset.trackId || '0', 10);
 
             handleSearchResultAction(action, trackId);
+        });
+
+        document.addEventListener('click', (event) => {
+            const tile = event.target.closest('.search-launch-tile');
+
+            if (!tile) {
+                return;
+            }
+
+            const mode = tile.dataset.searchMode || '';
+
+            if (mode === 'track-search') {
+                openTrackSearchPanel();
+            }
         });
 
         els.zones.forEach((zone) => {
