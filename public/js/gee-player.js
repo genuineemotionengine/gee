@@ -9,6 +9,8 @@ const GeePlayer = (() => {
     const TRACK_SEARCH_ENDPOINT = '/api/search.php';
     const VOLUME_STEP = 5;
     const TRACK_ACTION_ENDPOINT = '/api/track-action.php';
+    const ALBUM_SEARCH_ENDPOINT = '/api/search-albums.php';
+    const ALBUM_TRACKS_ENDPOINT = '/api/album-tracks.php';
 
     const state = {
         rendererList: [],
@@ -87,6 +89,169 @@ const GeePlayer = (() => {
 
         els.zones = document.querySelectorAll('.zone');
     }
+
+    function openAlbumSearchPanel() {
+        els.featureModalTitle.textContent = 'Album Search';
+
+        els.featureModalBody.innerHTML = `
+            <div class="search-modal">
+                <input
+                    id="albumSearchInput"
+                    class="search-modal-input"
+                    type="search"
+                    autocomplete="off"
+                    autocapitalize="off"
+                    spellcheck="false"
+                    placeholder=""
+                >
+
+                <div id="albumSearchResults" class="search-modal-results"></div>
+            </div>
+        `;
+
+        const input = document.getElementById('albumSearchInput');
+        const results = document.getElementById('albumSearchResults');
+
+        window.setTimeout(() => {
+            input.focus();
+        }, 80);
+
+        input.addEventListener('input', () => {
+            const query = input.value.trim();
+
+            if (state.searchTimeoutHandle !== null) {
+                window.clearTimeout(state.searchTimeoutHandle);
+                state.searchTimeoutHandle = null;
+            }
+
+            if (query.length < 2) {
+                results.innerHTML = '';
+                return;
+            }
+
+            state.searchTimeoutHandle = window.setTimeout(() => {
+                searchAlbums(query);
+            }, SEARCH_DEBOUNCE_MS);
+        });
+    }
+
+    async function searchAlbums(query) {
+        const results = document.getElementById('albumSearchResults');
+
+        if (!results) {
+            return;
+        }
+
+        try {
+            const data = await safeJson(fetch(`${ALBUM_SEARCH_ENDPOINT}?q=${encodeURIComponent(query)}`, {
+                cache: 'no-store'
+            }));
+
+            if (!Array.isArray(data) || data.length === 0) {
+                results.innerHTML = '<div class="search-modal-empty">No albums found</div>';
+                return;
+            }
+
+            results.innerHTML = data.map(renderAlbumSearchResult).join('');
+        } catch (err) {
+            console.error('searchAlbums failed', err);
+            results.innerHTML = '<div class="search-modal-empty">Album search failed</div>';
+        }
+    }
+
+    function renderAlbumSearchResult(album) {
+        const albumName = escapeHtml(album.album || 'Unknown Album');
+        const albumArtist = escapeHtml(album.albumartist || '');
+        const trackCount = parseInt(album.track_count || 0, 10);
+
+        return `
+            <div class="search-result-row">
+                <div class="search-result-main">
+                    <div class="search-result-title">${albumName}</div>
+                    <div class="search-result-artist">${albumArtist}</div>
+                    <div class="search-result-album">${trackCount} track${trackCount === 1 ? '' : 's'}</div>
+                </div>
+
+                <div class="search-result-actions">
+                    <button type="button"
+                        class="search-result-action"
+                        data-album-action="play-next"
+                        data-album="${escapeHtml(album.album || '')}"
+                        data-albumartist="${escapeHtml(album.albumartist || '')}"
+                        title="Play album next"
+                        aria-label="Play album next">
+                        ${iconChevronRight()}
+                    </button>
+
+                    <button type="button"
+                        class="search-result-action"
+                        data-album-action="insert-next"
+                        data-album="${escapeHtml(album.album || '')}"
+                        data-albumartist="${escapeHtml(album.albumartist || '')}"
+                        title="Queue album"
+                        aria-label="Queue album">
+                        ${iconChevronDoubleRight()}
+                    </button>
+
+                    <button type="button"
+                        class="search-result-action"
+                        data-album-action="play-now"
+                        data-album="${escapeHtml(album.album || '')}"
+                        data-albumartist="${escapeHtml(album.albumartist || '')}"
+                        title="Play album now"
+                        aria-label="Play album now">
+                        ${iconArrowRight()}
+                    </button>
+
+                    <button type="button"
+                        class="search-result-action"
+                        data-album-action="drill"
+                        data-album="${escapeHtml(album.album || '')}"
+                        data-albumartist="${escapeHtml(album.albumartist || '')}"
+                        title="Show tracks"
+                        aria-label="Show tracks">
+                        ${iconChevronDown()}
+                    </button>
+                </div>
+            </div>
+        `;
+    }
+
+    function iconChevronDown() {
+        return `
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" aria-hidden="true">
+                <path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708"/>
+            </svg>
+        `;
+    }
+
+    async function openAlbumTracksPanel(album, albumartist) {
+        els.featureModalTitle.textContent = 'Album Tracks';
+
+        els.featureModalBody.innerHTML = `
+            <div class="search-modal">
+                <div id="albumTrackResults" class="search-modal-results"></div>
+            </div>
+        `;
+
+        const results = document.getElementById('albumTrackResults');
+
+        try {
+            const url = `${ALBUM_TRACKS_ENDPOINT}?album=${encodeURIComponent(album)}&albumartist=${encodeURIComponent(albumartist)}`;
+            const data = await safeJson(fetch(url, { cache: 'no-store' }));
+
+            if (!Array.isArray(data) || data.length === 0) {
+                results.innerHTML = '<div class="search-modal-empty">No tracks found</div>';
+                return;
+            }
+
+            results.innerHTML = data.map(renderTrackSearchResult).join('');
+        } catch (err) {
+            console.error('openAlbumTracksPanel failed', err);
+            results.innerHTML = '<div class="search-modal-empty">Album tracks failed</div>';
+        }
+    }
+
 
     function fmt(sec) {
         sec = parseInt(sec || 0, 10);
@@ -884,6 +1049,10 @@ function openTrackSearchPanel() {
             if (mode === 'track-search') {
                 openTrackSearchPanel();
             }
+            
+            if (mode === 'album-search') {
+                openAlbumSearchPanel();
+            }
         });
 
         els.zones.forEach((zone) => {
@@ -944,6 +1113,25 @@ function openTrackSearchPanel() {
                 closeFeatureModal();
             }
         });
+        
+            document.addEventListener('click', async (event) => {
+        const albumButton = event.target.closest('[data-album-action]');
+
+        if (!albumButton) {
+            return;
+        }
+
+        const action = albumButton.dataset.albumAction || '';
+        const album = albumButton.dataset.album || '';
+        const albumartist = albumButton.dataset.albumartist || '';
+
+        if (action === 'drill') {
+            await openAlbumTracksPanel(album, albumartist);
+            return;
+        }
+
+        setMessage('Album action not wired yet');
+    });
     }
 
     async function init() {
