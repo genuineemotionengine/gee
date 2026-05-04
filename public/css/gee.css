@@ -1180,3 +1180,26 @@ select{
         Arial,
         sans-serif;
 }
+
+/* ================================
+   SEARCH MODAL (FULL HEIGHT)
+================================ */
+
+.feature-modal.search-modal-active {
+    top: 24px;
+    bottom: 24px;
+    left: 24px;
+    right: 24px;
+
+    height: auto;
+    max-height: none;
+
+    display: flex;
+    flex-direction: column;
+}
+
+/* ensure body fills available space */
+.feature-modal.search-modal-active .feature-modal-body {
+    flex: 1;
+    overflow-y: auto;
+}

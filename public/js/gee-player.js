@@ -92,6 +92,9 @@ const GeePlayer = (() => {
     }
 
     function openAlbumSearchPanel() {
+        
+        els.featureModal.classList.add('search-modal-active');
+        
         els.featureModalTitle.textContent = 'Album Search';
 
         els.featureModalBody.innerHTML = `
@@ -231,6 +234,9 @@ const GeePlayer = (() => {
     }
 
     async function openAlbumTracksPanel(album, albumartist) {
+        
+        els.featureModal.classList.add('search-modal-active');
+        
         els.featureModalTitle.textContent = 'Album Tracks';
 
         els.featureModalBody.innerHTML = `
@@ -430,6 +436,7 @@ const GeePlayer = (() => {
             return;
         }
 
+        els.featureModal.classList.remove('search-modal-active');
         els.featureModal.classList.remove('open');
         els.featureModalBackdrop.classList.remove('open');
         els.featureModal.setAttribute('aria-hidden', 'true');
@@ -502,6 +509,9 @@ function openSearchModal() {
 }
 
 function openTrackSearchPanel() {
+    
+    els.featureModal.classList.add('search-modal-active');
+    
     els.featureModalTitle.textContent = 'Track Search';
 
     els.featureModalBody.innerHTML = `
