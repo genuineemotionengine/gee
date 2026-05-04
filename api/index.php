@@ -504,6 +504,135 @@ $mod = gee_get_query_string_int('mod');
 $rendererId = gee_safe_renderer_id(gee_get_query_string_string('renderer_id'));
 $streamKey = trim((string)($_GET['stream'] ?? ''));
 
+function gee_mpd_raw_command(array $runtime, string $command): array
+{
+    $host = (string)($runtime['mpd_host'] ?? '127.0.0.1');
+    $port = (int)($runtime['mpd_port'] ?? 6600);
+
+    $errno = 0;
+    $errstr = '';
+
+    $fp = @fsockopen($host, $port, $errno, $errstr, 2.0);
+
+    if (!is_resource($fp)) {
+        return [];
+    }
+
+    stream_set_timeout($fp, 2, 0);
+
+    fgets($fp); // MPD OK banner
+    fwrite($fp, $command . "\n");
+
+    $lines = [];
+
+    while (!feof($fp)) {
+        $line = trim((string)fgets($fp));
+
+        if ($line === 'OK' || str_starts_with($line, 'ACK')) {
+            break;
+        }
+
+        if ($line !== '') {
+            $lines[] = $line;
+        }
+    }
+
+    fclose($fp);
+
+    return $lines;
+}
+
+function gee_mpd_parse_key_value_lines(array $lines): array
+{
+    $data = [];
+
+    foreach ($lines as $line) {
+        $parts = explode(': ', $line, 2);
+
+        if (count($parts) !== 2) {
+            continue;
+        }
+
+        $key = strtolower(trim($parts[0]));
+        $value = trim($parts[1]);
+
+        if ($key !== '') {
+            $data[$key] = $value;
+        }
+    }
+
+    return $data;
+}
+
+function gee_get_next_track_meta(array $runtime, array $status): array
+{
+    $currentPos = isset($status['song']) ? (int)$status['song'] : -1;
+    $playlistLength = isset($status['playlistlength']) ? (int)$status['playlistlength'] : 0;
+    $repeat = (string)($status['repeat'] ?? '0');
+
+    if ($playlistLength <= 0 || $currentPos < 0) {
+        return [
+            'next_title' => '',
+            'next_artist' => '',
+            'next_album' => '',
+            'next_file' => '',
+        ];
+    }
+
+    $nextPos = $currentPos + 1;
+
+    if ($nextPos >= $playlistLength) {
+        if ($repeat === '1') {
+            $nextPos = 0;
+        } else {
+            return [
+                'next_title' => '',
+                'next_artist' => '',
+                'next_album' => '',
+                'next_file' => '',
+            ];
+        }
+    }
+
+    $lines = gee_mpd_raw_command($runtime, 'playlistinfo ' . $nextPos);
+    $next = gee_mpd_parse_key_value_lines($lines);
+
+    $nextTitle = (string)($next['title'] ?? '');
+    $nextArtist = (string)($next['artist'] ?? '');
+    $nextAlbum = (string)($next['album'] ?? '');
+    $nextFile = (string)($next['file'] ?? '');
+
+    if (($nextTitle === '' || $nextArtist === '' || $nextAlbum === '') && $nextFile !== '') {
+        $stmt = gee_db()->prepare("
+            SELECT title, artist, album
+            FROM app
+            WHERE albumpath = ?
+            LIMIT 1
+        ");
+
+        if ($stmt) {
+            $stmt->bind_param('s', $nextFile);
+            $stmt->execute();
+            $result = $stmt->get_result();
+            $row = $result ? $result->fetch_assoc() : null;
+            $stmt->close();
+
+            if ($row) {
+                $nextTitle = $nextTitle !== '' ? $nextTitle : (string)($row['title'] ?? '');
+                $nextArtist = $nextArtist !== '' ? $nextArtist : (string)($row['artist'] ?? '');
+                $nextAlbum = $nextAlbum !== '' ? $nextAlbum : (string)($row['album'] ?? '');
+            }
+        }
+    }
+
+    return [
+        'next_title' => $nextTitle,
+        'next_artist' => $nextArtist,
+        'next_album' => $nextAlbum,
+        'next_file' => $nextFile,
+    ];
+}
+
 /*
 |--------------------------------------------------------------------------
 | Renderer services
@@ -640,6 +769,9 @@ try {
     ]);
 }
 
+
+
+
 if ($service === 1) {
     $status = $mphpd->status();
     $song = $mphpd->player()->current_song();
@@ -695,6 +827,8 @@ if ($service === 1) {
         }
     }
 
+    $nextTrack = gee_get_next_track_meta($runtime, $status);
+    
     $snapcastVolume = gee_snapcast_get_client_volume_for_renderer($runtime);
 
     gee_json_response([
@@ -710,6 +844,10 @@ if ($service === 1) {
         'artist' => $artist,
         'album' => $album,
         'albumartist' => $albumartist,
+        'next_title' => (string)($nextTrack['next_title'] ?? ''),
+        'next_artist' => (string)($nextTrack['next_artist'] ?? ''),
+        'next_album' => (string)($nextTrack['next_album'] ?? ''),
+        'next_file' => (string)($nextTrack['next_file'] ?? ''),
         'elapsed' => (int)$elapsed,
         'duration' => (int)$duration,
         'volume' => $snapcastVolume,
