@@ -571,9 +571,9 @@ function openTrackSearchPanel() {
 
     function renderTrackSearchResult(track) {
         const id = parseInt(track.id || 0, 10);
-        const title = escapeHtml(track.title || 'Unknown Title');
-        const artist = escapeHtml(track.artist || '');
-        const album = escapeHtml(track.album || '');
+        const title = cleanText(track.title || 'Unknown Title');
+        const artist = cleanText(track.artist || '');
+        const album = cleanText(track.album || '');
 
         return `
             <div class="search-result-row" data-track-id="${id}">
