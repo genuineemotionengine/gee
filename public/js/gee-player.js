@@ -8,6 +8,7 @@ const GeePlayer = (() => {
     const SEARCH_DEBOUNCE_MS = 220;
     const TRACK_SEARCH_ENDPOINT = '/api/search.php';
     const VOLUME_STEP = 5;
+    const TRACK_ACTION_ENDPOINT = '/api/track-action.php';
 
     const state = {
         rendererList: [],
@@ -737,6 +738,64 @@ function openTrackSearchPanel() {
             setMessage('Load Music failed');
         }
     }
+    
+    async function handleSearchResultAction(action, trackId) {
+    if (!trackId) {
+        return;
+    }
+
+    let apiAction = '';
+
+    if (action === 'play-next') {
+        apiAction = 'play_next';
+    }
+
+    if (action === 'insert-next') {
+        apiAction = 'queue';
+    }
+
+    if (action === 'play-now') {
+        apiAction = 'play_now';
+    }
+
+    if (apiAction === '') {
+        return;
+    }
+
+    try {
+        const data = await safeJson(fetch(TRACK_ACTION_ENDPOINT, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            cache: 'no-store',
+            body: JSON.stringify({
+                action: apiAction,
+                track_id: trackId
+            })
+        }));
+
+        if (!data || data.status !== 'ok') {
+            console.error('track action failed', data);
+            setMessage('Track action failed');
+            return;
+        }
+
+        if (apiAction === 'queue') {
+            setMessage('Track queued');
+            await fetchMeta(true);
+            return;
+        }
+
+        closeFeatureModal();
+        setMessage('');
+        await fetchMeta(true);
+
+    } catch (err) {
+        console.error('handleSearchResultAction failed', err);
+        setMessage('Track action failed');
+    }
+}
 
     function openMoreSheet() {
         els.moreSheet.classList.add('open');
