@@ -160,22 +160,19 @@ const GeePlayer = (() => {
     }
 
     function renderAlbumSearchResult(album) {
-        
-        
-        const rawAlbumName = decodeHtml(album.album || 'Unknown Album');
-        const rawAlbumArtist = decodeHtml(album.albumartist || '');
+        const rawAlbumDbValue = String(album.album || '');
+        const rawAlbumArtistDbValue = String(album.albumartist || '');
 
-        const albumName = escapeHtml(rawAlbumName);
-        const albumArtist = escapeHtml(rawAlbumArtist);
-               
-        
+        const displayAlbumName = escapeHtml(decodeHtml(rawAlbumDbValue || 'Unknown Album'));
+        const displayAlbumArtist = escapeHtml(decodeHtml(rawAlbumArtistDbValue));
+
         const trackCount = parseInt(album.track_count || 0, 10);
 
         return `
             <div class="search-result-row">
                 <div class="search-result-main">
-                    <div class="search-result-title">${albumName}</div>
-                    <div class="search-result-artist">${albumArtist}</div>
+                    <div class="search-result-title">${displayAlbumName}</div>
+                    <div class="search-result-artist">${displayAlbumArtist}</div>
                     <div class="search-result-album">${trackCount} track${trackCount === 1 ? '' : 's'}</div>
                 </div>
 
@@ -183,8 +180,8 @@ const GeePlayer = (() => {
                     <button type="button"
                         class="search-result-action"
                         data-album-action="play-next"
-                        data-album="${encodeURIComponent(rawAlbumName)}"
-                        data-albumartist="${encodeURIComponent(rawAlbumArtist)}"
+                        data-album="${encodeURIComponent(rawAlbumDbValue)}"
+                        data-albumartist="${encodeURIComponent(rawAlbumArtistDbValue)}"
                         title="Play album next"
                         aria-label="Play album next">
                         ${iconChevronRight()}
@@ -193,8 +190,8 @@ const GeePlayer = (() => {
                     <button type="button"
                         class="search-result-action"
                         data-album-action="insert-next"
-                        data-album="${encodeURIComponent(rawAlbumName)}"
-                        data-albumartist="${encodeURIComponent(rawAlbumArtist)}"
+                        data-album="${encodeURIComponent(rawAlbumDbValue)}"
+                        data-albumartist="${encodeURIComponent(rawAlbumArtistDbValue)}"
                         title="Queue album"
                         aria-label="Queue album">
                         ${iconChevronDoubleRight()}
@@ -203,8 +200,8 @@ const GeePlayer = (() => {
                     <button type="button"
                         class="search-result-action"
                         data-album-action="play-now"
-                        data-album="${encodeURIComponent(rawAlbumName)}"
-                        data-albumartist="${encodeURIComponent(rawAlbumArtist)}"
+                        data-album="${encodeURIComponent(rawAlbumDbValue)}"
+                        data-albumartist="${encodeURIComponent(rawAlbumArtistDbValue)}"
                         title="Play album now"
                         aria-label="Play album now">
                         ${iconArrowRight()}
@@ -213,8 +210,8 @@ const GeePlayer = (() => {
                     <button type="button"
                         class="search-result-action"
                         data-album-action="drill"
-                        data-album="${encodeURIComponent(rawAlbumName)}"
-                        data-albumartist="${encodeURIComponent(rawAlbumArtist)}"
+                        data-album="${encodeURIComponent(rawAlbumDbValue)}"
+                        data-albumartist="${encodeURIComponent(rawAlbumArtistDbValue)}"
                         title="Show tracks"
                         aria-label="Show tracks">
                         ${iconChevronDown()}
