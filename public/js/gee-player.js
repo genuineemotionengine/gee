@@ -11,6 +11,7 @@ const GeePlayer = (() => {
     const TRACK_ACTION_ENDPOINT = '/api/track-action.php';
     const ALBUM_SEARCH_ENDPOINT = '/api/search-albums.php';
     const ALBUM_TRACKS_ENDPOINT = '/api/album-tracks.php';
+    const ALBUM_ACTION_ENDPOINT = '/api/album-action.php';
 
     const state = {
         rendererList: [],
@@ -1144,9 +1145,67 @@ function openTrackSearchPanel() {
             return;
         }
 
-        setMessage('Album action not wired yet');
+        await handleAlbumResultAction(action, album, albumartist);
     });
     }
+
+    async function handleAlbumResultAction(action, album, albumartist) {
+        let apiAction = '';
+
+        if (action === 'play-next') {
+            apiAction = 'play_next';
+        }
+
+        if (action === 'insert-next') {
+            apiAction = 'queue';
+        }
+
+        if (action === 'play-now') {
+            apiAction = 'play_now';
+        }
+
+        if (apiAction === '') {
+            return;
+        }
+
+        try {
+            const data = await safeJson(fetch(ALBUM_ACTION_ENDPOINT, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                cache: 'no-store',
+                body: JSON.stringify({
+                    action: apiAction,
+                    album: album,
+                    albumartist: albumartist
+                })
+            }));
+
+            if (!data || data.status !== 'ok') {
+                console.error('album action failed', data);
+                setMessage('Album action failed');
+                return;
+            }
+
+            if (apiAction === 'queue') {
+                setMessage('Album queued');
+                await fetchMeta(true);
+                return;
+            }
+
+            closeFeatureModal();
+            setMessage('');
+            await fetchMeta(true);
+
+        } catch (err) {
+            console.error('handleAlbumResultAction failed', err);
+            setMessage('Album action failed');
+        }
+    }
+
+
+
 
     async function init() {
         cacheElements();
