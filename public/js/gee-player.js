@@ -160,8 +160,15 @@ const GeePlayer = (() => {
     }
 
     function renderAlbumSearchResult(album) {
-        const albumName = escapeHtml(album.album || 'Unknown Album');
-        const albumArtist = escapeHtml(album.albumartist || '');
+        
+        
+        const rawAlbumName = decodeHtml(album.album || 'Unknown Album');
+        const rawAlbumArtist = decodeHtml(album.albumartist || '');
+
+        const albumName = escapeHtml(rawAlbumName);
+        const albumArtist = escapeHtml(rawAlbumArtist);
+               
+        
         const trackCount = parseInt(album.track_count || 0, 10);
 
         return `
@@ -176,8 +183,8 @@ const GeePlayer = (() => {
                     <button type="button"
                         class="search-result-action"
                         data-album-action="play-next"
-                        data-album="${escapeHtml(album.album || '')}"
-                        data-albumartist="${escapeHtml(album.albumartist || '')}"
+                        data-album="${escapeHtml(rawAlbumName)}"
+                        data-albumartist="${escapeHtml(rawAlbumArtist)}"
                         title="Play album next"
                         aria-label="Play album next">
                         ${iconChevronRight()}
@@ -186,8 +193,8 @@ const GeePlayer = (() => {
                     <button type="button"
                         class="search-result-action"
                         data-album-action="insert-next"
-                        data-album="${escapeHtml(album.album || '')}"
-                        data-albumartist="${escapeHtml(album.albumartist || '')}"
+                        data-album="${escapeHtml(rawAlbumName)}"
+                        data-albumartist="${escapeHtml(rawAlbumArtist)}"
                         title="Queue album"
                         aria-label="Queue album">
                         ${iconChevronDoubleRight()}
@@ -196,8 +203,8 @@ const GeePlayer = (() => {
                     <button type="button"
                         class="search-result-action"
                         data-album-action="play-now"
-                        data-album="${escapeHtml(album.album || '')}"
-                        data-albumartist="${escapeHtml(album.albumartist || '')}"
+                        data-album="${escapeHtml(rawAlbumName)}"
+                        data-albumartist="${escapeHtml(rawAlbumArtist)}"
                         title="Play album now"
                         aria-label="Play album now">
                         ${iconArrowRight()}
@@ -206,8 +213,8 @@ const GeePlayer = (() => {
                     <button type="button"
                         class="search-result-action"
                         data-album-action="drill"
-                        data-album="${escapeHtml(album.album || '')}"
-                        data-albumartist="${escapeHtml(album.albumartist || '')}"
+                        data-album="${escapeHtml(rawAlbumName)}"
+                        data-albumartist="${escapeHtml(rawAlbumArtist)}"
                         title="Show tracks"
                         aria-label="Show tracks">
                         ${iconChevronDown()}
@@ -972,6 +979,16 @@ function openTrackSearchPanel() {
         els.moreSheet.classList.remove('open');
         els.sheetBackdrop.classList.remove('open');
         els.moreSheet.setAttribute('aria-hidden', 'true');
+    }
+
+    function decodeHtml(value) {
+        const textarea = document.createElement('textarea');
+        textarea.innerHTML = String(value ?? '');
+        return textarea.value;
+    }
+
+    function cleanText(value) {
+        return escapeHtml(decodeHtml(value));
     }
 
     function bindEvents() {
