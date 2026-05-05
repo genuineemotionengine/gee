@@ -45,7 +45,8 @@ const GeePlayer = (() => {
             state: 'stop'
         },
         
-        isScrubbing: false
+        isScrubbing: false,
+        isVolumeScrubbing: false
     };
 
     const els = {};
@@ -145,6 +146,62 @@ const GeePlayer = (() => {
                 searchAlbums(query);
             }, SEARCH_DEBOUNCE_MS);
         });
+    }
+
+    function getVolumeFromPointer(event) {
+        if (!els.volumeBar) {
+            return null;
+        }
+
+        const rect = els.volumeBar.getBoundingClientRect();
+        const clientX = event.clientX ?? event.touches?.[0]?.clientX ?? 0;
+        const ratio = Math.max(0, Math.min(1, (clientX - rect.left) / rect.width));
+
+        return Math.round(ratio * 100);
+    }
+
+    function previewVolume(volume) {
+        if (volume === null) {
+            return;
+        }
+
+        updateVolumeUI(volume);
+    }
+
+    async function commitVolume(volume) {
+        if (volume === null) {
+            return;
+        }
+
+        try {
+            const currentVolume = parseInt(state.ui.volume ?? 0, 10) || 0;
+            const targetVolume = Math.max(0, Math.min(100, parseInt(volume, 10) || 0));
+            const mod = targetVolume - currentVolume;
+
+            if (mod === 0) {
+                updateVolumeUI(targetVolume);
+                return;
+            }
+
+            const data = await safeJson(
+                fetch(`/api/?service=15&mod=${encodeURIComponent(mod)}`, { cache: 'no-store' })
+            );
+
+            if (!data || data.status !== 'ok') {
+                setMessage('Volume change failed');
+                await fetchMeta(true);
+                return;
+            }
+
+            updateVolumeUI(data.volume ?? targetVolume);
+            setMessage('');
+            await fetchMeta(true);
+
+        } catch (err) {
+            console.error('commitVolume failed', err);
+            setMessage('Volume change failed');
+            await fetchMeta(true);
+        }
     }
 
     async function searchAlbums(query) {
@@ -1195,6 +1252,39 @@ async function openArtistAlbumsPanel(artist) {
     }
 
     function bindEvents() {
+        
+            els.volumeBar.addEventListener('pointerdown', (event) => {
+            state.isVolumeScrubbing = true;
+            els.volumeBar.setPointerCapture(event.pointerId);
+
+            const volume = getVolumeFromPointer(event);
+            previewVolume(volume);
+        });
+
+        els.volumeBar.addEventListener('pointermove', (event) => {
+            if (!state.isVolumeScrubbing) {
+                return;
+            }
+
+            const volume = getVolumeFromPointer(event);
+            previewVolume(volume);
+        });
+
+        els.volumeBar.addEventListener('pointerup', async (event) => {
+            if (!state.isVolumeScrubbing) {
+                return;
+            }
+
+            state.isVolumeScrubbing = false;
+
+            const volume = getVolumeFromPointer(event);
+            await commitVolume(volume);
+        });
+
+        els.volumeBar.addEventListener('pointercancel', async () => {
+            state.isVolumeScrubbing = false;
+            await fetchMeta(true);
+        });
         
         els.trackBar.addEventListener('pointerdown', (event) => {
         if (state.playbackClock.duration <= 0) {
