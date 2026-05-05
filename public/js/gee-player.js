@@ -16,6 +16,7 @@ const GeePlayer = (() => {
     const ARTIST_ALBUMS_ENDPOINT = '/api/artist-albums.php';
     const PLAYLIST_ENDPOINT = '/api/playlist.php';
     const PLAYLIST_ACTION_ENDPOINT = '/api/playlist-action.php';
+    const TRACK_LIST_ENDPOINT = '/api/track-list.php';
 
     const state = {
         rendererList: [],
@@ -1285,6 +1286,10 @@ async function openArtistAlbumsPanel(artist) {
 
             const mode = tile.dataset.searchMode || '';
             
+            if (mode === 'track-list') {
+                openFullTrackListPanel();
+            }
+            
             if (mode === 'playlist') {
                 openPlaylistPanel();
             }
@@ -1400,6 +1405,115 @@ async function openArtistAlbumsPanel(artist) {
         await handleAlbumResultAction(action, album, albumartist);
     });
     }
+
+function openFullTrackListPanel() {
+    els.featureModal.classList.add('search-modal-active');
+    els.featureModalTitle.textContent = 'Full Track List';
+
+    els.featureModalBody.innerHTML = `
+        <div class="track-list-modal">
+            <div id="trackListResults" class="search-modal-results track-list-results"></div>
+
+            <div id="trackListIndex" class="track-list-index" aria-label="Track index">
+                ${['0-9','A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z']
+                    .map(letter => `<button type="button" class="track-list-index-item" data-track-group="${letter}">${letter}</button>`)
+                    .join('')}
+            </div>
+
+            <div id="trackListOverlay" class="track-list-overlay">0-9</div>
+        </div>
+    `;
+
+    bindTrackListIndex();
+    loadTrackListGroup('0-9');
+}
+
+function bindTrackListIndex() {
+    const index = document.getElementById('trackListIndex');
+
+    if (!index) {
+        return;
+    }
+
+    index.addEventListener('click', async (event) => {
+        const item = event.target.closest('.track-list-index-item');
+
+        if (!item) {
+            return;
+        }
+
+        await loadTrackListGroup(item.dataset.trackGroup || '0-9');
+    });
+
+    index.addEventListener('touchmove', async (event) => {
+        const touch = event.touches[0];
+
+        if (!touch) {
+            return;
+        }
+
+        const element = document.elementFromPoint(touch.clientX, touch.clientY);
+        const item = element ? element.closest('.track-list-index-item') : null;
+
+        if (!item) {
+            return;
+        }
+
+        const group = item.dataset.trackGroup || '0-9';
+
+        if (index.dataset.activeGroup === group) {
+            return;
+        }
+
+        await loadTrackListGroup(group);
+    }, { passive: true });
+}
+
+async function loadTrackListGroup(group) {
+    const results = document.getElementById('trackListResults');
+    const index = document.getElementById('trackListIndex');
+    const overlay = document.getElementById('trackListOverlay');
+
+    if (!results || !index) {
+        return;
+    }
+
+    index.dataset.activeGroup = group;
+
+    document.querySelectorAll('.track-list-index-item').forEach(item => {
+        item.classList.toggle('active', item.dataset.trackGroup === group);
+    });
+
+    if (overlay) {
+        overlay.textContent = group;
+        overlay.classList.add('visible');
+
+        window.clearTimeout(overlay._hideTimer);
+        overlay._hideTimer = window.setTimeout(() => {
+            overlay.classList.remove('visible');
+        }, 650);
+    }
+
+    results.innerHTML = '<div class="search-modal-empty">Loading…</div>';
+
+    try {
+        const data = await safeJson(fetch(`${TRACK_LIST_ENDPOINT}?group=${encodeURIComponent(group)}`, {
+            cache: 'no-store'
+        }));
+
+        if (!data || data.status !== 'ok' || !Array.isArray(data.tracks) || data.tracks.length === 0) {
+            results.innerHTML = `<div class="search-modal-empty">No tracks found for ${cleanText(group)}</div>`;
+            return;
+        }
+
+        results.scrollTop = 0;
+        results.innerHTML = data.tracks.map(renderTrackSearchResult).join('');
+    } catch (err) {
+        console.error('loadTrackListGroup failed', err);
+        results.innerHTML = '<div class="search-modal-empty">Track list failed</div>';
+    }
+}
+
 
     async function openPlaylistPanel() {
         els.featureModal.classList.add('search-modal-active');

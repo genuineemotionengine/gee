@@ -1230,3 +1230,68 @@ select{
     text-transform:uppercase;
     color:rgba(255,255,255,.45);
 }
+
+/* --------------------------------
+   FULL TRACK LIST
+-------------------------------- */
+
+.track-list-modal{
+    position:relative;
+    width:100%;
+    height:100%;
+    min-height:0;
+    display:flex;
+}
+
+.track-list-results{
+    width:100%;
+    padding-right:34px;
+}
+
+.track-list-index{
+    position:absolute;
+    top:0;
+    right:0;
+    bottom:0;
+    width:28px;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    gap:2px;
+    z-index:5;
+}
+
+.track-list-index-item{
+    width:28px;
+    min-height:18px;
+    color:rgba(255,255,255,.76);
+    font-size:.78rem;
+    line-height:1;
+    text-align:center;
+    cursor:pointer;
+}
+
+.track-list-index-item.active{
+    color:#ffffff;
+    transform:scale(1.12);
+}
+
+.track-list-overlay{
+    position:absolute;
+    left:50%;
+    top:50%;
+    transform:translate(-50%, -50%) scale(.96);
+    color:#ffffff;
+    font-size:6rem;
+    line-height:1;
+    opacity:0;
+    pointer-events:none;
+    transition:opacity 140ms ease, transform 140ms ease;
+    z-index:4;
+}
+
+.track-list-overlay.visible{
+    opacity:.9;
+    transform:translate(-50%, -50%) scale(1);
+}
