@@ -1214,3 +1214,19 @@ select{
     min-height:0;
     overflow-y:auto;
 }
+
+.playlist-current .search-result-title{
+    color:#ffffff;
+}
+
+.playlist-next .search-result-title{
+    color:rgba(255,255,255,.82);
+}
+
+.playlist-flag{
+    margin-top:10px;
+    font-size:.85rem;
+    letter-spacing:.14em;
+    text-transform:uppercase;
+    color:rgba(255,255,255,.45);
+}

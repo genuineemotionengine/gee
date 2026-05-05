@@ -14,6 +14,7 @@ const GeePlayer = (() => {
     const ALBUM_ACTION_ENDPOINT = '/api/album-action.php';
     const ARTIST_SEARCH_ENDPOINT = '/api/search-artists.php';
     const ARTIST_ALBUMS_ENDPOINT = '/api/artist-albums.php';
+    const PLAYLIST_ENDPOINT = '/api/playlist.php';
 
     const state = {
         rendererList: [],
@@ -1242,6 +1243,10 @@ async function openArtistAlbumsPanel(artist) {
             }
 
             const mode = tile.dataset.searchMode || '';
+            
+            if (mode === 'playlist') {
+                openPlaylistPanel();
+            }
 
             if (mode === 'current-album') {
                 openCurrentAlbumPanel();
@@ -1354,6 +1359,59 @@ async function openArtistAlbumsPanel(artist) {
         await handleAlbumResultAction(action, album, albumartist);
     });
     }
+
+    async function openPlaylistPanel() {
+        els.featureModal.classList.add('search-modal-active');
+        els.featureModalTitle.textContent = 'Playlist';
+
+        els.featureModalBody.innerHTML = `
+            <div class="search-modal">
+                <div id="playlistResults" class="search-modal-results"></div>
+            </div>
+        `;
+
+        const results = document.getElementById('playlistResults');
+
+        try {
+            const data = await safeJson(fetch(PLAYLIST_ENDPOINT, {
+                cache: 'no-store'
+            }));
+
+            if (!data || data.status !== 'ok' || !Array.isArray(data.tracks) || data.tracks.length === 0) {
+                results.innerHTML = '<div class="search-modal-empty">Playlist is empty</div>';
+                return;
+            }
+
+            results.innerHTML = data.tracks.map(renderPlaylistResult).join('');
+        } catch (err) {
+            console.error('openPlaylistPanel failed', err);
+            results.innerHTML = '<div class="search-modal-empty">Playlist failed</div>';
+        }
+    }
+
+    function renderPlaylistResult(track) {
+        const position = parseInt(track.pos || 0, 10) + 1;
+        const title = cleanText(track.title || 'Unknown Title');
+        const artist = cleanText(track.artist || '');
+        const album = cleanText(track.album || '');
+
+        const flags = [
+            track.is_current ? 'Current' : '',
+            track.is_next ? 'Next' : ''
+        ].filter(Boolean).join(' · ');
+
+        return `
+            <div class="search-result-row ${track.is_current ? 'playlist-current' : ''} ${track.is_next ? 'playlist-next' : ''}">
+                <div class="search-result-main">
+                    <div class="search-result-title">${String(position).padStart(2, '0')} - ${title}</div>
+                    <div class="search-result-artist">${artist}</div>
+                    <div class="search-result-album">${album}</div>
+                    ${flags ? `<div class="playlist-flag">${flags}</div>` : ''}
+                </div>
+            </div>
+        `;
+    }
+
 
     async function handleAlbumResultAction(action, album, albumartist) {
         let apiAction = '';
