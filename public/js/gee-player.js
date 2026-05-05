@@ -15,6 +15,7 @@ const GeePlayer = (() => {
     const ARTIST_SEARCH_ENDPOINT = '/api/search-artists.php';
     const ARTIST_ALBUMS_ENDPOINT = '/api/artist-albums.php';
     const PLAYLIST_ENDPOINT = '/api/playlist.php';
+    const PLAYLIST_ACTION_ENDPOINT = '/api/playlist-action.php';
 
     const state = {
         rendererList: [],
@@ -1131,7 +1132,47 @@ async function openArtistAlbumsPanel(artist) {
 
     function bindEvents() {
         
-        
+        document.addEventListener('click', async (event) => {
+    const playlistButton = event.target.closest('[data-playlist-action]');
+
+    if (!playlistButton) {
+        return;
+    }
+
+    const action = playlistButton.dataset.playlistAction || '';
+    const mpdId = parseInt(playlistButton.dataset.mpdId || '0', 10);
+
+    if (action !== 'play-now' || mpdId <= 0) {
+        return;
+    }
+
+    try {
+        const data = await safeJson(fetch(PLAYLIST_ACTION_ENDPOINT, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            cache: 'no-store',
+            body: JSON.stringify({
+                action: 'play_now',
+                mpd_id: mpdId
+            })
+        }));
+
+        if (!data || data.status !== 'ok') {
+            setMessage('Playlist action failed');
+            return;
+        }
+
+        closeFeatureModal();
+        setMessage('');
+        await fetchMeta(true);
+
+    } catch (err) {
+        console.error('playlist play now failed', err);
+        setMessage('Playlist action failed');
+    }
+});
         
         async function openCurrentAlbumPanel() {
     const currentAlbum = state.ui.album || '';
@@ -1433,7 +1474,12 @@ async function openArtistAlbumsPanel(artist) {
                         ${iconChevronDoubleRight()}
                     </button>
 
-                    <button type="button" class="search-result-action" data-search-action="play-now" data-track-id="${id}" title="Play now" aria-label="Play now">
+                    <button type="button"
+                        class="search-result-action"
+                        data-playlist-action="play-now"
+                        data-mpd-id="${parseInt(track.id || 0, 10)}"
+                        title="Play now"
+                        aria-label="Play now">
                         ${iconArrowRight()}
                     </button>
                 </div>
