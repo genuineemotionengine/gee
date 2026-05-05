@@ -1399,8 +1399,8 @@ async function openArtistAlbumsPanel(artist) {
     }
 
     function renderPlaylistResult(track) {
-        const position = parseInt(track.pos || 0, 10) + 1;
-//        const position = (track.pos - currentIndex) + 1;
+//        const position = parseInt(track.pos || 0, 10) + 1;
+        const position = (track.pos - currentIndex) + 1;
         const title = cleanText(track.title || 'Unknown Title');
         const artist = cleanText(track.artist || '');
         const album = cleanText(track.album || '');
