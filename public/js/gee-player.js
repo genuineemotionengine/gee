@@ -1132,7 +1132,41 @@ async function openArtistAlbumsPanel(artist) {
         
         
         
-        
+        async function openCurrentAlbumPanel() {
+    const currentAlbum = state.ui.album || '';
+    const currentArtist = state.ui.artist || '';
+
+    if (currentAlbum === '') {
+        setMessage('No current album available');
+        return;
+    }
+
+    els.featureModal.classList.add('search-modal-active');
+    els.featureModalTitle.textContent = 'Current Album';
+
+    els.featureModalBody.innerHTML = `
+        <div class="search-modal">
+            <div id="currentAlbumResults" class="search-modal-results"></div>
+        </div>
+    `;
+
+    const results = document.getElementById('currentAlbumResults');
+
+    try {
+        const url = `${ALBUM_TRACKS_ENDPOINT}?album=${encodeURIComponent(currentAlbum)}&albumartist=${encodeURIComponent(currentArtist)}`;
+        const data = await safeJson(fetch(url, { cache: 'no-store' }));
+
+        if (!Array.isArray(data) || data.length === 0) {
+            results.innerHTML = '<div class="search-modal-empty">No tracks found</div>';
+            return;
+        }
+
+        results.innerHTML = data.map(renderTrackSearchResult).join('');
+    } catch (err) {
+        console.error('openCurrentAlbumPanel failed', err);
+        results.innerHTML = '<div class="search-modal-empty">Current album failed</div>';
+    }
+}
         
         
         
@@ -1208,6 +1242,10 @@ async function openArtistAlbumsPanel(artist) {
             }
 
             const mode = tile.dataset.searchMode || '';
+
+            if (mode === 'current-album') {
+                openCurrentAlbumPanel();
+            }
 
             if (mode === 'track-search') {
                 openTrackSearchPanel();
