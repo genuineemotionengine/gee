@@ -1382,7 +1382,16 @@ async function openArtistAlbumsPanel(artist) {
                 return;
             }
 
-            results.innerHTML = data.tracks.map(renderPlaylistResult).join('');
+            const currentIndex = data.current_song ?? -1;
+
+            const filteredTracks = data.tracks.filter(track => {
+                return typeof track.pos === 'number' && track.pos >= currentIndex;
+            });
+
+            results.innerHTML = filteredTracks.map(renderPlaylistResult).join('');
+            
+            
+            
         } catch (err) {
             console.error('openPlaylistPanel failed', err);
             results.innerHTML = '<div class="search-modal-empty">Playlist failed</div>';
