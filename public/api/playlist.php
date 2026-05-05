@@ -70,6 +70,23 @@ function gee_playlist_mpd_command(array $runtime, string $command): array
     return $lines;
 }
 
+function gee_playlist_key_values(array $lines): array
+{
+    $data = [];
+
+    foreach ($lines as $line) {
+        $parts = explode(': ', $line, 2);
+
+        if (count($parts) !== 2) {
+            continue;
+        }
+
+        $data[strtolower(trim($parts[0]))] = trim($parts[1]);
+    }
+
+    return $data;
+}
+
 function gee_playlist_parse_tracks(array $lines): array
 {
     $tracks = [];
@@ -107,21 +124,41 @@ function gee_playlist_parse_tracks(array $lines): array
     return $tracks;
 }
 
-function gee_playlist_key_values(array $lines): array
+function gee_playlist_find_db_track(string $file): array
 {
-    $data = [];
-
-    foreach ($lines as $line) {
-        $parts = explode(': ', $line, 2);
-
-        if (count($parts) !== 2) {
-            continue;
-        }
-
-        $data[strtolower(trim($parts[0]))] = trim($parts[1]);
+    if ($file === '') {
+        return [];
     }
 
-    return $data;
+    $stmt = gee_db()->prepare("
+        SELECT id, title, artist, album
+        FROM app
+        WHERE albumpath = ?
+        LIMIT 1
+    ");
+
+    if (!$stmt) {
+        return [];
+    }
+
+    $stmt->bind_param('s', $file);
+    $stmt->execute();
+
+    $result = $stmt->get_result();
+    $row = $result ? $result->fetch_assoc() : null;
+
+    $stmt->close();
+
+    if (!$row) {
+        return [];
+    }
+
+    return [
+        'db_id' => (int)($row['id'] ?? 0),
+        'title' => (string)($row['title'] ?? ''),
+        'artist' => (string)($row['artist'] ?? ''),
+        'album' => (string)($row['album'] ?? ''),
+    ];
 }
 
 $runtime = gee_get_active_runtime();
@@ -140,14 +177,36 @@ $out = [];
 
 foreach ($tracks as $track) {
     $position = isset($track['pos']) ? (int)$track['pos'] : -1;
+    $file = (string)($track['file'] ?? '');
+
+    $dbTrack = gee_playlist_find_db_track($file);
+
+    $dbId = (int)($dbTrack['db_id'] ?? 0);
+
+    $title = (string)($track['title'] ?? '');
+    $artist = (string)($track['artist'] ?? '');
+    $album = (string)($track['album'] ?? '');
+
+    if ($title === '') {
+        $title = (string)($dbTrack['title'] ?? '');
+    }
+
+    if ($artist === '') {
+        $artist = (string)($dbTrack['artist'] ?? '');
+    }
+
+    if ($album === '') {
+        $album = (string)($dbTrack['album'] ?? '');
+    }
 
     $out[] = [
         'id' => isset($track['id']) ? (int)$track['id'] : 0,
+        'db_id' => $dbId,
         'pos' => $position,
-        'file' => (string)($track['file'] ?? ''),
-        'title' => (string)($track['title'] ?? ''),
-        'artist' => (string)($track['artist'] ?? ''),
-        'album' => (string)($track['album'] ?? ''),
+        'file' => $file,
+        'title' => $title,
+        'artist' => $artist,
+        'album' => $album,
         'is_current' => $position === $currentSong,
         'is_next' => $position === $nextSong,
     ];
@@ -160,4 +219,3 @@ gee_playlist_json([
     'track_count' => count($out),
     'tracks' => $out,
 ]);
-

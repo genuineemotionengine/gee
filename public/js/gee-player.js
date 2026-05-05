@@ -1382,11 +1382,17 @@ async function openArtistAlbumsPanel(artist) {
                 return;
             }
 
-            const currentIndex = data.current_song ?? -1;
+            const currentIndex = parseInt(data.current_song ?? -1, 10);
 
             const filteredTracks = data.tracks.filter(track => {
-                return typeof track.pos === 'number' && track.pos >= currentIndex;
+                const pos = parseInt(track.pos ?? -1, 10);
+                return currentIndex < 0 || pos >= currentIndex;
             });
+
+            if (filteredTracks.length === 0) {
+                results.innerHTML = '<div class="search-modal-empty">Playlist is empty</div>';
+                return;
+            }
 
             results.innerHTML = filteredTracks.map(renderPlaylistResult).join('');
             
@@ -1399,8 +1405,7 @@ async function openArtistAlbumsPanel(artist) {
     }
 
     function renderPlaylistResult(track) {
-//        const position = parseInt(track.pos || 0, 10) + 1;
-        const position = (track.pos - currentIndex) + 1;
+        const id = parseInt(track.db_id || track.track_id || track.id || 0, 10);
         const title = cleanText(track.title || 'Unknown Title');
         const artist = cleanText(track.artist || '');
         const album = cleanText(track.album || '');
@@ -1413,15 +1418,28 @@ async function openArtistAlbumsPanel(artist) {
         return `
             <div class="search-result-row ${track.is_current ? 'playlist-current' : ''} ${track.is_next ? 'playlist-next' : ''}">
                 <div class="search-result-main">
-                    <div class="search-result-title">${String(position).padStart(2, '0')} - ${title}</div>
+                    <div class="search-result-title">${title}</div>
                     <div class="search-result-artist">${artist}</div>
                     <div class="search-result-album">${album}</div>
                     ${flags ? `<div class="playlist-flag">${flags}</div>` : ''}
                 </div>
+
+                <div class="search-result-actions">
+                    <button type="button" class="search-result-action" data-search-action="play-next" data-track-id="${id}" title="Play next" aria-label="Play next">
+                        ${iconChevronRight()}
+                    </button>
+
+                    <button type="button" class="search-result-action" data-search-action="insert-next" data-track-id="${id}" title="Queue next" aria-label="Queue next">
+                        ${iconChevronDoubleRight()}
+                    </button>
+
+                    <button type="button" class="search-result-action" data-search-action="play-now" data-track-id="${id}" title="Play now" aria-label="Play now">
+                        ${iconArrowRight()}
+                    </button>
+                </div>
             </div>
         `;
     }
-
 
     async function handleAlbumResultAction(action, album, albumartist) {
         let apiAction = '';
