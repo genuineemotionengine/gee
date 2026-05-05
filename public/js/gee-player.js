@@ -12,6 +12,8 @@ const GeePlayer = (() => {
     const ALBUM_SEARCH_ENDPOINT = '/api/search-albums.php';
     const ALBUM_TRACKS_ENDPOINT = '/api/album-tracks.php';
     const ALBUM_ACTION_ENDPOINT = '/api/album-action.php';
+    const ARTIST_SEARCH_ENDPOINT = '/api/search-artists.php';
+    const ARTIST_ALBUMS_ENDPOINT = '/api/artist-albums.php';
 
     const state = {
         rendererList: [],
@@ -977,6 +979,133 @@ function openTrackSearchPanel() {
     }
 }
 
+function openArtistSearchPanel() {
+    els.featureModal.classList.add('search-modal-active');
+    els.featureModalTitle.textContent = 'Artist Search';
+
+    els.featureModalBody.innerHTML = `
+        <div class="search-modal">
+            <input
+                id="artistSearchInput"
+                class="search-modal-input"
+                type="search"
+                autocomplete="off"
+                autocapitalize="off"
+                spellcheck="false"
+                placeholder=""
+            >
+
+            <div id="artistSearchResults" class="search-modal-results"></div>
+        </div>
+    `;
+
+    const input = document.getElementById('artistSearchInput');
+    const results = document.getElementById('artistSearchResults');
+
+    window.setTimeout(() => {
+        input.focus();
+    }, 80);
+
+    input.addEventListener('input', () => {
+        const query = input.value.trim();
+
+        if (state.searchTimeoutHandle !== null) {
+            window.clearTimeout(state.searchTimeoutHandle);
+            state.searchTimeoutHandle = null;
+        }
+
+        if (query.length < 2) {
+            results.innerHTML = '';
+            return;
+        }
+
+        state.searchTimeoutHandle = window.setTimeout(() => {
+            searchArtists(query);
+        }, SEARCH_DEBOUNCE_MS);
+    });
+}
+
+async function searchArtists(query) {
+    const results = document.getElementById('artistSearchResults');
+
+    if (!results) {
+        return;
+    }
+
+    try {
+        const data = await safeJson(fetch(`${ARTIST_SEARCH_ENDPOINT}?q=${encodeURIComponent(query)}`, {
+            cache: 'no-store'
+        }));
+
+        if (!Array.isArray(data) || data.length === 0) {
+            results.innerHTML = '<div class="search-modal-empty">No artists found</div>';
+            return;
+        }
+
+        results.innerHTML = data.map(renderArtistSearchResult).join('');
+    } catch (err) {
+        console.error('searchArtists failed', err);
+        results.innerHTML = '<div class="search-modal-empty">Artist search failed</div>';
+    }
+}
+
+function renderArtistSearchResult(artist) {
+    const rawArtistDbValue = String(artist.artist || '');
+    const displayArtist = cleanText(rawArtistDbValue || 'Unknown Artist');
+    const albumCount = parseInt(artist.album_count || 0, 10);
+    const trackCount = parseInt(artist.track_count || 0, 10);
+
+    return `
+        <div class="search-result-row">
+            <div class="search-result-main">
+                <div class="search-result-title">${displayArtist}</div>
+                <div class="search-result-artist">${albumCount} album${albumCount === 1 ? '' : 's'}</div>
+                <div class="search-result-album">${trackCount} track${trackCount === 1 ? '' : 's'}</div>
+            </div>
+
+            <div class="search-result-actions">
+                <button type="button"
+                    class="search-result-action"
+                    data-artist-action="drill"
+                    data-artist="${encodeURIComponent(rawArtistDbValue)}"
+                    title="Show albums"
+                    aria-label="Show albums">
+                    ${iconChevronDown()}
+                </button>
+            </div>
+        </div>
+    `;
+}
+
+async function openArtistAlbumsPanel(artist) {
+    els.featureModal.classList.add('search-modal-active');
+    els.featureModalTitle.textContent = 'Artist Albums';
+
+    els.featureModalBody.innerHTML = `
+        <div class="search-modal">
+            <div id="artistAlbumResults" class="search-modal-results"></div>
+        </div>
+    `;
+
+    const results = document.getElementById('artistAlbumResults');
+
+    try {
+        const data = await safeJson(fetch(`${ARTIST_ALBUMS_ENDPOINT}?artist=${encodeURIComponent(artist)}`, {
+            cache: 'no-store'
+        }));
+
+        if (!Array.isArray(data) || data.length === 0) {
+            results.innerHTML = '<div class="search-modal-empty">No albums found</div>';
+            return;
+        }
+
+        results.innerHTML = data.map(renderAlbumSearchResult).join('');
+    } catch (err) {
+        console.error('openArtistAlbumsPanel failed', err);
+        results.innerHTML = '<div class="search-modal-empty">Artist albums failed</div>';
+    }
+}
+
     function openMoreSheet() {
         els.moreSheet.classList.add('open');
         els.sheetBackdrop.classList.add('open');
@@ -1000,6 +1129,15 @@ function openTrackSearchPanel() {
     }
 
     function bindEvents() {
+        
+        
+        
+        
+        
+        
+        
+        
+        
         els.rendererSelect.addEventListener('change', async function () {
             if (state.isUpdatingSelectors) {
                 return;
@@ -1078,7 +1216,27 @@ function openTrackSearchPanel() {
             if (mode === 'album-search') {
                 openAlbumSearchPanel();
             }
+
+            if (mode === 'artist-search') {
+                openArtistSearchPanel();
+            }
         });
+
+        document.addEventListener('click', async (event) => {
+            const artistButton = event.target.closest('[data-artist-action]');
+
+            if (!artistButton) {
+                return;
+            }
+
+            const action = artistButton.dataset.artistAction || '';
+            const artist = decodeURIComponent(artistButton.dataset.artist || '');
+
+            if (action === 'drill') {
+                await openArtistAlbumsPanel(artist);
+            }
+        });
+
 
         els.zones.forEach((zone) => {
             zone.addEventListener('click', async () => {
