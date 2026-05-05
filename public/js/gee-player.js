@@ -17,6 +17,7 @@ const GeePlayer = (() => {
     const PLAYLIST_ENDPOINT = '/api/playlist.php';
     const PLAYLIST_ACTION_ENDPOINT = '/api/playlist-action.php';
     const TRACK_LIST_ENDPOINT = '/api/track-list.php';
+    const SEEK_ENDPOINT = '/api/seek.php';
 
     const state = {
         rendererList: [],
@@ -42,7 +43,9 @@ const GeePlayer = (() => {
             elapsed: 0,
             duration: 0,
             state: 'stop'
-        }
+        },
+        
+        isScrubbing: false
     };
 
     const els = {};
@@ -311,6 +314,61 @@ const GeePlayer = (() => {
         renderProgress(state.playbackClock.elapsed, state.playbackClock.duration);
     }
 
+    function getSeekSecondsFromPointer(event) {
+        if (!els.trackBar || state.playbackClock.duration <= 0) {
+            return null;
+        }
+
+        const rect = els.trackBar.getBoundingClientRect();
+        const clientX = event.clientX ?? event.touches?.[0]?.clientX ?? 0;
+
+        const ratio = Math.max(0, Math.min(1, (clientX - rect.left) / rect.width));
+        return Math.round(ratio * state.playbackClock.duration);
+    }
+
+    function previewSeek(seconds) {
+        if (seconds === null) {
+            return;
+        }
+
+        renderProgress(seconds, state.playbackClock.duration);
+    }
+
+    async function commitSeek(seconds) {
+        if (seconds === null) {
+            return;
+        }
+
+        try {
+            state.playbackClock.elapsed = seconds;
+
+            const data = await safeJson(fetch(SEEK_ENDPOINT, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                cache: 'no-store',
+                body: JSON.stringify({
+                    seconds: seconds
+                })
+            }));
+
+            if (!data || data.status !== 'ok') {
+                setMessage('Seek failed');
+                await fetchMeta(true);
+                return;
+            }
+
+            setMessage('');
+            await fetchMeta(true);
+
+        } catch (err) {
+            console.error('commitSeek failed', err);
+            setMessage('Seek failed');
+            await fetchMeta(true);
+        }
+    }
+
     function startProgressTicker() {
         if (state.progressTickHandle !== null) {
             window.clearInterval(state.progressTickHandle);
@@ -331,6 +389,11 @@ const GeePlayer = (() => {
             if (state.playbackClock.elapsed >= state.playbackClock.duration) {
                 await fetchMeta(true);
             }
+            
+            if (state.isScrubbing) {
+                return;
+            }
+            
         }, PROGRESS_TICK_INTERVAL_MS);
     }
 
@@ -1133,6 +1196,43 @@ async function openArtistAlbumsPanel(artist) {
 
     function bindEvents() {
         
+        els.trackBar.addEventListener('pointerdown', (event) => {
+        if (state.playbackClock.duration <= 0) {
+            return;
+        }
+
+        state.isScrubbing = true;
+        els.trackBar.setPointerCapture(event.pointerId);
+
+        const seconds = getSeekSecondsFromPointer(event);
+        previewSeek(seconds);
+    });
+
+    els.trackBar.addEventListener('pointermove', (event) => {
+        if (!state.isScrubbing) {
+            return;
+        }
+
+        const seconds = getSeekSecondsFromPointer(event);
+        previewSeek(seconds);
+    });
+
+    els.trackBar.addEventListener('pointerup', async (event) => {
+        if (!state.isScrubbing) {
+            return;
+        }
+
+        state.isScrubbing = false;
+
+        const seconds = getSeekSecondsFromPointer(event);
+        await commitSeek(seconds);
+    });
+
+    els.trackBar.addEventListener('pointercancel', async () => {
+        state.isScrubbing = false;
+        await fetchMeta(true);
+    });
+        
         document.addEventListener('click', async (event) => {
     const playlistButton = event.target.closest('[data-playlist-action]');
 
@@ -1672,6 +1772,9 @@ async function loadTrackListGroup(group) {
         if (state.metaPollHandle !== null) {
             window.clearInterval(state.metaPollHandle);
         }
+
+
+
 
         state.metaPollHandle = window.setInterval(() => {
             fetchMeta(false);
