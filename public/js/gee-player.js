@@ -380,8 +380,8 @@ const GeePlayer = (() => {
         els.message.textContent = text;
     }
 
-    function renderProgress(elapsed, duration) {
-        if (state.isTrackVisualTransitioning) {
+    function renderProgress(elapsed, duration, force = false) {
+        if (state.isTrackVisualTransitioning && !force) {
             return;
         }
 
@@ -398,12 +398,16 @@ const GeePlayer = (() => {
         els.trackBar.setAttribute('aria-valuenow', String(progress));
     }
 
-    function syncPlaybackClock(elapsed, duration, playbackState) {
+    function syncPlaybackClock(elapsed, duration, playbackState, forceProgress = false) {
         state.playbackClock.elapsed = Math.max(0, parseInt(elapsed || 0, 10));
         state.playbackClock.duration = Math.max(0, parseInt(duration || 0, 10));
         state.playbackClock.state = String(playbackState || 'stop');
 
-        renderProgress(state.playbackClock.elapsed, state.playbackClock.duration);
+        renderProgress(
+            state.playbackClock.elapsed,
+            state.playbackClock.duration,
+            forceProgress
+        );
     }
 
     function getSeekSecondsFromPointer(event) {
@@ -990,7 +994,7 @@ function openTrackSearchPanel() {
             els.title.textContent = title || 'Unknown Title';
             els.artist.textContent = artist || '';
             els.album.textContent = album || '';
-            syncPlaybackClock(elapsed, duration, playbackState);
+            syncPlaybackClock(elapsed, duration, playbackState, state.isTrackVisualTransitioning);
         }
 
         if (data.image) {
