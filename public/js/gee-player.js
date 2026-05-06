@@ -28,6 +28,7 @@ const GeePlayer = (() => {
         gridHelperTimeoutHandle: null,
         gridHelperVisible: false,
         searchTimeoutHandle: null,
+        volumeBeforeScrub: 0,
 
         ui: {
             rendererDisplay: '',
@@ -174,9 +175,9 @@ const GeePlayer = (() => {
         }
 
         try {
-            const currentVolume = parseInt(state.ui.volume ?? 0, 10) || 0;
+            const startVolume = parseInt(state.volumeBeforeScrub ?? state.ui.volume ?? 0, 10) || 0;
             const targetVolume = Math.max(0, Math.min(100, parseInt(volume, 10) || 0));
-            const mod = targetVolume - currentVolume;
+            const mod = targetVolume - startVolume;
 
             if (mod === 0) {
                 updateVolumeUI(targetVolume);
@@ -203,7 +204,6 @@ const GeePlayer = (() => {
             await fetchMeta(true);
         }
     }
-
     async function searchAlbums(query) {
         const results = document.getElementById('albumSearchResults');
 
@@ -1253,8 +1253,10 @@ async function openArtistAlbumsPanel(artist) {
 
     function bindEvents() {
         
-            els.volumeBar.addEventListener('pointerdown', (event) => {
+        els.volumeBar.addEventListener('pointerdown', (event) => {
             state.isVolumeScrubbing = true;
+            state.volumeBeforeScrub = parseInt(state.ui.volume ?? 0, 10) || 0;
+
             els.volumeBar.setPointerCapture(event.pointerId);
 
             const volume = getVolumeFromPointer(event);
