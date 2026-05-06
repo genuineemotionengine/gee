@@ -81,7 +81,7 @@ const GeePlayer = (() => {
         }
 
         const minimumFadeTime = new Promise((resolve) => {
-            window.setTimeout(resolve, 320);
+            window.setTimeout(resolve, 400);
         });
 
         const coverReady = preloadCoverImage(targetCoverSrc);

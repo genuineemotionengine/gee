@@ -7,7 +7,7 @@
 <meta name="theme-color" content="#000000">
 <link rel="icon" href="/favicon.ico">
 <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
-<link rel="stylesheet" href="/css/gee.css?v=118">
+<link rel="stylesheet" href="/css/gee.css?v=119">
 </head>
 <body>
 <div id="app">
@@ -251,6 +251,6 @@
     </div>
 </div>
 
-<script src="/js/gee-player.js?v=112"></script>
+<script src="/js/gee-player.js?v=113"></script>
 </body>
 </html>
