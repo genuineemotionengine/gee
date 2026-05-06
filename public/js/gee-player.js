@@ -32,6 +32,7 @@ const GeePlayer = (() => {
         isTrackVisualTransitioning: false,
         lastTrackKey: '',
         trackTransitionTimer: null,
+        
 
         ui: {
             rendererDisplay: '',
@@ -380,6 +381,24 @@ const GeePlayer = (() => {
     }
 
     function renderProgress(elapsed, duration) {
+        
+        function renderProgress(elapsed, duration) {
+            if (state.isTrackVisualTransitioning) {
+                return;
+            }
+
+            const safeElapsed = Math.max(0, parseInt(elapsed || 0, 10));
+            const safeDuration = Math.max(0, parseInt(duration || 0, 10));
+
+            const progress = safeDuration > 0
+                ? Math.max(0, Math.min(100, Math.round((safeElapsed / safeDuration) * 100)))
+                : 0;
+
+            els.elapsed.textContent = fmt(safeElapsed);
+            els.duration.textContent = fmt(safeDuration);
+            els.progressFill.style.width = `${progress}%`;
+            els.trackBar.setAttribute('aria-valuenow', String(progress));
+        }
         
         if (state.isTrackVisualTransitioning) {
             return;
