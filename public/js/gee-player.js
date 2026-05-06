@@ -29,6 +29,9 @@ const GeePlayer = (() => {
         gridHelperVisible: false,
         searchTimeoutHandle: null,
         volumeBeforeScrub: 0,
+        isTrackVisualTransitioning: false,
+        lastTrackKey: '',
+        trackTransitionTimer: null,
 
         ui: {
             rendererDisplay: '',
@@ -51,6 +54,33 @@ const GeePlayer = (() => {
     };
 
     const els = {};
+    
+        function buildTrackKey(data) {
+        return [
+            data.title || '',
+            data.artist || '',
+            data.album || '',
+            data.image || ''
+        ].join('|');
+    }
+
+    function beginTrackVisualTransition() {
+        if (!els.player) {
+            return;
+        }
+
+        els.player.classList.add('track-transitioning');
+
+        if (state.trackTransitionTimer !== null) {
+            window.clearTimeout(state.trackTransitionTimer);
+        }
+
+        state.trackTransitionTimer = window.setTimeout(() => {
+            els.player.classList.remove('track-transitioning');
+            state.isTrackVisualTransitioning = false;
+            state.trackTransitionTimer = null;
+        }, 260);
+    }
 
     function cacheElements() {
         els.player = document.getElementById('player');
@@ -350,6 +380,12 @@ const GeePlayer = (() => {
     }
 
     function renderProgress(elapsed, duration) {
+        
+        if (state.isTrackVisualTransitioning) {
+            return;
+        }
+        
+        
         const safeElapsed = Math.max(0, parseInt(elapsed || 0, 10));
         const safeDuration = Math.max(0, parseInt(duration || 0, 10));
 
@@ -927,6 +963,18 @@ function openTrackSearchPanel() {
         const playbackState = data.state || 'stop';
         const elapsed = parseInt(data.elapsed || 0, 10);
         const duration = parseInt(data.duration || 0, 10);
+        const newTrackKey = buildTrackKey(data);
+
+        if (
+            state.lastTrackKey !== '' &&
+            newTrackKey !== '' &&
+            state.lastTrackKey !== newTrackKey
+        ) {
+            state.isTrackVisualTransitioning = true;
+            beginTrackVisualTransition();
+        }
+
+        state.lastTrackKey = newTrackKey;
 
         state.ui.rendererDisplay = rendererDisplay;
         state.ui.streamKey = streamKey || 'safe';
