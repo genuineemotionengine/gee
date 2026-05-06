@@ -65,22 +65,36 @@ const GeePlayer = (() => {
         ].join('|');
     }
 
-    function beginTrackVisualTransition() {
+    function beginTrackVisualTransition(nextCoverSrc = '') {
         if (!els.player) {
             return;
         }
 
+        const targetCoverSrc = nextCoverSrc || DEFAULT_COVER;
+
+        state.isTrackVisualTransitioning = true;
         els.player.classList.add('track-transitioning');
 
         if (state.trackTransitionTimer !== null) {
             window.clearTimeout(state.trackTransitionTimer);
+            state.trackTransitionTimer = null;
         }
 
-        state.trackTransitionTimer = window.setTimeout(() => {
-            els.player.classList.remove('track-transitioning');
-            state.isTrackVisualTransitioning = false;
-            state.trackTransitionTimer = null;
-        }, 260);
+        const minimumFadeTime = new Promise((resolve) => {
+            window.setTimeout(resolve, 280);
+        });
+
+        const coverReady = preloadCoverImage(targetCoverSrc);
+
+        Promise.all([minimumFadeTime, coverReady]).then(([, resolvedCoverSrc]) => {
+            els.cover.src = resolvedCoverSrc;
+            els.cover.dataset.currentSrc = resolvedCoverSrc;
+
+            window.requestAnimationFrame(() => {
+                els.player.classList.remove('track-transitioning');
+                state.isTrackVisualTransitioning = false;
+            });
+        });
     }
 
     function cacheElements() {
@@ -973,7 +987,7 @@ function openTrackSearchPanel() {
             state.lastTrackKey !== newTrackKey
         ) {
             state.isTrackVisualTransitioning = true;
-            beginTrackVisualTransition();
+            beginTrackVisualTransition(data.image || DEFAULT_COVER);
         }
 
         state.lastTrackKey = newTrackKey;
@@ -997,11 +1011,16 @@ function openTrackSearchPanel() {
             syncPlaybackClock(elapsed, duration, playbackState, state.isTrackVisualTransitioning);
         }
 
-        if (data.image) {
-            setCoverImage(data.image);
-        } else if (!title && !artist && !album) {
-            setCoverImage(DEFAULT_COVER);
+        if (!state.isTrackVisualTransitioning) {
+            if (data.image) {
+                els.cover.src = data.image;
+                els.cover.dataset.currentSrc = data.image;
+            } else if (!title && !artist && !album) {
+                els.cover.src = DEFAULT_COVER;
+                els.cover.dataset.currentSrc = DEFAULT_COVER;
+            }
         }
+
         updateVolumeUI(data.volume ?? 0);
         applyPlaybackState(playbackState);
         updateSheetSummary();
@@ -1014,6 +1033,19 @@ function openTrackSearchPanel() {
         }
         
         
+    }
+
+    function preloadCoverImage(src) {
+        const targetSrc = src || DEFAULT_COVER;
+
+        return new Promise((resolve) => {
+            const img = new Image();
+
+            img.onload = () => resolve(targetSrc);
+            img.onerror = () => resolve(DEFAULT_COVER);
+
+            img.src = targetSrc;
+        });
     }
 
     function setCoverImage(src) {
