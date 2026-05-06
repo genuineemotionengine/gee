@@ -1346,7 +1346,7 @@ select{
 .meta-tertiary,
 .meta-next{
     transition:
-        opacity 220ms ease,
+        opacity 280ms ease,
         width 180ms linear;
 }
 

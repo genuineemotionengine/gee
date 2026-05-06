@@ -998,11 +998,10 @@ function openTrackSearchPanel() {
         }
 
         if (data.image) {
-            els.cover.src = data.image;
+            setCoverImage(data.image);
         } else if (!title && !artist && !album) {
-            els.cover.src = DEFAULT_COVER;
+            setCoverImage(DEFAULT_COVER);
         }
-
         updateVolumeUI(data.volume ?? 0);
         applyPlaybackState(playbackState);
         updateSheetSummary();
@@ -1016,6 +1015,29 @@ function openTrackSearchPanel() {
         
         
     }
+
+    function setCoverImage(src) {
+        const nextSrc = src || DEFAULT_COVER;
+
+        if (!els.cover || els.cover.dataset.currentSrc === nextSrc) {
+            return;
+        }
+
+        const img = new Image();
+
+        img.onload = () => {
+            els.cover.src = nextSrc;
+            els.cover.dataset.currentSrc = nextSrc;
+        };
+
+        img.onerror = () => {
+            els.cover.src = DEFAULT_COVER;
+            els.cover.dataset.currentSrc = DEFAULT_COVER;
+        };
+
+        img.src = nextSrc;
+    }
+
 
     async function fetchMeta(force = false) {
         if (state.isFetchingMeta && !force) {
