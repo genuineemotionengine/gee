@@ -1339,15 +1339,21 @@ select{
     transform:none;
 }
 
-#cover,
-.track-fill,
+#cover{
+    transition:opacity 260ms ease;
+}
+
+.track-fill{
+    transition:
+        opacity 220ms ease,
+        width 180ms linear;
+}
+
 .meta-primary,
 .meta-secondary,
 .meta-tertiary,
 .meta-next{
-    transition:
-        opacity 280ms ease,
-        width 180ms linear;
+    transition:opacity 360ms ease;
 }
 
 .player.track-transitioning #cover,
