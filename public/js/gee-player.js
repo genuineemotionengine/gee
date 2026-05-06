@@ -1436,14 +1436,13 @@ async function openArtistAlbumsPanel(artist) {
             toggleGridHelper();
         });
 
-        els.volDownButton.addEventListener('click', async () => {
-            await changeVolume(-VOLUME_STEP);
-        });
-
-        els.volUpButton.addEventListener('click', async () => {
-            await changeVolume(VOLUME_STEP);
-        });
-
+//els.volDownButton.addEventListener('click', (event) => {
+//    event.preventDefault();
+//});
+//
+//els.volUpButton.addEventListener('click', (event) => {
+//    event.preventDefault();
+//});
         els.sheetLoadMusic.addEventListener('click', async () => {
             closeMoreSheet();
             await loadMusic();

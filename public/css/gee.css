@@ -1329,3 +1329,12 @@ select{
     opacity:.9;
     transform:translate(-50%, -50%) scale(1);
 }
+
+.volume-step{
+    cursor:default;
+    pointer-events:none;
+}
+
+.volume-step:active{
+    transform:none;
+}
