@@ -1349,12 +1349,12 @@ select{
         width 180ms linear;
 }
 
-.meta-primary,
+/*.meta-primary,
 .meta-secondary,
 .meta-tertiary,
 .meta-next{
     transition:opacity 300ms ease;
-}
+}*/
 
 .player.track-transitioning #cover,
 .player.track-transitioning .track-fill,
