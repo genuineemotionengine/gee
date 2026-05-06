@@ -1340,7 +1340,7 @@ select{
 }
 
 #cover{
-    transition:opacity 260ms ease;
+    transition:opacity 160ms ease;
 }
 
 .track-fill{
