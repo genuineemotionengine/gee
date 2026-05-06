@@ -176,7 +176,7 @@ for ($x = 2; $x < $elements; $x++) {
     $displayAlbumArtist = str_replace('&#39;', "'", $albumartist);
     $displayAlbum = str_replace('&#39;', "'", $album);
 
-    echo $a . " - Adding: " . $displayAlbumArtist . " - " . $displayAlbum . " - " . $artistFolder . " - Done\n";
+    echo $a . " - Adding: " . $displayAlbumArtist . " - " . $displayAlbum . " - " . $artistFolder . "... Done\n";
     $a++;
 }
 
