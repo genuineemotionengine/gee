@@ -381,30 +381,10 @@ const GeePlayer = (() => {
     }
 
     function renderProgress(elapsed, duration) {
-        
-        function renderProgress(elapsed, duration) {
-            if (state.isTrackVisualTransitioning) {
-                return;
-            }
-
-            const safeElapsed = Math.max(0, parseInt(elapsed || 0, 10));
-            const safeDuration = Math.max(0, parseInt(duration || 0, 10));
-
-            const progress = safeDuration > 0
-                ? Math.max(0, Math.min(100, Math.round((safeElapsed / safeDuration) * 100)))
-                : 0;
-
-            els.elapsed.textContent = fmt(safeElapsed);
-            els.duration.textContent = fmt(safeDuration);
-            els.progressFill.style.width = `${progress}%`;
-            els.trackBar.setAttribute('aria-valuenow', String(progress));
-        }
-        
         if (state.isTrackVisualTransitioning) {
             return;
         }
-        
-        
+
         const safeElapsed = Math.max(0, parseInt(elapsed || 0, 10));
         const safeDuration = Math.max(0, parseInt(duration || 0, 10));
 
@@ -487,6 +467,10 @@ const GeePlayer = (() => {
         }
 
         state.progressTickHandle = window.setInterval(async () => {
+            if (state.isScrubbing || state.isTrackVisualTransitioning) {
+                return;
+            }
+
             if (state.playbackClock.state !== 'play') {
                 return;
             }
@@ -501,11 +485,6 @@ const GeePlayer = (() => {
             if (state.playbackClock.elapsed >= state.playbackClock.duration) {
                 await fetchMeta(true);
             }
-            
-            if (state.isScrubbing) {
-                return;
-            }
-            
         }, PROGRESS_TICK_INTERVAL_MS);
     }
 
