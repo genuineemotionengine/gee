@@ -1353,7 +1353,7 @@ select{
 .meta-secondary,
 .meta-tertiary,
 .meta-next{
-    transition:opacity 400ms ease;
+    transition:opacity 300ms ease;
 }
 
 .player.track-transitioning #cover,
