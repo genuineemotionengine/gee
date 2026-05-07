@@ -744,6 +744,7 @@ if ($service === 23) {
     $snapcastSwitched = gee_snapcast_set_renderer_stream($runtime);
 
     gee_json_response([
+        'success' => true,
         'status' => 'ok',
         'message' => 'Stream selected.',
         'selected_stream' => $streamKey,
