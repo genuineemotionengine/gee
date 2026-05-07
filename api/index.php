@@ -358,7 +358,8 @@ function gee_snapcast_set_renderer_stream(array $runtime): bool
         return false;
     }
 
-    $command = escapeshellarg($switchScript)
+    $command = 'sudo '
+        . escapeshellarg($switchScript)
         . ' '
         . escapeshellarg($rendererId)
         . ' '
