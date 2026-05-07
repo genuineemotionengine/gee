@@ -85,19 +85,31 @@ $renderers = gee_get_all_renderer_contexts();
 
 $selectedRendererLabel = '';
 
+function gee_renderer_display_label(array $rendererContext): string
+{
+    $rendererId = (string)($rendererContext['renderer_id'] ?? '');
+    $rendererName = (string)($rendererContext['renderer_name'] ?? '');
+    $displayName = (string)($rendererContext['display_name'] ?? '');
+    $hostname = (string)($rendererContext['hostname'] ?? '');
+
+    return $rendererName !== ''
+        ? $rendererName
+        : ($displayName !== ''
+            ? $displayName
+            : ($hostname !== '' ? $hostname : $rendererId));
+}
+
+function gee_title_label(string $value): string
+{
+    $value = trim($value);
+    return $value !== '' ? ucfirst($value) : '';
+}
+
 foreach ($renderers as $rendererContext) {
     $rendererId = (string)($rendererContext['renderer_id'] ?? '');
 
     if ($selectedRendererId !== null && $rendererId === $selectedRendererId) {
-        $rendererName = (string)($rendererContext['renderer_name'] ?? '');
-        $displayName = (string)($rendererContext['display_name'] ?? '');
-        $hostname = (string)($rendererContext['hostname'] ?? '');
-
-        $selectedRendererLabel = $rendererName !== ''
-            ? $rendererName
-            : ($displayName !== ''
-                ? $displayName
-                : ($hostname !== '' ? $hostname : $rendererId));
+        $selectedRendererLabel = gee_renderer_display_label($rendererContext);
 
         break;
     }
@@ -429,6 +441,75 @@ function gee_stream_block(?array $runtime, string $streamKey, string $rendererId
             font-weight: 600;
         }
 
+        .current-selection {
+            margin: 14px 0 18px;
+            font-size: 17px;
+            color: #f2f2f2;
+        }
+
+        .current-selection strong {
+            font-weight: 600;
+        }
+
+        .current-selection .accent {
+            color: #249cff;
+            font-weight: 600;
+        }
+
+        .renderer-switcher {
+            margin: 0 0 22px;
+            border: 1px solid #242424;
+            border-radius: 18px;
+            overflow: hidden;
+            background: rgba(10,10,10,0.72);
+        }
+
+        .renderer-switch-row {
+            display: grid;
+            grid-template-columns: minmax(90px, 1fr) auto auto;
+            gap: 12px;
+            align-items: center;
+            padding: 12px 14px;
+            border-bottom: 1px solid #1c1c1c;
+        }
+
+        .renderer-switch-row:last-child {
+            border-bottom: 0;
+        }
+
+        .renderer-switch-name {
+            font-size: 17px;
+            font-weight: 600;
+            color: #f4f4f4;
+            min-width: 0;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        .stream-choice {
+            min-width: 112px;
+            text-align: center;
+            padding: 9px 18px;
+            border-radius: 999px;
+            border: 1px solid #333333;
+            background: #101010;
+            color: #ffffff;
+            text-decoration: none;
+            line-height: 1.1;
+        }
+
+        .stream-choice:hover {
+            background: #181818;
+        }
+
+        .stream-choice.active {
+            border-color: #249cff;
+            background: #249cff;
+            color: #ffffff;
+            box-shadow: 0 0 24px rgba(36,156,255,0.25);
+        }
+
         .footer-note {
             margin-top: 20px;
             color: #888888;
@@ -461,17 +542,33 @@ function gee_stream_block(?array $runtime, string $streamKey, string $rendererId
     <h1>Registered Renderers</h1>
     <div class="sub">Gee Core renderer status and runtime diagnostics</div>
 
-    <div class="toolbar">
-        <div class="toolbar-left">
-            <span class="pill">Count: <?= count($rows) ?></span>
-            <span class="pill">Selected Renderer: <?= gee_value($selectedRendererLabel) ?></span>
-            <span class="pill">Selected Stream: <?= gee_value($selectedStream) ?></span>
-        </div>
-        <div class="toolbar-right">
-            <a class="btn" href="/renderers.php">Refresh</a>
-            <a class="btn" href="/">Back to Player</a>
-        </div>
+    <?php
+        $currentRendererText = $selectedRendererLabel !== '' ? gee_title_label($selectedRendererLabel) : 'No renderer selected';
+        $currentStreamText = $selectedStream !== '' ? gee_title_label($selectedStream) : 'No stream selected';
+    ?>
+    <div class="current-selection">
+        <strong>Current Renderer:</strong>
+        <span class="accent"><?= htmlspecialchars($currentRendererText, ENT_QUOTES, 'UTF-8') ?> - <?= htmlspecialchars($currentStreamText, ENT_QUOTES, 'UTF-8') ?></span>
     </div>
+
+    <?php if ($rows !== []): ?>
+        <div class="renderer-switcher" aria-label="Renderer stream selection">
+            <?php foreach ($rows as $row): ?>
+                <?php
+                    $renderer = $row['renderer'];
+                    $rendererId = (string)($renderer['renderer_id'] ?? '');
+                    $label = gee_renderer_display_label($renderer);
+                    $safeActive = (bool)$row['selected'] && $selectedStream === 'safe';
+                    $hiresActive = (bool)$row['selected'] && $selectedStream === 'hires';
+                ?>
+                <div class="renderer-switch-row">
+                    <div class="renderer-switch-name"><?= htmlspecialchars($label, ENT_QUOTES, 'UTF-8') ?>:</div>
+                    <a class="stream-choice<?= $safeActive ? ' active' : '' ?>" href="/renderers.php?select=<?= rawurlencode($rendererId) ?>&stream=safe">Safe</a>
+                    <a class="stream-choice<?= $hiresActive ? ' active' : '' ?>" href="/renderers.php?select=<?= rawurlencode($rendererId) ?>&stream=hires">Hires</a>
+                </div>
+            <?php endforeach; ?>
+        </div>
+    <?php endif; ?>
 
     <?php if ($message !== ''): ?>
         <div class="notice <?= htmlspecialchars($messageType, ENT_QUOTES, 'UTF-8') ?>">
@@ -492,9 +589,7 @@ function gee_stream_block(?array $runtime, string $streamKey, string $rendererId
                     $runtime = $row['runtime'];
 
                     $rendererId = (string)($renderer['renderer_id'] ?? '');
-                    $rendererName = (string)($renderer['renderer_name'] ?? '');
-                    $displayName = (string)($renderer['display_name'] ?? '');
-                    $cardTitle = $rendererName !== '' ? $rendererName : ($displayName !== '' ? $displayName : $rendererId);
+                    $cardTitle = gee_renderer_display_label($renderer);
                 ?>
                 <div class="card<?= $row['selected'] ? ' selected' : '' ?>">
                     <div class="card-head">
@@ -556,5 +651,33 @@ function gee_stream_block(?array $runtime, string $streamKey, string $rendererId
         This page is intended as the renderer and stream diagnostics view before full player integration.
     </div>-->
 </div>
+<script>
+(function () {
+    const refreshMs = 10000;
+    let timer = null;
+
+    function scheduleRefresh() {
+        if (timer) {
+            window.clearTimeout(timer);
+        }
+
+        timer = window.setTimeout(function () {
+            if (document.visibilityState === 'visible') {
+                window.location.reload();
+            } else {
+                scheduleRefresh();
+            }
+        }, refreshMs);
+    }
+
+    document.addEventListener('visibilitychange', function () {
+        if (document.visibilityState === 'visible') {
+            scheduleRefresh();
+        }
+    });
+
+    scheduleRefresh();
+}());
+</script>
 </body>
 </html>
