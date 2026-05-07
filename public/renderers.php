@@ -216,16 +216,25 @@ function gee_stream_block(?array $runtime, string $streamKey, string $rendererId
             box-sizing: border-box;
         }
 
+        html,
+        body {
+            min-height: 100%;
+        }
+
         body {
             margin: 0;
-            padding: 24px;
+            padding: 18px;
+            min-height: 100dvh;
             background: #050505;
             color: #f2f2f2;
             font: 14px/1.5 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+            overflow-x: hidden;
         }
 
         .wrap {
-            max-width: 1440px;
+            width: 100%;
+            max-width: 980px;
+            min-height: calc(100dvh - 36px);
             margin: 0 auto;
         }
 
@@ -466,8 +475,8 @@ function gee_stream_block(?array $runtime, string $streamKey, string $rendererId
 
         .renderer-switch-row {
             display: grid;
-            grid-template-columns: minmax(90px, 1fr) auto auto;
-            gap: 12px;
+            grid-template-columns: minmax(0, 1fr) minmax(86px, 112px) minmax(86px, 112px);
+            gap: 10px;
             align-items: center;
             padding: 12px 14px;
             border-bottom: 1px solid #1c1c1c;
@@ -488,15 +497,21 @@ function gee_stream_block(?array $runtime, string $streamKey, string $rendererId
         }
 
         .stream-choice {
-            min-width: 112px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            min-width: 0;
+            min-height: 44px;
             text-align: center;
-            padding: 9px 18px;
+            padding: 9px 10px;
             border-radius: 999px;
             border: 1px solid #333333;
             background: #101010;
             color: #ffffff;
             text-decoration: none;
             line-height: 1.1;
+            white-space: nowrap;
         }
 
         .stream-choice:hover {
@@ -524,7 +539,15 @@ function gee_stream_block(?array $runtime, string $streamKey, string $rendererId
 
         @media (max-width: 700px) {
             body {
-                padding: 14px;
+                padding: 12px;
+            }
+
+            .wrap {
+                min-height: calc(100dvh - 24px);
+            }
+
+            h1 {
+                font-size: 26px;
             }
 
             .card {
@@ -533,6 +556,47 @@ function gee_stream_block(?array $runtime, string $streamKey, string $rendererId
 
             .meta td:first-child {
                 width: 46%;
+            }
+
+            .renderer-switch-row {
+                grid-template-columns: minmax(0, 1fr) minmax(80px, 104px) minmax(80px, 104px);
+                gap: 8px;
+                padding: 11px 10px;
+            }
+
+            .renderer-switch-name {
+                font-size: 16px;
+            }
+
+            .stream-choice {
+                min-height: 42px;
+                padding: 8px 8px;
+            }
+        }
+
+        @media (max-width: 430px) {
+            body {
+                padding: 10px;
+            }
+
+            .wrap {
+                min-height: calc(100dvh - 20px);
+            }
+
+            .renderer-switch-row {
+                grid-template-columns: minmax(0, 1fr) minmax(74px, 96px) minmax(74px, 96px);
+                gap: 7px;
+                padding: 10px 8px;
+            }
+
+            .renderer-switch-name {
+                font-size: 15px;
+            }
+
+            .stream-choice {
+                font-size: 14px;
+                min-height: 40px;
+                padding: 7px 6px;
             }
         }
     </style>
