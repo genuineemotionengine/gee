@@ -6,25 +6,23 @@ require_once __DIR__ . '/../core/bootstrap.php';
 require_once __DIR__ . '/../core/renderers.php';
 require_once __DIR__ . '/../core/runtime.php';
 
-$message = '';
-$messageType = 'info';
-
-function gee_switch_renderer_stream_runtime(string $rendererId, string $streamKey): bool
+function gee_switch_renderer_stream_runtime_local(string $rendererId, string $streamKey): array
 {
     $rendererId = gee_safe_renderer_id($rendererId);
     $streamKey = trim($streamKey);
 
     if ($rendererId === '' || !gee_is_valid_stream_key($streamKey)) {
-        return false;
+        return ['ok' => false, 'message' => 'Invalid renderer or stream.'];
     }
 
     $switchScript = '/usr/local/bin/gee-switch-renderer-stream.sh';
 
     if (!is_file($switchScript) || !is_executable($switchScript)) {
-        return false;
+        return ['ok' => false, 'message' => 'Stream switch script is missing or not executable.'];
     }
 
-    $command = escapeshellarg($switchScript)
+    $command = '/usr/bin/sudo '
+        . escapeshellarg($switchScript)
         . ' '
         . escapeshellarg($rendererId)
         . ' '
@@ -36,8 +34,20 @@ function gee_switch_renderer_stream_runtime(string $rendererId, string $streamKe
 
     exec($command, $output, $exitCode);
 
-    return $exitCode === 0;
+    if ($exitCode !== 0) {
+        return [
+            'ok' => false,
+            'message' => 'Failed to switch renderer stream.',
+            'output' => implode(' | ', $output),
+            'exit_code' => $exitCode,
+        ];
+    }
+
+    return ['ok' => true, 'message' => 'Renderer stream switched.'];
 }
+
+$message = '';
+$messageType = 'info';
 
 $selectRendererId = gee_safe_renderer_id((string)($_GET['select'] ?? ''));
 $selectStream = trim((string)($_GET['stream'] ?? ''));
@@ -65,7 +75,16 @@ if ($selectRendererId !== '') {
         $switchOk = true;
 
         if ($rendererOk && $streamOk && $selectStream !== '' && gee_is_valid_stream_key($selectStream)) {
-            $switchOk = gee_switch_renderer_stream_runtime($selectRendererId, $selectStream);
+            $switchResult = gee_switch_renderer_stream_runtime_local($selectRendererId, $selectStream);
+            $switchOk = (bool)($switchResult['ok'] ?? false);
+
+            if (!$switchOk) {
+                $message = htmlspecialchars((string)($switchResult['message'] ?? 'Failed to switch renderer stream.'), ENT_QUOTES, 'UTF-8');
+                if (!empty($switchResult['output'])) {
+                    $message .= '<br><small>' . htmlspecialchars((string)$switchResult['output'], ENT_QUOTES, 'UTF-8') . '</small>';
+                }
+                $messageType = 'error';
+            }
         }
 
         if ($rendererOk && $streamOk && $switchOk) {
@@ -75,11 +94,6 @@ if ($selectRendererId !== '') {
             }
             header('Location: ' . $url);
             exit;
-        }
-
-        if (!$switchOk) {
-            $message = 'Failed to switch renderer stream.';
-            $messageType = 'error';
         }
 
         if ($message === '') {
@@ -96,18 +110,28 @@ if ($selectRendererId === '' && $selectStream !== '') {
     } else {
         if (gee_set_selected_stream_cookie($selectStream)) {
             $activeRendererId = gee_get_selected_renderer_id();
-            $switchOk = $activeRendererId !== null
-                ? gee_switch_renderer_stream_runtime($activeRendererId, $selectStream)
-                : true;
+            $switchOk = true;
+
+            if ($activeRendererId !== null && $activeRendererId !== '') {
+                $switchResult = gee_switch_renderer_stream_runtime_local((string)$activeRendererId, $selectStream);
+                $switchOk = (bool)($switchResult['ok'] ?? false);
+
+                if (!$switchOk) {
+                    $message = htmlspecialchars((string)($switchResult['message'] ?? 'Failed to switch renderer stream.'), ENT_QUOTES, 'UTF-8');
+                    if (!empty($switchResult['output'])) {
+                        $message .= '<br><small>' . htmlspecialchars((string)$switchResult['output'], ENT_QUOTES, 'UTF-8') . '</small>';
+                    }
+                    $messageType = 'error';
+                }
+            }
 
             if ($switchOk) {
                 header('Location: /renderers.php?stream_selected=' . rawurlencode($selectStream));
                 exit;
             }
+        }
 
-            $message = 'Failed to switch renderer stream.';
-            $messageType = 'error';
-        } else {
+        if ($message === '') {
             $message = 'Failed to set selected stream cookie.';
             $messageType = 'error';
         }
@@ -267,25 +291,16 @@ function gee_stream_block(?array $runtime, string $streamKey, string $rendererId
             box-sizing: border-box;
         }
 
-        html,
-        body {
-            min-height: 100%;
-        }
-
         body {
             margin: 0;
-            padding: 18px;
-            min-height: 100dvh;
+            padding: 24px;
             background: #050505;
             color: #f2f2f2;
             font: 14px/1.5 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
-            overflow-x: hidden;
         }
 
         .wrap {
-            width: 100%;
-            max-width: 980px;
-            min-height: calc(100dvh - 36px);
+            max-width: 1440px;
             margin: 0 auto;
         }
 
@@ -526,8 +541,8 @@ function gee_stream_block(?array $runtime, string $streamKey, string $rendererId
 
         .renderer-switch-row {
             display: grid;
-            grid-template-columns: minmax(0, 1fr) minmax(86px, 112px) minmax(86px, 112px);
-            gap: 10px;
+            grid-template-columns: minmax(90px, 1fr) auto auto;
+            gap: 12px;
             align-items: center;
             padding: 12px 14px;
             border-bottom: 1px solid #1c1c1c;
@@ -548,21 +563,15 @@ function gee_stream_block(?array $runtime, string $streamKey, string $rendererId
         }
 
         .stream-choice {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            width: 100%;
-            min-width: 0;
-            min-height: 44px;
+            min-width: 112px;
             text-align: center;
-            padding: 9px 10px;
+            padding: 9px 18px;
             border-radius: 999px;
             border: 1px solid #333333;
             background: #101010;
             color: #ffffff;
             text-decoration: none;
             line-height: 1.1;
-            white-space: nowrap;
         }
 
         .stream-choice:hover {
@@ -590,15 +599,7 @@ function gee_stream_block(?array $runtime, string $streamKey, string $rendererId
 
         @media (max-width: 700px) {
             body {
-                padding: 12px;
-            }
-
-            .wrap {
-                min-height: calc(100dvh - 24px);
-            }
-
-            h1 {
-                font-size: 26px;
+                padding: 14px;
             }
 
             .card {
@@ -607,47 +608,6 @@ function gee_stream_block(?array $runtime, string $streamKey, string $rendererId
 
             .meta td:first-child {
                 width: 46%;
-            }
-
-            .renderer-switch-row {
-                grid-template-columns: minmax(0, 1fr) minmax(80px, 104px) minmax(80px, 104px);
-                gap: 8px;
-                padding: 11px 10px;
-            }
-
-            .renderer-switch-name {
-                font-size: 16px;
-            }
-
-            .stream-choice {
-                min-height: 42px;
-                padding: 8px 8px;
-            }
-        }
-
-        @media (max-width: 430px) {
-            body {
-                padding: 10px;
-            }
-
-            .wrap {
-                min-height: calc(100dvh - 20px);
-            }
-
-            .renderer-switch-row {
-                grid-template-columns: minmax(0, 1fr) minmax(74px, 96px) minmax(74px, 96px);
-                gap: 7px;
-                padding: 10px 8px;
-            }
-
-            .renderer-switch-name {
-                font-size: 15px;
-            }
-
-            .stream-choice {
-                font-size: 14px;
-                min-height: 40px;
-                padding: 7px 6px;
             }
         }
     </style>

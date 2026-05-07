@@ -349,14 +349,12 @@ function gee_snapcast_set_renderer_stream(array $runtime): bool
     $streamKey = trim((string)($runtime['stream_key'] ?? ''));
 
     if ($rendererId === '' || !gee_is_valid_stream_key($streamKey)) {
-        error_log('Gee stream switch failed: invalid renderer_id or stream_key');
         return false;
     }
 
     $switchScript = '/usr/local/bin/gee-switch-renderer-stream.sh';
 
     if (!is_file($switchScript) || !is_executable($switchScript)) {
-        error_log('Gee stream switch failed: script missing or not executable: ' . $switchScript);
         return false;
     }
 
@@ -373,13 +371,8 @@ function gee_snapcast_set_renderer_stream(array $runtime): bool
 
     exec($command, $output, $exitCode);
 
-    error_log('Gee stream switch command: ' . $command);
-    error_log('Gee stream switch exit code: ' . $exitCode);
-    error_log('Gee stream switch output: ' . implode(' | ', $output));
-
     return $exitCode === 0;
 }
-
 
 function gee_build_and_load_playlist(array $runtime, string $sql): array
 {
