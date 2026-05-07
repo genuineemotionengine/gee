@@ -346,26 +346,31 @@ function gee_snapcast_adjust_renderer_volume(array $runtime, int $delta): ?int
 function gee_snapcast_set_renderer_stream(array $runtime): bool
 {
     $rendererId = trim((string)($runtime['renderer_id'] ?? ''));
-    $rendererHostname = trim((string)($runtime['hostname'] ?? ''));
     $streamKey = trim((string)($runtime['stream_key'] ?? ''));
 
-    if ($rendererId === '' || $rendererHostname === '' || $streamKey === '') {
+    if ($rendererId === '' || !gee_is_valid_stream_key($streamKey)) {
         return false;
     }
 
-    $groupId = gee_snapcast_get_group_id_for_renderer($rendererHostname);
-    if ($groupId === null || $groupId === '') {
+    $switchScript = '/usr/local/bin/gee-switch-renderer-stream.sh';
+
+    if (!is_file($switchScript) || !is_executable($switchScript)) {
         return false;
     }
 
-    $streamId = $rendererId . '-' . $streamKey;
+    $command = escapeshellarg($switchScript)
+        . ' '
+        . escapeshellarg($rendererId)
+        . ' '
+        . escapeshellarg($streamKey)
+        . ' 2>&1';
 
-    $result = gee_snapcast_request('Group.SetStream', [
-        'id' => $groupId,
-        'stream_id' => $streamId,
-    ]);
+    $output = [];
+    $exitCode = 0;
 
-    return is_array($result) && !isset($result['error']);
+    exec($command, $output, $exitCode);
+
+    return $exitCode === 0;
 }
 
 function gee_build_and_load_playlist(array $runtime, string $sql): array

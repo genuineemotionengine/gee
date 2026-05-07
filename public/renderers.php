@@ -9,6 +9,36 @@ require_once __DIR__ . '/../core/runtime.php';
 $message = '';
 $messageType = 'info';
 
+function gee_switch_renderer_stream_runtime(string $rendererId, string $streamKey): bool
+{
+    $rendererId = gee_safe_renderer_id($rendererId);
+    $streamKey = trim($streamKey);
+
+    if ($rendererId === '' || !gee_is_valid_stream_key($streamKey)) {
+        return false;
+    }
+
+    $switchScript = '/usr/local/bin/gee-switch-renderer-stream.sh';
+
+    if (!is_file($switchScript) || !is_executable($switchScript)) {
+        return false;
+    }
+
+    $command = escapeshellarg($switchScript)
+        . ' '
+        . escapeshellarg($rendererId)
+        . ' '
+        . escapeshellarg($streamKey)
+        . ' 2>&1';
+
+    $output = [];
+    $exitCode = 0;
+
+    exec($command, $output, $exitCode);
+
+    return $exitCode === 0;
+}
+
 $selectRendererId = gee_safe_renderer_id((string)($_GET['select'] ?? ''));
 $selectStream = trim((string)($_GET['stream'] ?? ''));
 
@@ -32,13 +62,24 @@ if ($selectRendererId !== '') {
             }
         }
 
-        if ($rendererOk && $streamOk) {
+        $switchOk = true;
+
+        if ($rendererOk && $streamOk && $selectStream !== '' && gee_is_valid_stream_key($selectStream)) {
+            $switchOk = gee_switch_renderer_stream_runtime($selectRendererId, $selectStream);
+        }
+
+        if ($rendererOk && $streamOk && $switchOk) {
             $url = '/renderers.php?selected=' . rawurlencode($selectRendererId);
             if ($selectStream !== '' && gee_is_valid_stream_key($selectStream)) {
                 $url .= '&stream_selected=' . rawurlencode($selectStream);
             }
             header('Location: ' . $url);
             exit;
+        }
+
+        if (!$switchOk) {
+            $message = 'Failed to switch renderer stream.';
+            $messageType = 'error';
         }
 
         if ($message === '') {
@@ -54,12 +95,22 @@ if ($selectRendererId === '' && $selectStream !== '') {
         $messageType = 'error';
     } else {
         if (gee_set_selected_stream_cookie($selectStream)) {
-            header('Location: /renderers.php?stream_selected=' . rawurlencode($selectStream));
-            exit;
-        }
+            $activeRendererId = gee_get_selected_renderer_id();
+            $switchOk = $activeRendererId !== null
+                ? gee_switch_renderer_stream_runtime($activeRendererId, $selectStream)
+                : true;
 
-        $message = 'Failed to set selected stream cookie.';
-        $messageType = 'error';
+            if ($switchOk) {
+                header('Location: /renderers.php?stream_selected=' . rawurlencode($selectStream));
+                exit;
+            }
+
+            $message = 'Failed to switch renderer stream.';
+            $messageType = 'error';
+        } else {
+            $message = 'Failed to set selected stream cookie.';
+            $messageType = 'error';
+        }
     }
 }
 
