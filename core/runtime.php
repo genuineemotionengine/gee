@@ -5,6 +5,9 @@ declare(strict_types=1);
 require_once __DIR__ . '/renderers.php';
 
 const GEE_RUNTIME_ROOT = '/var/lib/gee-core/runtime';
+const GEE_SPACES_ROOT = '/var/lib/gee-core/spaces';
+const GEE_SPACES_ROOMS_FILE = GEE_SPACES_ROOT . '/rooms.json';
+const GEE_SPACES_CURRENT_FILE = GEE_SPACES_ROOT . '/current.json';
 
 function gee_get_renderer_dir(string $rendererId): string
 {
@@ -190,6 +193,117 @@ function gee_set_selected_stream_cookie(string $streamKey): bool
     );
 }
 
+function gee_read_json_file(string $path): ?array
+{
+    if (!is_file($path)) {
+        return null;
+    }
+
+    $json = file_get_contents($path);
+    if ($json === false || trim($json) === '') {
+        return null;
+    }
+
+    $data = json_decode($json, true);
+    return is_array($data) ? $data : null;
+}
+
+function gee_read_spaces_current(): ?array
+{
+    return gee_read_json_file(GEE_SPACES_CURRENT_FILE);
+}
+
+function gee_read_spaces_rooms(): array
+{
+    $data = gee_read_json_file(GEE_SPACES_ROOMS_FILE);
+
+    if (!is_array($data)) {
+        return [];
+    }
+
+    $rooms = $data['rooms'] ?? [];
+    return is_array($rooms) ? $rooms : [];
+}
+
+function gee_find_space_room(string $roomId): ?array
+{
+    $roomId = trim($roomId);
+    if ($roomId === '') {
+        return null;
+    }
+
+    foreach (gee_read_spaces_rooms() as $room) {
+        if (!is_array($room)) {
+            continue;
+        }
+
+        if ((string)($room['room_id'] ?? '') === $roomId) {
+            return $room;
+        }
+    }
+
+    return null;
+}
+
+function gee_resolve_current_listening_space(): ?array
+{
+    $current = gee_read_spaces_current();
+
+    if (!is_array($current)) {
+        return null;
+    }
+
+    $spaceType = trim((string)($current['space_type'] ?? ''));
+    $spaceId = trim((string)($current['space_id'] ?? ''));
+    $activeStream = trim((string)($current['active_stream'] ?? 'safe'));
+
+    if (!gee_is_valid_stream_key($activeStream)) {
+        $activeStream = 'safe';
+    }
+
+    if ($spaceType === 'renderer' && $spaceId !== '') {
+        $rendererId = gee_safe_renderer_id($spaceId);
+        $rendererContext = gee_get_renderer_context($rendererId);
+
+        if (is_array($rendererContext)) {
+            return [
+                'space_type' => 'renderer',
+                'space_id' => $rendererId,
+                'space_name' => (string)($rendererContext['display_name'] ?? $rendererContext['renderer_name'] ?? $rendererId),
+                'active_stream' => $activeStream,
+                'playback_renderer_id' => $rendererId,
+                'renderer_context' => $rendererContext,
+            ];
+        }
+    }
+
+    if ($spaceType === 'room' && $spaceId !== '') {
+        $room = gee_find_space_room($spaceId);
+
+        if (is_array($room)) {
+            $members = $room['members'] ?? [];
+            if (is_array($members) && count($members) > 0) {
+                $playbackRendererId = gee_safe_renderer_id((string)$members[0]);
+                $rendererContext = gee_get_renderer_context($playbackRendererId);
+
+                if (is_array($rendererContext)) {
+                    return [
+                        'space_type' => 'room',
+                        'space_id' => (string)($room['room_id'] ?? $spaceId),
+                        'space_name' => (string)($room['room_name'] ?? $spaceId),
+                        'active_stream' => $activeStream,
+                        'room' => $room,
+                        'playback_renderer_id' => $playbackRendererId,
+                        'renderer_context' => $rendererContext,
+                    ];
+                }
+            }
+        }
+    }
+
+    return null;
+}
+
 function gee_read_renderer_runtime_json(string $rendererId): ?array
 {
     $path = gee_get_renderer_dir($rendererId) . '/runtime.json';
@@ -241,7 +355,7 @@ function gee_get_renderer_stream_runtime(array $runtime, ?string $streamKey = nu
     return array_merge($runtime, [
         'active_stream' => $streamKey,
         'stream_key' => $streamKey,
-        'stream_name' => ucfirst($streamKey),
+        'stream_name' => $streamKey === 'hires' ? 'Hires' : 'Safe',
         'stream_format' => $streamFormat,
         'fifo_path' => $fifoPath,
         'playlist_directory' => $playlistDirectory,
@@ -254,7 +368,7 @@ function gee_get_renderer_stream_runtime(array $runtime, ?string $streamKey = nu
     ]);
 }
 
-function gee_get_renderer_runtime_context(?array $rendererContext = null): ?array
+function gee_get_renderer_runtime_context(?array $rendererContext = null, ?string $streamKey = null): ?array
 {
     if (!is_array($rendererContext)) {
         $rendererContext = gee_get_selected_or_first_renderer_context();
@@ -392,22 +506,48 @@ function gee_get_renderer_runtime_context(?array $rendererContext = null): ?arra
         'mpd_port_source' => $portSource,
     ]);
 
-    return gee_get_renderer_stream_runtime($baseRuntime);
+    return gee_get_renderer_stream_runtime($baseRuntime, $streamKey);
 }
 
 function gee_get_active_runtime(): ?array
 {
+    $space = gee_resolve_current_listening_space();
+
+    if (is_array($space) && isset($space['renderer_context']) && is_array($space['renderer_context'])) {
+        $streamKey = (string)($space['active_stream'] ?? 'safe');
+
+        if (!gee_is_valid_stream_key($streamKey)) {
+            $streamKey = 'safe';
+        }
+
+        $runtime = gee_get_renderer_runtime_context($space['renderer_context'], $streamKey);
+
+        if (is_array($runtime)) {
+            return array_merge($runtime, [
+                'listening_space_type' => (string)($space['space_type'] ?? 'renderer'),
+                'listening_space_id' => (string)($space['space_id'] ?? ''),
+                'listening_space_name' => (string)($space['space_name'] ?? ''),
+                'playback_renderer_id' => (string)($space['playback_renderer_id'] ?? $runtime['renderer_id'] ?? ''),
+            ]);
+        }
+    }
+
     $rendererContext = gee_get_selected_or_first_renderer_context();
 
     if (!is_array($rendererContext)) {
         return null;
     }
 
-    $runtime = gee_get_renderer_runtime_context($rendererContext);
+    $runtime = gee_get_renderer_runtime_context($rendererContext, gee_get_selected_stream());
 
     if (!is_array($runtime)) {
         return null;
     }
 
-    return gee_get_renderer_stream_runtime($runtime);
+    return array_merge($runtime, [
+        'listening_space_type' => 'renderer',
+        'listening_space_id' => (string)($runtime['renderer_id'] ?? ''),
+        'listening_space_name' => (string)($runtime['display_name'] ?? $runtime['renderer_name'] ?? ''),
+        'playback_renderer_id' => (string)($runtime['renderer_id'] ?? ''),
+    ]);
 }
