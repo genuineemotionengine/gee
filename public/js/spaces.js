@@ -552,8 +552,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
 // ------------------------------------------------------------
 // Gee Listening Space Context Line
-// Updates the player context line from /api/spaces.php
+// Spaces is now authoritative for #stream and #renderer.
+// This intentionally overrides old renderer/runtime labels from gee-player.js.
 // ------------------------------------------------------------
+
+let geeLastSpacesContext = null;
 
 function geeFormatSpaceStream(stream) {
     return String(stream || 'safe').toLowerCase() === 'hires' ? 'Hires' : 'Safe';
@@ -585,6 +588,47 @@ function geeFindCurrentSpaceName(data) {
     return 'No listening space selected';
 }
 
+function geeApplyPlayerContextLine(data) {
+    if (!data || !data.success || !data.current) {
+        return;
+    }
+
+    const streamEl = document.getElementById('stream');
+    const rendererEl = document.getElementById('renderer');
+
+    if (!streamEl || !rendererEl) {
+        return;
+    }
+
+    const spaceName = geeFindCurrentSpaceName(data);
+    const streamName = geeFormatSpaceStream(data.current.active_stream);
+
+    streamEl.textContent = streamName;
+    rendererEl.textContent = spaceName;
+
+    geeLastSpacesContext = {
+        stream: streamName,
+        renderer: spaceName
+    };
+}
+
+function geeReapplyLastSpacesContextLine() {
+    if (!geeLastSpacesContext) {
+        return;
+    }
+
+    const streamEl = document.getElementById('stream');
+    const rendererEl = document.getElementById('renderer');
+
+    if (streamEl) {
+        streamEl.textContent = geeLastSpacesContext.stream;
+    }
+
+    if (rendererEl) {
+        rendererEl.textContent = geeLastSpacesContext.renderer;
+    }
+}
+
 async function geeUpdatePlayerContextLine() {
     try {
         const response = await fetch('/api/spaces.php?action=list', {
@@ -596,24 +640,7 @@ async function geeUpdatePlayerContextLine() {
         }
 
         const data = await response.json();
-
-        if (!data || !data.success || !data.current) {
-            return;
-        }
-
-        const streamEl = document.getElementById('stream');
-        const rendererEl = document.getElementById('renderer');
-
-        const spaceName = geeFindCurrentSpaceName(data);
-        const streamName = geeFormatSpaceStream(data.current.active_stream);
-
-        if (streamEl) {
-            streamEl.textContent = streamName;
-        }
-
-        if (rendererEl) {
-            rendererEl.textContent = spaceName;
-        }
+        geeApplyPlayerContextLine(data);
 
     } catch (error) {
         console.warn('Gee context line update failed:', error);
@@ -622,5 +649,10 @@ async function geeUpdatePlayerContextLine() {
 
 document.addEventListener('DOMContentLoaded', function () {
     geeUpdatePlayerContextLine();
+
+    // Pull current space state regularly.
     setInterval(geeUpdatePlayerContextLine, 5000);
+
+    // Re-apply spaces context after gee-player.js refreshes metadata.
+    setInterval(geeReapplyLastSpacesContextLine, 500);
 });
