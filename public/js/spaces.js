@@ -5,6 +5,7 @@ const GeeSpaces = (() => {
 
     const state = {
         spaces: null,
+        mode: 'multiroom',
         isOpen: false,
         isBusy: false
     };
@@ -88,9 +89,9 @@ const GeeSpaces = (() => {
 
         els.body.classList.toggle('spaces-busy', isBusy);
 
-        const buttons = els.body.querySelectorAll('button, select, input');
-        buttons.forEach((button) => {
-            button.disabled = isBusy;
+        const controls = els.body.querySelectorAll('button, select, input');
+        controls.forEach((control) => {
+            control.disabled = isBusy;
         });
     }
 
@@ -285,6 +286,62 @@ const GeeSpaces = (() => {
         `;
     }
 
+    function renderRegisteredRenderers() {
+        const renderers = state.spaces?.renderers || [];
+        const roomLookup = new Map();
+
+        (state.spaces?.rooms || []).forEach((room) => {
+            (room.members || []).forEach((rendererId) => {
+                roomLookup.set(rendererId, room.room_name || room.room_id);
+            });
+        });
+
+        if (renderers.length === 0) {
+            return `
+                <div class="spaces-panel">
+                    <section class="spaces-section">
+                        <div class="spaces-empty">No registered renderers found.</div>
+                    </section>
+                </div>
+            `;
+        }
+
+        const rows = renderers.map((renderer) => {
+            const assignedRoom = roomLookup.get(renderer.renderer_id);
+            const status = assignedRoom ? `Room: ${assignedRoom}` : 'Standalone';
+            const meta = [renderer.model, renderer.ip_address].filter(Boolean).join(' · ');
+
+            return `
+                <article class="spaces-renderer-row spaces-renderer-row-readonly">
+                    <div>
+                        <div class="spaces-card-title">${escapeHtml(renderer.renderer_name || renderer.hostname || renderer.renderer_id)}</div>
+                        <div class="spaces-card-sub">${escapeHtml(meta)}</div>
+                        <div class="spaces-muted">${escapeHtml(status)}</div>
+                    </div>
+                </article>
+            `;
+        }).join('');
+
+        return `
+            <div class="spaces-panel">
+                <section class="spaces-current-card">
+                    <div class="spaces-eyebrow">Registered Renderers</div>
+                    <div class="spaces-current-main">
+                        <div>
+                            <div class="spaces-current-name">${renderers.length}</div>
+                            <div class="spaces-current-sub">Connected to Gee Core</div>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="spaces-section">
+                    <div class="spaces-section-title">Renderers</div>
+                    ${rows}
+                </section>
+            </div>
+        `;
+    }
+
     function renderCreateRoom() {
         return `
             <section class="spaces-section spaces-create-room">
@@ -303,12 +360,8 @@ const GeeSpaces = (() => {
         `;
     }
 
-    function render() {
-        if (!els.body) {
-            return;
-        }
-
-        els.body.innerHTML = `
+    function renderMultiroom() {
+        return `
             <div class="spaces-panel">
                 ${renderCurrent()}
                 <div id="spacesStatus" class="spaces-status"></div>
@@ -319,7 +372,17 @@ const GeeSpaces = (() => {
         `;
     }
 
-    async function open() {
+    function render() {
+        if (!els.body) {
+            return;
+        }
+
+        els.body.innerHTML = state.mode === 'renderers'
+            ? renderRegisteredRenderers()
+            : renderMultiroom();
+    }
+
+    async function open(mode = 'multiroom') {
         cacheElements();
 
         if (!els.modal || !els.backdrop || !els.title || !els.body) {
@@ -327,9 +390,10 @@ const GeeSpaces = (() => {
         }
 
         state.isOpen = true;
+        state.mode = mode;
 
-        els.title.textContent = 'Listening Spaces';
-        els.body.innerHTML = '<div class="spaces-loading">Loading listening spaces…</div>';
+        els.title.textContent = mode === 'renderers' ? 'Registered Renderers' : 'Listening Spaces';
+        els.body.innerHTML = '<div class="spaces-loading">Loading…</div>';
 
         els.modal.classList.add('open', 'search-modal-active', 'spaces-modal-active');
         els.backdrop.classList.add('open');
@@ -346,7 +410,7 @@ const GeeSpaces = (() => {
     async function handleClick(event) {
         const actionButton = event.target.closest('[data-spaces-action]');
 
-        if (!actionButton || !els.body || !els.body.contains(actionButton)) {
+        if (!actionButton || !els.body || !els.body.contains(actionButton) || state.mode !== 'multiroom') {
             return;
         }
 
@@ -398,7 +462,7 @@ const GeeSpaces = (() => {
     async function handleSubmit(event) {
         const form = event.target.closest('#spacesCreateRoomForm');
 
-        if (!form) {
+        if (!form || state.mode !== 'multiroom') {
             return;
         }
 
@@ -416,9 +480,10 @@ const GeeSpaces = (() => {
     }
 
     function interceptLegacyRendererModal(event) {
-        const zone = event.target.closest('.zone[data-zone="renderers"], .zone[data-zone="multiroom"]');
+        const multiroomZone = event.target.closest('.zone[data-zone="multiroom"]');
+        const renderersZone = event.target.closest('.zone[data-zone="renderers"]');
 
-        if (!zone) {
+        if (!multiroomZone && !renderersZone) {
             return;
         }
 
@@ -426,7 +491,12 @@ const GeeSpaces = (() => {
         event.stopPropagation();
         event.stopImmediatePropagation();
 
-        open();
+        if (multiroomZone) {
+            open('multiroom');
+            return;
+        }
+
+        open('renderers');
     }
 
     function init() {
