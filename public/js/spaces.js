@@ -11,6 +11,41 @@ const GeeSpaces = (() => {
     };
 
     const els = {};
+    
+        function geeFormatStreamName(stream) {
+        return String(stream || 'safe').toLowerCase() === 'hires' ? 'Hires' : 'Safe';
+    }
+
+    function geeUpdatePlayerContextFromSpaces(data) {
+        if (!data || !data.current) {
+            return;
+        }
+
+        const current = data.current;
+        let name = '';
+
+        if (current.space_type === 'room') {
+            const room = (data.rooms || []).find(r => r.room_id === current.space_id);
+            name = room ? room.room_name : current.space_id;
+        } else {
+            const renderer = (data.renderers || []).find(r => r.renderer_id === current.space_id);
+            name = renderer ? renderer.renderer_name : current.space_id;
+        }
+
+        if (!name) {
+            name = 'No listening space selected';
+        }
+
+        const label = name === 'No listening space selected'
+            ? name
+            : `${name} - ${geeFormatStreamName(current.active_stream)}`;
+
+        document.querySelectorAll(
+            '#currentRenderer, #current-renderer, .current-renderer, [data-gee-current-renderer]'
+        ).forEach(el => {
+            el.textContent = `Current: ${label}`;
+        });
+    }
 
     function cacheElements() {
         els.modal = document.getElementById('featureModal');
@@ -513,4 +548,79 @@ const GeeSpaces = (() => {
 
 document.addEventListener('DOMContentLoaded', () => {
     GeeSpaces.init();
+});
+
+// ------------------------------------------------------------
+// Gee Listening Space Context Line
+// Updates the player context line from /api/spaces.php
+// ------------------------------------------------------------
+
+function geeFormatSpaceStream(stream) {
+    return String(stream || 'safe').toLowerCase() === 'hires' ? 'Hires' : 'Safe';
+}
+
+function geeFindCurrentSpaceName(data) {
+    if (!data || !data.current) {
+        return 'No listening space selected';
+    }
+
+    const current = data.current;
+
+    if (current.space_type === 'room') {
+        const room = (data.rooms || []).find(function (r) {
+            return r.room_id === current.space_id;
+        });
+
+        return room ? room.room_name : current.space_id;
+    }
+
+    if (current.space_type === 'renderer') {
+        const renderer = (data.renderers || []).find(function (r) {
+            return r.renderer_id === current.space_id;
+        });
+
+        return renderer ? renderer.renderer_name : current.space_id;
+    }
+
+    return 'No listening space selected';
+}
+
+async function geeUpdatePlayerContextLine() {
+    try {
+        const response = await fetch('/api/spaces.php?action=list', {
+            cache: 'no-store'
+        });
+
+        if (!response.ok) {
+            return;
+        }
+
+        const data = await response.json();
+
+        if (!data || !data.success || !data.current) {
+            return;
+        }
+
+        const streamEl = document.getElementById('stream');
+        const rendererEl = document.getElementById('renderer');
+
+        const spaceName = geeFindCurrentSpaceName(data);
+        const streamName = geeFormatSpaceStream(data.current.active_stream);
+
+        if (streamEl) {
+            streamEl.textContent = streamName;
+        }
+
+        if (rendererEl) {
+            rendererEl.textContent = spaceName;
+        }
+
+    } catch (error) {
+        console.warn('Gee context line update failed:', error);
+    }
+}
+
+document.addEventListener('DOMContentLoaded', function () {
+    geeUpdatePlayerContextLine();
+    setInterval(geeUpdatePlayerContextLine, 5000);
 });
