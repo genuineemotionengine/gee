@@ -8,6 +8,7 @@
 <link rel="icon" href="/favicon.ico">
 <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
 <link rel="stylesheet" href="/css/gee.css?v=124">
+<link rel="stylesheet" href="/css/spaces.css?v=1">
 </head>
 <body>
 <div id="app">
@@ -252,5 +253,6 @@
 </div>
 
 <script src="/js/gee-player.js?v=114"></script>
+<script src="/js/spaces.js?v=1"></script>
 </body>
 </html>

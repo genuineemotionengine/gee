@@ -42,7 +42,6 @@ function gee_spaces_run(array $args): void
             'message' => 'Gee spaces command failed',
             'exit_code' => $exitCode,
             'output' => $output,
-            'command' => $command,
         ], 500);
     }
 
@@ -51,7 +50,6 @@ function gee_spaces_run(array $args): void
             'success' => false,
             'message' => 'Gee spaces command did not return valid JSON',
             'output' => $output,
-            'command' => $command,
         ], 500);
     }
 

@@ -346,32 +346,26 @@ function gee_snapcast_adjust_renderer_volume(array $runtime, int $delta): ?int
 function gee_snapcast_set_renderer_stream(array $runtime): bool
 {
     $rendererId = trim((string)($runtime['renderer_id'] ?? ''));
+    $rendererHostname = trim((string)($runtime['hostname'] ?? ''));
     $streamKey = trim((string)($runtime['stream_key'] ?? ''));
 
-    if ($rendererId === '' || !gee_is_valid_stream_key($streamKey)) {
+    if ($rendererId === '' || $rendererHostname === '' || $streamKey === '') {
         return false;
     }
 
-    $switchScript = '/usr/local/bin/gee-switch-renderer-stream.sh';
-
-    if (!is_file($switchScript) || !is_executable($switchScript)) {
+    $groupId = gee_snapcast_get_group_id_for_renderer($rendererHostname);
+    if ($groupId === null || $groupId === '') {
         return false;
     }
 
-    $command = '/usr/bin/sudo '
-        . escapeshellarg($switchScript)
-        . ' '
-        . escapeshellarg($rendererId)
-        . ' '
-        . escapeshellarg($streamKey)
-        . ' 2>&1';
+    $streamId = $rendererId . '-' . $streamKey;
 
-    $output = [];
-    $exitCode = 0;
+    $result = gee_snapcast_request('Group.SetStream', [
+        'id' => $groupId,
+        'stream_id' => $streamId,
+    ]);
 
-    exec($command, $output, $exitCode);
-
-    return $exitCode === 0;
+    return is_array($result) && !isset($result['error']);
 }
 
 function gee_build_and_load_playlist(array $runtime, string $sql): array
@@ -700,7 +694,6 @@ if ($service === 21) {
     $snapcastSwitched = gee_snapcast_set_renderer_stream($runtime);
 
     gee_json_response([
-        'success' => true,
         'status' => 'ok',
         'message' => 'Renderer selected.',
         'selected_renderer_id' => $rendererId,
@@ -737,7 +730,6 @@ if ($service === 23) {
     $snapcastSwitched = gee_snapcast_set_renderer_stream($runtime);
 
     gee_json_response([
-        'success' => true,
         'status' => 'ok',
         'message' => 'Stream selected.',
         'selected_stream' => $streamKey,
