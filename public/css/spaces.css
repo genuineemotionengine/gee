@@ -293,3 +293,92 @@
         flex:1;
     }
 }
+
+/* =============================================================================
+   Custom confirm dialog — replaces white browser confirm() popup.
+   Append to public/css/spaces.css
+   ============================================================================= */
+
+.spaces-confirm-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(10, 13, 18, 0.82);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+    border-radius: inherit;
+    animation: spaces-confirm-in 120ms ease;
+}
+
+@keyframes spaces-confirm-in {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+.spaces-confirm-panel {
+    background: rgba(20, 24, 32, 0.96);
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    border-radius: 18px;
+    padding: 24px 26px;
+    max-width: 340px;
+    width: 90%;
+    box-shadow: 0 24px 64px rgba(0, 0, 0, 0.6);
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.spaces-confirm-message {
+    margin: 0;
+    color: #f5f7fa;
+    font-size: 0.97rem;
+    line-height: 1.55;
+}
+
+.spaces-confirm-actions {
+    display: flex;
+    gap: 10px;
+    justify-content: flex-end;
+}
+
+.spaces-confirm-cancel {
+    padding: 9px 18px;
+    border-radius: 999px;
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    background: rgba(255, 255, 255, 0.06);
+    color: #a8b3c2;
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 150ms ease, color 150ms ease;
+}
+
+.spaces-confirm-cancel:hover {
+    background: rgba(255, 255, 255, 0.12);
+    color: #f5f7fa;
+}
+
+.spaces-confirm-ok {
+    padding: 9px 18px;
+    border-radius: 999px;
+    border: 1px solid rgba(255, 100, 100, 0.30);
+    background: rgba(255, 80, 80, 0.16);
+    color: rgba(255, 180, 180, 0.95);
+    font-size: 0.9rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background 150ms ease, color 150ms ease;
+}
+
+.spaces-confirm-ok:hover {
+    background: rgba(255, 80, 80, 0.28);
+    color: #fff;
+}
+
+/* Make the modal body position:relative so the overlay can be inset:0 */
+.feature-modal-body {
+    position: relative;
+}
