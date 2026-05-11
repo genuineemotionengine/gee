@@ -1644,11 +1644,7 @@ async function openArtistAlbumsPanel(artist) {
                         break;
 
                     case 'multiroom':
-                        if (typeof GeeSpaces !== 'undefined') {
-                            GeeSpaces.open('multiroom');
-                        } else {
-                            openFeatureModal('Multi Room');
-                        }
+                        GeeSpaces.open('multiroom');
                         break;
 
                     case 'playpause':
@@ -1656,11 +1652,7 @@ async function openArtistAlbumsPanel(artist) {
                         break;
 
                     case 'renderers':
-                        if (typeof GeeSpaces !== 'undefined') {
-                            GeeSpaces.open('renderers');
-                        } else {
-                            openFeatureModal('Renderers', '/renderers.php');
-                        }
+                        GeeSpaces.open('renderers');
                         break;
 
                     case 'prev':

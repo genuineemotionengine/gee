@@ -28,20 +28,20 @@ function gee_spaces_run(array $args): void
         $command .= ' ' . escapeshellarg((string)$arg);
     }
 
-    $output = [];
+    $output   = [];
     $exitCode = 0;
 
     exec($command . ' 2>&1', $output, $exitCode);
 
-    $raw = implode("\n", $output);
+    $raw  = implode("\n", $output);
     $json = json_decode($raw, true);
 
     if ($exitCode !== 0) {
         gee_spaces_response([
-            'success' => false,
-            'message' => 'Gee spaces command failed',
+            'success'   => false,
+            'message'   => 'Gee spaces command failed',
             'exit_code' => $exitCode,
-            'output' => $output,
+            'output'    => $output,
         ], 500);
     }
 
@@ -49,7 +49,7 @@ function gee_spaces_run(array $args): void
         gee_spaces_response([
             'success' => false,
             'message' => 'Gee spaces command did not return valid JSON',
-            'output' => $output,
+            'output'  => $output,
         ], 500);
     }
 
@@ -59,13 +59,14 @@ function gee_spaces_run(array $args): void
 $action = trim((string)($_POST['action'] ?? $_GET['action'] ?? 'list'));
 
 switch ($action) {
+
     case 'list':
         gee_spaces_run(['list']);
         break;
 
     case 'select-renderer':
         $rendererId = trim((string)($_POST['renderer_id'] ?? $_GET['renderer_id'] ?? ''));
-        $stream = trim((string)($_POST['stream'] ?? $_GET['stream'] ?? 'safe'));
+        $stream     = trim((string)($_POST['stream']      ?? $_GET['stream']      ?? 'safe'));
         gee_spaces_run(['select-renderer', $rendererId, $stream]);
         break;
 
@@ -74,21 +75,26 @@ switch ($action) {
         gee_spaces_run(['create-room', $roomName]);
         break;
 
-    case 'add-renderer':
+    case 'delete-room':
         $roomId = trim((string)($_POST['room_id'] ?? $_GET['room_id'] ?? ''));
+        gee_spaces_run(['delete-room', $roomId]);
+        break;
+
+    case 'add-renderer':
+        $roomId     = trim((string)($_POST['room_id']     ?? $_GET['room_id']     ?? ''));
         $rendererId = trim((string)($_POST['renderer_id'] ?? $_GET['renderer_id'] ?? ''));
         gee_spaces_run(['add-renderer', $roomId, $rendererId]);
         break;
 
     case 'remove-renderer':
-        $roomId = trim((string)($_POST['room_id'] ?? $_GET['room_id'] ?? ''));
+        $roomId     = trim((string)($_POST['room_id']     ?? $_GET['room_id']     ?? ''));
         $rendererId = trim((string)($_POST['renderer_id'] ?? $_GET['renderer_id'] ?? ''));
         gee_spaces_run(['remove-renderer', $roomId, $rendererId]);
         break;
 
     case 'select-room':
         $roomId = trim((string)($_POST['room_id'] ?? $_GET['room_id'] ?? ''));
-        $stream = trim((string)($_POST['stream'] ?? $_GET['stream'] ?? 'safe'));
+        $stream = trim((string)($_POST['stream']  ?? $_GET['stream']  ?? 'safe'));
         gee_spaces_run(['select-room', $roomId, $stream]);
         break;
 
@@ -96,6 +102,6 @@ switch ($action) {
         gee_spaces_response([
             'success' => false,
             'message' => 'Unknown spaces action',
-            'action' => $action,
+            'action'  => $action,
         ], 400);
 }
