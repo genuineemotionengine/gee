@@ -546,21 +546,7 @@ const GeeSpaces = (() => {
         setInterval(refreshContext, 5000);
     }
 
-    // ── Public: getDisplayName ────────────────────────────────────────────────
-    // Returns the display name for the contact line based on current spaces
-    // state. Called by gee-player.js updateUI() so it defers to the room name
-    // when in a room rather than showing the individual renderer name.
-    // Returns null if spaces data is not yet loaded.
-    function getDisplayName() {
-        if (!state.data?.current) return null;
-        const cur = state.data.current;
-        if (!cur.space_id) return null;
-        if (cur.space_type === 'room') return roomName(cur.space_id);
-        if (cur.space_type === 'renderer') return rendererName(cur.space_id) || null;
-        return null;
-    }
-
-    return { init, open, getDisplayName };
+    return { init, open };
 
 })();
 
