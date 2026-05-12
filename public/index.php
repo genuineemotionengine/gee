@@ -252,7 +252,7 @@
     </div>
 </div>
 
-<script src="/js/gee-player.js"></script>
-<script src="/js/spaces.js"></script>
+<script src="/js/gee-player2.js"></script>
+<script src="/js/spaces2.js"></script>
 </body>
 </html>
