@@ -837,7 +837,8 @@ function openTrackSearchPanel() {
     }
 
     function setIdleState(rendererName = '', streamName = '') {
-        els.renderer.textContent = rendererName || 'No renderer';
+        const spacesName = (typeof GeeSpaces !== 'undefined') ? GeeSpaces.getDisplayName() : null;
+        els.renderer.textContent = spacesName || rendererName || 'No renderer';
         els.stream.textContent = streamName ? String(streamName).toUpperCase() : '--';
         els.title.textContent = 'Nothing playing';
         els.artist.textContent = '';
@@ -999,7 +1000,12 @@ function openTrackSearchPanel() {
         state.ui.artist = artist;
         state.ui.album = album;
 
-        els.renderer.textContent = rendererDisplay || 'No renderer';
+        // Use GeeSpaces room/renderer name if available — this prevents the
+        // contact line flickering back to the individual renderer name (e.g.
+        // "LUCY") when a Next/Prev/Play command triggers fetchMeta() while the
+        // active listening space is a room (e.g. "Living Room").
+        const spacesName = (typeof GeeSpaces !== 'undefined') ? GeeSpaces.getDisplayName() : null;
+        els.renderer.textContent = spacesName || rendererDisplay || 'No renderer';
         els.stream.textContent = streamKey ? String(streamKey).toUpperCase() : '--';
 
         if (!title && !artist && !album && playbackState === 'stop') {
@@ -1644,7 +1650,7 @@ async function openArtistAlbumsPanel(artist) {
                         break;
 
                     case 'multiroom':
-                        GeeSpaces.open('multiroom');
+                        openFeatureModal('Multi Room');
                         break;
 
                     case 'playpause':
@@ -1652,7 +1658,7 @@ async function openArtistAlbumsPanel(artist) {
                         break;
 
                     case 'renderers':
-                        GeeSpaces.open('renderers');
+                        openFeatureModal('Renderers', '/renderers.php');
                         break;
 
                     case 'prev':
