@@ -253,6 +253,6 @@
 </div>
 
 <script src="/js/gee-player1.js?v=200"></script>
-<script src="/js/spaces1.js?v=200"></script>
+<script src="/js/spaces.js?v=200"></script>
 </body>
 </html>
