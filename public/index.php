@@ -7,8 +7,8 @@
 <meta name="theme-color" content="#000000">
 <link rel="icon" href="/favicon.ico">
 <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
-<link rel="stylesheet" href="/css/gee.css?v=125">
-<link rel="stylesheet" href="/css/spaces.css?v=3">
+<link rel="stylesheet" href="/css/gee.css?v=200">
+<link rel="stylesheet" href="/css/spaces.css?v=200">
 </head>
 <body>
 <div id="app">
