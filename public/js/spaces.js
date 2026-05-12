@@ -560,7 +560,7 @@ const GeeSpaces = (() => {
         return null;
     }
 
-    return { init, open, getDisplayName };
+    return { init, open, getDisplayName, updatePlayerContext };
 
 })();
 

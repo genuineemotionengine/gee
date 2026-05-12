@@ -1107,6 +1107,15 @@ function openTrackSearchPanel() {
 
             setMessage(successMessage || '');
             await fetchMeta(true);
+
+            // Correct the contact line immediately after every player command.
+            // updateUI() uses GeeSpaces.getDisplayName() as a first pass, but
+            // state.data may not be populated yet on the first load. Calling
+            // updatePlayerContext() here guarantees the room name wins as soon
+            // as state.data is available, with no 5-second wait.
+            if (typeof GeeSpaces !== 'undefined') {
+                GeeSpaces.updatePlayerContext();
+            }
         } catch (err) {
             console.error('sendCommand failed', err);
             setMessage('Playback action failed');
