@@ -2,14 +2,53 @@
 
 declare(strict_types=1);
 
-const GEE_DB_HOST = '127.0.0.1';
-const GEE_DB_NAME = 'gee';
-const GEE_DB_USER = 'gee';
-const GEE_DB_PASS = 'gee';
-const GEE_MUSIC_ROOT = '/mnt/music';
-const GEE_RENDERERS_DIR = '/var/lib/gee-core/renderers';
+// ---------------------------------------------------------------------------
+// Load DB credentials from /etc/gee/app.conf (written by the Gee installer).
+// Never hardcode credentials here — this file is in version control.
+//
+// /etc/gee/app.conf format (shell key=value, written by installer task 09):
+//   GEE_DB_NAME="gee"
+//   GEE_DB_USER="gee"
+//   GEE_DB_PASS="<random password generated at install time>"
+// ---------------------------------------------------------------------------
+function gee_load_app_conf(): array
+{
+    $confFile = '/etc/gee/app.conf';
+
+    if (!is_file($confFile) || !is_readable($confFile)) {
+        http_response_code(503);
+        header('Content-Type: application/json');
+        echo json_encode(['status' => 'error', 'message' => 'Service configuration unavailable.']);
+        exit;
+    }
+
+    $values = [];
+    foreach (file($confFile, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES) as $line) {
+        $line = trim($line);
+        if ($line === '' || str_starts_with($line, '#')) {
+            continue;
+        }
+        $parts = explode('=', $line, 2);
+        if (count($parts) === 2) {
+            $values[trim($parts[0])] = trim($parts[1], '"\'');
+        }
+    }
+
+    return $values;
+}
+
+$_geeConf = gee_load_app_conf();
+
+define('GEE_DB_HOST', '127.0.0.1');
+define('GEE_DB_NAME', $_geeConf['GEE_DB_NAME'] ?? 'gee');
+define('GEE_DB_USER', $_geeConf['GEE_DB_USER'] ?? 'gee');
+define('GEE_DB_PASS', $_geeConf['GEE_DB_PASS'] ?? '');
+unset($_geeConf);
+
+const GEE_MUSIC_ROOT               = '/mnt/music';
+const GEE_RENDERERS_DIR            = '/var/lib/gee-core/renderers';
 const GEE_SELECTED_RENDERER_COOKIE = 'gee_selected_renderer';
-const GEE_SELECTED_STREAM_COOKIE = 'gee_selected_stream';
+const GEE_SELECTED_STREAM_COOKIE   = 'gee_selected_stream';
 
 function gee_db(): mysqli
 {
