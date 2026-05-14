@@ -827,6 +827,24 @@ if ($service === 1) {
         }
     }
 
+    // Fallback: artwork URL stored during library build (MusicBrainz / iTunes).
+    // Only a URL is stored — no images on the server. The browser fetches
+    // and caches the image directly from the external CDN.
+    if ($image === null && $file !== '') {
+        $artStmt = gee_db()->prepare(
+            'SELECT artwork_url FROM app WHERE albumpath = ? LIMIT 1'
+        );
+        if ($artStmt) {
+            $artStmt->bind_param('s', $file);
+            $artStmt->execute();
+            $artStmt->bind_result($artworkUrl);
+            if ($artStmt->fetch() && $artworkUrl !== null && $artworkUrl !== '') {
+                $image = $artworkUrl;
+            }
+            $artStmt->close();
+        }
+    }
+
     $nextTrack = gee_get_next_track_meta($runtime, $status);
     
     $snapcastVolume = gee_snapcast_get_client_volume_for_renderer($runtime);
