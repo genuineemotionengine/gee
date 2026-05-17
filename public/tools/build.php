@@ -141,6 +141,20 @@ function out(string $msg): void
 // ---------------------------------------------------------------------------
 
 /**
+ * Check whether a file has embedded artwork using getID3.
+ * Returns true if at least one picture is found in the file's tags.
+ */
+function has_embedded_artwork(getID3 $getID3, string $absolutePath): bool
+{
+    if (!is_file($absolutePath)) {
+        return false;
+    }
+
+    $info = $getID3->analyze($absolutePath);
+    return !empty($info['comments']['picture'][0]['data']);
+}
+
+/**
  * Try MusicBrainz Cover Art Archive, then iTunes Search as fallback.
  * Returns a URL string or null if nothing found.
  */
@@ -463,9 +477,9 @@ $stmt->close();
 
 // ---------------------------------------------------------------------------
 // Artwork lookup phase
-// Finds cover art URLs for albums that have no embedded art.
-// Tries MusicBrainz Cover Art Archive first, iTunes Search as fallback.
-// Stores only the URL — no images are saved on the server.
+// For each album, checks for embedded artwork first using getID3.
+// External lookup (MusicBrainz → iTunes) only runs when no embedded art
+// is found. Stores only a URL — no images saved on the server.
 // Rate-limited to 1 request/second to respect MusicBrainz policy.
 // ---------------------------------------------------------------------------
 out('');
@@ -473,11 +487,13 @@ out('============================================================');
 out('Artwork lookup');
 out('============================================================');
 
-// Fetch unique albums that still need artwork
+// Fetch unique albums with one sample track path each for embedded art check
 $albumStmt = $conn->prepare('
-    SELECT DISTINCT idalbum, albumartist, album
+    SELECT idalbum, albumartist, album,
+           MIN(albumpath) AS sample_path
     FROM app
     WHERE idalbum != ""
+    GROUP BY idalbum, albumartist, album
     ORDER BY albumartist ASC, album ASC
 ');
 
@@ -486,9 +502,11 @@ if ($albumStmt) {
     $albums = $albumStmt->get_result()->fetch_all(MYSQLI_ASSOC);
     $albumStmt->close();
 
+    $artworkEmbedded = 0;
     $artworkFound    = 0;
     $artworkNotFound = 0;
     $artworkTotal    = count($albums);
+    $externalLookups = 0;
 
     $updateStmt = $conn->prepare('
         UPDATE app SET artwork_url = ? WHERE idalbum = ?
@@ -498,9 +516,19 @@ if ($albumStmt) {
         $albumartist = $albumRow['albumartist'];
         $album       = $albumRow['album'];
         $idalbum     = $albumRow['idalbum'];
+        $samplePath  = MUSIC_ROOT . '/' . ltrim($albumRow['sample_path'], '/');
 
         out(sprintf('  [%d/%d] %s — %s', $i + 1, $artworkTotal, $albumartist, $album));
 
+        // Check for embedded artwork first — no external lookup needed if found
+        if (has_embedded_artwork($getID3, $samplePath)) {
+            $artworkEmbedded++;
+            out('         → Has embedded art, skipping lookup');
+            continue;
+        }
+
+        // No embedded art — try MusicBrainz then iTunes
+        $externalLookups++;
         $artworkUrl = gee_lookup_artwork($albumartist, $album);
 
         if ($artworkUrl !== null && $updateStmt) {
@@ -513,8 +541,8 @@ if ($albumStmt) {
             out('         → Not found');
         }
 
-        // Respect MusicBrainz rate limit: 1 request/second
-        if ($i < $artworkTotal - 1) {
+        // Respect MusicBrainz rate limit — only sleep after external requests
+        if ($externalLookups > 0 && $i < $artworkTotal - 1) {
             sleep(1);
         }
     }
@@ -524,8 +552,9 @@ if ($albumStmt) {
     }
 
     out('');
-    out("  Albums with artwork:     {$artworkFound}");
-    out("  Albums without artwork:  {$artworkNotFound}");
+    out("  Albums with embedded art:  {$artworkEmbedded}");
+    out("  Albums with external URL:  {$artworkFound}");
+    out("  Albums without artwork:    {$artworkNotFound}");
 } else {
     out('  WARNING: Could not query albums for artwork lookup.');
     out('  (Has the artwork_url column been added to the app table?');
