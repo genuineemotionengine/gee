@@ -467,7 +467,7 @@ foreach ($iterator as $fileInfo) {
         $conn->commit();
         $conn->begin_transaction();
         $batchCount = 0;
-        out("  ... {$inserted} tracks inserted");
+        out("Inserting {$inserted} tracks... done");
     }
 }
 
