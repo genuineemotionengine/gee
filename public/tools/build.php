@@ -132,7 +132,7 @@ function guess_track_from_filename(string $filename): string
 // ---------------------------------------------------------------------------
 function out(string $msg): void
 {
-    echo $msg . "\n";
+    echo $msg . "done\n";
     flush();
 }
 
@@ -467,7 +467,7 @@ foreach ($iterator as $fileInfo) {
         $conn->commit();
         $conn->begin_transaction();
         $batchCount = 0;
-        out("Inserting {$inserted} tracks... done");
+        out("Inserting {$inserted} tracks... ");
     }
 }
 
