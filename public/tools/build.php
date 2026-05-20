@@ -483,9 +483,7 @@ $stmt->close();
 // Rate-limited to 1 request/second to respect MusicBrainz policy.
 // ---------------------------------------------------------------------------
 out('');
-out('============================================================');
-out('Artwork lookup');
-out('============================================================');
+out('Checking for artwork...');
 
 // Fetch unique albums with one sample track path each for embedded art check
 $albumStmt = $conn->prepare('
@@ -518,12 +516,9 @@ if ($albumStmt) {
         $idalbum     = $albumRow['idalbum'];
         $samplePath  = MUSIC_ROOT . '/' . ltrim($albumRow['sample_path'], '/');
 
-        out(sprintf('  [%d/%d] %s — %s', $i + 1, $artworkTotal, $albumartist, $album));
-
         // Check for embedded artwork first — no external lookup needed if found
         if (has_embedded_artwork($getID3, $samplePath)) {
             $artworkEmbedded++;
-            out('         → Has embedded art, skipping lookup');
             continue;
         }
 
@@ -535,10 +530,8 @@ if ($albumStmt) {
             $updateStmt->bind_param('ss', $artworkUrl, $idalbum);
             $updateStmt->execute();
             $artworkFound++;
-            out("         → Found: {$artworkUrl}");
         } else {
             $artworkNotFound++;
-            out('         → Not found');
         }
 
         // Respect MusicBrainz rate limit — only sleep after external requests
@@ -551,14 +544,11 @@ if ($albumStmt) {
         $updateStmt->close();
     }
 
-    out('');
-    out("  Albums with embedded art:  {$artworkEmbedded}");
-    out("  Albums with external URL:  {$artworkFound}");
-    out("  Albums without artwork:    {$artworkNotFound}");
+    out('Artwork check done.');
 } else {
-    out('  WARNING: Could not query albums for artwork lookup.');
-    out('  (Has the artwork_url column been added to the app table?');
-    out('   Run: ALTER TABLE app ADD COLUMN artwork_url VARCHAR(500) DEFAULT NULL;)');
+    out('WARNING: Could not query albums for artwork lookup.');
+    out('(Has the artwork_url column been added to the app table?');
+    out(' Run: ALTER TABLE app ADD COLUMN artwork_url VARCHAR(500) DEFAULT NULL;)');
 }
 
 // ---------------------------------------------------------------------------
